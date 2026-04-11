@@ -154,7 +154,7 @@ export default function SIRSIncidentDetail() {
             <p className="text-[10px] text-muted-foreground">Fall with hip fracture · Wing A · 3 Apr 2026</p>
           </div>
         </div>
-        <button className="flex items-center gap-1.5 text-xs font-medium px-3 py-2 rounded-lg border border-border text-foreground hover:bg-muted"><Mic className="w-3.5 h-3.5" /> Ask CHRIS</button>
+        <button onClick={() => router.push("/dashboard/coach")} className="flex items-center gap-1.5 text-xs font-medium px-3 py-2 rounded-lg border border-border text-foreground hover:bg-muted"><Mic className="w-3.5 h-3.5" /> Ask CHRIS</button>
       </div>
 
       {/* Timeline */}

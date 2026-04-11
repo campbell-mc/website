@@ -17,7 +17,7 @@ export default function SIRSDeadlinesPage() {
             <p className="text-[10px] text-muted-foreground">Harbison Bowral · Active and upcoming</p>
           </div>
         </div>
-        <button className="flex items-center gap-1.5 text-xs font-medium px-3 py-2 rounded-lg border border-border text-foreground hover:bg-muted"><Mic className="w-3.5 h-3.5" /> Ask CHRIS</button>
+        <button onClick={() => router.push("/dashboard/coach")} className="flex items-center gap-1.5 text-xs font-medium px-3 py-2 rounded-lg border border-border text-foreground hover:bg-muted"><Mic className="w-3.5 h-3.5" /> Ask CHRIS</button>
       </div>
 
       {/* Active */}

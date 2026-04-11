@@ -1,8 +1,10 @@
 "use client";
 
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ChevronLeft, Mic, Clock, AlertTriangle, MoreHorizontal, CheckCircle, Users } from "lucide-react";
 import { ChrisAvatar } from "@/components/chris/ChrisAvatar";
+import { ActionModal, type ActionVariant } from "@/components/ActionModal";
 
 const WEEK_DATA = [
   { day: "Mon", total: 203, rn: 42, status: "compliant" as const },
@@ -22,6 +24,7 @@ const SHIFT_DATA = [
 
 export default function CareMinutesPage() {
   const router = useRouter();
+  const [modal, setModal] = useState<{ variant: ActionVariant; title: string; chris?: string; label?: string } | null>(null);
 
   return (
     <div className="p-4 lg:p-6 max-w-lg lg:max-w-3xl mx-auto">
@@ -36,7 +39,7 @@ export default function CareMinutesPage() {
             <p className="text-[10px] text-muted-foreground">Harbison Bowral · Deputy 2h ago ✅ · Updated hourly</p>
           </div>
         </div>
-        <button className="flex items-center gap-1.5 text-xs font-medium px-3 py-2 rounded-lg border border-border text-foreground hover:bg-muted">
+        <button onClick={() => router.push("/dashboard/coach")} className="flex items-center gap-1.5 text-xs font-medium px-3 py-2 rounded-lg border border-border text-foreground hover:bg-muted">
           <Mic className="w-3.5 h-3.5" /> Ask CHRIS
         </button>
       </div>
@@ -91,14 +94,14 @@ export default function CareMinutesPage() {
 
         {/* THE ACTIONS — front and centre */}
         <div className="space-y-2">
-          <button className="w-full text-sm font-medium py-3 rounded-lg bg-primary text-primary-foreground hover:opacity-90 transition-opacity">
+          <button onClick={() => setModal({ variant: "form", title: "Find agency RN for tonight", chris: "CHRIS has generated a shift brief for tonight's evening RN shift. Review it, then send to your agency contacts. The brief includes care model, specific care needs, handover time, and who to report to.", label: "Send agency brief →" })} className="w-full text-sm font-medium py-3 rounded-lg bg-primary text-primary-foreground hover:opacity-90 transition-opacity">
             Find agency RN for tonight →
           </button>
           <div className="flex gap-2">
-            <button className="flex-1 text-xs font-medium py-2.5 rounded-lg border border-border text-foreground hover:bg-muted transition-colors">
+            <button onClick={() => setModal({ variant: "confirm", title: "Post to internal pool", chris: "CHRIS will send an alert to all qualified RN staff asking for tonight's evening shift cover. The alert goes via iMessage.", label: "Post shift alert →" })} className="flex-1 text-xs font-medium py-2.5 rounded-lg border border-border text-foreground hover:bg-muted transition-colors">
               Post to internal pool
             </button>
-            <button className="flex-1 text-xs font-medium py-2.5 rounded-lg border border-border text-foreground hover:bg-muted transition-colors">
+            <button onClick={() => setModal({ variant: "confirm", title: "Flag for tomorrow", chris: "This flags tonight's gap as a known risk in tomorrow's briefing. Care minutes may breach but RN coverage has been reviewed and accepted.", label: "Accept and flag →" })} className="flex-1 text-xs font-medium py-2.5 rounded-lg border border-border text-foreground hover:bg-muted transition-colors">
               Flag for tomorrow
             </button>
           </div>
@@ -135,7 +138,7 @@ export default function CareMinutesPage() {
               ) : (
                 <div className="ml-4">
                   <p className="text-xs text-[hsl(var(--brand-terracotta))] font-medium mb-2">🔴 {s.note} — RN shift not filled</p>
-                  <button className="text-xs font-medium px-3 py-2 rounded-lg bg-primary text-primary-foreground hover:opacity-90">
+                  <button onClick={() => setModal({ variant: "form", title: "Find agency cover for tonight", chris: "CHRIS has generated a shift brief for tonight's night RN shift. Review and send to agency.", label: "Send agency brief →" })} className="text-xs font-medium px-3 py-2 rounded-lg bg-primary text-primary-foreground hover:opacity-90">
                     Find agency cover for tonight →
                   </button>
                 </div>
@@ -177,10 +180,22 @@ export default function CareMinutesPage() {
         <p className="text-sm font-medium text-foreground mb-1">RN shortfall follows PSH_02 decline — culture signal, not rostering failure</p>
         <p className="text-xs text-muted-foreground leading-relaxed mb-2">The permanent RN roster has insufficient buffer because 2 RNs resigned following 4 cycles of declining Lack of Support scores. Agency cover addresses the symptom. Recognition practices address the cause.</p>
         <div className="flex items-center gap-2">
-          <button className="text-[11px] font-medium px-2.5 py-1.5 rounded-lg bg-primary text-primary-foreground hover:opacity-90">Address root cause →</button>
-          <button className="text-[11px] text-muted-foreground hover:text-foreground">Not relevant</button>
+          <button onClick={() => setModal({ variant: "form", title: "Address root cause", chris: "The RN shortfall follows a 4-cycle decline in PSH_02 (Lack of Support). CHRIS recommends prescribing a recognition-focused practice for the affected team. This creates a corrective action and appears in the next Team Briefing.", label: "Create corrective action →" })} className="text-[11px] font-medium px-2.5 py-1.5 rounded-lg bg-primary text-primary-foreground hover:opacity-90">Address root cause →</button>
+          <button onClick={() => setModal({ variant: "feedback", title: "Signal not relevant", chris: "Your feedback helps CHRIS learn. Why doesn't this signal apply to your context?", label: "Submit feedback" })} className="text-[11px] text-muted-foreground hover:text-foreground">Not relevant</button>
         </div>
       </div>
+
+      {/* Action Modal */}
+      {modal && (
+        <ActionModal
+          open={true}
+          onClose={() => setModal(null)}
+          variant={modal.variant}
+          title={modal.title}
+          chrisMessage={modal.chris}
+          primaryLabel={modal.label}
+        />
+      )}
     </div>
   );
 }

@@ -25,7 +25,7 @@ export default function TrainingPage() {
           <button onClick={() => router.push("/dashboard/workforce")} className="p-1 -ml-1 hover:bg-muted rounded-lg"><ChevronLeft className="w-5 h-5 text-foreground" /></button>
           <div><p className="text-[28px] font-bold text-foreground tracking-tight leading-tight">Training Compliance</p><p className="text-[10px] text-muted-foreground">Harbison Bowral · All mandatory training</p></div>
         </div>
-        <button className="flex items-center gap-1.5 text-xs font-medium px-3 py-2 rounded-lg border border-border text-foreground hover:bg-muted"><Mic className="w-3.5 h-3.5" /> Ask CHRIS</button>
+        <button onClick={() => router.push("/dashboard/coach")} className="flex items-center gap-1.5 text-xs font-medium px-3 py-2 rounded-lg border border-border text-foreground hover:bg-muted"><Mic className="w-3.5 h-3.5" /> Ask CHRIS</button>
       </div>
 
       <div className="flex gap-2 mb-4">
