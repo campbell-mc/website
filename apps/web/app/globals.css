@@ -248,10 +248,10 @@ p {
    Sidebar
    ============================================================================ */
 
-.sidebar { background: hsl(var(--sidebar-background)); border-right: 1px solid hsl(var(--sidebar-border)); }
+.sidebar { background: #f0ede8; border-right: 1px solid hsl(var(--sidebar-border)); }
 .sidebar-item { padding: 0.5rem 1rem; border-left: 2px solid transparent; color: hsl(var(--muted-foreground)); font-size: 0.875rem; font-weight: 500; transition: all 150ms; cursor: pointer; }
 .sidebar-item:hover { color: hsl(var(--brand-forest)); background: hsl(150 25% 96%); }
-.sidebar-item-active { border-left-color: hsl(var(--brand-teal)); background: hsl(150 25% 96%); color: hsl(var(--brand-forest)); font-weight: 600; }
+.sidebar-item-active { border-left-color: hsl(var(--brand-teal)); background: rgba(27, 67, 50, 0.08); color: hsl(var(--brand-forest)); font-weight: 600; }
 
 /* ============================================================================
    Animations (from proto)

@@ -32,7 +32,7 @@ export default function CareMinutesPage() {
             <ChevronLeft className="w-5 h-5 text-foreground" />
           </button>
           <div>
-            <p className="text-base font-semibold text-foreground">Care Minutes</p>
+            <p className="text-[28px] font-bold text-foreground leading-tight tracking-tight">Care Minutes</p>
             <p className="text-[10px] text-muted-foreground">Harbison Bowral · Deputy 2h ago ✅ · Updated hourly</p>
           </div>
         </div>
@@ -42,7 +42,7 @@ export default function CareMinutesPage() {
       </div>
 
       {/* TODAY — hero with CHRIS speaking first */}
-      <div className="bg-card rounded-xl p-4 shadow-warm border border-border border-l-4 border-l-[hsl(var(--brand-amber))] mb-4">
+      <div className="rounded-xl p-4 border border-border border-l-4 border-l-[hsl(var(--brand-amber))] mb-4" style={{ background: "rgba(212, 160, 23, 0.06)", boxShadow: "0 4px 24px rgba(0,0,0,0.10)" }}>
         <div className="flex items-center justify-between mb-2">
           <span className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest">Today · At Risk · Day 3</span>
           <span className="text-xs text-muted-foreground font-mono">
@@ -52,8 +52,8 @@ export default function CareMinutesPage() {
 
         {/* Big number */}
         <div className="flex items-baseline gap-2 mb-1">
-          <span className="text-4xl font-bold text-[hsl(var(--brand-amber))]">198</span>
-          <span className="text-sm text-muted-foreground">/ 200 min per resident</span>
+          <span className="text-[64px] font-extrabold text-[hsl(var(--brand-amber))] leading-none tracking-tight" style={{ fontFamily: "var(--font-display)" }}>198</span>
+          <span className="text-lg text-muted-foreground ml-1">/ 200 min per resident</span>
         </div>
 
         {/* Role breakdown — simple bars */}
@@ -82,8 +82,8 @@ export default function CareMinutesPage() {
         </div>
 
         {/* CHRIS interpretation */}
-        <div className="flex items-start gap-2 p-3 rounded-lg bg-muted/50 mb-3">
-          <ChrisAvatar size="small" className="shrink-0 mt-0.5" />
+        <div className="flex items-start gap-2 p-3 rounded-lg mb-3" style={{ background: "rgba(27, 67, 50, 0.05)" }}>
+          <ChrisAvatar size="small" showGlow className="shrink-0 mt-0.5" />
           <p className="text-xs text-muted-foreground leading-relaxed">
             You're 2 min/resident short. Tonight's RN shift is unfilled — that's what tips you from compliant to at-risk. If agency RN confirmed, projected finish: 204 min — <span className="text-[hsl(var(--brand-teal))] font-medium">compliant</span>.
           </p>
@@ -108,13 +108,17 @@ export default function CareMinutesPage() {
       {/* BY SHIFT — with action on the gap */}
       <div className="bg-card rounded-xl shadow-warm border border-border mb-4 overflow-hidden">
         <div className="px-4 py-3 border-b border-border">
-          <p className="text-sm font-semibold text-foreground">By Shift</p>
+          <p className="text-[11px] font-semibold text-muted-foreground uppercase tracking-[0.08em]">By Shift</p>
         </div>
         {SHIFT_DATA.map((s) => {
           const isBad = s.status === "bad";
           const isWarn = s.status === "warn";
           return (
-            <div key={s.shift} className={`px-4 py-3 border-b border-border last:border-b-0 ${isBad ? "bg-[hsl(var(--brand-terracotta)/0.04)]" : ""}`}>
+            <div key={s.shift} className={`px-4 py-3 border-b border-border last:border-b-0 border-l-[3px] ${
+              isBad ? "border-l-[hsl(var(--brand-terracotta))] bg-[hsl(var(--brand-terracotta)/0.04)]" :
+              isWarn ? "border-l-[hsl(var(--brand-amber))]" :
+              "border-l-[hsl(var(--brand-teal))]"
+            }`}>
               <div className="flex items-center justify-between mb-1">
                 <div className="flex items-center gap-2">
                   <span className={`w-2 h-2 rounded-full ${
@@ -143,7 +147,7 @@ export default function CareMinutesPage() {
 
       {/* THIS WEEK — visual bar chart, fixed */}
       <div className="bg-card rounded-xl p-4 shadow-warm border border-border mb-4">
-        <p className="text-sm font-semibold text-foreground mb-3">This Week</p>
+        <p className="text-[11px] font-semibold text-muted-foreground uppercase tracking-[0.08em] mb-3">This Week</p>
         <div className="space-y-2">
           {WEEK_DATA.map((d) => {
             const pct = Math.round((d.total / 220) * 100);
