@@ -60,7 +60,7 @@ export default function SIRSPage() {
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <button className="text-xs font-medium px-3 py-2 rounded-lg bg-primary text-primary-foreground hover:opacity-90">
+          <button onClick={() => router.push("/dashboard/sirs/cat2-hip")} className="text-xs font-medium px-3 py-2 rounded-lg bg-primary text-primary-foreground hover:opacity-90">
             Review draft →
           </button>
           <button className="text-xs text-muted-foreground hover:text-foreground p-1.5 rounded-lg hover:bg-muted">
@@ -108,11 +108,11 @@ export default function SIRSPage() {
 
       {/* Quick actions */}
       <div className="grid grid-cols-2 gap-2 mt-4 mb-16">
-        <button className="bg-card rounded-lg px-3 py-2.5 border border-border hover:shadow-warm text-left flex items-center gap-2">
+        <button onClick={() => router.push("/dashboard/sirs/new")} className="bg-card rounded-lg px-3 py-2.5 border border-border hover:shadow-warm text-left flex items-center gap-2">
           <span className="text-sm">📋</span>
           <span className="text-xs font-medium text-foreground">+ Report incident</span>
         </button>
-        <button className="bg-card rounded-lg px-3 py-2.5 border border-border hover:shadow-warm text-left flex items-center gap-2">
+        <button onClick={() => router.push("/dashboard/sirs/deadlines")} className="bg-card rounded-lg px-3 py-2.5 border border-border hover:shadow-warm text-left flex items-center gap-2">
           <span className="text-sm">⏱</span>
           <span className="text-xs font-medium text-foreground">All SIRS deadlines</span>
         </button>
