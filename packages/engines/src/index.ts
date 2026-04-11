@@ -9,5 +9,10 @@ export type { PackType, PackRequest, PackSection, GeneratedPack } from "./govern
 
 export { SagaTransaction } from "./saga";
 
+export { PulseEngine } from "./pulse/index";
+export { PULSE_DOMAINS, PSH_DOMAINS, classifyHazardScore, calculateTrajectory } from "./pulse/domains";
+export type { PulseDomain, HazardClassification, Trajectory } from "./pulse/domains";
+export type { PulseResponse, HazardFlag, ConvergenceResult, PulseCycleResult } from "./pulse/index";
+
 export { scoreAudit, COMPLY_QUESTIONS } from "./comply/scoring";
 export type { ComplyResult, ComplyQuestion, ComplyAnswer } from "./comply/scoring";

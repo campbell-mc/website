@@ -1,6 +1,6 @@
 # CHRIS — Claude Code Operating Manual
 
-CHRIS (Culture Health & Reinforcement Intelligent System) is an AI-powered operational intelligence platform for Australian aged care providers. It connects every source system a provider runs (rostering, HR, clinical, incident, finance) into a single canonical data layer, then drives leadership behaviour change, compliance monitoring, and governance intelligence.
+CHRIS (Culture Habit Reinforcement Intelligence System) is an AI-powered operational intelligence platform for Australian aged care providers. It connects every source system a provider runs (rostering, HR, clinical, incident, finance) into a single canonical data layer, then drives leadership behaviour change, compliance monitoring, and governance intelligence.
 
 ---
 

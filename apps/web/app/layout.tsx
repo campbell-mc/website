@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "CHRIS — Culture Health & Reinforcement Intelligent System",
+  title: "CHRIS — Culture Habit Reinforcement Intelligence System",
   description:
     "Operational intelligence for Australian aged care providers. Connecting every source system into a single canonical data layer.",
 };

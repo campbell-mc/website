@@ -14,7 +14,7 @@ export default function Home() {
           CHRIS
         </h1>
         <p className="text-lg mb-2" style={{ color: "var(--forest-light)" }}>
-          Culture Health & Reinforcement Intelligent System
+          Culture Habit Reinforcement Intelligence System
         </p>
         <p className="text-sm mb-8" style={{ color: "#6b6b6b" }}>
           Operational intelligence for Australian aged care providers
