@@ -6,7 +6,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   outputFileTracingRoot: resolve(__dirname, "../../"),
-  transpilePackages: ["@chris/db", "@chris/shared", "@chris/connectors"],
+  transpilePackages: ["@chris/db", "@chris/shared", "@chris/connectors", "@chris/engines"],
   experimental: {
     optimizePackageImports: ["recharts", "lucide-react"],
   },

@@ -111,7 +111,7 @@ Build prompts are in `08-BUILD-PROMPTS.md` — we execute these in order.
 | 1.2 | Connector framework + Deputy | Complete |
 | 1.3 | ELMO connector | Complete |
 | 1.4 | Humanforce connector | Complete |
-| 2.1 | Care minutes engine | Pending |
+| 2.1 | Care minutes engine | Complete |
 | 2.2 | SIRS classification + submission | Pending |
 | 3.1 | DON approval queue + PWA | Pending |
 | 4.1 | CHRIS Comply public launch | Pending |

@@ -138,6 +138,25 @@ importers:
         specifier: ^0.30.0
         version: 0.30.6
 
+  packages/engines:
+    dependencies:
+      '@chris/db':
+        specifier: workspace:*
+        version: link:../db
+      drizzle-orm:
+        specifier: ^0.39.0
+        version: 0.39.3(@neondatabase/serverless@0.10.4)(@types/pg@8.11.6)(postgres@3.4.9)
+      postgres:
+        specifier: ^3.4.0
+        version: 3.4.9
+    devDependencies:
+      '@types/node':
+        specifier: ^22.19.17
+        version: 22.19.17
+      vitest:
+        specifier: ^3.0.0
+        version: 3.2.4(@types/node@22.19.17)(jiti@2.6.1)(lightningcss@1.32.0)(msw@2.13.2(@types/node@22.19.17)(typescript@5.9.3))(tsx@4.21.0)
+
   packages/shared:
     dependencies:
       '@chris/db':
