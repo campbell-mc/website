@@ -85,8 +85,9 @@ const NAV_SECTIONS: NavSection[] = [
   {
     title: "LOOPS",
     items: [
-      { label: "Team Briefing", href: "/dashboard/team-briefing", icon: FileText, roles: ["team_leader", "don", "facility_gm", "operator"] },
-      { label: "Leader Loop", href: "/dashboard/journey", icon: BarChart2, roles: ["team_leader", "don", "facility_gm", "operator"] },
+      { label: "Team Loop", href: "/team-loop/briefing", icon: FileText, roles: ["team_leader", "don", "facility_gm", "operator"] },
+      { label: "Team Pulse", href: "/team-loop/pulse", icon: Users, roles: ["team_leader", "don", "facility_gm", "frontline_staff", "operator"] },
+      { label: "Leader Loop", href: "/leader-loop/arrive", icon: BarChart2, roles: ["team_leader", "don", "facility_gm", "operator"] },
     ],
   },
 ];
