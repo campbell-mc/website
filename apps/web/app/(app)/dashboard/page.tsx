@@ -69,6 +69,28 @@ export default function HomePage() {
 
   return (
     <div className="p-4 lg:p-6 max-w-lg lg:max-w-3xl mx-auto">
+      {/* DEV: Role switcher — top of page */}
+      <div className="bg-[hsl(var(--brand-forest))] rounded-xl p-3 mb-4">
+        <p className="text-[10px] font-semibold text-white/60 uppercase tracking-wider mb-2">Demo — switch role view</p>
+        <div className="grid grid-cols-3 gap-1.5">
+          {[
+            { label: "DON", href: "/dashboard" },
+            { label: "CEO", href: "/dashboard/ceo" },
+            { label: "CFO", href: "/dashboard/cfo" },
+            { label: "Clinical Dir.", href: "/dashboard/clinical-director" },
+            { label: "Quality Lead", href: "/dashboard/quality-lead" },
+            { label: "WHS Lead", href: "/dashboard/whs" },
+            { label: "HR / P&C", href: "/dashboard/hr" },
+            { label: "Board", href: "/dashboard/board" },
+            { label: "Team Leader", href: "/dashboard/team-leader" },
+          ].map((r) => (
+            <button key={r.label} onClick={() => router.push(r.href)} className="bg-white/10 hover:bg-white/20 rounded-lg px-2 py-2 text-[11px] font-medium text-white transition-colors">
+              {r.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
       {/* 1. GREETING */}
       <div className="flex items-center justify-between mb-5">
         <div>
@@ -150,26 +172,6 @@ export default function HomePage() {
           <button className="text-[11px] font-medium px-2.5 py-1.5 rounded-lg border border-border text-muted-foreground hover:bg-muted">Monitor</button>
           <button className="text-[11px] text-muted-foreground/50 hover:text-muted-foreground ml-auto">Not relevant</button>
         </div>
-      </div>
-
-      {/* DEV: Role switcher — view any role's home screen */}
-      <p className="text-[11px] font-semibold text-muted-foreground uppercase tracking-[0.08em] mb-2">Switch role view</p>
-      <div className="grid grid-cols-2 gap-2 mb-5">
-        {[
-          { label: "DON (current)", href: "/dashboard" },
-          { label: "CEO / COO", href: "/dashboard/ceo" },
-          { label: "CFO", href: "/dashboard/cfo" },
-          { label: "Clinical Director", href: "/dashboard/clinical-director" },
-          { label: "Quality Lead", href: "/dashboard/quality-lead" },
-          { label: "WHS Lead", href: "/dashboard/whs" },
-          { label: "HR / P&C", href: "/dashboard/hr" },
-          { label: "Board Member", href: "/dashboard/board" },
-          { label: "Team Leader", href: "/dashboard/team-leader" },
-        ].map((r) => (
-          <button key={r.label} onClick={() => router.push(r.href)} className="bg-card rounded-lg px-3 py-2.5 border border-border hover:shadow-warm text-left text-xs font-medium text-foreground">
-            {r.label}
-          </button>
-        ))}
       </div>
 
       {/* 6. DAILY BRIEFING — quiet entry point */}
