@@ -3,7 +3,7 @@ import { RoleHomeScreen, type RoleHomeConfig } from "@/components/dashboard/Role
 
 const config: RoleHomeConfig = {
   greeting: "Good morning, Rachel",
-  subtitle: "Harbison · People & Culture",
+  subtitle: "Knights of the Holy Grail · People & Culture",
   todaysPicture: "AIN turnover is running at 34% annualised — 8 points above sector median. CHRIS has cross-referenced this with PSH data: the highest-churn teams consistently show PSH_13 (Recognition) and PSH_02 (Support) declining 4+ cycles before exit events. This is a culture signal, not a recruitment problem. 6 AHPRA registrations expire in the next 3 weeks — if not renewed, Facility B's care minutes will be at risk. Leader Loop completion is at 57% — 6 leaders haven't started Cycle 8. On a positive note, agency dependency is at 14%, below the 15% target.",
   domains: [
     { name: "Turnover", status: "watch", summary: "28% rolling · AIN 34% · above sector", href: "/dashboard/hr/workforce" },

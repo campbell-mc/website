@@ -130,7 +130,7 @@ function SubmissionPanel({ onClose }: { onClose: () => void }) {
               <button onClick={() => setSubmitted(true)} className="w-full py-3.5 rounded-xl font-medium text-white bg-primary hover:opacity-90">
                 Submit to GPMS →
               </button>
-              <p className="text-[10px] text-muted-foreground text-center mt-2">15 quality indicators · Q1 2026 · Harbison Bowral · Will be publicly reported</p>
+              <p className="text-[10px] text-muted-foreground text-center mt-2">15 quality indicators · Q1 2026 · The Holy Grail Bowral · Will be publicly reported</p>
             </div>
           )}
         </div>
@@ -188,7 +188,7 @@ export default function QualityPage() {
           <button onClick={() => router.push("/dashboard/clinical")} className="p-1 -ml-1 hover:bg-muted rounded-lg"><ChevronLeft className="w-5 h-5 text-foreground" /></button>
           <div>
             <p className="text-[28px] font-bold text-foreground tracking-tight leading-tight">Quality Indicators</p>
-            <p className="text-[10px] text-muted-foreground">15 Mandatory QIs · Q1 2026 · Harbison Bowral</p>
+            <p className="text-[10px] text-muted-foreground">15 Mandatory QIs · Q1 2026 · The Holy Grail Bowral</p>
           </div>
         </div>
         <button onClick={() => router.push("/dashboard/coach")} className="flex items-center gap-1.5 text-xs font-medium px-3 py-2 rounded-lg border border-border text-foreground hover:bg-muted"><Mic className="w-3.5 h-3.5" /> Ask CHRIS</button>

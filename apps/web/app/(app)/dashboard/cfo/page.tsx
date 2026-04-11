@@ -3,7 +3,7 @@ import { RoleHomeScreen, type RoleHomeConfig } from "@/components/dashboard/Role
 
 const config: RoleHomeConfig = {
   greeting: "Good morning, David",
-  subtitle: "Harbison · Financial Command",
+  subtitle: "Knights of the Holy Grail · Financial Command",
   todaysPicture: "Care ratio is sitting at 53% — below the 55% target. The driver is agency cost, which is up 23% this month following two Wing B resignations. CHRIS has traced this to a 4-cycle decline in PSH_13 in that team — this is a culture cost, not a labour market event. The Q1 QFR has been submitted and confirmed. Board finance section is ready for your review — 25 minutes estimated.",
   domains: [
     { name: "Revenue", status: "watch", summary: "YTD -1.2% vs budget · $2.1M actual", href: "/dashboard/financial" },

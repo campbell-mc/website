@@ -36,7 +36,7 @@ export default function CareMinutesPage() {
           </button>
           <div>
             <p className="text-[28px] font-bold text-foreground leading-tight tracking-tight">Care Minutes</p>
-            <p className="text-[10px] text-muted-foreground">Harbison Bowral · Deputy 2h ago ✅ · Updated hourly</p>
+            <p className="text-[10px] text-muted-foreground">The Holy Grail Bowral · Deputy 2h ago ✅ · Updated hourly</p>
           </div>
         </div>
         <button onClick={() => router.push("/dashboard/coach")} className="flex items-center gap-1.5 text-xs font-medium px-3 py-2 rounded-lg border border-border text-foreground hover:bg-muted">

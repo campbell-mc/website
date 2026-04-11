@@ -59,7 +59,7 @@ export default function ClinicalControlCentre() {
           </button>
           <div>
             <p className="text-[28px] font-bold text-foreground tracking-tight leading-tight">Clinical Control Centre</p>
-            <p className="text-[10px] text-muted-foreground">Harbison Bowral</p>
+            <p className="text-[10px] text-muted-foreground">The Holy Grail Bowral</p>
           </div>
         </div>
         <button className="flex items-center gap-1.5 text-xs font-medium px-3 py-2 rounded-lg border border-border text-foreground hover:bg-muted">

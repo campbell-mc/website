@@ -26,21 +26,21 @@ const PSH_DOMAINS = [
   { code: "PSH_16", name: "Work-Life Imbalance", category: "Work Context" },
 ];
 
-const TEAMS = ["Clinical Care BD", "Clinical Care MV", "Catering BD", "Catering MV", "Personal Care BD", "Cottage Team"];
+const TEAMS = ["Merlin Wing", "Galahad Wing", "Camelot Kitchen", "Avalon Kitchen", "Excalibur Wing", "Round Table Wing"];
 
 // Demo hazard scores
 const DEMO_SCORES: Record<string, Record<string, number>> = {
-  "Clinical Care BD": { PSH_01: 0.72, PSH_02: 0.45, PSH_03: 0.31, PSH_04: 0.55, PSH_05: 0.28, PSH_06: 0.41, PSH_07: 0.38, PSH_08: 0.68, PSH_09: 0.12, PSH_10: 0.35, PSH_11: 0.18, PSH_12: 0.71, PSH_13: 0.52, PSH_14: 0.25, PSH_15: 0.22, PSH_16: 0.48 },
-  "Clinical Care MV": { PSH_01: 0.45, PSH_02: 0.32, PSH_03: 0.28, PSH_04: 0.38, PSH_05: 0.25, PSH_06: 0.33, PSH_07: 0.29, PSH_08: 0.42, PSH_09: 0.15, PSH_10: 0.22, PSH_11: 0.12, PSH_12: 0.44, PSH_13: 0.35, PSH_14: 0.20, PSH_15: 0.18, PSH_16: 0.31 },
-  "Catering BD": { PSH_01: 0.55, PSH_02: 0.48, PSH_03: 0.42, PSH_04: 0.62, PSH_05: 0.30, PSH_06: 0.25, PSH_07: 0.45, PSH_08: 0.15, PSH_09: 0.10, PSH_10: 0.18, PSH_11: 0.22, PSH_12: 0.38, PSH_13: 0.65, PSH_14: 0.55, PSH_15: 0.32, PSH_16: 0.58 },
-  "Catering MV": { PSH_01: 0.38, PSH_02: 0.35, PSH_03: 0.30, PSH_04: 0.42, PSH_05: 0.22, PSH_06: 0.20, PSH_07: 0.35, PSH_08: 0.10, PSH_09: 0.08, PSH_10: 0.15, PSH_11: 0.10, PSH_12: 0.25, PSH_13: 0.40, PSH_14: 0.38, PSH_15: 0.25, PSH_16: 0.35 },
-  "Personal Care BD": { PSH_01: 0.82, PSH_02: 0.58, PSH_03: 0.45, PSH_04: 0.65, PSH_05: 0.42, PSH_06: 0.55, PSH_07: 0.48, PSH_08: 0.75, PSH_09: 0.20, PSH_10: 0.52, PSH_11: 0.35, PSH_12: 0.78, PSH_13: 0.62, PSH_14: 0.38, PSH_15: 0.42, PSH_16: 0.68 },
-  "Cottage Team": { PSH_01: 0.88, PSH_02: 0.72, PSH_03: 0.65, PSH_04: 0.78, PSH_05: 0.58, PSH_06: 0.62, PSH_07: 0.55, PSH_08: 0.82, PSH_09: 0.18, PSH_10: 0.48, PSH_11: 0.42, PSH_12: 0.85, PSH_13: 0.72, PSH_14: 0.45, PSH_15: 0.52, PSH_16: 0.75 },
+  "Merlin Wing": { PSH_01: 0.72, PSH_02: 0.45, PSH_03: 0.31, PSH_04: 0.55, PSH_05: 0.28, PSH_06: 0.41, PSH_07: 0.38, PSH_08: 0.68, PSH_09: 0.12, PSH_10: 0.35, PSH_11: 0.18, PSH_12: 0.71, PSH_13: 0.52, PSH_14: 0.25, PSH_15: 0.22, PSH_16: 0.48 },
+  "Galahad Wing": { PSH_01: 0.45, PSH_02: 0.32, PSH_03: 0.28, PSH_04: 0.38, PSH_05: 0.25, PSH_06: 0.33, PSH_07: 0.29, PSH_08: 0.42, PSH_09: 0.15, PSH_10: 0.22, PSH_11: 0.12, PSH_12: 0.44, PSH_13: 0.35, PSH_14: 0.20, PSH_15: 0.18, PSH_16: 0.31 },
+  "Camelot Kitchen": { PSH_01: 0.55, PSH_02: 0.48, PSH_03: 0.42, PSH_04: 0.62, PSH_05: 0.30, PSH_06: 0.25, PSH_07: 0.45, PSH_08: 0.15, PSH_09: 0.10, PSH_10: 0.18, PSH_11: 0.22, PSH_12: 0.38, PSH_13: 0.65, PSH_14: 0.55, PSH_15: 0.32, PSH_16: 0.58 },
+  "Avalon Kitchen": { PSH_01: 0.38, PSH_02: 0.35, PSH_03: 0.30, PSH_04: 0.42, PSH_05: 0.22, PSH_06: 0.20, PSH_07: 0.35, PSH_08: 0.10, PSH_09: 0.08, PSH_10: 0.15, PSH_11: 0.10, PSH_12: 0.25, PSH_13: 0.40, PSH_14: 0.38, PSH_15: 0.25, PSH_16: 0.35 },
+  "Excalibur Wing": { PSH_01: 0.82, PSH_02: 0.58, PSH_03: 0.45, PSH_04: 0.65, PSH_05: 0.42, PSH_06: 0.55, PSH_07: 0.48, PSH_08: 0.75, PSH_09: 0.20, PSH_10: 0.52, PSH_11: 0.35, PSH_12: 0.78, PSH_13: 0.62, PSH_14: 0.38, PSH_15: 0.42, PSH_16: 0.68 },
+  "Round Table Wing": { PSH_01: 0.88, PSH_02: 0.72, PSH_03: 0.65, PSH_04: 0.78, PSH_05: 0.58, PSH_06: 0.62, PSH_07: 0.55, PSH_08: 0.82, PSH_09: 0.18, PSH_10: 0.48, PSH_11: 0.42, PSH_12: 0.85, PSH_13: 0.72, PSH_14: 0.45, PSH_15: 0.52, PSH_16: 0.75 },
 };
 
 const CONVERGENCE_EVENTS = [
-  { domains: ["PSH_01", "PSH_12"], team: "Cottage Team", cycles: 3, severity: "critical" as const, recommendation: "Facility-level response required. Team-level practices insufficient at this threshold." },
-  { domains: ["PSH_08", "PSH_12"], team: "Personal Care BD", cycles: 2, severity: "high" as const, recommendation: "Review grief support. 3 resident deaths in 6 weeks driving traumatic exposure + emotional demands convergence." },
+  { domains: ["PSH_01", "PSH_12"], team: "Round Table Wing", cycles: 3, severity: "critical" as const, recommendation: "Facility-level response required. Team-level practices insufficient at this threshold." },
+  { domains: ["PSH_08", "PSH_12"], team: "Excalibur Wing", cycles: 2, severity: "high" as const, recommendation: "Review grief support. 3 resident deaths in 6 weeks driving traumatic exposure + emotional demands convergence." },
 ];
 
 function getHazardColor(score: number): string {

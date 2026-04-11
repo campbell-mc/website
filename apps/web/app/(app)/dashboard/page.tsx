@@ -96,7 +96,7 @@ export default function HomePage() {
         <div>
           <p className="text-lg font-semibold text-foreground">{getGreeting()}, Sarah</p>
           <p className="text-xs text-muted-foreground">
-            Harbison Bowral · {new Date().toLocaleDateString("en-AU", { weekday: "long", day: "numeric", month: "long" })} · Day shift
+            The Holy Grail Bowral · {new Date().toLocaleDateString("en-AU", { weekday: "long", day: "numeric", month: "long" })} · Day shift
           </p>
         </div>
         <button className="relative p-2 rounded-lg hover:bg-muted transition-colors">

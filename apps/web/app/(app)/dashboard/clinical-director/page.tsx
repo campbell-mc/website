@@ -3,7 +3,7 @@ import { RoleHomeScreen, type RoleHomeConfig } from "@/components/dashboard/Role
 
 const config: RoleHomeConfig = {
   greeting: "Good morning, Dr Chen",
-  subtitle: "Harbison · Clinical Governance",
+  subtitle: "Knights of the Holy Grail · Clinical Governance",
   todaysPicture: "Clinical performance is mixed across the portfolio this week. QI_04 (falls with injury) is elevated at Facility C — but CHRIS has cross-referenced this with a recent high-acuity admissions cohort, which likely explains the movement. Care minutes are compliant at both facilities. Facility B's RN hours are right on the threshold — worth monitoring. The monthly Clinical Leadership Pack is ready for your review — 30 minutes estimated.",
   domains: [
     { name: "Care Minutes", status: "clear", summary: "100% facilities compliant · RN threshold met", href: "/dashboard/clinical-director/care-minutes" },

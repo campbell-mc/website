@@ -15,7 +15,7 @@ export default function BoardHome() {
         {/* Provider identity */}
         <div className="text-center mb-8">
           <ChrisAvatar size="large" className="mx-auto mb-4" />
-          <h1 className="text-2xl font-bold text-foreground">Harbison</h1>
+          <h1 className="text-2xl font-bold text-foreground">Knights of the Holy Grail</h1>
           <p className="text-sm text-muted-foreground">Board member view · Margaret Wilson</p>
         </div>
 

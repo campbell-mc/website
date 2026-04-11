@@ -17,7 +17,7 @@ export default function SIRSPage() {
           </button>
           <div>
             <p className="text-[28px] font-bold text-foreground tracking-tight leading-tight">SIRS Register</p>
-            <p className="text-[10px] text-muted-foreground">Harbison Bowral · Aged Care Act 2024</p>
+            <p className="text-[10px] text-muted-foreground">The Holy Grail Bowral · Aged Care Act 2024</p>
           </div>
         </div>
         <button className="flex items-center gap-1.5 text-xs font-medium px-3 py-2 rounded-lg border border-border text-foreground hover:bg-muted">

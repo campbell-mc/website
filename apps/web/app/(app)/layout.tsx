@@ -17,7 +17,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   const user = {
     name: "Sarah Mitchell",
     role: "don" as Role,
-    providerName: "Harbison",
+    providerName: "Knights of the Holy Grail",
   };
 
   const config = getRoleConfig(user.role);

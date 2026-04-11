@@ -34,7 +34,7 @@ export default function PSHControlCentre() {
       <div className="flex items-center justify-between mb-5">
         <div className="flex items-center gap-2">
           <button onClick={() => router.push("/dashboard")} className="p-1 -ml-1 hover:bg-muted rounded-lg"><ChevronLeft className="w-5 h-5 text-foreground" /></button>
-          <div><p className="text-[28px] font-bold text-foreground tracking-tight leading-tight">PSH / Workforce Safety</p><p className="text-[10px] text-muted-foreground">Harbison Bowral · ISO 45003</p></div>
+          <div><p className="text-[28px] font-bold text-foreground tracking-tight leading-tight">PSH / Workforce Safety</p><p className="text-[10px] text-muted-foreground">The Holy Grail Bowral · ISO 45003</p></div>
         </div>
         <button onClick={() => router.push("/dashboard/coach")} className="flex items-center gap-1.5 text-xs font-medium px-3 py-2 rounded-lg border border-border text-foreground hover:bg-muted"><Mic className="w-3.5 h-3.5" /> Ask CHRIS</button>
       </div>
@@ -56,12 +56,12 @@ export default function PSHControlCentre() {
       <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-[0.08em] mb-2">Needs your attention</p>
 
       <ActionCard urgency="critical" icon={<AlertTriangle className="w-5 h-5 text-[hsl(var(--brand-terracotta))]" />}
-        title="Critical convergence — Cottage Team"
+        title="Critical convergence — Round Table Wing"
         chris="PSH_01 (High Job Demands) + PSH_08 (Traumatic Exposure) both above critical threshold for 3rd consecutive cycle. Team practices are insufficient. DON-level structural intervention required. Historical WC claim correlation: 68% within 4-6 weeks."
         actionLabel="Escalate to DON →" onAction={() => {}} />
 
       <ActionCard urgency="critical" icon={<Heart className="w-5 h-5 text-[hsl(var(--brand-terracotta))]" />}
-        title="Personal Care BD — 5 domains elevated"
+        title="Excalibur Wing — 5 domains elevated"
         chris="Highest hazard load in facility. PSH_01, PSH_04, PSH_06, PSH_08, PSH_12 all above threshold. Level 4 practices prescribed for 2 cycles with insufficient improvement. Level 2-3 intervention needed."
         actionLabel="Build advocacy brief →" onAction={() => {}} />
 
@@ -86,7 +86,7 @@ export default function PSHControlCentre() {
         actionLabel="Export evidence pack →" onAction={() => {}} />
 
       <ActionCard urgency="positive" icon={<Shield className="w-5 h-5 text-[hsl(var(--brand-teal))]" />}
-        title="Catering MV — all domains within range"
+        title="Avalon Kitchen — all domains within range"
         chris="Only team at this facility with zero elevated domains. Pulse participation at 95%. Worth recognising."
         actionLabel="Acknowledge in briefing →" onAction={() => {}} />
 

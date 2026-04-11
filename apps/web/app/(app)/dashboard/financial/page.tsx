@@ -37,7 +37,7 @@ export default function FinancialControlCentre() {
       <div className="flex items-center justify-between mb-5">
         <div className="flex items-center gap-2">
           <button onClick={() => router.push("/dashboard")} className="p-1 -ml-1 hover:bg-muted rounded-lg"><ChevronLeft className="w-5 h-5 text-foreground" /></button>
-          <div><p className="text-[28px] font-bold text-foreground tracking-tight leading-tight">Financial Control Centre</p><p className="text-[10px] text-muted-foreground">Harbison · FY2026 · April</p></div>
+          <div><p className="text-[28px] font-bold text-foreground tracking-tight leading-tight">Financial Control Centre</p><p className="text-[10px] text-muted-foreground">Knights of the Holy Grail · FY2026 · April</p></div>
         </div>
         <button onClick={() => router.push("/dashboard/coach")} className="flex items-center gap-1.5 text-xs font-medium px-3 py-2 rounded-lg border border-border text-foreground hover:bg-muted"><Mic className="w-3.5 h-3.5" /> Ask CHRIS</button>
       </div>
