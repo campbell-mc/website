@@ -14,5 +14,8 @@ export { PULSE_DOMAINS, PSH_DOMAINS, classifyHazardScore, calculateTrajectory } 
 export type { PulseDomain, HazardClassification, Trajectory } from "./pulse/domains";
 export type { PulseResponse, HazardFlag, ConvergenceResult, PulseCycleResult } from "./pulse/index";
 
+export { MondayBriefingEngine, PracticeSelector } from "./monday-briefing/index";
+export type { MondayBriefing, ActionBlock, OperationalDashboard, MicroPractice, PracticeSelection } from "./monday-briefing/index";
+
 export { scoreAudit, COMPLY_QUESTIONS } from "./comply/scoring";
 export type { ComplyResult, ComplyQuestion, ComplyAnswer } from "./comply/scoring";
