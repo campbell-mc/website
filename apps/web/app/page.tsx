@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center" style={{ background: "var(--cream)" }}>
@@ -20,11 +22,21 @@ export default function Home() {
           Operational intelligence for Australian aged care providers
         </p>
 
-        <div
-          className="inline-block px-6 py-3 rounded-lg text-white font-medium"
-          style={{ background: "var(--forest)" }}
-        >
-          Platform launching soon
+        <div className="flex flex-col gap-3 items-center">
+          <Link
+            href="/dashboard"
+            className="inline-block px-8 py-3 rounded-xl text-white font-medium hover:opacity-90 transition-opacity"
+            style={{ background: "var(--forest)" }}
+          >
+            Open Dashboard
+          </Link>
+          <Link
+            href="/comply"
+            className="inline-block px-8 py-3 rounded-xl font-medium border-2 hover:bg-[#E8F5EE] transition-colors"
+            style={{ borderColor: "var(--forest)", color: "var(--forest)" }}
+          >
+            Free Compliance Audit
+          </Link>
         </div>
       </div>
     </div>
