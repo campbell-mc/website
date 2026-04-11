@@ -1,198 +1,281 @@
 "use client";
 
 import { useState } from "react";
-import { FileText, ClipboardList, Activity, AlertTriangle, Shield, Heart, BarChart2, Clock, ChevronRight, Sparkles, Bell } from "lucide-react";
-import { ScoreRing } from "@/components/ui/score-ring";
-import { MetricCard } from "@/components/ui/metric-card";
-import { StatusBadge, StatusDot } from "@/components/ui/status-badge";
-import { ChrisMessage } from "@/components/chris/ChrisMessage";
+import { Bell, Clock, ChevronRight, ChevronDown, Sparkles, CheckCircle, MessageSquare, Mic, MoreHorizontal } from "lucide-react";
+import { StatusBadge } from "@/components/ui/status-badge";
+import { ChrisAvatar } from "@/components/chris/ChrisAvatar";
 
-// Demo data — will be replaced by real API calls
-const DEMO = {
-  facility: "Harbison — Burradoo",
-  careMinutes: { total: 198, rn: 41.2, status: "at-risk" as const, trend: "stable" as const },
-  sirs: { openCat1: 0, openCat2: 1, approaching: 1 },
-  compliance: { score: 82, trend: "up" as const, atRisk: 2 },
-  psh: { elevated: 3, convergence: 1 },
-  queue: { immediate: 0, urgent: 2, routine: 5 },
-  recentActivity: [
-    { icon: "alert", text: "Care minutes at-risk alert sent to DON", time: "3 hours ago" },
-    { icon: "sirs", text: "SIRS Category 2 draft created for review", time: "Yesterday" },
-    { icon: "briefing", text: "Team Briefing delivered to 14 leaders", time: "2 days ago" },
-    { icon: "pulse", text: "Cycle 8 pulse closed — 34% response rate", time: "3 days ago" },
-    { icon: "practice", text: "Practice outcome measured: hazard reduced in Wattle Wing", time: "4 days ago" },
-  ],
-};
+// ============================================================================
+// DON COMMAND CENTRE
+// Spec: "CHRIS Command Centre — Operational Dashboard Specification"
+// Principles: Zero friction. One most important thing. Action on the card.
+// Mobile is the product. CHRIS speaks first, explains second.
+// ============================================================================
 
-function getTimeGreeting(): string {
+function getGreeting(): string {
   const h = new Date().getHours();
   if (h < 12) return "Good morning";
   if (h < 17) return "Good afternoon";
   return "Good evening";
 }
 
-export default function SiteDashboardPage() {
-  return (
-    <div className="p-4 lg:p-8 max-w-5xl mx-auto animate-fadeIn">
-      {/* Header */}
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold text-[var(--brand-forest)]">
-          {getTimeGreeting()}, Mary
-        </h1>
-        <p className="text-sm text-gray-500">{DEMO.facility} · {new Date().toLocaleDateString("en-AU", { weekday: "long", day: "numeric", month: "long" })}</p>
-      </div>
+// --- Dominant Card: CHRIS decides what's most important ---
+// Priority: SIRS deadline > Care minutes breach > Unread briefing > Queue items > All clear
 
-      {/* Monday Briefing Card (hero) */}
-      <div className="rounded-xl p-5 mb-6 text-white" style={{ background: "var(--gradient-hero)" }}>
-        <div className="flex items-start justify-between">
-          <div>
-            <div className="flex items-center gap-2 mb-2">
-              <Sparkles className="w-4 h-4 opacity-80" />
-              <span className="text-sm font-medium opacity-90">Your Monday Briefing is ready</span>
-            </div>
-            <p className="text-xs opacity-70 mb-3">3 signals · 3 actions · 8 minutes to read</p>
+type DominantType = "sirs_deadline" | "care_minutes_breach" | "unread_briefing" | "queue" | "all_clear";
+
+function DominantCard({ type }: { type: DominantType }) {
+  if (type === "sirs_deadline") {
+    return (
+      <div className="rounded-xl border-l-4 border-l-[var(--brand-terracotta)] bg-white shadow-warm p-4 mb-4">
+        <div className="flex items-center gap-2 mb-2">
+          <StatusBadge status="non-compliant" label="SIRS · CAT 1" size="sm" showDot />
+          <span className="text-xs text-gray-400 ml-auto font-mono">6h 14m remaining</span>
+        </div>
+
+        {/* CHRIS speaks first */}
+        <div className="flex items-start gap-3 mb-3">
+          <ChrisAvatar size="small" className="mt-0.5 shrink-0" />
+          <p className="text-sm text-gray-800 leading-relaxed">
+            Unexpected fall – Wing B – Tuesday 2:15pm. CHRIS has the draft ready. You need to add resident details and submit to ACQSC.
+          </p>
+        </div>
+
+        {/* Deadline bar */}
+        <div className="w-full bg-gray-100 rounded-full h-2 mb-3">
+          <div className="h-2 rounded-full bg-[var(--brand-terracotta)] animate-[pulseSoft_2s_ease-in-out_infinite]" style={{ width: "80%" }} />
+        </div>
+
+        {/* Action on the card — one primary, always bottom right */}
+        <div className="flex justify-end">
+          <button className="text-sm font-medium px-4 py-2.5 rounded-lg bg-[var(--brand-forest)] text-white hover:opacity-90 transition-opacity">
+            Review draft →
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  if (type === "care_minutes_breach") {
+    return (
+      <div className="rounded-xl border-l-4 border-l-[var(--brand-amber)] bg-white shadow-warm p-4 mb-4">
+        <StatusBadge status="at-risk" label="Care Minutes · Day 3" size="sm" showDot className="mb-2" />
+        <div className="flex items-start gap-3 mb-3">
+          <ChrisAvatar size="small" className="mt-0.5 shrink-0" />
+          <p className="text-sm text-gray-800 leading-relaxed">
+            You're 14 minutes short on care hours today. Tonight's RN shift is unfilled — that's the gap.
+          </p>
+        </div>
+        {/* Data one tap away */}
+        <p className="text-[11px] text-gray-400 mb-3">186 actual · 200 target · RN: 37/40 · Deputy · 2h ago ✅</p>
+        <div className="flex justify-end">
+          <button className="text-sm font-medium px-4 py-2.5 rounded-lg bg-[var(--brand-forest)] text-white hover:opacity-90">
+            Fix gap →
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  if (type === "unread_briefing") {
+    return (
+      <div className="rounded-xl bg-white shadow-warm overflow-hidden mb-4">
+        <div className="h-1 bg-gradient-to-r from-[var(--brand-forest)] via-[var(--brand-terracotta)] to-[var(--brand-amber)]" />
+        <div className="p-4">
+          <div className="flex items-center gap-2 mb-2">
+            <Sparkles className="w-4 h-4 text-[var(--brand-amber)]" />
+            <span className="text-sm font-semibold text-[var(--brand-forest)]">Monday Briefing</span>
+            <span className="text-[10px] text-gray-400 ml-auto">3 signals · 3 actions · 8 min</span>
           </div>
-          <FileText className="w-8 h-8 opacity-40" />
-        </div>
-        <button className="bg-white/20 hover:bg-white/30 transition-colors text-white text-sm font-medium px-4 py-2.5 rounded-lg">
-          Read now →
-        </button>
-      </div>
-
-      {/* DON Queue Badge */}
-      {(DEMO.queue.immediate + DEMO.queue.urgent) > 0 && (
-        <div className="card-terracotta rounded-xl p-4 mb-6 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-[var(--brand-terracotta)] flex items-center justify-center">
-              <Bell className="w-5 h-5 text-white" />
-            </div>
-            <div>
-              <p className="text-sm font-semibold text-[var(--brand-forest)]">
-                {DEMO.queue.immediate + DEMO.queue.urgent + DEMO.queue.routine} items in your review queue
-              </p>
-              <p className="text-xs text-gray-500">
-                {DEMO.queue.immediate > 0 && `${DEMO.queue.immediate} immediate · `}
-                {DEMO.queue.urgent} urgent · {DEMO.queue.routine} routine
-              </p>
-            </div>
-          </div>
-          <ChevronRight className="w-5 h-5 text-gray-400" />
-        </div>
-      )}
-
-      {/* Critical Status Row (4 metric cards) */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
-        <MetricCard
-          label="Care Minutes"
-          value={`${DEMO.careMinutes.total}`}
-          subtitle={`RN: ${DEMO.careMinutes.rn} · Target: 200/40`}
-          trend={DEMO.careMinutes.trend}
-          status={DEMO.careMinutes.status}
-        />
-        <MetricCard
-          label="SIRS Status"
-          value={`${DEMO.sirs.openCat1 + DEMO.sirs.openCat2} open`}
-          subtitle={`${DEMO.sirs.approaching} approaching deadline`}
-          status={DEMO.sirs.openCat1 > 0 ? "non-compliant" : DEMO.sirs.openCat2 > 0 ? "at-risk" : "compliant"}
-        />
-        <MetricCard
-          label="PSH Risk"
-          value={`${DEMO.psh.elevated} elevated`}
-          subtitle={`${DEMO.psh.convergence} convergence event`}
-          status={DEMO.psh.convergence > 0 ? "at-risk" : "compliant"}
-        />
-        <MetricCard
-          label="Compliance"
-          value={DEMO.compliance.score}
-          subtitle={`${DEMO.compliance.atRisk} obligations at risk`}
-          trend={DEMO.compliance.trend}
-          trendLabel="+3"
-          status={DEMO.compliance.score >= 85 ? "compliant" : DEMO.compliance.score >= 70 ? "at-risk" : "non-compliant"}
-        />
-      </div>
-
-      {/* Care Minutes Today — large gauge */}
-      <div className="bg-white rounded-xl p-6 shadow-warm border border-[var(--border-default)] mb-6">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-base font-semibold text-[var(--brand-forest)]">Care Minutes Today</h2>
-          <StatusBadge status={DEMO.careMinutes.status} />
-        </div>
-        <div className="flex items-center gap-8">
-          <ScoreRing score={Math.round((DEMO.careMinutes.total / 200) * 100)} size="lg" label="of target" />
-          <div className="flex-1 space-y-3">
-            <div className="flex justify-between items-center">
-              <span className="text-sm text-gray-600">RN component</span>
-              <div className="flex items-center gap-2">
-                <div className="w-32 bg-gray-100 rounded-full h-2">
-                  <div className="h-2 rounded-full" style={{ width: `${Math.min(100, (DEMO.careMinutes.rn / 40) * 100)}%`, background: DEMO.careMinutes.rn >= 40 ? "var(--brand-teal)" : "var(--brand-amber)" }} />
-                </div>
-                <span className="text-sm font-medium w-16 text-right">{DEMO.careMinutes.rn} min</span>
-              </div>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-sm text-gray-600">Total care</span>
-              <div className="flex items-center gap-2">
-                <div className="w-32 bg-gray-100 rounded-full h-2">
-                  <div className="h-2 rounded-full" style={{ width: `${Math.min(100, (DEMO.careMinutes.total / 200) * 100)}%`, background: DEMO.careMinutes.total >= 200 ? "var(--brand-teal)" : "var(--brand-amber)" }} />
-                </div>
-                <span className="text-sm font-medium w-16 text-right">{DEMO.careMinutes.total} min</span>
-              </div>
-            </div>
-            <p className="text-xs text-gray-400">
-              Target: 200 min/resident (40 RN) · Updated hourly
+          <div className="flex items-start gap-3 mb-3">
+            <ChrisAvatar size="small" className="mt-0.5 shrink-0" />
+            <p className="text-sm text-gray-800 leading-relaxed">
+              Your team's trust is under strain — staff are pulling back. Three things to address this week.
             </p>
           </div>
+          <div className="flex justify-end">
+            <button className="text-sm font-medium px-4 py-2.5 rounded-lg bg-[var(--brand-forest)] text-white hover:opacity-90">
+              Read briefing →
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // All clear
+  return (
+    <div className="rounded-xl bg-white shadow-warm p-4 mb-4 card-teal">
+      <div className="flex items-start gap-3">
+        <ChrisAvatar size="small" showGlow className="mt-0.5 shrink-0" />
+        <div>
+          <p className="text-sm font-medium text-[var(--brand-forest)] mb-1">All good. Here's what CHRIS is watching.</p>
+          <p className="text-xs text-gray-500">Care minutes compliant. No SIRS deadlines. Queue clear. Next pulse launches Monday.</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// --- Status Tile (tap to drill) ---
+function StatusTile({ label, value, sub, status }: { label: string; value: string; sub: string; status: "ok" | "warn" | "bad" }) {
+  const dotColor = status === "ok" ? "bg-[var(--brand-teal)]" : status === "warn" ? "bg-[var(--brand-amber)]" : "bg-[var(--brand-terracotta)]";
+  return (
+    <button className="bg-white rounded-xl p-3 shadow-warm-sm border border-[var(--border-default)] hover:shadow-warm transition-shadow text-left flex-1 min-w-0">
+      <div className="flex items-center gap-1.5 mb-1">
+        <span className={`w-2 h-2 rounded-full ${dotColor}`} />
+        <span className="text-[10px] font-medium text-gray-400 uppercase tracking-wider truncate">{label}</span>
+      </div>
+      <p className="text-lg font-bold text-[var(--brand-forest)] leading-tight">{value}</p>
+      <p className="text-[10px] text-gray-400 truncate">{sub}</p>
+    </button>
+  );
+}
+
+// --- Queue Item Card (action on the card) ---
+function QueueCard({ urgency, title, chris, action, actionLabel, meta }: {
+  urgency: "immediate" | "urgent" | "routine";
+  title: string; chris: string; action: () => void; actionLabel: string; meta?: string;
+}) {
+  const borderColor = urgency === "immediate" ? "border-l-[var(--brand-terracotta)]" : urgency === "urgent" ? "border-l-[var(--brand-amber)]" : "border-l-[var(--brand-teal)]";
+
+  return (
+    <div className={`bg-white rounded-xl p-4 shadow-warm-sm border border-[var(--border-default)] border-l-4 ${borderColor} mb-2`}>
+      <div className="flex items-start justify-between mb-1">
+        <p className="text-sm font-medium text-[var(--brand-forest)]">{title}</p>
+        <button className="text-gray-300 hover:text-gray-500 p-1"><MoreHorizontal className="w-4 h-4" /></button>
+      </div>
+      <p className="text-xs text-gray-600 mb-2 leading-relaxed">{chris}</p>
+      {meta && <p className="text-[10px] text-gray-400 mb-2">{meta}</p>}
+      <div className="flex justify-end">
+        <button onClick={action} className="text-xs font-medium px-3 py-2 rounded-lg bg-[var(--brand-forest)] text-white hover:opacity-90">
+          {actionLabel}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// --- CHRIS Insight Card (signal convergence, inline) ---
+function InsightCard({ type, confidence, domains, headline, detail }: {
+  type: string; confidence: string; domains: string[]; headline: string; detail: string;
+}) {
+  const [expanded, setExpanded] = useState(false);
+
+  return (
+    <div className="bg-white rounded-xl p-4 shadow-warm-sm border border-[var(--border-default)] mb-2">
+      <div className="flex items-center gap-1.5 mb-1.5 flex-wrap">
+        <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-full bg-[rgba(212,160,23,0.1)] text-[var(--brand-amber)]">{type}</span>
+        <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-full border border-dashed border-[var(--brand-amber)] text-gray-500">{confidence}</span>
+        {domains.map((d) => (
+          <span key={d} className="text-[9px] px-1.5 py-0.5 rounded bg-[rgba(27,67,50,0.06)] text-gray-500">{d}</span>
+        ))}
+      </div>
+      <button onClick={() => setExpanded(!expanded)} className="text-left w-full">
+        <p className="text-sm font-medium text-[var(--brand-forest)]">{headline}</p>
+        {expanded && <p className="text-xs text-gray-600 mt-1.5 leading-relaxed">{detail}</p>}
+      </button>
+      <div className="flex items-center gap-2 mt-2">
+        <button className="text-[11px] font-medium px-2.5 py-1.5 rounded-lg bg-[var(--brand-forest)] text-white hover:opacity-90">Act</button>
+        <button className="text-[11px] font-medium px-2.5 py-1.5 rounded-lg border border-[var(--border-default)] text-gray-500 hover:bg-[rgba(27,67,50,0.04)]">Monitor</button>
+        <button className="text-[11px] text-gray-400 hover:text-gray-600 ml-auto">Not relevant</button>
+      </div>
+    </div>
+  );
+}
+
+// --- Page ---
+
+export default function SiteDashboardPage() {
+  // In production: CHRIS determines dominant type from live data
+  const [dominant] = useState<DominantType>("sirs_deadline");
+
+  return (
+    <div className="p-4 lg:p-6 max-w-lg lg:max-w-3xl mx-auto">
+      {/* Top bar context */}
+      <div className="flex items-center justify-between mb-4">
+        <div>
+          <p className="text-lg font-semibold text-[var(--brand-forest)]">{getGreeting()}, Sarah</p>
+          <p className="text-xs text-gray-400">Harbison Bowral · Fri 11 Apr · Day shift</p>
+        </div>
+        <div className="flex items-center gap-2">
+          <button className="relative p-2 rounded-lg hover:bg-[rgba(27,67,50,0.04)]">
+            <Bell className="w-5 h-5 text-[var(--brand-forest)]" />
+            <span className="absolute top-1 right-1 w-4 h-4 bg-[var(--brand-terracotta)] text-white text-[9px] font-bold rounded-full flex items-center justify-center">3</span>
+          </button>
         </div>
       </div>
 
-      {/* Quick Status Row */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
-        <button className="bg-white rounded-xl p-3 shadow-warm-sm border border-[var(--border-default)] hover:shadow-warm transition-shadow text-left">
-          <div className="flex items-center gap-2 mb-1">
-            <AlertTriangle className="w-4 h-4 text-[var(--brand-amber)]" />
-            <span className="text-xs font-medium text-gray-500">SIRS</span>
-          </div>
-          <span className="text-sm font-semibold text-[var(--brand-forest)]">{DEMO.sirs.openCat1 + DEMO.sirs.openCat2} open</span>
-        </button>
-        <button className="bg-white rounded-xl p-3 shadow-warm-sm border border-[var(--border-default)] hover:shadow-warm transition-shadow text-left">
-          <div className="flex items-center gap-2 mb-1">
-            <BarChart2 className="w-4 h-4 text-[var(--brand-teal)]" />
-            <span className="text-xs font-medium text-gray-500">Audits</span>
-          </div>
-          <span className="text-sm font-semibold text-[var(--brand-forest)]">2 due this week</span>
-        </button>
-        <button className="bg-white rounded-xl p-3 shadow-warm-sm border border-[var(--border-default)] hover:shadow-warm transition-shadow text-left">
-          <div className="flex items-center gap-2 mb-1">
-            <Shield className="w-4 h-4 text-[var(--brand-teal)]" />
-            <span className="text-xs font-medium text-gray-500">Compliance</span>
-          </div>
-          <span className="text-sm font-semibold text-[var(--brand-forest)]">{DEMO.compliance.score} score</span>
-        </button>
-        <button className="bg-white rounded-xl p-3 shadow-warm-sm border border-[var(--border-default)] hover:shadow-warm transition-shadow text-left">
-          <div className="flex items-center gap-2 mb-1">
-            <Heart className="w-4 h-4 text-[var(--brand-amber)]" />
-            <span className="text-xs font-medium text-gray-500">PSH</span>
-          </div>
-          <span className="text-sm font-semibold text-[var(--brand-forest)]">{DEMO.psh.elevated} elevated</span>
-        </button>
+      {/* DOMINANT: The single most important thing right now */}
+      <DominantCard type={dominant} />
+
+      {/* STATUS ROW: Live metrics, tap to drill */}
+      <div className="flex gap-2 mb-4">
+        <StatusTile label="Care min" value="186" sub="/200 · RN: 37" status="bad" />
+        <StatusTile label="Roster" value="2 gaps" sub="tonight" status="warn" />
+        <StatusTile label="Compliance" value="78" sub="score" status="warn" />
       </div>
 
-      {/* Recent Activity */}
-      <div className="bg-white rounded-xl p-5 shadow-warm border border-[var(--border-default)]">
-        <h2 className="text-base font-semibold text-[var(--brand-forest)] mb-4">Recent Activity</h2>
-        <div className="space-y-3">
-          {DEMO.recentActivity.map((item, i) => (
-            <div key={i} className="flex items-start gap-3">
-              <StatusDot status={i === 0 ? "at-risk" : i === 1 ? "non-compliant" : "compliant"} className="mt-1.5 shrink-0" />
-              <div className="min-w-0">
-                <p className="text-sm text-gray-700">{item.text}</p>
-                <p className="text-[10px] text-gray-400 flex items-center gap-1">
-                  <Clock className="w-3 h-3" /> {item.time}
-                </p>
-              </div>
-            </div>
+      {/* QUEUE: Top items, action on card */}
+      <div className="mb-4">
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-widest">Queue · 4 items</span>
+          <button className="text-[11px] text-[var(--brand-teal)] font-medium hover:underline">View all →</button>
+        </div>
+
+        <QueueCard
+          urgency="urgent"
+          title="Board Pack · Needs your approval"
+          chris="CHRIS draft ready. 8 sections. Est. 35 min review. Meeting in 8 days."
+          action={() => {}}
+          actionLabel="Start review →"
+        />
+        <QueueCard
+          urgency="urgent"
+          title="Monday Briefing · Unread"
+          chris="3 signals this week. Practice attached. 8 min read."
+          action={() => {}}
+          actionLabel="Read briefing →"
+          meta="3 actions · 1 practice"
+        />
+      </div>
+
+      {/* CHRIS INSIGHT: Cross-domain signal, not a dashboard panel */}
+      <div className="mb-4">
+        <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-widest mb-2 block">CHRIS intelligence</span>
+        <InsightCard
+          type="PREDICTIVE"
+          confidence="EMERGING"
+          domains={["Workforce", "PSH"]}
+          headline="Night team approaching burnout threshold"
+          detail="PSH_01 + PSH_08 co-elevated 3 cycles. Sick leave up 28%. Historically precedes WC claims within 4-6 weeks in 68% of comparable teams. Intervention window is open."
+        />
+      </div>
+
+      {/* QUICK ACTIONS */}
+      <div className="mb-4">
+        <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-widest mb-2 block">Quick actions</span>
+        <div className="grid grid-cols-2 gap-2">
+          {[
+            { label: "+ Report incident", icon: "📋" },
+            { label: "+ Handover note", icon: "📝" },
+            { label: "Start audit", icon: "✅" },
+            { label: "SIRS deadlines", icon: "⏱" },
+          ].map((a) => (
+            <button key={a.label} className="bg-white rounded-lg px-3 py-2.5 shadow-warm-sm border border-[var(--border-default)] hover:shadow-warm transition-shadow text-left flex items-center gap-2">
+              <span className="text-sm">{a.icon}</span>
+              <span className="text-xs font-medium text-[var(--brand-forest)]">{a.label}</span>
+            </button>
           ))}
         </div>
+      </div>
+
+      {/* CHRIS Coach floating button hint */}
+      <div className="text-center py-6 mb-16">
+        <p className="text-[10px] text-gray-400">
+          <Mic className="w-3 h-3 inline mr-1" />
+          Tap the CHRIS button to speak or type — CHRIS already knows your context
+        </p>
       </div>
     </div>
   );

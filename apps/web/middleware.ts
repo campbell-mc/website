@@ -13,6 +13,11 @@ const PUBLIC_PATHS = [
 ];
 
 export function middleware(request: NextRequest) {
+  // DEV MODE: auth bypass — remove this block before production
+  if (process.env.NODE_ENV === "development") {
+    return NextResponse.next();
+  }
+
   const { pathname } = request.nextUrl;
 
   // Allow public routes
