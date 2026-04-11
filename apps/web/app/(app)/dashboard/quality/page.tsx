@@ -35,7 +35,7 @@ export default function QualityPage() {
             <ChevronLeft className="w-5 h-5 text-foreground" />
           </button>
           <div>
-            <p className="text-base font-semibold text-foreground">Quality Indicators</p>
+            <p className="text-[28px] font-bold text-foreground tracking-tight leading-tight">Quality Indicators</p>
             <p className="text-[10px] text-muted-foreground">14 Mandatory QIs · Q1 2026 · Harbison Bowral</p>
           </div>
         </div>
@@ -58,7 +58,7 @@ export default function QualityPage() {
       {/* QIs NEEDING ATTENTION — action cards first */}
       {belowBenchmark.length > 0 && (
         <>
-          <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest mb-2">Below benchmark — needs attention</p>
+          <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-[0.08em] mb-2">Below benchmark — needs attention</p>
           {belowBenchmark.map((qi) => (
             <div key={qi.code} className="bg-card rounded-xl p-4 shadow-warm-sm border border-border border-l-4 border-l-[hsl(var(--brand-amber))] mb-2">
               <div className="flex items-center justify-between mb-1">
@@ -89,7 +89,7 @@ export default function QualityPage() {
       )}
 
       {/* QIs ON TRACK — compact list */}
-      <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest mb-2 mt-4">On track</p>
+      <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-[0.08em] mb-2 mt-4">On track</p>
       <div className="bg-card rounded-xl border border-border overflow-hidden mb-16">
         {aboveBenchmark.map((qi, i) => (
           <div key={qi.code} className={`flex items-center justify-between px-4 py-2.5 ${i < aboveBenchmark.length - 1 ? "border-b border-border" : ""}`}>

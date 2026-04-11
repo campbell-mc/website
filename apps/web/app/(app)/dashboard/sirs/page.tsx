@@ -16,7 +16,7 @@ export default function SIRSPage() {
             <ChevronLeft className="w-5 h-5 text-foreground" />
           </button>
           <div>
-            <p className="text-base font-semibold text-foreground">SIRS Register</p>
+            <p className="text-[28px] font-bold text-foreground tracking-tight leading-tight">SIRS Register</p>
             <p className="text-[10px] text-muted-foreground">Harbison Bowral · Aged Care Act 2024</p>
           </div>
         </div>
@@ -42,7 +42,7 @@ export default function SIRSPage() {
       </div>
 
       {/* OPEN ITEMS — each is an action card */}
-      <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest mb-2">Open items</p>
+      <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-[0.08em] mb-2">Open items</p>
 
       {/* Cat 2 — open */}
       <div className="bg-card rounded-xl p-4 shadow-warm border border-border border-l-4 border-l-[hsl(var(--brand-amber))] mb-3">
@@ -92,7 +92,7 @@ export default function SIRSPage() {
       </div>
 
       {/* CLOSED — compact */}
-      <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest mb-2">Closed — last 90 days</p>
+      <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-[0.08em] mb-2">Closed — last 90 days</p>
       {[
         { type: "Fall with injury", date: "15 Mar", ref: "SIRS-2026-0412", outcome: "Corrective action complete" },
         { type: "Medication error", date: "28 Feb", ref: "SIRS-2026-0389", outcome: "Process updated" },

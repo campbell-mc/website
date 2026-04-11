@@ -14,15 +14,15 @@ function ActionCard({ urgency, icon, title, chris, actionLabel, onAction, deadli
   icon: React.ReactNode; title: string; chris: string; actionLabel: string;
   onAction: () => void; deadline?: string; meta?: string;
 }) {
-  const borderColor = {
-    critical: "border-l-[hsl(var(--brand-terracotta))]",
-    warning: "border-l-[hsl(var(--brand-amber))]",
-    info: "border-l-[hsl(var(--brand-forest))]",
-    positive: "border-l-[hsl(var(--brand-teal))]",
+  const styles = {
+    critical: { border: "border-l-[hsl(var(--brand-terracotta))]", bg: "rgba(196,112,74,0.06)", shadow: "0 4px 24px rgba(0,0,0,0.10)" },
+    warning: { border: "border-l-[hsl(var(--brand-amber))]", bg: "rgba(212,160,23,0.06)", shadow: "0 4px 24px rgba(0,0,0,0.10)" },
+    info: { border: "border-l-[hsl(var(--brand-forest))]", bg: "", shadow: "" },
+    positive: { border: "border-l-[hsl(var(--brand-teal))]", bg: "", shadow: "" },
   }[urgency];
 
   return (
-    <div className={`bg-card rounded-xl p-4 shadow-warm border border-border border-l-4 ${borderColor} mb-3`}>
+    <div className={`rounded-xl p-4 border border-border border-l-4 ${styles.border} mb-3`} style={{ background: styles.bg || "hsl(var(--card))", boxShadow: styles.shadow || undefined }}>
       <div className="flex items-start gap-3">
         <div className="mt-0.5 shrink-0">{icon}</div>
         <div className="flex-1 min-w-0">
@@ -58,7 +58,7 @@ export default function ClinicalControlCentre() {
             <ChevronLeft className="w-5 h-5 text-foreground" />
           </button>
           <div>
-            <p className="text-base font-semibold text-foreground">Clinical Control Centre</p>
+            <p className="text-[28px] font-bold text-foreground tracking-tight leading-tight">Clinical Control Centre</p>
             <p className="text-[10px] text-muted-foreground">Harbison Bowral</p>
           </div>
         </div>
@@ -85,7 +85,7 @@ export default function ClinicalControlCentre() {
 
       {/* === ALL CLINICAL ACTIONS — front and centre === */}
 
-      <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest mb-2">Needs your attention</p>
+      <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-[0.08em] mb-2">Needs your attention</p>
 
       <ActionCard
         urgency="critical"
@@ -164,7 +164,7 @@ export default function ClinicalControlCentre() {
       />
 
       {/* Navigate to detail views */}
-      <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest mb-2 mt-6">Detail views</p>
+      <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-[0.08em] mb-2 mt-6">Detail views</p>
       <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 mb-4">
         {[
           { label: "Care Minutes", summary: "Today + week + month", href: "/dashboard/care-minutes" },
@@ -182,7 +182,7 @@ export default function ClinicalControlCentre() {
       </div>
 
       {/* Quick actions */}
-      <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest mb-2">Quick actions</p>
+      <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-[0.08em] mb-2">Quick actions</p>
       <div className="grid grid-cols-2 gap-2 mb-16">
         {[
           { label: "+ Report incident", icon: "📋" },

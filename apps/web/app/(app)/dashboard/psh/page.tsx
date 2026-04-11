@@ -8,9 +8,9 @@ function ActionCard({ urgency, icon, title, chris, actionLabel, onAction, meta }
   urgency: "critical" | "warning" | "info" | "positive"; icon: React.ReactNode; title: string;
   chris: string; actionLabel: string; onAction: () => void; meta?: string;
 }) {
-  const border = { critical: "border-l-[hsl(var(--brand-terracotta))]", warning: "border-l-[hsl(var(--brand-amber))]", info: "border-l-[hsl(var(--brand-forest))]", positive: "border-l-[hsl(var(--brand-teal))]" }[urgency];
+  const styles = { critical: { border: "border-l-[hsl(var(--brand-terracotta))]", bg: "rgba(196,112,74,0.06)", shadow: "0 4px 24px rgba(0,0,0,0.10)" }, warning: { border: "border-l-[hsl(var(--brand-amber))]", bg: "rgba(212,160,23,0.06)", shadow: "0 4px 24px rgba(0,0,0,0.10)" }, info: { border: "border-l-[hsl(var(--brand-forest))]", bg: "transparent", shadow: "" }, positive: { border: "border-l-[hsl(var(--brand-teal))]", bg: "transparent", shadow: "" } }[urgency]; const border = styles.border;
   return (
-    <div className={`bg-card rounded-xl p-4 shadow-warm border border-border border-l-4 ${border} mb-3`}>
+    <div className={`rounded-xl p-4 border border-border border-l-4 ${border} mb-3`} style={{ background: styles.bg || "var(--color-card)", boxShadow: styles.shadow || "" }}>
       <div className="flex items-start gap-3">
         <div className="mt-0.5 shrink-0">{icon}</div>
         <div className="flex-1 min-w-0">
@@ -34,7 +34,7 @@ export default function PSHControlCentre() {
       <div className="flex items-center justify-between mb-5">
         <div className="flex items-center gap-2">
           <button onClick={() => router.push("/dashboard")} className="p-1 -ml-1 hover:bg-muted rounded-lg"><ChevronLeft className="w-5 h-5 text-foreground" /></button>
-          <div><p className="text-base font-semibold text-foreground">PSH / Workforce Safety</p><p className="text-[10px] text-muted-foreground">Harbison Bowral · ISO 45003</p></div>
+          <div><p className="text-[28px] font-bold text-foreground tracking-tight leading-tight">PSH / Workforce Safety</p><p className="text-[10px] text-muted-foreground">Harbison Bowral · ISO 45003</p></div>
         </div>
         <button className="flex items-center gap-1.5 text-xs font-medium px-3 py-2 rounded-lg border border-border text-foreground hover:bg-muted"><Mic className="w-3.5 h-3.5" /> Ask CHRIS</button>
       </div>
@@ -53,7 +53,7 @@ export default function PSHControlCentre() {
         ))}
       </div>
 
-      <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest mb-2">Needs your attention</p>
+      <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-[0.08em] mb-2">Needs your attention</p>
 
       <ActionCard urgency="critical" icon={<AlertTriangle className="w-5 h-5 text-[hsl(var(--brand-terracotta))]" />}
         title="Critical convergence — Cottage Team"
@@ -90,7 +90,7 @@ export default function PSHControlCentre() {
         chris="Only team at this facility with zero elevated domains. Pulse participation at 95%. Worth recognising."
         actionLabel="Acknowledge in briefing →" onAction={() => {}} />
 
-      <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest mb-2 mt-4">Detail views</p>
+      <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-[0.08em] mb-2 mt-4">Detail views</p>
       <div className="grid grid-cols-2 gap-2 mb-4">
         {[{ label: "Hazard Heatmap", href: "/dashboard/risk" }, { label: "Convergence Events", href: "/dashboard/risk" }, { label: "Intervention Library", href: "/dashboard/risk" }, { label: "WC Risk Monitor", href: "/dashboard/risk" }].map((f) => (
           <button key={f.label} onClick={() => router.push(f.href)} className="bg-card rounded-lg p-3 border border-border hover:shadow-warm text-left"><p className="text-xs font-semibold text-foreground">{f.label}</p></button>

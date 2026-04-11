@@ -8,9 +8,9 @@ function ActionCard({ urgency, icon, title, chris, actionLabel, onAction, deadli
   urgency: "critical" | "warning" | "info" | "positive"; icon: React.ReactNode; title: string;
   chris: string; actionLabel: string; onAction: () => void; deadline?: string; meta?: string;
 }) {
-  const border = { critical: "border-l-[hsl(var(--brand-terracotta))]", warning: "border-l-[hsl(var(--brand-amber))]", info: "border-l-[hsl(var(--brand-forest))]", positive: "border-l-[hsl(var(--brand-teal))]" }[urgency];
+  const styles = { critical: { border: "border-l-[hsl(var(--brand-terracotta))]", bg: "rgba(196,112,74,0.06)", shadow: "0 4px 24px rgba(0,0,0,0.10)" }, warning: { border: "border-l-[hsl(var(--brand-amber))]", bg: "rgba(212,160,23,0.06)", shadow: "0 4px 24px rgba(0,0,0,0.10)" }, info: { border: "border-l-[hsl(var(--brand-forest))]", bg: "transparent", shadow: "" }, positive: { border: "border-l-[hsl(var(--brand-teal))]", bg: "transparent", shadow: "" } }[urgency]; const border = styles.border;
   return (
-    <div className={`bg-card rounded-xl p-4 shadow-warm border border-border border-l-4 ${border} mb-3`}>
+    <div className={`rounded-xl p-4 border border-border border-l-4 ${border} mb-3`} style={{ background: styles.bg || "var(--color-card)", boxShadow: styles.shadow || "" }}>
       <div className="flex items-start gap-3">
         <div className="mt-0.5 shrink-0">{icon}</div>
         <div className="flex-1 min-w-0">
@@ -37,7 +37,7 @@ export default function GovernanceControlCentre() {
       <div className="flex items-center justify-between mb-5">
         <div className="flex items-center gap-2">
           <button onClick={() => router.push("/dashboard")} className="p-1 -ml-1 hover:bg-muted rounded-lg"><ChevronLeft className="w-5 h-5 text-foreground" /></button>
-          <div><p className="text-base font-semibold text-foreground">Governance Control Centre</p><p className="text-[10px] text-muted-foreground">Harbison Bowral</p></div>
+          <div><p className="text-[28px] font-bold text-foreground tracking-tight leading-tight">Governance Control Centre</p><p className="text-[10px] text-muted-foreground">Harbison Bowral</p></div>
         </div>
         <button className="flex items-center gap-1.5 text-xs font-medium px-3 py-2 rounded-lg border border-border text-foreground hover:bg-muted"><Mic className="w-3.5 h-3.5" /> Ask CHRIS</button>
       </div>
@@ -56,7 +56,7 @@ export default function GovernanceControlCentre() {
         ))}
       </div>
 
-      <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest mb-2">Needs your attention</p>
+      <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-[0.08em] mb-2">Needs your attention</p>
 
       <ActionCard urgency="warning" icon={<Shield className="w-5 h-5 text-[hsl(var(--brand-amber))]" />}
         title="QS 2.8.2 — evidence gap"
@@ -101,7 +101,7 @@ export default function GovernanceControlCentre() {
         </div>
       </div>
 
-      <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest mb-2 mt-4">Detail views</p>
+      <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-[0.08em] mb-2 mt-4">Detail views</p>
       <div className="grid grid-cols-2 gap-2 mb-4">
         {[{ label: "Compliance Register", href: "/dashboard/compliance" }, { label: "Reporting Cycles", href: "/dashboard/reporting" }, { label: "Corrective Actions", href: "/dashboard/compliance" }, { label: "Risk Register", href: "/dashboard/compliance" }].map((f) => (
           <button key={f.label} onClick={() => router.push(f.href)} className="bg-card rounded-lg p-3 border border-border hover:shadow-warm text-left"><p className="text-xs font-semibold text-foreground">{f.label}</p></button>

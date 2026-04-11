@@ -29,15 +29,15 @@ function ActionCard({ urgency, icon, title, chris, actionLabel, onAction, deadli
   deadline?: string;
   meta?: string;
 }) {
-  const borderColor = {
-    critical: "border-l-[hsl(var(--brand-terracotta))]",
-    warning: "border-l-[hsl(var(--brand-amber))]",
-    info: "border-l-[hsl(var(--brand-forest))]",
-    positive: "border-l-[hsl(var(--brand-teal))]",
+  const styles = {
+    critical: { border: "border-l-[hsl(var(--brand-terracotta))]", bg: "rgba(196,112,74,0.06)", shadow: "0 4px 24px rgba(0,0,0,0.10)" },
+    warning: { border: "border-l-[hsl(var(--brand-amber))]", bg: "rgba(212,160,23,0.06)", shadow: "0 4px 24px rgba(0,0,0,0.10)" },
+    info: { border: "border-l-[hsl(var(--brand-forest))]", bg: "", shadow: "" },
+    positive: { border: "border-l-[hsl(var(--brand-teal))]", bg: "", shadow: "" },
   }[urgency];
 
   return (
-    <div className={`bg-card rounded-xl p-4 shadow-warm border border-border border-l-4 ${borderColor} mb-3`}>
+    <div className={`rounded-xl p-4 border border-border border-l-4 ${styles.border} mb-3`} style={{ background: styles.bg || "hsl(var(--card))", boxShadow: styles.shadow || undefined }}>
       <div className="flex items-start gap-3">
         <div className="mt-0.5 shrink-0">{icon}</div>
         <div className="flex-1 min-w-0">
@@ -171,7 +171,7 @@ export default function CommandCentre() {
 
       {/* === STATUS SUMMARY: things that are OK === */}
       <div className="mt-6 mb-4">
-        <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest mb-2">On track</p>
+        <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-[0.08em] mb-2">On track</p>
         <StatusSummary items={[
           { label: "RN 24/7", value: "✅", ok: true },
           { label: "Training", value: "91%", ok: true },
@@ -181,7 +181,7 @@ export default function CommandCentre() {
       </div>
 
       {/* Quick actions */}
-      <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest mb-2">Quick actions</p>
+      <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-[0.08em] mb-2">Quick actions</p>
       <div className="grid grid-cols-2 gap-2 mb-4">
         {[
           { label: "+ Report incident", icon: "📋", href: "/dashboard/sirs" },
@@ -197,7 +197,7 @@ export default function CommandCentre() {
       </div>
 
       {/* Domain nav */}
-      <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest mb-2">Domains</p>
+      <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-[0.08em] mb-2">Domains</p>
       <div className="grid grid-cols-3 gap-2 mb-16">
         {[
           { label: "Clinical", href: "/dashboard/clinical", dot: "bg-[hsl(var(--brand-terracotta))]" },

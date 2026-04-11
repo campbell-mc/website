@@ -9,9 +9,9 @@ function ActionCard({ urgency, icon, title, chris, actionLabel, onAction, deadli
   urgency: "critical" | "warning" | "info" | "positive"; icon: React.ReactNode; title: string;
   chris: string; actionLabel: string; onAction: () => void; deadline?: string; meta?: string;
 }) {
-  const border = { critical: "border-l-[hsl(var(--brand-terracotta))]", warning: "border-l-[hsl(var(--brand-amber))]", info: "border-l-[hsl(var(--brand-forest))]", positive: "border-l-[hsl(var(--brand-teal))]" }[urgency];
+  const styles = { critical: { border: "border-l-[hsl(var(--brand-terracotta))]", bg: "rgba(196,112,74,0.06)", shadow: "0 4px 24px rgba(0,0,0,0.10)" }, warning: { border: "border-l-[hsl(var(--brand-amber))]", bg: "rgba(212,160,23,0.06)", shadow: "0 4px 24px rgba(0,0,0,0.10)" }, info: { border: "border-l-[hsl(var(--brand-forest))]", bg: "transparent", shadow: "" }, positive: { border: "border-l-[hsl(var(--brand-teal))]", bg: "transparent", shadow: "" } }[urgency]; const border = styles.border;
   return (
-    <div className={`bg-card rounded-xl p-4 shadow-warm border border-border border-l-4 ${border} mb-3`}>
+    <div className={`rounded-xl p-4 border border-border border-l-4 ${border} mb-3`} style={{ background: styles.bg || "var(--color-card)", boxShadow: styles.shadow || "" }}>
       <div className="flex items-start gap-3">
         <div className="mt-0.5 shrink-0">{icon}</div>
         <div className="flex-1 min-w-0">
@@ -45,12 +45,12 @@ export default function PortfolioDashboard() {
       <div className="flex items-center justify-between mb-5">
         <div className="flex items-center gap-2">
           <button onClick={() => router.push("/dashboard")} className="p-1 -ml-1 hover:bg-muted rounded-lg"><ChevronLeft className="w-5 h-5 text-foreground" /></button>
-          <div><p className="text-base font-semibold text-foreground">Portfolio Command</p><p className="text-[10px] text-muted-foreground">Harbison · 2 facilities</p></div>
+          <div><p className="text-[28px] font-bold text-foreground tracking-tight leading-tight">Portfolio Command</p><p className="text-[10px] text-muted-foreground">Harbison · 2 facilities</p></div>
         </div>
         <button className="flex items-center gap-1.5 text-xs font-medium px-3 py-2 rounded-lg border border-border text-foreground hover:bg-muted"><Mic className="w-3.5 h-3.5" /> Ask CHRIS</button>
       </div>
 
-      <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest mb-2">Needs your attention</p>
+      <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-[0.08em] mb-2">Needs your attention</p>
 
       <ActionCard urgency="info" icon={<FileText className="w-5 h-5 text-[hsl(var(--brand-forest))]" />}
         title="Q1 Board Pack — ready for your approval"
@@ -73,7 +73,7 @@ export default function PortfolioDashboard() {
         actionLabel="Review ELT pack →" onAction={() => router.push("/dashboard/reporting")} />
 
       {/* Facility cards */}
-      <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest mb-2 mt-4">Facilities</p>
+      <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-[0.08em] mb-2 mt-4">Facilities</p>
       {FACILITIES.map((f) => (
         <div key={f.name} className="bg-card rounded-xl border border-border shadow-warm-sm mb-2 overflow-hidden">
           <button onClick={() => setExpandedFacility(expandedFacility === f.name ? null : f.name)} className="w-full px-4 py-3 flex items-center justify-between">
@@ -100,7 +100,7 @@ export default function PortfolioDashboard() {
         </div>
       ))}
 
-      <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest mb-2 mt-4">On track</p>
+      <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-[0.08em] mb-2 mt-4">On track</p>
       <div className="flex gap-2 mb-4">
         {[
           { label: "Care min", value: "100%", ok: true },
