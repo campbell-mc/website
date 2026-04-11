@@ -115,7 +115,7 @@ Build prompts are in `08-BUILD-PROMPTS.md` — we execute these in order.
 | 2.2 | SIRS classification + submission | Complete |
 | 3.1 | DON approval queue + PWA | Complete |
 | 4.1 | CHRIS Comply public launch | Complete |
-| 4.2 | Governance pack engine | Pending |
+| 4.2 | Governance pack engine | Complete |
 
 ---
 
