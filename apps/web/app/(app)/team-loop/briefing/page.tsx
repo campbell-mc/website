@@ -43,20 +43,58 @@ export default function TeamBriefingPage() {
   const [showStory, setShowStory] = useState(true);
   const [showPulse, setShowPulse] = useState(false);
   const [committed, setCommitted] = useState(false);
+  // Practice personalisation flow
+  const [editingPractice, setEditingPractice] = useState(false);
+  const [myVersion, setMyVersion] = useState("");
+  const [optimising, setOptimising] = useState(false);
+  const [optimised, setOptimised] = useState(false);
+  const [chrisOptimised, setChrisOptimised] = useState("");
 
   if (committed) {
+    const practice = PRACTICES.find((p) => p.id === selectedPractice);
     return (
       <div className="min-h-screen flex flex-col items-center justify-center px-6" style={{ background: "hsl(var(--background))" }}>
         <div className="w-16 h-16 rounded-full bg-[#D4EDDD] flex items-center justify-center mb-4">
           <CheckCircle className="w-8 h-8 text-[#1B4332]" />
         </div>
-        <h2 className="text-xl font-bold text-foreground mb-2">Practice committed</h2>
-        <p className="text-sm text-muted-foreground text-center mb-2">
-          CHRIS will measure the outcome next cycle.
+        <h2 className="text-xl font-bold text-foreground mb-2">Practice submitted</h2>
+        <p className="text-sm text-muted-foreground text-center mb-4">
+          Your personalised practice has been logged.
         </p>
+
+        {/* What happens next */}
+        <div className="w-full max-w-md bg-card rounded-xl p-4 border border-border mb-4">
+          <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-2">What happens now</p>
+          <div className="space-y-2">
+            <div className="flex items-start gap-2">
+              <span className="text-[hsl(var(--brand-teal))] text-sm mt-0.5">✓</span>
+              <p className="text-xs text-muted-foreground">Added to your <strong>action log</strong></p>
+            </div>
+            <div className="flex items-start gap-2">
+              <span className="text-[hsl(var(--brand-teal))] text-sm mt-0.5">✓</span>
+              <p className="text-xs text-muted-foreground">Included in your next <strong>Team Briefing</strong> for the team to see</p>
+            </div>
+            <div className="flex items-start gap-2">
+              <span className="text-[hsl(var(--brand-teal))] text-sm mt-0.5">✓</span>
+              <p className="text-xs text-muted-foreground">CHRIS will <strong>measure the outcome</strong> next cycle against hazard scores</p>
+            </div>
+            <div className="flex items-start gap-2">
+              <span className="text-[hsl(var(--brand-teal))] text-sm mt-0.5">✓</span>
+              <p className="text-xs text-muted-foreground">Feeds the <strong>ISO 45003 evidence trail</strong> as a documented control measure</p>
+            </div>
+          </div>
+        </div>
+
+        {/* The practice they submitted */}
+        <div className="w-full max-w-md rounded-xl p-4 border-2 border-[hsl(var(--brand-amber))] mb-4" style={{ background: "hsl(48 90% 97%)" }}>
+          <p className="text-[10px] font-semibold text-muted-foreground uppercase mb-1">Your practice this fortnight</p>
+          <p className="text-xs text-foreground leading-relaxed">{chrisOptimised || myVersion || practice?.whatToTry}</p>
+        </div>
+
         <p className="text-xs text-muted-foreground text-center mb-6">
-          127 leaders closed their loops this week. 89% implemented at least one action.
+          127 leaders submitted practices this week. 89% implemented at least one.
         </p>
+
         <button onClick={() => router.push("/dashboard")} className="text-sm font-medium px-6 py-3 rounded-xl bg-primary text-primary-foreground hover:opacity-90">
           ← Back to Home
         </button>
@@ -72,7 +110,7 @@ export default function TeamBriefingPage() {
           <button onClick={() => router.push("/dashboard")} className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
             <ChevronLeft className="w-4 h-4" /> Home
           </button>
-          <span className="text-sm font-semibold text-foreground">Team Briefing · Cycle 8</span>
+          <span className="text-sm font-semibold text-foreground">Daily Briefing · Cycle 8</span>
           <button className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground">
             <Mic className="w-3.5 h-3.5" /> CHRIS
           </button>
@@ -161,14 +199,74 @@ export default function TeamBriefingPage() {
                       <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-1">What it might look like</p>
                       <p className="text-xs text-muted-foreground leading-relaxed italic">"{p.whatItLooksLike}"</p>
                     </div>
-                    <button
-                      onClick={() => setSelectedPractice(isSelected ? null : p.id)}
-                      className={`w-full py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                        isSelected ? "bg-[hsl(var(--brand-amber))] text-white" : "bg-primary text-primary-foreground hover:opacity-90"
-                      }`}
-                    >
-                      {isSelected ? "✓ Selected — use as inspiration" : "Use as inspiration"}
-                    </button>
+
+                    {/* Step 1: Use as Inspiration → opens editor */}
+                    {!isSelected && (
+                      <button
+                        onClick={() => {
+                          setSelectedPractice(p.id);
+                          setEditingPractice(true);
+                          setMyVersion(p.whatToTry);
+                          setOptimised(false);
+                          setChrisOptimised("");
+                        }}
+                        className="w-full py-2.5 rounded-lg text-sm font-medium bg-primary text-primary-foreground hover:opacity-90"
+                      >
+                        Use as inspiration
+                      </button>
+                    )}
+
+                    {/* Step 2: Edit your version */}
+                    {isSelected && editingPractice && !optimised && (
+                      <div className="mt-3 animate-slideUp">
+                        <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-1">Make it yours</p>
+                        <p className="text-[10px] text-muted-foreground mb-2">Adapt this practice for your team's specific context. What will you actually do?</p>
+                        <textarea
+                          value={myVersion}
+                          onChange={(e) => setMyVersion(e.target.value)}
+                          className="w-full p-3 border border-border rounded-lg text-xs bg-background resize-none min-h-[100px] leading-relaxed"
+                        />
+                        <div className="flex gap-2 mt-2">
+                          <button
+                            onClick={async () => {
+                              setOptimising(true);
+                              // Simulate CHRIS optimisation (in production: Claude API call)
+                              await new Promise((r) => setTimeout(r, 1500));
+                              setChrisOptimised(
+                                myVersion.length > 100
+                                  ? myVersion.replace(/\.$/, "") + " — and frame it as a team conversation, not an announcement. Ask one open question at the end to invite their perspective."
+                                  : myVersion + "\n\nCHRIS suggestion: be specific about the one issue you're returning to. Name it. Staff remember when leaders follow through on specifics."
+                              );
+                              setOptimising(false);
+                              setOptimised(true);
+                            }}
+                            disabled={optimising || myVersion.length < 10}
+                            className="flex-1 py-2.5 rounded-lg text-sm font-medium border-2 border-[hsl(var(--brand-amber))] text-[hsl(var(--brand-amber))] hover:bg-[hsl(var(--brand-amber)/0.06)] disabled:opacity-40 flex items-center justify-center gap-1.5"
+                          >
+                            <Sparkles className="w-3.5 h-3.5" />
+                            {optimising ? "CHRIS is refining..." : "Optimise with CHRIS"}
+                          </button>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Step 3: CHRIS optimised version → Submit */}
+                    {isSelected && optimised && (
+                      <div className="mt-3 animate-slideUp">
+                        <div className="rounded-lg p-3 mb-3" style={{ background: "rgba(27,67,50,0.05)" }}>
+                          <div className="flex items-start gap-2 mb-2">
+                            <ChrisAvatar size="small" showGlow className="shrink-0 mt-0.5" />
+                            <p className="text-[10px] font-semibold text-muted-foreground">CHRIS refined version</p>
+                          </div>
+                          <textarea
+                            value={chrisOptimised}
+                            onChange={(e) => setChrisOptimised(e.target.value)}
+                            className="w-full p-2 border border-border rounded-lg text-xs bg-background resize-none min-h-[80px] leading-relaxed"
+                          />
+                        </div>
+                        <p className="text-[10px] text-muted-foreground mb-2">This practice will be added to your action log and included in your next Team Briefing.</p>
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
@@ -176,16 +274,19 @@ export default function TeamBriefingPage() {
           })}
         </div>
 
-        {/* Commit */}
-        {selectedPractice && (
+        {/* Submit — only shows after optimisation */}
+        {selectedPractice && optimised && (
           <div className="sticky bottom-0 bg-card border-t border-border px-4 py-4 -mx-4">
             <button
               onClick={() => setCommitted(true)}
               className="w-full py-3.5 rounded-xl font-medium text-white"
               style={{ background: "#C4704A" }}
             >
-              Commit to this practice →
+              Submit practice →
             </button>
+            <p className="text-[10px] text-muted-foreground text-center mt-2">
+              Added to your action log · included in next Team Briefing · CHRIS will measure the outcome
+            </p>
           </div>
         )}
       </div>
