@@ -51,11 +51,11 @@ function DomainRow({ domain }: { domain: DomainStatus }) {
 
 // --- Data ---
 const DOMAINS: DomainStatus[] = [
-  { name: "Clinical", status: "clear", summary: "Care minutes compliant · QIs on track · 1 SIRS Cat 2 open", href: "/dashboard/clinical" },
-  { name: "Workforce", status: "watch", summary: "PSH improving · night team to monitor", href: "/dashboard/workforce" },
-  { name: "Governance", status: "clear", summary: "SIRS draft ready for review · compliance 84", href: "/dashboard/compliance" },
-  { name: "Operations", status: "clear", summary: "RN confirmed tonight · 1 AIN gap", href: "/dashboard/operations" },
-  { name: "Financial", status: "clear", summary: "Care ratio 56% · on target", href: "/dashboard/financial" },
+  { name: "Clinical", status: "watch", summary: "Care minutes compliant · QI_03 trending up · 1 SIRS Cat 2 open", href: "/dashboard/clinical" },
+  { name: "Workforce", status: "watch", summary: "PSH improving · night team to monitor · 3 AHPRA expiring", href: "/dashboard/workforce" },
+  { name: "Governance", status: "clear", summary: "SIRS draft ready for review · compliance 84 · Board Pack due 8 days", href: "/dashboard/compliance" },
+  { name: "Operations", status: "clear", summary: "RN confirmed tonight · 1 AIN gap · briefing unread", href: "/dashboard/operations" },
+  { name: "Financial", status: "watch", summary: "Care ratio 56% on target · agency cost trending up", href: "/dashboard/financial" },
 ];
 
 const TOP_ACTIONS = [
