@@ -4,6 +4,7 @@ import { Header } from "@/components/layout/Header";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { BottomNav } from "@/components/layout/BottomNav";
 import { FloatingChrisButton } from "@/components/chris/FloatingChrisButton";
+import { ActionCatcher } from "@/components/ActionCatcher";
 import { useRouter } from "next/navigation";
 import { shouldShowCoach } from "@/components/access/FeatureGate";
 import { getRoleConfig } from "@/lib/roles/config";
@@ -23,28 +24,26 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   const showCoach = shouldShowCoach(user.role);
 
   return (
-    <div className="min-h-screen flex" style={{ background: "hsl(var(--background))" }}>
-      {/* Desktop sidebar — reads from role config */}
-      <Sidebar userName={user.name} userRole={user.role} providerName={user.providerName} />
+    <ActionCatcher>
+      <div className="min-h-screen flex" style={{ background: "hsl(var(--background))" }}>
+        <Sidebar userName={user.name} userRole={user.role} providerName={user.providerName} />
 
-      <div className="flex-1 flex flex-col min-h-screen">
-        {/* Mobile header */}
-        <div className="lg:hidden">
-          <Header title="Culture Crunch" subtitle={user.providerName} showSettings />
+        <div className="flex-1 flex flex-col min-h-screen">
+          <div className="lg:hidden">
+            <Header title="Culture Crunch" subtitle={user.providerName} showSettings />
+          </div>
+
+          <main className="flex-1 overflow-y-auto">{children}</main>
+
+          <div className="lg:hidden">
+            <BottomNav userRole={user.role} />
+          </div>
         </div>
 
-        <main className="flex-1 overflow-y-auto">{children}</main>
-
-        {/* Mobile bottom nav — reads from role config */}
-        <div className="lg:hidden">
-          <BottomNav userRole={user.role} />
-        </div>
+        {showCoach && (
+          <FloatingChrisButton onClick={() => router.push("/dashboard/coach")} />
+        )}
       </div>
-
-      {/* Floating CHRIS button — hidden for readonly persona (Board) */}
-      {showCoach && (
-        <FloatingChrisButton onClick={() => router.push("/dashboard/coach")} />
-      )}
-    </div>
+    </ActionCatcher>
   );
 }
