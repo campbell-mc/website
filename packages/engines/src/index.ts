@@ -19,3 +19,11 @@ export type { MondayBriefing, ActionBlock, OperationalDashboard, MicroPractice, 
 
 export { scoreAudit, COMPLY_QUESTIONS } from "./comply/scoring";
 export type { ComplyResult, ComplyQuestion, ComplyAnswer } from "./comply/scoring";
+
+// Execution Layer (Doc 17)
+export { TrustEngine } from "./trust/index";
+export type { TrustResult } from "./trust/index";
+export { MonitoringEngine } from "./monitoring/index";
+export type { MonitorSignal } from "./monitoring/index";
+export { ExecutionLoop } from "./execution/index";
+export type { ExecutionResult } from "./execution/index";

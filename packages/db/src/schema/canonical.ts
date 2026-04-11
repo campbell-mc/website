@@ -350,3 +350,138 @@ export const facilityTrainingCompliance = pgTable(
     index("ix_training_facility_period").on(table.facilityId, table.periodStart),
   ]
 );
+
+// ============================================================================
+// EXECUTION LAYER TABLES (Doc 17)
+// Action registry, evidence chain, trust scores, autonomy config
+// ============================================================================
+
+// --- evidence_records (APPEND-ONLY — the complete audit trail) ---
+// Every execution action creates an append-only evidence record.
+// An ACQSC auditor can reconstruct: what CHRIS detected, what it recommended,
+// what the leader decided, what was done, and when.
+export const evidenceRecords = pgTable(
+  "evidence_records",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    facilityId: uuid("facility_id")
+      .notNull()
+      .references(() => facilities.id, { onDelete: "restrict" }),
+    recordType: text("record_type").notNull(), // alert | queue_item | action | outcome
+    actionCategory: text("action_category").notNull(), // From action registry
+    triggeredAt: timestamp("triggered_at", { withTimezone: true }).notNull(),
+    deliveredAt: timestamp("delivered_at", { withTimezone: true }),
+    reviewedAt: timestamp("reviewed_at", { withTimezone: true }),
+    executedAt: timestamp("executed_at", { withTimezone: true }),
+    triggeredBy: text("triggered_by").notNull().default("chris"),
+    executedBy: text("executed_by"), // 'chris' | human role identifier
+    approvedBy: text("approved_by"), // human role identifier
+    signalData: jsonb("signal_data"), // de-identified signal values
+    recommendation: text("recommendation"),
+    decision: text("decision"), // approve | modify | reject
+    modification: text("modification"), // what changed from recommendation
+    outcome: text("outcome"),
+    complianceRef: text("compliance_ref"), // regulatory obligation link
+    clinicalRef: text("clinical_ref"), // clinical system record ID
+    externalRef: text("external_ref"), // ACQSC reference number
+    supersededBy: uuid("superseded_by"), // link to correction record
+    // NEVER DELETED. NEVER UPDATED. Corrections create new records.
+  },
+  (table) => [
+    index("ix_evidence_facility_triggered").on(table.facilityId, table.triggeredAt),
+    index("ix_evidence_action_category").on(table.actionCategory),
+    index("ix_evidence_record_type").on(table.recordType),
+  ]
+);
+
+// --- trust_scores (per action category, per facility — earned autonomy) ---
+export const trustScores = pgTable(
+  "trust_scores",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    facilityId: uuid("facility_id")
+      .notNull()
+      .references(() => facilities.id, { onDelete: "cascade" }),
+    actionCategory: text("action_category").notNull(),
+    score: decimal("score", { precision: 5, scale: 4 }).notNull().default("0.2000"),
+    consecutiveApprovals: integer("consecutive_approvals").default(0),
+    totalApprovals: integer("total_approvals").default(0),
+    totalModifications: integer("total_modifications").default(0),
+    totalRejections: integer("total_rejections").default(0),
+    lastActivityAt: timestamp("last_activity_at", { withTimezone: true }),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow(),
+  },
+  (table) => [
+    uniqueIndex("uq_trust_facility_action").on(table.facilityId, table.actionCategory),
+    index("ix_trust_facility").on(table.facilityId),
+  ]
+);
+
+// --- autonomy_config (per facility — provider-level autonomy settings) ---
+export const autonomyConfig = pgTable(
+  "autonomy_config",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    facilityId: uuid("facility_id")
+      .notNull()
+      .references(() => facilities.id, { onDelete: "cascade" }),
+    actionCategory: text("action_category").notNull(),
+    defaultTier: integer("default_tier").notNull().default(2), // 1, 2, or 3
+    ceilingTier: integer("ceiling_tier").notNull().default(2), // lowest tier this can reach
+    isReversible: boolean("is_reversible").notNull().default(true),
+    requiresSaga: boolean("requires_saga").notNull().default(false),
+    trustThreshold: decimal("trust_threshold", { precision: 5, scale: 4 }).default("0.8000"),
+    hardCeiling: boolean("hard_ceiling").default(false), // true = can never be fully autonomous
+    updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow(),
+  },
+  (table) => [
+    uniqueIndex("uq_autonomy_facility_action").on(table.facilityId, table.actionCategory),
+  ]
+);
+
+// --- alert_loop (tracks iMessage execution loops from signal to resolution) ---
+export const alertLoops = pgTable(
+  "alert_loops",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    facilityId: uuid("facility_id")
+      .notNull()
+      .references(() => facilities.id, { onDelete: "restrict" }),
+    alertType: text("alert_type").notNull(),
+    urgency: text("urgency").notNull(), // immediate | urgent | routine
+    status: text("status").notNull().default("open"), // open | responded | executing | resolved | escalated
+    recipientRole: text("recipient_role").notNull(), // don | ceo | facility_gm | team_leader
+    signalLabel: text("signal_label").notNull(),
+    specificFact: text("specific_fact").notNull(),
+    consequenceOfInaction: text("consequence_of_inaction"),
+    recommendedAction: text("recommended_action"),
+    responseOptions: jsonb("response_options"), // button options
+    // Delivery
+    deliveredAt: timestamp("delivered_at", { withTimezone: true }),
+    deliveryMethod: text("delivery_method"), // imessage | sms | in_app
+    deliveryConfirmed: boolean("delivery_confirmed").default(false),
+    readAt: timestamp("read_at", { withTimezone: true }),
+    // Response
+    respondedAt: timestamp("responded_at", { withTimezone: true }),
+    responseType: text("response_type"), // button | text | no_response
+    responseContent: text("response_content"),
+    // Execution
+    executedAt: timestamp("executed_at", { withTimezone: true }),
+    executedBy: text("executed_by"), // chris | human role
+    executionResult: jsonb("execution_result"),
+    // Resolution
+    resolvedAt: timestamp("resolved_at", { withTimezone: true }),
+    evidenceRecordId: uuid("evidence_record_id"),
+    // Escalation
+    escalatedAt: timestamp("escalated_at", { withTimezone: true }),
+    escalatedTo: text("escalated_to"), // next tier role
+    parentAlertId: uuid("parent_alert_id"), // if this is an escalation of another alert
+    // Suppression
+    suppressedDuplicate: boolean("suppressed_duplicate").default(false),
+    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow(),
+  },
+  (table) => [
+    index("ix_alert_facility_status").on(table.facilityId, table.status),
+    index("ix_alert_type_created").on(table.alertType, table.createdAt),
+  ]
+);

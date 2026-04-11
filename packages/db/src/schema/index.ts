@@ -8,4 +8,9 @@ export {
   facilityInterventions,
   donReviewItems,
   facilityTrainingCompliance,
+  // Execution layer (Doc 17)
+  evidenceRecords,
+  trustScores,
+  autonomyConfig,
+  alertLoops,
 } from "./canonical";
