@@ -29,6 +29,9 @@ importers:
       '@chris/db':
         specifier: workspace:*
         version: link:../../packages/db
+      '@chris/engines':
+        specifier: workspace:*
+        version: link:../../packages/engines
       '@chris/shared':
         specifier: workspace:*
         version: link:../../packages/shared
