@@ -88,7 +88,6 @@ export default function HomePage() {
         <div className="flex items-start gap-3">
           <ChrisAvatar size="small" showGlow className="shrink-0 mt-0.5" />
           <div>
-            <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-[0.08em] mb-2">Today's picture</p>
             <p className="text-sm text-foreground leading-relaxed font-serif-accent">
               Good news first — Wattle Wing's practice last fortnight worked. Hazard score dropped 0.08, the strongest improvement this cycle. Care minutes recovered to compliant yesterday after the agency RN was confirmed. One thing still needs your attention — a SIRS Cat 2 submission is due in 22 days and the draft is ready for your review. Tonight's roster has one AIN gap but RN coverage is confirmed. Overall, your facility is in better shape than last week.
             </p>
