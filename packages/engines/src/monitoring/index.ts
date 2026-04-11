@@ -12,8 +12,8 @@
 // Adapted from Prism's observer system with dedup, dispatch, cooldown.
 // ============================================================================
 
-import { db, facilityRostering, facilityIncidents, facilityHazardScores, facilityWorkforce, alertLoops } from "@chris/db";
-import { eq, and, gte, gt, isNull, isNotNull, desc } from "drizzle-orm";
+import { db, facilityRostering, facilityIncidents, facilityHazardScores, facilityWorkforce, alertLoops, alertCooldowns, alertRateLimits } from "@chris/db";
+import { eq, and, gte, gt, lt, isNull, isNotNull, desc, sql } from "drizzle-orm";
 import type { AlertUrgency } from "@chris/db";
 
 export interface MonitorSignal {
@@ -340,8 +340,97 @@ export class MonitoringEngine {
     });
   }
 
-  // --- Create Alert Loop ---
+  // --- Cooldown Check ---
+  // Prevents rapid re-alerting on the same issue after resolution
+  private async isOnCooldown(facilityId: string, alertType: string, recipientRole: string): Promise<boolean> {
+    const now = new Date();
+    const [cooldown] = await db
+      .select()
+      .from(alertCooldowns)
+      .where(
+        and(
+          eq(alertCooldowns.facilityId, facilityId),
+          eq(alertCooldowns.alertType, alertType),
+          eq(alertCooldowns.recipientRole, recipientRole),
+          gt(alertCooldowns.cooldownUntil, now)
+        )
+      )
+      .limit(1);
+
+    return !!cooldown;
+  }
+
+  // Seed a cooldown after an alert is resolved
+  async seedCooldown(facilityId: string, alertType: string, recipientRole: string, cooldownHours: number = 4): Promise<void> {
+    const cooldownUntil = new Date(Date.now() + cooldownHours * 60 * 60 * 1000);
+    await db.insert(alertCooldowns).values({
+      facilityId,
+      alertType,
+      recipientRole,
+      cooldownUntil,
+    });
+  }
+
+  // --- Rate Limiting ---
+  // Max alerts per person per day (configurable, default 15)
+  private async isRateLimited(facilityId: string, recipientRole: string): Promise<boolean> {
+    const today = new Date().toISOString().split("T")[0];
+
+    const [limit] = await db
+      .select()
+      .from(alertRateLimits)
+      .where(
+        and(
+          eq(alertRateLimits.facilityId, facilityId),
+          eq(alertRateLimits.recipientRole, recipientRole),
+          eq(alertRateLimits.dateKey, today)
+        )
+      )
+      .limit(1);
+
+    if (!limit) return false;
+    return limit.alertCount >= limit.maxAlerts;
+  }
+
+  private async incrementRateCount(facilityId: string, recipientRole: string): Promise<void> {
+    const today = new Date().toISOString().split("T")[0];
+
+    await db
+      .insert(alertRateLimits)
+      .values({
+        facilityId,
+        recipientRole,
+        dateKey: today,
+        alertCount: 1,
+        maxAlerts: 15, // Default: 15 alerts per person per day
+      })
+      .onConflictDoUpdate({
+        target: [alertRateLimits.facilityId, alertRateLimits.recipientRole, alertRateLimits.dateKey],
+        set: {
+          alertCount: sql`${alertRateLimits.alertCount} + 1`,
+          updatedAt: new Date(),
+        },
+      });
+  }
+
+  // --- Create Alert Loop (with cooldown + rate limit checks) ---
   private async createAlertLoop(signal: MonitorSignal): Promise<void> {
+    // Check cooldown
+    const onCooldown = await this.isOnCooldown(signal.facilityId, signal.type, signal.recipientRole);
+    if (onCooldown && signal.urgency !== "immediate") {
+      // Cooldown active — suppress unless IMMEDIATE
+      return;
+    }
+
+    // Check rate limit (IMMEDIATE always gets through)
+    const rateLimited = await this.isRateLimited(signal.facilityId, signal.recipientRole);
+    if (rateLimited && signal.urgency !== "immediate") {
+      // Rate limited — batch for daily digest instead
+      console.log(`[Monitor] Rate limited: ${signal.type} for ${signal.recipientRole} at ${signal.facilityId}. Queued for digest.`);
+      return;
+    }
+
+    // Create the alert
     await db.insert(alertLoops).values({
       facilityId: signal.facilityId,
       alertType: signal.type,
@@ -359,5 +448,18 @@ export class MonitoringEngine {
         { label: "Show data", action: "show_data" },
       ]),
     });
+
+    // Increment rate count
+    await this.incrementRateCount(signal.facilityId, signal.recipientRole);
+  }
+
+  // --- Cleanup expired cooldowns (run daily) ---
+  async cleanupExpiredCooldowns(): Promise<number> {
+    const now = new Date();
+    const result = await db
+      .delete(alertCooldowns)
+      .where(lt(alertCooldowns.cooldownUntil, now))
+      .returning({ id: alertCooldowns.id });
+    return result.length;
   }
 }

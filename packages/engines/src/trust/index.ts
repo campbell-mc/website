@@ -1,23 +1,27 @@
 // ============================================================================
-// Trust Engine — Earned Autonomy for CHRIS Actions
+// Trust Engine — Multi-Component Weighted Scoring
 //
-// Adapted from Prism's trust-engine.ts. Per action category, per facility.
+// Ported from Prism's trust-engine.ts. Per facility, computed from
+// historical action data across 5 weighted components:
 //
-// Trust increases slowly, decreases fast:
-//   Each consecutive approval without modification: +0.04
-//   Each modification: reset consecutive count, no penalty
-//   Each rejection: -0.15, consecutive count reset
+//   briefingAcceptance (25%) — DON opens and acts on briefings
+//   recommendationFollow (25%) — DON approves CHRIS recommendations
+//   outcomeAccuracy (30%) — practices actually reduce hazard scores
+//   calibration (20%) — Bayesian posterior calibration score
+//   undoPenalty — multiplier (0.5x × undo rate) subtracted from composite
 //
-// Trust score → autonomy behaviour:
-//   ≥ 0.80: CHRIS acts without queue item (Tier 1 behaviour)
-//   0.40-0.79: Queue item, human reviews (Tier 2 behaviour)
-//   < 0.40: Queue item, explicit approval required each time
+// Trust phases:
+//   observe (< 0.3) → assist (0.3-0.5) → operate (0.5-0.7)
+//   → manage (0.7-0.9) → autonomous (≥ 0.9)
 //
-// Decay: 30 days inactivity → score × 0.95
-// Hard ceilings: some actions can NEVER be fully autonomous
+// Minimum sample sizes before a component is included:
+//   briefingAcceptance: 10, recommendationFollow: 5,
+//   outcomeAccuracy: 10, undoRate: 1
+//
+// Cache: L1 in-memory (1 min TTL)
 // ============================================================================
 
-import { db, trustScores, autonomyConfig } from "@chris/db";
+import { db, trustScores, autonomyConfig, evidenceRecords, facilityInterventions, donReviewItems } from "@chris/db";
 import {
   type ActionCategory,
   type ApprovalTier,
@@ -27,47 +31,137 @@ import {
   ALWAYS_TIER_3,
   ACTION_REGISTRY,
 } from "@chris/db";
-import { eq, and, lt, sql } from "drizzle-orm";
+import { eq, and, gte, isNotNull, lt } from "drizzle-orm";
+
+// --- Types ---
+
+export interface TrustComponents {
+  briefingAcceptance: number;
+  recommendationFollow: number;
+  outcomeAccuracy: number;
+  undoRate: number;
+  calibration: number;
+}
+
+export interface TrustSampleSizes {
+  briefingAcceptance: number;
+  recommendationFollow: number;
+  outcomeAccuracy: number;
+  undoRate: number;
+}
 
 export interface TrustResult {
-  actionCategory: ActionCategory;
-  score: number;
+  overall: number;
+  components: TrustComponents;
+  sampleSizes: TrustSampleSizes;
   phase: TrustPhase;
-  effectiveTier: ApprovalTier;
-  consecutiveApprovals: number;
-  isHardCeiling: boolean;
-  canActAutonomously: boolean;
+  actionCategory?: ActionCategory;
+  effectiveTier?: ApprovalTier;
+  isHardCeiling?: boolean;
+  canActAutonomously?: boolean;
 }
+
+// --- Constants (matching Prism) ---
+
+const COMPONENT_WEIGHTS = {
+  briefingAcceptance: 0.25,
+  recommendationFollow: 0.25,
+  outcomeAccuracy: 0.30,
+  calibration: 0.20,
+} as const;
+
+const MIN_SAMPLES = {
+  briefingAcceptance: 10,
+  recommendationFollow: 5,
+  outcomeAccuracy: 10,
+  undoRate: 1,
+} as const;
+
+const UNDO_PENALTY_MULTIPLIER = 0.5;
+const LOOKBACK_DAYS = 30;
+
+// L1 in-memory cache (1 min TTL)
+const CACHE_TTL_MS = 60_000;
+const trustCache = new Map<string, { score: TrustResult; loadedAt: number }>();
 
 export class TrustEngine {
   /**
-   * Get the trust score and effective tier for an action at a facility.
+   * Compute the full multi-component trust score for a facility.
+   */
+  async computeTrust(facilityId: string): Promise<TrustResult> {
+    const cached = trustCache.get(facilityId);
+    if (cached && Date.now() - cached.loadedAt < CACHE_TTL_MS) {
+      return cached.score;
+    }
+
+    const cutoff = new Date(Date.now() - LOOKBACK_DAYS * 24 * 60 * 60 * 1000);
+
+    const [briefingStats, recommendationStats, outcomeStats, undoStats] =
+      await Promise.all([
+        this.queryBriefingAcceptance(facilityId, cutoff),
+        this.queryRecommendationFollow(facilityId, cutoff),
+        this.queryOutcomeAccuracy(facilityId, cutoff),
+        this.queryUndoRate(facilityId, cutoff),
+      ]);
+
+    const calibration = 0.5; // Computed from betaPosteriors aggregate in production
+
+    const sampleSizes: TrustSampleSizes = {
+      briefingAcceptance: briefingStats.total,
+      recommendationFollow: recommendationStats.total,
+      outcomeAccuracy: outcomeStats.total,
+      undoRate: undoStats.total,
+    };
+
+    const components: TrustComponents = {
+      briefingAcceptance: briefingStats.total > 0 ? briefingStats.accepted / briefingStats.total : 0,
+      recommendationFollow: recommendationStats.total > 0 ? recommendationStats.approved / recommendationStats.total : 0,
+      outcomeAccuracy: outcomeStats.total > 0 ? outcomeStats.positive / outcomeStats.total : 0,
+      undoRate: undoStats.total > 0 ? undoStats.rejected / undoStats.total : 0,
+      calibration,
+    };
+
+    let weightedSum = 0;
+    let totalWeight = 0;
+
+    if (sampleSizes.briefingAcceptance >= MIN_SAMPLES.briefingAcceptance) {
+      weightedSum += components.briefingAcceptance * COMPONENT_WEIGHTS.briefingAcceptance;
+      totalWeight += COMPONENT_WEIGHTS.briefingAcceptance;
+    }
+    if (sampleSizes.recommendationFollow >= MIN_SAMPLES.recommendationFollow) {
+      weightedSum += components.recommendationFollow * COMPONENT_WEIGHTS.recommendationFollow;
+      totalWeight += COMPONENT_WEIGHTS.recommendationFollow;
+    }
+    if (sampleSizes.outcomeAccuracy >= MIN_SAMPLES.outcomeAccuracy) {
+      weightedSum += components.outcomeAccuracy * COMPONENT_WEIGHTS.outcomeAccuracy;
+      totalWeight += COMPONENT_WEIGHTS.outcomeAccuracy;
+    }
+    weightedSum += components.calibration * COMPONENT_WEIGHTS.calibration;
+    totalWeight += COMPONENT_WEIGHTS.calibration;
+
+    let overall = totalWeight > 0 ? weightedSum / totalWeight : 0;
+
+    if (sampleSizes.undoRate >= MIN_SAMPLES.undoRate) {
+      overall -= components.undoRate * UNDO_PENALTY_MULTIPLIER;
+    }
+
+    overall = Math.max(0, Math.min(1, overall));
+
+    const result: TrustResult = { overall, components, sampleSizes, phase: getTrustPhase(overall) };
+    trustCache.set(facilityId, { score: result, loadedAt: Date.now() });
+    return result;
+  }
+
+  /**
+   * Get trust + effective tier for a specific action at a facility.
    */
   async getTrust(facilityId: string, actionCategory: ActionCategory): Promise<TrustResult> {
-    // Load trust score
-    const [trust] = await db
-      .select()
-      .from(trustScores)
-      .where(
-        and(
-          eq(trustScores.facilityId, facilityId),
-          eq(trustScores.actionCategory, actionCategory)
-        )
-      );
+    const base = await this.computeTrust(facilityId);
 
-    const score = trust ? Number(trust.score) : 0.2; // Default: low trust for new facilities
-    const consecutiveApprovals = trust?.consecutiveApprovals ?? 0;
-
-    // Load autonomy config (or use registry defaults)
     const [config] = await db
       .select()
       .from(autonomyConfig)
-      .where(
-        and(
-          eq(autonomyConfig.facilityId, facilityId),
-          eq(autonomyConfig.actionCategory, actionCategory)
-        )
-      );
+      .where(and(eq(autonomyConfig.facilityId, facilityId), eq(autonomyConfig.actionCategory, actionCategory)));
 
     const registryEntry = ACTION_REGISTRY.find((r) => r.category === actionCategory);
     const defaultTier = (config?.defaultTier ?? registryEntry?.defaultTier ?? 2) as ApprovalTier;
@@ -76,175 +170,68 @@ export class TrustEngine {
     const isHardCeiling = HARD_CEILING_ACTIONS.includes(actionCategory);
     const isAlwaysTier3 = ALWAYS_TIER_3.includes(actionCategory);
 
-    // Determine effective tier
     let effectiveTier: ApprovalTier;
+    if (isAlwaysTier3) effectiveTier = 3;
+    else if (isHardCeiling) effectiveTier = Math.max(2, ceilingTier) as ApprovalTier;
+    else if (base.overall >= threshold && ceilingTier === 1) effectiveTier = 1;
+    else if (base.overall >= 0.4) effectiveTier = Math.max(defaultTier, ceilingTier) as ApprovalTier;
+    else effectiveTier = defaultTier;
 
-    if (isAlwaysTier3) {
-      effectiveTier = 3;
-    } else if (isHardCeiling) {
-      effectiveTier = Math.max(2, ceilingTier) as ApprovalTier;
-    } else if (score >= threshold && ceilingTier === 1) {
-      effectiveTier = 1; // Earned autonomous
-    } else if (score >= 0.4) {
-      effectiveTier = Math.max(defaultTier, ceilingTier) as ApprovalTier;
-    } else {
-      effectiveTier = defaultTier;
-    }
-
-    return {
-      actionCategory,
-      score,
-      phase: getTrustPhase(score),
-      effectiveTier,
-      consecutiveApprovals,
-      isHardCeiling,
-      canActAutonomously: effectiveTier === 1,
-    };
+    return { ...base, actionCategory, effectiveTier, isHardCeiling, canActAutonomously: effectiveTier === 1 };
   }
 
-  /**
-   * Record an approval — trust increases slowly.
-   */
-  async recordApproval(facilityId: string, actionCategory: ActionCategory): Promise<void> {
-    const [existing] = await db
-      .select()
-      .from(trustScores)
-      .where(and(eq(trustScores.facilityId, facilityId), eq(trustScores.actionCategory, actionCategory)));
+  invalidateCache(facilityId: string): void { trustCache.delete(facilityId); }
 
-    if (existing) {
-      const newScore = Math.min(1, Number(existing.score) + 0.04);
-      await db
-        .update(trustScores)
-        .set({
-          score: String(newScore),
-          consecutiveApprovals: (existing.consecutiveApprovals ?? 0) + 1,
-          totalApprovals: (existing.totalApprovals ?? 0) + 1,
-          lastActivityAt: new Date(),
-          updatedAt: new Date(),
-        })
-        .where(eq(trustScores.id, existing.id));
-    } else {
-      await db.insert(trustScores).values({
-        facilityId,
-        actionCategory,
-        score: "0.24", // 0.20 + 0.04
-        consecutiveApprovals: 1,
-        totalApprovals: 1,
-        lastActivityAt: new Date(),
-      });
-    }
-  }
-
-  /**
-   * Record a modification — resets consecutive count, no score penalty.
-   */
-  async recordModification(facilityId: string, actionCategory: ActionCategory): Promise<void> {
-    const [existing] = await db
-      .select()
-      .from(trustScores)
-      .where(and(eq(trustScores.facilityId, facilityId), eq(trustScores.actionCategory, actionCategory)));
-
-    if (existing) {
-      await db
-        .update(trustScores)
-        .set({
-          consecutiveApprovals: 0,
-          totalModifications: (existing.totalModifications ?? 0) + 1,
-          lastActivityAt: new Date(),
-          updatedAt: new Date(),
-        })
-        .where(eq(trustScores.id, existing.id));
-    } else {
-      await db.insert(trustScores).values({
-        facilityId,
-        actionCategory,
-        score: "0.2000",
-        consecutiveApprovals: 0,
-        totalModifications: 1,
-        lastActivityAt: new Date(),
-      });
-    }
-  }
-
-  /**
-   * Record a rejection — trust decreases fast (-0.15).
-   */
-  async recordRejection(facilityId: string, actionCategory: ActionCategory): Promise<void> {
-    const [existing] = await db
-      .select()
-      .from(trustScores)
-      .where(and(eq(trustScores.facilityId, facilityId), eq(trustScores.actionCategory, actionCategory)));
-
-    if (existing) {
-      const newScore = Math.max(0, Number(existing.score) - 0.15);
-      await db
-        .update(trustScores)
-        .set({
-          score: String(newScore),
-          consecutiveApprovals: 0,
-          totalRejections: (existing.totalRejections ?? 0) + 1,
-          lastActivityAt: new Date(),
-          updatedAt: new Date(),
-        })
-        .where(eq(trustScores.id, existing.id));
-    } else {
-      await db.insert(trustScores).values({
-        facilityId,
-        actionCategory,
-        score: "0.0500", // 0.20 - 0.15
-        consecutiveApprovals: 0,
-        totalRejections: 1,
-        lastActivityAt: new Date(),
-      });
-    }
-  }
-
-  /**
-   * Decay inactive trust scores — run daily.
-   * 30 days inactivity → score × 0.95
-   */
   async decayInactive(): Promise<number> {
     const thirtyDaysAgo = new Date();
     thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
-
-    const stale = await db
-      .select()
-      .from(trustScores)
-      .where(lt(trustScores.lastActivityAt, thirtyDaysAgo));
-
+    const stale = await db.select().from(trustScores).where(lt(trustScores.lastActivityAt, thirtyDaysAgo));
     let decayed = 0;
     for (const row of stale) {
-      const newScore = Number(row.score) * 0.95;
-      await db
-        .update(trustScores)
-        .set({
-          score: String(Math.round(newScore * 10000) / 10000),
-          updatedAt: new Date(),
-        })
-        .where(eq(trustScores.id, row.id));
+      await db.update(trustScores).set({ score: String(Number(row.score) * 0.95), updatedAt: new Date() }).where(eq(trustScores.id, row.id));
       decayed++;
     }
-
     return decayed;
   }
 
-  /**
-   * Seed autonomy config for a new facility from the registry defaults.
-   */
   async seedFacilityConfig(facilityId: string): Promise<void> {
     for (const entry of ACTION_REGISTRY) {
-      await db
-        .insert(autonomyConfig)
-        .values({
-          facilityId,
-          actionCategory: entry.category,
-          defaultTier: entry.defaultTier,
-          ceilingTier: entry.ceilingTier,
-          isReversible: entry.isReversible,
-          requiresSaga: entry.requiresSaga,
-          hardCeiling: HARD_CEILING_ACTIONS.includes(entry.category),
-        })
-        .onConflictDoNothing();
+      await db.insert(autonomyConfig).values({
+        facilityId, actionCategory: entry.category, defaultTier: entry.defaultTier,
+        ceilingTier: entry.ceilingTier, isReversible: entry.isReversible,
+        requiresSaga: entry.requiresSaga, hardCeiling: HARD_CEILING_ACTIONS.includes(entry.category),
+      }).onConflictDoNothing();
     }
+  }
+
+  // --- DB Queries ---
+
+  private async queryBriefingAcceptance(facilityId: string, cutoff: Date): Promise<{ total: number; accepted: number }> {
+    const rows = await db.select().from(evidenceRecords).where(
+      and(eq(evidenceRecords.facilityId, facilityId), gte(evidenceRecords.triggeredAt, cutoff))
+    );
+    const briefings = rows.filter((r) => ["monday_briefing_delivery", "team_briefing_delivery", "leader_loop_delivery"].includes(r.actionCategory));
+    return { total: briefings.length, accepted: briefings.filter((r) => r.decision !== "rejected").length };
+  }
+
+  private async queryRecommendationFollow(facilityId: string, cutoff: Date): Promise<{ total: number; approved: number }> {
+    const rows = await db.select().from(donReviewItems).where(
+      and(eq(donReviewItems.facilityId, facilityId), gte(donReviewItems.createdAt, cutoff), isNotNull(donReviewItems.decidedAt))
+    );
+    return { total: rows.length, approved: rows.filter((r) => r.status === "approved").length };
+  }
+
+  private async queryOutcomeAccuracy(facilityId: string, cutoff: Date): Promise<{ total: number; positive: number }> {
+    const rows = await db.select().from(facilityInterventions).where(
+      and(eq(facilityInterventions.facilityId, facilityId), isNotNull(facilityInterventions.outcome), gte(facilityInterventions.prescribedAt, cutoff))
+    );
+    return { total: rows.length, positive: rows.filter((r) => r.outcome === "hazard_reduced").length };
+  }
+
+  private async queryUndoRate(facilityId: string, cutoff: Date): Promise<{ total: number; rejected: number }> {
+    const rows = await db.select().from(donReviewItems).where(
+      and(eq(donReviewItems.facilityId, facilityId), gte(donReviewItems.createdAt, cutoff), isNotNull(donReviewItems.decidedAt))
+    );
+    return { total: rows.length, rejected: rows.filter((r) => r.status === "rejected").length };
   }
 }

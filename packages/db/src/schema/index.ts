@@ -13,4 +13,8 @@ export {
   trustScores,
   autonomyConfig,
   alertLoops,
+  // Bayesian + rate limiting
+  betaPosteriors,
+  alertCooldowns,
+  alertRateLimits,
 } from "./canonical";

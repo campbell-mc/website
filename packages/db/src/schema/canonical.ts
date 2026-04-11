@@ -485,3 +485,71 @@ export const alertLoops = pgTable(
     index("ix_alert_type_created").on(table.alertType, table.createdAt),
   ]
 );
+
+// --- beta_posteriors (Bayesian calibration per entity×issue×action) ---
+// Adapted from Prism: Thompson sampling with Beta distributions.
+// Tracks per-(facility × hazard_domain × action_type) success/failure rates.
+export const betaPosteriors = pgTable(
+  "beta_posteriors",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    facilityId: uuid("facility_id")
+      .notNull()
+      .references(() => facilities.id, { onDelete: "cascade" }),
+    entityType: text("entity_type").notNull().default("facility"), // facility | team | provider
+    entityId: text("entity_id").notNull(), // facility UUID or team_id
+    issueType: text("issue_type").notNull(), // hazard domain or signal type
+    actionType: text("action_type").notNull(), // practice_id or action category
+    alpha: decimal("alpha", { precision: 10, scale: 4 }).notNull().default("2.0000"),
+    betaParam: decimal("beta_param", { precision: 10, scale: 4 }).notNull().default("2.0000"),
+    totalObservations: integer("total_observations").notNull().default(0),
+    lastUpdatedAt: timestamp("last_updated_at", { withTimezone: true }).defaultNow(),
+  },
+  (table) => [
+    uniqueIndex("uq_beta_posteriors").on(
+      table.facilityId,
+      table.entityType,
+      table.entityId,
+      table.issueType,
+      table.actionType
+    ),
+    index("ix_beta_facility").on(table.facilityId),
+  ]
+);
+
+// --- alert_cooldowns (prevent rapid re-alerting) ---
+export const alertCooldowns = pgTable(
+  "alert_cooldowns",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    facilityId: uuid("facility_id")
+      .notNull()
+      .references(() => facilities.id, { onDelete: "cascade" }),
+    alertType: text("alert_type").notNull(),
+    recipientRole: text("recipient_role").notNull(),
+    cooldownUntil: timestamp("cooldown_until", { withTimezone: true }).notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow(),
+  },
+  (table) => [
+    index("ix_cooldown_facility_type").on(table.facilityId, table.alertType),
+  ]
+);
+
+// --- alert_rate_limits (per-person per-day caps) ---
+export const alertRateLimits = pgTable(
+  "alert_rate_limits",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    facilityId: uuid("facility_id")
+      .notNull()
+      .references(() => facilities.id, { onDelete: "cascade" }),
+    recipientRole: text("recipient_role").notNull(),
+    dateKey: date("date_key").notNull(), // YYYY-MM-DD
+    alertCount: integer("alert_count").notNull().default(0),
+    maxAlerts: integer("max_alerts").notNull().default(15),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow(),
+  },
+  (table) => [
+    uniqueIndex("uq_rate_limit").on(table.facilityId, table.recipientRole, table.dateKey),
+  ]
+);

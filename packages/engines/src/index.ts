@@ -22,7 +22,12 @@ export type { ComplyResult, ComplyQuestion, ComplyAnswer } from "./comply/scorin
 
 // Execution Layer (Doc 17)
 export { TrustEngine } from "./trust/index";
-export type { TrustResult } from "./trust/index";
+export type { TrustResult, TrustComponents, TrustSampleSizes } from "./trust/index";
+export {
+  loadPrior, updatePrior, posteriorMean, posteriorVariance,
+  credibleIntervalWidth, betaSample, decayPriors,
+} from "./trust/bayesian";
+export type { BetaPrior } from "./trust/bayesian";
 export { MonitoringEngine } from "./monitoring/index";
 export type { MonitorSignal } from "./monitoring/index";
 export { ExecutionLoop } from "./execution/index";
