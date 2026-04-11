@@ -45,8 +45,7 @@ const NAV_SECTIONS: NavSection[] = [
     title: "OPERATIONS",
     items: [
       { label: "Monday Briefing", href: "/dashboard/briefing", icon: FileText, roles: ["don", "facility_gm", "ceo", "operator"] },
-      { label: "DON Review Queue", href: "/don/queue", icon: ClipboardList, roles: ["don", "facility_gm", "ceo", "operator"] },
-      { label: "Site Dashboard", href: "/dashboard/site", icon: LayoutDashboard, roles: ["don", "facility_gm", "ceo", "operator"] },
+      { label: "Review Queue", href: "/don/queue", icon: ClipboardList, roles: ["don", "facility_gm", "ceo", "operator"] },
       { label: "Compliance Register", href: "/dashboard/compliance", icon: Shield, roles: ["don", "facility_gm", "quality_lead", "ceo", "operator"] },
     ],
   },
