@@ -1,5 +1,8 @@
 export {
   providers,
+  users,
+  magicLinks,
+  sessions,
   facilities,
   facilityWorkforce,
   facilityRostering,

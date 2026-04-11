@@ -37,6 +37,71 @@ export const providers = pgTable("providers", {
   config: jsonb("config").default({}),
 });
 
+// --- users (auth — phone-based, magic link via LinqApp/iMessage) ---
+export const users = pgTable(
+  "users",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow(),
+    providerId: uuid("provider_id")
+      .notNull()
+      .references(() => providers.id, { onDelete: "restrict" }),
+    phone: text("phone").notNull().unique(), // E.164 format: +614XXXXXXXX
+    name: text("name").notNull(),
+    role: text("role").notNull().default("team_leader"),
+    // board_member | ceo | cfo | clinical_director | don | facility_gm |
+    // quality_lead | whs_lead | hr_manager | elt_member |
+    // team_leader | frontline_staff | operator
+    facilityIds: jsonb("facility_ids").default([]), // UUIDs of accessible facilities
+    isActive: boolean("is_active").default(true),
+    lastLoginAt: timestamp("last_login_at", { withTimezone: true }),
+    onboardedAt: timestamp("onboarded_at", { withTimezone: true }),
+  },
+  (table) => [
+    index("ix_users_provider").on(table.providerId),
+    index("ix_users_phone").on(table.phone),
+  ]
+);
+
+// --- magic_links (short-lived auth tokens sent via LinqApp → iMessage) ---
+export const magicLinks = pgTable(
+  "magic_links",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    userId: uuid("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    token: text("token").notNull().unique(), // crypto random, URL-safe
+    expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
+    usedAt: timestamp("used_at", { withTimezone: true }),
+    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow(),
+  },
+  (table) => [
+    index("ix_magic_links_token").on(table.token),
+    index("ix_magic_links_user").on(table.userId),
+  ]
+);
+
+// --- sessions (JWT sessions persisted in Neon) ---
+export const sessions = pgTable(
+  "sessions",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    userId: uuid("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    token: text("token").notNull().unique(), // JWT or session token
+    expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow(),
+    lastActiveAt: timestamp("last_active_at", { withTimezone: true }).defaultNow(),
+    deviceInfo: text("device_info"), // user-agent for session management
+  },
+  (table) => [
+    index("ix_sessions_token").on(table.token),
+    index("ix_sessions_user").on(table.userId),
+  ]
+);
+
 // --- facilities ---
 export const facilities = pgTable(
   "facilities",
