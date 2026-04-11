@@ -5,7 +5,8 @@
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
-    "./care-minutes": "./src/care-minutes/index.ts"
+    "./care-minutes": "./src/care-minutes/index.ts",
+    "./comply/scoring": "./src/comply/scoring.ts"
   },
   "scripts": {
     "test": "vitest run"
