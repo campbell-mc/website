@@ -30,6 +30,7 @@ interface NavItem {
 
 interface NavSection {
   title: string;
+  href?: string; // Domain Control Centre route
   items: NavItem[];
 }
 
@@ -43,14 +44,15 @@ const NAV_SECTIONS: NavSection[] = [
   },
   {
     title: "OPERATIONS",
+    href: "/dashboard/operations",
     items: [
       { label: "Monday Briefing", href: "/dashboard/briefing", icon: FileText, roles: ["don", "facility_gm", "ceo", "operator"] },
       { label: "Review Queue", href: "/don/queue", icon: ClipboardList, roles: ["don", "facility_gm", "ceo", "operator"] },
-      { label: "Compliance Register", href: "/dashboard/compliance", icon: Shield, roles: ["don", "facility_gm", "quality_lead", "ceo", "operator"] },
     ],
   },
   {
     title: "CLINICAL",
+    href: "/dashboard/clinical",
     items: [
       { label: "Care Minutes", href: "/dashboard/care-minutes", icon: Activity, roles: ["don", "clinical_director", "quality_lead", "ceo", "operator"] },
       { label: "Quality Indicators", href: "/dashboard/quality", icon: BarChart2, roles: ["don", "clinical_director", "quality_lead", "ceo", "operator"] },
@@ -60,20 +62,20 @@ const NAV_SECTIONS: NavSection[] = [
   },
   {
     title: "WORKFORCE",
+    href: "/dashboard/workforce",
     items: [
-      { label: "P&C Scoreboard", href: "/dashboard/workforce", icon: Users, roles: ["hr_manager", "ceo", "operator"] },
-      { label: "PSH Dashboard", href: "/dashboard/risk", icon: Heart, roles: ["whs_lead", "hr_manager", "don", "ceo", "operator"] },
+      { label: "PSH Dashboard", href: "/dashboard/psh", icon: Heart, roles: ["whs_lead", "hr_manager", "don", "ceo", "operator"] },
       { label: "Training Compliance", href: "/dashboard/training", icon: GraduationCap, roles: ["hr_manager", "don", "quality_lead", "operator"] },
     ],
   },
   {
     title: "FINANCIAL",
-    items: [
-      { label: "Financial Dashboard", href: "/dashboard/financial", icon: DollarSign, roles: ["cfo", "ceo", "operator"] },
-    ],
+    href: "/dashboard/financial",
+    items: [],
   },
   {
     title: "GOVERNANCE",
+    href: "/dashboard/compliance",
     items: [
       { label: "Reporting Cycles", href: "/dashboard/reporting", icon: Calendar, roles: ["don", "quality_lead", "whs_lead", "hr_manager", "clinical_director", "cfo", "ceo", "operator"] },
       { label: "Governance Packs", href: "/dashboard/packs", icon: BookOpen, roles: ["don", "quality_lead", "ceo", "cfo", "operator"] },
@@ -130,9 +132,20 @@ export function Sidebar({ userName, userRole, providerName, className = "" }: Si
       <nav className="py-3 px-2">
         {visibleSections.map((section) => (
           <div key={section.title} className="mb-4">
-            <p className="px-3 mb-1 text-[10px] font-semibold text-gray-400 uppercase tracking-widest">
-              {section.title}
-            </p>
+            {section.href ? (
+              <button
+                onClick={() => router.push(section.href!)}
+                className={`px-3 mb-1 text-[10px] font-semibold uppercase tracking-widest w-full text-left hover:text-[var(--brand-forest)] transition-colors ${
+                  pathname.startsWith(section.href) ? "text-[var(--brand-forest)]" : "text-gray-400"
+                }`}
+              >
+                {section.title} →
+              </button>
+            ) : (
+              <p className="px-3 mb-1 text-[10px] font-semibold text-gray-400 uppercase tracking-widest">
+                {section.title}
+              </p>
+            )}
             {section.items.map((item) => {
               const active = isActive(item.href);
               const Icon = item.icon;

@@ -10,6 +10,7 @@ interface MetricCardProps {
   trendLabel?: string;
   status?: "compliant" | "at-risk" | "non-compliant";
   onClick?: () => void;
+  action?: { label: string; onClick: () => void }; // Action for at-risk / non-compliant
   className?: string;
 }
 
@@ -27,16 +28,18 @@ export function MetricCard({
   trendLabel,
   status,
   onClick,
+  action,
   className = "",
 }: MetricCardProps) {
   const statusClass = status ? STATUS_STYLES[status] : "";
   const isClickable = !!onClick;
+  const needsAction = status === "at-risk" || status === "non-compliant";
 
   return (
     <div
-      onClick={onClick}
+      onClick={!action ? onClick : undefined}
       className={`bg-white rounded-xl p-4 shadow-warm-sm border border-[var(--border-default)] ${statusClass} ${
-        isClickable ? "cursor-pointer hover:shadow-warm transition-shadow" : ""
+        isClickable && !action ? "cursor-pointer hover:shadow-warm transition-shadow" : ""
       } ${className}`}
     >
       <p className="text-[11px] font-medium text-gray-500 uppercase tracking-wider mb-1">
@@ -61,6 +64,14 @@ export function MetricCard({
       </div>
       {subtitle && (
         <p className="text-xs text-gray-400 mt-1">{subtitle}</p>
+      )}
+      {needsAction && action && (
+        <button
+          onClick={(e) => { e.stopPropagation(); action.onClick(); }}
+          className="mt-2 w-full text-xs font-medium py-2 rounded-lg bg-[var(--brand-forest)] text-white hover:opacity-90 transition-opacity"
+        >
+          {action.label}
+        </button>
       )}
     </div>
   );

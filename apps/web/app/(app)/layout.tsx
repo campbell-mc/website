@@ -14,59 +14,53 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 
   // TODO: Replace with real user from session
   const user = {
-    name: "Mary Thompson",
+    name: "Sarah Mitchell",
     role: "don" as const,
     providerName: "Harbison",
   };
 
   // Sync active tab with URL
   useEffect(() => {
-    if (pathname.includes("/journey")) setActiveTab("journey");
-    else if (pathname.includes("/risk")) setActiveTab("risk");
-    else if (pathname.includes("/todo") || pathname.includes("/actions")) setActiveTab("todo");
-    else if (pathname.includes("/coach")) setActiveTab("coach");
-    else setActiveTab("home");
+    if (pathname.includes("/clinical") || pathname.includes("/care-minutes") || pathname.includes("/quality") || pathname.includes("/sirs") || pathname.includes("/audits")) {
+      setActiveTab("clinical");
+    } else if (pathname.includes("/workforce") || pathname.includes("/risk") || pathname.includes("/psh") || pathname.includes("/training") || pathname.includes("/journey")) {
+      setActiveTab("workforce");
+    } else if (pathname.includes("/compliance") || pathname.includes("/reporting") || pathname.includes("/packs") || pathname.includes("/actions")) {
+      setActiveTab("governance");
+    } else if (pathname.includes("/coach")) {
+      setActiveTab("coach");
+    } else {
+      setActiveTab("home");
+    }
   }, [pathname]);
 
   function handleNavigate(tab: NavTab) {
     setActiveTab(tab);
     switch (tab) {
       case "home": router.push("/dashboard"); break;
-      case "journey": router.push("/dashboard/journey"); break;
-      case "risk": router.push("/dashboard/risk"); break;
-      case "todo": router.push("/don/queue"); break;
+      case "clinical": router.push("/dashboard/clinical"); break;
+      case "workforce": router.push("/dashboard/workforce"); break;
+      case "governance": router.push("/dashboard/compliance"); break;
       case "coach": router.push("/dashboard/coach"); break;
     }
   }
 
   return (
     <div className="min-h-screen flex" style={{ background: "var(--background)" }}>
-      {/* Desktop sidebar */}
-      <Sidebar
-        userName={user.name}
-        userRole={user.role}
-        providerName={user.providerName}
-      />
+      <Sidebar userName={user.name} userRole={user.role} providerName={user.providerName} />
 
-      {/* Main content area */}
       <div className="flex-1 flex flex-col min-h-screen">
-        {/* Mobile header (hidden on desktop — sidebar replaces it) */}
         <div className="lg:hidden">
           <Header title="Culture Crunch" subtitle={user.providerName} showSettings />
         </div>
 
-        {/* Page content */}
-        <main className="flex-1 overflow-y-auto">
-          {children}
-        </main>
+        <main className="flex-1 overflow-y-auto">{children}</main>
 
-        {/* Mobile bottom nav (hidden on desktop — sidebar replaces it) */}
         <div className="lg:hidden">
-          <BottomNav activeTab={activeTab} onNavigate={handleNavigate} todoCount={2} />
+          <BottomNav activeTab={activeTab} onNavigate={handleNavigate} />
         </div>
       </div>
 
-      {/* Floating CHRIS button (both mobile and desktop) */}
       <FloatingChrisButton onClick={() => router.push("/dashboard/coach")} />
     </div>
   );

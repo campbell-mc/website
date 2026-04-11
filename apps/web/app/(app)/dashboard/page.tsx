@@ -117,18 +117,31 @@ function DominantCard({ type }: { type: DominantType }) {
   );
 }
 
-// --- Status Tile (tap to drill) ---
-function StatusTile({ label, value, sub, status }: { label: string; value: string; sub: string; status: "ok" | "warn" | "bad" }) {
+// --- Status Tile (tap to drill — action on card if not OK) ---
+function StatusTile({ label, value, sub, status, action, actionLabel }: {
+  label: string; value: string; sub: string; status: "ok" | "warn" | "bad";
+  action?: () => void; actionLabel?: string;
+}) {
   const dotColor = status === "ok" ? "bg-[var(--brand-teal)]" : status === "warn" ? "bg-[var(--brand-amber)]" : "bg-[var(--brand-terracotta)]";
+  const needsAction = status !== "ok" && action;
+
   return (
-    <button className="bg-white rounded-xl p-3 shadow-warm-sm border border-[var(--border-default)] hover:shadow-warm transition-shadow text-left flex-1 min-w-0">
+    <div className="bg-white rounded-xl p-3 shadow-warm-sm border border-[var(--border-default)] hover:shadow-warm transition-shadow text-left flex-1 min-w-0">
       <div className="flex items-center gap-1.5 mb-1">
-        <span className={`w-2 h-2 rounded-full ${dotColor}`} />
+        <span className={`w-2 h-2 rounded-full ${dotColor} ${status === "bad" ? "animate-[pulseSoft_2s_ease-in-out_infinite]" : ""}`} />
         <span className="text-[10px] font-medium text-gray-400 uppercase tracking-wider truncate">{label}</span>
       </div>
       <p className="text-lg font-bold text-[var(--brand-forest)] leading-tight">{value}</p>
       <p className="text-[10px] text-gray-400 truncate">{sub}</p>
-    </button>
+      {needsAction && (
+        <button
+          onClick={action}
+          className="mt-2 w-full text-[10px] font-medium py-1.5 rounded-lg bg-[var(--brand-forest)] text-white hover:opacity-90 transition-opacity"
+        >
+          {actionLabel ?? "Fix →"}
+        </button>
+      )}
+    </div>
   );
 }
 
@@ -211,9 +224,9 @@ export default function SiteDashboardPage() {
 
       {/* STATUS ROW: Live metrics, tap to drill */}
       <div className="flex gap-2 mb-4">
-        <StatusTile label="Care min" value="186" sub="/200 · RN: 37" status="bad" />
-        <StatusTile label="Roster" value="2 gaps" sub="tonight" status="warn" />
-        <StatusTile label="Compliance" value="78" sub="score" status="warn" />
+        <StatusTile label="Care min" value="186" sub="/200 · RN: 37" status="bad" action={() => {}} actionLabel="Fix gap →" />
+        <StatusTile label="Roster" value="2 gaps" sub="tonight" status="warn" action={() => {}} actionLabel="View roster →" />
+        <StatusTile label="Compliance" value="78" sub="score" status="warn" action={() => {}} actionLabel="Review →" />
       </div>
 
       {/* QUEUE: Top items, action on card */}
