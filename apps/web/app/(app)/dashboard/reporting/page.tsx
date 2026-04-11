@@ -16,7 +16,7 @@ const UPCOMING = [
 ];
 
 const COMPLETED = [
-  { type: "Monday Briefing", period: "7 Apr", approved: "Mary T.", distributed: "14 leaders" },
+  { type: "Today's Briefing", period: "7 Apr", approved: "Mary T.", distributed: "14 leaders" },
   { type: "Monthly Clinical Governance", period: "Mar 2026", approved: "Mary T.", distributed: "5 members" },
   { type: "ELT Pack", period: "Mar 2026", approved: "CEO", distributed: "6 ELT members" },
 ];

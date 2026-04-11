@@ -60,7 +60,7 @@ const DOMAINS: DomainStatus[] = [
 
 const TOP_ACTIONS = [
   { priority: "watch" as const, label: "Review SIRS Cat 2 draft — 22 days remaining", actionLabel: "Review draft →", href: "/dashboard/sirs" },
-  { priority: "watch" as const, label: "Read your Daily Briefing — 3 signals, 1 positive", actionLabel: "Read briefing →", href: "/team-loop/briefing" },
+  { priority: "watch" as const, label: "Read Today's Briefing — 3 signals, 1 positive", actionLabel: "Read briefing →", href: "/team-loop/briefing" },
   { priority: "clear" as const, label: "Acknowledge Wattle Wing practice outcome — hazard reduced", actionLabel: "View outcome →", href: "/dashboard/psh" },
 ];
 
@@ -161,8 +161,8 @@ export default function HomePage() {
         <div className="flex items-center gap-3">
           <Sparkles className="w-4 h-4 text-[hsl(var(--brand-amber))]" />
           <div>
-            <p className="text-sm font-medium text-foreground">Daily Briefing · Cycle 8</p>
-            <p className="text-[10px] text-muted-foreground">3 signals · 8 min read</p>
+            <p className="text-sm font-medium text-foreground">Today's Briefing · Cycle 8</p>
+            <p className="text-[10px] text-muted-foreground">Updated overnight · 3 signals · 8 min read</p>
           </div>
         </div>
         <ChevronRight className="w-4 h-4 text-muted-foreground" />

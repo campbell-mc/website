@@ -64,7 +64,7 @@ export default function OperationsControlCentre() {
         actionLabel="Find agency cover →" onAction={() => router.push("/dashboard/care-minutes")} />
 
       <ActionCard urgency="info" icon={<Sparkles className="w-5 h-5 text-[hsl(var(--brand-amber))]" />}
-        title="Monday Briefing · Unread"
+        title="Today's Briefing · Unread"
         chris="3 signals this week. Practice attached. 8 minutes to read. 3 actions for this week."
         actionLabel="Read briefing →" onAction={() => router.push("/dashboard/briefing")} />
 
