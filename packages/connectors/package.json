@@ -1,0 +1,23 @@
+{
+  "name": "@chris/connectors",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./deputy": "./src/deputy/index.ts"
+  },
+  "scripts": {
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@chris/db": "workspace:*",
+    "drizzle-orm": "^0.39.0",
+    "postgres": "^3.4.0",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.17",
+    "vitest": "^3.0.0"
+  }
+}

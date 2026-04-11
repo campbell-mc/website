@@ -1,0 +1,70 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* CHRIS Brand Palette — warm, earthy, distinctly Australian */
+  --forest: #1B4332;
+  --forest-light: #2D6A4F;
+  --amber: #D4A017;
+  --amber-light: #E8B931;
+  --terracotta: #C4704A;
+  --teal: #2D7D73;
+  --cream: #FAF7F2;
+  --sage: #A7C4A0;
+  --gold: #C9A84C;
+
+  /* Status colours */
+  --status-healthy: var(--teal);
+  --status-watch: var(--amber);
+  --status-act: var(--terracotta);
+
+  /* Shadcn/ui theme variables */
+  --radius: 0.625rem;
+  --background: var(--cream);
+  --foreground: #1a1a1a;
+  --card: #ffffff;
+  --card-foreground: #1a1a1a;
+  --popover: #ffffff;
+  --popover-foreground: #1a1a1a;
+  --primary: var(--forest);
+  --primary-foreground: #ffffff;
+  --secondary: #f0ebe3;
+  --secondary-foreground: var(--forest);
+  --muted: #f0ebe3;
+  --muted-foreground: #6b6b6b;
+  --accent: var(--amber);
+  --accent-foreground: var(--forest);
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --border: #e2ddd5;
+  --input: #e2ddd5;
+  --ring: var(--forest);
+}
+
+.dark {
+  --background: #0f1a14;
+  --foreground: #f0ebe3;
+  --card: #162920;
+  --card-foreground: #f0ebe3;
+  --popover: #162920;
+  --popover-foreground: #f0ebe3;
+  --primary: var(--amber);
+  --primary-foreground: var(--forest);
+  --secondary: #1e3a2c;
+  --secondary-foreground: #f0ebe3;
+  --muted: #1e3a2c;
+  --muted-foreground: #8a8a7a;
+  --accent: var(--amber);
+  --accent-foreground: var(--forest);
+  --border: #2d4a3c;
+  --input: #2d4a3c;
+  --ring: var(--amber);
+}
+
+body {
+  font-family: "DM Sans", system-ui, -apple-system, sans-serif;
+  background: var(--background);
+  color: var(--foreground);
+}

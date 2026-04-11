@@ -1,0 +1,26 @@
+{
+  "name": "@chris/monorepo",
+  "private": true,
+  "packageManager": "pnpm@10.30.1",
+  "scripts": {
+    "build": "npx turbo run build",
+    "start": "pnpm --filter @chris/web start",
+    "dev": "npx turbo run dev",
+    "lint": "npx turbo run lint",
+    "db:generate": "npx turbo run db:generate",
+    "db:migrate": "npx turbo run db:migrate",
+    "db:studio": "npx turbo run db:studio",
+    "test": "npx turbo run test"
+  },
+  "devDependencies": {
+    "turbo": "^2.5.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.8.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp"
+    ]
+  }
+}
