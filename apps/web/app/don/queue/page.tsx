@@ -1,195 +1,189 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
-import { ReviewCard } from "@/components/don/ReviewCard";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { ChevronLeft, Mic, MoreHorizontal, CheckCircle, AlertTriangle, FileText, Activity, Shield, Users, Clock } from "lucide-react";
+import { ChrisAvatar } from "@/components/chris/ChrisAvatar";
 
-interface DONReviewItem {
+// ============================================================================
+// Review Queue — same design language as everywhere else.
+// CHRIS speaks first on every card. Action on the card.
+// Demo items matching the home screen's top actions.
+// ============================================================================
+
+interface QueueItem {
   id: string;
-  facilityId: string;
-  createdAt: string;
-  itemType: string;
   urgency: "immediate" | "urgent" | "routine";
-  summary: string;
-  fullContext: Record<string, unknown>;
-  chrisRecommendation: string | null;
-  deadline: string | null;
-  status: string;
+  type: string;
+  title: string;
+  chris: string;
+  actionLabel: string;
+  href: string;
+  deadline?: string;
+  meta?: string;
 }
 
-// TODO: Replace with real facility ID from auth context
-const FACILITY_ID = "demo-facility";
+const QUEUE_ITEMS: QueueItem[] = [
+  // Immediate
+  {
+    id: "q1", urgency: "immediate", type: "SIRS",
+    title: "SIRS Cat 2 · Review draft",
+    chris: "Fall with hip fracture — Wing A. CHRIS draft is ready. Add resident details and approve before submission. 22 days remaining but best reviewed promptly.",
+    actionLabel: "Review draft →", href: "/dashboard/sirs", deadline: "22 days",
+  },
+  // Urgent
+  {
+    id: "q2", urgency: "urgent", type: "Care Minutes",
+    title: "Care minutes gap · Tonight's AIN shift",
+    chris: "1 AIN shift unfilled tonight. Care minutes will stay compliant but the margin is thin. Post to internal pool or accept the gap.",
+    actionLabel: "View roster →", href: "/dashboard/care-minutes",
+  },
+  {
+    id: "q3", urgency: "urgent", type: "Governance",
+    title: "Board Pack · Awaiting your review",
+    chris: "CHRIS has drafted all 8 sections. Meeting in 8 days. Estimated review: 35 minutes. 3 decisions need your framing before CEO approval.",
+    actionLabel: "Start review →", href: "/dashboard/reporting", deadline: "8 days",
+  },
+  {
+    id: "q4", urgency: "urgent", type: "Audit",
+    title: "Medication audit · 3 days overdue",
+    chris: "CHRIS can guide you through it by voice. Takes about 45 minutes. Non-conformances will queue as corrective actions automatically.",
+    actionLabel: "Start audit →", href: "/dashboard/audits",
+  },
+  // Routine
+  {
+    id: "q5", urgency: "routine", type: "Governance",
+    title: "Clinical Governance Pack · Ready for review",
+    chris: "CHRIS draft complete. 6 sections. Care minutes, QI snapshot, SIRS summary, audits, corrective actions, PSH summary. Est. 25 min.",
+    actionLabel: "Start review →", href: "/dashboard/reporting", deadline: "10 days",
+  },
+  {
+    id: "q6", urgency: "routine", type: "Compliance",
+    title: "QS 2.8.2 evidence gap · 2 min fix",
+    chris: "Worker consultation record needs updating. Pulse participation data from last cycle satisfies this requirement. CHRIS can do it now.",
+    actionLabel: "Fix now →", href: "/dashboard/compliance",
+  },
+  {
+    id: "q7", urgency: "routine", type: "Practice",
+    title: "Wattle Wing practice outcome · Acknowledge",
+    chris: "'Protect breaks under pressure' reduced hazard score by 0.08 — above the 0.05 success threshold. Worth reinforcing with the team.",
+    actionLabel: "View outcome →", href: "/dashboard/psh",
+  },
+];
 
-export default function DONQueuePage() {
-  const [items, setItems] = useState<DONReviewItem[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [offline, setOffline] = useState(false);
+export default function ReviewQueuePage() {
+  const router = useRouter();
+  const [dismissed, setDismissed] = useState<Set<string>>(new Set());
 
-  const fetchItems = useCallback(async () => {
-    try {
-      const res = await fetch(`/api/don/queue?facilityId=${FACILITY_ID}`);
-      if (res.ok) {
-        const data = await res.json();
-        setItems(data.items);
-        // Cache in localStorage for offline
-        localStorage.setItem("don-queue-cache", JSON.stringify(data.items));
-      }
-    } catch {
-      // Offline — load from cache
-      const cached = localStorage.getItem("don-queue-cache");
-      if (cached) {
-        setItems(JSON.parse(cached));
-      }
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    fetchItems();
-
-    // Poll every 30 seconds for new items
-    const interval = setInterval(fetchItems, 30_000);
-
-    // Online/offline detection
-    function handleOnline() { setOffline(false); fetchItems(); }
-    function handleOffline() { setOffline(true); }
-    window.addEventListener("online", handleOnline);
-    window.addEventListener("offline", handleOffline);
-    setOffline(!navigator.onLine);
-
-    return () => {
-      clearInterval(interval);
-      window.removeEventListener("online", handleOnline);
-      window.removeEventListener("offline", handleOffline);
-    };
-  }, [fetchItems]);
-
-  async function handleApprove(itemId: string, note?: string) {
-    await fetch("/api/don/queue", {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ itemId, action: "approve", note }),
-    });
-    setItems((prev) => prev.filter((i) => i.id !== itemId));
-  }
-
-  async function handleModify(itemId: string, modifications: Record<string, unknown>, note: string) {
-    await fetch("/api/don/queue", {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ itemId, action: "modify", modifications, note }),
-    });
-    setItems((prev) => prev.filter((i) => i.id !== itemId));
-  }
-
-  async function handleReject(itemId: string, note: string) {
-    await fetch("/api/don/queue", {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ itemId, action: "reject", note }),
-    });
-    setItems((prev) => prev.filter((i) => i.id !== itemId));
-  }
-
-  // Group by urgency
+  const items = QUEUE_ITEMS.filter((i) => !dismissed.has(i.id));
   const immediate = items.filter((i) => i.urgency === "immediate");
   const urgent = items.filter((i) => i.urgency === "urgent");
   const routine = items.filter((i) => i.urgency === "routine");
 
-  return (
-    <div className="min-h-screen" style={{ background: "var(--cream, #FAF7F2)" }}>
-      {/* Header */}
-      <header className="sticky top-0 z-40 px-4 py-3 shadow-sm" style={{ background: "var(--forest, #1B4332)" }}>
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#1B4332] to-[#D4A017] flex items-center justify-center">
-            <span className="text-white text-xs font-bold">C</span>
-          </div>
-          <div>
-            <h1 className="text-white font-semibold text-lg">DON Queue</h1>
-            <p className="text-white/60 text-xs">
-              {items.length} item{items.length !== 1 ? "s" : ""} pending
-            </p>
+  function handleDismiss(id: string) {
+    setDismissed((prev) => new Set([...prev, id]));
+  }
+
+  function renderItem(item: QueueItem) {
+    const borderColor = item.urgency === "immediate"
+      ? "border-l-[hsl(var(--brand-terracotta))]"
+      : item.urgency === "urgent"
+        ? "border-l-[hsl(var(--brand-amber))]"
+        : "border-l-[hsl(var(--brand-teal))]";
+
+    const bgStyle = item.urgency === "immediate"
+      ? { background: "rgba(196,112,74,0.06)", boxShadow: "0 4px 24px rgba(0,0,0,0.10)" }
+      : item.urgency === "urgent"
+        ? { background: "rgba(212,160,23,0.06)" }
+        : undefined;
+
+    return (
+      <div key={item.id} className={`rounded-xl p-4 border border-border border-l-4 ${borderColor} mb-3 bg-card`} style={bgStyle}>
+        <div className="flex items-start gap-3">
+          <ChrisAvatar size="small" className="shrink-0 mt-0.5" />
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center justify-between mb-1">
+              <div className="flex items-center gap-2">
+                <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-full bg-muted text-muted-foreground">{item.type}</span>
+                <p className="text-sm font-semibold text-foreground">{item.title}</p>
+              </div>
+              {item.deadline && <span className="text-[10px] text-muted-foreground font-mono shrink-0 ml-2">{item.deadline}</span>}
+            </div>
+            <p className="text-xs text-muted-foreground leading-relaxed mb-3">{item.chris}</p>
+            <div className="flex items-center gap-2">
+              <button onClick={() => { handleDismiss(item.id); router.push(item.href); }} className="text-xs font-medium px-3 py-2 rounded-lg bg-primary text-primary-foreground hover:opacity-90">
+                {item.actionLabel}
+              </button>
+              <button onClick={() => handleDismiss(item.id)} className="text-xs text-muted-foreground hover:text-foreground p-1.5 rounded-lg hover:bg-muted">
+                <MoreHorizontal className="w-4 h-4" />
+              </button>
+            </div>
           </div>
         </div>
-      </header>
+      </div>
+    );
+  }
 
-      {/* Offline banner */}
-      {offline && (
-        <div className="bg-amber-100 text-amber-800 text-center py-2 text-sm font-medium">
-          Offline — showing cached items. Actions will sync when reconnected.
+  return (
+    <div className="p-4 lg:p-6 max-w-lg lg:max-w-3xl mx-auto">
+      {/* Header */}
+      <div className="flex items-center justify-between mb-5">
+        <div className="flex items-center gap-2">
+          <button onClick={() => router.push("/dashboard")} className="p-1 -ml-1 hover:bg-muted rounded-lg">
+            <ChevronLeft className="w-5 h-5 text-foreground" />
+          </button>
+          <div>
+            <p className="text-[28px] font-bold text-foreground tracking-tight leading-tight">Review Queue</p>
+            <p className="text-[10px] text-muted-foreground">Harbison Bowral · {items.length} items pending</p>
+          </div>
+        </div>
+        <button className="flex items-center gap-1.5 text-xs font-medium px-3 py-2 rounded-lg border border-border text-foreground hover:bg-muted">
+          <Mic className="w-3.5 h-3.5" /> Ask CHRIS
+        </button>
+      </div>
+
+      {/* Empty state */}
+      {items.length === 0 && (
+        <div className="text-center py-16">
+          <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[hsl(150_25%_96%)] flex items-center justify-center">
+            <CheckCircle className="w-8 h-8 text-[hsl(var(--brand-teal))]" />
+          </div>
+          <p className="text-base font-semibold text-foreground mb-1">All clear</p>
+          <p className="text-sm text-muted-foreground">No items require your attention right now.</p>
         </div>
       )}
 
-      {/* Queue content */}
-      <main className="px-4 py-4 max-w-lg mx-auto">
-        {loading ? (
-          <div className="text-center py-12 text-gray-400">Loading...</div>
-        ) : items.length === 0 ? (
-          <div className="text-center py-12">
-            <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style={{ background: "#e8f5e9" }}>
-              <span className="text-2xl">✓</span>
-            </div>
-            <p className="text-gray-600 font-medium">All clear</p>
-            <p className="text-gray-400 text-sm mt-1">No items require your attention</p>
-          </div>
-        ) : (
-          <>
-            {/* Immediate */}
-            {immediate.length > 0 && (
-              <section className="mb-6">
-                <h2 className="text-xs font-semibold text-red-600 uppercase tracking-wide mb-2">
-                  Immediate ({immediate.length})
-                </h2>
-                {immediate.map((item) => (
-                  <ReviewCard
-                    key={item.id}
-                    item={item}
-                    onApprove={handleApprove}
-                    onModify={handleModify}
-                    onReject={handleReject}
-                  />
-                ))}
-              </section>
-            )}
+      {/* Immediate */}
+      {immediate.length > 0 && (
+        <>
+          <p className="text-[11px] font-semibold uppercase tracking-[0.08em] mb-2 text-[hsl(var(--brand-terracotta))]">
+            🔴 Immediate · {immediate.length}
+          </p>
+          {immediate.map(renderItem)}
+        </>
+      )}
 
-            {/* Urgent */}
-            {urgent.length > 0 && (
-              <section className="mb-6">
-                <h2 className="text-xs font-semibold uppercase tracking-wide mb-2" style={{ color: "var(--amber)" }}>
-                  Urgent ({urgent.length})
-                </h2>
-                {urgent.map((item) => (
-                  <ReviewCard
-                    key={item.id}
-                    item={item}
-                    onApprove={handleApprove}
-                    onModify={handleModify}
-                    onReject={handleReject}
-                  />
-                ))}
-              </section>
-            )}
+      {/* Urgent */}
+      {urgent.length > 0 && (
+        <>
+          <p className="text-[11px] font-semibold uppercase tracking-[0.08em] mb-2 mt-4 text-[hsl(var(--brand-amber))]">
+            🟡 Urgent · {urgent.length}
+          </p>
+          {urgent.map(renderItem)}
+        </>
+      )}
 
-            {/* Routine */}
-            {routine.length > 0 && (
-              <section className="mb-6">
-                <h2 className="text-xs font-semibold uppercase tracking-wide mb-2" style={{ color: "var(--teal, #2D7D73)" }}>
-                  Routine ({routine.length})
-                </h2>
-                {routine.map((item) => (
-                  <ReviewCard
-                    key={item.id}
-                    item={item}
-                    onApprove={handleApprove}
-                    onModify={handleModify}
-                    onReject={handleReject}
-                  />
-                ))}
-              </section>
-            )}
-          </>
-        )}
-      </main>
+      {/* Routine */}
+      {routine.length > 0 && (
+        <>
+          <p className="text-[11px] font-semibold uppercase tracking-[0.08em] mb-2 mt-4 text-[hsl(var(--brand-teal))]">
+            🟢 Routine · {routine.length}
+          </p>
+          {routine.map(renderItem)}
+        </>
+      )}
+
+      <div className="mb-16" />
     </div>
   );
 }
