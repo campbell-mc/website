@@ -91,7 +91,7 @@ export default function OperationsControlCentre() {
       <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-[0.08em] mb-2 mt-4">Quick actions</p>
       <div className="grid grid-cols-2 gap-2 mb-16">
         {[{ label: "+ Report incident", icon: "📋" }, { label: "+ Handover note", icon: "📝" }, { label: "Find agency cover", icon: "👤" }, { label: "Run CHRIS huddle 🎤", icon: "🎙" }].map((a) => (
-          <button key={a.label} className="bg-card rounded-lg px-3 py-2.5 border border-border hover:shadow-warm text-left flex items-center gap-2">
+          <button key={a.label} onClick={() => router.push("/dashboard/coach")} className="bg-card rounded-lg px-3 py-2.5 border border-border hover:shadow-warm text-left flex items-center gap-2">
             <span className="text-sm">{a.icon}</span><span className="text-xs font-medium text-foreground">{a.label}</span>
           </button>
         ))}

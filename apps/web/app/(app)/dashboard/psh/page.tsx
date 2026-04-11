@@ -99,7 +99,7 @@ export default function PSHControlCentre() {
 
       <div className="grid grid-cols-2 gap-2 mb-16">
         {[{ label: "Prescribe practice", icon: "💊" }, { label: "Escalate to DON", icon: "⚡" }, { label: "Export evidence", icon: "📦" }, { label: "Build advocacy brief", icon: "📄" }].map((a) => (
-          <button key={a.label} className="bg-card rounded-lg px-3 py-2.5 border border-border hover:shadow-warm text-left flex items-center gap-2">
+          <button key={a.label} onClick={() => router.push("/dashboard/coach")} className="bg-card rounded-lg px-3 py-2.5 border border-border hover:shadow-warm text-left flex items-center gap-2">
             <span className="text-sm">{a.icon}</span><span className="text-xs font-medium text-foreground">{a.label}</span>
           </button>
         ))}
