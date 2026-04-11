@@ -152,6 +152,26 @@ export default function HomePage() {
         </div>
       </div>
 
+      {/* DEV: Role switcher — view any role's home screen */}
+      <p className="text-[11px] font-semibold text-muted-foreground uppercase tracking-[0.08em] mb-2">Switch role view</p>
+      <div className="grid grid-cols-2 gap-2 mb-5">
+        {[
+          { label: "DON (current)", href: "/dashboard" },
+          { label: "CEO / COO", href: "/dashboard/ceo" },
+          { label: "CFO", href: "/dashboard/cfo" },
+          { label: "Clinical Director", href: "/dashboard/clinical-director" },
+          { label: "Quality Lead", href: "/dashboard/quality-lead" },
+          { label: "WHS Lead", href: "/dashboard/whs" },
+          { label: "HR / P&C", href: "/dashboard/hr" },
+          { label: "Board Member", href: "/dashboard/board" },
+          { label: "Team Leader", href: "/dashboard/team-leader" },
+        ].map((r) => (
+          <button key={r.label} onClick={() => router.push(r.href)} className="bg-card rounded-lg px-3 py-2.5 border border-border hover:shadow-warm text-left text-xs font-medium text-foreground">
+            {r.label}
+          </button>
+        ))}
+      </div>
+
       {/* 6. DAILY BRIEFING — quiet entry point */}
       <button
         onClick={() => router.push("/team-loop/briefing")}
