@@ -32,3 +32,7 @@ export { MonitoringEngine } from "./monitoring/index";
 export type { MonitorSignal } from "./monitoring/index";
 export { ExecutionLoop } from "./execution/index";
 export type { ExecutionResult } from "./execution/index";
+
+// Signal Convergence (Doc 18)
+export { ConvergenceDetector } from "./convergence/index";
+export type { ConvergenceSignal, ConvergencePanel, SignalType, SignalConfidence, Domain, DataPoint } from "./convergence/types";

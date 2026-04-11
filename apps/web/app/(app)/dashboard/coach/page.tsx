@@ -1,12 +1,144 @@
+"use client";
+
+import { useState, useRef, useEffect } from "react";
+import { Send } from "lucide-react";
+import { ChrisAvatar } from "@/components/chris/ChrisAvatar";
+
+interface Message {
+  id: string;
+  role: "user" | "assistant";
+  content: string;
+  isStreaming?: boolean;
+}
+
+const SUGGESTED_PROMPTS = [
+  "What should I focus on this week?",
+  "Help me prepare for a difficult conversation",
+  "Why is care minutes at risk today?",
+  "What's driving turnover in my team?",
+  "Help me understand the latest pulse results",
+  "I'm feeling overwhelmed — what can I let go of?",
+];
+
+const WELCOME: Message = {
+  id: "welcome",
+  role: "assistant",
+  content: "I'm here whenever you need me. I can help you think through team challenges, prepare for conversations, understand your data, or just work through what's on your mind. What's on your plate today?",
+};
+
 export default function CoachPage() {
+  const [messages, setMessages] = useState<Message[]>([WELCOME]);
+  const [input, setInput] = useState("");
+  const [streaming, setStreaming] = useState(false);
+  const endRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    endRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
+  async function send(text?: string) {
+    const msg = text ?? input.trim();
+    if (!msg || streaming) return;
+
+    const userMsg: Message = { id: `u-${Date.now()}`, role: "user", content: msg };
+    setMessages((p) => [...p, userMsg]);
+    setInput("");
+    setStreaming(true);
+
+    const aId = `a-${Date.now()}`;
+    setMessages((p) => [...p, { id: aId, role: "assistant", content: "", isStreaming: true }]);
+
+    try {
+      const res = await fetch("/api/coach/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: [...messages, userMsg].map((m) => ({ role: m.role, content: m.content })) }),
+      });
+
+      const data = res.ok ? await res.json() : null;
+      const reply = data?.response ?? "I'm here to help. Could you tell me more about what you're working through?";
+
+      setMessages((p) => p.map((m) => m.id === aId ? { ...m, content: reply, isStreaming: false } : m));
+    } catch {
+      setMessages((p) => p.map((m) => m.id === aId ? { ...m, content: "I wasn't able to connect just now. Try again in a moment.", isStreaming: false } : m));
+    }
+
+    setStreaming(false);
+  }
+
   return (
-    <div className="px-4 py-12 max-w-lg mx-auto text-center mb-24">
-      <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#1B4332] to-[#D4A017] flex items-center justify-center">
-        <span className="text-2xl text-white font-bold">C</span>
+    <div className="flex flex-col h-[calc(100vh-60px)] lg:h-screen">
+      {/* Header */}
+      <div className="px-4 py-3 border-b border-[var(--border-default)] bg-white/80 backdrop-blur-sm shrink-0">
+        <div className="max-w-2xl mx-auto flex items-center gap-3">
+          <ChrisAvatar size="small" showGlow={streaming} />
+          <div>
+            <h1 className="text-base font-semibold text-[var(--brand-forest)]">CHRIS Coach</h1>
+            <p className="text-[10px] text-gray-400">{streaming ? "Thinking..." : "Your practice support"}</p>
+          </div>
+        </div>
       </div>
-      <h2 className="text-xl font-semibold text-[#1B4332] mb-2">CHRIS Coach</h2>
-      <p className="text-sm text-gray-500">Your always-on leadership coach — ask questions, explore data, work through challenges.</p>
-      <p className="text-xs text-gray-400 mt-4">Coming with UX build</p>
+
+      {/* Messages */}
+      <div className="flex-1 overflow-y-auto px-4 py-4">
+        <div className="max-w-2xl mx-auto space-y-4">
+          {messages.map((msg) => (
+            <div key={msg.id} className={`flex gap-3 animate-slideUp ${msg.role === "user" ? "flex-row-reverse" : ""}`}>
+              {msg.role === "assistant" && <ChrisAvatar size="small" className="mt-1 shrink-0" />}
+              <div className={`max-w-[80%] rounded-2xl px-4 py-3 ${
+                msg.role === "user"
+                  ? "bg-[var(--brand-forest)] text-white rounded-br-md"
+                  : "bg-[rgba(27,67,50,0.04)] text-[var(--brand-forest)] rounded-bl-md border border-[rgba(27,67,50,0.08)]"
+              }`}>
+                <p className="text-sm leading-relaxed whitespace-pre-wrap">
+                  {msg.content}
+                  {msg.isStreaming && (
+                    <span className="inline-flex gap-1 ml-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-current animate-bounce" style={{ animationDelay: "0ms" }} />
+                      <span className="w-1.5 h-1.5 rounded-full bg-current animate-bounce" style={{ animationDelay: "150ms" }} />
+                      <span className="w-1.5 h-1.5 rounded-full bg-current animate-bounce" style={{ animationDelay: "300ms" }} />
+                    </span>
+                  )}
+                </p>
+              </div>
+            </div>
+          ))}
+          <div ref={endRef} />
+        </div>
+      </div>
+
+      {/* Suggestions */}
+      {messages.length <= 1 && (
+        <div className="px-4 pb-2 shrink-0">
+          <div className="max-w-2xl mx-auto">
+            <p className="text-[10px] font-medium text-gray-400 uppercase tracking-wider mb-2">Suggestions</p>
+            <div className="flex flex-wrap gap-2">
+              {SUGGESTED_PROMPTS.map((p) => (
+                <button key={p} onClick={() => send(p)} className="text-xs px-3 py-2 rounded-full border border-[var(--border-default)] text-[var(--brand-forest)] hover:bg-[rgba(27,67,50,0.04)] transition-colors">
+                  {p}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Input */}
+      <div className="px-4 py-3 border-t border-[var(--border-default)] bg-white shrink-0 mb-16 lg:mb-0">
+        <div className="max-w-2xl mx-auto flex gap-2">
+          <textarea
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } }}
+            placeholder="Ask CHRIS anything..."
+            rows={1}
+            className="flex-1 resize-none rounded-xl border border-[var(--border-default)] px-4 py-3 text-sm focus:outline-none focus:border-[var(--brand-teal)] focus:ring-2 focus:ring-[rgba(45,125,115,0.12)]"
+          />
+          <button onClick={() => send()} disabled={!input.trim() || streaming} className="px-4 py-3 rounded-xl text-white disabled:opacity-40 transition-opacity shrink-0" style={{ background: "var(--brand-forest)" }}>
+            <Send className="w-4 h-4" />
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
