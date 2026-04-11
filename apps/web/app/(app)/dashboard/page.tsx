@@ -51,17 +51,17 @@ function DomainRow({ domain }: { domain: DomainStatus }) {
 
 // --- Data ---
 const DOMAINS: DomainStatus[] = [
-  { name: "Clinical", status: "watch", summary: "Care minutes at risk · Day 3 · SIRS open", href: "/dashboard/clinical" },
-  { name: "Workforce", status: "watch", summary: "PSH signal detected · night team", href: "/dashboard/workforce" },
-  { name: "Governance", status: "act", summary: "SIRS submission due 6h 14m", href: "/dashboard/compliance" },
-  { name: "Operations", status: "clear", summary: "2 roster gaps — manageable", href: "/dashboard/operations" },
-  { name: "Financial", status: "clear", summary: "All clear", href: "/dashboard/financial" },
+  { name: "Clinical", status: "clear", summary: "Care minutes compliant · QIs on track · 1 SIRS Cat 2 open", href: "/dashboard/clinical" },
+  { name: "Workforce", status: "watch", summary: "PSH improving · night team to monitor", href: "/dashboard/workforce" },
+  { name: "Governance", status: "clear", summary: "SIRS draft ready for review · compliance 84", href: "/dashboard/compliance" },
+  { name: "Operations", status: "clear", summary: "RN confirmed tonight · 1 AIN gap", href: "/dashboard/operations" },
+  { name: "Financial", status: "clear", summary: "Care ratio 56% · on target", href: "/dashboard/financial" },
 ];
 
 const TOP_ACTIONS = [
-  { priority: "act" as const, label: "Review SIRS draft — 6h 14m remaining", actionLabel: "Review draft →", href: "/dashboard/sirs" },
-  { priority: "watch" as const, label: "Find RN cover for tonight", actionLabel: "Find agency cover →", href: "/dashboard/care-minutes" },
-  { priority: "watch" as const, label: "Read your Daily Briefing — 3 signals", actionLabel: "Read briefing →", href: "/team-loop/briefing" },
+  { priority: "watch" as const, label: "Review SIRS Cat 2 draft — 22 days remaining", actionLabel: "Review draft →", href: "/dashboard/sirs" },
+  { priority: "watch" as const, label: "Read your Daily Briefing — 3 signals, 1 positive", actionLabel: "Read briefing →", href: "/team-loop/briefing" },
+  { priority: "clear" as const, label: "Acknowledge Wattle Wing practice outcome — hazard reduced", actionLabel: "View outcome →", href: "/dashboard/psh" },
 ];
 
 export default function HomePage() {
@@ -79,7 +79,7 @@ export default function HomePage() {
         </div>
         <button className="relative p-2 rounded-lg hover:bg-muted transition-colors">
           <Bell className="w-5 h-5 text-foreground" />
-          <span className="absolute top-1 right-1 w-4 h-4 bg-[hsl(var(--brand-terracotta))] text-white text-[9px] font-bold rounded-full flex items-center justify-center">3</span>
+          <span className="absolute top-1 right-1 w-4 h-4 bg-[hsl(var(--brand-amber))] text-white text-[9px] font-bold rounded-full flex items-center justify-center">2</span>
         </button>
       </div>
 
@@ -90,7 +90,7 @@ export default function HomePage() {
           <div>
             <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-[0.08em] mb-2">Today's picture</p>
             <p className="text-sm text-foreground leading-relaxed font-serif-accent">
-              There's one thing that needs urgent attention today — a SIRS submission due by 2:23pm. Beyond that, care minutes have been at risk for three days and tonight's RN shift is unfilled. Your team's trust signals have been declining — your Daily Briefing goes deeper on that. Otherwise the facility is stable.
+              Good news first — Wattle Wing's practice last fortnight worked. Hazard score dropped 0.08, the strongest improvement this cycle. Care minutes recovered to compliant yesterday after the agency RN was confirmed. One thing still needs your attention — a SIRS Cat 2 submission is due in 22 days and the draft is ready for your review. Tonight's roster has one AIN gap but RN coverage is confirmed. Overall, your facility is in better shape than last week.
             </p>
           </div>
         </div>
@@ -111,9 +111,8 @@ export default function HomePage() {
           <div
             key={i}
             className={`bg-card rounded-xl p-4 border border-border border-l-4 ${
-              action.priority === "act" ? "border-l-[hsl(var(--brand-terracotta))]" : "border-l-[hsl(var(--brand-amber))]"
+              action.priority === "act" ? "border-l-[hsl(var(--brand-terracotta))]" : action.priority === "clear" ? "border-l-[hsl(var(--brand-teal))]" : "border-l-[hsl(var(--brand-amber))]"
             }`}
-            style={action.priority === "act" ? { background: "rgba(196,112,74,0.06)", boxShadow: "0 4px 24px rgba(0,0,0,0.10)" } : undefined}
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3 flex-1 min-w-0">
@@ -133,7 +132,7 @@ export default function HomePage() {
           onClick={() => router.push("/don/queue")}
           className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1 mt-1"
         >
-          4 more items in your queue <ChevronRight className="w-3 h-3" />
+          2 routine items in your queue <ChevronRight className="w-3 h-3" />
         </button>
       </div>
 
@@ -145,8 +144,8 @@ export default function HomePage() {
           <span className="text-[9px] px-1.5 py-0.5 rounded bg-muted text-muted-foreground">Workforce</span>
           <span className="text-[9px] px-1.5 py-0.5 rounded bg-muted text-muted-foreground">PSH</span>
         </div>
-        <p className="text-sm font-medium text-foreground mb-1">Night team approaching burnout threshold</p>
-        <p className="text-xs text-muted-foreground leading-relaxed mb-2">PSH_01 + PSH_08 co-elevated 3 cycles. Historically precedes WC claims within 4-6 weeks in 68% of comparable teams.</p>
+        <p className="text-sm font-medium text-foreground mb-1">Night team PSH improving — but not out of the woods</p>
+        <p className="text-xs text-muted-foreground leading-relaxed mb-2">PSH_01 improved 0.06 this cycle after practice intervention. But PSH_08 (Traumatic Exposure) remains elevated. The pattern is moving in the right direction — continued monitoring recommended to confirm the trend holds.</p>
         <div className="flex items-center gap-2">
           <button className="text-[11px] font-medium px-2.5 py-1.5 rounded-lg bg-primary text-primary-foreground hover:opacity-90">Act</button>
           <button className="text-[11px] font-medium px-2.5 py-1.5 rounded-lg border border-border text-muted-foreground hover:bg-muted">Monitor</button>
