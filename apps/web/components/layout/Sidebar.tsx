@@ -2,170 +2,86 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import {
-  Home, MessageSquare, FileText, ClipboardList, LayoutDashboard,
-  Shield, Activity, BarChart2, BookOpen, Users, DollarSign,
-  Calendar, AlertTriangle, CheckSquare, Sparkles, Heart, GraduationCap,
+  Home, FileText, ClipboardList, Shield, Activity, BarChart2,
+  Users, DollarSign, Calendar, AlertTriangle, CheckSquare,
+  Sparkles, Heart, GraduationCap, BookOpen,
 } from "lucide-react";
 import { ChrisAvatar } from "../chris/ChrisAvatar";
+import type { Role } from "@/lib/roles/types";
+import { getRoleConfig } from "@/lib/roles/config";
 
-type UserRole =
-  | "board_member" | "ceo" | "cfo" | "clinical_director" | "don"
-  | "facility_gm" | "quality_lead" | "whs_lead" | "hr_manager"
-  | "elt_member" | "team_leader" | "frontline_staff" | "operator";
+// Icon lookup from string name → component
+const ICONS: Record<string, typeof Home> = {
+  Home, FileText, ClipboardList, Shield, Activity, BarChart2,
+  Users, DollarSign, Calendar, AlertTriangle, CheckSquare,
+  Sparkles, Heart, GraduationCap, BookOpen,
+};
 
 interface SidebarProps {
   userName: string;
-  userRole: UserRole;
+  userRole: Role;
   providerName?: string;
   className?: string;
 }
 
-interface NavItem {
-  label: string;
-  href: string;
-  icon: typeof Home;
-  roles: UserRole[] | "all";
-  badge?: number;
-}
-
-interface NavSection {
-  title: string;
-  href?: string; // Domain Control Centre route
-  items: NavItem[];
-}
-
-const NAV_SECTIONS: NavSection[] = [
-  {
-    title: "OVERVIEW",
-    items: [
-      { label: "Home", href: "/dashboard", icon: Home, roles: "all" },
-      { label: "CHRIS Coach", href: "/dashboard/coach", icon: Sparkles, roles: "all" },
-    ],
-  },
-  {
-    title: "OPERATIONS",
-    href: "/dashboard/operations",
-    items: [
-      { label: "Today's Briefing", href: "/dashboard/briefing", icon: FileText, roles: ["don", "facility_gm", "ceo", "operator"] },
-      { label: "Review Queue", href: "/don/queue", icon: ClipboardList, roles: ["don", "facility_gm", "ceo", "operator"] },
-    ],
-  },
-  {
-    title: "CLINICAL",
-    href: "/dashboard/clinical",
-    items: [
-      { label: "Care Minutes", href: "/dashboard/care-minutes", icon: Activity, roles: ["don", "clinical_director", "quality_lead", "ceo", "operator"] },
-      { label: "Quality Indicators", href: "/dashboard/quality", icon: BarChart2, roles: ["don", "clinical_director", "quality_lead", "ceo", "operator"] },
-      { label: "Clinical Audits", href: "/dashboard/audits", icon: CheckSquare, roles: ["don", "clinical_director", "quality_lead", "operator"] },
-      { label: "SIRS Register", href: "/dashboard/sirs", icon: AlertTriangle, roles: ["don", "clinical_director", "quality_lead", "ceo", "operator"] },
-    ],
-  },
-  {
-    title: "WORKFORCE",
-    href: "/dashboard/workforce",
-    items: [
-      { label: "PSH Dashboard", href: "/dashboard/psh", icon: Heart, roles: ["whs_lead", "hr_manager", "don", "ceo", "operator"] },
-      { label: "Training Compliance", href: "/dashboard/training", icon: GraduationCap, roles: ["hr_manager", "don", "quality_lead", "operator"] },
-    ],
-  },
-  {
-    title: "FINANCIAL",
-    href: "/dashboard/financial",
-    items: [],
-  },
-  {
-    title: "GOVERNANCE",
-    href: "/dashboard/compliance",
-    items: [
-      { label: "Reporting Cycles", href: "/dashboard/reporting", icon: Calendar, roles: ["don", "quality_lead", "whs_lead", "hr_manager", "clinical_director", "cfo", "ceo", "operator"] },
-      { label: "Governance Packs", href: "/dashboard/packs", icon: BookOpen, roles: ["don", "quality_lead", "ceo", "cfo", "operator"] },
-      { label: "Corrective Actions", href: "/dashboard/actions", icon: CheckSquare, roles: ["don", "quality_lead", "whs_lead", "operator"] },
-    ],
-  },
-  {
-    title: "LOOPS",
-    items: [
-      { label: "Team Loop", href: "/team-loop/briefing", icon: FileText, roles: ["team_leader", "don", "facility_gm", "operator"] },
-      { label: "Team Pulse", href: "/team-loop/pulse", icon: Users, roles: ["team_leader", "don", "facility_gm", "frontline_staff", "operator"] },
-      { label: "Leader Loop", href: "/leader-loop/arrive", icon: BarChart2, roles: ["team_leader", "don", "facility_gm", "operator"] },
-    ],
-  },
-];
-
 export function Sidebar({ userName, userRole, providerName, className = "" }: SidebarProps) {
   const pathname = usePathname();
   const router = useRouter();
+  const config = getRoleConfig(userRole);
 
-  function isVisible(roles: UserRole[] | "all"): boolean {
-    if (roles === "all") return true;
-    if (userRole === "operator") return true; // Operator sees everything
-    return roles.includes(userRole);
-  }
+  // No sidebar for roles with no nav sections (board, frontline)
+  if (config.nav.sections.length === 0) return null;
 
   function isActive(href: string): boolean {
-    if (href === "/dashboard") return pathname === "/dashboard";
+    if (href === "/dashboard") return pathname === "/dashboard" || pathname === config.nav.homeRoute;
     return pathname.startsWith(href);
   }
-
-  const visibleSections = NAV_SECTIONS
-    .map((section) => ({
-      ...section,
-      items: section.items.filter((item) => isVisible(item.roles)),
-    }))
-    .filter((section) => section.items.length > 0);
 
   return (
     <aside className={`sidebar w-60 h-screen overflow-y-auto shrink-0 hidden lg:block ${className}`}>
       {/* Provider branding */}
-      <div className="px-4 py-5 border-b border-[var(--border-default)]">
+      <div className="px-4 py-5 border-b border-[hsl(var(--sidebar-border))]">
         <div className="flex items-center gap-3">
           <ChrisAvatar size="small" />
           <div className="min-w-0">
-            <p className="text-sm font-semibold text-[var(--brand-forest)] truncate">
+            <p className="text-sm font-semibold text-[hsl(var(--sidebar-foreground))] truncate">
               {providerName ?? "Culture Crunch"}
             </p>
-            <p className="text-[10px] text-gray-400 truncate">{userName}</p>
+            <p className="text-[10px] text-muted-foreground truncate">{userName} · {config.displayName}</p>
           </div>
         </div>
       </div>
 
-      {/* Navigation */}
+      {/* Navigation — driven by role config */}
       <nav className="py-3 px-2">
-        {visibleSections.map((section) => (
+        {config.nav.sections.map((section) => (
           <div key={section.title} className="mb-4">
             {section.href ? (
               <button
                 onClick={() => router.push(section.href!)}
-                className={`px-3 mb-1 text-[10px] font-semibold uppercase tracking-widest w-full text-left hover:text-[var(--brand-forest)] transition-colors ${
-                  pathname.startsWith(section.href) ? "text-[var(--brand-forest)]" : "text-gray-400"
+                className={`px-3 mb-1 text-[10px] font-semibold uppercase tracking-[0.08em] w-full text-left hover:text-[hsl(var(--sidebar-foreground))] transition-colors ${
+                  pathname.startsWith(section.href) ? "text-[hsl(var(--sidebar-foreground))]" : "text-muted-foreground"
                 }`}
               >
                 {section.title} →
               </button>
             ) : (
-              <p className="px-3 mb-1 text-[10px] font-semibold text-gray-400 uppercase tracking-widest">
+              <p className="px-3 mb-1 text-[10px] font-semibold text-muted-foreground uppercase tracking-[0.08em]">
                 {section.title}
               </p>
             )}
             {section.items.map((item) => {
               const active = isActive(item.href);
-              const Icon = item.icon;
+              const Icon = ICONS[item.icon] ?? Home;
 
               return (
                 <button
                   key={item.href}
                   onClick={() => router.push(item.href)}
-                  className={`sidebar-item w-full flex items-center gap-2.5 rounded-lg text-left ${
-                    active ? "sidebar-item-active" : ""
-                  }`}
+                  className={`sidebar-item w-full flex items-center gap-2.5 rounded-lg text-left ${active ? "sidebar-item-active" : ""}`}
                 >
                   <Icon className="w-4 h-4 shrink-0" />
                   <span className="truncate">{item.label}</span>
-                  {item.badge !== undefined && item.badge > 0 && (
-                    <span className="ml-auto text-[10px] font-bold bg-[var(--brand-terracotta)] text-white w-5 h-5 flex items-center justify-center rounded-full">
-                      {item.badge}
-                    </span>
-                  )}
                 </button>
               );
             })}
