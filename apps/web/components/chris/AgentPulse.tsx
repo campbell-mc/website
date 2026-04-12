@@ -17,6 +17,7 @@ const DOMAIN_AGENTS: Record<string, string[]> = {
   governance: ['Sentinel', 'Chronicler'],
   residents: ['Sentinel', 'Chronicler', 'Oracle'],
   loops: ['Keeper', 'Sentinel'],
+  all: ['Sentinel', 'Oracle', 'Steward', 'Chronicler', 'Keeper', 'Town Crier'],
 };
 
 const STATUS_DOT: Record<AgentStatus, string> = {

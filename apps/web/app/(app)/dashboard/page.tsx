@@ -5,6 +5,7 @@ import { Bell, ChevronRight, Sparkles, Mic, MoreHorizontal } from "lucide-react"
 import { ChrisAvatar } from "@/components/chris/ChrisAvatar";
 import { todays_picture, facility, psh_cycles } from "@/lib/seed-data";
 import { OperationalFinancialPanel } from "@/components/financial/OperationalFinancialPanel";
+import { AgentPulse } from "@/components/chris/AgentPulse";
 
 // ============================================================================
 // HOME SCREEN — Today's Briefing
@@ -139,6 +140,8 @@ export default function HomePage() {
           </div>
         </div>
       </div>
+
+      <AgentPulse domain="all" />
 
       {/* 3. DOMAIN STATUS STRIP */}
       <p className="text-[11px] font-semibold text-muted-foreground uppercase tracking-[0.08em] mb-2">Across your domains</p>
