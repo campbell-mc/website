@@ -26,6 +26,16 @@ const STATUS_DOT: Record<AgentStatus, string> = {
   idle: 'bg-[#9CA3AF]',
 };
 
+// Each agent gets its own colour identity
+const AGENT_COLORS: Record<string, { dot: string; text: string }> = {
+  Sentinel:   { dot: '#1B4332', text: '#1B4332' },  // deep forest
+  Oracle:     { dot: '#2D7D73', text: '#2D7D73' },  // teal
+  Steward:    { dot: '#6BAF92', text: '#4A8C6F' },  // sage green
+  Chronicler: { dot: '#D4A017', text: '#B8900F' },  // amber gold
+  Keeper:     { dot: '#C4704A', text: '#C4704A' },  // terracotta
+  'Town Crier': { dot: '#7C5CBF', text: '#7C5CBF' }, // purple
+};
+
 interface AgentPulseProps {
   domain: keyof typeof DOMAIN_AGENTS;
 }
@@ -78,11 +88,15 @@ function AgentPill({ agent, onAction }: { agent: AgentState; onAction?: () => vo
   const isAwaiting = agent.status === 'awaiting_action';
   const isActive = agent.status === 'active';
   const lastAction = agent.last_action.length > 50 ? agent.last_action.substring(0, 47) + '...' : agent.last_action;
+  const colors = AGENT_COLORS[agent.name] ?? { dot: '#1B4332', text: '#1B4332' };
 
   return (
     <div className={`flex items-center gap-2 shrink-0 mx-3 ${isAwaiting ? 'bg-[rgba(212,160,23,0.1)] rounded-full px-3 py-1' : ''}`}>
-      <span className={`w-2 h-2 rounded-full shrink-0 ${STATUS_DOT[agent.status]} ${isActive ? 'animate-pulse' : ''}`} />
-      <span className="text-[11px] font-semibold uppercase tracking-wider text-[#1B4332] whitespace-nowrap">
+      <span
+        className={`w-2.5 h-2.5 rounded-full shrink-0 ${isActive ? 'animate-pulse' : ''}`}
+        style={{ backgroundColor: isAwaiting ? '#D4A017' : colors.dot }}
+      />
+      <span className="text-[11px] font-semibold uppercase tracking-wider whitespace-nowrap" style={{ color: colors.text }}>
         {agent.name}
       </span>
       <span className="text-[11px] text-[#6B7280] whitespace-nowrap">{lastAction}</span>
