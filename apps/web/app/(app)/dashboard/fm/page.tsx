@@ -6,6 +6,7 @@ import { ChrisAvatar } from "@/components/chris/ChrisAvatar";
 import { todays_picture, facility, financial_monthly, workforce_monthly, compliance_obligations, corrective_actions, resident_intelligence } from "@/lib/seed-data";
 import { currentMetrics, fmtK, BENCHMARKS } from "@/lib/financial-benchmarks";
 import { OperationalFinancialPanel } from "@/components/financial/OperationalFinancialPanel";
+import { AgentPulse } from "@/components/chris/AgentPulse";
 
 // ============================================================================
 // FACILITY MANAGER HOME — Integrated operational picture
@@ -115,6 +116,8 @@ export default function FMHomePage() {
       </div>
 
       {/* 3. DOMAIN STATUS STRIP — 5 domains */}
+      <AgentPulse domain="all" />
+
       <p className="text-[11px] font-semibold text-muted-foreground uppercase tracking-[0.08em] mb-2">Across your domains</p>
       <div className="bg-card rounded-xl border border-border overflow-hidden mb-5">
         {DOMAINS.map((d) => {

@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { Bell, ChevronRight, Sparkles, Mic } from "lucide-react";
 import { ChrisAvatar } from "../chris/ChrisAvatar";
+import { AgentPulse } from "../chris/AgentPulse";
 
 // ============================================================================
 // RoleHomeScreen — Reusable home screen template for every role
@@ -71,6 +72,8 @@ export function RoleHomeScreen({ config, children }: { config: RoleHomeConfig; c
           <p className="text-sm text-foreground leading-relaxed font-serif-accent">{config.todaysPicture}</p>
         </div>
       </div>
+
+      <AgentPulse domain="all" />
 
       {/* 3. DOMAIN STATUS STRIP */}
       <p className="text-[11px] font-semibold text-muted-foreground uppercase tracking-[0.08em] mb-2">Across your domains</p>
