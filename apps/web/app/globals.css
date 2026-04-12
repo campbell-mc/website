@@ -433,7 +433,7 @@ button:active { transform: scale(0.98); }
   100% { transform: translateX(-50%); }
 }
 .animate-agent-scroll {
-  animation: agent-scroll 30s linear infinite;
+  animation: agent-scroll 45s linear infinite;
   width: max-content;
 }
 .animate-agent-scroll:hover {
