@@ -15,6 +15,7 @@ import { getRoleConfig } from "@/lib/roles/config";
 import { resolveNavSections, isWeeklyLoops, getActiveLoopWeek, type NavSection, type NavItem, type WeeklyLoopSection } from "@/lib/roles/nav-registry";
 import { useFacility } from "@/lib/context/facility";
 import { getLabel } from "@/lib/care-type/labels";
+import { queue_summary, section_alerts } from "@/lib/seed-data";
 
 const ICONS: Record<string, typeof Home> = {
   Home, FileText, ClipboardList, Shield, Activity, BarChart2,
@@ -115,9 +116,13 @@ export function Sidebar({ userName, userRole, providerName, className = "", mobi
     if (mobile && onClose) onClose();
   }
 
+  // Queue badge for Review Queue item
+  const queueData = queue_summary[userRole as keyof typeof queue_summary];
+
   function renderNavItem(item: NavItem) {
     const active = isActive(item.href);
     const Icon = ICONS[item.icon] ?? Home;
+    const isQueue = item.label === "Review Queue";
     return (
       <button
         key={item.href}
@@ -125,7 +130,16 @@ export function Sidebar({ userName, userRole, providerName, className = "", mobi
         className={`sidebar-item w-full flex items-center gap-2.5 rounded-lg text-left ${active ? "sidebar-item-active" : ""}`}
       >
         <Icon className="w-4 h-4 shrink-0" />
-        <span className="truncate">{item.label}</span>
+        <span className="truncate flex-1">{item.label}</span>
+        {isQueue && queueData && queueData.count > 0 && (
+          <span className={`ml-auto min-w-[20px] h-5 px-1.5 rounded-full flex items-center justify-center text-white text-[11px] font-bold ${
+            queueData.highestSeverity === 'immediate' ? 'bg-[#EF4444] animate-pulse' :
+            queueData.highestSeverity === 'urgent' ? 'bg-[#D4A017]' :
+            'bg-[#6B7280]'
+          }`}>
+            {queueData.count > 99 ? '99+' : queueData.count}
+          </span>
+        )}
       </button>
     );
   }
@@ -134,6 +148,9 @@ export function Sidebar({ userName, userRole, providerName, className = "", mobi
     const isOpen = section.alwaysOpen || expanded[section.title];
     const SectionIcon = SECTION_ICONS[section.title];
     const sectionActive = section.href ? pathname.startsWith(section.href) : section.items.some((item) => pathname.startsWith(item.href) && item.href !== "/dashboard");
+    // Alert dot — show if this section has pending items
+    const sectionKey = section.title.toLowerCase().replace(/ & /g, '_').replace(/ /g, '_');
+    const hasAlert = !section.alwaysOpen && section_alerts[sectionKey];
 
     return (
       <div key={section.title} className="mb-1">
@@ -159,6 +176,7 @@ export function Sidebar({ userName, userRole, providerName, className = "", mobi
               >
                 {SectionIcon && <SectionIcon className="w-4 h-4 shrink-0" />}
                 <span className="truncate">{section.title.charAt(0) + section.title.slice(1).toLowerCase()}</span>
+                {hasAlert && !isOpen && <span className="w-1.5 h-1.5 rounded-full bg-[#EF4444] shrink-0" />}
               </button>
               {/* Chevron toggle — expands sub-items */}
               <button

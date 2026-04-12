@@ -30,6 +30,7 @@ const NAV_SECTIONS: Record<string, NavSection | WeeklyLoopSection> = {
     alwaysOpen: true,
     items: [
       { label: "Home", href: "/dashboard", icon: "Home" },
+      { label: "Review Queue", href: "/don/queue", icon: "ClipboardList" },
       { label: "CHRIS Coach", href: "/dashboard/coach", icon: "Sparkles" },
       { label: "Agents", href: "/dashboard/agents", icon: "Activity" },
       { label: "iMessage Demo", href: "/dashboard/demo/imessage", icon: "FileText" },
@@ -39,7 +40,7 @@ const NAV_SECTIONS: Record<string, NavSection | WeeklyLoopSection> = {
     title: "OPERATIONS",
     href: "/dashboard/operations",
     items: [
-      { label: "Review Queue", href: "/don/queue", icon: "ClipboardList" },
+      { label: "Rostering", href: "/dashboard/workforce/roster", icon: "Calendar" },
       { label: "Handovers", href: "/dashboard/operations/handovers", icon: "FileText" },
       { label: "Incidents", href: "/dashboard/operations/incidents", icon: "AlertTriangle" },
     ],
@@ -81,7 +82,6 @@ const NAV_SECTIONS: Record<string, NavSection | WeeklyLoopSection> = {
       { label: "PSH Dashboard", href: "/dashboard/psh", icon: "Heart" },
       { label: "Team Pulse", href: "/team-loop/pulse", icon: "Users" },
       { label: "Training", href: "/dashboard/training", icon: "GraduationCap" },
-      { label: "Roster", href: "/dashboard/workforce/roster", icon: "Calendar" },
     ],
   },
   psh: {

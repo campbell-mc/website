@@ -1152,6 +1152,31 @@ export const agent_activity: AgentState[] = [
   },
 ];
 
+// Queue items for badge count on Review Queue nav item
+export const queue_summary = {
+  don: { count: 5, highestSeverity: 'immediate' as const },
+  facility_manager: { count: 7, highestSeverity: 'urgent' as const },
+  ceo: { count: 2, highestSeverity: 'routine' as const },
+  cfo: { count: 3, highestSeverity: 'urgent' as const },
+  quality_lead: { count: 4, highestSeverity: 'urgent' as const },
+  whs_lead: { count: 2, highestSeverity: 'routine' as const },
+  hr_manager: { count: 1, highestSeverity: 'routine' as const },
+  clinical_director: { count: 2, highestSeverity: 'routine' as const },
+  team_leader: { count: 1, highestSeverity: 'routine' as const },
+  board_member: { count: 1, highestSeverity: 'routine' as const },
+};
+
+// Sections with pending alerts (for dot indicator on collapsed sections)
+export const section_alerts: Record<string, boolean> = {
+  clinical: true,    // SIRS Cat 1 pending
+  operations: true,  // RN gap tonight
+  governance: true,  // corrective action overdue
+  workforce: false,
+  financial: false,
+  residents: true,   // care plan overdue
+  loops: false,
+};
+
 export const agent_activity_log = [
   { time: '07:30', agent: 'Sentinel', action: 'Flagged RN gap tonight — DON notified via iMessage', status: 'delivered' as const },
   { time: '06:47', agent: 'Sentinel', action: 'Morning scan complete — care minutes compliant, 0 immediate findings', status: 'success' as const },
@@ -1212,6 +1237,8 @@ export default {
   todays_picture,
   resident_intelligence,
   home_care_data,
+  queue_summary,
+  section_alerts,
   agent_activity,
   agent_activity_log,
   coordination_log,
