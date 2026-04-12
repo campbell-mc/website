@@ -1,5 +1,6 @@
 "use client";
 import { RoleHomeScreen, type RoleHomeConfig } from "@/components/dashboard/RoleHomeScreen";
+import { ComplianceFinancialPanel } from "@/components/financial/ComplianceFinancialPanel";
 
 const config: RoleHomeConfig = {
   greeting: "Good morning, Lisa",
@@ -26,4 +27,10 @@ const config: RoleHomeConfig = {
   queueCount: 2, queueHref: "/don/queue", notificationCount: 1,
 };
 
-export default function QualityLeadHome() { return <RoleHomeScreen config={config} />; }
+export default function QualityLeadHome() {
+  return (
+    <RoleHomeScreen config={config}>
+      <ComplianceFinancialPanel />
+    </RoleHomeScreen>
+  );
+}

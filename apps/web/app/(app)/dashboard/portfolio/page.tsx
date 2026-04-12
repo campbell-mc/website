@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ChevronLeft, ChevronRight, Mic, FileText, AlertTriangle, MessageSquare, MoreHorizontal, CheckCircle, Sparkles } from "lucide-react";
 import { ChrisAvatar } from "@/components/chris/ChrisAvatar";
+import { facility, governance_packs, workforce_monthly, financial_monthly, compliance_obligations } from "@/lib/seed-data";
+import { ALL_FACILITIES, portfolio_summary } from "@/lib/seed-facilities";
 
 function ActionCard({ urgency, icon, title, chris, actionLabel, onAction, deadline, meta }: {
   urgency: "critical" | "warning" | "info" | "positive"; icon: React.ReactNode; title: string;
@@ -31,14 +33,13 @@ function ActionCard({ urgency, icon, title, chris, actionLabel, onAction, deadli
   );
 }
 
-const FACILITIES = [
-  { name: "The Holy Grail Bowral", type: "Residential · 137 beds", status: "ok" as const, summary: "Care min compliant · Wattle Wing PSH improving · 1 SIRS Cat 2 open", signals: 2 },
-  { name: "The Holy Grail Goulburn", type: "Residential · 96 beds", status: "ok" as const, summary: "All compliant · 1 team PSH_01 elevated · compliance 88", signals: 1 },
-  { name: "The Holy Grail Young", type: "Residential · 72 beds", status: "warn" as const, summary: "Care min at risk · RN gap 2 days · 2 teams PSH elevated", signals: 2 },
-  { name: "The Holy Grail Temora", type: "Residential · 60 beds", status: "warn" as const, summary: "SIRS Cat 2 draft ready · 18 days remaining · compliance 91", signals: 1 },
-  { name: "KHG Home Care Southern Highlands", type: "Home Care · 48 packages", status: "ok" as const, summary: "46 active packages · compliance 94 · all clear", signals: 0 },
-  { name: "KHG Home Care Goulburn", type: "Home Care · 36 packages", status: "ok" as const, summary: "34 active packages · compliance 89 · all clear", signals: 0 },
-];
+const FACILITIES = ALL_FACILITIES.map((f) => ({
+  name: f.name,
+  type: f.type === "residential" ? `Residential · ${f.beds} beds` : `Home Care · ${f.packages} packages`,
+  status: f.status === "critical" ? "warn" as const : f.status as "ok" | "warn",
+  summary: f.summary,
+  signals: f.signals,
+}));
 
 export default function PortfolioDashboard() {
   const router = useRouter();
@@ -49,7 +50,7 @@ export default function PortfolioDashboard() {
       <div className="flex items-center justify-between mb-5">
         <div className="flex items-center gap-2">
           <button onClick={() => router.push("/dashboard")} className="p-1 -ml-1 hover:bg-muted rounded-lg"><ChevronLeft className="w-5 h-5 text-foreground" /></button>
-          <div><p className="text-[28px] font-bold text-foreground tracking-tight leading-tight">Portfolio Command</p><p className="text-[10px] text-muted-foreground">Knights of the Holy Grail · 4 residential · 2 home care · 365 beds · 84 HCP</p></div>
+          <div><p className="text-[28px] font-bold text-foreground tracking-tight leading-tight">Portfolio Command</p><p className="text-[10px] text-muted-foreground">{facility.provider_name} · 4 residential · 2 home care · 365 beds · 84 HCP</p></div>
         </div>
         <button onClick={() => router.push("/dashboard/coach")} className="flex items-center gap-1.5 text-xs font-medium px-3 py-2 rounded-lg border border-border text-foreground hover:bg-muted"><Mic className="w-3.5 h-3.5" /> Ask CHRIS</button>
       </div>
@@ -109,7 +110,7 @@ export default function PortfolioDashboard() {
         {[
           { label: "Care min", value: "100%", ok: true },
           { label: "SIRS Cat 1", value: "0", ok: true },
-          { label: "Compliance", value: "87", ok: true },
+          { label: "Compliance", value: `${compliance_obligations.filter((o) => o.status === "compliant").length}/${compliance_obligations.length}`, ok: true },
         ].map((m) => (
           <div key={m.label} className="bg-card rounded-lg px-3 py-2 border border-border flex-1 text-center">
             <p className="text-base font-bold text-[hsl(var(--brand-teal))]">{m.value}</p>

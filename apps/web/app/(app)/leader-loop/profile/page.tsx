@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ChevronLeft, ChevronDown, ChevronUp, Sparkles } from "lucide-react";
 import { ChrisAvatar } from "@/components/chris/ChrisAvatar";
@@ -99,7 +99,7 @@ const COMPETENCIES = [
   },
 ];
 
-export default function LeaderLoop360Profile() {
+function LeaderLoop360ProfileContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const emotion = searchParams.get("emotion") ?? "Curious";
@@ -265,5 +265,13 @@ export default function LeaderLoop360Profile() {
         </button>
       </div>
     </div>
+  );
+}
+
+export default function LeaderLoop360Profile() {
+  return (
+    <Suspense fallback={<div className="p-6 text-center text-muted-foreground">Loading...</div>}>
+      <LeaderLoop360ProfileContent />
+    </Suspense>
   );
 }

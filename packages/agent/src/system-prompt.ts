@@ -1,7 +1,7 @@
 // ============================================================================
 // CHRIS Agent System Prompt
 // The autonomous intelligence that runs the aged care facility.
-// Adapted from Prism's Shepherd — same architecture, aged care domain.
+// Adapted from Prism's Sentinel — same architecture, aged care domain.
 // ============================================================================
 
 export function buildSystemPrompt(facilityName: string, providerName: string): string {

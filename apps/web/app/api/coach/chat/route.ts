@@ -5,15 +5,15 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { getCoachPersona } from "@/lib/roles/coach-personas";
-import type { CoachPersona } from "@/lib/roles/types";
+import type { RoleName } from "@/lib/roles/config";
 
 export async function POST(request: NextRequest) {
-  const { messages, persona } = await request.json() as {
+  const { messages, role } = await request.json() as {
     messages: Array<{ role: string; content: string }>;
-    persona?: CoachPersona;
+    role?: RoleName;
   };
 
-  const systemPrompt = getCoachPersona(persona ?? "operational");
+  const systemPrompt = getCoachPersona(role ?? "don");
   const apiKey = process.env.ANTHROPIC_API_KEY;
 
   if (!apiKey || apiKey === "sk-ant-your-key-here") {

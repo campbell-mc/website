@@ -1,11 +1,11 @@
 "use client";
 
-import type { Role, FeatureAccess } from "@/lib/roles/types";
-import { getRoleConfig } from "@/lib/roles/config";
+import type { RoleName, FeatureAccess } from "@/lib/roles/config";
+import { getRoleConfig, hasFeatureAccess } from "@/lib/roles/config";
 
 interface FeatureGateProps {
-  feature: string;
-  role: Role;
+  feature: keyof ReturnType<typeof getRoleConfig>['features'];
+  role: RoleName;
   children: React.ReactNode;
   fallback?: React.ReactNode;
 }
@@ -20,8 +20,7 @@ interface FeatureGateProps {
  * 'hidden' — renders nothing
  */
 export function FeatureGate({ feature, role, children, fallback }: FeatureGateProps) {
-  const config = getRoleConfig(role);
-  const access: FeatureAccess = config.features[feature] ?? "hidden";
+  const access = hasFeatureAccess(role, feature);
 
   if (access === "hidden") return null;
 
@@ -39,15 +38,14 @@ export function FeatureGate({ feature, role, children, fallback }: FeatureGatePr
 /**
  * Hook for checking feature access in logic (not just rendering).
  */
-export function useFeatureAccess(feature: string, role: Role): FeatureAccess {
-  const config = getRoleConfig(role);
-  return config.features[feature] ?? "hidden";
+export function useFeatureAccess(feature: keyof ReturnType<typeof getRoleConfig>['features'], role: RoleName): FeatureAccess {
+  return hasFeatureAccess(role, feature);
 }
 
 /**
  * Check if CHRIS Coach should be shown for this role.
  */
-export function shouldShowCoach(role: Role): boolean {
+export function shouldShowCoach(role: RoleName): boolean {
   const config = getRoleConfig(role);
-  return config.chrisCoach.persona !== "readonly";
+  return config.chris_coach.enabled;
 }

@@ -45,7 +45,7 @@ export interface RoleHomeConfig {
   notificationCount?: number;
 }
 
-export function RoleHomeScreen({ config }: { config: RoleHomeConfig }) {
+export function RoleHomeScreen({ config, children }: { config: RoleHomeConfig; children?: React.ReactNode }) {
   const router = useRouter();
 
   return (
@@ -144,22 +144,10 @@ export function RoleHomeScreen({ config }: { config: RoleHomeConfig }) {
         </div>
       )}
 
-      {/* 6. BRIEFING */}
-      {config.briefing && (
-        <button
-          onClick={() => router.push(config.briefing!.href)}
-          className="w-full bg-card rounded-xl p-4 border border-border hover:shadow-warm transition-shadow text-left flex items-center justify-between mb-16"
-        >
-          <div className="flex items-center gap-3">
-            <Sparkles className="w-4 h-4 text-[hsl(var(--brand-amber))]" />
-            <div>
-              <p className="text-sm font-medium text-foreground">{config.briefing.label}</p>
-              <p className="text-[10px] text-muted-foreground">{config.briefing.sub}</p>
-            </div>
-          </div>
-          <ChevronRight className="w-4 h-4 text-muted-foreground" />
-        </button>
-      )}
+      {/* 5.5 ROLE-SPECIFIC FINANCIAL SECTION */}
+      {children && <div className="mb-5">{children}</div>}
+
+      <div className="h-16" />
     </div>
   );
 }

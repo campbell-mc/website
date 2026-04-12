@@ -3,6 +3,12 @@
 import { useRouter } from "next/navigation";
 import { ChevronLeft, Mic, AlertTriangle, Clock, CheckCircle, MoreHorizontal } from "lucide-react";
 import { ChrisAvatar } from "@/components/chris/ChrisAvatar";
+import { sirs_events, facility } from "@/lib/seed-data";
+
+const openEvents = sirs_events.filter((e) => e.status !== "closed");
+const closedEvents = sirs_events.filter((e) => e.status === "closed");
+const cat1Open = openEvents.filter((e) => e.category === 1).length;
+const cat2Open = openEvents.filter((e) => e.category === 2).length;
 
 export default function SIRSPage() {
   const router = useRouter();
@@ -17,7 +23,7 @@ export default function SIRSPage() {
           </button>
           <div>
             <p className="text-[28px] font-bold text-foreground tracking-tight leading-tight">SIRS Register</p>
-            <p className="text-[10px] text-muted-foreground">The Holy Grail Bowral · Aged Care Act 2024</p>
+            <p className="text-[10px] text-muted-foreground">{facility.name} · Aged Care Act 2024</p>
           </div>
         </div>
         <button className="flex items-center gap-1.5 text-xs font-medium px-3 py-2 rounded-lg border border-border text-foreground hover:bg-muted">
@@ -28,52 +34,48 @@ export default function SIRSPage() {
       {/* Status strip */}
       <div className="flex gap-2 mb-4">
         <div className="bg-card rounded-lg px-3 py-2 border border-border flex-1 text-center">
-          <p className="text-lg font-bold text-[hsl(var(--brand-terracotta))]">0</p>
+          <p className="text-lg font-bold text-[hsl(var(--brand-terracotta))]">{cat1Open}</p>
           <p className="text-[9px] text-muted-foreground">Open Cat 1</p>
         </div>
         <div className="bg-card rounded-lg px-3 py-2 border border-border flex-1 text-center">
-          <p className="text-lg font-bold text-[hsl(var(--brand-amber))]">1</p>
+          <p className="text-lg font-bold text-[hsl(var(--brand-amber))]">{cat2Open}</p>
           <p className="text-[9px] text-muted-foreground">Open Cat 2</p>
         </div>
         <div className="bg-card rounded-lg px-3 py-2 border border-border flex-1 text-center">
-          <p className="text-lg font-bold text-[hsl(var(--brand-teal))]">2</p>
-          <p className="text-[9px] text-muted-foreground">Closed 90d</p>
+          <p className="text-lg font-bold text-[hsl(var(--brand-teal))]">{closedEvents.length}</p>
+          <p className="text-[9px] text-muted-foreground">Closed YTD</p>
         </div>
       </div>
 
-      {/* OPEN ITEMS — each is an action card */}
+      {/* OPEN ITEMS */}
       <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-[0.08em] mb-2">Open items</p>
 
-      {/* Cat 2 — open */}
-      <div className="bg-card rounded-xl p-4 shadow-warm border border-border border-l-4 border-l-[hsl(var(--brand-amber))] mb-3">
-        <div className="flex items-center justify-between mb-2">
-          <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-[hsl(var(--brand-amber)/0.12)] text-[hsl(var(--brand-amber))]">Category 2 · 30 day</span>
-          <span className="text-xs text-muted-foreground font-mono">22 days remaining</span>
-        </div>
-        <div className="flex items-start gap-3 mb-3">
-          <ChrisAvatar size="small" className="shrink-0 mt-0.5" />
-          <div>
-            <p className="text-sm text-foreground leading-relaxed mb-1">
-              Fall with hip fracture — Wing A resident. Reported 8 days ago. CHRIS draft is ready. You need to add resident details and approve before submission.
-            </p>
-            <p className="text-[10px] text-muted-foreground">Incident: 3 Apr · Reported: 3 Apr · Deadline: 3 May</p>
+      {openEvents.length > 0 ? openEvents.map((evt) => (
+        <div key={evt.id} className="bg-card rounded-xl p-4 shadow-warm border border-border border-l-4 border-l-[hsl(var(--brand-amber))] mb-3">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-[hsl(var(--brand-amber)/0.12)] text-[hsl(var(--brand-amber))]">Category {evt.category} · {evt.category === 1 ? "24h" : "30 day"}</span>
+            <span className="text-xs text-muted-foreground font-mono">{Math.max(0, Math.ceil((new Date(evt.deadline).getTime() - Date.now()) / 86400000))} days remaining</span>
+          </div>
+          <div className="flex items-start gap-3 mb-3">
+            <ChrisAvatar size="small" className="shrink-0 mt-0.5" />
+            <div>
+              <p className="text-sm text-foreground leading-relaxed mb-1">
+                {evt.incident_type.replace(/_/g, " ")} — {evt.wing}. CHRIS draft is ready for review.
+              </p>
+              <p className="text-[10px] text-muted-foreground">Incident: {evt.incident_date} · Deadline: {evt.deadline}</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <button onClick={() => router.push(`/dashboard/sirs/${evt.id}`)} className="text-xs font-medium px-3 py-2 rounded-lg bg-primary text-primary-foreground hover:opacity-90">Review draft →</button>
+            <button className="text-xs text-muted-foreground hover:text-foreground p-1.5 rounded-lg hover:bg-muted"><MoreHorizontal className="w-4 h-4" /></button>
           </div>
         </div>
-        <div className="flex items-center gap-2">
-          <button onClick={() => router.push("/dashboard/sirs/cat2-hip")} className="text-xs font-medium px-3 py-2 rounded-lg bg-primary text-primary-foreground hover:opacity-90">
-            Review draft →
-          </button>
-          <button className="text-xs text-muted-foreground hover:text-foreground p-1.5 rounded-lg hover:bg-muted">
-            <MoreHorizontal className="w-4 h-4" />
-          </button>
+      )) : (
+        <div className="bg-card rounded-xl p-4 border border-border mb-6 text-center">
+          <CheckCircle className="w-5 h-5 text-[hsl(var(--brand-teal))] mx-auto mb-1" />
+          <p className="text-xs text-muted-foreground">No open SIRS items. All {sirs_events.length} events this period submitted on time. Average days to submit: {Math.round(sirs_events.reduce((sum, e) => sum + (e.days_to_submit || 0), 0) / sirs_events.length)}.</p>
         </div>
-      </div>
-
-      {/* No more open items message */}
-      <div className="bg-card rounded-xl p-4 border border-border mb-6 text-center">
-        <CheckCircle className="w-5 h-5 text-[hsl(var(--brand-teal))] mx-auto mb-1" />
-        <p className="text-xs text-muted-foreground">No Category 1 items open. All Cat 1 deadlines met.</p>
-      </div>
+      )}
 
       {/* CHRIS cross-domain signal */}
       <div className="bg-card rounded-xl p-4 shadow-warm border border-border mb-4">
@@ -83,8 +85,8 @@ export default function SIRSPage() {
           <span className="text-[9px] px-1.5 py-0.5 rounded bg-muted text-muted-foreground">Clinical</span>
           <span className="text-[9px] px-1.5 py-0.5 rounded bg-muted text-muted-foreground">Workforce</span>
         </div>
-        <p className="text-sm font-medium text-foreground mb-1">SIRS cluster on agency shifts — pattern, not systemic failure</p>
-        <p className="text-xs text-muted-foreground leading-relaxed mb-2">2 of 3 SIRS incidents this quarter occurred on afternoon shifts with &gt;35% agency coverage. Permanent staff shifts: zero SIRS events. This is an agency onboarding gap presenting as a SIRS risk.</p>
+        <p className="text-sm font-medium text-foreground mb-1">SIRS cluster on agency shifts — workforce-clinical convergence</p>
+        <p className="text-xs text-muted-foreground leading-relaxed mb-2">{sirs_events.filter((e) => e.agency_shift).length} of {sirs_events.length} SIRS events occurred on shifts with agency coverage. Wing B bathroom falls pattern: 3 of 5 Wing B falls occurred in bathrooms on high-agency shifts. Agency onboarding corrective action from SIRS-003 is still in progress.</p>
         <div className="flex items-center gap-2">
           <button className="text-[11px] font-medium px-2.5 py-1.5 rounded-lg bg-primary text-primary-foreground hover:opacity-90">Add to corrective action →</button>
           <button className="text-[11px] text-muted-foreground hover:text-foreground">Not relevant</button>
@@ -92,18 +94,15 @@ export default function SIRSPage() {
       </div>
 
       {/* CLOSED — compact */}
-      <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-[0.08em] mb-2">Closed — last 90 days</p>
-      {[
-        { type: "Fall with injury", date: "15 Mar", ref: "SIRS-2026-0412", outcome: "Corrective action complete" },
-        { type: "Medication error", date: "28 Feb", ref: "SIRS-2026-0389", outcome: "Process updated" },
-      ].map((item) => (
-        <div key={item.ref} className="bg-card rounded-lg px-4 py-3 border border-border mb-2 flex items-center justify-between">
+      <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-[0.08em] mb-2">Closed — YTD ({closedEvents.length})</p>
+      {closedEvents.map((evt) => (
+        <button key={evt.id} onClick={() => router.push(`/dashboard/sirs/${evt.id}`)} className="w-full bg-card rounded-lg px-4 py-3 border border-border mb-2 flex items-center justify-between hover:bg-muted/50 text-left">
           <div>
-            <p className="text-xs font-medium text-foreground">{item.type} · {item.date}</p>
-            <p className="text-[10px] text-muted-foreground">{item.ref} · {item.outcome}</p>
+            <p className="text-xs font-medium text-foreground">{evt.incident_type.replace(/_/g, " ")} · {evt.incident_date} · {evt.wing}</p>
+            <p className="text-[10px] text-muted-foreground">{evt.id} · Submitted {evt.submitted_date} ({evt.days_to_submit}d){evt.agency_shift ? " · Agency shift" : ""}</p>
           </div>
           <CheckCircle className="w-4 h-4 text-[hsl(var(--brand-teal))] shrink-0" />
-        </div>
+        </button>
       ))}
 
       {/* Quick actions */}

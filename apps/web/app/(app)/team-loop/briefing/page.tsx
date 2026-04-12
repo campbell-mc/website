@@ -287,6 +287,11 @@ export default function TeamBriefingPage() {
             <p className="text-[10px] text-muted-foreground text-center mt-2">
               Added to your action log · included in next Team Briefing · CHRIS will measure the outcome
             </p>
+            <div className="mt-3 p-3 rounded-lg" style={{ background: "rgba(27,67,50,0.05)" }}>
+              <p className="text-[11px] text-muted-foreground leading-relaxed text-center italic">
+                Your team&apos;s recognition scores have improved for 2 cycles. Teams with sustained improvement show 40% lower turnover in comparable facilities. Your leadership is having a real financial impact.
+              </p>
+            </div>
           </div>
         )}
       </div>

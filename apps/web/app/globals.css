@@ -232,9 +232,40 @@ p {
 }
 
 /* ============================================================================
-   Status Cards
+   URGENCY SYSTEM — consistent across all cards, alerts, badges, actions
    ============================================================================ */
 
+/* IMMEDIATE — terracotta, 6px border, warm cream bg */
+.urgency-immediate {
+  border-left: 6px solid #C4704A;
+  background: #FEF7F0;
+  box-shadow: 0 2px 8px rgba(196, 112, 74, 0.15);
+}
+.badge-immediate { background: #C4704A; color: white; }
+
+/* URGENT — amber, 6px border, warm yellow bg */
+.urgency-urgent {
+  border-left: 6px solid #D4A017;
+  background: #FFFBF0;
+  box-shadow: 0 2px 8px rgba(212, 160, 23, 0.12);
+}
+.badge-urgent { background: #D4A017; color: white; }
+
+/* ROUTINE — teal, 4px border, white bg */
+.urgency-routine {
+  border-left: 4px solid #2D7D73;
+  background: #FFFFFF;
+}
+.badge-routine { background: #2D7D73; color: white; }
+
+/* POSITIVE / COMPLETE — light teal */
+.urgency-positive {
+  border-left: 4px solid #6BAF92;
+  background: #F0F7F4;
+}
+.badge-positive { background: #6BAF92; color: white; }
+
+/* Legacy status cards — keep for backwards compat */
 .card-forest { background: hsl(150 25% 96%); border: 1px solid hsl(150 20% 90%); }
 .card-amber { background: hsl(48 90% 96%); border: 1px solid hsl(48 85% 89%); }
 .card-terracotta { background: hsl(20 80% 96%); border: 1px solid hsl(20 60% 85%); }
@@ -243,6 +274,128 @@ p {
 .border-status-compliant { border-left: 4px solid hsl(var(--brand-teal)); }
 .border-status-at-risk { border-left: 4px solid hsl(var(--brand-amber)); }
 .border-status-non-compliant { border-left: 4px solid hsl(var(--brand-terracotta)); }
+
+/* ============================================================================
+   PROGRESS BARS — inline metric visualisation
+   ============================================================================ */
+
+.progress-bar-track { height: 6px; border-radius: 3px; background: #E5E7EB; }
+.progress-bar-fill { height: 6px; border-radius: 3px; transition: width 500ms ease-out; }
+.progress-bar-good { background: #2D7D73; }
+.progress-bar-watch { background: #D4A017; }
+.progress-bar-act { background: #C4704A; }
+
+/* ============================================================================
+   COUNTDOWN — time-sensitive display
+   ============================================================================ */
+
+@keyframes urgency-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+.countdown-pulse { animation: urgency-pulse 2s ease-in-out infinite; }
+
+/* ============================================================================
+   SKELETON LOADING — pulse animation for loading states
+   ============================================================================ */
+
+@keyframes skeleton-pulse {
+  0%, 100% { background-color: #F3F4F6; }
+  50% { background-color: #E5E7EB; }
+}
+.skeleton { animation: skeleton-pulse 1.5s ease-in-out infinite; border-radius: 8px; }
+.skeleton-text { height: 14px; margin-bottom: 8px; }
+.skeleton-title { height: 20px; width: 60%; margin-bottom: 12px; }
+.skeleton-card { height: 72px; border-radius: 12px; margin-bottom: 12px; }
+.skeleton-block { height: 120px; border-radius: 16px; margin-bottom: 16px; }
+
+/* ============================================================================
+   STAT CARDS — consistent across all control centres
+   ============================================================================ */
+
+.stat-card {
+  min-height: 72px;
+  padding: 12px 16px;
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  background: #FFFFFF;
+  cursor: pointer;
+  transition: all 150ms;
+}
+.stat-card:hover { background: #F9FAFB; box-shadow: 0 1px 3px rgba(27, 67, 50, 0.06); }
+.stat-card-active { background: #F0F4F2; border-left: 2px solid #2D7D73; }
+.stat-card-alert-amber { background: #FFFBF0; border-color: #D4A017; }
+.stat-card-alert-terra { background: #FEF7F0; border-color: #C4704A; }
+.stat-card-value { font-size: 28px; font-weight: 700; color: #1A1A1A; line-height: 1.1; }
+.stat-card-label { font-size: 12px; color: #6B7280; text-transform: uppercase; letter-spacing: 0.08em; }
+
+/* ============================================================================
+   ACTION CARDS — queue items, attention items, recommended actions
+   ============================================================================ */
+
+.action-card {
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid #E5E7EB;
+  margin-bottom: 12px;
+}
+.action-card-title { font-size: 16px; font-weight: 600; color: #1A1A1A; }
+.action-card-desc { font-size: 14px; color: #374151; line-height: 1.5; }
+.action-card-meta { font-size: 13px; color: #6B7280; }
+.action-card-penalty { font-size: 13px; font-weight: 600; color: #C4704A; }
+.action-card-cta {
+  width: 100%;
+  height: 48px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 100ms;
+}
+.action-card-cta:active { transform: scale(0.98); }
+.action-card-cta-primary { background: #1B4332; color: white; border: none; }
+.action-card-cta-primary:hover { opacity: 0.9; }
+.action-card-cta-outlined { background: transparent; color: #1B4332; border: 1.5px solid #1B4332; }
+.action-card-cta-outlined:hover { background: #F0F4F2; }
+.action-card-cta-teal { background: transparent; color: #2D7D73; border: 1.5px solid #2D7D73; }
+.action-card-overflow { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; color: #6B7280; cursor: pointer; border-radius: 8px; }
+.action-card-overflow:hover { background: #F3F4F6; }
+
+/* ============================================================================
+   NOTIFICATION BADGES
+   ============================================================================ */
+
+.badge-count {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 18px; height: 18px; padding: 0 5px;
+  border-radius: 9px; font-size: 11px; font-weight: 700; color: white;
+}
+.badge-count-red { background: #EF4444; }
+.badge-count-amber { background: #D4A017; }
+.badge-count-terra { background: #C4704A; }
+.badge-count-teal { background: #2D7D73; }
+.badge-dot {
+  width: 8px; height: 8px; border-radius: 4px; background: #EF4444;
+  position: absolute; top: -2px; right: -2px;
+}
+
+/* ============================================================================
+   BUTTON PRESS — subtle scale on all interactive elements
+   ============================================================================ */
+
+button:active { transform: scale(0.98); }
+
+/* ============================================================================
+   REDUCED MOTION — respect user preference
+   ============================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
 
 /* ============================================================================
    Sidebar
@@ -271,6 +424,8 @@ p {
 .animate-fadeIn { animation: fadeIn 0.3s ease-out; }
 .animate-scaleIn { animation: scaleIn 0.2s ease-out; }
 .animate-slideUp { animation: slideUp 0.2s ease-out; }
+@keyframes slideIn { from { transform: translateX(-100%); } to { transform: translateX(0); } }
+.animate-slideIn { animation: slideIn 0.2s ease-out; }
 
 /* ============================================================================
    Scrollbar

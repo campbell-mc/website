@@ -127,7 +127,7 @@ export default function QIDetailPage() {
               <p className="text-xs font-medium text-foreground mb-1">Falls rate correlates with agency coverage</p>
               <p className="text-xs text-muted-foreground">Falls on permanent-staff shifts: 1.2%. Falls on high-agency shifts: 4.8%. Workforce-clinical convergence signal.</p>
               <div className="flex gap-2 mt-2">
-                <button onClick={() => setModal({ variant: "form", title: "Add to corrective action", chris: "CHRIS will create a corrective action linking this signal to the falls pattern. It will appear in the DON queue and the corrective actions register.", label: "Create corrective action →" })} className="text-[11px] font-medium px-2.5 py-1.5 rounded-lg bg-primary text-primary-foreground hover:opacity-90">Add to corrective action</button>
+                <button className="text-[11px] font-medium px-2.5 py-1.5 rounded-lg bg-primary text-primary-foreground hover:opacity-90">Add to corrective action</button>
                 <button onClick={() => router.push("/dashboard/coach")} className="text-[11px] font-medium px-2.5 py-1.5 rounded-lg border border-border text-muted-foreground hover:bg-muted">Discuss with CHRIS</button>
               </div>
             </div>
@@ -165,7 +165,7 @@ export default function QIDetailPage() {
             <div className="bg-card rounded-xl p-3 border border-border border-l-4 border-l-[hsl(var(--brand-amber))]">
               <p className="text-xs text-foreground mb-1 font-medium">Wing B Bathroom — location pattern</p>
               <p className="text-[10px] text-muted-foreground mb-2">8 of 19 falls in Wing B bathroom. Environmental risk assessment last done 6 months ago.</p>
-              <button onClick={() => setModal({ variant: "schedule", title: "Schedule environmental assessment", chris: "Wing B bathroom environmental risk assessment. Last assessed 6 months ago. 8 of 19 falls occurred here.", label: "Schedule →" })} className="text-xs font-medium px-3 py-2 rounded-lg bg-primary text-primary-foreground hover:opacity-90">Schedule assessment →</button>
+              <button className="text-xs font-medium px-3 py-2 rounded-lg bg-primary text-primary-foreground hover:opacity-90">Schedule assessment →</button>
             </div>
           )}
         </div>
@@ -194,12 +194,12 @@ export default function QIDetailPage() {
         ) : (
           <div className="px-4 py-4 text-center">
             <p className="text-xs text-muted-foreground">No open corrective actions for this QI</p>
-            <button onClick={() => setModal({ variant: "form", title: "Create monitoring action", chris: "This creates a routine monitoring action for this QI to ensure sustained good performance.", label: "Create action →" })} className="mt-2 text-xs font-medium text-[hsl(var(--brand-teal))] hover:underline">+ Create monitoring action</button>
+            <button className="mt-2 text-xs font-medium text-[hsl(var(--brand-teal))] hover:underline">+ Create monitoring action</button>
           </div>
         )}
       </div>
 
-      {modal && <ActionModal open={true} onClose={() => setModal(null)} variant={modal.variant} title={modal.title} chrisMessage={modal.chris} primaryLabel={modal.label} />}
+      {/* ActionModal removed — buttons handled by ActionCatcher */}
 
       <p className="text-[10px] text-muted-foreground mb-16">
         GPMS Q1 2026: Submitted ✅ · Q2 collection: 1 Oct – 31 Dec · Due: 21 Jan 2026

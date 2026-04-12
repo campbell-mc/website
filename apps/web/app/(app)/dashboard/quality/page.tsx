@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { ChevronLeft, ChevronRight, Mic, TrendingUp, TrendingDown, Minus } from "lucide-react";
 import { ChrisAvatar } from "@/components/chris/ChrisAvatar";
 import { QI_DATA, getQIStatus, type QIDefinition } from "@/components/quality/qi-data";
+import { quality_indicators, facility } from "@/lib/seed-data";
 
 // GPMS Submission Panel (slide-over)
 function SubmissionPanel({ onClose }: { onClose: () => void }) {
@@ -20,7 +21,7 @@ function SubmissionPanel({ onClose }: { onClose: () => void }) {
               <span className="text-2xl">✅</span>
             </div>
             <p className="text-lg font-bold text-foreground mb-1">Submitted to GPMS</p>
-            <p className="text-xs text-muted-foreground mb-1">Reference: GPMS-2026-Q1-0847</p>
+            <p className="text-xs text-muted-foreground mb-1">Reference: GPMS-2026-Q2-{facility.acqsc_service_id.split("-").pop()}</p>
             <p className="text-xs text-muted-foreground mb-4">Submitted by Sarah Mitchell · {new Date().toLocaleString("en-AU")}</p>
             <button onClick={onClose} className="text-sm font-medium px-6 py-3 rounded-xl bg-primary text-primary-foreground hover:opacity-90">Close panel</button>
           </div>
@@ -35,7 +36,7 @@ function SubmissionPanel({ onClose }: { onClose: () => void }) {
         {/* Header */}
         <div className="sticky top-0 bg-card border-b border-border px-4 py-3 z-10">
           <div className="flex items-center justify-between mb-2">
-            <p className="text-base font-bold text-foreground">GPMS QI Submission · Q1 2026</p>
+            <p className="text-base font-bold text-foreground">GPMS QI Submission · Q2 2025-26</p>
             <button onClick={onClose} className="text-xs text-muted-foreground hover:text-foreground">✕ Close</button>
           </div>
           <div className="flex gap-1 bg-muted rounded-lg p-1">
@@ -85,15 +86,19 @@ function SubmissionPanel({ onClose }: { onClose: () => void }) {
                 <div className="space-y-3 text-xs text-muted-foreground leading-relaxed">
                   <div>
                     <p className="font-semibold text-foreground text-[10px] uppercase mb-1">What went well</p>
-                    <p>Pressure injuries dropped from 9.1% to 6.4% — below the national average for the first time this year. Wound care audit changes from August appear to have made a difference. Restrictive practices, incontinence care, and hospitalisation all improved.</p>
+                    <p>{quality_indicators[3].chris_analysis?.went_well}</p>
                   </div>
                   <div>
                     <p className="font-semibold text-foreground text-[10px] uppercase mb-1">What needs attention</p>
-                    <p>Falls (40.4%) remain above benchmark — 3rd consecutive quarter. Major-injury falls tripled (2.1% → 6.4%). 2 of 3 major-injury falls occurred on night shifts with agency cover. Allied health hours dropped 18% — correlates with falls trend.</p>
+                    <p>{quality_indicators[3].chris_analysis?.needs_attention}</p>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-foreground text-[10px] uppercase mb-1">Cross-domain signal</p>
+                    <p>{quality_indicators[3].chris_analysis?.cross_domain_signal}</p>
                   </div>
                   <div>
                     <p className="font-semibold text-foreground text-[10px] uppercase mb-1">Submission risk</p>
-                    <p>Low overall. No outliers beyond 2 standard deviations of national mean. Falls trend is consistent with prior quarters and will not trigger ACQSC attention in isolation. The major-injury falls spike may attract a follow-up question — ensure corrective action documentation is current.</p>
+                    <p>{quality_indicators[3].chris_analysis?.submission_risk}</p>
                   </div>
                 </div>
               </div>
@@ -130,7 +135,7 @@ function SubmissionPanel({ onClose }: { onClose: () => void }) {
               <button onClick={() => setSubmitted(true)} className="w-full py-3.5 rounded-xl font-medium text-white bg-primary hover:opacity-90">
                 Submit to GPMS →
               </button>
-              <p className="text-[10px] text-muted-foreground text-center mt-2">15 quality indicators · Q1 2026 · The Holy Grail Bowral · Will be publicly reported</p>
+              <p className="text-[10px] text-muted-foreground text-center mt-2">15 quality indicators · Q2 2025-26 · {facility.name} · Will be publicly reported</p>
             </div>
           )}
         </div>
@@ -188,7 +193,7 @@ export default function QualityPage() {
           <button onClick={() => router.push("/dashboard/clinical")} className="p-1 -ml-1 hover:bg-muted rounded-lg"><ChevronLeft className="w-5 h-5 text-foreground" /></button>
           <div>
             <p className="text-[28px] font-bold text-foreground tracking-tight leading-tight">Quality Indicators</p>
-            <p className="text-[10px] text-muted-foreground">15 Mandatory QIs · Q1 2026 · The Holy Grail Bowral</p>
+            <p className="text-[10px] text-muted-foreground">15 Mandatory QIs · Q2 2025-26 · {facility.name}</p>
           </div>
         </div>
         <button onClick={() => router.push("/dashboard/coach")} className="flex items-center gap-1.5 text-xs font-medium px-3 py-2 rounded-lg border border-border text-foreground hover:bg-muted"><Mic className="w-3.5 h-3.5" /> Ask CHRIS</button>
@@ -197,8 +202,8 @@ export default function QualityPage() {
       {/* GPMS status */}
       <div className="bg-card rounded-xl p-4 border border-border mb-4 flex items-center justify-between">
         <div>
-          <p className="text-xs font-medium text-foreground">Q1 QI Submission</p>
-          <p className="text-[10px] text-muted-foreground">CHRIS has compiled all 15 QIs. Due 21 Oct. Data reviewed.</p>
+          <p className="text-xs font-medium text-foreground">Q2 QI Submission</p>
+          <p className="text-[10px] text-muted-foreground">CHRIS has compiled all 15 QIs. Due {quality_indicators[3].due_date}. Draft ready for DON review.</p>
         </div>
         <button onClick={() => setShowSubmission(true)} className="text-xs font-medium px-3 py-2 rounded-lg bg-primary text-primary-foreground hover:opacity-90">
           Review submission →

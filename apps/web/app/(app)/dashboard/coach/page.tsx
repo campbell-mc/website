@@ -1,8 +1,10 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { Send } from "lucide-react";
 import { ChrisAvatar } from "@/components/chris/ChrisAvatar";
+import { getRoleConfig, type RoleName } from "@/lib/roles/config";
 
 interface Message {
   id: string;
@@ -11,14 +13,25 @@ interface Message {
   isStreaming?: boolean;
 }
 
-const SUGGESTED_PROMPTS = [
-  "What should I focus on this week?",
-  "Help me prepare for a difficult conversation",
-  "Why is care minutes at risk today?",
-  "What's driving turnover in my team?",
-  "Help me understand the latest pulse results",
-  "I'm feeling overwhelmed — what can I let go of?",
-];
+// TODO: Replace with real user role from session
+const USER_ROLE: RoleName = "don";
+const config = getRoleConfig(USER_ROLE);
+const coachConfig = config.chris_coach;
+
+// Get suggested prompts for the referring page, or default
+function getSuggestedPrompts(pathname: string): string[] {
+  // Check if there are route-specific prompts
+  for (const [route, prompts] of Object.entries(coachConfig.suggested_prompts)) {
+    if (pathname.startsWith(route)) return prompts;
+  }
+  // Fallback to the first set of prompts
+  const allPrompts = Object.values(coachConfig.suggested_prompts);
+  return allPrompts[0] || [
+    "What should I focus on today?",
+    "Help me prepare for a difficult conversation",
+    "I'm feeling overwhelmed — what can I let go of?",
+  ];
+}
 
 const WELCOME: Message = {
   id: "welcome",
@@ -27,10 +40,12 @@ const WELCOME: Message = {
 };
 
 export default function CoachPage() {
+  const pathname = usePathname();
   const [messages, setMessages] = useState<Message[]>([WELCOME]);
   const [input, setInput] = useState("");
   const [streaming, setStreaming] = useState(false);
   const endRef = useRef<HTMLDivElement>(null);
+  const suggestedPrompts = getSuggestedPrompts(pathname);
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -52,7 +67,7 @@ export default function CoachPage() {
       const res = await fetch("/api/coach/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: [...messages, userMsg].map((m) => ({ role: m.role, content: m.content })) }),
+        body: JSON.stringify({ messages: [...messages, userMsg].map((m) => ({ role: m.role, content: m.content })), role: USER_ROLE }),
       });
 
       const data = res.ok ? await res.json() : null;
@@ -113,7 +128,7 @@ export default function CoachPage() {
           <div className="max-w-2xl mx-auto">
             <p className="text-[10px] font-medium text-gray-400 uppercase tracking-wider mb-2">Suggestions</p>
             <div className="flex flex-wrap gap-2">
-              {SUGGESTED_PROMPTS.map((p) => (
+              {suggestedPrompts.map((p) => (
                 <button key={p} onClick={() => send(p)} className="text-xs px-3 py-2 rounded-full border border-[var(--border-default)] text-[var(--brand-forest)] hover:bg-[rgba(27,67,50,0.04)] transition-colors">
                   {p}
                 </button>

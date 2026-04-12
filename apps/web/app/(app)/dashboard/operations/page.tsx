@@ -3,6 +3,9 @@
 import { useRouter } from "next/navigation";
 import { ChevronLeft, Mic, Users, FileText, Bell, Sparkles, MoreHorizontal, CheckCircle, Clipboard, MessageSquare } from "lucide-react";
 import { ChrisAvatar } from "@/components/chris/ChrisAvatar";
+import { SituationReport } from "@/components/chris/SituationReport";
+import { operationsReport } from "@/lib/chris/situation-reports";
+import { AgentPulse } from "@/components/chris/AgentPulse";
 
 function ActionCard({ urgency, icon, title, chris, actionLabel, onAction, deadline, meta }: {
   urgency: "critical" | "warning" | "info" | "positive"; icon: React.ReactNode; title: string;
@@ -55,6 +58,9 @@ export default function OperationsControlCentre() {
           </div>
         ))}
       </div>
+
+      <AgentPulse domain="operations" />
+      <SituationReport domain="operations" narrative={operationsReport.narrative} refreshedAt={operationsReport.refreshedAt} context={operationsReport.context} signals={operationsReport.signals} />
 
       <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-[0.08em] mb-2">Needs your attention</p>
 

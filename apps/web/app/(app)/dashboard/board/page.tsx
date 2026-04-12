@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { FileText, ChevronRight, Download } from "lucide-react";
 import { ChrisAvatar } from "@/components/chris/ChrisAvatar";
+import { facility } from "@/lib/seed-data";
 
 // Board Member — read-only, clean, minimal, authoritative.
 
@@ -15,7 +16,7 @@ export default function BoardHome() {
         {/* Provider identity */}
         <div className="text-center mb-8">
           <ChrisAvatar size="large" className="mx-auto mb-4" />
-          <h1 className="text-2xl font-bold text-foreground">Knights of the Holy Grail</h1>
+          <h1 className="text-2xl font-bold text-foreground">{facility.provider_name}</h1>
           <p className="text-sm text-muted-foreground">Board member view · Margaret Wilson</p>
         </div>
 

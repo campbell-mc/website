@@ -1,5 +1,6 @@
 "use client";
 import { RoleHomeScreen, type RoleHomeConfig } from "@/components/dashboard/RoleHomeScreen";
+import { ClinicalFinancialPanel } from "@/components/financial/ClinicalFinancialPanel";
 
 const config: RoleHomeConfig = {
   greeting: "Good morning, Dr Chen",
@@ -25,4 +26,10 @@ const config: RoleHomeConfig = {
   notificationCount: 1,
 };
 
-export default function ClinicalDirectorHome() { return <RoleHomeScreen config={config} />; }
+export default function ClinicalDirectorHome() {
+  return (
+    <RoleHomeScreen config={config}>
+      <ClinicalFinancialPanel />
+    </RoleHomeScreen>
+  );
+}

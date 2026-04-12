@@ -1,7 +1,10 @@
 // ============================================================================
 // Quality Indicator Data — All 15 QIs per ACQSC Mandatory QI Program
 // Since 1 April 2025: includes staffing QIs (QI_13, QI_14, QI_15)
+// Data sourced from seed-data.ts — Q2 2025-26 (Jan–Mar 2026, current quarter)
 // ============================================================================
+
+import { quality_indicators } from "@/lib/seed-data";
 
 export interface QIDefinition {
   code: string;
@@ -21,116 +24,154 @@ export interface QIDefinition {
   chrisNote?: string;
 }
 
+// Current quarter = Q2 2025-26 (index 3), prior = Q1 2025-26 (index 2)
+const currentQ = quality_indicators[3]; // Q2 2025-26
+const priorQ = quality_indicators[2];   // Q1 2025-26
+const ci = currentQ.indicators;
+const pi = priorQ.indicators;
+
+function trend(current: number, prior: number, higherIsBetter: boolean): "improving" | "stable" | "worsening" {
+  const delta = current - prior;
+  if (Math.abs(delta) < 0.3) return "stable";
+  if (higherIsBetter) return delta > 0 ? "improving" : "worsening";
+  return delta < 0 ? "improving" : "worsening";
+}
+
 export const QI_DATA: QIDefinition[] = [
   {
     code: "QI_01", name: "Pressure Injuries", category: "clinical",
     description: "% of eligible residents with a Stage 2+ pressure injury on the collection day.",
     collection: "Point prevalence — assessed on the same day each quarter.",
-    higherIsBetter: false, source: "clinical", benchmark: 7.8, current: 6.4, prior: 9.1,
-    numerator: 3, denominator: 47, trend: "improving", scrutiny: "high",
-    chrisNote: "Dropped from 9.1% to 6.4% — below benchmark for the first time this year. Wound care audit changes from August appear to have made a difference.",
+    higherIsBetter: false, source: "clinical",
+    benchmark: ci.QI_01_pressure_injuries.benchmark, current: ci.QI_01_pressure_injuries.rate, prior: pi.QI_01_pressure_injuries.rate,
+    numerator: ci.QI_01_pressure_injuries.numerator, denominator: ci.QI_01_pressure_injuries.denominator,
+    trend: trend(ci.QI_01_pressure_injuries.rate, pi.QI_01_pressure_injuries.rate, false), scrutiny: "high",
+    chrisNote: ci.QI_01_pressure_injuries.note || "Below benchmark for 4 consecutive quarters. Wound care protocol changes from October 2025 are sustaining.",
   },
   {
     code: "QI_02", name: "Restrictive Practices", category: "clinical",
     description: "% of eligible residents subject to a restrictive practice on the collection day.",
     collection: "Point prevalence. Includes physical, chemical, environmental, mechanical restraint and seclusion.",
-    higherIsBetter: false, source: "clinical", benchmark: 15.0, current: 12.8, prior: 13.5,
-    numerator: 6, denominator: 47, trend: "improving", scrutiny: "high",
+    higherIsBetter: false, source: "clinical",
+    benchmark: ci.QI_02_restrictive_practices.benchmark, current: ci.QI_02_restrictive_practices.rate, prior: pi.QI_02_restrictive_practices.rate,
+    numerator: ci.QI_02_restrictive_practices.numerator, denominator: ci.QI_02_restrictive_practices.denominator,
+    trend: trend(ci.QI_02_restrictive_practices.rate, pi.QI_02_restrictive_practices.rate, false), scrutiny: "high",
+    chrisNote: ci.QI_02_restrictive_practices.note,
   },
   {
     code: "QI_03", name: "Falls", category: "clinical",
     description: "% of eligible residents who experienced one or more falls during the quarter.",
     collection: "Retrospective review of care records for the full quarter.",
-    higherIsBetter: false, source: "incident", benchmark: 42.1, current: 40.4, prior: 38.5,
-    numerator: 19, denominator: 47, trend: "worsening", scrutiny: "medium",
-    chrisNote: "Falls trending up 3 consecutive quarters. Allied health hours dropped 18% in the same period. Physio assessment completion fallen from 94% to 71%.",
+    higherIsBetter: false, source: "incident",
+    benchmark: ci.QI_03_falls.benchmark, current: ci.QI_03_falls.rate, prior: pi.QI_03_falls.rate,
+    numerator: ci.QI_03_falls.numerator, denominator: ci.QI_03_falls.denominator,
+    trend: trend(ci.QI_03_falls.rate, pi.QI_03_falls.rate, false), scrutiny: "high",
+    chrisNote: ci.QI_03_falls.note || "Falls above benchmark for 3rd consecutive quarter. CHRIS has identified workforce-falls correlation: 78% of falls on shifts with >30% agency coverage.",
   },
   {
     code: "QI_04", name: "Falls — Major Injury", category: "clinical",
     description: "% of eligible residents who experienced a fall resulting in major injury during the quarter.",
     collection: "Retrospective review. Major injury = fracture, dislocation, closed head injury, subdural haematoma.",
-    higherIsBetter: false, source: "incident", benchmark: 3.5, current: 6.4, prior: 2.1,
-    numerator: 3, denominator: 47, trend: "worsening", scrutiny: "high",
-    chrisNote: "3 major-injury falls this quarter — up from 1. 2 of 3 occurred on night shifts with >40% agency coverage. SIRS review completed for all three.",
+    higherIsBetter: false, source: "incident",
+    benchmark: ci.QI_04_falls_major_injury.benchmark, current: ci.QI_04_falls_major_injury.rate, prior: pi.QI_04_falls_major_injury.rate,
+    numerator: ci.QI_04_falls_major_injury.numerator, denominator: ci.QI_04_falls_major_injury.denominator,
+    trend: trend(ci.QI_04_falls_major_injury.rate, pi.QI_04_falls_major_injury.rate, false), scrutiny: "high",
+    chrisNote: ci.QI_04_falls_major_injury.note || "Major injury rate recovered after Q1 spike. Both major-injury falls occurred on high-agency shifts.",
   },
   {
     code: "QI_05", name: "Polypharmacy", category: "clinical",
     description: "% of eligible residents prescribed 9 or more medications on the collection date.",
     collection: "Review of medication charts on a single date each quarter.",
-    higherIsBetter: false, source: "medication", benchmark: 40.0, current: 38.3, prior: 39.1,
-    numerator: 18, denominator: 47, trend: "improving", scrutiny: "low",
+    higherIsBetter: false, source: "medication",
+    benchmark: ci.QI_05_polypharmacy.benchmark, current: ci.QI_05_polypharmacy.rate, prior: pi.QI_05_polypharmacy.rate,
+    numerator: ci.QI_05_polypharmacy.numerator, denominator: ci.QI_05_polypharmacy.denominator,
+    trend: trend(ci.QI_05_polypharmacy.rate, pi.QI_05_polypharmacy.rate, false), scrutiny: "low",
   },
   {
     code: "QI_06", name: "Antipsychotics", category: "clinical",
     description: "% of eligible residents prescribed antipsychotic medication without a psychosis diagnosis.",
     collection: "Review of medication charts on collection date. Excludes residents with documented psychosis.",
-    higherIsBetter: false, source: "medication", benchmark: 24.1, current: 23.4, prior: 21.8,
-    numerator: 11, denominator: 47, trend: "worsening", scrutiny: "high",
-    chrisNote: "Within benchmark but rising. 3 residents have antipsychotic orders without a 90-day clinical review — flag for pharmacy review.",
+    higherIsBetter: false, source: "medication",
+    benchmark: ci.QI_06_antipsychotics.benchmark, current: ci.QI_06_antipsychotics.rate, prior: pi.QI_06_antipsychotics.rate,
+    numerator: ci.QI_06_antipsychotics.numerator, denominator: ci.QI_06_antipsychotics.denominator,
+    trend: trend(ci.QI_06_antipsychotics.rate, pi.QI_06_antipsychotics.rate, false), scrutiny: "high",
   },
   {
     code: "QI_07", name: "Activities of Daily Living", category: "clinical",
     description: "% of eligible residents whose ADL score declined compared to the prior quarter.",
     collection: "Standardised ADL assessment tool each quarter.",
-    higherIsBetter: false, source: "clinical", benchmark: 37.0, current: 34.0, prior: 36.2,
-    numerator: 16, denominator: 47, trend: "improving", scrutiny: "low",
+    higherIsBetter: false, source: "clinical",
+    benchmark: ci.QI_07_adl_decline.benchmark, current: ci.QI_07_adl_decline.rate, prior: pi.QI_07_adl_decline.rate,
+    numerator: ci.QI_07_adl_decline.numerator, denominator: ci.QI_07_adl_decline.denominator,
+    trend: trend(ci.QI_07_adl_decline.rate, pi.QI_07_adl_decline.rate, false), scrutiny: "low",
   },
   {
     code: "QI_08", name: "Incontinence Care", category: "clinical",
     description: "% of eligible residents with unplanned incontinence not addressed in their care plan.",
     collection: "Review of care records and care plan for collection period.",
-    higherIsBetter: false, source: "clinical", benchmark: 11.0, current: 8.5, prior: 10.2,
-    numerator: 4, denominator: 47, trend: "improving", scrutiny: "low",
+    higherIsBetter: false, source: "clinical",
+    benchmark: ci.QI_08_incontinence.benchmark, current: ci.QI_08_incontinence.rate, prior: pi.QI_08_incontinence.rate,
+    numerator: ci.QI_08_incontinence.numerator, denominator: ci.QI_08_incontinence.denominator,
+    trend: trend(ci.QI_08_incontinence.rate, pi.QI_08_incontinence.rate, false), scrutiny: "low",
   },
   {
     code: "QI_09", name: "ED Presentations", category: "clinical",
     description: "% of eligible residents who had one or more unplanned ED presentations during the quarter.",
     collection: "Hospital notifications / clinical system records.",
-    higherIsBetter: false, source: "clinical", benchmark: 20.0, current: 17.0, prior: 19.1,
-    numerator: 8, denominator: 47, trend: "improving", scrutiny: "medium",
+    higherIsBetter: false, source: "clinical",
+    benchmark: ci.QI_09_ed_presentations.benchmark, current: ci.QI_09_ed_presentations.rate, prior: pi.QI_09_ed_presentations.rate,
+    numerator: ci.QI_09_ed_presentations.numerator, denominator: ci.QI_09_ed_presentations.denominator,
+    trend: trend(ci.QI_09_ed_presentations.rate, pi.QI_09_ed_presentations.rate, false), scrutiny: "medium",
   },
   {
     code: "QI_10", name: "Hospitalisation", category: "clinical",
     description: "% of eligible residents who had one or more unplanned ED presentations or hospital admissions during the quarter.",
     collection: "Hospital notifications / clinical system.",
-    higherIsBetter: false, source: "clinical", benchmark: 27.0, current: 23.4, prior: 25.5,
-    numerator: 11, denominator: 47, trend: "improving", scrutiny: "medium",
+    higherIsBetter: false, source: "clinical",
+    benchmark: ci.QI_10_hospitalisation.benchmark, current: ci.QI_10_hospitalisation.rate, prior: pi.QI_10_hospitalisation.rate,
+    numerator: ci.QI_10_hospitalisation.numerator, denominator: ci.QI_10_hospitalisation.denominator,
+    trend: trend(ci.QI_10_hospitalisation.rate, pi.QI_10_hospitalisation.rate, false), scrutiny: "medium",
   },
   {
     code: "QI_11", name: "Consumer Experience", category: "experience",
     description: "Resident satisfaction score from the annual Residents' Experience Survey conducted by ACQSC.",
     collection: "Conducted by ACQSC directly — not by the provider.",
-    higherIsBetter: true, source: "acqsc_survey", benchmark: 78.0, current: 82.0, prior: 80.0,
-    trend: "improving", scrutiny: "medium",
+    higherIsBetter: true, source: "acqsc_survey",
+    benchmark: ci.QI_11_consumer_experience.benchmark, current: ci.QI_11_consumer_experience.score, prior: pi.QI_11_consumer_experience.score,
+    trend: trend(ci.QI_11_consumer_experience.score, pi.QI_11_consumer_experience.score, true), scrutiny: "medium",
   },
   {
     code: "QI_12", name: "Quality of Life", category: "experience",
     description: "Resident-reported quality of life using a standardised tool.",
     collection: "Providers collect using the Dementia Quality of Life tool or equivalent.",
-    higherIsBetter: true, source: "clinical", benchmark: 72.0, current: 75.0, prior: 73.0,
-    trend: "improving", scrutiny: "low",
+    higherIsBetter: true, source: "clinical",
+    benchmark: ci.QI_12_quality_of_life.benchmark, current: ci.QI_12_quality_of_life.score, prior: pi.QI_12_quality_of_life.score,
+    trend: trend(ci.QI_12_quality_of_life.score, pi.QI_12_quality_of_life.score, true), scrutiny: "low",
   },
   {
     code: "QI_13", name: "Enrolled Nursing Hours", category: "staffing",
     description: "Enrolled nurse hours per resident per day. Sourced from QFR data.",
     collection: "QFR / rostering data.",
-    higherIsBetter: true, source: "qfr", benchmark: 0.8, current: 0.9, prior: 0.85,
-    trend: "improving", scrutiny: "low",
+    higherIsBetter: true, source: "qfr",
+    benchmark: 0.40, current: ci.QI_13_enrolled_nursing_hrs.hrs_per_resident_day, prior: pi.QI_13_enrolled_nursing_hrs.hrs_per_resident_day,
+    trend: trend(ci.QI_13_enrolled_nursing_hrs.hrs_per_resident_day, pi.QI_13_enrolled_nursing_hrs.hrs_per_resident_day, true), scrutiny: "low",
     chrisNote: "New QI from April 2025. National benchmarks still establishing.",
   },
   {
     code: "QI_14", name: "Allied Health Hours", category: "staffing",
     description: "Allied health professional hours per resident per day. Sourced from QFR data.",
     collection: "QFR / rostering data.",
-    higherIsBetter: true, source: "qfr", benchmark: 0.3, current: 0.25, prior: 0.31,
-    trend: "worsening", scrutiny: "medium",
-    chrisNote: "Allied health hours dropped 18%. Correlates with QI_03 (falls) trend. Physio assessment completion also declining.",
+    higherIsBetter: true, source: "qfr",
+    benchmark: 0.35, current: ci.QI_14_allied_health_hrs.hrs_per_resident_day, prior: pi.QI_14_allied_health_hrs.hrs_per_resident_day,
+    trend: trend(ci.QI_14_allied_health_hrs.hrs_per_resident_day, pi.QI_14_allied_health_hrs.hrs_per_resident_day, true), scrutiny: "medium",
+    chrisNote: ci.QI_14_allied_health_hrs.note || "New QI from April 2025. National benchmarks still establishing.",
   },
   {
     code: "QI_15", name: "Lifestyle Officer Hours", category: "staffing",
     description: "Lifestyle officer hours per resident per day. Sourced from QFR data.",
     collection: "QFR / rostering data.",
-    higherIsBetter: true, source: "qfr", benchmark: 0.2, current: 0.22, prior: 0.21,
+    higherIsBetter: true, source: "qfr",
+    benchmark: 0.20, current: 0.22, prior: 0.21,
     trend: "improving", scrutiny: "low",
     chrisNote: "New QI from April 2025. National benchmarks still establishing.",
   },

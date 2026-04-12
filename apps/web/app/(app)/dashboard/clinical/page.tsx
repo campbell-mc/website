@@ -3,6 +3,9 @@
 import { useRouter } from "next/navigation";
 import { ChevronLeft, Mic, AlertTriangle, Activity, BarChart2, Shield, CheckCircle, FileText, MoreHorizontal, Sparkles } from "lucide-react";
 import { ChrisAvatar } from "@/components/chris/ChrisAvatar";
+import { SituationReport } from "@/components/chris/SituationReport";
+import { AgentPulse } from "@/components/chris/AgentPulse";
+import { clinicalReport } from "@/lib/chris/situation-reports";
 
 // ============================================================================
 // CLINICAL CONTROL CENTRE
@@ -83,7 +86,10 @@ export default function ClinicalControlCentre() {
         ))}
       </div>
 
-      {/* === ALL CLINICAL ACTIONS — front and centre === */}
+      <AgentPulse domain="clinical" />
+
+      {/* === CHRIS SITUATION REPORT === */}
+      <SituationReport domain="clinical" narrative={clinicalReport.narrative} refreshedAt={clinicalReport.refreshedAt} context={clinicalReport.context} signals={clinicalReport.signals} />
 
       <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-[0.08em] mb-2">Needs your attention</p>
 

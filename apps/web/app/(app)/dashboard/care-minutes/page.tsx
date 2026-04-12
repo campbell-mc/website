@@ -5,16 +5,22 @@ import { useRouter } from "next/navigation";
 import { ChevronLeft, Mic, Clock, AlertTriangle, MoreHorizontal, CheckCircle, Users } from "lucide-react";
 import { ChrisAvatar } from "@/components/chris/ChrisAvatar";
 import { ActionModal, type ActionVariant } from "@/components/ActionModal";
+import { care_minutes_weekly, facility, workforce_monthly } from "@/lib/seed-data";
 
-const WEEK_DATA = [
-  { day: "Mon", total: 203, rn: 42, status: "compliant" as const },
-  { day: "Tue", total: 198, rn: 39, status: "at-risk" as const },
-  { day: "Wed", total: 201, rn: 41, status: "compliant" as const },
-  { day: "Thu", total: 186, rn: 37, status: "non-compliant" as const },
-  { day: "Fri", total: 189, rn: 38, status: "at-risk" as const },
-  { day: "Sat", total: 191, rn: 39, status: "at-risk" as const },
-  { day: "Today", total: 198, rn: 41, status: "at-risk" as const },
-];
+// Derive this week's daily data from the most recent week in seed data
+const latestWeek = care_minutes_weekly[care_minutes_weekly.length - 1];
+const prevWeeks = care_minutes_weekly.slice(-4);
+
+// Simulate daily variation from weekly average
+const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Today"];
+const WEEK_DATA = DAYS.map((day, i) => {
+  const jitter = [3, -2, 1, -14, -11, -9, -2][i]; // realistic daily variation
+  const total = latestWeek.avg_total + jitter;
+  const rnJitter = [1.2, -0.9, 0.8, -3.2, -2.1, -1.1, 0.4][i];
+  const rn = latestWeek.avg_rn + rnJitter;
+  const status = total >= 200 && rn >= 40 ? "compliant" as const : total >= 195 ? "at-risk" as const : "non-compliant" as const;
+  return { day, total: Math.round(total), rn: Math.round(rn * 10) / 10, status };
+});
 
 const SHIFT_DATA = [
   { shift: "Morning", rn: 16.2, en: 5.4, ain: 42.1, total: 63.7, status: "ok" as const, note: "Complete" },
@@ -36,7 +42,7 @@ export default function CareMinutesPage() {
           </button>
           <div>
             <p className="text-[28px] font-bold text-foreground leading-tight tracking-tight">Care Minutes</p>
-            <p className="text-[10px] text-muted-foreground">The Holy Grail Bowral · Deputy 2h ago ✅ · Updated hourly</p>
+            <p className="text-[10px] text-muted-foreground">{facility.name} · Deputy 2h ago ✅ · Updated hourly</p>
           </div>
         </div>
         <button onClick={() => router.push("/dashboard/coach")} className="flex items-center gap-1.5 text-xs font-medium px-3 py-2 rounded-lg border border-border text-foreground hover:bg-muted">
@@ -47,7 +53,7 @@ export default function CareMinutesPage() {
       {/* TODAY — hero with CHRIS speaking first */}
       <div className="rounded-xl p-4 border border-border border-l-4 border-l-[hsl(var(--brand-amber))] mb-4" style={{ background: "rgba(212, 160, 23, 0.06)", boxShadow: "0 4px 24px rgba(0,0,0,0.10)" }}>
         <div className="flex items-center justify-between mb-2">
-          <span className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest">Today · At Risk · Day 3</span>
+          <span className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest">Today · {latestWeek.non_compliant_days === 0 ? "Compliant" : latestWeek.non_compliant_days <= 2 ? "At Risk" : "Non-Compliant"} · Week {latestWeek.week.split("W")[1]}</span>
           <span className="text-xs text-muted-foreground font-mono">
             <Clock className="w-3 h-3 inline mr-1" />Updates hourly
           </span>
@@ -55,16 +61,16 @@ export default function CareMinutesPage() {
 
         {/* Big number */}
         <div className="flex items-baseline gap-2 mb-1">
-          <span className="text-[64px] font-extrabold text-[hsl(var(--brand-amber))] leading-none tracking-tight" style={{ fontFamily: "var(--font-display)" }}>198</span>
+          <span className={`text-[64px] font-extrabold leading-none tracking-tight ${latestWeek.avg_total >= 200 ? "text-[hsl(var(--brand-teal))]" : "text-[hsl(var(--brand-amber))]"}`} style={{ fontFamily: "var(--font-display)" }}>{latestWeek.avg_total}</span>
           <span className="text-lg text-muted-foreground ml-1">/ 200 min per resident</span>
         </div>
 
         {/* Role breakdown — simple bars */}
         <div className="space-y-2 mb-3">
           {[
-            { label: "RN", value: 41, target: 40, ok: true },
-            { label: "EN", value: 10.2, target: null, ok: true },
-            { label: "AIN", value: 146.8, target: null, ok: true },
+            { label: "RN", value: Math.round(latestWeek.avg_rn * 10) / 10, target: 40, ok: latestWeek.avg_rn >= 40 },
+            { label: "EN", value: Math.round((latestWeek.avg_total - latestWeek.avg_rn - (latestWeek.avg_total - latestWeek.avg_rn) * 0.93) * 10) / 10, target: null, ok: true },
+            { label: "AIN", value: Math.round((latestWeek.avg_total - latestWeek.avg_rn) * 0.93 * 10) / 10, target: null, ok: true },
           ].map((r) => (
             <div key={r.label} className="flex items-center gap-3">
               <span className="text-xs text-muted-foreground w-8">{r.label}</span>
@@ -88,7 +94,9 @@ export default function CareMinutesPage() {
         <div className="flex items-start gap-2 p-3 rounded-lg mb-3" style={{ background: "rgba(27, 67, 50, 0.05)" }}>
           <ChrisAvatar size="small" showGlow className="shrink-0 mt-0.5" />
           <p className="text-xs text-muted-foreground leading-relaxed">
-            You're 2 min/resident short. Tonight's RN shift is unfilled — that's what tips you from compliant to at-risk. If agency RN confirmed, projected finish: 204 min — <span className="text-[hsl(var(--brand-teal))] font-medium">compliant</span>.
+            {latestWeek.avg_total >= 200 && latestWeek.avg_rn >= 40
+              ? `Care minutes have been compliant every day this week — ${latestWeek.avg_total} total, ${latestWeek.avg_rn} RN. This is the strongest sustained period since November. The new RN has settled in and agency dependency is down to 18%. Keep it going.`
+              : `You're ${200 - latestWeek.avg_total} min/resident short. RN minutes at ${latestWeek.avg_rn} (target: 40). ${latestWeek.rn_gap_days} RN gap days this week. Agency cover is the immediate lever — longer term, workforce stability is the fix.`}
           </p>
         </div>
 
@@ -177,8 +185,8 @@ export default function CareMinutesPage() {
           <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-full bg-[hsl(var(--brand-amber)/0.1)] text-[hsl(var(--brand-amber))]">CAUSAL</span>
           <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-full border border-dashed border-[hsl(var(--brand-amber))] text-muted-foreground">STRONG</span>
         </div>
-        <p className="text-sm font-medium text-foreground mb-1">RN shortfall follows PSH_02 decline — culture signal, not rostering failure</p>
-        <p className="text-xs text-muted-foreground leading-relaxed mb-2">The permanent RN roster has insufficient buffer because 2 RNs resigned following 4 cycles of declining Lack of Support scores. Agency cover addresses the symptom. Recognition practices address the cause.</p>
+        <p className="text-sm font-medium text-foreground mb-1">Agency dependency peaked in Jan — culture signal, not rostering failure</p>
+        <p className="text-xs text-muted-foreground leading-relaxed mb-2">2 RNs resigned in December following 4 cycles of declining PSH_13 (Recognition) scores in Wattle Wing. Agency peaked at 28% of RN hours in January. Care minutes breached 6 days that month. As agency reduces (now 18%), care minutes have recovered. Estimated cost of the exits + agency surge: $240K YTD.</p>
         <div className="flex items-center gap-2">
           <button onClick={() => setModal({ variant: "form", title: "Address root cause", chris: "The RN shortfall follows a 4-cycle decline in PSH_02 (Lack of Support). CHRIS recommends prescribing a recognition-focused practice for the affected team. This creates a corrective action and appears in the next Team Briefing.", label: "Create corrective action →" })} className="text-[11px] font-medium px-2.5 py-1.5 rounded-lg bg-primary text-primary-foreground hover:opacity-90">Address root cause →</button>
           <button onClick={() => setModal({ variant: "feedback", title: "Signal not relevant", chris: "Your feedback helps CHRIS learn. Why doesn't this signal apply to your context?", label: "Submit feedback" })} className="text-[11px] text-muted-foreground hover:text-foreground">Not relevant</button>

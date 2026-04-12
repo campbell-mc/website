@@ -3,6 +3,8 @@
 import { useRouter } from "next/navigation";
 import { Bell, ChevronRight, Sparkles, Mic, MoreHorizontal } from "lucide-react";
 import { ChrisAvatar } from "@/components/chris/ChrisAvatar";
+import { todays_picture, facility, psh_cycles } from "@/lib/seed-data";
+import { OperationalFinancialPanel } from "@/components/financial/OperationalFinancialPanel";
 
 // ============================================================================
 // HOME SCREEN — Today's Briefing
@@ -49,20 +51,34 @@ function DomainRow({ domain }: { domain: DomainStatus }) {
   );
 }
 
-// --- Data ---
-const DOMAINS: DomainStatus[] = [
-  { name: "Clinical", status: "watch", summary: "Care minutes compliant · QI_03 trending up · 1 SIRS Cat 2 open", href: "/dashboard/clinical" },
-  { name: "Workforce", status: "watch", summary: "PSH improving · night team to monitor · 3 AHPRA expiring", href: "/dashboard/workforce" },
-  { name: "Governance", status: "clear", summary: "SIRS draft ready for review · compliance 84 · Board Pack due 8 days", href: "/dashboard/compliance" },
-  { name: "Operations", status: "clear", summary: "RN confirmed tonight · 1 AIN gap · briefing unread", href: "/dashboard/operations" },
-  { name: "Financial", status: "watch", summary: "Care ratio 56% on target · agency cost trending up", href: "/dashboard/financial" },
-];
+// --- Data derived from seed ---
+const DOMAIN_HREFS: Record<string, string> = {
+  Clinical: "/dashboard/clinical",
+  Workforce: "/dashboard/workforce",
+  Governance: "/dashboard/compliance",
+  Operations: "/dashboard/operations",
+  Financial: "/dashboard/financial",
+};
 
-const TOP_ACTIONS = [
-  { priority: "watch" as const, label: "Review SIRS Cat 2 draft — 22 days remaining", actionLabel: "Review draft →", href: "/dashboard/sirs" },
-  { priority: "watch" as const, label: "Read Today's Briefing — 3 signals, 1 positive", actionLabel: "Read briefing →", href: "/team-loop/briefing" },
-  { priority: "clear" as const, label: "Acknowledge Wattle Wing practice outcome — hazard reduced", actionLabel: "View outcome →", href: "/dashboard/psh" },
-];
+const DOMAINS: DomainStatus[] = todays_picture.domain_status.map((d) => ({
+  name: d.domain,
+  status: d.status === "ok" ? "clear" as const : "watch" as const,
+  summary: d.summary,
+  href: DOMAIN_HREFS[d.domain] || "/dashboard",
+}));
+
+const PRIORITY_MAP: Record<string, "clear" | "watch" | "act"> = {
+  urgent: "act",
+  warning: "watch",
+  info: "clear",
+};
+
+const TOP_ACTIONS = todays_picture.top_3_actions.map((a) => ({
+  priority: PRIORITY_MAP[a.priority] || ("watch" as const),
+  label: a.description + (a.context ? ` — ${a.context.split("·")[0].trim()}` : ""),
+  actionLabel: a.action_label,
+  href: a.route,
+}));
 
 export default function HomePage() {
   const router = useRouter();
@@ -72,9 +88,10 @@ export default function HomePage() {
       {/* DEV: Role switcher — top of page */}
       <div className="bg-[hsl(var(--brand-forest))] rounded-xl p-3 mb-4">
         <p className="text-[10px] font-semibold text-white/60 uppercase tracking-wider mb-2">Demo — switch role view</p>
-        <div className="grid grid-cols-3 gap-1.5">
+        <div className="grid grid-cols-4 lg:grid-cols-5 gap-1.5">
           {[
             { label: "DON", href: "/dashboard" },
+            { label: "Facility Mgr", href: "/dashboard/fm" },
             { label: "CEO", href: "/dashboard/ceo" },
             { label: "CFO", href: "/dashboard/cfo" },
             { label: "Clinical Dir.", href: "/dashboard/clinical-director" },
@@ -96,7 +113,7 @@ export default function HomePage() {
         <div>
           <p className="text-lg font-semibold text-foreground">{getGreeting()}, Sarah</p>
           <p className="text-xs text-muted-foreground">
-            The Holy Grail Bowral · {new Date().toLocaleDateString("en-AU", { weekday: "long", day: "numeric", month: "long" })} · Day shift
+            {facility.name} · {new Date().toLocaleDateString("en-AU", { weekday: "long", day: "numeric", month: "long" })} · Day shift
           </p>
         </div>
         <button className="relative p-2 rounded-lg hover:bg-muted transition-colors">
@@ -111,7 +128,7 @@ export default function HomePage() {
           <ChrisAvatar size="small" showGlow className="shrink-0 mt-0.5" />
           <div>
             <p className="text-sm text-foreground leading-relaxed font-serif-accent">
-              Good news first — Wattle Wing's practice last fortnight worked. Hazard score dropped 0.08, the strongest improvement this cycle. Care minutes recovered to compliant yesterday after the agency RN was confirmed. One thing still needs your attention — a SIRS Cat 2 submission is due in 22 days and the draft is ready for your review. Tonight's roster has one AIN gap but RN coverage is confirmed. Overall, your facility is in better shape than last week.
+              {todays_picture.chris_text}
             </p>
           </div>
         </div>
@@ -160,34 +177,27 @@ export default function HomePage() {
       {/* 5. CHRIS INTELLIGENCE — max 1 signal on home */}
       <div className="bg-card rounded-xl p-4 border border-border mb-5">
         <div className="flex items-center gap-1.5 mb-1.5 flex-wrap">
-          <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-full bg-[hsl(var(--brand-amber)/0.1)] text-[hsl(var(--brand-amber))]">PREDICTIVE</span>
-          <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-full border border-dashed border-[hsl(var(--brand-amber))] text-muted-foreground">EMERGING</span>
-          <span className="text-[9px] px-1.5 py-0.5 rounded bg-muted text-muted-foreground">Workforce</span>
-          <span className="text-[9px] px-1.5 py-0.5 rounded bg-muted text-muted-foreground">PSH</span>
+          <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-full bg-[hsl(var(--brand-amber)/0.1)] text-[hsl(var(--brand-amber))]">{todays_picture.chris_intelligence_signal.type}</span>
+          <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-full border border-dashed border-[hsl(var(--brand-amber))] text-muted-foreground">{todays_picture.chris_intelligence_signal.confidence}</span>
+          {todays_picture.chris_intelligence_signal.domains.map((d) => (
+            <span key={d} className="text-[9px] px-1.5 py-0.5 rounded bg-muted text-muted-foreground">{d}</span>
+          ))}
         </div>
-        <p className="text-sm font-medium text-foreground mb-1">Night team PSH improving — but not out of the woods</p>
-        <p className="text-xs text-muted-foreground leading-relaxed mb-2">PSH_01 improved 0.06 this cycle after practice intervention. But PSH_08 (Traumatic Exposure) remains elevated. The pattern is moving in the right direction — continued monitoring recommended to confirm the trend holds.</p>
+        <p className="text-sm font-medium text-foreground mb-1">{todays_picture.chris_intelligence_signal.headline}</p>
+        <p className="text-xs text-muted-foreground leading-relaxed mb-2">{todays_picture.chris_intelligence_signal.detail}</p>
         <div className="flex items-center gap-2">
-          <button className="text-[11px] font-medium px-2.5 py-1.5 rounded-lg bg-primary text-primary-foreground hover:opacity-90">Act</button>
-          <button className="text-[11px] font-medium px-2.5 py-1.5 rounded-lg border border-border text-muted-foreground hover:bg-muted">Monitor</button>
-          <button className="text-[11px] text-muted-foreground/50 hover:text-muted-foreground ml-auto">Not relevant</button>
+          {todays_picture.chris_intelligence_signal.actions.map((a, i) => (
+            i === 0 ? <button key={a} className="text-[11px] font-medium px-2.5 py-1.5 rounded-lg bg-primary text-primary-foreground hover:opacity-90">{a}</button> :
+            i === 1 ? <button key={a} className="text-[11px] font-medium px-2.5 py-1.5 rounded-lg border border-border text-muted-foreground hover:bg-muted">{a}</button> :
+            <button key={a} className="text-[11px] text-muted-foreground/50 hover:text-muted-foreground ml-auto">{a}</button>
+          ))}
         </div>
       </div>
 
-      {/* 6. DAILY BRIEFING — quiet entry point */}
-      <button
-        onClick={() => router.push("/team-loop/briefing")}
-        className="w-full bg-card rounded-xl p-4 border border-border hover:shadow-warm transition-shadow text-left flex items-center justify-between mb-16"
-      >
-        <div className="flex items-center gap-3">
-          <Sparkles className="w-4 h-4 text-[hsl(var(--brand-amber))]" />
-          <div>
-            <p className="text-sm font-medium text-foreground">Today's Briefing · Cycle 8</p>
-            <p className="text-[10px] text-muted-foreground">Updated overnight · 3 signals · 8 min read</p>
-          </div>
-        </div>
-        <ChevronRight className="w-4 h-4 text-muted-foreground" />
-      </button>
+      {/* 5.5 OPERATIONAL FINANCIAL IMPACT */}
+      <OperationalFinancialPanel />
+
+      <div className="h-16" />
     </div>
   );
 }

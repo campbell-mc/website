@@ -1,5 +1,6 @@
 "use client";
 import { RoleHomeScreen, type RoleHomeConfig } from "@/components/dashboard/RoleHomeScreen";
+import { WCFinancialPanel } from "@/components/financial/WCFinancialPanel";
 
 const config: RoleHomeConfig = {
   greeting: "Good morning, Karen",
@@ -26,4 +27,10 @@ const config: RoleHomeConfig = {
   notificationCount: 1,
 };
 
-export default function WHSHome() { return <RoleHomeScreen config={config} />; }
+export default function WHSHome() {
+  return (
+    <RoleHomeScreen config={config}>
+      <WCFinancialPanel />
+    </RoleHomeScreen>
+  );
+}

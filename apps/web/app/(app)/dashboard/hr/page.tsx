@@ -1,5 +1,6 @@
 "use client";
 import { RoleHomeScreen, type RoleHomeConfig } from "@/components/dashboard/RoleHomeScreen";
+import { WorkforceFinancialPanel } from "@/components/financial/WorkforceFinancialPanel";
 
 const config: RoleHomeConfig = {
   greeting: "Good morning, Rachel",
@@ -26,4 +27,10 @@ const config: RoleHomeConfig = {
   queueCount: 3, queueHref: "/don/queue", notificationCount: 2,
 };
 
-export default function HRHome() { return <RoleHomeScreen config={config} />; }
+export default function HRHome() {
+  return (
+    <RoleHomeScreen config={config}>
+      <WorkforceFinancialPanel />
+    </RoleHomeScreen>
+  );
+}

@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ChrisAvatar } from "@/components/chris/ChrisAvatar";
 
-export default function VerifyPage() {
+function VerifyContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [status, setStatus] = useState<"verifying" | "success" | "error">("verifying");
@@ -27,10 +27,8 @@ export default function VerifyPage() {
 
       if (res.ok) {
         const data = await res.json();
-        // Store user info for client-side access
         localStorage.setItem("chris-user", JSON.stringify(data.user));
         setStatus("success");
-        // Redirect to dashboard after brief success display
         setTimeout(() => router.push("/dashboard"), 1500);
       } else {
         const data = await res.json();
@@ -63,14 +61,14 @@ export default function VerifyPage() {
             <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[#E8F5EE] flex items-center justify-center">
               <span className="text-2xl">✓</span>
             </div>
-            <h2 className="text-xl font-semibold text-[#1B4332] mb-2">You're in</h2>
+            <h2 className="text-xl font-semibold text-[#1B4332] mb-2">You&apos;re in</h2>
             <p className="text-sm text-gray-500">Taking you to your dashboard...</p>
           </>
         )}
 
         {status === "error" && (
           <>
-            <h2 className="text-xl font-semibold text-[#C4704A] mb-2">Couldn't sign in</h2>
+            <h2 className="text-xl font-semibold text-[#C4704A] mb-2">Couldn&apos;t sign in</h2>
             <p className="text-sm text-gray-500 mb-6">{error}</p>
             <button
               onClick={() => router.push("/auth/login")}
@@ -83,5 +81,18 @@ export default function VerifyPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function VerifyPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex flex-col items-center justify-center" style={{ background: "var(--cream, #FAF7F2)" }}>
+        <ChrisAvatar size="large" showGlow className="mx-auto mb-6" />
+        <p className="text-sm text-gray-500">Verifying...</p>
+      </div>
+    }>
+      <VerifyContent />
+    </Suspense>
   );
 }
