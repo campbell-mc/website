@@ -1152,26 +1152,85 @@ export const agent_activity: AgentState[] = [
   },
 ];
 
-// Queue items for badge count on Review Queue nav item
-export const queue_summary = {
-  don: { count: 5, highestSeverity: 'immediate' as const },
-  facility_manager: { count: 7, highestSeverity: 'urgent' as const },
-  ceo: { count: 2, highestSeverity: 'routine' as const },
-  cfo: { count: 3, highestSeverity: 'urgent' as const },
-  quality_lead: { count: 4, highestSeverity: 'urgent' as const },
-  whs_lead: { count: 2, highestSeverity: 'routine' as const },
-  hr_manager: { count: 1, highestSeverity: 'routine' as const },
-  clinical_director: { count: 2, highestSeverity: 'routine' as const },
-  team_leader: { count: 1, highestSeverity: 'routine' as const },
-  board_member: { count: 1, highestSeverity: 'routine' as const },
+// Queue items — role-specific, aligned to data model
+export interface QueueItem {
+  id: string;
+  severity: 'immediate' | 'urgent' | 'routine';
+  title: string;
+  source: string;
+  route: string;
+}
+
+export const queue_items: Record<string, QueueItem[]> = {
+  don: [
+    { id: 'Q-001', severity: 'immediate', title: 'SIRS Cat 2 draft — review and submit to GPMS', source: 'Chronicler', route: '/dashboard/sirs' },
+    { id: 'Q-002', severity: 'urgent', title: 'Falls prevention audit — 4 days overdue', source: 'Sentinel', route: '/dashboard/audits' },
+    { id: 'Q-003', severity: 'urgent', title: '2 care plan reviews overdue — Grevillea & Boronia Wings', source: 'Sentinel', route: '/dashboard/residents/care-plans' },
+    { id: 'Q-004', severity: 'routine', title: 'QI Q2 submission — CHRIS draft ready for review', source: 'Chronicler', route: '/dashboard/quality' },
+    { id: 'Q-005', severity: 'routine', title: '3 AN-ACC reassessments — schedule clinical reviews', source: 'Oracle', route: '/dashboard/residents/care-plans' },
+  ],
+  facility_manager: [
+    { id: 'Q-010', severity: 'urgent', title: 'Board Pack — approve before 17 Apr (8 days)', source: 'Chronicler', route: '/dashboard/reporting' },
+    { id: 'Q-011', severity: 'urgent', title: 'Wing B bathroom corrective action — 58 days overdue', source: 'Sentinel', route: '/dashboard/compliance' },
+    { id: 'Q-012', severity: 'urgent', title: 'Grevillea Wing PSH convergence — Level 2 escalation needed', source: 'Keeper', route: '/dashboard/psh' },
+    { id: 'Q-013', severity: 'urgent', title: 'Structural RN gap — Sunday PM requires permanent hire', source: 'Steward', route: '/dashboard/workforce/roster' },
+    { id: 'Q-014', severity: 'routine', title: 'Oracle + Steward recommendation — AN-ACC review scheduling', source: 'Town Crier', route: '/dashboard/agents' },
+    { id: 'Q-015', severity: 'routine', title: 'Clinical Governance Pack — review before 14 Apr meeting', source: 'Chronicler', route: '/dashboard/reporting' },
+    { id: 'Q-016', severity: 'routine', title: 'Monthly family update — review and distribute', source: 'Chronicler', route: '/dashboard/residents/families' },
+  ],
+  ceo: [
+    { id: 'Q-020', severity: 'urgent', title: 'Board Pack Q2 — approve before 17 Apr Board meeting', source: 'Chronicler', route: '/dashboard/reporting' },
+    { id: 'Q-021', severity: 'routine', title: 'ELT Pack — review cross-facility intelligence section', source: 'Chronicler', route: '/dashboard/reporting' },
+  ],
+  cfo: [
+    { id: 'Q-030', severity: 'urgent', title: 'QFR Q2 — sign off capital expenditure and depreciation', source: 'Chronicler', route: '/dashboard/financial/budget' },
+    { id: 'Q-031', severity: 'urgent', title: 'Oracle report — 3 AN-ACC opportunities ($11.4K/month)', source: 'Oracle', route: '/dashboard/financial/revenue' },
+    { id: 'Q-032', severity: 'routine', title: 'ELT finance section — review P&L commentary draft', source: 'Chronicler', route: '/dashboard/reporting' },
+  ],
+  clinical_director: [
+    { id: 'Q-040', severity: 'routine', title: 'Clinical Leadership Pack — review before meeting', source: 'Chronicler', route: '/dashboard/reporting' },
+    { id: 'Q-041', severity: 'routine', title: 'AN-ACC portfolio review — 3 facilities with reassessment flags', source: 'Oracle', route: '/dashboard/residents/care-plans' },
+  ],
+  quality_lead: [
+    { id: 'Q-050', severity: 'immediate', title: 'SIRS Cat 2 draft — co-review with DON before GPMS submission', source: 'Chronicler', route: '/dashboard/sirs' },
+    { id: 'Q-051', severity: 'urgent', title: 'QS 2.8.2 evidence gap — CHRIS can fix in 2 minutes', source: 'Sentinel', route: '/dashboard/compliance' },
+    { id: 'Q-052', severity: 'urgent', title: 'ISO 45003 worker consultation record — needs updating', source: 'Sentinel', route: '/dashboard/compliance' },
+    { id: 'Q-053', severity: 'routine', title: 'Q&R Committee Pack — review before 17 Apr meeting', source: 'Chronicler', route: '/dashboard/reporting' },
+  ],
+  whs_lead: [
+    { id: 'Q-060', severity: 'urgent', title: 'Grevillea Wing WC risk — prescribe Level 2 intervention', source: 'Keeper', route: '/dashboard/psh' },
+    { id: 'Q-061', severity: 'routine', title: 'WHS Committee Pack — review PSH + WC section', source: 'Chronicler', route: '/dashboard/reporting' },
+  ],
+  hr_manager: [
+    { id: 'Q-070', severity: 'urgent', title: '2 AHPRA registrations expiring within 30 days — send reminders', source: 'Steward', route: '/dashboard/training' },
+    { id: 'Q-071', severity: 'routine', title: 'P&C Committee Pack — review workforce section', source: 'Chronicler', route: '/dashboard/reporting' },
+  ],
+  team_leader: [
+    { id: 'Q-080', severity: 'routine', title: 'Team Briefing Cycle 8 — read before Monday huddle', source: 'Chronicler', route: '/team-loop/briefing' },
+  ],
+  board_member: [
+    { id: 'Q-090', severity: 'routine', title: 'Q2 Board Pack — read before 17 Apr meeting', source: 'Chronicler', route: '/dashboard/reporting' },
+  ],
 };
+
+// Derived summary for badge display
+export const queue_summary = Object.fromEntries(
+  Object.entries(queue_items).map(([role, items]) => {
+    const severityOrder = { immediate: 0, urgent: 1, routine: 2 };
+    const sorted = [...items].sort((a, b) => severityOrder[a.severity] - severityOrder[b.severity]);
+    return [role, {
+      count: items.length,
+      highestSeverity: sorted[0]?.severity ?? null,
+    }];
+  })
+) as Record<string, { count: number; highestSeverity: 'immediate' | 'urgent' | 'routine' | null }>;
 
 // Sections with pending alerts (for dot indicator on collapsed sections)
 export const section_alerts: Record<string, boolean> = {
-  clinical: true,    // SIRS Cat 1 pending
-  operations: true,  // RN gap tonight
-  governance: true,  // corrective action overdue
-  workforce: false,
+  clinical: true,    // SIRS draft + audit overdue + QI submission
+  operations: true,  // falls corrective action overdue
+  governance: true,  // Board Pack + corrective action overdue
+  workforce: true,   // PSH convergence + AHPRA expiry
   financial: false,
   residents: true,   // care plan overdue
   loops: false,
@@ -1237,6 +1296,7 @@ export default {
   todays_picture,
   resident_intelligence,
   home_care_data,
+  queue_items,
   queue_summary,
   section_alerts,
   agent_activity,
