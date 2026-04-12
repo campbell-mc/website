@@ -120,7 +120,12 @@ export default function FinancialControlCentre() {
             key={m.label}
             data-has-handler="true"
             onClick={() => router.push(m.href)}
-            className="bg-card rounded-xl px-4 py-3 border border-border hover:shadow-warm transition-shadow text-left flex items-center justify-between"
+            className={`rounded-xl px-4 py-3 border border-border hover:shadow-warm transition-shadow text-left flex items-center justify-between ${
+              m.label === "Revenue" ? "border-l-4 border-l-[#2D7D73] bg-white" :
+              m.label === "Care Ratio" ? "border-l-4 border-l-[#D4A017] bg-[#FFFBF0]" :
+              m.label === "Budget" ? "border-l-4 border-l-[#D4A017] bg-[#FFFBF0]" :
+              "bg-white"
+            }`}
           >
             <div>
               <p className={`text-lg font-bold ${m.color}`}>{m.value}</p>

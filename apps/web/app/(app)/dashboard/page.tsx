@@ -13,7 +13,12 @@ import { OperationalFinancialPanel } from "@/components/financial/OperationalFin
 // "What's going on at my facility today?" → then "What do I do about it?"
 // ============================================================================
 
-function getGreeting(): string {
+function getGreeting(shift?: string): string {
+  // Shift takes priority — a DON starting day shift at 6:30pm gets "Good morning"
+  if (shift === "day" || shift === "morning") return "Good morning";
+  if (shift === "afternoon") return "Good afternoon";
+  if (shift === "night") return "Good evening";
+  // Fallback to time-based
   const h = new Date().getHours();
   if (h < 12) return "Good morning";
   if (h < 17) return "Good afternoon";
@@ -68,9 +73,10 @@ const DOMAINS: DomainStatus[] = todays_picture.domain_status.map((d) => ({
 }));
 
 const PRIORITY_MAP: Record<string, "clear" | "watch" | "act"> = {
-  urgent: "act",
-  warning: "watch",
+  immediate: "act",
+  urgent: "watch",
   info: "clear",
+  warning: "watch",
 };
 
 const TOP_ACTIONS = todays_picture.top_3_actions.map((a) => ({
@@ -111,7 +117,7 @@ export default function HomePage() {
       {/* 1. GREETING */}
       <div className="flex items-center justify-between mb-5">
         <div>
-          <p className="text-lg font-semibold text-foreground">{getGreeting()}, Sarah</p>
+          <p className="text-lg font-semibold text-foreground">{getGreeting("day")}, Sarah</p>
           <p className="text-xs text-muted-foreground">
             {facility.name} · {new Date().toLocaleDateString("en-AU", { weekday: "long", day: "numeric", month: "long" })} · Day shift
           </p>
@@ -148,8 +154,10 @@ export default function HomePage() {
         {TOP_ACTIONS.map((action, i) => (
           <div
             key={i}
-            className={`bg-card rounded-xl p-4 border border-border border-l-4 ${
-              action.priority === "act" ? "border-l-[hsl(var(--brand-terracotta))]" : action.priority === "clear" ? "border-l-[hsl(var(--brand-teal))]" : "border-l-[hsl(var(--brand-amber))]"
+            className={`rounded-xl p-4 border border-border border-l-[6px] ${
+              action.priority === "act" ? "border-l-[#C4704A] bg-[#FEF7F0]" :
+              action.priority === "watch" ? "border-l-[#D4A017] bg-[#FFFBF0]" :
+              "border-l-[#2D7D73] bg-white"
             }`}
           >
             <div className="flex items-center justify-between">

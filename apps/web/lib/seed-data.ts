@@ -794,9 +794,9 @@ export const todays_picture = {
     { domain: 'Financial', status: 'warning', summary: 'Care ratio 51.9% — below 55% target · Agency cost reducing month-on-month · YTD adverse $244K' },
   ],
   top_3_actions: [
-    { rank: 1, priority: 'urgent', description: 'Q2 QI submission — review CHRIS draft and submit to GPMS', context: 'Due 21 Apr · 9 days · Draft ready · 14 QIs compiled', action_label: 'Review submission →', route: '/dashboard/quality-indicators' },
+    { rank: 1, priority: 'info', description: 'Q2 QI submission — review CHRIS draft and submit to GPMS', context: 'Due 21 Apr · 9 days · Draft ready · 14 QIs compiled', action_label: 'Review submission →', route: '/dashboard/quality-indicators' },
     { rank: 2, priority: 'urgent', description: 'Board Pack approval — meeting in 8 days', context: 'CHRIS draft ready · 8 sections · Est. 35 min review', action_label: 'Start review →', route: '/dashboard/governance/board-pack' },
-    { rank: 3, priority: 'warning', description: 'Wing B bathroom corrective action — overdue 58 days', context: 'Falls prevention audit CA-2026-004 · Grab rail assessment not yet done', action_label: 'Assign now →', route: '/dashboard/corrective-actions/CA-2026-004' },
+    { rank: 3, priority: 'immediate', description: 'Wing B bathroom corrective action — overdue 58 days', context: 'Falls prevention audit CA-2026-004 · Grab rail assessment not yet done', action_label: 'Assign now →', route: '/dashboard/corrective-actions/CA-2026-004' },
   ],
   chris_intelligence_signal: {
     type: 'PREDICTIVE', confidence: 'EMERGING',

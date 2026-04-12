@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { RefreshCw, MessageCircle } from "lucide-react";
 import { ChrisAvatar } from "./ChrisAvatar";
 import { useRouter } from "next/navigation";
@@ -119,6 +119,13 @@ export function SituationReport({
     onRefresh?.();
   }, [facilityId, domain, canRefresh, refreshing, onRefresh]);
 
+  const [expanded, setExpanded] = useState(false);
+  const { preview, hasMore } = useMemo(() => {
+    const sentences = narrative.split(/(?<=\.)\s+/).filter(Boolean);
+    if (sentences.length <= 4) return { preview: narrative, hasMore: false };
+    return { preview: sentences.slice(0, 4).join(' '), hasMore: true };
+  }, [narrative]);
+
   return (
     <div
       className="rounded-xl border-l-4 border-l-[hsl(var(--brand-forest))] border border-border p-5 mb-4"
@@ -134,14 +141,21 @@ export function SituationReport({
         </div>
       </div>
 
-      {/* Narrative — fades on update */}
-      <p className={`text-sm text-foreground leading-relaxed font-serif-accent mb-4 transition-opacity duration-300 ${refreshing ? "opacity-40" : "opacity-100"}`}>
+      {/* Narrative — 4 sentence max, expand for more */}
+      <div className={`text-sm text-foreground leading-relaxed font-serif-accent mb-4 transition-opacity duration-300 ${refreshing ? "opacity-40" : "opacity-100"}`}>
         {refreshing && !narrative ? (
           <span className="text-muted-foreground italic">Generating situation report...</span>
         ) : (
-          narrative
+          <>
+            {expanded ? narrative : preview}
+            {hasMore && (
+              <button onClick={() => setExpanded(!expanded)} className="ml-1 text-[#2D7D73] text-sm font-medium hover:underline">
+                {expanded ? 'Show less' : 'Read more →'}
+              </button>
+            )}
+          </>
         )}
-      </p>
+      </div>
 
       {/* Signal dots + actions */}
       <div className="flex items-center justify-between">

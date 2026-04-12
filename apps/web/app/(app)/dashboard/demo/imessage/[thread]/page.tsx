@@ -111,7 +111,7 @@ export default function IMessageThreadPage() {
 
                 <div className={`max-w-[75%] px-4 py-3 ${
                   isChris
-                    ? "bg-white rounded-[18px_18px_18px_4px]"
+                    ? msg.urgent ? "bg-[#FEF7F0] rounded-[18px_18px_18px_4px]" : "bg-white rounded-[18px_18px_18px_4px]"
                     : "bg-[#1B4332] text-white rounded-[18px_18px_4px_18px]"
                 }`}>
                   <p className="text-[15px] leading-relaxed" style={{ color: isChris ? "#000000" : "#FFFFFF" }}>{msg.text}</p>
@@ -128,6 +128,8 @@ export default function IMessageThreadPage() {
                       className={`px-4 py-2 rounded-full text-[14px] font-semibold transition-opacity hover:opacity-90 ${
                         action.variant === "secondary"
                           ? "bg-[#E5E7EB] text-[#374151]"
+                          : action.variant === "urgent"
+                          ? "bg-[#C4704A] text-white"
                           : "bg-[#1B4332] text-white"
                       }`}
                     >

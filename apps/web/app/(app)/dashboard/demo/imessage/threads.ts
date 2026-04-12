@@ -5,7 +5,8 @@ export interface ThreadMessage {
   sender: 'chris' | 'user';
   text: string;
   time: string;
-  actions?: Array<{ label: string; route?: string; variant?: 'primary' | 'secondary'; response?: string }>;
+  urgent?: boolean; // terracotta tint on bubble for immediate messages
+  actions?: Array<{ label: string; route?: string; variant?: 'primary' | 'secondary' | 'urgent'; response?: string }>;
   emojiActions?: Array<{ emoji: string; response: string }>;
 }
 
@@ -27,7 +28,7 @@ export const THREADS: Thread[] = [
     color: '#1B4332',
     messages: [
       { id: 'd1', sender: 'chris', time: 'Today 05:47am', text: "Good morning Sarah. Care minutes are compliant heading into the day — 201 total, 40.4 RN. One thing before you arrive: the Board Pack needs your approval before the 17th. It's sitting in your queue, takes about 20 minutes.", actions: [{ label: 'Open CHRIS →', route: '/dashboard', variant: 'primary' }] },
-      { id: 'd2', sender: 'chris', time: 'Today 06:03am', text: 'SIRS Cat 1 — Wattle Wing. Unexpected fall, Wing B bathroom. Draft notification is ready for your review. 18 hours remaining to submit to ACQSC. Penalty exposure: $783K if missed.', actions: [{ label: 'Review draft →', route: '/dashboard/sirs', variant: 'primary' }] },
+      { id: 'd2', sender: 'chris', time: 'Today 06:03am', urgent: true, text: 'SIRS Cat 1 — Wattle Wing. Unexpected fall, Wing B bathroom. Draft notification is ready for your review. 18 hours remaining to submit to ACQSC. Penalty exposure: $783K if missed.', actions: [{ label: 'Review draft →', route: '/dashboard/sirs', variant: 'urgent' }] },
       { id: 'd3', sender: 'user', time: 'Today 11:47am', text: "What's our care minutes position for tonight's afternoon shift?" },
       { id: 'd4', sender: 'chris', time: 'Today 11:48am', text: "Tonight looks tight. RN confirmed — 40.2 minutes projected. Total care minutes at 197 — 3 short of the 200 target. The gap is in Grevillea Wing afternoon. One AIN shift unfilled. Want me to generate the agency brief?", actions: [{ label: 'Yes, generate brief →', variant: 'primary', response: 'Agency brief sent to Programmed. Grevillea Wing AIN shift covered for tonight. Care minutes will be compliant. I\'ve updated the roster in the queue for your confirmation.' }, { label: "I'll handle it", variant: 'secondary', response: 'Got it. The gap is flagged in your queue if you need the detail later.' }] },
     ],

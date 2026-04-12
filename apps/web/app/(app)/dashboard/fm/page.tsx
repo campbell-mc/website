@@ -13,7 +13,10 @@ import { OperationalFinancialPanel } from "@/components/financial/OperationalFin
 // Broader than DON (adds financial + residents), narrower than CEO (single facility)
 // ============================================================================
 
-function getGreeting(): string {
+function getGreeting(shift?: string): string {
+  if (shift === "day" || shift === "morning") return "Good morning";
+  if (shift === "afternoon") return "Good afternoon";
+  if (shift === "night") return "Good evening";
   const h = new Date().getHours();
   if (h < 12) return "Good morning";
   if (h < 17) return "Good afternoon";
@@ -90,7 +93,7 @@ export default function FMHomePage() {
       {/* 1. GREETING */}
       <div className="flex items-center justify-between mb-5">
         <div>
-          <p className="text-lg font-semibold text-foreground">{getGreeting()}, Michael</p>
+          <p className="text-lg font-semibold text-foreground">{getGreeting("day")}, Michael</p>
           <p className="text-xs text-muted-foreground">
             {facility.name} · {new Date().toLocaleDateString("en-AU", { weekday: "long", day: "numeric", month: "long" })} · Facility Manager
           </p>

@@ -40,7 +40,7 @@ export const operationsReport = {
 // ============================================================
 
 export const clinicalReport = {
-  narrative: `The clinical picture is mixed today. Care minutes have been compliant all week — ${latestCM.avg_total} total, ${latestCM.avg_rn} RN — the strongest sustained period since November. The SIRS draft for the March 3 wrist fracture is ready for review with ${Math.max(0, Math.ceil((new Date("2026-04-02").getTime() - Date.now()) / 86400000))} days remaining — no urgency, but it's cleaner to clear it this week. QI_03 (Falls) has been above benchmark for 3 consecutive quarters and CHRIS has traced the pattern to agency-covered night shifts specifically — 78% of falls occurred on shifts with more than 30% agency coverage. The falls prevention audit is due in 4 days — CHRIS can guide it by voice, approximately 45 minutes. Two residents are flagged for AN-ACC reassessment; clinical reviews should happen before their assessment dates to ensure accurate documentation supports the funding claim.`,
+  narrative: `The SIRS Cat 1 notification for the March 3 wrist fracture is due today — the Chronicler draft is ready for your review. This must be submitted before the deadline to avoid $783K penalty exposure. Care minutes have been compliant all week — ${latestCM.avg_total} total, ${latestCM.avg_rn} RN — the strongest sustained period since November. QI_03 (Falls) remains above benchmark for a third consecutive quarter, with 78% of falls on shifts with more than 30% agency coverage.`,
   refreshedAt: "2h ago",
   context: `Care minutes ${latestCM.avg_total >= 200 ? "compliant" : "at risk"} · AlayaCare 2h ago`,
   signals: [
