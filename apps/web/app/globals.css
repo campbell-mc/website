@@ -427,6 +427,19 @@ button:active { transform: scale(0.98); }
 @keyframes slideIn { from { transform: translateX(-100%); } to { transform: translateX(0); } }
 .animate-slideIn { animation: slideIn 0.2s ease-out; }
 
+/* Agent Pulse ticker — continuous scroll */
+@keyframes agent-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-agent-scroll {
+  animation: agent-scroll 30s linear infinite;
+  width: max-content;
+}
+.animate-agent-scroll:hover {
+  animation-play-state: paused;
+}
+
 /* ============================================================================
    Scrollbar
    ============================================================================ */
