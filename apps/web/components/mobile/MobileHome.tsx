@@ -2,224 +2,137 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { todays_picture, facility, financial_monthly } from "@/lib/seed-data";
+import { Mic, ChevronRight, RefreshCw } from "lucide-react";
+import { todays_picture, facility, financial_monthly, agent_activity } from "@/lib/seed-data";
+import { currentMetrics } from "@/lib/financial-benchmarks";
 import MobileActionCard from "./MobileActionCard";
 
 function getGreeting(): string {
-  const hour = new Date().getHours();
-  if (hour < 12) return "Good morning";
-  if (hour < 17) return "Good afternoon";
+  const h = new Date().getHours();
+  if (h < 12) return "Good morning";
+  if (h < 17) return "Good afternoon";
   return "Good evening";
 }
 
-function formatDate(): string {
-  return new Date().toLocaleDateString("en-AU", {
-    weekday: "long",
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
-}
-
-const domainStatusDot: Record<string, string> = {
-  ok: "bg-[#2D7D73]",
-  warning: "bg-[#D4A017]",
-  critical: "bg-[#C4704A]",
-};
+const topAgent = agent_activity.find((a) => a.status === "awaiting_action") ?? agent_activity[0];
 
 export default function MobileHome() {
   const router = useRouter();
-  const [expanded, setExpanded] = useState(false);
+  const [chrisExpanded, setChrisExpanded] = useState(false);
+  const [agentExpanded, setAgentExpanded] = useState(false);
 
-  const latestFinancial = financial_monthly[financial_monthly.length - 1];
-  const chrisText = todays_picture.chris_text;
-  const previewText = chrisText.split(". ").slice(0, 2).join(". ") + ".";
+  const sentences = todays_picture.chris_text.split(/(?<=\.)\s+/).filter(Boolean);
+  const preview = sentences.slice(0, 3).join(" ");
+  const rest = sentences.slice(3).join(" ");
 
   return (
-    <div className="min-h-screen bg-[#FAF9F7] pb-20">
-      {/* Header */}
-      <div className="px-4 pt-12 pb-4">
-        <h1 className="text-[22px] font-bold text-[#1B4332]">
-          {getGreeting()}, Sarah
-        </h1>
-        <p className="text-[14px] text-gray-500 mt-0.5">
-          {facility.name} &middot; {formatDate()}
-        </p>
+    <div className="flex flex-col gap-6 pb-24">
+      {/* Greeting */}
+      <div className="px-4 pt-4">
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-[28px] font-bold text-gray-900">{getGreeting()}, Sarah</h1>
+            <p className="text-[13px] text-gray-500 mt-0.5">{facility.name} · Day shift</p>
+          </div>
+          <button data-has-handler="true" onClick={() => router.push("/dashboard/coach")} className="flex items-center gap-1.5 px-3 py-2 border border-gray-200 rounded-xl text-[13px] font-medium text-gray-700 active:bg-gray-50">
+            <Mic className="w-4 h-4" /><span>Ask</span>
+          </button>
+        </div>
       </div>
 
-      {/* CHRIS Intelligence Block */}
-      <div className="px-4 mb-4">
-        <div className="bg-white rounded-2xl p-4 shadow-sm">
-          <div className="flex items-start gap-3">
-            {/* CHRIS Avatar */}
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#1B4332] to-[#C9A84C] flex items-center justify-center flex-shrink-0">
-              <svg
-                className="w-5 h-5 text-white"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"
-                />
-              </svg>
-            </div>
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-2 mb-1">
-                <span className="text-[13px] font-semibold text-[#1B4332]">
-                  CHRIS
-                </span>
-                {/* Signal dots */}
-                <div className="flex gap-1">
-                  {todays_picture.domain_status.map((d) => (
-                    <span
-                      key={d.domain}
-                      className={`w-1.5 h-1.5 rounded-full ${domainStatusDot[d.status] || "bg-gray-300"}`}
-                      title={d.domain}
-                    />
-                  ))}
-                </div>
-              </div>
-              <p className="text-[15px] text-gray-700 leading-relaxed">
-                {expanded ? chrisText : previewText}
-              </p>
-              <button
-                data-has-handler="true"
-                onClick={() => setExpanded(!expanded)}
-                className="text-[13px] text-[#2D7D73] font-medium mt-1 min-h-[44px] flex items-center"
-              >
-                {expanded ? "Show less" : "Read more"}
-              </button>
-            </div>
+      {/* CHRIS Intelligence */}
+      <div className="mx-4 bg-white rounded-2xl border border-gray-100 p-5">
+        <div className="flex items-center gap-2.5 mb-3">
+          <div className="w-8 h-8 rounded-full bg-[#1B4332] flex items-center justify-center shrink-0">
+            <span className="text-white text-sm font-bold">C</span>
+          </div>
+          <div>
+            <p className="text-[13px] font-semibold text-gray-900">CHRIS</p>
+            <p className="text-[12px] text-gray-400">Updated 2h ago</p>
           </div>
         </div>
+        <p className="text-[17px] text-gray-800 leading-[1.65] mb-3">
+          {preview}
+          {rest && !chrisExpanded && (
+            <span>... <button onClick={() => setChrisExpanded(true)} className="text-[#2D7D73] font-semibold">Read more</button></span>
+          )}
+          {chrisExpanded && (
+            <span> {rest} <button onClick={() => setChrisExpanded(false)} className="text-[#2D7D73] font-semibold">Show less</button></span>
+          )}
+        </p>
+        <div className="flex gap-4 pt-3 border-t border-gray-50">
+          <button className="text-[13px] text-[#2D7D73] font-medium flex items-center gap-1"><RefreshCw className="w-3.5 h-3.5" />Refresh</button>
+          <button data-has-handler="true" onClick={() => router.push("/dashboard/coach")} className="text-[13px] text-gray-400 font-medium">Ask CHRIS</button>
+        </div>
+      </div>
+
+      {/* Agent Pulse — single agent, expandable */}
+      <div className="mx-4">
+        <button onClick={() => setAgentExpanded(!agentExpanded)} className="w-full bg-[#F0F4F2] rounded-xl px-4 py-3 flex items-center gap-2.5 active:opacity-80">
+          <div className={`w-2 h-2 rounded-full shrink-0 ${topAgent.status === "active" ? "bg-[#2D7D73] animate-pulse" : "bg-[#D4A017]"}`} />
+          <span className="text-[13px] font-semibold text-[#1B4332] uppercase tracking-wider shrink-0">{topAgent.name}</span>
+          <span className="text-[13px] text-gray-500 flex-1 truncate">{topAgent.last_action.substring(0, 35)}...</span>
+          <span className="text-[12px] text-[#2D7D73] font-medium shrink-0">{agentExpanded ? "Close ↑" : "All ↓"}</span>
+        </button>
+        {agentExpanded && (
+          <div className="bg-[#F0F4F2] rounded-b-xl px-4 pb-3 -mt-1 pt-2 space-y-2.5">
+            {agent_activity.filter((a) => a.name !== topAgent.name).map((agent) => (
+              <div key={agent.name} className="flex items-center gap-2.5">
+                <div className={`w-2 h-2 rounded-full shrink-0 ${agent.status === "active" ? "bg-[#2D7D73]" : agent.status === "awaiting_action" ? "bg-[#D4A017]" : "bg-gray-400"}`} />
+                <span className="text-[12px] font-semibold text-[#1B4332] uppercase tracking-wider w-20 shrink-0">{agent.name}</span>
+                <span className="text-[12px] text-gray-500 truncate">{agent.last_action.substring(0, 30)}...</span>
+              </div>
+            ))}
+            <button data-has-handler="true" onClick={() => router.push("/dashboard/agents")} className="text-[12px] text-[#2D7D73] font-medium pt-1">View all →</button>
+          </div>
+        )}
       </div>
 
       {/* Domain Strip */}
-      <div className="px-4 mb-4">
-        <div className="bg-white rounded-2xl shadow-sm divide-y divide-gray-50">
-          {todays_picture.domain_status.map((domain) => (
-            <button
-              key={domain.domain}
-              data-has-handler="true"
-              onClick={() =>
-                router.push(
-                  `/dashboard/${domain.domain.toLowerCase()}`
-                )
-              }
-              className="w-full flex items-start gap-3 px-4 py-3.5 min-h-[44px] active:bg-gray-50 transition-colors"
-            >
-              <span
-                className={`w-2.5 h-2.5 rounded-full mt-1.5 flex-shrink-0 ${domainStatusDot[domain.status] || "bg-gray-300"}`}
-              />
-              <div className="flex-1 text-left min-w-0">
-                <span className="text-[15px] font-semibold text-[#1B4332] block">
-                  {domain.domain}
-                </span>
-                <span className="text-[13px] text-gray-500 leading-snug block mt-0.5">
-                  {domain.summary}
-                </span>
-              </div>
-              <svg
-                className="w-4 h-4 text-gray-300 mt-1 flex-shrink-0"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={2}
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M8.25 4.5l7.5 7.5-7.5 7.5"
-                />
-              </svg>
-            </button>
-          ))}
+      <div className="px-4">
+        <p className="text-[13px] font-semibold text-gray-400 uppercase tracking-wider mb-2">Across your domains</p>
+        <div className="flex flex-col gap-2">
+          {todays_picture.domain_status.map((d) => {
+            const routes: Record<string, string> = { Clinical: "/dashboard/clinical", Workforce: "/dashboard/workforce", Governance: "/dashboard/compliance", Financial: "/dashboard/financial", Operations: "/dashboard/operations" };
+            return (
+              <button key={d.domain} data-has-handler="true" onClick={() => router.push(routes[d.domain] || "/dashboard/residents")} className="flex items-start gap-3 p-4 bg-white rounded-2xl border border-gray-100 text-left active:bg-gray-50">
+                <span className={`w-2.5 h-2.5 rounded-full shrink-0 mt-1 ${d.status === "ok" ? "bg-[#2D7D73]" : "bg-[#D4A017]"}`} />
+                <div className="flex-1 min-w-0">
+                  <p className="text-[15px] font-semibold text-gray-900">{d.domain}</p>
+                  <p className="text-[13px] text-gray-500 leading-snug mt-0.5">{d.summary}</p>
+                </div>
+                <ChevronRight className="w-4 h-4 text-gray-300 shrink-0 mt-1" />
+              </button>
+            );
+          })}
         </div>
       </div>
 
-      {/* Top 3 Actions */}
-      <div className="px-4 mb-4">
-        <h2 className="text-[15px] font-semibold text-[#1B4332] mb-3">
-          Priority actions
-        </h2>
+      {/* Actions */}
+      <div className="px-4">
+        <p className="text-[13px] font-semibold text-gray-400 uppercase tracking-wider mb-2">Needs your attention</p>
         <div className="flex flex-col gap-3">
-          {todays_picture.top_3_actions.map((action) => (
-            <MobileActionCard
-              key={action.rank}
-              severity={
-                action.priority === "immediate"
-                  ? "immediate"
-                  : action.priority === "urgent"
-                    ? "urgent"
-                    : "routine"
-              }
-              title={action.description}
-              description={action.context}
-              actionLabel={action.action_label}
-              route={action.route}
-            />
-          ))}
+          <MobileActionCard severity="immediate" title="Corrective action — 58 days overdue" description="Wing B bathroom falls prevention. Grab rail assessment not done." penaltyRisk="Overdue corrective actions are ACQSC audit risk" actionLabel="Assign now →" route="/dashboard/compliance" />
+          <MobileActionCard severity="urgent" title="Board Pack approval — 8 days" description="Meeting 17 April. CHRIS draft ready. 35 min review." actionLabel="Start review →" route="/dashboard/reporting" />
+          <MobileActionCard severity="routine" title="QI submission due in 9 days" description="Q2 Quality Indicators. CHRIS draft ready for review." actionLabel="Review submission →" route="/dashboard/quality" />
         </div>
       </div>
 
-      {/* Financial Snapshot */}
-      <div className="px-4 mb-6">
-        <div className="bg-white rounded-2xl p-4 shadow-sm">
-          <h2 className="text-[15px] font-semibold text-[#1B4332] mb-3">
-            Financial snapshot
-          </h2>
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <p className="text-[12px] text-gray-400 uppercase tracking-wide">
-                Care ratio
-              </p>
-              <p className="text-[20px] font-bold text-[#1B4332]">
-                {latestFinancial
-                  ? `${(latestFinancial.care_ratio * 100).toFixed(1)}%`
-                  : "--"}
-              </p>
-              <p className="text-[12px] text-gray-400">Target 55%</p>
+      {/* Financial snapshot 2x2 */}
+      <div className="px-4">
+        <p className="text-[13px] font-semibold text-gray-400 uppercase tracking-wider mb-2">Financial snapshot</p>
+        <div className="grid grid-cols-2 gap-3">
+          {[
+            { value: `${currentMetrics.careRatio}%`, label: "Care ratio", alert: false },
+            { value: `$${Math.round(financial_monthly[financial_monthly.length - 1].expenditure.direct_care_agency / 1000)}K`, label: "Agency cost", alert: true },
+            { value: `${Math.round(currentMetrics.occupancy * 100)}%`, label: "Occupancy", alert: false },
+            { value: "+$190", label: "Tonight premium", alert: true },
+          ].map((s) => (
+            <div key={s.label} className={`bg-white rounded-2xl border p-4 min-h-[88px] flex flex-col justify-between ${s.alert ? "border-l-4 border-l-[#D4A017] bg-[#FFFBF0] border-gray-100" : "border-gray-100"}`}>
+              <span className={`text-[32px] font-bold leading-none ${s.alert ? "text-[#C4704A]" : "text-gray-900"}`}>{s.value}</span>
+              <span className="text-[12px] uppercase tracking-wide text-gray-500 font-medium">{s.label}</span>
             </div>
-            <div>
-              <p className="text-[12px] text-gray-400 uppercase tracking-wide">
-                Agency cost
-              </p>
-              <p className="text-[20px] font-bold text-[#1B4332]">
-                {latestFinancial
-                  ? `${(latestFinancial.agency_cost_pct_of_care_workforce * 100).toFixed(1)}%`
-                  : "--"}
-              </p>
-              <p className="text-[12px] text-gray-400">of care workforce</p>
-            </div>
-            <div>
-              <p className="text-[12px] text-gray-400 uppercase tracking-wide">
-                EBITDA
-              </p>
-              <p className="text-[20px] font-bold text-[#1B4332]">
-                {latestFinancial
-                  ? `$${(latestFinancial.ebitda / 1000).toFixed(0)}K`
-                  : "--"}
-              </p>
-              <p className="text-[12px] text-gray-400">March 2026</p>
-            </div>
-            <div>
-              <p className="text-[12px] text-gray-400 uppercase tracking-wide">
-                Occupancy
-              </p>
-              <p className="text-[20px] font-bold text-[#1B4332]">
-                {latestFinancial
-                  ? `${(latestFinancial.occupancy_pct * 100).toFixed(1)}%`
-                  : "--"}
-              </p>
-              <p className="text-[12px] text-gray-400">
-                {facility.beds} beds
-              </p>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </div>

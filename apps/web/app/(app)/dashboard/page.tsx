@@ -6,6 +6,8 @@ import { ChrisAvatar } from "@/components/chris/ChrisAvatar";
 import { todays_picture, facility, psh_cycles } from "@/lib/seed-data";
 import { OperationalFinancialPanel } from "@/components/financial/OperationalFinancialPanel";
 import { AgentPulse } from "@/components/chris/AgentPulse";
+import { useMobile } from "@/lib/hooks/useMobile";
+import MobileHome from "@/components/mobile/MobileHome";
 
 // ============================================================================
 // HOME SCREEN — Today's Briefing
@@ -87,6 +89,9 @@ const TOP_ACTIONS = todays_picture.top_3_actions.map((a) => ({
 
 export default function HomePage() {
   const router = useRouter();
+  const mobile = useMobile();
+
+  if (mobile) return <MobileHome />;
 
   return (
     <div className="px-4 lg:px-6 py-4 lg:py-6 max-w-3xl mx-auto">
