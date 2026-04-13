@@ -41,18 +41,16 @@ function DomainRow({ domain }: { domain: DomainStatus }) {
   return (
     <button
       onClick={() => router.push(domain.href)}
-      className={`flex items-center justify-between w-full px-4 py-3 border-b border-border last:border-b-0 hover:bg-muted/50 transition-colors ${
+      className={`flex items-start gap-3 w-full px-4 py-3 border-b border-border last:border-b-0 hover:bg-muted/50 transition-colors text-left ${
         domain.status === "act" ? "bg-[rgba(196,112,74,0.04)]" : ""
       }`}
     >
-      <div className="flex items-center gap-3">
-        <span className="text-sm">{indicator}</span>
+      <span className="text-sm shrink-0 mt-0.5">{indicator}</span>
+      <div className="flex-1 min-w-0">
         <span className="text-sm font-medium text-foreground">{domain.name}</span>
+        <span className="text-xs text-muted-foreground leading-snug">{domain.summary}</span>
       </div>
-      <div className="flex items-center gap-2">
-        <span className="text-xs text-muted-foreground">{domain.summary}</span>
-        <ChevronRight className="w-3.5 h-3.5 text-muted-foreground/40" />
-      </div>
+      <ChevronRight className="w-3.5 h-3.5 text-muted-foreground/40 shrink-0 mt-1" />
     </button>
   );
 }
@@ -163,18 +161,17 @@ export default function HomePage() {
               "border-l-[#2D7D73] bg-white"
             }`}
           >
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3 flex-1 min-w-0">
-                <span className="text-sm font-bold text-muted-foreground w-5 shrink-0">{i + 1}.</span>
-                <p className="text-sm font-medium text-foreground">{action.label}</p>
-              </div>
-              <button
-                onClick={() => router.push(action.href)}
-                className="text-xs font-medium px-3 py-2 rounded-lg bg-primary text-primary-foreground hover:opacity-90 shrink-0 ml-3"
-              >
-                {action.actionLabel}
-              </button>
+            <div className="flex items-start gap-2 mb-2">
+              <span className="text-sm font-bold text-muted-foreground w-5 shrink-0">{i + 1}.</span>
+              <p className="text-sm font-medium text-foreground">{action.label}</p>
             </div>
+            <button
+              data-has-handler="true"
+              onClick={() => router.push(action.href)}
+              className="w-full text-xs font-medium px-3 py-3 rounded-lg bg-primary text-primary-foreground hover:opacity-90"
+            >
+              {action.actionLabel}
+            </button>
           </div>
         ))}
         <button
