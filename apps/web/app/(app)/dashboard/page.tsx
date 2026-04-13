@@ -97,7 +97,7 @@ export default function HomePage() {
     <div className="px-4 lg:px-6 py-4 lg:py-6 max-w-3xl mx-auto">
       {/* DEV: Role switcher — top of page */}
       <div className="bg-[hsl(var(--brand-forest))] rounded-xl p-3 mb-4 overflow-hidden">
-        <p className="text-[10px] font-semibold text-white uppercase tracking-wider mb-2">Demo — switch role view</p>
+        <p className="text-[10px] font-semibold uppercase tracking-wider mb-2" style={{ color: "white" }}>Demo — switch role view</p>
         <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-1.5">
           {[
             { label: "DON", href: "/dashboard" },
