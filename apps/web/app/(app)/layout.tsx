@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { MobileHeader } from "@/components/layout/MobileHeader";
 import { FloatingChrisButton } from "@/components/chris/FloatingChrisButton";
+import BottomTabBar from "@/components/mobile/BottomTabBar";
 import { ActionCatcher } from "@/components/ActionCatcher";
 import { useRouter, usePathname } from "next/navigation";
 import { shouldShowCoach } from "@/components/access/FeatureGate";
@@ -84,12 +85,18 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             />
           </div>
 
-          <main className="flex-1 overflow-y-auto">{children}</main>
+          <main className="flex-1 overflow-y-auto pb-20 md:pb-0">{children}</main>
         </div>
 
+        {/* Floating CHRIS button — desktop only (mobile has bottom tab) */}
         {showCoach && (
-          <FloatingChrisButton onClick={() => router.push("/dashboard/coach")} />
+          <div className="hidden md:block">
+            <FloatingChrisButton onClick={() => router.push("/dashboard/coach")} />
+          </div>
         )}
+
+        {/* Bottom tab bar — mobile only */}
+        <BottomTabBar />
       </div>
     </ActionCatcher>
     </FacilityProvider>
