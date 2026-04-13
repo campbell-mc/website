@@ -298,6 +298,40 @@ export const AGED_CARE_KNOWLEDGE = {
     an_acc_max_assessment_interval_days: 365,
   },
 
+  workforce_benchmarks: {
+    turnover: {
+      sector_average_pct: 0.32,
+      chris_alert_threshold: 0.28,
+      chris_critical_threshold: 0.40,
+      replacement_cost_rn: 28000,
+      replacement_cost_en: 18000,
+      replacement_cost_ain: 9000,
+    },
+    absenteeism: {
+      sector_average_pct: 0.068,
+      chris_alert_threshold: 0.08,
+      chris_critical_threshold: 0.12,
+      unplanned_to_planned_ratio_alert: 0.4,
+    },
+    agency: {
+      chris_alert_threshold: 0.15,
+      chris_critical_threshold: 0.25,
+      overnight_rn_sector_avg: 0.29,
+      rn_premium_per_shift: 190,
+    },
+    composition: {
+      rn_ratio_target: 0.20,
+      permanent_ratio_target: 0.75,
+    },
+    sentiment: {
+      psh_elevated_threshold: 3.5,
+      psh_convergence_domains: 2,
+      psh_convergence_cycles: 2,
+      custom_pulse_alert_threshold: 3.0,
+      participation_minimum: 0.70,
+    },
+  },
+
   connector_source_systems: {
     rostering: ['Deputy', 'Humanforce', 'Kronos', 'Roster Ready'],
     clinical: ['AlayaCare', 'Leecare', 'Civica Care', 'iCare'],

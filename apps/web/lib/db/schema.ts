@@ -141,3 +141,76 @@ export const leaveAlerts = pgTable('leave_alerts', {
   resolved: boolean('resolved').default(false),
   created_at: timestamp('created_at').defaultNow(),
 });
+
+// ── CUSTOM PULSE SURVEYS ─────────────────────────────────────
+
+export const customPulseSurveys = pgTable('custom_pulse_surveys', {
+  id: text('id').primaryKey(),
+  facility_id: text('facility_id').notNull(),
+  created_by_role: text('created_by_role').notNull(),
+  name: text('name').notNull(),
+  description: text('description'),
+  frequency: text('frequency').notNull(),       // daily | weekly | fortnightly | monthly | one_off
+  target_roles: text('target_roles').array().notNull(),
+  target_wings: text('target_wings').array(),
+  questions: jsonb('questions').notNull(),
+  status: text('status').default('active'),     // active | paused | archived
+  next_send_at: timestamp('next_send_at'),
+  created_at: timestamp('created_at').defaultNow(),
+  updated_at: timestamp('updated_at').defaultNow(),
+});
+
+export const customPulseResponses = pgTable('custom_pulse_responses', {
+  id: text('id').primaryKey(),
+  survey_id: text('survey_id').notNull(),
+  facility_id: text('facility_id').notNull(),
+  respondent_role: text('respondent_role').notNull(),
+  respondent_wing: text('respondent_wing'),
+  cycle_id: text('cycle_id').notNull(),
+  answers: jsonb('answers').notNull(),
+  submitted_at: timestamp('submitted_at').defaultNow(),
+  // No respondent_id — fully anonymous
+});
+
+export const customPulseCycles = pgTable('custom_pulse_cycles', {
+  id: text('id').primaryKey(),
+  survey_id: text('survey_id').notNull(),
+  facility_id: text('facility_id').notNull(),
+  period_start: timestamp('period_start').notNull(),
+  period_end: timestamp('period_end').notNull(),
+  target_count: integer('target_count').notNull(),
+  response_count: integer('response_count').default(0),
+  participation_pct: real('participation_pct').default(0),
+  results: jsonb('results'),
+  status: text('status').default('open'),       // open | closed
+  created_at: timestamp('created_at').defaultNow(),
+  closed_at: timestamp('closed_at'),
+});
+
+// ── WORKFORCE METRICS SNAPSHOTS ──────────────────────────────
+// Computed daily from connector data. One row per facility per day.
+
+export const workforceMetrics = pgTable('workforce_metrics', {
+  id: serial('id').primaryKey(),
+  facility_id: text('facility_id').notNull(),
+  snapshot_date: text('snapshot_date').notNull(),
+  turnover_pct: real('turnover_pct'),
+  voluntary_turnover_pct: real('voluntary_turnover_pct'),
+  absenteeism_pct: real('absenteeism_pct'),
+  unplanned_leave_pct: real('unplanned_leave_pct'),
+  agency_pct: real('agency_pct'),
+  agency_cost_week: integer('agency_cost_week'),
+  overtime_cost_week: integer('overtime_cost_week'),
+  permanent_ratio: real('permanent_ratio'),
+  rn_ratio: real('rn_ratio'),
+  avg_tenure_days: integer('avg_tenure_days'),
+  training_compliance_pct: real('training_compliance_pct'),
+  ahpra_current_pct: real('ahpra_current_pct'),
+  leave_liability: integer('leave_liability'),
+  turnover_cost_ytd: integer('turnover_cost_ytd'),
+  care_ratio: real('care_ratio'),
+  labour_cost_pbd: real('labour_cost_pbd'),
+  psh_composite_score: real('psh_composite_score'),
+  psh_participation_pct: real('psh_participation_pct'),
+  created_at: timestamp('created_at').defaultNow(),
+});
