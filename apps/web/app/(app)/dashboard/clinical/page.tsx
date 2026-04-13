@@ -1,4 +1,6 @@
 "use client";
+import { useMobile } from "@/lib/hooks/useMobile";
+import { MobileDomainScreen } from "@/components/mobile/MobileDomainScreen";
 
 import { useRouter } from "next/navigation";
 import { ChevronLeft, Mic, AlertTriangle, Activity, BarChart2, Shield, CheckCircle, FileText, MoreHorizontal, Sparkles } from "lucide-react";
@@ -50,6 +52,9 @@ function ActionCard({ urgency, icon, title, chris, actionLabel, onAction, deadli
 }
 
 export default function ClinicalControlCentre() {
+  const mobile = useMobile();
+  if (mobile) return <MobileDomainScreen domain="clinical" />;
+
   const router = useRouter();
 
   return (

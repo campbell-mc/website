@@ -1,4 +1,6 @@
 "use client";
+import { useMobile } from "@/lib/hooks/useMobile";
+import { MobileDomainScreen } from "@/components/mobile/MobileDomainScreen";
 
 import { useRouter } from "next/navigation";
 import { ChevronLeft, ChevronRight, Mic, AlertTriangle, FileText, Users, Heart, MoreHorizontal, CheckCircle } from "lucide-react";
@@ -17,6 +19,9 @@ const comp = ri.complaints;
 const ce = ri.consumer_experience;
 
 export default function ResidentIntelligencePage() {
+  const mobile = useMobile();
+  if (mobile) return <MobileDomainScreen domain="residents" />;
+
   const router = useRouter();
 
   return (

@@ -1,4 +1,6 @@
 "use client";
+import { useMobile } from "@/lib/hooks/useMobile";
+import { MobileDomainScreen } from "@/components/mobile/MobileDomainScreen";
 
 import { useRouter } from "next/navigation";
 import { ChevronLeft, ChevronRight, Mic, DollarSign, AlertTriangle, FileText, MoreHorizontal, CheckCircle } from "lucide-react";
@@ -66,6 +68,9 @@ const chartData = financial_monthly.map((m, i) => {
 });
 
 export default function FinancialControlCentre() {
+  const mobile = useMobile();
+  if (mobile) return <MobileDomainScreen domain="financial" />;
+
   const router = useRouter();
 
   const statCards = [

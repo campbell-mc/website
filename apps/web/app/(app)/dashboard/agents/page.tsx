@@ -1,4 +1,6 @@
 "use client";
+import { useMobile } from "@/lib/hooks/useMobile";
+import MobileAgents from "@/components/mobile/MobileAgents";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -84,6 +86,9 @@ function AgentCard({ agent }: { agent: AgentState }) {
 }
 
 export default function AgentActivityPage() {
+  const mobile = useMobile();
+  if (mobile) return <MobileAgents />;
+
   const router = useRouter();
   const [logFilter, setLogFilter] = useState<string>('All');
   const [showAllCoordination, setShowAllCoordination] = useState(false);

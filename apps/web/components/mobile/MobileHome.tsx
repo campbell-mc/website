@@ -26,6 +26,27 @@ export default function MobileHome() {
 
   return (
     <div className="flex flex-col gap-6 pb-24">
+      {/* Role switcher — horizontal scroll */}
+      <div className="bg-[#1B4332]">
+        <p className="px-4 pt-3 pb-2 text-[11px] font-semibold text-white/50 uppercase tracking-wider">Demo — Switch role</p>
+        <div className="flex overflow-x-auto gap-2 px-4 pb-3" style={{ scrollbarWidth: "none" }}>
+          {[
+            { label: "DON", href: "/dashboard" },
+            { label: "FM", href: "/dashboard/fm" },
+            { label: "CEO", href: "/dashboard/ceo" },
+            { label: "CFO", href: "/dashboard/cfo" },
+            { label: "Clinical", href: "/dashboard/clinical-director" },
+            { label: "Quality", href: "/dashboard/quality-lead" },
+            { label: "WHS", href: "/dashboard/whs" },
+            { label: "HR", href: "/dashboard/hr" },
+            { label: "Board", href: "/dashboard/board" },
+            { label: "Team Lead", href: "/dashboard/team-leader" },
+          ].map((r) => (
+            <button key={r.label} data-has-handler="true" onClick={() => router.push(r.href)} className="shrink-0 px-4 py-2 rounded-xl bg-white/10 text-white text-[14px] font-medium active:bg-white/20">{r.label}</button>
+          ))}
+        </div>
+      </div>
+
       {/* Greeting */}
       <div className="px-4 pt-4">
         <div className="flex items-center justify-between">

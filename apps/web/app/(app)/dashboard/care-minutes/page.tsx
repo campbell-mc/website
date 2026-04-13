@@ -1,4 +1,6 @@
 "use client";
+import { useMobile } from "@/lib/hooks/useMobile";
+import MobileCareMinutes from "@/components/mobile/MobileCareMinutes";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -29,6 +31,9 @@ const SHIFT_DATA = [
 ];
 
 export default function CareMinutesPage() {
+  const mobile = useMobile();
+  if (mobile) return <MobileCareMinutes />;
+
   const router = useRouter();
   const [modal, setModal] = useState<{ variant: ActionVariant; title: string; chris?: string; label?: string } | null>(null);
 

@@ -1,4 +1,6 @@
 "use client";
+import { useMobile } from "@/lib/hooks/useMobile";
+import { MobileDomainScreen } from "@/components/mobile/MobileDomainScreen";
 
 import { useRouter } from "next/navigation";
 import { ChevronLeft, Mic, Users, FileText, Bell, Sparkles, MoreHorizontal, CheckCircle, Clipboard, MessageSquare } from "lucide-react";
@@ -34,6 +36,9 @@ function ActionCard({ urgency, icon, title, chris, actionLabel, onAction, deadli
 }
 
 export default function OperationsControlCentre() {
+  const mobile = useMobile();
+  if (mobile) return <MobileDomainScreen domain="operations" />;
+
   const router = useRouter();
   return (
     <div className="p-4 lg:p-6 max-w-3xl mx-auto">

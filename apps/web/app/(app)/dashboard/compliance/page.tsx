@@ -1,4 +1,6 @@
 "use client";
+import { useMobile } from "@/lib/hooks/useMobile";
+import { MobileDomainScreen } from "@/components/mobile/MobileDomainScreen";
 
 import { useRouter } from "next/navigation";
 import { ChevronLeft, Mic, Shield, FileText, Calendar, CheckCircle, AlertTriangle, MoreHorizontal } from "lucide-react";
@@ -34,6 +36,9 @@ function ActionCard({ urgency, icon, title, chris, actionLabel, onAction, deadli
 }
 
 export default function GovernanceControlCentre() {
+  const mobile = useMobile();
+  if (mobile) return <MobileDomainScreen domain="governance" />;
+
   const router = useRouter();
   return (
     <div className="p-4 lg:p-6 max-w-3xl mx-auto">

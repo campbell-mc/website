@@ -1,4 +1,6 @@
 "use client";
+import { useMobile } from "@/lib/hooks/useMobile";
+import MobileSIRS from "@/components/mobile/MobileSIRS";
 
 import { useRouter } from "next/navigation";
 import { ChevronLeft, Mic, AlertTriangle, Clock, CheckCircle, MoreHorizontal } from "lucide-react";
@@ -11,6 +13,9 @@ const cat1Open = openEvents.filter((e) => e.category === 1).length;
 const cat2Open = openEvents.filter((e) => e.category === 2).length;
 
 export default function SIRSPage() {
+  const mobile = useMobile();
+  if (mobile) return <MobileSIRS />;
+
   const router = useRouter();
 
   return (
