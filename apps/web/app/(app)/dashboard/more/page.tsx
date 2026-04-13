@@ -49,7 +49,7 @@ export default function MorePage() {
   const router = useRouter();
 
   return (
-    <div className="p-4 lg:p-6 max-w-lg lg:max-w-3xl mx-auto pb-24">
+    <div className="p-4 lg:p-6 max-w-3xl mx-auto pb-24">
       <p className="text-[28px] font-bold text-foreground tracking-tight leading-tight mb-4">More</p>
 
       {SECTIONS.map((section) => (

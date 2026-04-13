@@ -19,7 +19,7 @@ export default function TrainingPage() {
   const needsAction = TRAINING.filter((t) => t.status !== "ok");
 
   return (
-    <div className="p-4 lg:p-6 max-w-lg lg:max-w-3xl mx-auto">
+    <div className="p-4 lg:p-6 max-w-3xl mx-auto">
       <div className="flex items-center justify-between mb-5">
         <div className="flex items-center gap-2">
           <button onClick={() => router.push("/dashboard/workforce")} className="p-1 -ml-1 hover:bg-muted rounded-lg"><ChevronLeft className="w-5 h-5 text-foreground" /></button>

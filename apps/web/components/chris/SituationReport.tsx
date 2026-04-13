@@ -135,8 +135,9 @@ export function SituationReport({
       <div className="flex items-center gap-2 mb-3">
         <ChrisAvatar size="small" showGlow />
         <div className="flex-1 min-w-0">
-          <p className="text-[11px] font-semibold text-[hsl(var(--brand-forest))]">
-            CHRIS · {DOMAIN_LABELS[domain]} · Updated {refreshedAt} · {context}
+          <p className="text-[11px] font-semibold text-[hsl(var(--brand-forest))] break-words">
+            CHRIS · {DOMAIN_LABELS[domain]} · Updated {refreshedAt}
+            <span className="hidden sm:inline"> · {context}</span>
           </p>
         </div>
       </div>
@@ -158,7 +159,7 @@ export function SituationReport({
       </div>
 
       {/* Signal dots + actions */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-wrap items-center justify-between gap-2">
         {signals && signals.length > 0 && (
           <div className="flex items-center gap-1.5">
             <span className="text-[9px] text-muted-foreground mr-1">Signals:</span>

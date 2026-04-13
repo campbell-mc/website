@@ -37,7 +37,7 @@ export default function VisitCompliancePage() {
   ];
 
   return (
-    <div className="p-4 lg:p-6 max-w-lg lg:max-w-3xl mx-auto">
+    <div className="p-4 lg:p-6 max-w-3xl mx-auto">
       {/* Header */}
       <div className="flex items-center gap-2 mb-5">
         <button

@@ -91,11 +91,11 @@ export default function HomePage() {
   const router = useRouter();
 
   return (
-    <div className="p-4 lg:p-6 max-w-lg lg:max-w-3xl mx-auto">
+    <div className="px-4 lg:px-6 py-4 lg:py-6 max-w-3xl mx-auto">
       {/* DEV: Role switcher — top of page */}
-      <div className="bg-[hsl(var(--brand-forest))] rounded-xl p-3 mb-4">
+      <div className="bg-[hsl(var(--brand-forest))] rounded-xl p-3 mb-4 overflow-hidden">
         <p className="text-[10px] font-semibold text-white/60 uppercase tracking-wider mb-2">Demo — switch role view</p>
-        <div className="grid grid-cols-4 lg:grid-cols-5 gap-1.5">
+        <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-1.5">
           {[
             { label: "DON", href: "/dashboard" },
             { label: "Facility Mgr", href: "/dashboard/fm" },

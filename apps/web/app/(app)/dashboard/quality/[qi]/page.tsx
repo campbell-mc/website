@@ -59,7 +59,7 @@ export default function QIDetailPage() {
   const isFallsQI = code === "QI_03" || code === "QI_04";
 
   return (
-    <div className="p-4 lg:p-6 max-w-lg lg:max-w-3xl mx-auto">
+    <div className="p-4 lg:p-6 max-w-3xl mx-auto">
       {/* Header */}
       <div className="flex items-center justify-between mb-5">
         <div className="flex items-center gap-2">

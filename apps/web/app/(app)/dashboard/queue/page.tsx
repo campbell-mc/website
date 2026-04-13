@@ -23,7 +23,7 @@ export default function QueuePage() {
   };
 
   return (
-    <div className="p-4 lg:p-6 max-w-lg lg:max-w-3xl mx-auto pb-24">
+    <div className="p-4 lg:p-6 max-w-3xl mx-auto pb-24">
       <div className="flex items-center gap-2 mb-1">
         <button data-has-handler="true" onClick={() => router.push("/dashboard")} className="p-1 -ml-1 hover:bg-muted rounded-lg">
           <ChevronLeft className="w-5 h-5 text-foreground" />

@@ -14,7 +14,7 @@ export default function SIRSPage() {
   const router = useRouter();
 
   return (
-    <div className="p-4 lg:p-6 max-w-lg lg:max-w-3xl mx-auto">
+    <div className="p-4 lg:p-6 max-w-3xl mx-auto">
       {/* Header — back to Clinical CC */}
       <div className="flex items-center justify-between mb-5">
         <div className="flex items-center gap-2">
