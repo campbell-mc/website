@@ -153,7 +153,7 @@ export function Sidebar({ userName, userRole, providerName, className = "", mobi
     const hasAlert = !section.alwaysOpen && section_alerts[sectionKey];
 
     return (
-      <div key={section.title} className="mb-1">
+      <div key={section.title} className="mb-0.5">
         {section.alwaysOpen ? (
           /* Overview — always open, no chevron */
           <>
@@ -215,7 +215,7 @@ export function Sidebar({ userName, userRole, providerName, className = "", mobi
     const loopRouteActive = [...section.teamLoop.items, ...section.leaderLoop.items].some((item) => pathname.startsWith(item.href));
 
     return (
-      <div key={section.title} className="mb-1">
+      <div key={section.title} className="mb-0.5">
         {/* Big tappable heading — same style as Clinical, Operations, etc. */}
         <div className="flex items-center gap-1">
           <button
@@ -338,7 +338,7 @@ export function Sidebar({ userName, userRole, providerName, className = "", mobi
       </div>
 
       {/* Navigation */}
-      <nav className="py-3 px-2">
+      <nav className="py-2 px-2 pb-24">
         {sections.map((section) =>
           isWeeklyLoops(section)
             ? renderWeeklyLoops(section)
