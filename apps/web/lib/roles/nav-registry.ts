@@ -31,6 +31,7 @@ const NAV_SECTIONS: Record<string, NavSection | WeeklyLoopSection> = {
     items: [
       { label: "Home", href: "/dashboard", icon: "Home" },
       { label: "Review Queue", href: "/don/queue", icon: "ClipboardList" },
+      { label: "Documents", href: "/dashboard/documents", icon: "FileText" },
       { label: "CHRIS Coach", href: "/dashboard/coach", icon: "Sparkles" },
       { label: "Agents", href: "/dashboard/agents", icon: "Activity" },
       { label: "iMessage Demo", href: "/dashboard/demo/imessage", icon: "FileText" },
@@ -108,6 +109,7 @@ const NAV_SECTIONS: Record<string, NavSection | WeeklyLoopSection> = {
       { label: "Care Ratio", href: "/dashboard/financial/care-ratio", icon: "BarChart2" },
       { label: "Agency Cost", href: "/dashboard/financial/agency", icon: "Users" },
       { label: "Benchmarks", href: "/dashboard/financial/benchmarks", icon: "BarChart2" },
+      { label: "Oracle Report", href: "/dashboard/financial/oracle", icon: "TrendingUp" },
       { label: "Budget", href: "/dashboard/financial/budget", icon: "FileText" },
     ],
   },

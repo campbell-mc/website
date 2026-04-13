@@ -1,7 +1,8 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { Bell, ChevronRight, Sparkles, Mic, MoreHorizontal } from "lucide-react";
+import { ChevronRight, Sparkles, Mic, MoreHorizontal } from "lucide-react";
+import { NotificationBell } from "@/components/ui/NotificationBell";
 import { ChrisAvatar } from "@/components/chris/ChrisAvatar";
 import { todays_picture, facility, psh_cycles } from "@/lib/seed-data";
 import { OperationalFinancialPanel } from "@/components/financial/OperationalFinancialPanel";
@@ -126,10 +127,7 @@ export default function HomePage() {
             {facility.name} · {new Date().toLocaleDateString("en-AU", { weekday: "long", day: "numeric", month: "long" })} · Day shift
           </p>
         </div>
-        <button className="relative p-2 rounded-lg hover:bg-muted transition-colors">
-          <Bell className="w-5 h-5 text-foreground" />
-          <span className="absolute top-1 right-1 w-4 h-4 bg-[hsl(var(--brand-amber))] text-white text-[9px] font-bold rounded-full flex items-center justify-center">2</span>
-        </button>
+        <NotificationBell />
       </div>
 
       {/* 2. TODAY'S PICTURE — CHRIS speaks first */}

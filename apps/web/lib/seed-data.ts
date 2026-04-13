@@ -794,9 +794,9 @@ export const todays_picture = {
     { domain: 'Financial', status: 'warning', summary: 'Care ratio 51.9% — below 55% target · Agency cost reducing month-on-month · YTD adverse $244K' },
   ],
   top_3_actions: [
-    { rank: 1, priority: 'info', description: 'Q2 QI submission — review CHRIS draft and submit to GPMS', context: 'Due 21 Apr · 9 days · Draft ready · 14 QIs compiled', action_label: 'Review submission →', route: '/dashboard/quality-indicators' },
+    { rank: 1, priority: 'info', description: 'Q2 QI submission — review CHRIS draft and submit to GPMS', context: 'Due 21 Apr · 9 days · Draft ready · 14 QIs compiled', action_label: 'Review submission →', route: '/dashboard/quality-indicators/submission' },
     { rank: 2, priority: 'urgent', description: 'Board Pack approval — meeting in 8 days', context: 'CHRIS draft ready · 8 sections · Est. 35 min review', action_label: 'Start review →', route: '/dashboard/governance/board-pack' },
-    { rank: 3, priority: 'immediate', description: 'Wing B bathroom corrective action — overdue 58 days', context: 'Falls prevention audit CA-2026-004 · Grab rail assessment not yet done', action_label: 'Assign now →', route: '/dashboard/corrective-actions/CA-2026-004' },
+    { rank: 3, priority: 'immediate', description: 'Wing B bathroom corrective action — overdue 58 days', context: 'Falls prevention audit CA-2026-004 · Grab rail assessment not yet done', action_label: 'Assign now →', route: '/dashboard/governance/corrective-actions/CA-2026-004' },
   ],
   chris_intelligence_signal: {
     type: 'PREDICTIVE', confidence: 'EMERGING',
@@ -1163,8 +1163,8 @@ export interface QueueItem {
 
 export const queue_items: Record<string, QueueItem[]> = {
   don: [
-    { id: 'Q-001', severity: 'immediate', title: 'SIRS Cat 2 draft — review and submit to GPMS', source: 'Chronicler', route: '/dashboard/sirs' },
-    { id: 'Q-002', severity: 'urgent', title: 'Falls prevention audit — 4 days overdue', source: 'Sentinel', route: '/dashboard/audits' },
+    { id: 'Q-001', severity: 'immediate', title: 'SIRS Cat 1 draft — review and submit to GPMS', source: 'Chronicler', route: '/dashboard/sirs/draft' },
+    { id: 'Q-002', severity: 'urgent', title: 'Falls prevention audit — 4 days overdue', source: 'Sentinel', route: '/dashboard/governance/corrective-actions/CA-2026-004' },
     { id: 'Q-003', severity: 'urgent', title: '2 care plan reviews overdue — Grevillea & Boronia Wings', source: 'Sentinel', route: '/dashboard/residents/care-plans' },
     { id: 'Q-004', severity: 'routine', title: 'QI Q2 submission — CHRIS draft ready for review', source: 'Chronicler', route: '/dashboard/quality' },
     { id: 'Q-005', severity: 'routine', title: '3 AN-ACC reassessments — schedule clinical reviews', source: 'Oracle', route: '/dashboard/residents/care-plans' },
