@@ -51,33 +51,45 @@ export function RoleHomeScreen({ config, children }: { config: RoleHomeConfig; c
 
   return (
     <div className="p-4 lg:p-6 max-w-lg lg:max-w-3xl mx-auto">
-      {/* 1. GREETING */}
+      {/* 1. GREETING — matches MobileHome exactly */}
       <div className="flex items-center justify-between mb-5">
         <div>
-          <p className="text-[28px] lg:text-lg font-bold lg:font-semibold text-foreground">{config.greeting}</p>
-          <p className="text-[13px] lg:text-xs text-muted-foreground">{config.subtitle}</p>
+          <h1 className="text-[28px] lg:text-lg font-bold lg:font-semibold text-gray-900">{config.greeting}</h1>
+          <p className="text-[13px] lg:text-xs text-gray-500">{config.subtitle}</p>
         </div>
+        <button className="flex items-center gap-1.5 px-3 py-2 border border-gray-200 rounded-xl text-[13px] font-medium text-gray-700 lg:hidden">
+          <Mic className="w-4 h-4" /><span>Ask</span>
+        </button>
         {config.notificationCount !== undefined && config.notificationCount > 0 && (
-          <button className="relative p-2 rounded-lg hover:bg-muted transition-colors">
+          <button className="relative p-2 rounded-lg hover:bg-muted transition-colors hidden lg:block">
             <Bell className="w-5 h-5 text-foreground" />
             <span className="absolute top-1 right-1 w-4 h-4 bg-[hsl(var(--brand-amber))] text-white text-[9px] font-bold rounded-full flex items-center justify-center">{config.notificationCount}</span>
           </button>
         )}
       </div>
 
-      {/* 2. TODAY'S PICTURE */}
-      <div className="rounded-xl p-5 mb-5" style={{ background: "rgba(27,67,50,0.05)" }}>
+      {/* 2. TODAY'S PICTURE — no avatar on mobile, matches MobileHome */}
+      <div className="bg-white lg:bg-transparent rounded-2xl lg:rounded-xl border border-gray-100 lg:border-0 p-5 mb-5" style={{ background: undefined }}>
         <div className="flex items-start gap-3">
-          <ChrisAvatar size="small" showGlow className="shrink-0 mt-0.5" />
-          <p className="text-[17px] lg:text-sm text-foreground leading-[1.65] lg:leading-relaxed font-serif-accent">{config.todaysPicture}</p>
+          <ChrisAvatar size="small" showGlow className="shrink-0 mt-0.5 hidden lg:block" />
+          <div className="lg:hidden flex items-center gap-2.5 mb-3">
+            <div className="w-8 h-8 rounded-full bg-[#1B4332] flex items-center justify-center shrink-0">
+              <span className="text-white text-sm font-bold">C</span>
+            </div>
+            <div>
+              <p className="text-[13px] font-semibold text-gray-900">CHRIS</p>
+              <p className="text-[12px] text-gray-400">Updated 2h ago</p>
+            </div>
+          </div>
         </div>
+        <p className="text-[17px] lg:text-sm text-gray-800 leading-[1.65] lg:leading-relaxed">{config.todaysPicture}</p>
       </div>
 
       <AgentPulse domain="all" />
 
       {/* 3. DOMAIN STATUS STRIP */}
       <p className="text-[11px] font-semibold text-muted-foreground uppercase tracking-[0.08em] mb-2">Across your domains</p>
-      <div className="bg-card rounded-xl border border-border overflow-hidden mb-5">
+      <div className="bg-white rounded-2xl lg:rounded-xl border border-gray-100 lg:border-border overflow-hidden mb-5">
         {config.domains.map((d) => {
           const indicator = d.status === "clear" ? "✅" : d.status === "watch" ? "⚠️" : "🔴";
           return (

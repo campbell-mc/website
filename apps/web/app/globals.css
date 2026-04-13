@@ -175,6 +175,13 @@ body {
   line-height: 1.65;
 }
 
+/* Plain white background on mobile */
+@media (max-width: 1023px) {
+  body {
+    background: #ffffff;
+  }
+}
+
 h1 {
   font-family: var(--font-display);
   font-size: 1.875rem;
