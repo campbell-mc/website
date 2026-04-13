@@ -96,16 +96,14 @@ export function RoleHomeScreen({ config, children }: { config: RoleHomeConfig; c
             <button
               key={d.name}
               onClick={() => router.push(d.href)}
-              className={`flex items-center justify-between w-full px-4 py-3 border-b border-border last:border-b-0 hover:bg-muted/50 transition-colors ${d.status === "act" ? "bg-[rgba(196,112,74,0.04)]" : ""}`}
+              className={`flex items-start w-full px-4 py-3.5 border-b border-gray-50 last:border-b-0 hover:bg-gray-50 transition-colors text-left ${d.status === "act" ? "bg-[rgba(196,112,74,0.04)]" : ""}`}
             >
-              <div className="flex items-center gap-3">
-                <span className="text-[15px] lg:text-sm">{indicator}</span>
-                <span className="text-[15px] lg:text-sm font-medium text-foreground">{d.name}</span>
+              <span className="text-[15px] lg:text-sm mt-0.5 shrink-0 mr-3">{indicator}</span>
+              <div className="flex-1 min-w-0">
+                <span className="text-[15px] lg:text-sm font-semibold text-gray-900">{d.name}</span>
+                <p className="text-[13px] lg:text-xs text-gray-500 mt-0.5">{d.summary}</p>
               </div>
-              <div className="flex items-center gap-2">
-                <span className="text-[13px] lg:text-xs text-muted-foreground">{d.summary}</span>
-                <ChevronRight className="w-3.5 h-3.5 text-muted-foreground/40" />
-              </div>
+              <ChevronRight className="w-4 h-4 text-gray-300 shrink-0 mt-1 ml-2" />
             </button>
           );
         })}
@@ -117,19 +115,17 @@ export function RoleHomeScreen({ config, children }: { config: RoleHomeConfig; c
         {config.topActions.map((action, i) => (
           <div
             key={i}
-            className={`bg-card rounded-xl p-4 border border-border border-l-4 ${
-              action.priority === "act" ? "border-l-[hsl(var(--brand-terracotta))]" : action.priority === "clear" ? "border-l-[hsl(var(--brand-teal))]" : "border-l-[hsl(var(--brand-amber))]"
+            className={`bg-white rounded-2xl lg:rounded-xl p-4 border border-gray-100 lg:border-border border-l-4 ${
+              action.priority === "act" ? "border-l-[#C4704A]" : action.priority === "clear" ? "border-l-[#2D7D73]" : "border-l-[#D4A017]"
             }`}
           >
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3 flex-1 min-w-0">
-                <span className="text-sm font-bold text-muted-foreground w-5 shrink-0">{i + 1}.</span>
-                <p className="text-[15px] lg:text-sm font-medium text-foreground">{action.label}</p>
-              </div>
-              <button onClick={() => router.push(action.href)} className="text-[13px] lg:text-xs font-medium px-3 py-2 rounded-lg bg-primary text-primary-foreground hover:opacity-90 shrink-0 ml-3">
-                {action.actionLabel}
-              </button>
+            <div className="flex items-start gap-2 mb-3 lg:mb-0">
+              <span className="text-[15px] lg:text-sm font-bold text-gray-300 w-5 shrink-0">{i + 1}.</span>
+              <p className="text-[15px] lg:text-sm font-medium text-gray-900">{action.label}</p>
             </div>
+            <button onClick={() => router.push(action.href)} className="w-full lg:w-auto text-[13px] lg:text-xs font-medium px-4 py-3 lg:py-2 rounded-xl lg:rounded-lg bg-[#1B4332] text-white hover:opacity-90">
+              {action.actionLabel}
+            </button>
           </div>
         ))}
         {config.queueCount !== undefined && config.queueCount > 0 && (
