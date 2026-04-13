@@ -28,7 +28,7 @@ export default function LandingPage() {
 
           {/* Sub */}
           <p className="text-base md:text-lg text-gray-600 mb-8 md:mb-10 leading-relaxed">
-            Built for Directors of Nursing, Facility Managers, and the teams responsible for running aged care facilities every day.
+            Built for CEOs, executives, Directors of Nursing, Facility Managers, quality and clinical leads — and the wider leadership teams responsible for running aged care services every day.
           </p>
 
           {/* Three capability cards */}
@@ -37,7 +37,7 @@ export default function LandingPage() {
               {
                 icon: "⬡",
                 title: "Six AI agents",
-                body: "Monitor your facility continuously — clinical compliance, workforce health, financial performance, and regulatory obligations.",
+                body: "Monitor your facility or service and entire organisation continuously — clinical compliance, workforce health, financial performance, and regulatory obligations.",
               },
               {
                 icon: "↻",
@@ -64,7 +64,7 @@ export default function LandingPage() {
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-[#2D7D73] animate-pulse" />
               <p className="text-xs md:text-sm text-gray-500 text-center">
-                Live at <span className="font-semibold text-gray-700">Harbison Aged Care</span> · Bowral NSW · 350 staff · Cycle 8
+                Live with providers in <span className="font-semibold text-gray-700">NSW and VIC</span>
               </p>
             </div>
             <div className="flex-1 h-px bg-gray-200" />
