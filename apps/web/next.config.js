@@ -13,7 +13,7 @@ const nextConfig = {
   // Skip static prerendering — all pages render on request
   // Required because many pages use useSearchParams/useParams
   // and the app has no database connection yet for build-time data
-  output: undefined,
+  output: "standalone",
   // Treat prerender errors as warnings, not build failures
   typescript: {
     ignoreBuildErrors: false,
