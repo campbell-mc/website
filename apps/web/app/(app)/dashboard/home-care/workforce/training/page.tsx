@@ -45,7 +45,7 @@ export default function TrainingCompliancePage() {
 
         {/* Header */}
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Training Compliance</h1>
+          <h1 className="text-[28px] md:text-2xl font-bold text-gray-900">Training Compliance</h1>
           <p className="text-sm text-gray-500 mt-1">
             Knights of the Holy Grail · Home Care · Camelot and Avalon
           </p>
@@ -82,7 +82,7 @@ export default function TrainingCompliancePage() {
             <AlertTriangle className="w-5 h-5 shrink-0 mt-0.5" style={{ color: terracotta }} />
             <div>
               <p className="text-sm font-semibold text-gray-900 mb-1">CHRIS Intelligence Note</p>
-              <p className="text-sm text-gray-700 leading-relaxed">
+              <p className="text-[15px] md:text-sm text-gray-700 leading-relaxed">
                 <strong>Managing Challenging Behaviour</strong> has the lowest compliance at{" "}
                 <strong>71.9%</strong>. This directly correlates with the elevated{" "}
                 <strong>PSH_10 Violence &amp; Aggression</strong> domain score (2.7). Prioritising

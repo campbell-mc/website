@@ -42,7 +42,7 @@ export default function SelfReflectionPage() {
   return (
     <div className="px-4 lg:px-6 py-4 lg:py-6 max-w-2xl mx-auto">
       <button onClick={() => router.push("/dashboard/weekly-loops")} className="flex items-center gap-1 text-sm text-muted-foreground mb-4"><ChevronLeft className="w-4 h-4" /> Weekly Loops</button>
-      <h1 className="text-xl font-semibold text-foreground mb-1">Self-reflection</h1>
+      <h1 className="text-[22px] md:text-xl font-semibold text-foreground mb-1">Self-reflection</h1>
       <p className="text-xs text-muted-foreground mb-5">Cycle 8 · Private · Your notes stay with you</p>
 
       <div className="bg-[#F0F7F4] rounded-xl border border-[#2D7D73] p-3 mb-5">

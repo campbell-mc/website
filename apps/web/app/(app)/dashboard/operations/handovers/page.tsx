@@ -67,7 +67,7 @@ export default function HandoversPage() {
   return (
     <div className="px-4 lg:px-6 py-4 lg:py-6 max-w-3xl mx-auto">
       <div className="mb-5">
-        <h1 className="text-xl font-semibold text-foreground">Handovers</h1>
+        <h1 className="text-[22px] md:text-xl font-semibold text-foreground">Handovers</h1>
         <p className="text-xs text-muted-foreground">{facility.name} · Monday 13 April · Afternoon handover</p>
       </div>
 

@@ -38,7 +38,7 @@ export default function VisitCompliancePage() {
           >
             Home Care <ChevronRight className="w-3 h-3" /> Visits
           </button>
-          <h1 className="text-2xl font-bold text-gray-900">Visit Compliance</h1>
+          <h1 className="text-[28px] md:text-2xl font-bold text-gray-900">Visit Compliance</h1>
           <p className="text-sm text-gray-500 mt-1">
             Knights of the Holy Grail · AlayaCare
           </p>
@@ -52,7 +52,7 @@ export default function VisitCompliancePage() {
                 <span className="text-sm font-medium text-gray-500">{card.label}</span>
                 <card.icon className="w-4 h-4" style={{ color: card.color }} />
               </div>
-              <p className="text-2xl font-bold text-gray-900">{card.value}</p>
+              <p className="text-[28px] md:text-2xl font-bold text-gray-900">{card.value}</p>
               <p className="text-xs text-gray-500 mt-1">of {visits.scheduled} scheduled</p>
             </div>
           ))}
@@ -112,17 +112,17 @@ export default function VisitCompliancePage() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="rounded-xl bg-gray-50 p-4">
               <p className="text-xs text-gray-500 mb-1">Visit Compliance</p>
-              <p className="text-xl font-bold text-gray-900">{metrics.visit_compliance_pct}%</p>
+              <p className="text-[22px] md:text-xl font-bold text-gray-900">{metrics.visit_compliance_pct}%</p>
               <p className="text-xs mt-1" style={{ color: "#D4A017" }}>Target 97%</p>
             </div>
             <div className="rounded-xl bg-gray-50 p-4">
               <p className="text-xs text-gray-500 mb-1">Travel Time</p>
-              <p className="text-xl font-bold text-gray-900">{metrics.travel_time_pct}%</p>
+              <p className="text-[22px] md:text-xl font-bold text-gray-900">{metrics.travel_time_pct}%</p>
               <p className="text-xs text-gray-500 mt-1">of total visit time</p>
             </div>
             <div className="rounded-xl bg-gray-50 p-4">
               <p className="text-xs text-gray-500 mb-1">Avg Visit Duration</p>
-              <p className="text-xl font-bold text-gray-900">64 min</p>
+              <p className="text-[22px] md:text-xl font-bold text-gray-900">64 min</p>
               <p className="text-xs text-gray-500 mt-1">scheduled avg 60 min</p>
             </div>
           </div>

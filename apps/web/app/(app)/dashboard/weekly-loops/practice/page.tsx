@@ -30,7 +30,7 @@ export default function MicroPracticePage() {
   return (
     <div className="px-4 lg:px-6 py-4 lg:py-6 max-w-2xl mx-auto">
       <button onClick={() => router.push("/dashboard/weekly-loops")} className="flex items-center gap-1 text-sm text-muted-foreground mb-4"><ChevronLeft className="w-4 h-4" /> Weekly Loops</button>
-      <h1 className="text-xl font-semibold text-foreground mb-1">Micro Practice</h1>
+      <h1 className="text-[22px] md:text-xl font-semibold text-foreground mb-1">Micro Practice</h1>
       <p className="text-xs text-muted-foreground mb-5">Cycle 8 · Deliver with your team this week</p>
 
       {/* Practice card */}

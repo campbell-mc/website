@@ -96,7 +96,7 @@ export default function ClientIntelligencePage() {
           >
             Home Care <ChevronRight className="w-3 h-3" /> Clients
           </button>
-          <h1 className="text-2xl font-bold text-gray-900">Client Intelligence</h1>
+          <h1 className="text-[28px] md:text-2xl font-bold text-gray-900">Client Intelligence</h1>
           <p className="text-sm text-gray-500 mt-1">
             {combined.active_clients} active clients
           </p>
@@ -110,7 +110,7 @@ export default function ClientIntelligencePage() {
                 <span className="text-sm font-medium text-gray-500">{card.label}</span>
                 <card.icon className="w-4 h-4" style={{ color: card.color }} />
               </div>
-              <p className="text-2xl font-bold text-gray-900">{card.value}</p>
+              <p className="text-[28px] md:text-2xl font-bold text-gray-900">{card.value}</p>
               <p className="text-xs mt-1" style={{ color: card.color }}>{card.sub}</p>
             </div>
           ))}
@@ -198,7 +198,7 @@ export default function ClientIntelligencePage() {
           </div>
           <div className="flex items-end gap-4">
             <div>
-              <p className="text-3xl font-bold text-gray-900">{metrics.client_satisfaction}</p>
+              <p className="text-[28px] md:text-3xl font-bold text-gray-900">{metrics.client_satisfaction}</p>
               <p className="text-xs text-gray-500">/100</p>
             </div>
             <div className="flex items-center gap-1 mb-1">

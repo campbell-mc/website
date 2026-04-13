@@ -12,7 +12,7 @@ export default function MobileRostering() {
 
   return (
     <div className="px-4 py-4">
-      <h1 className="text-lg font-semibold text-foreground mb-4">Rostering</h1>
+      <h1 className="text-[28px] font-bold text-foreground mb-4">Rostering</h1>
 
       {/* Tonight hero */}
       <div className="rounded-xl p-4 mb-4 border border-border bg-card">

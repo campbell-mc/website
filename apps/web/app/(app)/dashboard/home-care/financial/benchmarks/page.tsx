@@ -157,7 +157,7 @@ export default function BenchmarksPage() {
 
         {/* Header */}
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Home Care Benchmarks</h1>
+          <h1 className="text-[28px] md:text-2xl font-bold text-gray-900">Home Care Benchmarks</h1>
           <p className="text-sm text-gray-500 mt-1">
             StewartBrown ACFPS FY25 Home Care · 247 providers
           </p>

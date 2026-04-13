@@ -31,7 +31,7 @@ export default function MobileHandovers() {
 
   return (
     <div className="px-4 py-4 pb-32">
-      <h1 className="text-lg font-semibold text-foreground mb-1">Handovers</h1>
+      <h1 className="text-[28px] font-bold text-foreground mb-1">Handovers</h1>
       <p className="text-xs text-muted-foreground mb-4">Afternoon handover · Monday 13 April</p>
 
       {/* Items */}

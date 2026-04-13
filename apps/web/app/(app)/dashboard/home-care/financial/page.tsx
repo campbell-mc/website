@@ -84,7 +84,7 @@ export default function FinancialDashboardPage() {
           >
             Home Care <ChevronRight className="w-3 h-3" /> Financial
           </button>
-          <h1 className="text-2xl font-bold text-gray-900">Financial Dashboard</h1>
+          <h1 className="text-[28px] md:text-2xl font-bold text-gray-900">Financial Dashboard</h1>
           <p className="text-sm text-gray-500 mt-1">
             Support at Home · FY2026
           </p>
@@ -100,7 +100,7 @@ export default function FinancialDashboardPage() {
                   <span className="text-sm font-medium text-gray-500">{card.label}</span>
                   <card.icon className="w-4 h-4 text-gray-400" />
                 </div>
-                <p className="text-2xl font-bold text-gray-900">{card.value}</p>
+                <p className="text-[28px] md:text-2xl font-bold text-gray-900">{card.value}</p>
                 <div className="flex items-center gap-1.5 mt-1">
                   {positive ? (
                     <TrendingUp className="w-3 h-3 text-emerald-500" />
@@ -193,13 +193,13 @@ export default function FinancialDashboardPage() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="rounded-xl bg-gray-50 p-4">
               <p className="text-xs text-gray-500 mb-1">Revenue MTD</p>
-              <p className="text-xl font-bold text-gray-900">
+              <p className="text-[22px] md:text-xl font-bold text-gray-900">
                 ${(financial.total_revenue_mtd / 1000000).toFixed(2)}M
               </p>
             </div>
             <div className="rounded-xl bg-gray-50 p-4">
               <p className="text-xs text-gray-500 mb-1">Cost MTD</p>
-              <p className="text-xl font-bold text-gray-900">
+              <p className="text-[22px] md:text-xl font-bold text-gray-900">
                 ${(financial.total_cost_mtd / 1000000).toFixed(2)}M
               </p>
             </div>

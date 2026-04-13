@@ -23,7 +23,7 @@ export default function TeamBriefingsPage() {
 
       <div className="flex items-start justify-between mb-5">
         <div>
-          <h1 className="text-xl font-semibold text-foreground">Team Briefings</h1>
+          <h1 className="text-[22px] md:text-xl font-semibold text-foreground">Team Briefings</h1>
           <p className="text-xs text-muted-foreground">Cycle 8 · 5 teams · {deliveredCount}/5 practices delivered</p>
         </div>
         <button onClick={() => router.push("/dashboard/weekly-loops/leadership-session")} className="text-xs font-medium px-4 py-2.5 rounded-xl bg-[#1B4332] text-white">Prepare session →</button>

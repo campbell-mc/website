@@ -62,7 +62,7 @@ export default function PackageIntelligencePage() {
           >
             Home Care <ChevronRight className="w-3 h-3" /> Packages
           </button>
-          <h1 className="text-2xl font-bold text-gray-900">Package Intelligence</h1>
+          <h1 className="text-[28px] md:text-2xl font-bold text-gray-900">Package Intelligence</h1>
           <p className="text-sm text-gray-500 mt-1">
             Support at Home · {combined.active_clients} active clients
           </p>
@@ -76,7 +76,7 @@ export default function PackageIntelligencePage() {
                 <span className="text-sm font-medium text-gray-500">{card.label}</span>
                 <card.icon className="w-4 h-4" style={{ color: card.color }} />
               </div>
-              <p className="text-2xl font-bold text-gray-900">{card.value}</p>
+              <p className="text-[28px] md:text-2xl font-bold text-gray-900">{card.value}</p>
               <p className="text-xs mt-1" style={{ color: card.color }}>{card.sub}</p>
             </div>
           ))}

@@ -36,7 +36,7 @@ export default function RosteringPage() {
     <div className="px-4 lg:px-6 py-4 lg:py-6 max-w-3xl mx-auto">
       {/* Header */}
       <div className="mb-5">
-        <h1 className="text-xl font-semibold text-foreground">Rostering</h1>
+        <h1 className="text-[22px] md:text-xl font-semibold text-foreground">Rostering</h1>
         <p className="text-xs text-muted-foreground">{facility.name} · Deputy · Updated 8 min ago ✓</p>
       </div>
 

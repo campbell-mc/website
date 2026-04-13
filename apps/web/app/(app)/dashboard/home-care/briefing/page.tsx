@@ -80,7 +80,7 @@ export default function BriefingPage() {
             <span className="text-white font-bold text-sm">C</span>
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Morning Briefing</h1>
+            <h1 className="text-[28px] md:text-2xl font-bold text-gray-900">Morning Briefing</h1>
             <div className="flex items-center gap-2 text-sm text-gray-500">
               <span>{dateStr}</span>
               <span className="text-gray-300">·</span>
@@ -134,7 +134,7 @@ export default function BriefingPage() {
                   {a.urgency}
                 </span>
               </div>
-              <p className="text-sm text-gray-600 leading-relaxed">{a.detail}</p>
+              <p className="text-[15px] md:text-sm text-gray-600 leading-relaxed">{a.detail}</p>
               <button
                 onClick={() => router.push(a.route)}
                 className="flex items-center gap-2 text-sm font-medium transition-colors"

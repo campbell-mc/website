@@ -32,7 +32,7 @@ export default function WeeklyLoopsPage() {
   return (
     <div className="px-4 lg:px-6 py-4 lg:py-6 max-w-3xl mx-auto">
       <div className="mb-5">
-        <h1 className="text-xl font-semibold text-foreground">Weekly Loops</h1>
+        <h1 className="text-[22px] md:text-xl font-semibold text-foreground">Weekly Loops</h1>
         <p className="text-xs text-muted-foreground">Cycle {cycle.number} · {cycle.start_date.slice(5)} – {cycle.end_date.slice(5)}</p>
       </div>
 

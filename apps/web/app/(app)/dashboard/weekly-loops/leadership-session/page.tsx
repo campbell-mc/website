@@ -73,7 +73,7 @@ export default function LeadershipSessionPage() {
       <button onClick={() => router.push("/dashboard/weekly-loops")} className="flex items-center gap-1 text-sm text-muted-foreground mb-4"><ChevronLeft className="w-4 h-4" /> Weekly Loops</button>
 
       <div className="mb-5">
-        <h1 className="text-xl font-semibold text-foreground">Leadership Session</h1>
+        <h1 className="text-[22px] md:text-xl font-semibold text-foreground">Leadership Session</h1>
         <p className="text-xs text-muted-foreground">Cycle 8 · Week 1 · All Team Leaders + DON/FM</p>
       </div>
 

@@ -108,7 +108,7 @@ export default function PSHDashboardPage() {
             K
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">
+            <h1 className="text-[28px] md:text-2xl font-bold text-gray-900">
               People, Safety &amp; Happiness — Home Care
             </h1>
             <p className="text-sm text-gray-500">
@@ -144,7 +144,7 @@ export default function PSHDashboardPage() {
         {/* HC PSH Context Box */}
         <div className="rounded-2xl border-l-4 p-5 bg-amber-50" style={{ borderColor: amber }}>
           <p className="text-sm font-semibold text-gray-900 mb-2">Home Care PSH Context</p>
-          <p className="text-sm text-gray-700 leading-relaxed">
+          <p className="text-[15px] md:text-sm text-gray-700 leading-relaxed">
             <strong>PSH_09</strong> (Remote/Isolated Work), <strong>PSH_10</strong> (Violence &amp; Aggression),
             and <strong>PSH_01</strong> (Job Demands) are the highest-risk domains in home care — driven by
             lone worker exposure, in-home aggression risk, and travel-plus-visit intensity.
@@ -171,7 +171,7 @@ export default function PSHDashboardPage() {
                   {d.score.toFixed(1)}
                 </span>
               </div>
-              <p className="text-sm text-gray-600 leading-relaxed">{d.explanation}</p>
+              <p className="text-[15px] md:text-sm text-gray-600 leading-relaxed">{d.explanation}</p>
               <div className="rounded-xl bg-gray-50 p-3 flex items-start gap-3">
                 <span
                   className="text-xs font-mono font-medium px-2 py-0.5 rounded shrink-0"

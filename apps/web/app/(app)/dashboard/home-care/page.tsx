@@ -120,7 +120,7 @@ export default function HomeCareDashboard() {
               Support at Home
             </span>
           </div>
-          <h1 className="text-2xl font-bold text-gray-900">Good morning, Guinevere</h1>
+          <h1 className="text-[28px] md:text-2xl font-bold text-gray-900">Good morning, Guinevere</h1>
           <p className="text-sm text-gray-500 mt-1">
             {org.name} · {org.location} · {combined.active_clients} active clients
           </p>
@@ -134,7 +134,7 @@ export default function HomeCareDashboard() {
                 <span className="text-sm font-medium text-gray-500">{card.label}</span>
                 <card.icon className="w-4 h-4 text-gray-400" />
               </div>
-              <p className="text-2xl font-bold text-gray-900">{card.value}</p>
+              <p className="text-[28px] md:text-2xl font-bold text-gray-900">{card.value}</p>
               <p className="text-xs mt-1" style={{ color: card.color }}>{card.target}</p>
             </div>
           ))}
@@ -209,15 +209,15 @@ export default function HomeCareDashboard() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="rounded-xl bg-gray-50 p-4">
               <p className="text-xs text-gray-500 mb-1">Revenue per client per day</p>
-              <p className="text-xl font-bold text-gray-900">${financial.revenue_per_client_per_day.toFixed(2)}</p>
+              <p className="text-[22px] md:text-xl font-bold text-gray-900">${financial.revenue_per_client_per_day.toFixed(2)}</p>
             </div>
             <div className="rounded-xl bg-gray-50 p-4">
               <p className="text-xs text-gray-500 mb-1">Care Management</p>
-              <p className="text-xl font-bold text-gray-900">{financial.care_management_pct}%</p>
+              <p className="text-[22px] md:text-xl font-bold text-gray-900">{financial.care_management_pct}%</p>
             </div>
             <div className="rounded-xl bg-gray-50 p-4">
               <p className="text-xs text-gray-500 mb-1">EBITDA Return</p>
-              <p className="text-xl font-bold text-gray-900">{financial.ebitda_return_pct}%</p>
+              <p className="text-[22px] md:text-xl font-bold text-gray-900">{financial.ebitda_return_pct}%</p>
             </div>
           </div>
         </div>

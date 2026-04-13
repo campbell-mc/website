@@ -20,7 +20,7 @@ export default function MobileIncidents() {
 
   return (
     <div className="px-4 py-4 pb-24">
-      <h1 className="text-lg font-semibold text-foreground mb-4">Incidents</h1>
+      <h1 className="text-[28px] font-bold text-foreground mb-4">Incidents</h1>
 
       {/* Stat grid 2x2 */}
       <div className="grid grid-cols-2 gap-2 mb-4">

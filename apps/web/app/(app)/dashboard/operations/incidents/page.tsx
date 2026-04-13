@@ -43,7 +43,7 @@ export default function IncidentsPage() {
     <div className="px-4 lg:px-6 py-4 lg:py-6 max-w-3xl mx-auto">
       <div className="flex items-start justify-between mb-5">
         <div>
-          <h1 className="text-xl font-semibold text-foreground">Incidents</h1>
+          <h1 className="text-[22px] md:text-xl font-semibold text-foreground">Incidents</h1>
           <p className="text-xs text-muted-foreground">{facility.name} · Aged Care Act 2024</p>
         </div>
         <button

@@ -114,7 +114,7 @@ export default function WorkforcePage() {
 
         {/* Header */}
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">
+          <h1 className="text-[28px] md:text-2xl font-bold text-gray-900">
             Workforce Control Centre
           </h1>
           <p className="text-sm text-gray-500 mt-1">
@@ -130,7 +130,7 @@ export default function WorkforcePage() {
                 <span className="text-sm font-medium text-gray-500">{card.label}</span>
                 <card.icon className="w-4 h-4" style={{ color: card.color }} />
               </div>
-              <p className="text-2xl font-bold text-gray-900">{card.value}</p>
+              <p className="text-[28px] md:text-2xl font-bold text-gray-900">{card.value}</p>
               <p className="text-xs text-gray-500 mt-1">{card.sub}</p>
             </div>
           ))}

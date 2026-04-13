@@ -160,7 +160,7 @@ export default function KeeperSignalDetailPage() {
           <span className="text-white text-sm font-bold">K</span>
         </div>
         <div className="flex-1">
-          <h1 className="text-xl font-semibold text-foreground">{signal.title}</h1>
+          <h1 className="text-[22px] md:text-xl font-semibold text-foreground">{signal.title}</h1>
           <div className="flex items-center gap-2 mt-1">
             <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${signal.severity === "urgent" ? "bg-[#FFFBF0] text-[#D4A017] border border-[#D4A017]" : "bg-[#F0F7F4] text-[#2D7D73] border border-[#2D7D73]"}`}>
               {signal.metric}

@@ -94,7 +94,7 @@ export default function ComplianceRegisterPage() {
           >
             Home Care <ChevronRight className="w-3 h-3" /> Compliance
           </button>
-          <h1 className="text-2xl font-bold text-gray-900">Compliance Register</h1>
+          <h1 className="text-[28px] md:text-2xl font-bold text-gray-900">Compliance Register</h1>
           <p className="text-sm text-gray-500 mt-1">
             Support at Home · Aged Care Act 2024
           </p>
@@ -108,7 +108,7 @@ export default function ComplianceRegisterPage() {
                 <span className="text-sm font-medium text-gray-500">{card.label}</span>
                 <card.icon className="w-4 h-4" style={{ color: card.color }} />
               </div>
-              <p className="text-2xl font-bold text-gray-900">{card.value}</p>
+              <p className="text-[28px] md:text-2xl font-bold text-gray-900">{card.value}</p>
             </div>
           ))}
         </div>
