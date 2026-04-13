@@ -214,3 +214,68 @@ export const workforceMetrics = pgTable('workforce_metrics', {
   psh_participation_pct: real('psh_participation_pct'),
   created_at: timestamp('created_at').defaultNow(),
 });
+
+// ── LEADER LOOP CYCLES ───────────────────────────────────────
+
+export const leaderLoopCycles = pgTable('leader_loop_cycles', {
+  id: text('id').primaryKey(),
+  facility_id: text('facility_id').notNull(),
+  leader_role: text('leader_role').notNull(),
+  cycle_number: integer('cycle_number').notNull(),
+  practice: text('practice').notNull(),
+  sent_to_count: integer('sent_to_count').notNull(),
+  response_count: integer('response_count').default(0),
+  practice_visible_yes: integer('practice_visible_yes').default(0),
+  practice_visible_somewhat: integer('practice_visible_somewhat').default(0),
+  practice_visible_no: integer('practice_visible_no').default(0),
+  support_rating_avg: real('support_rating_avg'),
+  support_rating_prior: real('support_rating_prior'),
+  word_themes: text('word_themes').array(),
+  status: text('status').default('open'),
+  sent_at: timestamp('sent_at').defaultNow(),
+  closed_at: timestamp('closed_at'),
+});
+
+// ── LEADER REFLECTIONS ───────────────────────────────────────
+// Private to leader — never joined to reporting queries.
+
+export const leaderReflections = pgTable('leader_reflections', {
+  id: text('id').primaryKey(),
+  facility_id: text('facility_id').notNull(),
+  leader_role: text('leader_role').notNull(),
+  cycle_number: integer('cycle_number').notNull(),
+  answers: jsonb('answers').notNull(),
+  created_at: timestamp('created_at').defaultNow(),
+  updated_at: timestamp('updated_at').defaultNow(),
+});
+
+// ── LEADERSHIP SESSION RECORDS ───────────────────────────────
+
+export const leadershipSessionRecords = pgTable('leadership_session_records', {
+  id: text('id').primaryKey(),
+  facility_id: text('facility_id').notNull(),
+  cycle_number: integer('cycle_number').notNull(),
+  attendees: text('attendees'),
+  key_insights: text('key_insights'),
+  actions: jsonb('actions').default([]),
+  practice_commitments: jsonb('practice_commitments').default([]),
+  held_at: timestamp('held_at'),
+  documented_by: text('documented_by'),
+  status: text('status').default('planned'),
+  created_at: timestamp('created_at').defaultNow(),
+});
+
+// ── PRACTICE LOGS ────────────────────────────────────────────
+
+export const practiceLogs = pgTable('practice_logs', {
+  id: text('id').primaryKey(),
+  facility_id: text('facility_id').notNull(),
+  team_id: text('team_id').notNull(),
+  leader_role: text('leader_role').notNull(),
+  cycle_number: integer('cycle_number').notNull(),
+  practice: text('practice').notNull(),
+  delivered: boolean('delivered').default(false),
+  delivered_at: timestamp('delivered_at'),
+  notes: text('notes'),
+  created_at: timestamp('created_at').defaultNow(),
+});

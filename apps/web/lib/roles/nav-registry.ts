@@ -213,24 +213,23 @@ const NAV_SECTIONS: Record<string, NavSection | WeeklyLoopSection> = {
   loops: {
     title: "WEEKLY LOOPS",
     type: 'weekly_loops',
+    href: "/dashboard/weekly-loops",
     items: [], // Items are in teamLoop/leaderLoop sub-sections
     teamLoop: {
       label: "Team Loop",
       items: [
-        { label: "Pulse Check-In", href: "/team-loop/pulse", icon: "Heart" },
-        { label: "Briefing & Practice", href: "/team-loop/briefing", icon: "FileText" },
-        { label: "Reflection", href: "/team-loop/reflection", icon: "BookOpen" },
-        { label: "Close Loop", href: "/team-loop/close", icon: "CheckCircle" },
+        { label: "Team Pulse", href: "/dashboard/weekly-loops/team-pulse", icon: "Heart" },
+        { label: "Team Briefings", href: "/dashboard/weekly-loops/team-briefings", icon: "FileText" },
+        { label: "Leadership Session", href: "/dashboard/weekly-loops/leadership-session", icon: "Users" },
+        { label: "Micro Practice", href: "/dashboard/weekly-loops/practice", icon: "Sparkles" },
       ],
     },
     leaderLoop: {
       label: "Leader Loop",
       items: [
-        { label: "Arrive", href: "/leader-loop/arrive", icon: "Heart" },
-        { label: "360 Profile", href: "/leader-loop/profile", icon: "Users" },
-        { label: "Insights", href: "/leader-loop/insights", icon: "Sparkles" },
-        { label: "One Big Practice", href: "/leader-loop/obp", icon: "Star" },
-        { label: "Complete", href: "/leader-loop/complete", icon: "CheckCircle" },
+        { label: "Leader Pulse", href: "/dashboard/weekly-loops/leader-pulse", icon: "Heart" },
+        { label: "Leader Briefing", href: "/dashboard/weekly-loops/leader-briefing", icon: "FileText" },
+        { label: "Self-Reflection", href: "/dashboard/weekly-loops/self-reflection", icon: "BookOpen" },
       ],
     },
   } as WeeklyLoopSection,
