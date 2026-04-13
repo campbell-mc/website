@@ -95,6 +95,24 @@ export default function HomeCareDashboard() {
   return (
     <div className="min-h-screen bg-gray-50 p-6 lg:p-8">
       <div className="max-w-7xl mx-auto space-y-6">
+        {/* Demo role switcher */}
+        <div className="bg-[#1B4332] rounded-xl p-3 overflow-hidden">
+          <p className="text-[10px] font-semibold uppercase tracking-wider mb-2" style={{ color: "white" }}>Demo — switch role</p>
+          <div className="flex gap-1.5">
+            {[
+              { label: "HC Manager", href: "/dashboard/home-care?care=home_care" },
+              { label: "Care Coordinator", href: "/dashboard/care-coordinator?care=home_care" },
+              { label: "CEO", href: "/dashboard/ceo?care=home_care" },
+              { label: "CFO", href: "/dashboard/cfo?care=home_care" },
+              { label: "← Residential", href: "/dashboard" },
+            ].map((r) => (
+              <button key={r.label} onClick={() => router.push(r.href)} className="bg-white/10 hover:bg-white/20 rounded-lg px-3 py-2 text-[11px] font-medium text-white transition-colors">
+                {r.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
         {/* Header */}
         <div>
           <div className="flex items-center gap-2 mb-2">

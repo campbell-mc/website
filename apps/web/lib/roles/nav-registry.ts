@@ -156,6 +156,48 @@ const NAV_SECTIONS: Record<string, NavSection | WeeklyLoopSection> = {
     ],
   },
 
+  // ── HOME CARE ADDITIONAL SECTIONS ───────────────────────
+  hc_overview: {
+    title: "OVERVIEW",
+    alwaysOpen: true,
+    items: [
+      { label: "Home", href: "/dashboard/home-care", icon: "Home" },
+      { label: "Morning Briefing", href: "/dashboard/home-care/briefing", icon: "FileText" },
+      { label: "Documents", href: "/dashboard/home-care/documents", icon: "FileText" },
+      { label: "CHRIS Coach", href: "/dashboard/coach", icon: "Sparkles" },
+      { label: "Agents", href: "/dashboard/agents", icon: "Activity" },
+      { label: "iMessage Demo", href: "/dashboard/home-care/demo/imessage", icon: "FileText" },
+    ],
+  },
+  hc_workforce: {
+    title: "WORKFORCE",
+    href: "/dashboard/home-care/workforce",
+    items: [
+      { label: "Workforce Control Centre", href: "/dashboard/home-care/workforce", icon: "Users" },
+      { label: "PSH Dashboard", href: "/dashboard/home-care/workforce/psh", icon: "Heart" },
+      { label: "Keeper Signals", href: "/dashboard/home-care/workforce/keeper", icon: "Activity" },
+      { label: "Training Compliance", href: "/dashboard/home-care/workforce/training", icon: "GraduationCap" },
+    ],
+  },
+  hc_financial: {
+    title: "FINANCIAL",
+    href: "/dashboard/home-care/financial",
+    items: [
+      { label: "Financial Dashboard", href: "/dashboard/home-care/financial", icon: "DollarSign" },
+      { label: "Oracle Report", href: "/dashboard/home-care/financial/oracle", icon: "TrendingUp" },
+      { label: "Benchmarks", href: "/dashboard/home-care/financial/benchmarks", icon: "BarChart2" },
+    ],
+  },
+  hc_compliance: {
+    title: "COMPLIANCE",
+    href: "/dashboard/home-care/compliance",
+    items: [
+      { label: "Compliance Register", href: "/dashboard/home-care/compliance", icon: "Shield" },
+      { label: "SIRS Register", href: "/dashboard/home-care/sirs", icon: "AlertTriangle" },
+      { label: "Corrective Actions", href: "/dashboard/home-care/compliance/corrective-actions", icon: "CheckSquare" },
+    ],
+  },
+
   // ── NDIS NAV SECTIONS ───────────────────────────────────
   supports: {
     title: "SUPPORTS",
