@@ -19,7 +19,6 @@ const topAgent = agent_activity.find((a) => a.status === "awaiting_action") ?? a
 export default function MobileHome() {
   const router = useRouter();
   const [chrisExpanded, setChrisExpanded] = useState(false);
-  const [agentExpanded, setAgentExpanded] = useState(false);
 
   const sentences = todays_picture.chris_text.split(/(?<=\.)\s+/).filter(Boolean);
   const preview = sentences.slice(0, 3).join(" ");
@@ -66,26 +65,22 @@ export default function MobileHome() {
         </div>
       </div>
 
-      {/* Agent Pulse — single agent, expandable */}
-      <div className="mx-4">
-        <button onClick={() => setAgentExpanded(!agentExpanded)} className="w-full bg-[#F0F4F2] rounded-xl px-4 py-3 flex items-center gap-2.5 active:opacity-80">
-          <div className={`w-2 h-2 rounded-full shrink-0 ${topAgent.status === "active" ? "bg-[#2D7D73] animate-pulse" : "bg-[#D4A017]"}`} />
-          <span className="text-[13px] font-semibold text-[#1B4332] uppercase tracking-wider shrink-0">{topAgent.name}</span>
-          <span className="text-[13px] text-gray-500 flex-1 truncate">{topAgent.last_action.substring(0, 35)}...</span>
-          <span className="text-[12px] text-[#2D7D73] font-medium shrink-0">{agentExpanded ? "Close ↑" : "All ↓"}</span>
-        </button>
-        {agentExpanded && (
-          <div className="bg-[#F0F4F2] rounded-b-xl px-4 pb-3 -mt-1 pt-2 space-y-2.5">
-            {agent_activity.filter((a) => a.name !== topAgent.name).map((agent) => (
-              <div key={agent.name} className="flex items-center gap-2.5">
-                <div className={`w-2 h-2 rounded-full shrink-0 ${agent.status === "active" ? "bg-[#2D7D73]" : agent.status === "awaiting_action" ? "bg-[#D4A017]" : "bg-gray-400"}`} />
-                <span className="text-[12px] font-semibold text-[#1B4332] uppercase tracking-wider w-20 shrink-0">{agent.name}</span>
-                <span className="text-[12px] text-gray-500 truncate">{agent.last_action.substring(0, 30)}...</span>
+      {/* Agent Pulse — animated scrolling ticker */}
+      <div className="mx-4 rounded-xl overflow-hidden relative" style={{ background: "#F0F4F2" }}>
+        <div className="absolute left-0 top-0 bottom-0 w-6 z-10" style={{ background: "linear-gradient(to right, #F0F4F2, transparent)" }} />
+        <div className="absolute right-0 top-0 bottom-0 w-6 z-10" style={{ background: "linear-gradient(to left, #F0F4F2, transparent)" }} />
+        <div className="flex items-center py-3 animate-agent-scroll">
+          {[...agent_activity, ...agent_activity].map((agent, i) => {
+            const COLORS: Record<string, string> = { Sentinel: "#1B4332", Oracle: "#2D7D73", Steward: "#4A8C6F", Chronicler: "#B8900F", Keeper: "#C4704A", "Town Crier": "#7C5CBF" };
+            return (
+              <div key={`${agent.name}-${i}`} className="flex items-center gap-2 shrink-0 mx-3">
+                <span className={`w-2.5 h-2.5 rounded-full shrink-0 ${agent.status === "active" ? "animate-pulse" : ""}`} style={{ backgroundColor: agent.status === "awaiting_action" ? "#D4A017" : COLORS[agent.name] || "#1B4332" }} />
+                <span className="text-[12px] font-semibold uppercase tracking-wider whitespace-nowrap" style={{ color: COLORS[agent.name] || "#1B4332" }}>{agent.name}</span>
+                <span className="text-[12px] text-gray-500 whitespace-nowrap">{agent.last_action.substring(0, 30)}...</span>
               </div>
-            ))}
-            <button data-has-handler="true" onClick={() => router.push("/dashboard/agents")} className="text-[12px] text-[#2D7D73] font-medium pt-1">View all →</button>
-          </div>
-        )}
+            );
+          })}
+        </div>
       </div>
 
       {/* Domain Strip */}
