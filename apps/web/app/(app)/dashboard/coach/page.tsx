@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { usePathname } from "next/navigation";
-import { Send } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
+import { Send, ChevronLeft } from "lucide-react";
 import { ChrisAvatar } from "@/components/chris/ChrisAvatar";
 import { getRoleConfig, type RoleName } from "@/lib/roles/config";
 
@@ -41,6 +41,7 @@ const WELCOME: Message = {
 
 export default function CoachPage() {
   const pathname = usePathname();
+  const router = useRouter();
   const [messages, setMessages] = useState<Message[]>([WELCOME]);
   const [input, setInput] = useState("");
   const [streaming, setStreaming] = useState(false);
@@ -86,6 +87,9 @@ export default function CoachPage() {
       {/* Header */}
       <div className="px-4 py-3 border-b border-[var(--border-default)] bg-white/80 backdrop-blur-sm shrink-0">
         <div className="max-w-2xl mx-auto flex items-center gap-3">
+          <button onClick={() => router.push("/dashboard")} className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground shrink-0">
+            <ChevronLeft className="w-4 h-4" />
+          </button>
           <ChrisAvatar size="small" showGlow={streaming} />
           <div>
             <h1 className="text-base font-semibold text-[var(--brand-forest)]">CHRIS Coach</h1>

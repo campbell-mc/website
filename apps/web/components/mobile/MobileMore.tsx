@@ -33,6 +33,7 @@ const sections: NavSection[] = [
       { emoji: "📅", label: "Rostering", route: "/dashboard/operations/rostering" },
       { emoji: "🔄", label: "Handovers", route: "/dashboard/operations/handovers" },
       { emoji: "🚨", label: "Incidents", route: "/dashboard/operations/incidents" },
+      { emoji: "🗓", label: "Leave & Calendar", route: "/dashboard/operations/leave" },
     ],
   },
   {

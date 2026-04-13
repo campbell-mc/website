@@ -107,3 +107,37 @@ export const rosterShifts = pgTable('roster_shifts', {
   status: text('status').default('filled'), // 'filled' | 'gap' | 'cancelled'
   created_at: timestamp('created_at').defaultNow(),
 });
+
+// ── LEAVE RECORDS ────────────────────────────────────────────
+
+export const leaveRecords = pgTable('leave_records', {
+  id: text('id').primaryKey(),
+  facility_id: text('facility_id').notNull(),
+  worker_id: text('worker_id').notNull(),
+  worker_role: text('worker_role').notNull(),
+  wing: text('wing'),
+  leave_type: text('leave_type').notNull(),   // annual | sick | carer | training | rdo | wc
+  start_date: text('start_date').notNull(),
+  end_date: text('end_date').notNull(),
+  days: integer('days').notNull(),
+  status: text('status').notNull(),            // approved | pending | rejected | cancelled
+  eh_record_id: text('eh_record_id'),
+  care_minutes_impact: integer('care_minutes_impact'),
+  creates_gap: boolean('creates_gap').default(false),
+  synced_at: timestamp('synced_at').defaultNow(),
+  created_at: timestamp('created_at').defaultNow(),
+});
+
+// ── LEAVE ALERTS ─────────────────────────────────────────────
+
+export const leaveAlerts = pgTable('leave_alerts', {
+  id: serial('id').primaryKey(),
+  facility_id: text('facility_id').notNull(),
+  alert_type: text('alert_type').notNull(),   // care_minutes_risk | concentration | sick_trend | liability
+  severity: text('severity').notNull(),
+  title: text('title').notNull(),
+  description: text('description'),
+  agent: text('agent').notNull(),             // keeper | sentinel | steward
+  resolved: boolean('resolved').default(false),
+  created_at: timestamp('created_at').defaultNow(),
+});

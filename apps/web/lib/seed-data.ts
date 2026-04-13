@@ -1417,6 +1417,24 @@ export const steward_structural_finding = {
   recommendation: 'Direct-engage an RN for regular Sunday PM coverage at permanent rates. Break-even at 26 Sundays — achieved within 6 months.',
 };
 
+// ── LEAVE ─────────────────────────────────────────────────────
+
+export const leave_current = {
+  approved: [
+    { id: 'L001', worker_role: 'EN' as const, wing: 'Wattle Wing', leave_type: 'sick' as const, start_date: '2026-04-13', end_date: '2026-04-13', days: 1, status: 'approved' as const, creates_gap: false, care_minutes_impact: -11 },
+    { id: 'L002', worker_role: 'RN' as const, wing: 'Wing A', leave_type: 'annual' as const, start_date: '2026-04-18', end_date: '2026-04-22', days: 5, status: 'approved' as const, creates_gap: true, care_minutes_impact: -40 },
+    { id: 'L003', worker_role: 'AIN' as const, wing: 'Grevillea Wing', leave_type: 'annual' as const, start_date: '2026-04-19', end_date: '2026-04-19', days: 1, status: 'approved' as const, creates_gap: false, care_minutes_impact: -12 },
+    { id: 'L004', worker_role: 'AIN' as const, wing: 'Grevillea Wing', leave_type: 'annual' as const, start_date: '2026-04-19', end_date: '2026-04-19', days: 1, status: 'approved' as const, creates_gap: false, care_minutes_impact: -12 },
+    { id: 'L005', worker_role: 'AIN' as const, wing: 'Grevillea Wing', leave_type: 'annual' as const, start_date: '2026-04-19', end_date: '2026-04-19', days: 1, status: 'approved' as const, creates_gap: true, care_minutes_impact: -12 },
+    { id: 'L006', worker_role: 'AIN' as const, wing: 'Wattle Wing', leave_type: 'training' as const, start_date: '2026-04-21', end_date: '2026-04-21', days: 1, status: 'approved' as const, creates_gap: false, care_minutes_impact: -12 },
+  ],
+  pending: [
+    { id: 'L007', worker_role: 'RN' as const, wing: 'Night shift', leave_type: 'annual' as const, start_date: '2026-04-25', end_date: '2026-04-25', days: 1, status: 'pending' as const, creates_gap: false, care_minutes_impact: -40, impact_assessment: 'No coverage risk if approved' },
+    { id: 'L008', worker_role: 'AIN' as const, wing: 'Wattle Wing', leave_type: 'annual' as const, start_date: '2026-05-03', end_date: '2026-05-07', days: 5, status: 'pending' as const, creates_gap: true, care_minutes_impact: -12, impact_assessment: 'Creates gap on Thursday 7 May afternoon shift' },
+  ],
+  accrued_liability: { total_dollars: 48000, staff_not_taken_leave_6m: 4, highest_accrual_role: 'RN', highest_accrual_days: 38 },
+};
+
 export default {
   facility,
   teams,
@@ -1443,4 +1461,5 @@ export default {
   current_handover,
   incidents_closed_ytd,
   steward_structural_finding,
+  leave_current,
 };
