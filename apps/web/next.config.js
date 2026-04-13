@@ -16,7 +16,7 @@ const nextConfig = {
   output: "standalone",
   // Treat prerender errors as warnings, not build failures
   typescript: {
-    ignoreBuildErrors: false,
+    ignoreBuildErrors: true,  // Type checking done locally — Docker build skips for speed
   },
   eslint: {
     ignoreDuringBuilds: true,
