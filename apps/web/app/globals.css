@@ -502,3 +502,4 @@ button:active { transform: scale(0.98); }
 
 html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
 button, a { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+/* font fix */
