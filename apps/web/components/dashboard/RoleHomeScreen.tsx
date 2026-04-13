@@ -54,8 +54,8 @@ export function RoleHomeScreen({ config, children }: { config: RoleHomeConfig; c
       {/* 1. GREETING */}
       <div className="flex items-center justify-between mb-5">
         <div>
-          <p className="text-lg font-semibold text-foreground">{config.greeting}</p>
-          <p className="text-xs text-muted-foreground">{config.subtitle}</p>
+          <p className="text-[28px] lg:text-lg font-bold lg:font-semibold text-foreground">{config.greeting}</p>
+          <p className="text-[13px] lg:text-xs text-muted-foreground">{config.subtitle}</p>
         </div>
         {config.notificationCount !== undefined && config.notificationCount > 0 && (
           <button className="relative p-2 rounded-lg hover:bg-muted transition-colors">
@@ -69,7 +69,7 @@ export function RoleHomeScreen({ config, children }: { config: RoleHomeConfig; c
       <div className="rounded-xl p-5 mb-5" style={{ background: "rgba(27,67,50,0.05)" }}>
         <div className="flex items-start gap-3">
           <ChrisAvatar size="small" showGlow className="shrink-0 mt-0.5" />
-          <p className="text-sm text-foreground leading-relaxed font-serif-accent">{config.todaysPicture}</p>
+          <p className="text-[17px] lg:text-sm text-foreground leading-[1.65] lg:leading-relaxed font-serif-accent">{config.todaysPicture}</p>
         </div>
       </div>
 
@@ -87,11 +87,11 @@ export function RoleHomeScreen({ config, children }: { config: RoleHomeConfig; c
               className={`flex items-center justify-between w-full px-4 py-3 border-b border-border last:border-b-0 hover:bg-muted/50 transition-colors ${d.status === "act" ? "bg-[rgba(196,112,74,0.04)]" : ""}`}
             >
               <div className="flex items-center gap-3">
-                <span className="text-sm">{indicator}</span>
-                <span className="text-sm font-medium text-foreground">{d.name}</span>
+                <span className="text-[15px] lg:text-sm">{indicator}</span>
+                <span className="text-[15px] lg:text-sm font-medium text-foreground">{d.name}</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-xs text-muted-foreground">{d.summary}</span>
+                <span className="text-[13px] lg:text-xs text-muted-foreground">{d.summary}</span>
                 <ChevronRight className="w-3.5 h-3.5 text-muted-foreground/40" />
               </div>
             </button>
@@ -112,9 +112,9 @@ export function RoleHomeScreen({ config, children }: { config: RoleHomeConfig; c
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3 flex-1 min-w-0">
                 <span className="text-sm font-bold text-muted-foreground w-5 shrink-0">{i + 1}.</span>
-                <p className="text-sm font-medium text-foreground">{action.label}</p>
+                <p className="text-[15px] lg:text-sm font-medium text-foreground">{action.label}</p>
               </div>
-              <button onClick={() => router.push(action.href)} className="text-xs font-medium px-3 py-2 rounded-lg bg-primary text-primary-foreground hover:opacity-90 shrink-0 ml-3">
+              <button onClick={() => router.push(action.href)} className="text-[13px] lg:text-xs font-medium px-3 py-2 rounded-lg bg-primary text-primary-foreground hover:opacity-90 shrink-0 ml-3">
                 {action.actionLabel}
               </button>
             </div>
@@ -137,8 +137,8 @@ export function RoleHomeScreen({ config, children }: { config: RoleHomeConfig; c
               <span key={d} className="text-[9px] px-1.5 py-0.5 rounded bg-muted text-muted-foreground">{d}</span>
             ))}
           </div>
-          <p className="text-sm font-medium text-foreground mb-1">{config.intelligence.headline}</p>
-          <p className="text-xs text-muted-foreground leading-relaxed mb-2">{config.intelligence.detail}</p>
+          <p className="text-[15px] lg:text-sm font-medium text-foreground mb-1">{config.intelligence.headline}</p>
+          <p className="text-[13px] lg:text-xs text-muted-foreground leading-relaxed mb-2">{config.intelligence.detail}</p>
           <div className="flex items-center gap-2">
             <button className="text-[11px] font-medium px-2.5 py-1.5 rounded-lg bg-primary text-primary-foreground hover:opacity-90">Act</button>
             <button className="text-[11px] font-medium px-2.5 py-1.5 rounded-lg border border-border text-muted-foreground hover:bg-muted">Monitor</button>
