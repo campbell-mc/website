@@ -125,22 +125,23 @@ function OverviewTab() {
         <div className="flex items-center gap-2 mb-3">
           <div className="w-6 h-6 rounded-full bg-[#C4704A] flex items-center justify-center"><span className="text-white text-[10px] font-bold">K</span></div>
           <p className="text-sm font-semibold text-foreground">Keeper — this cycle</p>
-          <button className="ml-auto text-xs text-[hsl(var(--brand-teal))] font-medium">View all signals →</button>
+          <button onClick={() => router.push("/dashboard/workforce/keeper")} className="ml-auto text-xs text-[hsl(var(--brand-teal))] font-medium">View all signals →</button>
         </div>
         <div className="space-y-2">
           {[
-            { severity: "urgent", signal: "Turnover precursor — Wattle Wing Team B", detail: "71% probability within 4-6 cycles" },
-            { severity: "urgent", signal: "6 AHPRA registrations expiring in 3 weeks", detail: "Care minutes compliance at risk" },
-            { severity: "routine", signal: "Composition drift — Grevillea Wing RN:AIN ratio 1:6", detail: "Award compliance risk below 1:5" },
-            { severity: "routine", signal: "$48K accrued leave liability", detail: "4 staff — 6+ months without leave" },
+            { severity: "urgent", signal: "Turnover precursor — Wattle Wing Team B", detail: "71% probability within 4-6 cycles", route: "/dashboard/workforce/keeper/turnover-precursor" },
+            { severity: "urgent", signal: "6 AHPRA registrations expiring in 3 weeks", detail: "Care minutes compliance at risk", route: "/dashboard/workforce/keeper/ahpra-expiry" },
+            { severity: "routine", signal: "Composition drift — Grevillea Wing RN:AIN ratio 1:6", detail: "Award compliance risk below 1:5", route: "/dashboard/workforce/keeper/composition-drift" },
+            { severity: "routine", signal: "$48K accrued leave liability", detail: "4 staff — 6+ months without leave", route: "/dashboard/workforce/keeper/leave-liability" },
           ].map((item, i) => (
-            <div key={i} className={`flex gap-3 p-3 rounded-lg ${item.severity === "urgent" ? "bg-[#FFFBF0]" : "bg-muted/30"}`}>
+            <button key={i} onClick={() => router.push(item.route)} className={`w-full flex gap-3 p-3 rounded-lg text-left hover:shadow-sm transition-shadow ${item.severity === "urgent" ? "bg-[#FFFBF0]" : "bg-muted/30"}`}>
               <div className={`w-2 h-2 rounded-full mt-1.5 shrink-0 ${item.severity === "urgent" ? "bg-[#D4A017]" : "bg-[#2D7D73]"}`} />
-              <div>
+              <div className="flex-1">
                 <p className="text-sm font-medium text-foreground">{item.signal}</p>
                 <p className="text-xs text-muted-foreground">{item.detail}</p>
               </div>
-            </div>
+              <svg className="w-4 h-4 text-muted-foreground/30 shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+            </button>
           ))}
         </div>
       </div>

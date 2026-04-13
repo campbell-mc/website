@@ -26,8 +26,8 @@ const SIGNALS: WorkforceSignal[] = [
     metric: "71% probability",
     description: "Keeper has identified a turnover precursor pattern in Wattle Wing. PSH Cycle 8 data shows elevated psychosocial load combined with 3 consecutive months of overtime above threshold.",
     recommendedAction: "Review Wattle Wing PSH briefing and consider targeted intervention before next roster cycle.",
-    route: "/dashboard/workforce/psh/wattle-wing",
-    ctaLabel: "View PSH briefing",
+    route: "/dashboard/workforce/keeper/turnover-precursor",
+    ctaLabel: "View detail and commit actions →",
   },
   {
     id: "composition-grevillea",
@@ -36,8 +36,8 @@ const SIGNALS: WorkforceSignal[] = [
     metric: "1:6 RN ratio",
     description: "RN-to-resident ratio in Grevillea has drifted to 1:6 on PM shifts, above the 1:5 target. Two casual RNs have reduced availability since March.",
     recommendedAction: "Review rostering allocation for Grevillea PM shifts and consider backfill options.",
-    route: "/dashboard/operations/rostering",
-    ctaLabel: "View rostering",
+    route: "/dashboard/workforce/keeper/composition-drift",
+    ctaLabel: "View detail and commit actions →",
   },
   {
     id: "ahpra-expiry",
@@ -46,7 +46,8 @@ const SIGNALS: WorkforceSignal[] = [
     metric: "3 weeks",
     description: "Six staff members have AHPRA registrations expiring within 3 weeks. Keeper has sent automated reminders but no renewals have been confirmed.",
     recommendedAction: "Escalate to HR coordinator and confirm renewal status for all 6 registrations.",
-    ctaLabel: "View registrations",
+    route: "/dashboard/workforce/keeper/ahpra-expiry",
+    ctaLabel: "View detail and commit actions →",
   },
   {
     id: "leave-liability",
@@ -55,8 +56,8 @@ const SIGNALS: WorkforceSignal[] = [
     metric: "$48K accrued",
     description: "Annual leave liability has reached $48,000 across 12 staff members with balances exceeding 6 weeks. This represents a financial risk and potential fatigue concern.",
     recommendedAction: "Initiate leave management conversations and schedule planned leave to reduce exposure.",
-    route: "/dashboard/operations/leave",
-    ctaLabel: "View leave balances",
+    route: "/dashboard/workforce/keeper/leave-liability",
+    ctaLabel: "View detail and commit actions →",
   },
 ];
 
