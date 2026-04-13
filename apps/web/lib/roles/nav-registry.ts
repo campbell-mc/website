@@ -106,6 +106,7 @@ const NAV_SECTIONS: Record<string, NavSection | WeeklyLoopSection> = {
       { label: "Revenue", href: "/dashboard/financial/revenue", icon: "DollarSign" },
       { label: "Care Ratio", href: "/dashboard/financial/care-ratio", icon: "BarChart2" },
       { label: "Agency Cost", href: "/dashboard/financial/agency", icon: "Users" },
+      { label: "Benchmarks", href: "/dashboard/financial/benchmarks", icon: "BarChart2" },
       { label: "Budget", href: "/dashboard/financial/budget", icon: "FileText" },
     ],
   },
@@ -215,17 +216,20 @@ const NAV_SECTIONS: Record<string, NavSection | WeeklyLoopSection> = {
     teamLoop: {
       label: "Team Loop",
       items: [
-        { label: "Team Pulse", href: "/team-loop/pulse", icon: "Heart" },
-        { label: "Team Briefing", href: "/team-loop/briefing", icon: "FileText" },
-        { label: "Micro Practice", href: "/team-loop/practice", icon: "Sparkles" },
+        { label: "Pulse Check-In", href: "/team-loop/pulse", icon: "Heart" },
+        { label: "Briefing & Practice", href: "/team-loop/briefing", icon: "FileText" },
+        { label: "Reflection", href: "/team-loop/reflection", icon: "BookOpen" },
+        { label: "Close Loop", href: "/team-loop/close", icon: "CheckCircle" },
       ],
     },
     leaderLoop: {
       label: "Leader Loop",
       items: [
-        { label: "Leader Pulse", href: "/leader-loop/pulse", icon: "Heart" },
-        { label: "Self-Reflection", href: "/leader-loop/reflection", icon: "BookOpen" },
-        { label: "Leader Briefing", href: "/leader-loop/briefing", icon: "FileText" },
+        { label: "Arrive", href: "/leader-loop/arrive", icon: "Heart" },
+        { label: "360 Profile", href: "/leader-loop/profile", icon: "Users" },
+        { label: "Insights", href: "/leader-loop/insights", icon: "Sparkles" },
+        { label: "One Big Practice", href: "/leader-loop/obp", icon: "Star" },
+        { label: "Complete", href: "/leader-loop/complete", icon: "CheckCircle" },
       ],
     },
   } as WeeklyLoopSection,
@@ -233,8 +237,8 @@ const NAV_SECTIONS: Record<string, NavSection | WeeklyLoopSection> = {
     title: "MY TEAM",
     items: [
       { label: "Team Dashboard", href: "/dashboard/team-leader", icon: "Users" },
-      { label: "Team Pulse", href: "/team-loop/pulse", icon: "Heart" },
-      { label: "Leader Loop", href: "/leader-loop/arrive", icon: "BookOpen" },
+      { label: "Team Loop", href: "/team-loop/briefing", icon: "Heart" },
+      { label: "Leader Loop", href: "/leader-loop/arrive", icon: "Star" },
     ],
   },
   briefing: {

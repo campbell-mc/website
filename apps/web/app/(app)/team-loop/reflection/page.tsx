@@ -19,8 +19,19 @@ export default function TeamLoopReflection() {
   const [difference, setDifference] = useState("");
   const [challenges, setChallenges] = useState("");
 
-  function handleSubmit() {
-    // TODO: POST to API
+  async function handleSubmit() {
+    try {
+      await fetch("/api/team-loop/reflection", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          facility_id: "FAC-001", team_id: "TEAM-001", cycle_id: 8,
+          frequency, difference, challenges,
+        }),
+      });
+    } catch (e) {
+      // Silent fail for demo
+    }
     router.push("/team-loop/close");
   }
 

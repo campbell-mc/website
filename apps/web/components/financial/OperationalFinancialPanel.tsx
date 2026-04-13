@@ -7,6 +7,7 @@ import {
   tonightRosterCost,
 } from "@/lib/financial-benchmarks";
 import { facility, workforce_monthly, financial_monthly } from "@/lib/seed-data";
+import AGED_CARE_KNOWLEDGE from "@/lib/chris/aged-care-knowledge";
 
 /**
  * DON Operational Financial Panel
@@ -82,9 +83,13 @@ export function OperationalFinancialPanel() {
             </span>
           </p>
         )}
-        {currentMetrics.occupancy < BENCHMARKS.occupancy && (
+        {currentMetrics.occupancy >= AGED_CARE_KNOWLEDGE.stewartbrown_benchmarks.residential.occupancy.sector_average ? (
+          <p className="text-[10px] text-[hsl(var(--brand-teal))]">
+            vs StewartBrown sector avg: {(AGED_CARE_KNOWLEDGE.stewartbrown_benchmarks.residential.occupancy.sector_average * 100).toFixed(1)}% &uarr; Top quartile
+          </p>
+        ) : (
           <p className="text-[10px] text-muted-foreground/70">
-            Sector average: {(BENCHMARKS.occupancy * 100).toFixed(1)}%. You are {((BENCHMARKS.occupancy - currentMetrics.occupancy) * 100).toFixed(1)}pp below.
+            vs StewartBrown sector avg: {(AGED_CARE_KNOWLEDGE.stewartbrown_benchmarks.residential.occupancy.sector_average * 100).toFixed(1)}%. You are {((AGED_CARE_KNOWLEDGE.stewartbrown_benchmarks.residential.occupancy.sector_average - currentMetrics.occupancy) * 100).toFixed(1)}pp below.
           </p>
         )}
       </div>
@@ -118,6 +123,13 @@ export function OperationalFinancialPanel() {
             <span className="text-muted-foreground">Agency as % care hours</span>
             <span className={`font-medium ${currentMetrics.agencyPctCareWorkforce > 15 ? "text-[hsl(var(--brand-terracotta))]" : "text-[hsl(var(--brand-teal))]"}`}>
               {currentMetrics.agencyPctCareWorkforce}%
+            </span>
+          </div>
+          <div className="flex items-center justify-between text-xs">
+            <span className="text-muted-foreground">Care ratio</span>
+            <span className="font-medium text-[hsl(var(--brand-teal))]">
+              {(financial_monthly[financial_monthly.length - 1].care_ratio * 100).toFixed(1)}%
+              <span className="text-[10px] text-muted-foreground ml-1">vs SB avg {(AGED_CARE_KNOWLEDGE.stewartbrown_benchmarks.residential.labour.care_ratio.sector_average * 100).toFixed(0)}%</span>
             </span>
           </div>
           <div className="flex items-center justify-between text-xs">

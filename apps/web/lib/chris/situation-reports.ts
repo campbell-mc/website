@@ -24,7 +24,7 @@ const ri = resident_intelligence;
 // ============================================================
 
 export const operationsReport = {
-  narrative: `Tonight is the one to watch. The evening RN shift is still unfilled — that's what's driving the care minutes risk. If agency cover isn't confirmed by 3pm, care minutes will breach for the first time this week after 7 consecutive compliant days. The 3 outstanding handovers are routine and can be cleared after the SIRS draft, which is the real priority in the queue right now — it takes about 10 minutes and has 22 days remaining, but clearing it removes it from tomorrow's risk picture. The huddle agenda is ready and pre-loaded with this week's data — running it by voice with CHRIS takes 12 minutes.`,
+  narrative: `Tonight is the one to watch. The evening RN shift is still unfilled — that's what's driving the care minutes risk. If agency cover isn't confirmed by 3pm, care minutes will breach for the first time this week after 7 consecutive compliant days. Convergence detected: the unfilled RN shift pattern concentrates in Grevillea Wing where PSH_01 (Job Demands) has been elevated for 6 cycles — staff aren't declining shifts randomly, they're avoiding a high-demand environment. The 3 outstanding handovers are routine and can be cleared after the SIRS draft, which is the real priority in the queue right now — clearing it removes it from tomorrow's risk picture. The huddle agenda is ready and pre-loaded with this week's data — running it by voice with CHRIS takes 12 minutes.`,
   refreshedAt: "2h ago",
   context: "Day shift",
   signals: [
@@ -40,7 +40,7 @@ export const operationsReport = {
 // ============================================================
 
 export const clinicalReport = {
-  narrative: `The SIRS Cat 1 notification for the March 3 wrist fracture is due today — the Chronicler draft is ready for your review. This must be submitted before the deadline to avoid $783K penalty exposure. Care minutes have been compliant all week — ${latestCM.avg_total} total, ${latestCM.avg_rn} RN — the strongest sustained period since November. QI_03 (Falls) remains above benchmark for a third consecutive quarter, with 78% of falls on shifts with more than 30% agency coverage.`,
+  narrative: `The SIRS Cat 1 notification for the March 3 wrist fracture is due today — the Chronicler draft is ready for your review. This must be submitted before the deadline to avoid $783K penalty exposure. Care minutes have been compliant all week — ${latestCM.avg_total} total, ${latestCM.avg_rn} RN — the strongest sustained period since November. QI_03 (Falls) remains above benchmark for a third consecutive quarter. Convergence detected: 78% of falls occurred on shifts with more than 30% agency coverage — pulse data confirms PSH_08 (Traumatic Exposure) is elevated in the same teams, meaning unfamiliar staff are working alongside emotionally withdrawn permanent staff, and residents are falling through the gaps.`,
   refreshedAt: "2h ago",
   context: `Care minutes ${latestCM.avg_total >= 200 ? "compliant" : "at risk"} · AlayaCare 2h ago`,
   signals: [
@@ -56,7 +56,7 @@ export const clinicalReport = {
 // ============================================================
 
 export const workforceReport = {
-  narrative: `The workforce picture is split this cycle. Wattle Wing is the good news — PSH_08 dropped 0.08, the strongest single-cycle improvement in that team this year, and the practice prescribed last cycle appears to be working. Grevillea Wing is the concern: PSH_01 and PSH_08 have been co-elevated for 6 consecutive cycles and Level 4 practices aren't moving them. This is a HOC-level situation — a specialist dementia behaviour support conversation is overdue. Agency dependency is at ${Math.round(latestWf.agency_hours_pct * 100)}% and reducing month-on-month, but 9 residents mentioned staff consistency in this cycle's voice check-in — they notice the unfamiliar faces. ${latestWf.credentials_expiring_30d} AHPRA registrations expire within 30 days — one affects night shift RN coverage and needs urgent follow-up.`,
+  narrative: `The workforce picture is split this cycle. Wattle Wing PSH_08 dropped 0.08 — the strongest single-cycle improvement this year. Grevillea Wing remains a concern: PSH_01 and PSH_08 co-elevated for 6 cycles. Convergence detected: absenteeism concentration in Grevillea correlates with the PSH elevation — staff are avoiding the workplace, not randomly calling in sick. ${latestWf.credentials_expiring_30d} AHPRA registrations expire within 30 days — one affects night shift RN coverage.`,
   refreshedAt: "4h ago",
   context: `Cycle ${latestCycle.cycle} · Response rate ${Math.round(latestCycle.facility_response_rate * 100)}%`,
   signals: [
@@ -77,7 +77,7 @@ const janAgencyK = Math.round(financial_monthly[3].expenditure.direct_care_agenc
 const occupancy = Math.round(latestFin.occupancy_pct * 100 * 10) / 10;
 
 export const financialReport = {
-  narrative: `The financial picture is recovering but not there yet. Care ratio at ${careRatio}% is the headline — ${(55 - careRatio).toFixed(1)} points below the 55% target — but the driver is agency labour cost, not weak revenue. Agency peaked at $${janAgencyK}K in January and is now at $${agencyK}K, reducing month-on-month as the new RN settles in. At current trajectory CHRIS projects care ratio recovering to 55% by June. The two vacant beds are costing $840/day in foregone AN-ACC and hotelling revenue — 18 days for Wing A Bed 14. The admissions pipeline has ${ri.cohort.admissions_pipeline.enquiries} active enquiries and ${ri.cohort.admissions_pipeline.assessments_in_progress} assessments in progress. Three residents flagged for AN-ACC reassessment represent a potential +$8.2K/month revenue uplift — clinical reviews should happen before their assessment dates.`,
+  narrative: `Care ratio at ${careRatio}% — ${(55 - careRatio).toFixed(1)} points below 55% target. Agency at $${agencyK}K, down from $${janAgencyK}K peak in January. Convergence detected: the agency cost spike traces to PSH_13 (Low Recognition) declining 4 cycles in Wattle Wing before the December RN exits — this is a culture cost, not a labour market event. Three AN-ACC reassessment opportunities worth +$8.2K/month if clinical reviews happen before assessment dates.`,
   refreshedAt: "2h ago",
   context: `FY2026-${latestFin.period.split("-")[1]}`,
   signals: [
@@ -97,7 +97,7 @@ const compScore = compliance_obligations.filter((o) => o.status === "compliant")
 const overdueCA = corrective_actions.filter((ca) => ca.status === "not_started").length;
 
 export const governanceReport = {
-  narrative: `Governance is mostly on track with two things needing your attention this week. The QI submission for Q2 is due in 9 days — CHRIS has compiled all 14 indicators and the draft is ready for a 15-minute review. The Wing B bathroom corrective action (CA-2026-004) is now 58 days overdue — it originated from the January SIRS event and the falls prevention audit, and it's the only open corrective action without a completion date. Compliance score is ${compScore} of ${compliance_obligations.length} obligations met — ${atRisk} are at risk, both fixable in under 5 minutes with CHRIS. The Board Pack is ready for your approval and the meeting is in 8 days — estimated 35 minutes to review. ISO 45003 evidence is current across 3 of 4 categories; the worker consultation record needs updating, which CHRIS can do from pulse data immediately.`,
+  narrative: `Governance is mostly on track with two things needing your attention this week. The QI submission for Q2 is due in 9 days — CHRIS has compiled all 14 indicators and the draft is ready for a 15-minute review. The Wing B bathroom corrective action (CA-2026-004) is now 58 days overdue — it originated from the January SIRS event and the falls prevention audit, and it's the only open corrective action without a completion date. Convergence detected: this CA links to the same Grevillea Wing where PSH_01 and PSH_08 are co-elevated — the environment hazard that caused the fall and the psychosocial hazard affecting the team share a common root. Compliance score is ${compScore} of ${compliance_obligations.length} obligations met — ${atRisk} are at risk, both fixable in under 5 minutes with CHRIS. ISO 45003 evidence is current across 3 of 4 categories; the worker consultation record needs updating, which CHRIS can do from pulse data immediately.`,
   refreshedAt: "4h ago",
   context: `Compliance ${compScore}/${compliance_obligations.length} · ${atRisk} at risk`,
   signals: [

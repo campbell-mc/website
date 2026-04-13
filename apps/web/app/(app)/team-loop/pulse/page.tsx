@@ -34,8 +34,16 @@ export default function TeamPulseCheckIn() {
     setResponses((prev) => ({ ...prev, [questionId]: value }));
   }
 
-  function handleSubmit() {
-    // TODO: POST to API
+  async function handleSubmit() {
+    try {
+      await fetch("/api/team-loop/pulse", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ team_id: "TEAM-001", responses, comment }),
+      });
+    } catch (e) {
+      // Silent fail for demo — pulse is fire-and-forget
+    }
     setSubmitted(true);
   }
 

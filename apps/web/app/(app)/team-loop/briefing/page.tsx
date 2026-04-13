@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ChevronLeft, ChevronDown, ChevronUp, Sparkles, Mic, CheckCircle } from "lucide-react";
 import { ChrisAvatar } from "@/components/chris/ChrisAvatar";
+import { RESIDENTIAL_PRACTICES } from "@/lib/loops/practice-library";
 
 const PULSE_DATA = [
   { question: "I feel heard when I raise concerns or ideas.", score: 2.3, signal: true },
@@ -12,29 +13,20 @@ const PULSE_DATA = [
   { question: "I feel supported after difficult or emotional events.", score: 2.8, signal: false },
 ];
 
+// Practices selected for this team's context — drawn from canonical library,
+// never generic. Selection is based on the team's active PSH signals.
 const PRACTICES = [
-  {
-    id: "MA_001", title: "Prevent 'quiet resignation' after repeated disappointments",
-    tagline: "Close the loop on what was raised — even when the answer is 'not yet'.",
-    whatToTry: "This fortnight, pick one outstanding issue your team has raised before. Bring it back to them with a status: fixed, in progress, or can't fix (and why). The act of returning to an issue — even without a solution — breaks the 'nothing ever changes' cycle.",
-    whyThisHelps: "When people stop raising things, it's not because problems went away. It's because they decided raising them doesn't help. One closed loop — even a 'no' — rebuilds the signal that voice matters.",
-    whatItLooksLike: '"I know some of you raised the medication trolley issue a while back. I want to come back to it. We can\'t replace it this quarter, but I\'ve flagged it for budget review. In the meantime, here\'s what we\'re doing..."',
-  },
-  {
-    id: "MA_002", title: "Run a 'two-minute prep' before hard conversations",
-    tagline: "What you think through beforehand determines whether it lands.",
-    whatToTry: "Before any conversation you're dreading: write down the one thing you need them to hear, the one thing you need to understand from them, and the opening line you'll use. Two minutes. That's it.",
-    whyThisHelps: "Most difficult conversations fail not because of what's said, but because neither person knew what they actually needed from it. Two minutes of prep turns a confrontation into a conversation.",
-    whatItLooksLike: '"Before my next roster conversation: I need them to hear that the pattern is unsustainable. I need to understand what\'s driving the swaps. Opening: \'I want to talk about the last few weeks — not to blame, but to understand what\'s going on.\'"',
-  },
-  {
-    id: "MA_003", title: "Create a 'micro-ritual' for cumulative grief",
-    tagline: "Name repeated loss so it doesn't quietly become burnout.",
-    whatToTry: "After a resident death — particularly when it's the second or third in a short period — take 60 seconds with the team before the shift continues. Not a debrief. Just a pause. Name the person. Acknowledge the loss. Then carry on.",
-    whyThisHelps: "Cumulative grief in aged care is the number one driver of emotional exhaustion. Not because of any single death, but because there's never a pause between them. A micro-ritual doesn't fix grief — it prevents it from going underground.",
-    whatItLooksLike: '"Before we move on — Mrs Chen passed this morning. She was here for four years. Some of you knew her well. Take a moment if you need it. We keep going, but we don\'t pretend it didn\'t happen."',
-  },
-];
+  RESIDENTIAL_PRACTICES.find((p) => p.id === "MP_013")!,
+  RESIDENTIAL_PRACTICES.find((p) => p.id === "MP_033")!,
+  RESIDENTIAL_PRACTICES.find((p) => p.id === "MP_004")!,
+].map((p) => ({
+  id: p.id,
+  title: p.title,
+  tagline: p.tagline,
+  whatToTry: p.what_to_try,
+  whyThisHelps: p.why_this_helps,
+  whatItLooksLike: p.what_it_looks_like,
+}));
 
 export default function TeamBriefingPage() {
   const router = useRouter();

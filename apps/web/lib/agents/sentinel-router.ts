@@ -13,6 +13,7 @@
 
 import { runSentinel } from '@/lib/agents/sentinel';
 import { publishEvent } from '@/lib/agents/town-crier';
+import { generateConvergenceInsights } from '@/lib/chris/convergence';
 import { callClaudeText } from '@/lib/anthropic/client';
 import AGED_CARE_KNOWLEDGE from '@/lib/chris/aged-care-knowledge';
 
@@ -176,7 +177,7 @@ export async function refreshSituationReport(
   trigger: 'threshold_crossing' | 'scheduled' | 'manual'
 ): Promise<string> {
 
-  const systemPrompt = `You are CHRIS — the operational intelligence system for Australian aged care. You generate domain situation reports. Write 3-4 sentences maximum. Direct and specific. Name metrics, wings, deadlines, dollar amounts. No bullet points. No preamble. End with one clear recommended action.`;
+  const systemPrompt = `You are CHRIS — the operational intelligence system for Australian aged care. You generate domain situation reports. Write 3-4 sentences maximum. Direct and specific. Name metrics, wings, deadlines, dollar amounts. No bullet points. No preamble. Lead with deterministic metrics (compliance, deadlines, counts). Where convergence is detected — two independent signal streams agreeing on the same cause — add one sentence explaining the "why" behind the metric. End with one clear recommended action.`;
 
   const narrative = await callClaudeText({
     system: systemPrompt,

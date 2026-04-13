@@ -16,6 +16,7 @@
 import { callClaudeText } from '@/lib/anthropic/client';
 import { ROLE_CONFIG, getRoleConfig, type RoleName } from '@/lib/roles/config';
 import AGED_CARE_KNOWLEDGE from '@/lib/chris/aged-care-knowledge';
+import { generateConvergenceInsights, type ConvergenceInsight } from '@/lib/chris/convergence';
 
 // ── TYPES ─────────────────────────────────────────────────────
 
@@ -305,5 +306,8 @@ REGULATORY CONTEXT:
 - SIRS Cat 2: ${AGED_CARE_KNOWLEDGE.sirs.cat2_notification_days}d deadline
 - QI submission: ${AGED_CARE_KNOWLEDGE.quality_indicators.submission_deadline_days_after_quarter_end}d after quarter end
 
-Write 4-5 sentences. Lead with the most important signal for this role right now. Be specific. End with one clear recommended action. No bullet points. No preamble.`;
+CONVERGENCE CONTEXT (where two independent signal streams agree on the cause):
+When convergence is detected, include one sentence explaining the "why" — what's driving the metric, not just what the metric says. Convergence insights are high-confidence because two independent sources agree.
+
+Write 4-5 sentences. Lead with the most important deterministic signal. Add convergence "why" where detected. End with one clear recommended action. No bullet points. No preamble.`;
 }

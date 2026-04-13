@@ -16,6 +16,33 @@
 //   NSW WHS Regulation 2025
 //   AN-ACC Pricing Framework Oct 2025
 // ============================================================================
+//
+// ── STEWARTBROWN BENCHMARK UPDATE SCHEDULE ──────────────────
+// StewartBrown publishes quarterly sector reports publicly.
+// Ivan or Campbell updates the stewartbrown_benchmarks section
+// within 2 weeks of each publication.
+//
+// Publication schedule (approximate):
+//   Sep quarter: published ~January each year
+//   Dec quarter: published ~March each year
+//   Mar quarter: published ~July each year
+//   Jun quarter (annual): published ~October each year
+//
+// Public report archive:
+//   https://www.stewartbrown.com.au/index.php?option=com_content&view=article&id=192
+//
+// Key metrics to update each quarter:
+//   - stewartbrown_benchmarks.residential.ebitda.per_bed_day.sector_average
+//   - stewartbrown_benchmarks.residential.ebitda.per_bed_per_annum.sector_average
+//   - stewartbrown_benchmarks.residential.labour.direct_care_pbd.sector_average
+//   - stewartbrown_benchmarks.residential.labour.care_ratio.sector_average
+//   - stewartbrown_benchmarks.residential.occupancy.sector_average
+//   - stewartbrown_benchmarks.residential.care_minutes.sector_average_pbd
+//   - stewartbrown_benchmarks.residential.care_minutes.rn_minutes_pbd
+//   - stewartbrown_benchmarks.home_care.revenue.per_client_per_day.sector_average
+//   - stewartbrown_benchmarks.home_care.revenue.care_management_pct.sector_average
+//   - Update metadata.period and metadata.published
+// ============================================================================
 
 export const AGED_CARE_KNOWLEDGE = {
 
@@ -278,6 +305,186 @@ export const AGED_CARE_KNOWLEDGE = {
     finance_erp: ['TechnologyOne', 'MYOB', 'Xero', 'Epicor'],
     incident_whs: ['RiskMan', 'Riskware', 'SafeSys'],
     government: ['ACQSC GPMS'],
+  },
+
+  // ── STEWARTBROWN BENCHMARKS ────────────────────────────────
+  // Comprehensive sector benchmarks from StewartBrown ACFPS.
+  // Static data embedded — updated quarterly when StewartBrown publishes.
+  // No API, no partnership required. Public survey data.
+
+  stewartbrown_benchmarks: {
+    metadata: {
+      source: 'StewartBrown Aged Care Financial Performance Survey (ACFPS)',
+      period: 'FY2025 (July 2024 – June 2025)',
+      published: '2025-10-31',
+      next_update_due: '2026-02-01',
+      facilities_in_survey: 1192,
+      beds_in_survey: 99323,
+      home_care_packages: 79975,
+      update_cadence: 'quarterly',
+      update_instruction: 'Update when StewartBrown publishes quarterly sector report PDF. Extract key metrics from Tables 1-10. Contact: steven.toner@stewartbrown.com.au',
+      public_reports_url: 'https://www.stewartbrown.com.au/index.php?option=com_content&view=article&id=192',
+    },
+
+    residential: {
+
+      ebitda: {
+        per_bed_day: {
+          sector_average: 18.68,
+          top_quartile_threshold: 55.00,
+          second_quartile_range_low: 30.00,
+          second_quartile_range_high: 55.00,
+          third_quartile_range_low: 0.00,
+          third_quartile_range_high: 30.00,
+          fourth_quartile_threshold: 0.00,
+          unit: 'AUD per occupied bed day',
+        },
+        per_bed_per_annum: {
+          sector_average: 6817,
+          investment_viability_threshold: 20000,
+          // Below $20K pbpa: insufficient for ongoing capital investment
+          // StewartBrown FY25: "significantly lower than required to encourage ongoing investment"
+        },
+        ebitda_return_pct: {
+          sector_average: 0.081,   // 8.1% of revenue
+          top_quartile: 0.18,
+        },
+      },
+
+      revenue: {
+        direct_care_pbd: {
+          sector_average: 295.64,  // AN-ACC starting price Oct 2025
+          prior_year: 271.60,
+          yoy_change_pct: 0.0885,
+        },
+        everyday_living_pbd: {
+          sector_average: 80.84,   // incl. hotelling supplement
+          prior_year: 76.31,
+          yoy_change_pct: 0.0594,
+        },
+        accommodation_pbd: {
+          sector_average: 43.74,
+          prior_year: 41.65,
+          yoy_change_pct: 0.0500,
+          rad_price_cap: 750000,
+          average_full_rad: 516770,
+          full_rad_pct: 0.370,
+          full_dap_pct: 0.406,
+          combination_pct: 0.224,
+        },
+      },
+
+      labour: {
+        direct_care_pbd: {
+          sector_average: 227.70,  // RN/EN/PCW
+          prior_year: 205.05,
+          yoy_change_pct: 0.1105,
+        },
+        other_direct_care_pbd: {
+          sector_average: 19.13,   // care mgmt/allied health/lifestyle
+          prior_year: 17.70,
+          yoy_change_pct: 0.0806,
+        },
+        care_ratio: {
+          sector_average: 0.70,
+          top_quartile: 0.62,
+          chris_target: 0.55,
+          chris_alert_threshold: 0.75,
+          chris_critical_threshold: 0.80,
+        },
+        agency: {
+          overnight_rn_pct: 0.29,  // 29% of overnight RN minutes agency
+          chris_alert_threshold: 0.15,
+          chris_critical_threshold: 0.25,
+          typical_rn_premium_per_shift: 190,
+          typical_rn_agency_shift_cost: 480,
+          typical_rn_permanent_shift_cost: 290,
+        },
+      },
+
+      care_minutes: {
+        sector_average_pbd: 214.04,
+        rn_minutes_pbd: 43.70,
+        en_minutes_pbd: 9.00,
+        pcw_minutes_pbd: 161.34,
+        top_quartile_pbd: 230,
+        regulatory_minimum_total: 215,
+        regulatory_minimum_rn: 44,
+        direct_care_deficit_pct: 0.38,
+      },
+
+      occupancy: {
+        sector_average: 0.944,
+        prior_year: 0.926,
+        top_quartile: 0.966,
+        fourth_quartile: 0.927,
+        supported_resident_ratio: 0.464,
+        chris_alert_threshold: 0.92,
+        chris_critical_threshold: 0.88,
+        revenue_per_bed_day: 420,
+      },
+
+      by_location: {
+        mm1_ebitda_pbd: 18.68,
+        mm3_mm4_deficit_pbd: -19.19,
+      },
+    },
+
+    home_care: {
+      revenue: {
+        per_client_per_day: {
+          sector_average: 84.89,
+          prior_year: 78.44,
+          yoy_change_pct: 0.0822,
+        },
+        care_management_pct: {
+          sector_average: 0.187,
+          prior_year: 0.186,
+          minimum_compliant: 0.10,
+          chris_alert_threshold: 0.14,
+        },
+        package_management_pct: {
+          sector_average: 0.132,
+          prior_year: 0.124,
+        },
+      },
+      financial: {
+        npbt_per_client_per_day: 4.33,
+        ebitda_return_pct: 0.064,
+      },
+      unspent_funds: {
+        average_per_client: 14517,
+        chris_flag_threshold_pct: 0.25,
+        chris_alert_threshold_pct: 0.35,
+      },
+      labour: {
+        target_travel_cost_pct: 0.08,
+        chris_alert_threshold: 0.12,
+      },
+    },
+
+    disability: {
+      note: 'Disability benchmarks available from StewartBrown separately — add when NDIS care type is active',
+    },
+
+    // ── CHRIS NETWORK BENCHMARK ACCUMULATION ────────────────
+    // Proprietary dataset — not StewartBrown's.
+    // Grows as CHRIS scales across providers.
+    // Anonymised and aggregated. Never provider-identifiable.
+
+    chris_network: {
+      status: 'accumulating',  // 'accumulating' | 'publishable' (at 10+ providers)
+      note: 'Populated from CHRIS client data as network grows.',
+      psh_baseline_by_care_type: null,
+      intervention_effectiveness: null,
+      wc_claim_correlation_validated: null,
+      care_minutes_baseline_by_bed_count: null,
+      agency_correlation: null,
+      turnover_precursor_validated: null,
+      composition_benchmarks: null,
+      ebitda_operational_correlations: null,
+      agency_cost_patterns: null,
+    },
   },
 
 } as const;
