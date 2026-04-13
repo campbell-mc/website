@@ -16,7 +16,9 @@ import {
   text,
   real,
   integer,
+  boolean,
   timestamp,
+  jsonb,
 } from 'drizzle-orm/pg-core';
 
 // ── NETWORK BENCHMARKS ───────────────────────────────────────
@@ -44,4 +46,64 @@ export const networkBenchmarks = pgTable('network_benchmarks', {
   facility_count: integer('facility_count').notNull(), // how many facilities contributed
   calculated_at: timestamp('calculated_at').defaultNow(),
   // No facility_id — this is aggregate only
+});
+
+// ── INCIDENTS ────────────────────────────────────────────────
+
+export const incidents = pgTable('incidents', {
+  id: text('id').primaryKey(),
+  facility_id: text('facility_id').notNull(),
+  incident_type: text('incident_type').notNull(),
+  occurred_at: timestamp('occurred_at').notNull(),
+  wing: text('wing'),
+  location_detail: text('location_detail'),
+  description: text('description'),
+  immediate_actions: text('immediate_actions'),
+  medical_attention: boolean('medical_attention').default(false),
+  outcome_description: text('outcome_description'),
+  sirs_category: integer('sirs_category'),
+  sirs_assessed_at: timestamp('sirs_assessed_at'),
+  sirs_notification_deadline: timestamp('sirs_notification_deadline'),
+  sirs_submitted_at: timestamp('sirs_submitted_at'),
+  status: text('status').default('logged'), // 'logged' | 'assessed' | 'sirs_notified' | 'closed'
+  days_open: integer('days_open').default(0),
+  chronicler_document_id: integer('chronicler_document_id'),
+  logged_by_role: text('logged_by_role'),
+  shift: text('shift'),
+  agency_shift: boolean('agency_shift').default(false),
+  created_at: timestamp('created_at').defaultNow(),
+  closed_at: timestamp('closed_at'),
+});
+
+// ── HANDOVERS ────────────────────────────────────────────────
+
+export const handovers = pgTable('handovers', {
+  id: text('id').primaryKey(),
+  facility_id: text('facility_id').notNull(),
+  shift: text('shift').notNull(),       // 'morning' | 'afternoon' | 'night'
+  shift_date: text('shift_date').notNull(),
+  items: jsonb('items').default([]),
+  notes: jsonb('notes').default([]),
+  completed_at: timestamp('completed_at'),
+  completed_by: text('completed_by'),
+  status: text('status').default('active'), // 'active' | 'completed'
+  created_at: timestamp('created_at').defaultNow(),
+});
+
+// ── ROSTER SHIFTS ────────────────────────────────────────────
+
+export const rosterShifts = pgTable('roster_shifts', {
+  id: text('id').primaryKey(),
+  facility_id: text('facility_id').notNull(),
+  shift_date: text('shift_date').notNull(),
+  shift: text('shift').notNull(),         // 'morning' | 'afternoon' | 'night'
+  role: text('role').notNull(),           // 'RN' | 'EN' | 'AIN'
+  wing: text('wing'),
+  worker_name: text('worker_name'),
+  worker_role: text('worker_role'),
+  is_agency: boolean('is_agency').default(false),
+  agency_cost: integer('agency_cost'),
+  is_gap: boolean('is_gap').default(false),
+  status: text('status').default('filled'), // 'filled' | 'gap' | 'cancelled'
+  created_at: timestamp('created_at').defaultNow(),
 });

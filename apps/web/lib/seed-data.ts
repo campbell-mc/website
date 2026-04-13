@@ -1280,6 +1280,143 @@ export const coordination_log = [
   },
 ];
 
+// ── ROSTERING ─────────────────────────────────────────────────
+
+export const roster_today = {
+  date: '2026-04-13',
+  weekly_agency_cost: 950,
+  weekly_agency_pct: 0.18,
+  next_7_days_gaps: 3,
+  shifts: {
+    morning: {
+      time: '6:00am – 2:00pm',
+      total_rostered: 8,
+      gaps: 0,
+      rn_confirmed: true,
+      agency_count: 1,
+      staff: [
+        { role: 'RN' as const,  name: 'Sarah Chen',     agency: false },
+        { role: 'RN' as const,  name: 'James Wu',       agency: false },
+        { role: 'EN' as const,  name: 'Patricia Moore',  agency: false },
+        { role: 'AIN' as const, name: 'Worker 1',       agency: false },
+        { role: 'AIN' as const, name: 'Worker 2',       agency: false },
+        { role: 'AIN' as const, name: 'Worker 3',       agency: false },
+        { role: 'AIN' as const, name: 'Worker 4',       agency: false },
+        { role: 'AIN' as const, name: 'Agency Worker',  agency: true  },
+      ],
+    },
+    afternoon: {
+      time: '2:00pm – 10:00pm',
+      total_rostered: 7,
+      gaps: 1,
+      rn_confirmed: true,
+      agency_count: 1,
+      staff: [
+        { role: 'RN' as const,  name: 'Michael Torres',       agency: true  },
+        { role: 'EN' as const,  name: 'Linda Park',           agency: false },
+        { role: 'AIN' as const, name: 'Worker 5',             agency: false },
+        { role: 'AIN' as const, name: 'Worker 6',             agency: false },
+        { role: 'AIN' as const, name: 'Worker 7',             agency: false },
+        { role: 'AIN' as const, name: 'Worker 8',             agency: false },
+        { role: 'AIN' as const, name: 'GAP — Grevillea Wing', agency: false, gap: true },
+      ],
+    },
+    night: {
+      time: '10:00pm – 6:00am',
+      total_rostered: 5,
+      gaps: 0,
+      rn_confirmed: true,
+      agency_count: 0,
+      staff: [
+        { role: 'RN' as const,  name: 'Night RN confirmed', agency: false },
+        { role: 'EN' as const,  name: 'Night EN',           agency: false },
+        { role: 'AIN' as const, name: 'Night AIN 1',        agency: false },
+        { role: 'AIN' as const, name: 'Night AIN 2',        agency: false },
+        { role: 'AIN' as const, name: 'Night AIN 3',        agency: false },
+      ],
+    },
+  },
+  week: [
+    { day: 'Mon', shifts: 24, gaps: 0, agency: 1, cost: 120 },
+    { day: 'Tue', shifts: 24, gaps: 0, agency: 2, cost: 240 },
+    { day: 'Wed', shifts: 24, gaps: 1, agency: 1, cost: 120 },
+    { day: 'Thu', shifts: 24, gaps: 0, agency: 1, cost: 120 },
+    { day: 'Fri', shifts: 24, gaps: 0, agency: 2, cost: 240 },
+    { day: 'Sat', shifts: 20, gaps: 0, agency: 1, cost: 110 },
+    { day: 'Sun', shifts: 20, gaps: 1, agency: 2, cost: 480 },
+  ],
+};
+
+// ── HANDOVERS ─────────────────────────────────────────────────
+
+export const current_handover = {
+  shift: 'afternoon' as const,
+  date: '2026-04-13',
+  last_completed: { shift: 'morning', time: '6:02am', date: '2026-04-13' },
+  items: [
+    {
+      id: 'h1',
+      priority: 'high' as const,
+      title: 'Wing B resident: fall risk elevated',
+      detail: 'Resident had unwitnessed fall yesterday. Care plan updated — bed rails now required. Confirm rails checked at start of shift.',
+      source: 'AlayaCare incident log',
+      generated_by: 'chronicler' as const,
+      wing: 'Wing B',
+      noted: false,
+    },
+    {
+      id: 'h2',
+      priority: 'medium' as const,
+      title: 'Medication change — 3 residents',
+      detail: 'PRN pain medication added for Rooms 14, 22, 31. First doses not yet administered. Monitor for effect and document response.',
+      source: 'AlayaCare medication record',
+      generated_by: 'chronicler' as const,
+      wing: 'Wattle Wing',
+      noted: false,
+    },
+    {
+      id: 'h3',
+      priority: 'low' as const,
+      title: 'Care minutes — afternoon position',
+      detail: '58 min delivered morning shift. Afternoon target: 58 min. 1 AIN gap in Grevillea Wing — source cover before 3pm.',
+      source: 'Deputy + AlayaCare',
+      generated_by: 'sentinel' as const,
+      noted: false,
+    },
+    {
+      id: 'h4',
+      priority: 'low' as const,
+      title: 'Grevillea Wing bathroom — wet floor',
+      detail: 'Wet floor sign placed after mopping. Awaiting maintenance to check non-slip surface. Inform Grevillea Wing staff.',
+      source: 'Manual entry',
+      generated_by: 'manual' as const,
+      wing: 'Grevillea Wing',
+      noted: false,
+    },
+  ],
+};
+
+// ── INCIDENTS ─────────────────────────────────────────────────
+
+export const incidents_closed_ytd = [
+  { id: 'INC-2025-001', type: 'Fall with injury', date: '2025-10-22', wing: 'Wing A', status: 'closed' as const, sirs_category: 2 as number | null, days_to_close: 12, submitted: '2025-11-03', agency_shift: false },
+  { id: 'INC-2025-002', type: 'Medication error', date: '2025-12-08', wing: 'Wattle Wing', status: 'closed' as const, sirs_category: 2 as number | null, days_to_close: 14, submitted: '2025-12-22', agency_shift: false },
+  { id: 'INC-2026-001', type: 'Fall with injury', date: '2026-01-27', wing: 'Wing B', status: 'closed' as const, sirs_category: 1 as number | null, days_to_close: 8, submitted: '2026-02-04', agency_shift: true },
+  { id: 'INC-2026-002', type: 'Fall with injury', date: '2026-03-03', wing: 'Wing A', status: 'closed' as const, sirs_category: null, days_to_close: 15, submitted: '2026-03-18', agency_shift: true },
+];
+
+export const steward_structural_finding = {
+  finding: 'Sunday PM RN gap — structural',
+  evidence: '6 of last 8 Sundays required agency RN cover',
+  shift: 'Sunday afternoon (2pm–10pm)',
+  agency_cost_per_shift: 480,
+  permanent_equivalent: 290,
+  premium_per_shift: 190,
+  occurrences_last_8_weeks: 6,
+  annualised_cost: 4940,
+  recommendation: 'Direct-engage an RN for regular Sunday PM coverage at permanent rates. Break-even at 26 Sundays — achieved within 6 months.',
+};
+
 export default {
   facility,
   teams,
@@ -1302,4 +1439,8 @@ export default {
   agent_activity,
   agent_activity_log,
   coordination_log,
+  roster_today,
+  current_handover,
+  incidents_closed_ytd,
+  steward_structural_finding,
 };

@@ -40,7 +40,7 @@ const NAV_SECTIONS: Record<string, NavSection | WeeklyLoopSection> = {
     title: "OPERATIONS",
     href: "/dashboard/operations",
     items: [
-      { label: "Rostering", href: "/dashboard/workforce/roster", icon: "Calendar" },
+      { label: "Rostering", href: "/dashboard/operations/rostering", icon: "Calendar" },
       { label: "Handovers", href: "/dashboard/operations/handovers", icon: "FileText" },
       { label: "Incidents", href: "/dashboard/operations/incidents", icon: "AlertTriangle" },
     ],

@@ -30,9 +30,9 @@ const sections: NavSection[] = [
   {
     title: "Operations",
     items: [
-      { emoji: "📅", label: "Rostering", route: "/dashboard/rostering" },
-      { emoji: "🤝", label: "Handovers", route: "/dashboard/handovers" },
-      { emoji: "⚠️", label: "Incidents", route: "/dashboard/incidents" },
+      { emoji: "📅", label: "Rostering", route: "/dashboard/operations/rostering" },
+      { emoji: "🔄", label: "Handovers", route: "/dashboard/operations/handovers" },
+      { emoji: "🚨", label: "Incidents", route: "/dashboard/operations/incidents" },
     ],
   },
   {
@@ -106,16 +106,9 @@ const sections: NavSection[] = [
   {
     title: "Weekly Loops",
     items: [
-      {
-        emoji: "🔄",
-        label: "Team Loop",
-        route: "/dashboard/loops/team",
-      },
-      {
-        emoji: "🎯",
-        label: "Leader Loop",
-        route: "/dashboard/loops/leader",
-      },
+      { emoji: "🔄", label: "Team Loop — Briefing", route: "/team-loop/briefing" },
+      { emoji: "💚", label: "Team Loop — Pulse", route: "/team-loop/pulse" },
+      { emoji: "🎯", label: "Leader Loop", route: "/leader-loop/arrive" },
     ],
   },
   {
