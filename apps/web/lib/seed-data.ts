@@ -1417,6 +1417,130 @@ export const steward_structural_finding = {
   recommendation: 'Direct-engage an RN for regular Sunday PM coverage at permanent rates. Break-even at 26 Sundays — achieved within 6 months.',
 };
 
+// ── HOLY GRAIL HOME CARE ──────────────────────────────────────
+// Two services: Camelot (Inner West Sydney), Avalon (Northern Beaches Sydney)
+
+export const holy_grail_home_care = {
+  organisation: { id: 'holy-grail-hc', name: 'Knights of the Holy Grail', care_type: 'home_care' as const, location: 'Sydney NSW', program: 'Support at Home' },
+  services: {
+    camelot: { facility_id: 'camelot-hc-001', name: 'Camelot Home Care', suburb: 'Leichhardt', region: 'Inner West Sydney', active_clients: 134, active_workers: 48, care_coordinators: 3, service_manager: 'Guinevere Walsh' },
+    avalon: { facility_id: 'avalon-hc-001', name: 'Avalon Home Care', suburb: 'Manly', region: 'Northern Beaches Sydney', active_clients: 113, active_workers: 41, care_coordinators: 3, service_manager: 'Arthur Pendragon' },
+  },
+  combined: {
+    active_clients: 247, active_workers: 89, care_coordinators: 6,
+    metrics: {
+      visit_compliance_pct: 96.2, hours_utilised_pct: 88.4, unspent_funds_pct: 18.3,
+      care_plans_current_pct: 94.1, sirs_open: 0, budget_statements_due: 3,
+      travel_time_pct: 14.2, client_satisfaction: 81.3, lone_worker_overdue: 2,
+      care_plans_overdue: 14, high_risk_clients: 18, complaints_open: 2,
+    },
+    financial: {
+      revenue_per_client_per_day: 84.20, care_management_pct: 19.1, package_management_pct: 13.8,
+      ebitda_return_pct: 6.8, npbt_per_client_per_day: 4.61,
+      total_revenue_mtd: 1847000, total_cost_mtd: 1720000, unspent_liability: 521000,
+      labour_cost_pct: 68.4, travel_cost_pct: 8.9, admin_cost_pct: 14.2,
+    },
+    workforce: {
+      total_workers: 89, permanent: 54, casual: 28, agency: 7, agency_pct: 7.9,
+      turnover_pct: 31.2, psh_composite: 3.1, psh_participation: 81,
+      training_compliance: 88, rn_count: 12, wwvp_expiring_60d: 3,
+    },
+    visits_today: {
+      scheduled: 47, completed: 38, in_progress: 6, not_started: 2, cancelled: 1,
+      lone_worker_alerts: [
+        { id: 'LW001', service: 'Camelot Home Care', worker_role: 'Support Worker', suburb: 'Leichhardt', expected_checkout: '11:30am', overdue_mins: 45, client_risk: 'high' as const },
+        { id: 'LW002', service: 'Avalon Home Care', worker_role: 'Support Worker', suburb: 'Manly', expected_checkout: '12:00pm', overdue_mins: 15, client_risk: 'standard' as const },
+      ],
+    },
+    packages: {
+      total: 247, underspend_risk: 12, overspend_risk: 3,
+      quarterly_budget: 2847000, unspent_this_quarter: 521000,
+      by_service_category: [
+        { category: 'Daily Living', delivered_pct: 91.2, budget_pct: 42 },
+        { category: 'Independence', delivered_pct: 84.7, budget_pct: 18 },
+        { category: 'Allied Health', delivered_pct: 79.3, budget_pct: 15 },
+        { category: 'Clinical Nursing', delivered_pct: 96.1, budget_pct: 12 },
+        { category: 'Assistive Technology', delivered_pct: 71.4, budget_pct: 8 },
+        { category: 'Home Modifications', delivered_pct: 68.2, budget_pct: 5 },
+      ],
+    },
+    by_coordinator: [
+      { name: 'Priya Sharma', service: 'Camelot', clients: 45, compliance: 98.1, alerts: 0 },
+      { name: 'Marcus Chen', service: 'Camelot', clients: 42, compliance: 94.7, alerts: 1 },
+      { name: 'Anika Williams', service: 'Camelot', clients: 47, compliance: 97.8, alerts: 0 },
+      { name: 'James Okonkwo', service: 'Avalon', clients: 38, compliance: 91.4, alerts: 1 },
+      { name: 'Sandra Lee', service: 'Avalon', clients: 37, compliance: 96.3, alerts: 0 },
+      { name: 'Tom Nguyen', service: 'Avalon', clients: 38, compliance: 97.1, alerts: 0 },
+    ],
+  },
+};
+
+// ── NDIS DATA ─────────────────────────────────────────────────
+
+export const ndis_data = {
+  participants: {
+    total: 89,
+    plan_reviews_due: 12,
+    plans_expiring_30d: 3,
+    new_participants_month: 4,
+    exited_month: 1,
+    satisfaction_score: 4.2,
+  },
+  plan_budgets: {
+    core: { allocated: 1200000, spent: 876000, utilisation: 0.73 },
+    capacity_building: { allocated: 340000, spent: 198000, utilisation: 0.58 },
+    capital: { allocated: 89000, spent: 67000, utilisation: 0.75 },
+    total: { allocated: 1629000, spent: 1141000, utilisation: 0.70 },
+    claiming_deadline_days: 14,
+    underclaimed_amount: 48000,
+  },
+  support_delivery: {
+    this_week_hours: 156,
+    target_hours: 200,
+    utilisation: 0.78,
+    workers_active: 24,
+    workers_available: 28,
+    cancelled_this_week: 4,
+    rescheduled_this_week: 7,
+  },
+  worker_screening: {
+    total_workers: 28,
+    current_pct: 0.94,
+    expiring_30d: 3,
+    expiring_60d: 5,
+    expired: 0,
+    ndis_worker_check_current: 26,
+    wwcc_current: 27,
+  },
+  incidents: {
+    open: 0,
+    ytd: 2,
+    closed: [
+      { id: 'NDIS-INC-001', type: 'Restrictive practice — environmental', date: '2026-01-15', participant_id: 'P-022', status: 'closed', days_to_close: 5 },
+      { id: 'NDIS-INC-002', type: 'Injury during support', date: '2026-03-08', participant_id: 'P-045', status: 'closed', days_to_close: 8 },
+    ],
+  },
+  goals: {
+    total: 89,
+    on_track: 67,
+    at_risk: 14,
+    behind: 8,
+    sample: [
+      { participant: 'P-001', goal: 'Independent meal preparation 3x/week', status: 'on_track', progress: 0.72, plan_end: '2026-09-30' },
+      { participant: 'P-012', goal: 'Community access — attend social group weekly', status: 'at_risk', progress: 0.45, plan_end: '2026-07-15' },
+      { participant: 'P-033', goal: 'Develop communication board proficiency', status: 'behind', progress: 0.28, plan_end: '2026-06-01' },
+      { participant: 'P-045', goal: 'Reduce restrictive practices by 50%', status: 'on_track', progress: 0.61, plan_end: '2026-12-31' },
+      { participant: 'P-067', goal: 'Employment readiness — resume + interview skills', status: 'on_track', progress: 0.85, plan_end: '2026-05-30' },
+    ],
+  },
+  bsp: {
+    active: 8,
+    due_review: 2,
+    restrictive_practices_authorised: 3,
+    reportable_incidents_ytd: 1,
+  },
+};
+
 // ── LEAVE ─────────────────────────────────────────────────────
 
 export const leave_current = {
@@ -1462,4 +1586,6 @@ export default {
   incidents_closed_ytd,
   steward_structural_finding,
   leave_current,
+  ndis_data,
+  holy_grail_home_care,
 };

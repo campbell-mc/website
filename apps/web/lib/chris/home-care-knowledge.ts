@@ -1,85 +1,88 @@
 // lib/chris/home-care-knowledge.ts
-// Maintained by Ivan Sanchez
-// Support at Home Program — commenced 1 November 2025
-// Replaces: Home Care Packages (HCP)
+// Home Care Knowledge Base — Support at Home program (commenced November 2025)
+// Replaces Home Care Packages. Individual budget model.
+// Every home care screen, agent, and narrative references this.
 
 export const HOME_CARE_KNOWLEDGE = {
 
   program: {
     name: 'Support at Home',
     commenced: '2025-11-01',
-    replaces: 'Home Care Packages (HCP)',
-    administrator: 'Department of Social Services (DSS)',
+    replaced: 'Home Care Packages Program',
+    authority: 'Department of Health and Aged Care',
     regulator: 'ACQSC',
     legislation: 'Aged Care Act 2024',
   },
 
-  language: {
-    person: 'client', people: 'clients',
-    service: 'visit', services: 'visits',
-    place: 'home', funding: 'budget', plan: 'support plan',
-  },
-
-  classifications: {
-    count: 8,
-    model: 'ongoing_classifications',
-    budget_types: ['care_and_support', 'assistive_technology', 'home_modifications'],
-    special_pathways: ['assistive_technology_home_modification', 'restorative_care', 'end_of_life'],
-  },
-
   funding: {
-    model: 'individual_client_budget',
-    care_management_revenue_pct: 0.186,
-    unspent_funds_sector_avg_per_client: 14517,
-    unspent_funds_chris_flag_threshold_pct: 0.25,
-    claiming_system: 'Support at Home Portal (DSS)',
-    claiming_frequency: 'monthly',
-    claiming_deadline_days_after_month_end: 21,
+    model: 'individual_budget',
+    service_categories: [
+      'Daily Living', 'Independence', 'Allied Health',
+      'Clinical Nursing Care', 'Assistive Technology and Equipment', 'Home Modifications',
+    ],
+    unspent_funds: {
+      treatment: 'Return to government at end of quarter',
+      chris_alert_threshold_pct: 0.25,
+      chris_critical_threshold_pct: 0.40,
+    },
+    budget_statement: {
+      frequency: 'quarterly',
+      chris_monitoring: true,
+      deadline_days_after_quarter: 14,
+    },
   },
 
   compliance: {
-    no_sirs: true,
-    no_care_minutes: true,
-    no_qi_program: true,
-    incident_reporting_system: 'DSS Support at Home Portal',
-    incident_serious_hours: 24,
-    incident_other_business_days: 5,
-    care_plan_review_frequency: 'on_significant_change_or_annually',
-    quality_standards: 'Strengthened Aged Care Quality Standards',
+    sirs: {
+      applies: true,
+      cat1_notification_hours: 24,
+      cat2_notification_days: 30,
+      max_penalty_cat1: 783000,
+      max_penalty_cat2: 78000,
+    },
+    quality_standards_count: 7,
+    care_plan_review: 'annual_or_needs_change',
+    care_plan_alert_days_overdue: 30,
+    care_plan_critical_days_overdue: 60,
+    qfr_frequency: 'quarterly',
+    qfr_deadline_days: 42,
+    qfr_penalty: 783000,
   },
 
-  visits: {
-    types: ['personal_care', 'domestic_assistance', 'social_support_individual', 'social_support_group', 'transport', 'allied_health', 'nursing', 'meal_preparation', 'garden_and_home_maintenance', 'respite_in_home'],
-    missed_visit_documentation_hours: 24,
-    late_visit_threshold_minutes: 30,
-    worker_continuity_target: 'same_worker_where_possible',
+  metrics: {
+    visit_compliance: { target: 0.97, chris_alert: 0.93, chris_critical: 0.90 },
+    hours_utilisation: { target: 0.92, chris_alert: 0.85, chris_critical: 0.80 },
+    travel_time_pct: { target: 0.12, chris_alert: 0.18, chris_critical: 0.25 },
+    care_plan_currency: { target: 1.0, chris_alert: 0.95, chris_critical: 0.90 },
+    budget_utilisation: { target_min: 0.80, target_max: 0.95, underspend_alert: 0.75, overspend_alert: 0.97 },
+    client_satisfaction: { sector_average: 79.1, top_quartile: 88.0, chris_alert: 72.0 },
+    unspent_funds_pct: { sector_average: 0.187, chris_alert: 0.25, chris_critical: 0.35 },
   },
 
-  workforce: {
-    primary_role: 'community_support_worker',
-    lone_worker_psh_domain: 'PSH_09',
-    lone_worker_checkin_required: true,
-    target_travel_time_pct_of_paid_hours: 0.15,
+  benchmarks: {
+    source: 'StewartBrown ACFPS FY25',
+    revenue_per_client_per_day: { sector_average: 84.89, prior_year: 78.44 },
+    care_management_pct: { sector_average: 0.187, minimum_compliant: 0.10, chris_alert_below: 0.14 },
+    package_management_pct: { sector_average: 0.132 },
+    unspent_funds_per_client: { sector_average: 14517 },
+    npbt_per_client_per_day: { sector_average: 4.33 },
+    ebitda_return_pct: { sector_average: 0.064 },
   },
 
-  financial_benchmarks: {
-    care_management_pct: 0.186,
-    unspent_funds_per_client: 14517,
-    profitability_margin: 0.035,
-    labour_cost_pct_revenue: 0.65,
-    travel_cost_pct_revenue: 0.08,
+  lone_worker: {
+    check_in_overdue_alert_mins: 30,
+    high_risk_visit_pre_post_contact: true,
+    psh_elevated_domains: ['PSH_09', 'PSH_10', 'PSH_01'],
   },
 
-  sentinel_priorities: [
-    'missed_scheduled_visits', 'unspent_budget_above_threshold',
-    'lone_worker_checkin_failure', 'care_plan_overdue_review',
-    'incident_reporting_deadline', 'worker_screening_expiry', 'claiming_deadline_approaching',
-  ],
+  language: {
+    person: 'client', service_unit: 'visit', schedule: 'run',
+    team_leader: 'coordinator', worker: 'support worker',
+    manager: 'Home Care Manager', funding_unit: 'package',
+    funding_amount: 'budget', care_plan: 'care plan',
+    unspent: 'unspent funds', delivered: 'delivered hours',
+  },
 
-  oracle_priorities: [
-    'budget_utilisation_per_client', 'unspent_funds_management',
-    'care_management_revenue_optimisation', 'visit_compliance_rate',
-  ],
 } as const;
 
 export type HomeCareKnowledge = typeof HOME_CARE_KNOWLEDGE;

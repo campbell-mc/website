@@ -122,35 +122,37 @@ const NAV_SECTIONS: Record<string, NavSection | WeeklyLoopSection> = {
   },
   // ── HOME CARE NAV SECTIONS ────────────────────────────────
   care_management: {
-    title: "CARE MANAGEMENT",
-    href: "/dashboard/clinical",
+    title: "VISITS",
+    href: "/dashboard/home-care/visits",
     items: [
-      { label: "Visit Compliance", href: "/dashboard/visits", icon: "Activity" },
-      { label: "Incident Register", href: "/dashboard/incidents", icon: "AlertTriangle" },
-      { label: "Care Plans", href: "/dashboard/residents/care-plans", icon: "FileText" },
+      { label: "Visit Compliance", href: "/dashboard/home-care/visits", icon: "Activity" },
+      { label: "Lone Worker Safety", href: "/dashboard/home-care/visits/lone-worker", icon: "Shield" },
+      { label: "Incidents", href: "/dashboard/home-care/incidents", icon: "AlertTriangle" },
     ],
   },
   clients: {
     title: "CLIENTS",
-    href: "/dashboard/residents",
+    href: "/dashboard/home-care/clients",
     items: [
-      { label: "Client Intelligence", href: "/dashboard/residents", icon: "Users" },
-      { label: "Care Plans", href: "/dashboard/residents/care-plans", icon: "FileText" },
-      { label: "Family Engagement", href: "/dashboard/residents/families", icon: "Users" },
-      { label: "Feedback", href: "/dashboard/residents/feedback", icon: "AlertTriangle" },
+      { label: "Client Intelligence", href: "/dashboard/home-care/clients", icon: "Users" },
+      { label: "Care Plans", href: "/dashboard/home-care/clients/care-plans", icon: "FileText" },
+      { label: "Client Voice", href: "/dashboard/home-care/clients/voice", icon: "Heart" },
+      { label: "Feedback & Complaints", href: "/dashboard/home-care/clients/feedback", icon: "AlertTriangle" },
     ],
   },
   budget_management: {
-    title: "BUDGET",
-    href: "/dashboard/budget",
+    title: "PACKAGES",
+    href: "/dashboard/home-care/packages",
     items: [
-      { label: "Budget Management", href: "/dashboard/budget", icon: "DollarSign" },
+      { label: "Package Intelligence", href: "/dashboard/home-care/packages", icon: "DollarSign" },
+      { label: "Budget Statements", href: "/dashboard/home-care/packages/statements", icon: "FileText" },
+      { label: "Unspent Funds", href: "/dashboard/home-care/packages/unspent", icon: "AlertTriangle" },
     ],
   },
   lone_worker: {
     title: "WORKER SAFETY",
     items: [
-      { label: "Lone Worker Safety", href: "/dashboard/workers/lone", icon: "Shield" },
+      { label: "Lone Worker Safety", href: "/dashboard/home-care/visits/lone-worker", icon: "Shield" },
     ],
   },
 

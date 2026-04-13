@@ -15,15 +15,17 @@ export default function LandingPage() {
         <span className="text-sm text-gray-400 hidden md:block">chris-os.io</span>
       </div>
 
-      {/* Main content — vertically centred */}
+      {/* Main content */}
       <div className="flex-1 flex items-center justify-center px-6 md:px-8">
         <div className="max-w-2xl w-full">
 
           {/* Headline */}
           <h1 className="text-[28px] md:text-[42px] font-bold text-[#1B4332] leading-tight mb-4">
-            The operational intelligence<br className="hidden md:block" />
-            {" "}system for Australian<br className="hidden md:block" />
-            {" "}aged care.
+            The operational intelligence{" "}
+            <br className="hidden md:block" />
+            and execution system for{" "}
+            <br className="hidden md:block" />
+            Australian Aged Care.
           </h1>
 
           {/* Sub */}
@@ -58,7 +60,7 @@ export default function LandingPage() {
             ))}
           </div>
 
-          {/* Harbison reference */}
+          {/* Live reference */}
           <div className="flex items-center gap-3 mb-8">
             <div className="flex-1 h-px bg-gray-200" />
             <div className="flex items-center gap-2">
@@ -70,21 +72,34 @@ export default function LandingPage() {
             <div className="flex-1 h-px bg-gray-200" />
           </div>
 
-          {/* CTA */}
-          <div className="flex flex-col items-center gap-4 pb-8 md:pb-0">
+          {/* Two demo entry points */}
+          <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider text-center mb-4">Enter the demo</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
             <Link
               href="/dashboard"
-              className="w-full md:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#1B4332] text-white rounded-2xl text-base font-semibold hover:bg-[#2D7D73] transition-colors shadow-sm"
+              className="flex flex-col items-center gap-2 px-6 py-5 bg-[#1B4332] text-white rounded-2xl hover:bg-[#2D7D73] transition-colors shadow-sm text-center"
             >
-              Enter the demo
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <span className="text-base font-semibold">Residential Care</span>
+              <span className="text-xs text-white/60">137-bed facility · DON view · 6 agents active</span>
+              <svg className="w-4 h-4 mt-1 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M12 5l7 7-7 7" />
               </svg>
             </Link>
-            <p className="text-xs text-gray-400 text-center max-w-sm leading-relaxed">
-              You are entering a demo environment with representative data. Nothing you interact with affects a real facility.
-            </p>
+            <Link
+              href="/dashboard/home-care?care=home_care"
+              className="flex flex-col items-center gap-2 px-6 py-5 bg-[#1B4332] text-white rounded-2xl hover:bg-[#2D7D73] transition-colors shadow-sm text-center"
+            >
+              <span className="text-base font-semibold">Home Care</span>
+              <span className="text-xs text-white/60">247 clients · 2 services · Support at Home</span>
+              <svg className="w-4 h-4 mt-1 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </Link>
           </div>
+
+          <p className="text-xs text-gray-400 text-center max-w-sm mx-auto leading-relaxed pb-8 md:pb-0">
+            You are entering a demo environment with representative data. Nothing you interact with affects a real facility.
+          </p>
         </div>
       </div>
     </div>
