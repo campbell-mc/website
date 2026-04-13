@@ -127,6 +127,7 @@ const NAV_SECTIONS: Record<string, NavSection | WeeklyLoopSection> = {
     items: [
       { label: "Visit Compliance", href: "/dashboard/home-care/visits", icon: "Activity" },
       { label: "Lone Worker Safety", href: "/dashboard/home-care/visits/lone-worker", icon: "Shield" },
+      { label: "SIRS Register", href: "/dashboard/home-care/sirs", icon: "AlertTriangle" },
       { label: "Incidents", href: "/dashboard/home-care/incidents", icon: "AlertTriangle" },
     ],
   },
@@ -136,7 +137,6 @@ const NAV_SECTIONS: Record<string, NavSection | WeeklyLoopSection> = {
     items: [
       { label: "Client Intelligence", href: "/dashboard/home-care/clients", icon: "Users" },
       { label: "Care Plans", href: "/dashboard/home-care/clients/care-plans", icon: "FileText" },
-      { label: "Client Voice", href: "/dashboard/home-care/clients/voice", icon: "Heart" },
       { label: "Feedback & Complaints", href: "/dashboard/home-care/clients/feedback", icon: "AlertTriangle" },
     ],
   },
