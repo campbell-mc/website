@@ -279,3 +279,111 @@ export const practiceLogs = pgTable('practice_logs', {
   notes: text('notes'),
   created_at: timestamp('created_at').defaultNow(),
 });
+
+// ── CONVERSATIONS ────────────────────────────────────────────
+
+export const conversations = pgTable('conversations', {
+  id: text('id').primaryKey(),
+  facility_id: text('facility_id').notNull(),
+  context_type: text('context_type').notNull(),
+  context_id: text('context_id'),
+  context_label: text('context_label'),
+  status: text('status').default('active'),
+  created_at: timestamp('created_at').defaultNow(),
+  updated_at: timestamp('updated_at').defaultNow(),
+  resolved_at: timestamp('resolved_at'),
+});
+
+export const conversationParticipants = pgTable('conversation_participants', {
+  id: serial('id').primaryKey(),
+  conversation_id: text('conversation_id').notNull(),
+  role: text('role').notNull(),
+  joined_at: timestamp('joined_at').defaultNow(),
+  last_read_at: timestamp('last_read_at'),
+  is_active: boolean('is_active').default(true),
+});
+
+export const conversationMessages = pgTable('conversation_messages', {
+  id: text('id').primaryKey(),
+  conversation_id: text('conversation_id').notNull(),
+  sender_type: text('sender_type').notNull(),
+  sender_role: text('sender_role'),
+  content: text('content').notNull(),
+  attachments: jsonb('attachments').default([]),
+  suggested_actions: jsonb('suggested_actions').default([]),
+  actions_taken: jsonb('actions_taken').default([]),
+  created_at: timestamp('created_at').defaultNow(),
+});
+
+// ── OUTBOUND DRAFTS ──────────────────────────────────────────
+
+export const outboundDrafts = pgTable('outbound_drafts', {
+  id: text('id').primaryKey(),
+  conversation_id: text('conversation_id').notNull(),
+  facility_id: text('facility_id').notNull(),
+  recipient_type: text('recipient_type').notNull(),
+  recipient_name: text('recipient_name').notNull(),
+  recipient_contact: text('recipient_contact'),
+  subject: text('subject'),
+  content: text('content').notNull(),
+  status: text('status').default('drafting'),
+  approved_by: text('approved_by'),
+  approved_at: timestamp('approved_at'),
+  sent_at: timestamp('sent_at'),
+  filed_to: text('filed_to'),
+  created_at: timestamp('created_at').defaultNow(),
+});
+
+// ── OPERATIONAL THREADS ──────────────────────────────────────
+
+export const operationalThreads = pgTable('operational_threads', {
+  id: text('id').primaryKey(),
+  facility_id: text('facility_id').notNull(),
+  object_type: text('object_type').notNull(),
+  object_id: text('object_id').notNull(),
+  author_role: text('author_role').notNull(),
+  content: text('content').notNull(),
+  resolved: boolean('resolved').default(false),
+  resolved_at: timestamp('resolved_at'),
+  resolved_by: text('resolved_by'),
+  created_at: timestamp('created_at').defaultNow(),
+});
+
+// ── INBOUND EMAILS ───────────────────────────────────────────
+
+export const inboundEmails = pgTable('inbound_emails', {
+  id: text('id').primaryKey(),
+  facility_id: text('facility_id').notNull(),
+  from_address: text('from_address').notNull(),
+  from_name: text('from_name'),
+  subject: text('subject').notNull(),
+  content: text('content').notNull(),
+  classification: text('classification'),
+  summary: text('summary'),
+  urgency: text('urgency').default('routine'),
+  conversation_id: text('conversation_id'),
+  queue_item_id: text('queue_item_id'),
+  processed_at: timestamp('processed_at'),
+  received_at: timestamp('received_at').defaultNow(),
+});
+
+// ── RESPONSE TOKENS ──────────────────────────────────────────
+
+export const responseTokens = pgTable('response_tokens', {
+  id: serial('id').primaryKey(),
+  token: text('token').notNull(),
+  facility_id: text('facility_id').notNull(),
+  facility_name: text('facility_name').notNull(),
+  response_type: text('response_type').notNull(),
+  message: text('message').notNull(),
+  options: jsonb('options'),
+  scale: jsonb('scale'),
+  text_prompt: text('text_prompt'),
+  context: jsonb('context').notNull(),
+  expires_at: timestamp('expires_at').notNull(),
+  response_value: text('response_value'),
+  scale_value: integer('scale_value'),
+  text_value: text('text_value'),
+  responded_at: timestamp('responded_at'),
+  created_at: timestamp('created_at').defaultNow(),
+});
