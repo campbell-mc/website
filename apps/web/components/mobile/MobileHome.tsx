@@ -28,7 +28,7 @@ export default function MobileHome() {
     <div className="flex flex-col gap-6 pb-24">
       {/* Role switcher — horizontal scroll */}
       <div className="bg-[#1B4332]">
-        <p className="px-4 pt-3 pb-2 text-[11px] font-semibold text-white/50 uppercase tracking-wider">Demo — Switch role</p>
+        <p className="px-4 pt-3 pb-2 text-[11px] font-semibold text-white uppercase tracking-wider">Demo — Switch role</p>
         <div className="flex overflow-x-auto gap-2 px-4 pb-3" style={{ scrollbarWidth: "none" }}>
           {[
             { label: "DON", href: "/dashboard" },
