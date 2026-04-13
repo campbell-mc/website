@@ -68,18 +68,15 @@ export function RoleHomeScreen({ config, children }: { config: RoleHomeConfig; c
         )}
       </div>
 
-      {/* 2. TODAY'S PICTURE — no avatar on mobile, matches MobileHome */}
-      <div className="bg-white lg:bg-transparent rounded-2xl lg:rounded-xl border border-gray-100 lg:border-0 p-5 mb-5" style={{ background: undefined }}>
-        <div className="flex items-start gap-3">
-          <ChrisAvatar size="small" showGlow className="shrink-0 mt-0.5 hidden lg:block" />
-          <div className="lg:hidden flex items-center gap-2.5 mb-3">
-            <div className="w-8 h-8 rounded-full bg-[#1B4332] flex items-center justify-center shrink-0">
-              <span className="text-white text-sm font-bold">C</span>
-            </div>
-            <div>
-              <p className="text-[13px] font-semibold text-gray-900">CHRIS</p>
-              <p className="text-[12px] text-gray-400">Updated 2h ago</p>
-            </div>
+      {/* 2. TODAY'S PICTURE — avatar above narrative, never beside */}
+      <div className="bg-white rounded-2xl lg:rounded-xl border border-gray-100 p-5 mb-5">
+        <div className="flex items-center gap-2.5 mb-3">
+          <div className="w-8 h-8 rounded-full bg-[#1B4332] flex items-center justify-center shrink-0">
+            <span className="text-white text-sm font-bold">C</span>
+          </div>
+          <div>
+            <p className="text-[13px] font-semibold text-gray-900">CHRIS</p>
+            <p className="text-[12px] text-gray-400">Updated 2h ago</p>
           </div>
         </div>
         <p className="text-[17px] lg:text-sm text-gray-800 leading-[1.65] lg:leading-relaxed">{config.todaysPicture}</p>

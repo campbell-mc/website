@@ -50,8 +50,8 @@ function DomainRow({ domain }: { domain: DomainStatus }) {
     >
       <span className="text-sm shrink-0 mt-0.5">{indicator}</span>
       <div className="flex-1 min-w-0">
-        <span className="text-sm font-medium text-foreground">{domain.name}</span>
-        <span className="text-xs text-muted-foreground leading-snug">{domain.summary}</span>
+        <p className="text-sm font-semibold text-foreground">{domain.name}</p>
+        <p className="text-xs text-muted-foreground leading-snug mt-0.5">{domain.summary}</p>
       </div>
       <ChevronRight className="w-3.5 h-3.5 text-muted-foreground/40 shrink-0 mt-1" />
     </button>
@@ -130,16 +130,18 @@ export default function HomePage() {
         <NotificationBell />
       </div>
 
-      {/* 2. TODAY'S PICTURE — CHRIS speaks first */}
+      {/* 2. TODAY'S PICTURE — avatar above, never beside */}
       <div className="rounded-xl p-5 mb-5" style={{ background: "rgba(27,67,50,0.05)" }}>
-        <div className="flex items-start gap-3">
-          <ChrisAvatar size="small" showGlow className="shrink-0 mt-0.5" />
+        <div className="flex items-center gap-2.5 mb-3">
+          <ChrisAvatar size="small" showGlow className="shrink-0" />
           <div>
-            <p className="text-sm text-foreground leading-relaxed font-serif-accent">
-              {todays_picture.chris_text}
-            </p>
+            <p className="text-sm font-semibold text-foreground">CHRIS</p>
+            <p className="text-[10px] text-muted-foreground">Updated 2h ago</p>
           </div>
         </div>
+        <p className="text-sm text-foreground leading-relaxed font-serif-accent">
+          {todays_picture.chris_text}
+        </p>
       </div>
 
       <AgentPulse domain="all" />
