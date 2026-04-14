@@ -42,17 +42,17 @@ export function CuratorHero() {
           <h1 className="text-[clamp(30px,4vw,50px)] font-normal leading-[1.08] tracking-[-0.02em] text-white mb-6" style={{ fontFamily: "var(--font-instrument-serif, 'Georgia'), serif" }}>
             The sector, watched.
             <br />
-            <em className="italic text-[#2D7D73]/80">Every 2 hours. All 35 sources.</em>
+            <em className="italic text-emerald-300">Every 2 hours. All 35 sources.</em>
           </h1>
 
-          <p className="text-[15px] leading-[1.75] text-white/55 max-w-md mb-6">
+          <p className="text-[15px] leading-[1.75] text-white/80 max-w-md mb-6">
             The Curator is the seventh CHRIS agent. Where the other six watch your
             facility — clinical, financial, workforce, compliance — The Curator watches
             the world. Regulators, government, courts, legal analysts, sector media.
             Every 2 hours, without pause.
           </p>
 
-          <p className="text-[14px] leading-[1.75] text-white/38 max-w-md mb-10">
+          <p className="text-[14px] leading-[1.75] text-white/60 max-w-md mb-10">
             This is The Newsroom — what The Curator produces. A live intelligence feed,
             not a newsletter someone assembled on a Thursday afternoon. Real sources.
             Real synthesis. Updated continuously.
@@ -62,7 +62,7 @@ export function CuratorHero() {
             <a href="#feed" className="bg-white text-[#1B4332] px-6 py-3 rounded-lg text-[13px] font-medium hover:bg-white/90 transition-colors">
               Read the latest →
             </a>
-            <a href="#sources" className="border border-white/20 text-white/60 px-6 py-3 rounded-lg text-[13px] hover:border-white/35 hover:text-white/80 transition-colors">
+            <a href="#sources" className="border border-white/30 text-white/80 px-6 py-3 rounded-lg text-[13px] hover:border-white/50 hover:text-white transition-colors">
               All 35 sources
             </a>
           </div>
@@ -71,7 +71,7 @@ export function CuratorHero() {
         {/* Right — status panel */}
         <div className="px-6 lg:px-16 py-16 lg:py-20 flex flex-col justify-center gap-4">
           <div className="bg-white/6 border border-white/10 rounded-2xl p-6">
-            <div className="text-[10px] font-medium tracking-[0.08em] uppercase text-white/35 mb-5">
+            <div className="text-[10px] font-medium tracking-[0.08em] uppercase text-white/55 mb-5">
               Agent status
             </div>
             <div className="grid grid-cols-3 gap-4 mb-5">
@@ -82,7 +82,7 @@ export function CuratorHero() {
               ].map(({ v, l }) => (
                 <div key={l}>
                   <div className="text-[30px] text-white leading-none mb-1" style={{ fontFamily: "var(--font-instrument-serif, 'Georgia'), serif" }}>{v}</div>
-                  <div className="text-[10px] text-white/35 uppercase tracking-wide leading-tight">{l}</div>
+                  <div className="text-[10px] text-white/55 uppercase tracking-wide leading-tight">{l}</div>
                 </div>
               ))}
             </div>
@@ -91,21 +91,21 @@ export function CuratorHero() {
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                 <span className="text-[12px] text-white/50">Active · 2-hour cycle</span>
               </div>
-              <span className="text-[11px] text-white/28">
+              <span className="text-[11px] text-white/50">
                 Last run {stats.lastRun ? ago(stats.lastRun.completedAt) : "starting up"}
               </span>
             </div>
           </div>
 
           <div className="bg-white/4 border border-white/8 rounded-xl p-5">
-            <div className="text-[10px] font-medium tracking-[0.08em] uppercase text-white/28 mb-4">
+            <div className="text-[10px] font-medium tracking-[0.08em] uppercase text-white/50 mb-4">
               Coverage areas
             </div>
             <div className="grid grid-cols-2 gap-x-6 gap-y-2.5">
               {COVERAGE.map((a) => (
                 <div key={a} className="flex items-center gap-2">
                   <span className="w-1 h-1 rounded-full bg-[#2D7D73]/50 flex-shrink-0" />
-                  <span className="text-[11px] text-white/42 leading-none">{a}</span>
+                  <span className="text-[11px] text-white/65 leading-none">{a}</span>
                 </div>
               ))}
             </div>
