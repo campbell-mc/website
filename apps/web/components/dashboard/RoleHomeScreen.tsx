@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { Bell, ChevronRight, Sparkles, Mic } from "lucide-react";
+import { Bell, ChevronRight, Mic } from "lucide-react";
 import { ChrisAvatar } from "../chris/ChrisAvatar";
 import { AgentPulse } from "../chris/AgentPulse";
 
@@ -51,13 +51,13 @@ export function RoleHomeScreen({ config, children }: { config: RoleHomeConfig; c
 
   return (
     <div className="p-4 lg:p-6 max-w-lg lg:max-w-3xl mx-auto">
-      {/* 1. GREETING — matches MobileHome exactly */}
+      {/* 1. GREETING */}
       <div className="flex items-center justify-between mb-5">
         <div>
-          <h1 className="text-[28px] lg:text-lg font-bold lg:font-semibold text-gray-900">{config.greeting}</h1>
-          <p className="text-[13px] lg:text-xs text-gray-500">{config.subtitle}</p>
+          <h1 className="text-[28px] lg:text-lg font-bold lg:font-semibold text-foreground">{config.greeting}</h1>
+          <p className="text-[13px] lg:text-xs text-muted-foreground">{config.subtitle}</p>
         </div>
-        <button className="flex items-center gap-1.5 px-3 py-2 border border-gray-200 rounded-xl text-[13px] font-medium text-gray-700 lg:hidden">
+        <button className="flex items-center gap-1.5 px-3 py-2 border border-border rounded-xl text-[13px] font-medium text-foreground lg:hidden">
           <Mic className="w-4 h-4" /><span>Ask</span>
         </button>
         {config.notificationCount !== undefined && config.notificationCount > 0 && (
@@ -69,38 +69,36 @@ export function RoleHomeScreen({ config, children }: { config: RoleHomeConfig; c
       </div>
 
       {/* 2. TODAY'S PICTURE — avatar above narrative, never beside */}
-      <div className="bg-white rounded-2xl lg:rounded-xl border border-gray-100 p-5 mb-5">
+      <div className="rounded-xl p-5 mb-5" style={{ background: "rgba(27,67,50,0.05)" }}>
         <div className="flex items-center gap-2.5 mb-3">
-          <div className="w-8 h-8 rounded-full bg-[#1B4332] flex items-center justify-center shrink-0">
-            <span className="text-white text-sm font-bold">C</span>
-          </div>
+          <ChrisAvatar size="small" showGlow className="shrink-0" />
           <div>
-            <p className="text-[13px] font-semibold text-gray-900">CHRIS</p>
-            <p className="text-[12px] text-gray-400">Updated 2h ago</p>
+            <p className="text-[13px] font-semibold text-foreground">CHRIS</p>
+            <p className="text-[12px] text-muted-foreground">Updated 2h ago</p>
           </div>
         </div>
-        <p className="text-[17px] lg:text-sm text-gray-800 leading-[1.65] lg:leading-relaxed">{config.todaysPicture}</p>
+        <p className="text-[17px] lg:text-sm text-foreground leading-[1.65] lg:leading-relaxed font-serif-accent">{config.todaysPicture}</p>
       </div>
 
       <AgentPulse domain="all" />
 
       {/* 3. DOMAIN STATUS STRIP */}
       <p className="text-[11px] font-semibold text-muted-foreground uppercase tracking-[0.08em] mb-2">Across your domains</p>
-      <div className="bg-white rounded-2xl lg:rounded-xl border border-gray-100 lg:border-border overflow-hidden mb-5">
+      <div className="bg-card rounded-xl border border-border overflow-hidden mb-5">
         {config.domains.map((d) => {
           const indicator = d.status === "clear" ? "✅" : d.status === "watch" ? "⚠️" : "🔴";
           return (
             <button
               key={d.name}
               onClick={() => router.push(d.href)}
-              className={`flex items-start w-full px-4 py-3.5 border-b border-gray-50 last:border-b-0 hover:bg-gray-50 transition-colors text-left ${d.status === "act" ? "bg-[rgba(196,112,74,0.04)]" : ""}`}
+              className={`flex items-start w-full px-4 py-3.5 border-b border-border last:border-b-0 hover:bg-muted/50 transition-colors text-left ${d.status === "act" ? "bg-[rgba(196,112,74,0.04)]" : ""}`}
             >
               <span className="text-[15px] lg:text-sm mt-0.5 shrink-0 mr-3">{indicator}</span>
               <div className="flex-1 min-w-0">
-                <span className="text-[15px] lg:text-sm font-semibold text-gray-900">{d.name}</span>
-                <p className="text-[13px] lg:text-xs text-gray-500 mt-0.5">{d.summary}</p>
+                <span className="text-[15px] lg:text-sm font-semibold text-foreground">{d.name}</span>
+                <p className="text-[13px] lg:text-xs text-muted-foreground mt-0.5">{d.summary}</p>
               </div>
-              <ChevronRight className="w-4 h-4 text-gray-300 shrink-0 mt-1 ml-2" />
+              <ChevronRight className="w-4 h-4 text-muted-foreground/40 shrink-0 mt-1 ml-2" />
             </button>
           );
         })}
@@ -112,15 +110,15 @@ export function RoleHomeScreen({ config, children }: { config: RoleHomeConfig; c
         {config.topActions.map((action, i) => (
           <div
             key={i}
-            className={`bg-white rounded-2xl lg:rounded-xl p-4 border border-gray-100 lg:border-border border-l-4 ${
+            className={`bg-card rounded-xl p-4 border border-border border-l-4 ${
               action.priority === "act" ? "border-l-[#C4704A]" : action.priority === "clear" ? "border-l-[#2D7D73]" : "border-l-[#D4A017]"
             }`}
           >
             <div className="flex items-start gap-2 mb-3 lg:mb-0">
-              <span className="text-[15px] lg:text-sm font-bold text-gray-300 w-5 shrink-0">{i + 1}.</span>
-              <p className="text-[15px] lg:text-sm font-medium text-gray-900">{action.label}</p>
+              <span className="text-[15px] lg:text-sm font-bold text-muted-foreground/40 w-5 shrink-0">{i + 1}.</span>
+              <p className="text-[15px] lg:text-sm font-medium text-foreground">{action.label}</p>
             </div>
-            <button onClick={() => router.push(action.href)} className="w-full lg:w-auto text-[13px] lg:text-xs font-medium px-4 py-3 lg:py-2 rounded-xl lg:rounded-lg bg-[#1B4332] text-white hover:opacity-90">
+            <button onClick={() => router.push(action.href)} className="w-full lg:w-auto text-[13px] lg:text-xs font-medium px-4 py-3 lg:py-2 rounded-xl lg:rounded-lg bg-primary text-primary-foreground hover:opacity-90">
               {action.actionLabel}
             </button>
           </div>
@@ -152,7 +150,7 @@ export function RoleHomeScreen({ config, children }: { config: RoleHomeConfig; c
         </div>
       )}
 
-      {/* 5.5 ROLE-SPECIFIC FINANCIAL SECTION */}
+      {/* 5.5 ROLE-SPECIFIC SECTIONS */}
       {children && <div className="mb-5">{children}</div>}
 
       <div className="h-16" />

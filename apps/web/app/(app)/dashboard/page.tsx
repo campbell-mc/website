@@ -122,7 +122,7 @@ export default function HomePage() {
       {/* 1. GREETING */}
       <div className="flex items-center justify-between mb-5">
         <div>
-          <p className="text-lg font-semibold text-foreground">{getGreeting("day")}, Sarah</p>
+          <p className="text-[28px] lg:text-lg font-bold lg:font-semibold text-foreground">{getGreeting("day")}, Sarah</p>
           <p className="text-xs text-muted-foreground">
             {facility.name} · {new Date().toLocaleDateString("en-AU", { weekday: "long", day: "numeric", month: "long" })} · Day shift
           </p>
@@ -139,7 +139,7 @@ export default function HomePage() {
             <p className="text-[10px] text-muted-foreground">Updated 2h ago</p>
           </div>
         </div>
-        <p className="text-sm text-foreground leading-relaxed font-serif-accent">
+        <p className="text-[17px] lg:text-sm text-foreground leading-[1.65] lg:leading-relaxed font-serif-accent">
           {todays_picture.chris_text}
         </p>
       </div>
