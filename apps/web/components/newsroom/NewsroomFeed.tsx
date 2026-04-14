@@ -79,7 +79,7 @@ function Card({ u }: { u: Update }) {
         {u.headline}
       </h3>
       <p className="text-[12px] text-stone-500 leading-relaxed mb-3">
-        {u.summary.length > 180 ? u.summary.slice(0, 177) + "..." : u.summary}
+        {u.summary}
       </p>
       {u.implication && (
         <div className="text-[11px] text-[#2D7D73] italic border-l-2 border-[#2D7D73]/25 pl-3 mb-3 leading-relaxed">
@@ -89,8 +89,7 @@ function Card({ u }: { u: Update }) {
       {u.primarySource && (
         <a href={u.primarySource} target="_blank" rel="noopener noreferrer"
           className="mt-auto pt-2.5 border-t border-stone-50 text-[10px] text-stone-300 hover:text-[#1B4332] flex items-center gap-1 transition-colors">
-          ↗ {(u.sourceTitle ?? u.primarySource).slice(0, 55)}
-          {(u.sourceTitle ?? u.primarySource).length > 55 ? "..." : ""}
+          ↗ {u.sourceTitle ?? u.primarySource}
         </a>
       )}
     </article>

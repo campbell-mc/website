@@ -45,14 +45,14 @@ export function CuratorHero() {
             <em className="italic text-emerald-300">Every 2 hours. All 35 sources.</em>
           </h1>
 
-          <p className="text-[15px] leading-[1.75] text-white/80 max-w-md mb-6">
+          <p className="text-[16px] leading-[1.75] text-white/90 max-w-md mb-6">
             The Curator is the seventh CHRIS agent. Where the other six watch your
             facility — clinical, financial, workforce, compliance — The Curator watches
             the world. Regulators, government, courts, legal analysts, sector media.
             Every 2 hours, without pause.
           </p>
 
-          <p className="text-[14px] leading-[1.75] text-white/60 max-w-md mb-10">
+          <p className="text-[15px] leading-[1.75] text-white/75 max-w-md mb-10">
             This is The Newsroom — what The Curator produces. A live intelligence feed,
             not a newsletter someone assembled on a Thursday afternoon. Real sources.
             Real synthesis. Updated continuously.
