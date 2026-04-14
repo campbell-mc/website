@@ -26,11 +26,15 @@ export default function ChrisPublicChat() {
   const [streaming, setStreaming] = useState(false);
   const [rateLimited, setRateLimited] = useState(false);
   const [hasUserSent, setHasUserSent] = useState(false);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    // Scroll only the chat container — not the page
+    const container = messagesContainerRef.current;
+    if (container) {
+      container.scrollTop = container.scrollHeight;
+    }
   }, [messages]);
 
   async function sendMessage(text?: string) {
@@ -98,7 +102,7 @@ export default function ChrisPublicChat() {
   return (
     <div className="bg-white border border-[#1B4332]/12 rounded-2xl overflow-hidden flex flex-col" style={{ maxHeight: 420 }}>
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
+      <div ref={messagesContainerRef} className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
         {messages.map((msg, i) => (
           <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
             <div className={msg.role === "user" ? "max-w-[80%]" : "max-w-[85%]"}>
@@ -124,7 +128,6 @@ export default function ChrisPublicChat() {
             </div>
           </div>
         ))}
-        <div ref={messagesEndRef} />
       </div>
 
       {/* Suggestion chips — before first user message */}
