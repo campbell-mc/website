@@ -498,6 +498,7 @@ function Footer() {
         </span>
         <span className="flex items-center gap-4 text-[12px] text-stone-400">
           <Link href="/dashboard/references" className="hover:text-stone-600 transition-colors">Sources & references</Link>
+          <Link href="/legal" className="hover:text-stone-600 transition-colors">Privacy</Link>
           <span>chris-os.io · Live in NSW and VIC</span>
         </span>
       </div>
