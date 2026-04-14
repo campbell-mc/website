@@ -4,6 +4,7 @@
 // ============================================================================
 
 import { NextRequest, NextResponse } from "next/server";
+import { addMessage, getMessageHistory, getOrCreateConversation } from "@/lib/conversations/store";
 
 // ── CHRIS system prompt builder ──────────────────────────────────
 
@@ -276,7 +277,15 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const messageId = `msg-${Date.now()}`;
+  const fid = facility_id ?? "FAC-001";
+  const role = user_role ?? "don";
+
+  // Persist user message
+  const userMsg = addMessage(fid, role, "user", message);
+
+  // Get persisted history for Claude context (last 20 messages)
+  const history = getMessageHistory(fid, role, 20);
+
   const apiKey = process.env.ANTHROPIC_API_KEY;
 
   // ── Try live Claude call ──────────────────────────────────────
@@ -285,30 +294,27 @@ export async function POST(request: NextRequest) {
     try {
       const { callClaudeConversation } = await import("@/lib/anthropic/client");
 
-      const systemPrompt = buildSystemPrompt(context_type, context_data, user_role, facility_name);
-      const history = (message_history ?? []).map(
-        (m: { role: string; content: string }) => ({
-          role: m.role as "user" | "assistant",
-          content: m.content,
-        })
-      );
+      const systemPrompt = buildSystemPrompt(context_type, context_data, role, facility_name);
 
       const result = await callClaudeConversation({
         system: systemPrompt,
-        history,
+        history: history.slice(0, -1), // exclude the message we just added (it's the newMessage)
         newMessage: message,
         maxTokens: 800,
         model: "claude-sonnet-4-20250514",
-        facilityId: facility_id,
+        facilityId: fid,
         agentName: "chris_conversation",
       });
 
+      // Persist assistant response
+      const assistantMsg = addMessage(fid, role, "assistant", result.text);
+
       console.log(
-        `[ConversationAPI] Message: ${messageId} | conversation=${conversation_id} | ${user_role} | tokens=${result.inputTokens}in/${result.outputTokens}out`
+        `[ConversationAPI] ${role} | ${userMsg.id} → ${assistantMsg.id} | tokens=${result.inputTokens}in/${result.outputTokens}out`
       );
 
       return NextResponse.json({
-        id: messageId,
+        id: assistantMsg.id,
         content: result.text,
         attachments: [],
         suggested_actions: [],
@@ -321,13 +327,10 @@ export async function POST(request: NextRequest) {
   // ── Demo mode (no API key) ────────────────────────────────────
 
   const content = generateDemoResponse(message, context_type);
-
-  console.log(
-    `[ConversationAPI] Demo message: ${messageId} | conversation=${conversation_id} | ${user_role}`
-  );
+  const demoMsg = addMessage(fid, role, "assistant", content);
 
   return NextResponse.json({
-    id: messageId,
+    id: demoMsg.id,
     content,
     attachments: [],
     suggested_actions: [],

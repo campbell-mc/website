@@ -448,3 +448,28 @@ export const simulationFailures = pgTable('simulation_failures', {
   resolved_by: text('resolved_by'),                   // 'code_fix' | 'threshold_change' | 'scenario_updated'
   created_at: timestamp('created_at').defaultNow(),
 });
+
+// ── CONVERSATIONS ───────────────────────────────────────────
+// Chat history for CHRIS Coach. One conversation per role per facility.
+
+export const conversations = pgTable('conversations', {
+  id: text('id').primaryKey(),
+  facility_id: text('facility_id').notNull(),
+  user_role: text('user_role').notNull(),
+  user_name: text('user_name'),
+  context_type: text('context_type').default('general'),
+  title: text('title'),
+  message_count: integer('message_count').default(0),
+  last_message_at: timestamp('last_message_at'),
+  created_at: timestamp('created_at').defaultNow(),
+});
+
+export const conversationMessages = pgTable('conversation_messages', {
+  id: text('id').primaryKey(),
+  conversation_id: text('conversation_id').notNull(),
+  sender_type: text('sender_type').notNull(),            // 'user' | 'assistant' | 'system'
+  content: text('content').notNull(),
+  token_count: integer('token_count'),
+  attachments: jsonb('attachments').default([]),
+  created_at: timestamp('created_at').defaultNow(),
+});

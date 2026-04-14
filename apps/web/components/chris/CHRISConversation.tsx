@@ -263,12 +263,39 @@ export function CHRISConversation({
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, thinking]);
 
-  // Initialize conversation on mount
+  // Initialize: load history first, fallback to opening message
   useEffect(() => {
     if (initialized) return;
 
-    async function openConversation() {
+    async function init() {
       setThinking(true);
+      try {
+        // Try to load existing conversation history
+        const histRes = await fetch(
+          `/api/conversations/history?facility_id=${facility_id ?? "FAC-001"}&user_role=${current_user_role ?? "don"}`
+        );
+        const histData = await histRes.json();
+
+        if (histData.messages && histData.messages.length > 0) {
+          // Restore history
+          setConversationId(histData.conversation?.id ?? uid());
+          setMessages(
+            histData.messages.map((m: { id: string; sender_type: string; content: string; created_at: string }) => ({
+              id: m.id,
+              sender_type: m.sender_type === "assistant" ? "chris" : m.sender_type,
+              content: m.content,
+              created_at: m.created_at,
+            }))
+          );
+          setThinking(false);
+          setInitialized(true);
+          return;
+        }
+      } catch {
+        // History fetch failed — proceed to open new conversation
+      }
+
+      // No history — open new conversation
       try {
         const res = await fetch("/api/conversations/open", {
           method: "POST",
@@ -308,7 +335,7 @@ export function CHRISConversation({
       }
     }
 
-    openConversation();
+    init();
   }, [initialized, context_type, context_id, context_data, facility_id, current_user_role]);
 
   // Send a user message
