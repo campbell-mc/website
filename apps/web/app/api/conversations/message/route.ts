@@ -5,6 +5,7 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { addMessage, getMessageHistory, getOrCreateConversation } from "@/lib/conversations/store";
+import { extractInsights, buildMemoryContext } from "@/lib/conversations/memory";
 
 // ── CHRIS system prompt builder ──────────────────────────────────
 
@@ -294,7 +295,8 @@ export async function POST(request: NextRequest) {
     try {
       const { callClaudeConversation } = await import("@/lib/anthropic/client");
 
-      const systemPrompt = buildSystemPrompt(context_type, context_data, role, facility_name);
+      const memoryContext = buildMemoryContext(fid, role);
+      const systemPrompt = buildSystemPrompt(context_type, context_data, role, facility_name) + memoryContext;
 
       const result = await callClaudeConversation({
         system: systemPrompt,
@@ -308,6 +310,10 @@ export async function POST(request: NextRequest) {
 
       // Persist assistant response
       const assistantMsg = addMessage(fid, role, "assistant", result.text);
+
+      // Extract insights for memory
+      const conv = getOrCreateConversation(fid, role);
+      extractInsights(message, result.text, role, fid, conv.id);
 
       console.log(
         `[ConversationAPI] ${role} | ${userMsg.id} → ${assistantMsg.id} | tokens=${result.inputTokens}in/${result.outputTokens}out`
@@ -328,6 +334,8 @@ export async function POST(request: NextRequest) {
 
   const content = generateDemoResponse(message, context_type);
   const demoMsg = addMessage(fid, role, "assistant", content);
+  const conv = getOrCreateConversation(fid, role);
+  extractInsights(message, content, role, fid, conv.id);
 
   return NextResponse.json({
     id: demoMsg.id,
