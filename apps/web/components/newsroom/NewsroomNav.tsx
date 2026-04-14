@@ -11,12 +11,10 @@ export function NewsroomNav() {
           <span className="text-[#1B4332] text-[15px] font-medium tracking-tight">CHRIS-OS</span>
         </Link>
         <div className="flex items-center gap-6">
-          <span className="text-[13px] font-medium text-[#1B4332] border-b border-[#1B4332]/40 pb-0.5">
-            Newsroom
-          </span>
-          <Link href="/" className="text-[13px] text-stone-400 hover:text-[#1B4332] transition-colors hidden sm:block">
-            Back to CHRIS-OS
-          </Link>
+          <span className="text-[13px] font-medium text-[#1B4332] border-b border-[#1B4332]/40 pb-0.5">Newsroom</span>
+          <Link href="/technology" className="text-[13px] text-stone-400 hover:text-[#1B4332] transition-colors hidden sm:block">Technology</Link>
+          <Link href="/#roi-calculator" className="text-[13px] text-stone-400 hover:text-[#1B4332] transition-colors hidden sm:block">ROI</Link>
+          <Link href="/" className="text-[13px] text-stone-400 hover:text-[#1B4332] transition-colors hidden sm:block">chris-os.io</Link>
         </div>
       </div>
     </nav>
