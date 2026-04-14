@@ -39,10 +39,10 @@ export function CuratorHero() {
             </span>
           </div>
 
-          <h1 className="text-[clamp(30px,4vw,50px)] font-normal leading-[1.08] tracking-[-0.02em] text-white mb-6" style={{ fontFamily: "var(--font-instrument-serif, 'Georgia'), serif" }}>
+          <h1 className="text-[clamp(30px,4vw,50px)] font-normal leading-[1.08] tracking-[-0.02em] text-white mb-6" style={{ fontFamily: "var(--font-instrument-serif, 'Georgia'), serif", color: "#ffffff" }}>
             The sector, watched.
             <br />
-            <em className="italic text-emerald-300">Every 2 hours. All 35 sources.</em>
+            <em className="italic" style={{ color: "#86EFAC" }}>Every 2 hours. All 35 sources.</em>
           </h1>
 
           <p className="text-[16px] leading-[1.75] text-white/90 max-w-md mb-6">
