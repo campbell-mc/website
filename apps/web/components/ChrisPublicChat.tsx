@@ -18,6 +18,19 @@ const SUGGESTION_CHIPS = [
   "How does care minutes compliance work?",
 ];
 
+function stripMarkdown(text: string): string {
+  return text
+    .replace(/\*\*(.+?)\*\*/g, "$1")       // **bold** → bold
+    .replace(/\*(.+?)\*/g, "$1")            // *italic* → italic
+    .replace(/__(.+?)__/g, "$1")            // __bold__ → bold
+    .replace(/_(.+?)_/g, "$1")              // _italic_ → italic
+    .replace(/^#{1,6}\s+/gm, "")            // # headings → plain
+    .replace(/^[-*+]\s+/gm, "- ")           // normalise bullet markers
+    .replace(/^\d+\.\s+/gm, (m) => m)       // keep numbered lists
+    .replace(/`(.+?)`/g, "$1")              // `code` → code
+    .replace(/\[(.+?)\]\(.+?\)/g, "$1");    // [link](url) → link
+}
+
 export default function ChrisPublicChat() {
   const [messages, setMessages] = useState<Message[]>([
     { role: "assistant", content: OPENING_MESSAGE },
@@ -136,7 +149,7 @@ export default function ChrisPublicChat() {
                 }
                 style={msg.role === "user" ? { color: "#ffffff" } : undefined}
               >
-                {msg.content}
+                {msg.role === "assistant" ? stripMarkdown(msg.content) : msg.content}
                 {msg.role === "assistant" && msg.content === "" && streaming && (
                   <span className="inline-flex items-center gap-1">
                     <span className="w-1.5 h-1.5 rounded-full bg-stone-400 animate-pulse" />

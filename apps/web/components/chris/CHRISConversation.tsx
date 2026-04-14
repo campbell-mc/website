@@ -71,6 +71,17 @@ const MODE_CLASSES: Record<CHRISConversationProps["mode"], string> = {
 
 // ── Helpers ──────────────────────────────────────────────────────
 
+function stripMd(text: string): string {
+  return text
+    .replace(/\*\*(.+?)\*\*/g, "$1")
+    .replace(/\*(.+?)\*/g, "$1")
+    .replace(/__(.+?)__/g, "$1")
+    .replace(/_(.+?)_/g, "$1")
+    .replace(/^#{1,6}\s+/gm, "")
+    .replace(/`(.+?)`/g, "$1")
+    .replace(/\[(.+?)\]\(.+?\)/g, "$1");
+}
+
 function uid(): string {
   return `msg_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
 }
@@ -477,7 +488,7 @@ export function CHRISConversation({
               <div className="max-w-[85%] space-y-1">
                 <div className="bg-gray-50 rounded-2xl rounded-tl-sm px-4 py-3">
                   <p className="text-sm text-gray-900 leading-relaxed whitespace-pre-wrap">
-                    {msg.content}
+                    {stripMd(msg.content)}
                   </p>
                 </div>
 
