@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { Send } from "lucide-react";
 
 type Message = {
@@ -26,16 +26,23 @@ export default function ChrisPublicChat() {
   const [streaming, setStreaming] = useState(false);
   const [rateLimited, setRateLimited] = useState(false);
   const [hasUserSent, setHasUserSent] = useState(false);
-  const messagesContainerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const scrollRAF = useRef<number>(0);
+
+  // Scroll to bottom of chat container only — debounced via rAF to avoid
+  // firing on every streaming chunk and fighting with page scroll
+  const scrollToBottom = useCallback(() => {
+    cancelAnimationFrame(scrollRAF.current);
+    scrollRAF.current = requestAnimationFrame(() => {
+      const el = containerRef.current;
+      if (el) el.scrollTop = el.scrollHeight;
+    });
+  }, []);
 
   useEffect(() => {
-    // Scroll only the chat container — not the page
-    const container = messagesContainerRef.current;
-    if (container) {
-      container.scrollTop = container.scrollHeight;
-    }
-  }, [messages]);
+    scrollToBottom();
+  }, [messages, scrollToBottom]);
 
   async function sendMessage(text?: string) {
     const content = text ?? input.trim();
@@ -100,9 +107,21 @@ export default function ChrisPublicChat() {
   }
 
   return (
-    <div className="bg-white border border-[#1B4332]/12 rounded-2xl overflow-hidden flex flex-col" style={{ maxHeight: 420 }}>
-      {/* Messages */}
-      <div ref={messagesContainerRef} className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
+    <div
+      className="bg-white border border-[#1B4332]/12 rounded-2xl flex flex-col"
+      style={{ height: 420, overflow: "hidden" }}
+    >
+      {/* Messages — isolated scroll container */}
+      <div
+        ref={containerRef}
+        className="flex-1 px-4 py-4 space-y-4"
+        style={{
+          overflowY: "auto",
+          overscrollBehavior: "contain",   // Prevent scroll chaining to page
+          WebkitOverflowScrolling: "touch",
+          scrollBehavior: "auto",          // No smooth scroll inside — instant follow
+        }}
+      >
         {messages.map((msg, i) => (
           <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
             <div className={msg.role === "user" ? "max-w-[80%]" : "max-w-[85%]"}>
@@ -132,7 +151,7 @@ export default function ChrisPublicChat() {
 
       {/* Suggestion chips — before first user message */}
       {!hasUserSent && !streaming && (
-        <div className="flex gap-2 px-4 pb-2 flex-wrap">
+        <div className="flex gap-2 px-4 pb-2 flex-wrap shrink-0">
           {SUGGESTION_CHIPS.map((chip) => (
             <button
               key={chip}
@@ -147,7 +166,7 @@ export default function ChrisPublicChat() {
 
       {/* Rate limit message */}
       {rateLimited && (
-        <div className="px-4 pb-2">
+        <div className="px-4 pb-2 shrink-0">
           <p className="text-xs text-stone-400 mb-1">You've reached the limit for this session.</p>
           <a href="#demo-section" className="text-xs font-medium text-[#2D7D73] hover:underline">
             Enter the demo →
@@ -156,13 +175,18 @@ export default function ChrisPublicChat() {
       )}
 
       {/* Input bar */}
-      <div className="border-t border-[#1B4332]/8 flex items-center">
+      <div className="border-t border-[#1B4332]/8 flex items-center shrink-0">
         <input
           ref={inputRef}
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && sendMessage()}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && !e.shiftKey) {
+              e.preventDefault();
+              sendMessage();
+            }
+          }}
           placeholder={rateLimited ? "Limit reached" : "Ask CHRIS anything about aged care..."}
           disabled={streaming || rateLimited}
           className="flex-1 px-4 py-3.5 text-sm text-stone-800 placeholder:text-stone-400 focus:outline-none bg-transparent disabled:opacity-50"
