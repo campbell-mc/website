@@ -17,11 +17,11 @@ export const sentinelScenarios: Scenario[] = [
     tier: 'micro', agents: ['sentinel'], care_type: 'residential', duration_ticks: 6,
     world: healthy,
     events: [
-      { tick: 2, type: 'roster_update', description: 'Evening RN calls in sick', payload: { shift: 'afternoon', updates: { rn_confirmed: false, gaps: 1 }, care_minutes_impact: -14, rn_impact: -8 } },
+      { tick: 2, type: 'roster_update', description: 'Evening RN calls in sick', payload: { shift: 'afternoon', updates: { rn_confirmed: false, gaps: 1 }, care_minutes_impact: -16, rn_impact: -8 } },
     ],
     ground_truth: {
       expected_findings: [
-        { agent: 'sentinel', finding_type: 'care_minutes_at_risk', severity: 'urgent', max_ticks_to_detect: 3, description: 'Projected care minutes below 200 after RN callout' },
+        { agent: 'sentinel', finding_type: 'care_minutes_at_risk', severity: 'urgent', max_ticks_to_detect: 3, description: 'Projected care minutes below 190 after RN callout' },
         { agent: 'sentinel', finding_type: 'rn_gap_tonight', severity: 'immediate', max_ticks_to_detect: 3, description: 'No RN confirmed for afternoon shift' },
       ],
       expected_silence: [],
@@ -38,8 +38,8 @@ export const sentinelScenarios: Scenario[] = [
     tier: 'micro', agents: ['sentinel'], care_type: 'residential', duration_ticks: 6,
     world: healthy,
     events: [
-      { tick: 2, type: 'roster_update', description: 'RN gap appears', payload: { shift: 'afternoon', updates: { rn_confirmed: false, gaps: 1 }, care_minutes_impact: -14, rn_impact: -8 } },
-      { tick: 3, type: 'roster_update', description: 'Agency RN confirmed', payload: { shift: 'afternoon', updates: { rn_confirmed: true, gaps: 0, agency_count: 1 }, care_minutes_impact: 14, rn_impact: 8 } },
+      { tick: 2, type: 'roster_update', description: 'RN gap appears', payload: { shift: 'afternoon', updates: { rn_confirmed: false, gaps: 1 }, care_minutes_impact: -16, rn_impact: -8 } },
+      { tick: 3, type: 'roster_update', description: 'Agency RN confirmed', payload: { shift: 'afternoon', updates: { rn_confirmed: true, gaps: 0, agency_count: 1 }, care_minutes_impact: 16, rn_impact: 8 } },
     ],
     ground_truth: {
       expected_findings: [

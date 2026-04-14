@@ -49,7 +49,7 @@ export function seedPressuredResidential(): ScenarioWorld {
       { shift: 'afternoon', total_rostered: 7, gaps: 1, rn_confirmed: true, agency_count: 1 },
       { shift: 'night', total_rostered: 5, gaps: 0, rn_confirmed: false, agency_count: 0 },
     ],
-    care_minutes: { projected_total: 196, rn_minutes: 38, compliant: false },
+    care_minutes: { projected_total: 188, rn_minutes: 38, compliant: false },
     psh_scores: {
       'TEAM-001': { PSH_01: 0.71, PSH_02: 0.63, PSH_08: 0.68, PSH_13: 0.54 },
       'TEAM-002': { PSH_01: 0.48, PSH_02: 0.38, PSH_08: 0.36, PSH_13: 0.41 },
