@@ -97,8 +97,8 @@ const NAV_SECTIONS: Record<string, NavSection | WeeklyLoopSection> = {
   whs: {
     title: "WHS",
     items: [
-      { label: "WHS Incidents", href: "/dashboard/whs/incidents", icon: "AlertTriangle" },
-      { label: "ISO 45003", href: "/dashboard/risk", icon: "Shield" },
+      { label: "WHS Incidents", href: "/dashboard/operations/incidents", icon: "AlertTriangle" },
+      { label: "ISO 45003", href: "/dashboard/workforce/psh/iso45003", icon: "Shield" },
     ],
   },
   financial: {
@@ -198,14 +198,13 @@ const NAV_SECTIONS: Record<string, NavSection | WeeklyLoopSection> = {
     ],
   },
 
-  // ── NDIS NAV SECTIONS ───────────────────────────────────
+  // ── NDIS NAV SECTIONS (routes point to shared screens until NDIS is built) ──
   supports: {
     title: "SUPPORTS",
-    href: "/dashboard/supports",
+    href: "/dashboard/residents",
     items: [
-      { label: "Support Delivery", href: "/dashboard/supports", icon: "Activity" },
-      { label: "Goal Progress", href: "/dashboard/supports/goals", icon: "BarChart2" },
-      { label: "Incident Register", href: "/dashboard/incidents", icon: "AlertTriangle" },
+      { label: "Support Delivery", href: "/dashboard/residents", icon: "Activity" },
+      { label: "Incident Register", href: "/dashboard/operations/incidents", icon: "AlertTriangle" },
     ],
   },
   participants: {
@@ -219,26 +218,25 @@ const NAV_SECTIONS: Record<string, NavSection | WeeklyLoopSection> = {
   },
   plan_budgets: {
     title: "PLAN BUDGETS",
-    href: "/dashboard/plans",
+    href: "/dashboard/financial",
     items: [
-      { label: "Plan Budgets", href: "/dashboard/plans", icon: "DollarSign" },
-      { label: "Claiming", href: "/dashboard/plans/claiming", icon: "FileText" },
+      { label: "Plan Budgets", href: "/dashboard/financial", icon: "DollarSign" },
     ],
   },
   worker_screening: {
     title: "WORKER SCREENING",
     items: [
-      { label: "Worker Screening", href: "/dashboard/worker-screening", icon: "Shield" },
+      { label: "Worker Screening", href: "/dashboard/workforce", icon: "Shield" },
     ],
   },
 
   governance: {
     title: "GOVERNANCE",
-    href: "/dashboard/compliance",
+    href: "/dashboard/governance",
     items: [
-      { label: "Compliance Register", href: "/dashboard/compliance", icon: "Shield" },
+      { label: "Compliance Register", href: "/dashboard/governance", icon: "Shield" },
       { label: "Reporting Cycles", href: "/dashboard/reporting", icon: "Calendar" },
-      { label: "Corrective Actions", href: "/dashboard/corrective-actions", icon: "CheckSquare" },
+      { label: "Corrective Actions", href: "/dashboard/governance/corrective-actions/CA-2026-004", icon: "CheckSquare" },
     ],
   },
   compliance: {

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { instrumentSerif, dmSans } from "./fonts";
 
 export const metadata: Metadata = {
   title: "CHRIS — Culture Habit Reinforcement Intelligence System",
@@ -13,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${instrumentSerif.variable} ${dmSans.variable}`}>
       <head>
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#1B4332" />
@@ -24,4 +25,3 @@ export default function RootLayout({
     </html>
   );
 }
-// deploy trigger 1776026872

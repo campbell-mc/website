@@ -928,7 +928,7 @@ export const ROLE_CONFIG: Record<RoleName, RoleConfig> = {
   home_care_manager: {
     display_name: 'Home Care Manager',
     data_scope: 'single_facility',
-    home_route: '/dashboard/hc-manager',
+    home_route: '/dashboard/home-care',
     nav_sections: ['hc_overview', 'care_management', 'clients', 'budget_management', 'hc_workforce', 'hc_financial', 'hc_compliance', 'loops'],
     bottom_tabs: ['home', 'queue', 'coach', 'briefing', 'more'],
     domain_strip: { residential: [], home_care: ['Visits', 'Workforce', 'Budget', 'Compliance', 'Clients'], ndis: [] },

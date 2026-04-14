@@ -56,6 +56,13 @@
   --font-family-display: 'DM Sans', system-ui, -apple-system, sans-serif;
   --font-family-body: 'DM Sans', system-ui, -apple-system, sans-serif;
   --font-family-serif: 'Source Serif 4', Georgia, serif;
+
+  /* Landing page tokens */
+  --color-forest: #1B4332;
+  --color-forest-mid: #2D5A3D;
+  --color-teal: #2D7D73;
+  --color-cream: #F5F2EB;
+  --color-cream-dark: #EDE9DF;
 }
 
 :root {
@@ -445,6 +452,18 @@ button:active { transform: scale(0.98); }
 }
 .animate-agent-scroll:hover {
   animation-play-state: paused;
+}
+
+/* ============================================================================
+   Ticker animation — landing page live feed
+   ============================================================================ */
+
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.animate-ticker {
+  animation: ticker 30s linear infinite;
 }
 
 /* ============================================================================

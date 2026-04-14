@@ -57,14 +57,17 @@ const DEMO_USERS: Record<string, { name: string; role: RoleName }> = {
   "/dashboard/hr": { name: "Rachel Kim", role: "hr_manager" },
   "/dashboard/board": { name: "Margaret Wilson", role: "board_member" },
   "/dashboard/team-leader": { name: "Anika Patel", role: "team_leader" },
-  "/dashboard/hc-manager": { name: "Tom Nguyen", role: "home_care_manager" },
+  "/dashboard/hc-manager": { name: "Guinevere Walsh", role: "home_care_manager" },
+  "/dashboard/home-care": { name: "Guinevere Walsh", role: "home_care_manager" },
   "/dashboard/care-coordinator": { name: "Emily Santos", role: "care_coordinator" },
   "/dashboard/ndis-manager": { name: "David Okafor", role: "ndis_manager" },
   "/dashboard/support-coordinator-ndis": { name: "Maya Reeves", role: "support_coordinator_ndis" },
 };
 
 function getDemoUser(pathname: string, careType: string): { name: string; role: RoleName } {
-  for (const [route, user] of Object.entries(DEMO_USERS)) {
+  // Sort by route length descending — most specific match first
+  const sorted = Object.entries(DEMO_USERS).sort(([a], [b]) => b.length - a.length);
+  for (const [route, user] of sorted) {
     if (pathname.startsWith(route)) return user;
   }
   // Default based on care type
