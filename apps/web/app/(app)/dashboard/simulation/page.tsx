@@ -17,6 +17,7 @@ export default function SimulationPage() {
   const router = useRouter();
   const [running, setRunning] = useState(false);
   const [selectedSuite, setSelectedSuite] = useState("all");
+  const [llmJudge, setLlmJudge] = useState(false);
   const [report, setReport] = useState<SuiteReport | null>(null);
   const [expanded, setExpanded] = useState<string | null>(null);
 
@@ -24,7 +25,7 @@ export default function SimulationPage() {
     setRunning(true);
     setReport(null);
     try {
-      const res = await fetch("/api/simulation/run", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ suite: selectedSuite }) });
+      const res = await fetch("/api/simulation/run", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ suite: selectedSuite, llm_judge: llmJudge }) });
       const data = await res.json();
       setReport(data);
     } catch (e) {
@@ -43,6 +44,14 @@ export default function SimulationPage() {
         <button onClick={runSimulation} disabled={running} className={`text-sm font-medium px-4 py-2.5 rounded-xl ${running ? "bg-gray-200 text-gray-400" : "bg-[#1B4332] text-white hover:opacity-90"}`}>
           {running ? "Running..." : "Run Suite"}
         </button>
+      </div>
+
+      {/* LLM Judge toggle + Suite selector */}
+      <div className="flex items-center gap-3 mb-3">
+        <label className="flex items-center gap-2 cursor-pointer">
+          <input type="checkbox" checked={llmJudge} onChange={(e) => setLlmJudge(e.target.checked)} className="w-4 h-4 rounded border-gray-300" />
+          <span className="text-xs text-gray-600">LLM Judge (Claude evaluates finding quality)</span>
+        </label>
       </div>
 
       {/* Suite selector */}
@@ -82,7 +91,15 @@ export default function SimulationPage() {
                 <p className="text-xs text-gray-500">Overall score</p>
               </div>
             </div>
-            <div className="grid grid-cols-3 gap-2">
+            {report.llm_judge_available && report.llm_avg_quality != null && (
+              <div className="bg-white rounded-xl p-3 mt-3 flex items-center justify-between">
+                <span className="text-xs text-gray-500">LLM Judge (Claude quality evaluation)</span>
+                <span className={`text-sm font-bold ${report.llm_avg_quality >= 0.8 ? "text-[#2D7D73]" : report.llm_avg_quality >= 0.6 ? "text-[#D4A017]" : "text-[#C4704A]"}`}>
+                  {Math.round(report.llm_avg_quality * 100)}% avg quality
+                </span>
+              </div>
+            )}
+            <div className="grid grid-cols-3 gap-2 mt-3">
               <div className="bg-white rounded-xl p-3 text-center">
                 <p className="text-lg font-bold text-[#2D7D73]">{report.passed}</p>
                 <p className="text-[10px] text-gray-500">Passed</p>
@@ -111,6 +128,7 @@ export default function SimulationPage() {
                     <p className="text-sm font-semibold text-gray-900 truncate">{v.scenario_name}</p>
                     <p className="text-xs text-gray-500">
                       Detection: {Math.round(v.detection_rate * 100)}% · Silence: {Math.round(v.silence_rate * 100)}% · {v.findings_count} findings · {v.duration_ms}ms
+                      {v.llm_quality != null && <span className="ml-1"> · LLM: {Math.round(v.llm_quality * 100)}%</span>}
                     </p>
                   </div>
                   <span className={`text-lg font-bold shrink-0 ${v.overall_score >= 0.8 ? "text-[#2D7D73]" : v.overall_score >= 0.6 ? "text-[#D4A017]" : "text-[#C4704A]"}`}>
@@ -163,6 +181,17 @@ export default function SimulationPage() {
                         </div>
                       ))}
                     </div>
+
+                    {/* LLM Judge verdict */}
+                    {v.llm_summary && (
+                      <div className="mt-3 bg-[#F0F7F4] rounded-lg p-3">
+                        <p className="text-[10px] font-semibold text-[#1B4332] uppercase tracking-wider mb-1">LLM Judge — Claude quality evaluation</p>
+                        <p className="text-xs text-gray-700 leading-relaxed">{v.llm_summary}</p>
+                        {v.llm_quality != null && (
+                          <p className="text-xs font-bold text-[#2D7D73] mt-1">Quality: {Math.round(v.llm_quality * 100)}%</p>
+                        )}
+                      </div>
+                    )}
                   </div>
                 )}
               </div>

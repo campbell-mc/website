@@ -191,6 +191,8 @@ export interface Verdict {
   findings_count: number;
   actions_count: number;
   duration_ms: number;
+  llm_quality?: number;           // 0-1, from LLM judge (if available)
+  llm_summary?: string;           // LLM judge narrative assessment
 }
 
 export interface SuiteReport {
@@ -201,6 +203,8 @@ export interface SuiteReport {
   by_tier: Record<string, { total: number; passed: number; avg_score: number }>;
   by_agent: Record<string, { total: number; passed: number; avg_score: number }>;
   verdicts: Verdict[];
+  llm_judge_available: boolean;   // true if ANTHROPIC_API_KEY was set
+  llm_avg_quality?: number;       // average LLM quality score across suite
   run_at: string;
   duration_ms: number;
 }

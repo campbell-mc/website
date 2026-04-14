@@ -18,8 +18,10 @@ const SUITES: Record<string, typeof sentinelScenarios> = {
 };
 
 export async function POST(request: NextRequest) {
-  const { suite } = await request.json().catch(() => ({ suite: 'all' }));
+  const body = await request.json().catch(() => ({}));
+  const suite = body.suite ?? 'all';
+  const llmJudge = body.llm_judge ?? false;
   const scenarios = SUITES[suite] ?? ALL_SCENARIOS;
-  const report = await runSuite(scenarios);
+  const report = await runSuite(scenarios, { llmJudge });
   return NextResponse.json(report);
 }

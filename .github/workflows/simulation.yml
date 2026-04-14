@@ -1,0 +1,37 @@
+name: Agent Simulation Suite
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  simulate:
+    name: Run 28 Agent Scenarios
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.30.1
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install tsx
+        run: pnpm add -D tsx --filter @chris/web
+
+      - name: Run simulation suite
+        run: pnpm exec tsx scripts/run-simulation.ts all
+        working-directory: apps/web
