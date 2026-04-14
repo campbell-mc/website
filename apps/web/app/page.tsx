@@ -135,7 +135,10 @@ function Nav() {
           </div>
           <span className="text-[#1B4332] text-[15px] font-medium tracking-tight">CHRIS-OS</span>
         </div>
-        <span className="text-[13px] text-stone-400 hidden md:block">chris-os.io</span>
+        <div className="flex items-center gap-6">
+          <Link href="/newsroom" className="text-[13px] text-stone-400 hover:text-[#1B4332] transition-colors hidden md:block">Newsroom</Link>
+          <span className="text-[13px] text-stone-400 hidden md:block">chris-os.io</span>
+        </div>
       </div>
     </nav>
   );
