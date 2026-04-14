@@ -1,13 +1,12 @@
 "use client";
 
-import { useState, Suspense } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { MobileHeader } from "@/components/layout/MobileHeader";
 import { FloatingChrisButton } from "@/components/chris/FloatingChrisButton";
 import BottomTabBar from "@/components/mobile/BottomTabBar";
 import { ActionCatcher } from "@/components/ActionCatcher";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
-import { shouldShowCoach } from "@/components/access/FeatureGate";
 import { getRoleConfig } from "@/lib/roles/config";
 import type { RoleName } from "@/lib/roles/config";
 import { FacilityProvider } from "@/lib/context/facility";
@@ -45,9 +44,12 @@ const CARE_TYPE_FACILITIES: Record<string, {
   },
 };
 
-// ── DEMO USER MAPPING ────────────────────────────────────────
+// ── ROLE ENTRY POINTS ───────────────────────────────────────
+// These are the URLs that SET a user's role. Once you visit one of these,
+// you stay in that role until you visit a different entry point.
 
-const DEMO_USERS: Record<string, { name: string; role: RoleName }> = {
+const ROLE_ENTRY_POINTS: Record<string, { name: string; role: RoleName }> = {
+  "/dashboard": { name: "Sarah Mitchell", role: "don" },
   "/dashboard/ceo": { name: "James Whitfield", role: "ceo" },
   "/dashboard/cfo": { name: "Michelle Park", role: "cfo" },
   "/dashboard/fm": { name: "James Okonkwo", role: "facility_manager" },
@@ -64,14 +66,45 @@ const DEMO_USERS: Record<string, { name: string; role: RoleName }> = {
   "/dashboard/support-coordinator-ndis": { name: "Maya Reeves", role: "support_coordinator_ndis" },
 };
 
-function getDemoUser(pathname: string, careType: string): { name: string; role: RoleName } {
-  // Sort by route length descending — most specific match first
-  const sorted = Object.entries(DEMO_USERS).sort(([a], [b]) => b.length - a.length);
+const STORAGE_KEY = "chris-demo-role";
+
+function getStoredRole(): { name: string; role: RoleName } | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const stored = sessionStorage.getItem(STORAGE_KEY);
+    if (stored) return JSON.parse(stored);
+  } catch {}
+  return null;
+}
+
+function storeRole(user: { name: string; role: RoleName }) {
+  if (typeof window === "undefined") return;
+  try {
+    sessionStorage.setItem(STORAGE_KEY, JSON.stringify(user));
+  } catch {}
+}
+
+function resolveUser(pathname: string, careType: string): { name: string; role: RoleName } {
+  // 1. Check if current path is a role entry point (most specific match first)
+  //    Sort by length descending so /dashboard/cfo matches before /dashboard
+  const sorted = Object.entries(ROLE_ENTRY_POINTS).sort(([a], [b]) => b.length - a.length);
   for (const [route, user] of sorted) {
-    if (pathname.startsWith(route)) return user;
+    // Exact match for /dashboard, prefix match for everything else
+    if (route === "/dashboard" ? pathname === "/dashboard" : pathname.startsWith(route)) {
+      storeRole(user);
+      return user;
+    }
   }
-  // Default based on care type
-  return CARE_TYPE_FACILITIES[careType]?.defaultUser ?? { name: "Sarah Mitchell", role: "don" };
+
+  // 2. If navigating to a shared screen (e.g. /dashboard/financial),
+  //    keep the role from the last entry point
+  const stored = getStoredRole();
+  if (stored) return stored;
+
+  // 3. Default based on care type (first visit, no entry point hit yet)
+  const defaultUser = CARE_TYPE_FACILITIES[careType]?.defaultUser ?? { name: "Sarah Mitchell", role: "don" };
+  storeRole(defaultUser);
+  return defaultUser;
 }
 
 // ── LAYOUT ───────────────────────────────────────────────────
@@ -89,7 +122,7 @@ function AppLayoutInner({ children }: { children: React.ReactNode }) {
   const facilityConfig = CARE_TYPE_FACILITIES[careType] ?? CARE_TYPE_FACILITIES.residential;
 
   const user = {
-    ...getDemoUser(pathname, careType),
+    ...resolveUser(pathname, careType),
     providerName: facilityConfig.providerName,
   };
 
