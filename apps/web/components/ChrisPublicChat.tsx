@@ -131,9 +131,10 @@ export default function ChrisPublicChat() {
               <div
                 className={
                   msg.role === "user"
-                    ? "bg-[#1B4332] text-white rounded-2xl rounded-br-sm px-4 py-2.5 text-sm leading-relaxed"
+                    ? "bg-[#1B4332] rounded-2xl rounded-br-sm px-4 py-2.5 text-sm leading-relaxed"
                     : "bg-stone-50 text-stone-800 rounded-2xl rounded-bl-sm px-4 py-2.5 text-sm leading-relaxed whitespace-pre-wrap"
                 }
+                style={msg.role === "user" ? { color: "#ffffff" } : undefined}
               >
                 {msg.content}
                 {msg.role === "assistant" && msg.content === "" && streaming && (
