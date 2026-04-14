@@ -43,8 +43,8 @@ export default function MobileCareMinutes() {
           Total care minutes today
         </p>
         <div className="flex items-baseline justify-center gap-1">
-          <span className="text-[64px] font-bold text-[#1B4332] leading-none">201</span>
-          <span className="text-[24px] text-gray-400 font-medium">/200</span>
+          <span className="text-[64px] font-bold text-[#1B4332] leading-none">216</span>
+          <span className="text-[24px] text-gray-400 font-medium">/215</span>
         </div>
         <p className="text-[13px] text-[#2D7D73] font-medium mt-2">Compliant</p>
       </div>

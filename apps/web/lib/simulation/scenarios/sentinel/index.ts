@@ -13,7 +13,7 @@ export const sentinelScenarios: Scenario[] = [
   {
     id: 'sentinel-care-minutes-breach-001',
     name: 'Care minutes breach — evening RN gap',
-    description: 'RN calls in sick at tick 2. Projected minutes drop below 200. Sentinel should alert immediately.',
+    description: 'RN calls in sick at tick 2. Projected minutes drop below 215. Sentinel should alert immediately.',
     tier: 'micro', agents: ['sentinel'], care_type: 'residential', duration_ticks: 6,
     world: healthy,
     events: [

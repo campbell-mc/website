@@ -26,7 +26,7 @@ const QUESTIONS = [
   { id: "sirs_4", domain: 2, text: "Are SIRS incidents reviewed for patterns and systemic issues?" },
   // Domain 3
   { id: "care_1", domain: 3, text: "Do you monitor care minutes compliance daily?" },
-  { id: "care_2", domain: 3, text: "Have you consistently met the 200 min/resident/day target this past quarter?" },
+  { id: "care_2", domain: 3, text: "Have you consistently met the 215 min/resident/day target this past quarter?" },
   { id: "care_3", domain: 3, text: "Is RN 24/7 coverage maintained with a documented contingency process?" },
   { id: "care_4", domain: 3, text: "Do you submit quality indicator data to ACQSC on time quarterly?" },
   // Domain 4

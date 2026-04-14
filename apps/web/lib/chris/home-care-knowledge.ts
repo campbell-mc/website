@@ -34,19 +34,21 @@ export const HOME_CARE_KNOWLEDGE = {
 
   compliance: {
     sirs: {
-      applies: true,
-      cat1_notification_hours: 24,
-      cat2_notification_days: 30,
-      max_penalty_cat1: 783000,
-      max_penalty_cat2: 78000,
+      applies: true,      // SIRS extended to Support at Home from 1 Nov 2025
+      priority1_notification_hours: 24,
+      priority2_notification_days: 30,
+      final_report_days: 60,
+      reportable_incident_types: 9,
+      max_civil_penalty_corporate: 1650000,  // Up to $1.65M body corporates
+      penalty_unit_value: 330,               // $330 from 7 Nov 2024
     },
-    quality_standards_count: 7,
+    quality_standards_count: 7,  // 7 Strengthened Quality Standards from 1 Nov 2025
     care_plan_review: 'annual_or_needs_change',
     care_plan_alert_days_overdue: 30,
     care_plan_critical_days_overdue: 60,
     qfr_frequency: 'quarterly',
     qfr_deadline_days: 42,
-    qfr_penalty: 783000,
+    qfr_penalty: 1650000,  // Max civil penalty for body corporates
   },
 
   metrics: {

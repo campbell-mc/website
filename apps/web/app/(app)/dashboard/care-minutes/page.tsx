@@ -20,7 +20,7 @@ const WEEK_DATA = DAYS.map((day, i) => {
   const total = latestWeek.avg_total + jitter;
   const rnJitter = [1.2, -0.9, 0.8, -3.2, -2.1, -1.1, 0.4][i];
   const rn = latestWeek.avg_rn + rnJitter;
-  const status = total >= 200 && rn >= 40 ? "compliant" as const : total >= 195 ? "at-risk" as const : "non-compliant" as const;
+  const status = total >= 215 && rn >= 44 ? "compliant" as const : total >= 210 ? "at-risk" as const : "non-compliant" as const;
   return { day, total: Math.round(total), rn: Math.round(rn * 10) / 10, status };
 });
 
@@ -66,14 +66,14 @@ export default function CareMinutesPage() {
 
         {/* Big number */}
         <div className="flex items-baseline gap-2 mb-1">
-          <span className={`text-[64px] font-extrabold leading-none tracking-tight ${latestWeek.avg_total >= 200 ? "text-[hsl(var(--brand-teal))]" : "text-[hsl(var(--brand-amber))]"}`} style={{ fontFamily: "var(--font-display)" }}>{latestWeek.avg_total}</span>
-          <span className="text-lg text-muted-foreground ml-1">/ 200 min per resident</span>
+          <span className={`text-[64px] font-extrabold leading-none tracking-tight ${latestWeek.avg_total >= 215 ? "text-[hsl(var(--brand-teal))]" : "text-[hsl(var(--brand-amber))]"}`} style={{ fontFamily: "var(--font-display)" }}>{latestWeek.avg_total}</span>
+          <span className="text-lg text-muted-foreground ml-1">/ 215 min per resident</span>
         </div>
 
         {/* Role breakdown — simple bars */}
         <div className="space-y-2 mb-3">
           {[
-            { label: "RN", value: Math.round(latestWeek.avg_rn * 10) / 10, target: 40, ok: latestWeek.avg_rn >= 40 },
+            { label: "RN", value: Math.round(latestWeek.avg_rn * 10) / 10, target: 44, ok: latestWeek.avg_rn >= 44 },
             { label: "EN", value: Math.round((latestWeek.avg_total - latestWeek.avg_rn - (latestWeek.avg_total - latestWeek.avg_rn) * 0.93) * 10) / 10, target: null, ok: true },
             { label: "AIN", value: Math.round((latestWeek.avg_total - latestWeek.avg_rn) * 0.93 * 10) / 10, target: null, ok: true },
           ].map((r) => (
@@ -99,9 +99,9 @@ export default function CareMinutesPage() {
         <div className="flex items-start gap-2 p-3 rounded-lg mb-3" style={{ background: "rgba(27, 67, 50, 0.05)" }}>
           <ChrisAvatar size="small" showGlow className="shrink-0 mt-0.5" />
           <p className="text-xs text-muted-foreground leading-relaxed">
-            {latestWeek.avg_total >= 200 && latestWeek.avg_rn >= 40
+            {latestWeek.avg_total >= 215 && latestWeek.avg_rn >= 44
               ? `Care minutes have been compliant every day this week — ${latestWeek.avg_total} total, ${latestWeek.avg_rn} RN. This is the strongest sustained period since November. The new RN has settled in and agency dependency is down to 18%. Keep it going.`
-              : `You're ${200 - latestWeek.avg_total} min/resident short. RN minutes at ${latestWeek.avg_rn} (target: 40). ${latestWeek.rn_gap_days} RN gap days this week. Agency cover is the immediate lever — longer term, workforce stability is the fix.`}
+              : `You're ${215 - latestWeek.avg_total} min/resident short. RN minutes at ${latestWeek.avg_rn} (target: 44). ${latestWeek.rn_gap_days} RN gap days this week. Agency cover is the immediate lever — longer term, workforce stability is the fix.`}
           </p>
         </div>
 
@@ -166,22 +166,22 @@ export default function CareMinutesPage() {
         <p className="text-[11px] font-semibold text-muted-foreground uppercase tracking-[0.08em] mb-3">This Week</p>
         <div className="space-y-2">
           {WEEK_DATA.map((d) => {
-            const pct = Math.round((d.total / 220) * 100);
+            const pct = Math.round((d.total / 240) * 100);
             const color = d.status === "compliant" ? "hsl(var(--brand-teal))" : d.status === "at-risk" ? "hsl(var(--brand-amber))" : "hsl(var(--brand-terracotta))";
             return (
               <div key={d.day} className="flex items-center gap-3">
                 <span className="text-[10px] text-muted-foreground w-10 shrink-0">{d.day}</span>
                 <div className="flex-1 bg-muted rounded-full h-3 relative">
                   <div className="h-3 rounded-full transition-all duration-500" style={{ width: `${pct}%`, background: color }} />
-                  {/* 200 target marker */}
-                  <div className="absolute top-0 bottom-0 border-r-2 border-dashed border-foreground/20" style={{ left: `${Math.round((200 / 220) * 100)}%` }} />
+                  {/* 215 target marker */}
+                  <div className="absolute top-0 bottom-0 border-r-2 border-dashed border-foreground/20" style={{ left: `${Math.round((215 / 240) * 100)}%` }} />
                 </div>
                 <span className="text-xs font-medium w-8 text-right" style={{ color }}>{d.total}</span>
               </div>
             );
           })}
         </div>
-        <p className="text-[9px] text-muted-foreground mt-2 text-right">Dashed line = 200 target</p>
+        <p className="text-[9px] text-muted-foreground mt-2 text-right">Dashed line = 215 target</p>
       </div>
 
       {/* CHRIS cross-domain signal for care minutes */}

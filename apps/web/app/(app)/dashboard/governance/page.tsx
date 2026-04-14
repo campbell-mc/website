@@ -49,7 +49,7 @@ const OBLIGATIONS: Obligation[] = [
     title: "Care Minutes — Q3 Target",
     status: "at_risk",
     deadline: "30 Jun 2026",
-    description: "Current trajectory 198 min/day against 200 min target. RN component at risk.",
+    description: "Current trajectory 210 min/day against 215 min target. RN component at risk.",
   },
   {
     id: "obl-star-ratings",

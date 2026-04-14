@@ -493,8 +493,9 @@ function Footer() {
         <span className="text-[12px] text-stone-400">
           CHRIS-OS — The operational intelligence and execution system for Australian aged care
         </span>
-        <span className="text-[12px] text-stone-400">
-          chris-os.io · Live in NSW and VIC
+        <span className="flex items-center gap-4 text-[12px] text-stone-400">
+          <Link href="/dashboard/references" className="hover:text-stone-600 transition-colors">Sources & references</Link>
+          <span>chris-os.io · Live in NSW and VIC</span>
         </span>
       </div>
     </footer>

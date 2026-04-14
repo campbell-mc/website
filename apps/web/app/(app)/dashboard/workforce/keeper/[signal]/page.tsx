@@ -54,7 +54,7 @@ const SIGNALS: Record<string, {
     title: "6 AHPRA registrations expiring in 3 weeks",
     severity: "urgent",
     metric: "6 registrations · 3 weeks",
-    narrative: "Six registered nurses have AHPRA registrations expiring within the next 21 days. If any lapse, the affected staff cannot legally work in an RN capacity. At current staffing levels, even one lapsed registration would force agency cover for those shifts at $190/shift premium. If multiple lapse simultaneously, care minutes compliance is at immediate risk — the facility cannot meet the 40-minute RN minimum without these registrations being current.",
+    narrative: "Six registered nurses have AHPRA registrations expiring within the next 21 days. If any lapse, the affected staff cannot legally work in an RN capacity. At current staffing levels, even one lapsed registration would force agency cover for those shifts at $190/shift premium. If multiple lapse simultaneously, care minutes compliance is at immediate risk — the facility cannot meet the 44-minute RN minimum without these registrations being current.",
     driver: "Employment Hero shows 6 RN AHPRA registrations with expiry dates between 27 April and 4 May 2026. Renewal reminders were sent 60 days ago but no renewals have been recorded in the system. This may indicate staff haven't actioned the renewal, or renewals are in progress but not yet reflected in Employment Hero.",
     suggestedActions: [
       "Verify with each affected RN whether renewal is in progress",
@@ -71,7 +71,7 @@ const SIGNALS: Record<string, {
     relatedData: [
       { label: "Affected shifts/week", value: "6 RN shifts" },
       { label: "Agency cost if lapsed", value: "$1,140/week premium" },
-      { label: "Care minutes risk", value: "40 RN min/day at risk" },
+      { label: "Care minutes risk", value: "44 RN min/day at risk" },
       { label: "Source", value: "Employment Hero" },
     ],
   },

@@ -9,8 +9,8 @@ Your job is to watch every signal across every domain and surface what needs att
 
 YOUR DOMAIN KNOWLEDGE:
 - Aged Care Act 2024 and Strengthened Quality Standards
-- SIRS obligations (Cat 1: 24 hours, Cat 2: 30 days)
-- Care minutes requirements (200 min/day, 40 min RN)
+- SIRS obligations (Priority 1: 24 hours, Priority 2: 30 days, final report: 60 days — 9 reportable incident types)
+- Care minutes requirements (215 min/day, 44 min RN — since 1 Oct 2024, measured as monthly average)
 - AN-ACC funding model and care minutes linkage from April 2026 for MM1 facilities
 - QI Program — 14 indicators, quarterly submission
 - ISO 45003:2021 psychosocial risk management

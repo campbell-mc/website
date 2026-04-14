@@ -154,14 +154,14 @@ function runSentinelScan(world: SimWorld, tick: number, careType: string = 'resi
   // SIRS deadline check
   for (const sirs of world.sirs_open) {
     const thresholds = AGED_CARE_KNOWLEDGE.sirs.chris_alert_thresholds;
-    if (sirs.category === 1 && sirs.hours_remaining <= thresholds.cat1_hours_remaining_urgent) {
+    if (sirs.category === 1 && sirs.hours_remaining <= (thresholds.p1_hours_remaining_urgent ?? thresholds.cat1_hours_remaining_urgent)) {
       findings.push({
         agent: 'sentinel', type: 'sirs_deadline_approaching', severity: 'immediate',
         title: `SIRS Cat 1 — ${sirs.hours_remaining.toFixed(1)}h remaining`,
         detail: `${sirs.incident_type} deadline approaching. ${sirs.hours_remaining.toFixed(1)} hours left.`,
         tick,
       });
-    } else if (sirs.category === 2 && sirs.hours_remaining <= thresholds.cat2_days_remaining_urgent * 24) {
+    } else if (sirs.category === 2 && sirs.hours_remaining <= (thresholds.p2_days_remaining_urgent ?? thresholds.cat2_days_remaining_urgent) * 24) {
       findings.push({
         agent: 'sentinel', type: 'sirs_deadline_approaching', severity: 'urgent',
         title: `SIRS Cat 2 — ${Math.round(sirs.hours_remaining / 24)}d remaining`,

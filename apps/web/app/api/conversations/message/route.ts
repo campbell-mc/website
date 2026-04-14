@@ -43,7 +43,7 @@ You can:
 - Care ratio target: 52%+ (top quartile)
 - Agency target: <10% of total hours
 - Staff turnover benchmark: <25% annually
-- Care minutes: RN 40min, EN 20min, AIN 140min (200 total target)
+- Care minutes: 215 min/day total, 44 min RN (since 1 Oct 2024, measured as monthly average)
 
 Always respond in the context of Australian aged care regulation and operations.`;
 }
@@ -75,12 +75,12 @@ function generateDemoResponse(message: string, context_type?: string): string {
 
   // Financial
   if (lower.includes("financial") || lower.includes("care ratio") || lower.includes("stewartbrown") || lower.includes("benchmark")) {
-    return "Against StewartBrown benchmarks:\n\n- **Care ratio**: 51.9% \u2014 top quartile (benchmark: 52%+). Genuinely strong.\n- **Agency**: 18% \u2014 well above benchmark (<10%). This is the drag.\n- **Staff turnover**: 22% \u2014 within benchmark (<25%) but trending up.\n- **Care minutes**: Averaging 195/day against 200 target. RN minutes are solid, AIN minutes are the gap.\n\nThe story: clinical care delivery is strong, but the workforce model is expensive. Reducing agency by 8 percentage points would improve your operating margin by roughly $45K/year without touching care quality.";
+    return "Against StewartBrown benchmarks:\n\n- **Care ratio**: 51.9% \u2014 top quartile (benchmark: 52%+). Genuinely strong.\n- **Agency**: 18% \u2014 well above benchmark (<10%). This is the drag.\n- **Staff turnover**: 22% \u2014 within benchmark (<25%) but trending up.\n- **Care minutes**: Averaging 210/day against 215 target. RN minutes are solid, AIN minutes are the gap.\n\nThe story: clinical care delivery is strong, but the workforce model is expensive. Reducing agency by 8 percentage points would improve your operating margin by roughly $45K/year without touching care quality.";
   }
 
   // Roster / care minutes
   if (lower.includes("roster") || lower.includes("care minutes") || lower.includes("tonight") || lower.includes("shift")) {
-    return "Tonight\u2019s roster for Grevillea Wing has an AIN gap on the PM shift. If it stays unfilled:\n\n- Care minutes drop to approximately 185/day (below the 200 target)\n- First breach this week \u2014 the previous 4 nights have been compliant\n- RN and EN coverage is fine; it\u2019s specifically the AIN component\n\nOptions: agency confirmation (check with the coordinator by 3pm), or the Wattle Wing float AIN could cover if Wattle\u2019s acuity allows. The second option is better for continuity but needs the DON\u2019s sign-off.";
+    return "Tonight\u2019s roster for Grevillea Wing has an AIN gap on the PM shift. If it stays unfilled:\n\n- Care minutes drop to approximately 200/day (below the 215 target)\n- First breach this week \u2014 the previous 4 nights have been compliant\n- RN and EN coverage is fine; it\u2019s specifically the AIN component\n\nOptions: agency confirmation (check with the coordinator by 3pm), or the Wattle Wing float AIN could cover if Wattle\u2019s acuity allows. The second option is better for continuity but needs the DON\u2019s sign-off.";
   }
 
   // Leadership / governance

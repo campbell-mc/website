@@ -32,14 +32,14 @@ const DOMAIN_CONFIG: Record<Domain, DomainConfig> = {
     title: "Clinical",
     subtitle: "Care quality, minutes & clinical governance",
     stats: [
-      { value: "201", label: "Care mins", suffix: "/200", urgency: "none" },
+      { value: "216", label: "Care mins", suffix: "/215", urgency: "none" },
       { value: "0", label: "Open SIRS", urgency: "none" },
       { value: "98%", label: "RN coverage", urgency: "none" },
       { value: "4", label: "Overdue audits", urgency: "urgent" },
     ],
     agents: ["Sentinel", "Chronicler", "Town Crier"],
     chrisNarrative:
-      "Care minutes are compliant at 201 against the 200 target. RN coverage is confirmed for tonight with no gaps. The falls prevention audit in Wing B is 4 days overdue and needs immediate attention. SIRS register is clear with zero open Category 1 or Category 2 incidents. The Q2 Quality Indicator submission draft is ready for your review with all 14 indicators compiled and annotated.",
+      "Care minutes are compliant at 216 against the 215 target. RN coverage is confirmed for tonight with no gaps. The falls prevention audit in Wing B is 4 days overdue and needs immediate attention. SIRS register is clear with zero open Priority 1 or Priority 2 incidents. The Q2 Quality Indicator submission draft is ready for your review with all 14 indicators compiled and annotated.",
     actions: [
       { severity: "urgent", title: "Falls prevention audit overdue", description: "Wing B bathroom grab rail assessment not completed. 4 days past due date.", penaltyRisk: "Overdue corrective actions are ACQSC audit risk", actionLabel: "Complete audit →", route: "/dashboard/audits" },
       { severity: "routine", title: "Q2 QI submission ready", description: "All 14 indicators compiled. CHRIS draft ready for 20-minute review.", actionLabel: "Review submission →", route: "/dashboard/quality" },

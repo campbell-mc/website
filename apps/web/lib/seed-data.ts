@@ -60,8 +60,8 @@ export const teams = [
   { id: 'TEAM-006', name: 'Waratah Wing', wing: 'Waratah', beds: 16, care_focus: 'high_care', team_leader_role: 'EN' },
   { id: 'TEAM-007', name: 'Flannel Wing Morning', wing: 'Flannel', beds: 17, shift: 'morning', care_focus: 'mixed', team_leader_role: 'RN' },
   { id: 'TEAM-008', name: 'Flannel Wing Evening', wing: 'Flannel', beds: 18, shift: 'evening', care_focus: 'mixed', team_leader_role: 'EN' },
-  { id: 'TEAM-009', name: 'Home Care North', care_type: 'home_care', packages: 24, care_focus: 'hcp_level_3_4' },
-  { id: 'TEAM-010', name: 'Home Care South', care_type: 'home_care', packages: 24, care_focus: 'hcp_level_1_2' },
+  { id: 'TEAM-009', name: 'Home Care North', care_type: 'home_care', packages: 24, care_focus: 'sah_classification_5_8' },
+  { id: 'TEAM-010', name: 'Home Care South', care_type: 'home_care', packages: 24, care_focus: 'sah_classification_1_4' },
 ];
 
 // ============================================================
@@ -177,37 +177,37 @@ export const workforce_monthly = [
 
 export const care_minutes_weekly = [
   // Oct 2025 — generally compliant, some pressure
-  { week: '2025-W40', avg_total: 203, avg_rn: 41.2, avg_ain: 161.8, compliant_days: 6, non_compliant_days: 1, rn_gap_days: 1 },
-  { week: '2025-W41', avg_total: 198, avg_rn: 39.1, avg_ain: 158.9, compliant_days: 4, non_compliant_days: 3, rn_gap_days: 2, note: 'RN sick leave Mon/Tue' },
-  { week: '2025-W42', avg_total: 205, avg_rn: 41.8, avg_ain: 163.2, compliant_days: 7, non_compliant_days: 0, rn_gap_days: 0 },
-  { week: '2025-W43', avg_total: 201, avg_rn: 40.3, avg_ain: 160.7, compliant_days: 7, non_compliant_days: 0, rn_gap_days: 0 },
+  { week: '2025-W40', avg_total: 218, avg_rn: 45.2, avg_ain: 172.8, compliant_days: 6, non_compliant_days: 1, rn_gap_days: 1 },
+  { week: '2025-W41', avg_total: 213, avg_rn: 43.1, avg_ain: 169.9, compliant_days: 4, non_compliant_days: 3, rn_gap_days: 2, note: 'RN sick leave Mon/Tue' },
+  { week: '2025-W42', avg_total: 220, avg_rn: 45.8, avg_ain: 174.2, compliant_days: 7, non_compliant_days: 0, rn_gap_days: 0 },
+  { week: '2025-W43', avg_total: 216, avg_rn: 44.3, avg_ain: 171.7, compliant_days: 7, non_compliant_days: 0, rn_gap_days: 0 },
   // Nov 2025 — more pressure
-  { week: '2025-W44', avg_total: 196, avg_rn: 38.4, avg_ain: 157.6, compliant_days: 3, non_compliant_days: 4, rn_gap_days: 3, note: 'Flu season — multiple call-ins' },
-  { week: '2025-W45', avg_total: 199, avg_rn: 39.8, avg_ain: 159.2, compliant_days: 5, non_compliant_days: 2, rn_gap_days: 1 },
-  { week: '2025-W46', avg_total: 204, avg_rn: 41.1, avg_ain: 162.9, compliant_days: 7, non_compliant_days: 0, rn_gap_days: 0 },
-  { week: '2025-W47', avg_total: 202, avg_rn: 40.6, avg_ain: 161.4, compliant_days: 6, non_compliant_days: 1, rn_gap_days: 0 },
+  { week: '2025-W44', avg_total: 211, avg_rn: 42.4, avg_ain: 168.6, compliant_days: 3, non_compliant_days: 4, rn_gap_days: 3, note: 'Flu season — multiple call-ins' },
+  { week: '2025-W45', avg_total: 214, avg_rn: 43.8, avg_ain: 170.2, compliant_days: 5, non_compliant_days: 2, rn_gap_days: 1 },
+  { week: '2025-W46', avg_total: 219, avg_rn: 45.1, avg_ain: 173.9, compliant_days: 7, non_compliant_days: 0, rn_gap_days: 0 },
+  { week: '2025-W47', avg_total: 217, avg_rn: 44.6, avg_ain: 172.4, compliant_days: 6, non_compliant_days: 1, rn_gap_days: 0 },
   // Dec 2025 — RN exits hit, agency surge
-  { week: '2025-W48', avg_total: 200, avg_rn: 40.1, avg_ain: 159.9, compliant_days: 5, non_compliant_days: 2, rn_gap_days: 1 },
-  { week: '2025-W49', avg_total: 194, avg_rn: 37.8, avg_ain: 156.2, compliant_days: 2, non_compliant_days: 5, rn_gap_days: 4, note: 'First RN exit effective — agency cover partial' },
-  { week: '2025-W50', avg_total: 197, avg_rn: 38.9, avg_ain: 158.1, compliant_days: 3, non_compliant_days: 4, rn_gap_days: 3 },
-  { week: '2025-W51', avg_total: 193, avg_rn: 37.2, avg_ain: 155.8, compliant_days: 2, non_compliant_days: 5, rn_gap_days: 4, note: 'Second RN exit. Christmas period. Agency scarce.' },
-  { week: '2025-W52', avg_total: 196, avg_rn: 38.1, avg_ain: 157.9, compliant_days: 3, non_compliant_days: 4, rn_gap_days: 3 },
+  { week: '2025-W48', avg_total: 215, avg_rn: 44.1, avg_ain: 170.9, compliant_days: 5, non_compliant_days: 2, rn_gap_days: 1 },
+  { week: '2025-W49', avg_total: 209, avg_rn: 41.8, avg_ain: 167.2, compliant_days: 2, non_compliant_days: 5, rn_gap_days: 4, note: 'First RN exit effective — agency cover partial' },
+  { week: '2025-W50', avg_total: 212, avg_rn: 42.9, avg_ain: 169.1, compliant_days: 3, non_compliant_days: 4, rn_gap_days: 3 },
+  { week: '2025-W51', avg_total: 208, avg_rn: 41.2, avg_ain: 166.8, compliant_days: 2, non_compliant_days: 5, rn_gap_days: 4, note: 'Second RN exit. Christmas period. Agency scarce.' },
+  { week: '2025-W52', avg_total: 211, avg_rn: 42.1, avg_ain: 168.9, compliant_days: 3, non_compliant_days: 4, rn_gap_days: 3 },
   // Jan 2026 — most challenging month
-  { week: '2026-W01', avg_total: 191, avg_rn: 36.8, avg_ain: 154.2, compliant_days: 1, non_compliant_days: 6, rn_gap_days: 5, note: 'RN vacancies unfilled. Agency dependency at peak.' },
-  { week: '2026-W02', avg_total: 194, avg_rn: 37.4, avg_ain: 156.6, compliant_days: 2, non_compliant_days: 5, rn_gap_days: 4 },
-  { week: '2026-W03', avg_total: 198, avg_rn: 38.9, avg_ain: 159.1, compliant_days: 4, non_compliant_days: 3, rn_gap_days: 2, note: 'Agency RN becoming more reliable' },
-  { week: '2026-W04', avg_total: 201, avg_rn: 40.2, avg_ain: 160.8, compliant_days: 6, non_compliant_days: 1, rn_gap_days: 1 },
+  { week: '2026-W01', avg_total: 206, avg_rn: 40.8, avg_ain: 165.2, compliant_days: 1, non_compliant_days: 6, rn_gap_days: 5, note: 'RN vacancies unfilled. Agency dependency at peak.' },
+  { week: '2026-W02', avg_total: 209, avg_rn: 41.4, avg_ain: 167.6, compliant_days: 2, non_compliant_days: 5, rn_gap_days: 4 },
+  { week: '2026-W03', avg_total: 213, avg_rn: 42.9, avg_ain: 170.1, compliant_days: 4, non_compliant_days: 3, rn_gap_days: 2, note: 'Agency RN becoming more reliable' },
+  { week: '2026-W04', avg_total: 216, avg_rn: 44.2, avg_ain: 171.8, compliant_days: 6, non_compliant_days: 1, rn_gap_days: 1 },
   // Feb 2026 — improving
-  { week: '2026-W05', avg_total: 203, avg_rn: 41.1, avg_ain: 161.9, compliant_days: 7, non_compliant_days: 0, rn_gap_days: 0, note: 'New RN settled in. Care minutes recovering.' },
-  { week: '2026-W06', avg_total: 199, avg_rn: 39.4, avg_ain: 159.6, compliant_days: 5, non_compliant_days: 2, rn_gap_days: 1 },
-  { week: '2026-W07', avg_total: 204, avg_rn: 41.8, avg_ain: 162.2, compliant_days: 7, non_compliant_days: 0, rn_gap_days: 0 },
-  { week: '2026-W08', avg_total: 207, avg_rn: 42.3, avg_ain: 164.7, compliant_days: 7, non_compliant_days: 0, rn_gap_days: 0 },
+  { week: '2026-W05', avg_total: 218, avg_rn: 45.1, avg_ain: 172.9, compliant_days: 7, non_compliant_days: 0, rn_gap_days: 0, note: 'New RN settled in. Care minutes recovering.' },
+  { week: '2026-W06', avg_total: 214, avg_rn: 43.4, avg_ain: 170.6, compliant_days: 5, non_compliant_days: 2, rn_gap_days: 1 },
+  { week: '2026-W07', avg_total: 219, avg_rn: 45.8, avg_ain: 173.2, compliant_days: 7, non_compliant_days: 0, rn_gap_days: 0 },
+  { week: '2026-W08', avg_total: 222, avg_rn: 46.3, avg_ain: 175.7, compliant_days: 7, non_compliant_days: 0, rn_gap_days: 0 },
   // Mar 2026 — stable, compliant
-  { week: '2026-W09', avg_total: 205, avg_rn: 41.9, avg_ain: 163.1, compliant_days: 7, non_compliant_days: 0, rn_gap_days: 0 },
-  { week: '2026-W10', avg_total: 203, avg_rn: 41.2, avg_ain: 161.8, compliant_days: 7, non_compliant_days: 0, rn_gap_days: 0 },
-  { week: '2026-W11', avg_total: 206, avg_rn: 42.1, avg_ain: 163.9, compliant_days: 7, non_compliant_days: 0, rn_gap_days: 0 },
-  { week: '2026-W12', avg_total: 204, avg_rn: 41.6, avg_ain: 162.4, compliant_days: 7, non_compliant_days: 0, rn_gap_days: 0 },
-  { week: '2026-W13', avg_total: 201, avg_rn: 40.4, avg_ain: 160.6, compliant_days: 6, non_compliant_days: 1, rn_gap_days: 0 },
+  { week: '2026-W09', avg_total: 220, avg_rn: 45.9, avg_ain: 174.1, compliant_days: 7, non_compliant_days: 0, rn_gap_days: 0 },
+  { week: '2026-W10', avg_total: 218, avg_rn: 45.2, avg_ain: 172.8, compliant_days: 7, non_compliant_days: 0, rn_gap_days: 0 },
+  { week: '2026-W11', avg_total: 221, avg_rn: 46.1, avg_ain: 174.9, compliant_days: 7, non_compliant_days: 0, rn_gap_days: 0 },
+  { week: '2026-W12', avg_total: 219, avg_rn: 45.6, avg_ain: 173.4, compliant_days: 7, non_compliant_days: 0, rn_gap_days: 0 },
+  { week: '2026-W13', avg_total: 216, avg_rn: 44.4, avg_ain: 171.6, compliant_days: 6, non_compliant_days: 1, rn_gap_days: 0 },
 ];
 
 // ============================================================
@@ -626,7 +626,7 @@ export const financial_monthly = [
   {
     period: '2025-10', facility_id: 'FAC-001',
     revenue: {
-      annacc_residential: 1847200, hcp_packages: 142800, other: 12400, total: 2002400,
+      annacc_residential: 1847200, support_at_home: 142800, other: 12400, total: 2002400,
       budget: 1988000, variance: 14400, variance_pct: 0.007,
     },
     expenditure: {
@@ -645,7 +645,7 @@ export const financial_monthly = [
   // Nov 2025
   {
     period: '2025-11', facility_id: 'FAC-001',
-    revenue: { annacc_residential: 1839400, hcp_packages: 142800, other: 11200, total: 1993400, budget: 1988000, variance: 5400, variance_pct: 0.003 },
+    revenue: { annacc_residential: 1839400, support_at_home: 142800, other: 11200, total: 1993400, budget: 1988000, variance: 5400, variance_pct: 0.003 },
     expenditure: { direct_care_permanent: 884000, direct_care_agency: 114000, hotel_services: 187000, admin_management: 124000, capital: 22000, total: 1331000, budget: 1318000, variance: -13000 },
     care_ratio: 0.501, // dropping — agency cost up, revenue stable
     labour_cost_per_bed_day: 291.2,
@@ -657,7 +657,7 @@ export const financial_monthly = [
   // Dec 2025 — RN exits impact
   {
     period: '2025-12', facility_id: 'FAC-001',
-    revenue: { annacc_residential: 1831600, hcp_packages: 142800, other: 10800, total: 1985200, budget: 1988000, variance: -2800, variance_pct: -0.001 },
+    revenue: { annacc_residential: 1831600, support_at_home: 142800, other: 10800, total: 1985200, budget: 1988000, variance: -2800, variance_pct: -0.001 },
     expenditure: { direct_care_permanent: 863000, direct_care_agency: 169000, hotel_services: 187000, admin_management: 124000, capital: 22000, total: 1365000, budget: 1318000, variance: -47000 },
     care_ratio: 0.518, // agency surge hurts ratio
     labour_cost_per_bed_day: 304.1,
@@ -671,7 +671,7 @@ export const financial_monthly = [
   // Jan 2026 — worst month
   {
     period: '2026-01', facility_id: 'FAC-001',
-    revenue: { annacc_residential: 1823800, hcp_packages: 142800, other: 11600, total: 1978200, budget: 1988000, variance: -9800, variance_pct: -0.005 },
+    revenue: { annacc_residential: 1823800, support_at_home: 142800, other: 11600, total: 1978200, budget: 1988000, variance: -9800, variance_pct: -0.005 },
     expenditure: { direct_care_permanent: 858000, direct_care_agency: 239000, hotel_services: 187000, admin_management: 124000, capital: 22000, total: 1430000, budget: 1318000, variance: -112000 },
     care_ratio: 0.554, // total care cost / revenue — agency dragging it down
     labour_cost_per_bed_day: 318.7,
@@ -684,7 +684,7 @@ export const financial_monthly = [
   // Feb 2026 — recovering
   {
     period: '2026-02', facility_id: 'FAC-001',
-    revenue: { annacc_residential: 1839400, hcp_packages: 142800, other: 12200, total: 1994400, budget: 1988000, variance: 6400, variance_pct: 0.003 },
+    revenue: { annacc_residential: 1839400, support_at_home: 142800, other: 12200, total: 1994400, budget: 1988000, variance: 6400, variance_pct: 0.003 },
     expenditure: { direct_care_permanent: 871000, direct_care_agency: 196000, hotel_services: 187000, admin_management: 124000, capital: 22000, total: 1400000, budget: 1318000, variance: -82000 },
     care_ratio: 0.535,
     labour_cost_per_bed_day: 308.2,
@@ -697,7 +697,7 @@ export const financial_monthly = [
   // Mar 2026 — stabilising
   {
     period: '2026-03', facility_id: 'FAC-001',
-    revenue: { annacc_residential: 1847200, hcp_packages: 142800, other: 13400, total: 2003400, budget: 1988000, variance: 15400, variance_pct: 0.008 },
+    revenue: { annacc_residential: 1847200, support_at_home: 142800, other: 13400, total: 2003400, budget: 1988000, variance: 15400, variance_pct: 0.008 },
     expenditure: { direct_care_permanent: 879000, direct_care_agency: 161000, hotel_services: 187000, admin_management: 124000, capital: 22000, total: 1373000, budget: 1318000, variance: -55000 },
     care_ratio: 0.519,
     labour_cost_per_bed_day: 299.6,
@@ -715,16 +715,15 @@ export const financial_monthly = [
 // ============================================================
 
 export const compliance_obligations = [
-  // Quality Standards
-  { id: 'OBL-001', framework: 'Aged Care Act 2024', obligation: 'Quality Standard 1 — Consumer Dignity and Choice', status: 'compliant', evidence_current: true, last_reviewed: '2026-03-01', next_review: '2026-09-01' },
-  { id: 'OBL-002', framework: 'Aged Care Act 2024', obligation: 'Quality Standard 2 — Ongoing Assessment and Planning', status: 'compliant', evidence_current: true, last_reviewed: '2026-03-01' },
-  { id: 'OBL-003', framework: 'Aged Care Act 2024', obligation: 'Quality Standard 2.8.2 — Workforce Psychological Safety', status: 'at_risk', evidence_current: false, gap: 'ISO 45003 worker consultation record needs updating — pulse participation data satisfies this requirement. CHRIS can update in 2 minutes.', last_reviewed: '2025-12-01', action_required: 'Update consultation evidence record', action_eta_min: 2 },
-  { id: 'OBL-004', framework: 'Aged Care Act 2024', obligation: 'Quality Standard 3 — Care Environment', status: 'compliant', evidence_current: true },
-  { id: 'OBL-005', framework: 'Aged Care Act 2024', obligation: 'Quality Standard 4 — Services and Supports', status: 'compliant', evidence_current: true },
-  { id: 'OBL-006', framework: 'Aged Care Act 2024', obligation: 'Quality Standard 5 — Clinical Care', status: 'compliant', evidence_current: true, sub_status: { care_minutes: 'compliant_this_month', sirs: 'compliant', medication: 'compliant' } },
-  { id: 'OBL-007', framework: 'Aged Care Act 2024', obligation: 'Quality Standard 6 — Food and Nutrition', status: 'compliant', evidence_current: true },
-  { id: 'OBL-008', framework: 'Aged Care Act 2024', obligation: 'Quality Standard 7 — Residential Community', status: 'compliant', evidence_current: true },
-  { id: 'OBL-009', framework: 'Aged Care Act 2024', obligation: 'Quality Standard 8 — Organisational Governance', status: 'compliant', evidence_current: true },
+  // 7 Strengthened Quality Standards (from 1 November 2025)
+  { id: 'OBL-001', framework: 'Aged Care Act 2024', obligation: 'Standard 1 — The Individual', status: 'compliant', evidence_current: true, last_reviewed: '2026-03-01', next_review: '2026-09-01' },
+  { id: 'OBL-002', framework: 'Aged Care Act 2024', obligation: 'Standard 2 — The Organisation (includes PSH safety)', status: 'compliant', evidence_current: true, last_reviewed: '2026-03-01' },
+  { id: 'OBL-003', framework: 'Aged Care Act 2024', obligation: 'Standard 2 — Workforce Psychological Safety (PSH)', status: 'at_risk', evidence_current: false, gap: 'ISO 45003 worker consultation record needs updating — pulse participation data satisfies this requirement. CHRIS can update in 2 minutes.', last_reviewed: '2025-12-01', action_required: 'Update consultation evidence record', action_eta_min: 2 },
+  { id: 'OBL-004', framework: 'Aged Care Act 2024', obligation: 'Standard 3 — The Care Environment', status: 'compliant', evidence_current: true },
+  { id: 'OBL-005', framework: 'Aged Care Act 2024', obligation: 'Standard 4 — Services and Supports', status: 'compliant', evidence_current: true },
+  { id: 'OBL-006', framework: 'Aged Care Act 2024', obligation: 'Standard 5 — Clinical Care', status: 'compliant', evidence_current: true, sub_status: { care_minutes: 'compliant_this_month', sirs: 'compliant', medication: 'compliant' } },
+  { id: 'OBL-007', framework: 'Aged Care Act 2024', obligation: 'Standard 6 — Food and Nutrition', status: 'compliant', evidence_current: true },
+  { id: 'OBL-008', framework: 'Aged Care Act 2024', obligation: 'Standard 7 — The Residential Community', status: 'compliant', evidence_current: true },
 
   // ISO 45003
   { id: 'OBL-010', framework: 'ISO 45003:2021', obligation: 'Hazard Identification — systematic fortnightly identification across 16 domains', status: 'compliant', evidence_current: true, evidence_cycles: 8, evidence_teams: 8 },
@@ -737,7 +736,7 @@ export const compliance_obligations = [
   { id: 'OBL-015', framework: 'QI Program', obligation: 'Q2 2025-26 QI Submission — due 21 Apr 2026', status: 'pending', evidence_current: true, due_date: '2026-04-21', days_remaining: 9, chris_status: 'draft_ready', action_required: 'DON to review and submit' },
   { id: 'OBL-016', framework: 'QI Program', obligation: 'Q1 2025-26 QI Submission', status: 'compliant', submitted_date: '2026-01-17', gpms_ref: 'GPMS-2026-Q1-00847' },
   { id: 'OBL-017', framework: 'AN-ACC / Care Minutes', obligation: 'Care minutes monthly reporting', status: 'compliant', submitted_date: '2026-04-01', note: 'March 2026 — compliant' },
-  { id: 'OBL-018', framework: 'SIRS', obligation: 'SIRS reporting — all Category 1 within 24h, Category 2 within 30 days', status: 'compliant', ytd_events: 4, all_submitted_on_time: true, avg_days_to_submit: 12.3 },
+  { id: 'OBL-018', framework: 'SIRS', obligation: 'SIRS reporting — Priority 1 within 24h, Priority 2 within 30 days, final report within 60 days', status: 'compliant', ytd_events: 4, all_submitted_on_time: true, avg_days_to_submit: 12.3 },
   { id: 'OBL-019', framework: 'QFR', obligation: 'Q2 2025-26 Quarterly Financial Report', status: 'pending', due_date: '2026-04-21', chris_status: 'assembling', note: 'CHRIS compiling QFR data from TechOne' },
 
   // State WHS
@@ -1546,14 +1545,14 @@ export const ndis_data = {
 export const leave_current = {
   approved: [
     { id: 'L001', worker_role: 'EN' as const, wing: 'Wattle Wing', leave_type: 'sick' as const, start_date: '2026-04-13', end_date: '2026-04-13', days: 1, status: 'approved' as const, creates_gap: false, care_minutes_impact: -11 },
-    { id: 'L002', worker_role: 'RN' as const, wing: 'Wing A', leave_type: 'annual' as const, start_date: '2026-04-18', end_date: '2026-04-22', days: 5, status: 'approved' as const, creates_gap: true, care_minutes_impact: -40 },
+    { id: 'L002', worker_role: 'RN' as const, wing: 'Wing A', leave_type: 'annual' as const, start_date: '2026-04-18', end_date: '2026-04-22', days: 5, status: 'approved' as const, creates_gap: true, care_minutes_impact: -44 },
     { id: 'L003', worker_role: 'AIN' as const, wing: 'Grevillea Wing', leave_type: 'annual' as const, start_date: '2026-04-19', end_date: '2026-04-19', days: 1, status: 'approved' as const, creates_gap: false, care_minutes_impact: -12 },
     { id: 'L004', worker_role: 'AIN' as const, wing: 'Grevillea Wing', leave_type: 'annual' as const, start_date: '2026-04-19', end_date: '2026-04-19', days: 1, status: 'approved' as const, creates_gap: false, care_minutes_impact: -12 },
     { id: 'L005', worker_role: 'AIN' as const, wing: 'Grevillea Wing', leave_type: 'annual' as const, start_date: '2026-04-19', end_date: '2026-04-19', days: 1, status: 'approved' as const, creates_gap: true, care_minutes_impact: -12 },
     { id: 'L006', worker_role: 'AIN' as const, wing: 'Wattle Wing', leave_type: 'training' as const, start_date: '2026-04-21', end_date: '2026-04-21', days: 1, status: 'approved' as const, creates_gap: false, care_minutes_impact: -12 },
   ],
   pending: [
-    { id: 'L007', worker_role: 'RN' as const, wing: 'Night shift', leave_type: 'annual' as const, start_date: '2026-04-25', end_date: '2026-04-25', days: 1, status: 'pending' as const, creates_gap: false, care_minutes_impact: -40, impact_assessment: 'No coverage risk if approved' },
+    { id: 'L007', worker_role: 'RN' as const, wing: 'Night shift', leave_type: 'annual' as const, start_date: '2026-04-25', end_date: '2026-04-25', days: 1, status: 'pending' as const, creates_gap: false, care_minutes_impact: -44, impact_assessment: 'No coverage risk if approved' },
     { id: 'L008', worker_role: 'AIN' as const, wing: 'Wattle Wing', leave_type: 'annual' as const, start_date: '2026-05-03', end_date: '2026-05-07', days: 5, status: 'pending' as const, creates_gap: true, care_minutes_impact: -12, impact_assessment: 'Creates gap on Thursday 7 May afternoon shift' },
   ],
   accrued_liability: { total_dollars: 48000, staff_not_taken_leave_6m: 4, highest_accrual_role: 'RN', highest_accrual_days: 38 },

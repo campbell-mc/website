@@ -42,7 +42,7 @@ export const operationsReport = {
 export const clinicalReport = {
   narrative: `The SIRS Cat 1 notification for the March 3 wrist fracture is due today — the Chronicler draft is ready for your review. This must be submitted before the deadline to avoid $783K penalty exposure. Care minutes have been compliant all week — ${latestCM.avg_total} total, ${latestCM.avg_rn} RN — the strongest sustained period since November. QI_03 (Falls) remains above benchmark for a third consecutive quarter. Convergence detected: 78% of falls occurred on shifts with more than 30% agency coverage — pulse data confirms PSH_08 (Traumatic Exposure) is elevated in the same teams, meaning unfamiliar staff are working alongside emotionally withdrawn permanent staff, and residents are falling through the gaps.`,
   refreshedAt: "2h ago",
-  context: `Care minutes ${latestCM.avg_total >= 200 ? "compliant" : "at risk"} · AlayaCare 2h ago`,
+  context: `Care minutes ${latestCM.avg_total >= 215 ? "compliant" : "at risk"} · AlayaCare 2h ago`,
   signals: [
     { domain: "Clinical", active: true },
     { domain: "Workforce", active: true },

@@ -61,12 +61,15 @@ export const AGED_CARE_KNOWLEDGE = {
   },
 
   care_minutes: {
-    total_minutes_per_resident_day: 200,
-    rn_minutes_per_resident_day: 40,
-    en_can_substitute_rn_pct: 0.10,
+    total_minutes_per_resident_day: 215,       // Updated 1 Oct 2024 (was 200)
+    rn_minutes_per_resident_day: 44,           // Updated 1 Oct 2024 (was 40)
+    en_can_substitute_rn_pct: 0.10,            // Up to 10% of RN target can be EN
     rn_24_7_requirement: true,
-    reporting_frequency: 'monthly',
+    compliance_measured_as: 'monthly_average',  // Not a daily minimum
+    reporting_frequency: 'quarterly_via_qfr',
     reporting_system: 'GPMS',
+    legal_reference: 'Aged Care Rules 2025, section 176-20',
+    audited_performance_statement: true,        // New from 2025-26: externally audited
     an_acc_starting_price_oct_2025: 295.64,
     hotelling_supplement_sep_2025: 22.15,
     funding_linkage_mm1_from: '2026-04-01',
@@ -76,41 +79,38 @@ export const AGED_CARE_KNOWLEDGE = {
   },
 
   sirs: {
+    // Restructured under Aged Care Act 2024 — Priority 1/2 replaces Cat 1/2
+    priority1_notification_hours: 24,
+    priority2_notification_days: 30,
+    final_report_days: 60,                     // NEW: investigation report due within 60 days
+    applies_to: ['residential', 'support_at_home'],  // Extended to SaH from 1 Nov 2025
+    submission_system: 'GPMS',
+    penalty_unit_value: 330,                   // $330 from 7 Nov 2024, next indexation 1 Jul 2026
+    max_civil_penalty_body_corporate: 1650000, // Up to $1.65M for body corporates
+    // 9 reportable incident types (not 5+5 as previously structured)
+    reportable_incident_types: [
+      'unreasonable_use_of_force',
+      'unlawful_sexual_contact_or_inappropriate_sexual_conduct',
+      'psychological_or_emotional_abuse',
+      'unexpected_death',
+      'stealing_or_financial_coercion',
+      'neglect',
+      'inappropriate_use_of_restrictive_practices',
+      'unexplained_absence_from_care',
+      'other_serious_incidents',               // Causing serious injury/harm/risk not covered above
+    ],
+    priority1_criteria: '24h clock starts from when ANY staff member becomes aware — not from when management is informed',
+    chris_alert_thresholds: {
+      p1_hours_remaining_urgent: 6,
+      p1_hours_remaining_warning: 12,
+      p2_days_remaining_urgent: 3,
+      p2_days_remaining_warning: 7,
+      final_report_days_remaining_warning: 14,
+    },
+    // Legacy aliases for backward compatibility with simulation engine
     cat1_notification_hours: 24,
     cat2_notification_days: 30,
-    followup_report_days: 84,
-    max_penalty_per_breach: 783000,
-    submission_system: 'GPMS',
-    cat1_triggers: [
-      'unexpected_death',
-      'missing_resident',
-      'abuse_physical',
-      'abuse_sexual',
-      'abuse_psychological',
-      'abuse_financial',
-      'neglect',
-      'unexplained_serious_injury',
-      'unauthorised_restrictive_practice',
-      'sexual_misconduct_staff',
-      'unexpected_absence_without_consent',
-    ],
-    cat2_triggers: [
-      'deterioration_in_cognitive_function',
-      'significant_weight_loss',
-      'falls_with_injury',
-      'medication_error_with_harm',
-      'wound_deterioration',
-      'transfer_to_hospital',
-      'infection_outbreak',
-      'absconding',
-    ],
-    chris_alert_thresholds: {
-      cat1_hours_remaining_urgent: 6,
-      cat1_hours_remaining_warning: 12,
-      cat2_days_remaining_urgent: 3,
-      cat2_days_remaining_warning: 7,
-      followup_days_remaining_warning: 14,
-    },
+    max_penalty_per_breach: 1650000,
   },
 
   quality_indicators: {
@@ -148,16 +148,17 @@ export const AGED_CARE_KNOWLEDGE = {
   quality_standards: {
     framework: 'Strengthened Aged Care Quality Standards',
     commenced: '2025-11-01',
+    total_standards: 7,  // 7 under new Act (was 8 under old Act)
     standards: {
-      QS1: 'Consumer Dignity and Choice',
-      QS2: 'Ongoing Assessment and Planning',
-      QS3: 'Care Environment',
+      QS1: 'The Individual',                   // Was: Consumer Dignity and Choice
+      QS2: 'The Organisation',                 // Was: Ongoing Assessment and Planning — includes PSH safety (replaces QS 2.8.2)
+      QS3: 'The Care Environment',
       QS4: 'Services and Supports',
       QS5: 'Clinical Care',
-      QS6: 'Food and Nutrition',
-      QS7: 'Residential Community',
-      QS8: 'Organisational Governance',
+      QS6: 'Food and Nutrition',               // NEW standalone standard
+      QS7: 'The Residential Community',        // Was: Feedback and Complaints — restructured
     },
+    psh_obligation_location: 'Standard 2 — The Organisation (governance, workforce, organisational systems)',
   },
 
   financial: {
@@ -217,9 +218,15 @@ export const AGED_CARE_KNOWLEDGE = {
       agency_ain_premium_per_shift: 85,
     },
     penalty_exposures: {
-      sirs_cat1_max: 783000,
+      penalty_unit_value: 330,                            // $330 from 7 Nov 2024
+      s179_corporate_standard: 330000,                    // 1,000 units × $330
+      s179_corporate_serious: 1584000,                    // 4,800 units × $330 (death/serious injury)
+      s180_individual_serious: 165000,                    // 500 units × $330 (responsible person)
+      sirs_max_civil_penalty_corporate: 1650000,          // Up to $1.65M for body corporates
+      code_of_conduct_penalty: 82500,                     // 250 units × $330
       care_minutes_non_compliance_funding_risk: true,
       whs_regulation_max_combined: 1000000,
+      victorian_psh_cat1_corporate: 1817964,
     },
   },
 

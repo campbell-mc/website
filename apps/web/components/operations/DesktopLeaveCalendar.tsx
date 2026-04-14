@@ -16,8 +16,8 @@ const LEAVE_LABELS: Record<string, string> = {
 };
 
 function getCareMinutesColor(m: number) {
-  if (m >= 200) return "#2D7D73";
-  if (m >= 190) return "#D4A017";
+  if (m >= 215) return "#2D7D73";
+  if (m >= 205) return "#D4A017";
   return "#C4704A";
 }
 
@@ -38,11 +38,11 @@ function buildLeaveMap() {
   return map;
 }
 
-// Care minutes projection: 201 base, subtract per leave
+// Care minutes projection: 216 base, subtract per leave
 function projectCareMinutes(leaveItems: { role: string }[]) {
-  let minutes = 201;
+  let minutes = 216;
   for (const l of leaveItems) {
-    if (l.role === "RN") minutes -= 40;
+    if (l.role === "RN") minutes -= 44;
     else if (l.role === "EN") minutes -= 11;
     else minutes -= 12;
   }
@@ -73,7 +73,7 @@ export function DesktopLeaveCalendar() {
   const onLeaveToday = allLeave.filter((l) => l.start_date <= days[0].date && l.end_date >= days[0].date && l.status === "approved").length;
   const approvedNext14 = allLeave.filter((l) => l.status === "approved").length;
   const pendingCount = leave_current.pending.length;
-  const riskDays = days.filter((d) => { const items = leaveMap[d.date]; return items && projectCareMinutes(items) < 200; }).length;
+  const riskDays = days.filter((d) => { const items = leaveMap[d.date]; return items && projectCareMinutes(items) < 215; }).length;
 
   return (
     <div className="px-4 lg:px-6 py-4 lg:py-6 max-w-3xl mx-auto">
@@ -97,7 +97,7 @@ export function DesktopLeaveCalendar() {
       <div className="mb-5">
         <SituationReport
           domain="operations"
-          narrative="Leave coverage is stable this week with one exception: Sunday 19 April has three AINs on approved leave in Grevillea Wing simultaneously — projected care minutes drop to 188, 12 below the 200 regulatory minimum. The Steward has flagged this as the third Sunday in a row with care minutes risk from leave concentration. Two leave requests are pending DON approval — neither creates immediate coverage risk if approved."
+          narrative="Leave coverage is stable this week with one exception: Sunday 19 April has three AINs on approved leave in Grevillea Wing simultaneously — projected care minutes drop to 200, 15 below the 215 regulatory target. The Steward has flagged this as the third Sunday in a row with care minutes risk from leave concentration. Two leave requests are pending DON approval — neither creates immediate coverage risk if approved."
           refreshedAt="1h ago"
           context={`${onLeaveToday} on leave today · ${pendingCount} pending`}
           signals={[{ domain: "Workforce", active: true }, { domain: "Clinical", active: true }, { domain: "Financial", active: false }, { domain: "Governance", active: false }]}
@@ -210,7 +210,7 @@ export function DesktopLeaveCalendar() {
       {riskDays > 0 && (
         <div className="rounded-xl border-l-4 border-l-[#D4A017] bg-[#FFFBF0] border border-border p-4 mb-5">
           <p className="text-sm font-semibold text-foreground mb-1">⚠ 3 AINs on leave same day (Sunday 19 Apr)</p>
-          <p className="text-xs text-muted-foreground mb-2">Grevillea Wing afternoon shift affected · Projected care minutes: 188</p>
+          <p className="text-xs text-muted-foreground mb-2">Grevillea Wing afternoon shift affected · Projected care minutes: 180</p>
           <button onClick={() => router.push("/dashboard/operations/rostering")} className="text-xs font-medium text-[hsl(var(--brand-teal))]">View rostering impact →</button>
         </div>
       )}

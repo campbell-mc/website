@@ -53,7 +53,7 @@ export const BENCHMARKS = {
   depreciation_bed_day: 22.55,     // $/bed/day
 
   // Penalties
-  category_1_penalty_max: 783000,  // $ per offence
+  category_1_penalty_max: 1584000, // s.179 serious failure corporate: 4,800 × $330
   iso_45003_combined_penalty: 1000000, // $1M+ combined WHS + Aged Care Act
 
   // Workforce costs (estimates for turnover calculations)

@@ -48,7 +48,7 @@ export default function BoardPackPage() {
           {
             id: "workforce",
             title: "Workforce Report",
-            content: "Total headcount: 112 (86.4 FTE)\nVacancies: 4 (2 RN, 1 EN, 1 PCA)\nTurnover: 18.2% annualised (prior quarter 24.1%)\nAgency usage: 7.5% of total hours (target <5%)\nCare minutes compliance: 203 min/resident/day (target 200)\n  — RN component: 42 min (target 40)\n\nKey workforce actions:\n• 2 graduate RN positions offered — start dates May 2026\n• Night shift staffing model under review to reduce agency dependency\n• Leadership development program commenced for 6 team leaders\n• Annual mandatory training completion: 94% (target 95%)",
+            content: "Total headcount: 112 (86.4 FTE)\nVacancies: 4 (2 RN, 1 EN, 1 PCA)\nTurnover: 18.2% annualised (prior quarter 24.1%)\nAgency usage: 7.5% of total hours (target <5%)\nCare minutes compliance: 218 min/resident/day (target 215)\n  — RN component: 46 min (target 44)\n\nKey workforce actions:\n• 2 graduate RN positions offered — start dates May 2026\n• Night shift staffing model under review to reduce agency dependency\n• Leadership development program commenced for 6 team leaders\n• Annual mandatory training completion: 94% (target 95%)",
             editable: true,
             required: true,
             type: "textarea",

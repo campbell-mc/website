@@ -45,7 +45,7 @@ export class SimWorld {
       case 'care_minutes_update':
         if (payload.projected_total != null) this.care_minutes.projected_total = payload.projected_total as number;
         if (payload.rn_minutes != null) this.care_minutes.rn_minutes = payload.rn_minutes as number;
-        this.care_minutes.compliant = this.care_minutes.projected_total >= 200 && this.care_minutes.rn_minutes >= 40;
+        this.care_minutes.compliant = this.care_minutes.projected_total >= 215 && this.care_minutes.rn_minutes >= 44;
         break;
       case 'sirs_event':
         if (payload.action === 'add') {
@@ -91,7 +91,7 @@ export class SimWorld {
     if (payload.care_minutes_impact) {
       this.care_minutes.projected_total += payload.care_minutes_impact as number;
       if (payload.rn_impact) this.care_minutes.rn_minutes += payload.rn_impact as number;
-      this.care_minutes.compliant = this.care_minutes.projected_total >= 200 && this.care_minutes.rn_minutes >= 40;
+      this.care_minutes.compliant = this.care_minutes.projected_total >= 215 && this.care_minutes.rn_minutes >= 44;
     }
   }
 

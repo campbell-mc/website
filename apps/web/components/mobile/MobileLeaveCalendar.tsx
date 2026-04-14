@@ -11,8 +11,8 @@ const LEAVE_COLORS: Record<string, string> = {
 };
 
 function getCareMinutesColor(m: number) {
-  if (m >= 200) return "#2D7D73";
-  if (m >= 190) return "#D4A017";
+  if (m >= 215) return "#2D7D73";
+  if (m >= 205) return "#D4A017";
   return "#C4704A";
 }
 
@@ -36,8 +36,8 @@ function buildLeaveMap() {
 }
 
 function projectCareMinutes(items: { role: string }[]) {
-  let m = 201;
-  for (const l of items) { m -= l.role === "RN" ? 40 : l.role === "EN" ? 11 : 12; }
+  let m = 216;
+  for (const l of items) { m -= l.role === "RN" ? 44 : l.role === "EN" ? 11 : 12; }
   return Math.max(m, 0);
 }
 
@@ -97,7 +97,7 @@ export default function MobileLeaveCalendar() {
           <div className="flex gap-2 overflow-x-auto pb-3">
             {days.map((d) => {
               const items = leaveMap[d.date] ?? [];
-              const hasGap = items.length > 0 && projectCareMinutes(items) < 200;
+              const hasGap = items.length > 0 && projectCareMinutes(items) < 215;
               const isSelected = selectedDate === d.date;
               const minutes = items.length > 0 ? projectCareMinutes(items) : null;
 
@@ -140,7 +140,7 @@ export default function MobileLeaveCalendar() {
 
           {/* Selected day detail */}
           {selectedDate && selectedDayData && selectedDayData.length > 0 && (
-            <div className={`rounded-2xl border p-4 mb-4 ${selectedMinutes !== null && selectedMinutes < 200 ? "border-l-4 border-l-[#C4704A] bg-[#FEF7F0] border-gray-100" : "border-gray-100 bg-white"}`}>
+            <div className={`rounded-2xl border p-4 mb-4 ${selectedMinutes !== null && selectedMinutes < 215 ? "border-l-4 border-l-[#C4704A] bg-[#FEF7F0] border-gray-100" : "border-gray-100 bg-white"}`}>
               <div className="flex items-center justify-between mb-3">
                 <p className="text-[15px] font-semibold text-gray-900">
                   {new Date(selectedDate).toLocaleDateString("en-AU", { weekday: "long", day: "numeric", month: "short" })}
@@ -156,7 +156,7 @@ export default function MobileLeaveCalendar() {
                   <span className="text-[12px] text-gray-400 capitalize ml-auto">{item.type}</span>
                 </div>
               ))}
-              {selectedMinutes !== null && selectedMinutes < 200 && (
+              {selectedMinutes !== null && selectedMinutes < 215 && (
                 <button className="w-full py-3 bg-[#1B4332] text-white rounded-xl text-[15px] font-semibold mt-3">Source cover →</button>
               )}
             </div>
@@ -237,7 +237,7 @@ export default function MobileLeaveCalendar() {
           <div className="bg-white rounded-2xl border border-l-4 border-l-[#C4704A] border-gray-100 p-4">
             <p className="text-[13px] font-semibold text-[#C4704A] uppercase tracking-wide mb-1">Care minutes risk</p>
             <p className="text-[15px] font-semibold text-gray-900 mb-1">Sunday 19 Apr — 188 min projected</p>
-            <p className="text-[14px] text-gray-600 leading-relaxed mb-3">3 AINs from Grevillea Wing on annual leave simultaneously. 12 minutes below the 200 minute regulatory minimum.</p>
+            <p className="text-[14px] text-gray-600 leading-relaxed mb-3">3 AINs from Grevillea Wing on annual leave simultaneously. 15 minutes below the 215 minute regulatory target.</p>
             <button className="w-full py-3 bg-[#1B4332] text-white rounded-xl text-[15px] font-semibold">Source cover for Sunday →</button>
           </div>
 

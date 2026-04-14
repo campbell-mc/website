@@ -24,8 +24,8 @@ export default function ClinicalControlCentre() {
       {/* Live status strip */}
       <div className="flex gap-2 mb-4 overflow-x-auto">
         {[
-          { label: "Care Min", value: "186", sub: "/200", color: "text-[hsl(var(--brand-terracotta))]" },
-          { label: "RN", value: "37", sub: "/40", color: "text-[hsl(var(--brand-amber))]" },
+          { label: "Care Min", value: "201", sub: "/215", color: "text-[hsl(var(--brand-terracotta))]" },
+          { label: "RN", value: "41", sub: "/44", color: "text-[hsl(var(--brand-amber))]" },
           { label: "SIRS", value: "1 Cat 1", sub: "6h left", color: "text-[hsl(var(--brand-terracotta))]" },
           { label: "QI", value: "84%", sub: "vs 85%", color: "text-[hsl(var(--brand-amber))]" },
           { label: "Audits", value: "1 due", sub: "overdue", color: "text-[hsl(var(--brand-terracotta))]" },
@@ -61,7 +61,7 @@ export default function ClinicalControlCentre() {
         chris="You're 14 minutes short. Tonight's RN shift is unfilled — that's the gap. CHRIS can generate the agency shift brief now."
         actionLabel="Find agency cover →"
         onAction={() => router.push("/dashboard/care-minutes")}
-        meta="186 actual · 200 target · RN: 37/40 · Day 3 at risk"
+        meta="201 actual · 215 target · RN: 41/44 · Day 3 at risk"
       />
 
       <ActionCard
