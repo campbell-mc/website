@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import ChrisPublicChat from "@/components/ChrisPublicChat";
+import { RoiCalculator } from "@/components/RoiCalculator";
 
 // ─── Agent data ──────────────────────────────────────────────────────────────
 
@@ -518,6 +519,7 @@ export default function LandingPage() {
       <AgentHub />
       <ChrisCoachCTA />
       <ExecutionSection />
+      <RoiCalculator />
       <RolesSection />
       <DemoSection />
       <Footer />
