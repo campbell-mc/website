@@ -474,8 +474,8 @@ export function CHRISConversation({
           if (msg.sender_type === "user") {
             return (
               <div key={msg.id} className="flex justify-end">
-                <div className="max-w-[80%] bg-[#1B4332] text-white rounded-2xl rounded-tr-sm px-4 py-3">
-                  <p className="text-sm leading-relaxed whitespace-pre-wrap">{msg.content}</p>
+                <div className="max-w-[80%] bg-[#1B4332] rounded-2xl rounded-tr-sm px-4 py-3">
+                  <p className="text-sm leading-relaxed whitespace-pre-wrap" style={{ color: "#ffffff" }}>{msg.content}</p>
                 </div>
               </div>
             );
