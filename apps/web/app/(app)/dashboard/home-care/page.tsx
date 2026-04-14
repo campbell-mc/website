@@ -93,8 +93,7 @@ export default function HomeCareDashboard() {
   const router = useRouter();
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6 lg:p-8">
-      <div className="max-w-7xl mx-auto space-y-6">
+    <div className="p-4 lg:p-6 max-w-3xl mx-auto space-y-6">
         {/* Demo role switcher */}
         <div className="bg-[#1B4332] rounded-xl p-3 overflow-hidden">
           <p className="text-[10px] font-semibold uppercase tracking-wider mb-2" style={{ color: "white" }}>Demo — switch role</p>
@@ -120,7 +119,7 @@ export default function HomeCareDashboard() {
               Support at Home
             </span>
           </div>
-          <h1 className="text-[28px] md:text-2xl font-bold text-gray-900">Good morning, Guinevere</h1>
+          <h1 className="text-[28px] font-bold text-gray-900">Good morning, Guinevere</h1>
           <p className="text-sm text-gray-500 mt-1">
             {org.name} · {org.location} · {combined.active_clients} active clients
           </p>
@@ -129,19 +128,19 @@ export default function HomeCareDashboard() {
         {/* Stat Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {statCards.map((card) => (
-            <div key={card.label} className="bg-white rounded-2xl border border-gray-100 p-5">
+            <div key={card.label} className="bg-card rounded-xl border border-border p-5">
               <div className="flex items-center justify-between mb-3">
                 <span className="text-sm font-medium text-gray-500">{card.label}</span>
                 <card.icon className="w-4 h-4 text-gray-400" />
               </div>
-              <p className="text-[28px] md:text-2xl font-bold text-gray-900">{card.value}</p>
+              <p className="text-[28px] font-bold text-gray-900">{card.value}</p>
               <p className="text-xs mt-1" style={{ color: card.color }}>{card.target}</p>
             </div>
           ))}
         </div>
 
         {/* Domain Strip */}
-        <div className="bg-white rounded-2xl border border-gray-100 p-5">
+        <div className="bg-card rounded-xl border border-border p-5">
           <h2 className="text-sm font-semibold text-gray-900 mb-4">Domain Overview</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
             {domains.map((d) => {
@@ -168,7 +167,7 @@ export default function HomeCareDashboard() {
         </div>
 
         {/* Needs Attention */}
-        <div className="bg-white rounded-2xl border border-gray-100 p-5">
+        <div className="bg-card rounded-xl border border-border p-5">
           <h2 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
             <AlertTriangle className="w-4 h-4 text-amber-500" />
             Needs Attention
@@ -195,7 +194,7 @@ export default function HomeCareDashboard() {
         </div>
 
         {/* Financial Snapshot */}
-        <div className="bg-white rounded-2xl border border-gray-100 p-5">
+        <div className="bg-card rounded-xl border border-border p-5">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-sm font-semibold text-gray-900">Financial Snapshot</h2>
             <button
@@ -209,19 +208,18 @@ export default function HomeCareDashboard() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="rounded-xl bg-gray-50 p-4">
               <p className="text-xs text-gray-500 mb-1">Revenue per client per day</p>
-              <p className="text-[22px] md:text-xl font-bold text-gray-900">${financial.revenue_per_client_per_day.toFixed(2)}</p>
+              <p className="text-[28px] font-bold text-gray-900">${financial.revenue_per_client_per_day.toFixed(2)}</p>
             </div>
             <div className="rounded-xl bg-gray-50 p-4">
               <p className="text-xs text-gray-500 mb-1">Care Management</p>
-              <p className="text-[22px] md:text-xl font-bold text-gray-900">{financial.care_management_pct}%</p>
+              <p className="text-[28px] font-bold text-gray-900">{financial.care_management_pct}%</p>
             </div>
             <div className="rounded-xl bg-gray-50 p-4">
               <p className="text-xs text-gray-500 mb-1">EBITDA Return</p>
-              <p className="text-[22px] md:text-xl font-bold text-gray-900">{financial.ebitda_return_pct}%</p>
+              <p className="text-[28px] font-bold text-gray-900">{financial.ebitda_return_pct}%</p>
             </div>
           </div>
         </div>
-      </div>
     </div>
   );
 }

@@ -145,8 +145,7 @@ export default function BenchmarksPage() {
   const router = useRouter();
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6 lg:p-8">
-      <div className="max-w-7xl mx-auto space-y-6">
+    <div className="p-4 lg:p-6 max-w-3xl mx-auto space-y-6">
         {/* Breadcrumb */}
         <button
           onClick={() => router.push("/dashboard/home-care/financial")}
@@ -157,7 +156,7 @@ export default function BenchmarksPage() {
 
         {/* Header */}
         <div>
-          <h1 className="text-[28px] md:text-2xl font-bold text-gray-900">Home Care Benchmarks</h1>
+          <h1 className="text-[28px] font-bold text-gray-900">Home Care Benchmarks</h1>
           <p className="text-sm text-gray-500 mt-1">
             StewartBrown ACFPS FY25 Home Care · 247 providers
           </p>
@@ -166,7 +165,7 @@ export default function BenchmarksPage() {
 
         {/* Categories */}
         {categories.map((cat) => (
-          <div key={cat.title} className="bg-white rounded-2xl border border-gray-100 p-5 space-y-5">
+          <div key={cat.title} className="bg-card rounded-xl border border-border p-5 space-y-5">
             <h2 className="text-sm font-semibold text-gray-900">{cat.title}</h2>
 
             {cat.metrics.map((m) => {
@@ -284,7 +283,6 @@ export default function BenchmarksPage() {
             })}
           </div>
         ))}
-      </div>
     </div>
   );
 }

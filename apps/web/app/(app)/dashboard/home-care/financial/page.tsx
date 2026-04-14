@@ -74,8 +74,7 @@ export default function FinancialDashboardPage() {
   const router = useRouter();
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6 lg:p-8">
-      <div className="max-w-7xl mx-auto space-y-6">
+    <div className="p-4 lg:p-6 max-w-3xl mx-auto space-y-6">
         {/* Header */}
         <div>
           <button
@@ -84,7 +83,7 @@ export default function FinancialDashboardPage() {
           >
             Home Care <ChevronRight className="w-3 h-3" /> Financial
           </button>
-          <h1 className="text-[28px] md:text-2xl font-bold text-gray-900">Financial Dashboard</h1>
+          <h1 className="text-[28px] font-bold text-gray-900">Financial Dashboard</h1>
           <p className="text-sm text-gray-500 mt-1">
             Support at Home · FY2026
           </p>
@@ -95,12 +94,12 @@ export default function FinancialDashboardPage() {
           {statCards.map((card) => {
             const positive = card.delta >= 0;
             return (
-              <div key={card.label} className="bg-white rounded-2xl border border-gray-100 p-5">
+              <div key={card.label} className="bg-card rounded-xl border border-border p-5">
                 <div className="flex items-center justify-between mb-3">
                   <span className="text-sm font-medium text-gray-500">{card.label}</span>
                   <card.icon className="w-4 h-4 text-gray-400" />
                 </div>
-                <p className="text-[28px] md:text-2xl font-bold text-gray-900">{card.value}</p>
+                <p className="text-[28px] font-bold text-gray-900">{card.value}</p>
                 <div className="flex items-center gap-1.5 mt-1">
                   {positive ? (
                     <TrendingUp className="w-3 h-3 text-emerald-500" />
@@ -122,7 +121,7 @@ export default function FinancialDashboardPage() {
         </p>
 
         {/* Oracle Opportunities */}
-        <div className="bg-white rounded-2xl border border-gray-100 border-l-4 border-l-[#1B4332] p-5">
+        <div className="bg-card rounded-xl border border-border border-l-4 border-l-[#1B4332] p-5">
           <div className="flex items-center gap-2 mb-4">
             <Lightbulb className="w-5 h-5" style={{ color: "#D4A017" }} />
             <h2 className="text-sm font-bold text-gray-900">Oracle Opportunities</h2>
@@ -151,7 +150,7 @@ export default function FinancialDashboardPage() {
         </div>
 
         {/* Cost Structure */}
-        <div className="bg-white rounded-2xl border border-gray-100 p-5">
+        <div className="bg-card rounded-xl border border-border p-5">
           <h2 className="text-sm font-semibold text-gray-900 mb-4">Cost Structure</h2>
           <div className="space-y-4">
             {costStructure.map((item) => {
@@ -188,18 +187,18 @@ export default function FinancialDashboardPage() {
         </div>
 
         {/* Revenue / Cost / Unspent Summary */}
-        <div className="bg-white rounded-2xl border border-gray-100 p-5">
+        <div className="bg-card rounded-xl border border-border p-5">
           <h2 className="text-sm font-semibold text-gray-900 mb-4">Month to Date Summary</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="rounded-xl bg-gray-50 p-4">
               <p className="text-xs text-gray-500 mb-1">Revenue MTD</p>
-              <p className="text-[22px] md:text-xl font-bold text-gray-900">
+              <p className="text-[28px] font-bold text-gray-900">
                 ${(financial.total_revenue_mtd / 1000000).toFixed(2)}M
               </p>
             </div>
             <div className="rounded-xl bg-gray-50 p-4">
               <p className="text-xs text-gray-500 mb-1">Cost MTD</p>
-              <p className="text-[22px] md:text-xl font-bold text-gray-900">
+              <p className="text-[28px] font-bold text-gray-900">
                 ${(financial.total_cost_mtd / 1000000).toFixed(2)}M
               </p>
             </div>
@@ -211,7 +210,6 @@ export default function FinancialDashboardPage() {
             </div>
           </div>
         </div>
-      </div>
     </div>
   );
 }

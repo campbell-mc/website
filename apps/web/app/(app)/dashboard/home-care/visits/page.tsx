@@ -28,8 +28,7 @@ export default function VisitCompliancePage() {
   const router = useRouter();
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6 lg:p-8">
-      <div className="max-w-7xl mx-auto space-y-6">
+    <div className="p-4 lg:p-6 max-w-3xl mx-auto space-y-6">
         {/* Header */}
         <div>
           <button
@@ -38,7 +37,7 @@ export default function VisitCompliancePage() {
           >
             Home Care <ChevronRight className="w-3 h-3" /> Visits
           </button>
-          <h1 className="text-[28px] md:text-2xl font-bold text-gray-900">Visit Compliance</h1>
+          <h1 className="text-[28px] font-bold text-gray-900">Visit Compliance</h1>
           <p className="text-sm text-gray-500 mt-1">
             Knights of the Holy Grail · AlayaCare
           </p>
@@ -47,19 +46,19 @@ export default function VisitCompliancePage() {
         {/* Stat Cards */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {statCards.map((card) => (
-            <div key={card.label} className="bg-white rounded-2xl border border-gray-100 p-5">
+            <div key={card.label} className="bg-card rounded-xl border border-border p-5">
               <div className="flex items-center justify-between mb-3">
                 <span className="text-sm font-medium text-gray-500">{card.label}</span>
                 <card.icon className="w-4 h-4" style={{ color: card.color }} />
               </div>
-              <p className="text-[28px] md:text-2xl font-bold text-gray-900">{card.value}</p>
+              <p className="text-[28px] font-bold text-gray-900">{card.value}</p>
               <p className="text-xs text-gray-500 mt-1">of {visits.scheduled} scheduled</p>
             </div>
           ))}
         </div>
 
         {/* Lone Worker Safety Alert */}
-        <div className="bg-white rounded-2xl border border-gray-100 border-l-4 border-l-[#C4704A] p-5" style={{ background: "rgba(196,112,74,0.04)" }}>
+        <div className="bg-card rounded-xl border border-border border-l-4 border-l-[#C4704A] p-5" style={{ background: "rgba(196,112,74,0.04)" }}>
           <div className="flex items-center gap-2 mb-4">
             <Shield className="w-5 h-5 text-[#C4704A]" />
             <h2 className="text-sm font-bold text-gray-900">Lone Worker Safety Alert</h2>
@@ -107,29 +106,29 @@ export default function VisitCompliancePage() {
         </div>
 
         {/* This Week Performance */}
-        <div className="bg-white rounded-2xl border border-gray-100 p-5">
+        <div className="bg-card rounded-xl border border-border p-5">
           <h2 className="text-sm font-semibold text-gray-900 mb-4">This Week Performance</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="rounded-xl bg-gray-50 p-4">
               <p className="text-xs text-gray-500 mb-1">Visit Compliance</p>
-              <p className="text-[22px] md:text-xl font-bold text-gray-900">{metrics.visit_compliance_pct}%</p>
+              <p className="text-[28px] font-bold text-gray-900">{metrics.visit_compliance_pct}%</p>
               <p className="text-xs mt-1" style={{ color: "#D4A017" }}>Target 97%</p>
             </div>
             <div className="rounded-xl bg-gray-50 p-4">
               <p className="text-xs text-gray-500 mb-1">Travel Time</p>
-              <p className="text-[22px] md:text-xl font-bold text-gray-900">{metrics.travel_time_pct}%</p>
+              <p className="text-[28px] font-bold text-gray-900">{metrics.travel_time_pct}%</p>
               <p className="text-xs text-gray-500 mt-1">of total visit time</p>
             </div>
             <div className="rounded-xl bg-gray-50 p-4">
               <p className="text-xs text-gray-500 mb-1">Avg Visit Duration</p>
-              <p className="text-[22px] md:text-xl font-bold text-gray-900">64 min</p>
+              <p className="text-[28px] font-bold text-gray-900">64 min</p>
               <p className="text-xs text-gray-500 mt-1">scheduled avg 60 min</p>
             </div>
           </div>
         </div>
 
         {/* By Coordinator */}
-        <div className="bg-white rounded-2xl border border-gray-100 p-5">
+        <div className="bg-card rounded-xl border border-border p-5">
           <h2 className="text-sm font-semibold text-gray-900 mb-4">By Coordinator</h2>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
@@ -184,7 +183,6 @@ export default function VisitCompliancePage() {
             </table>
           </div>
         </div>
-      </div>
     </div>
   );
 }

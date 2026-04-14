@@ -33,8 +33,7 @@ export default function TrainingCompliancePage() {
   const router = useRouter();
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6 lg:p-8">
-      <div className="max-w-7xl mx-auto space-y-6">
+    <div className="p-4 lg:p-6 max-w-3xl mx-auto space-y-6">
         {/* Breadcrumb */}
         <button
           onClick={() => router.push("/dashboard/home-care/workforce")}
@@ -45,7 +44,7 @@ export default function TrainingCompliancePage() {
 
         {/* Header */}
         <div>
-          <h1 className="text-[28px] md:text-2xl font-bold text-gray-900">Training Compliance</h1>
+          <h1 className="text-[28px] font-bold text-gray-900">Training Compliance</h1>
           <p className="text-sm text-gray-500 mt-1">
             Knights of the Holy Grail · Home Care · Camelot and Avalon
           </p>
@@ -53,17 +52,17 @@ export default function TrainingCompliancePage() {
 
         {/* 3 Stat Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="bg-white rounded-2xl border border-gray-100 p-5">
+          <div className="bg-card rounded-xl border border-border p-5">
             <p className="text-sm font-medium text-gray-500 mb-1">Overall Compliance</p>
             <p className="text-3xl font-bold" style={{ color: amber }}>88%</p>
             <p className="text-xs text-gray-500 mt-1">mandatory training current</p>
           </div>
-          <div className="bg-white rounded-2xl border border-gray-100 p-5">
+          <div className="bg-card rounded-xl border border-border p-5">
             <p className="text-sm font-medium text-gray-500 mb-1">Fully Current</p>
             <p className="text-3xl font-bold" style={{ color: teal }}>72 / 89</p>
             <p className="text-xs text-gray-500 mt-1">workers with all modules complete</p>
           </div>
-          <div className="bg-white rounded-2xl border border-gray-100 p-5">
+          <div className="bg-card rounded-xl border border-border p-5">
             <p className="text-sm font-medium text-gray-500 mb-1">Workers with Gaps</p>
             <p className="text-3xl font-bold" style={{ color: terracotta }}>17</p>
             <p className="text-xs text-gray-500 mt-1">one or more modules overdue</p>
@@ -93,7 +92,7 @@ export default function TrainingCompliancePage() {
         </div>
 
         {/* Training Types */}
-        <div className="bg-white rounded-2xl border border-gray-100 p-5">
+        <div className="bg-card rounded-xl border border-border p-5">
           <h2 className="text-sm font-semibold text-gray-900 mb-4">
             Mandatory Training Modules — Sorted by Compliance
           </h2>
@@ -122,7 +121,7 @@ export default function TrainingCompliancePage() {
         </div>
 
         {/* Credentials */}
-        <div className="bg-white rounded-2xl border border-gray-100 p-5">
+        <div className="bg-card rounded-xl border border-border p-5">
           <h2 className="text-sm font-semibold text-gray-900 mb-4">Credential Status</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {/* WWVP */}
@@ -154,7 +153,6 @@ export default function TrainingCompliancePage() {
             </div>
           </div>
         </div>
-      </div>
     </div>
   );
 }

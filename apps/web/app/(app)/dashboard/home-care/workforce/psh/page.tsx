@@ -89,8 +89,7 @@ export default function PSHDashboardPage() {
   const router = useRouter();
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6 lg:p-8">
-      <div className="max-w-7xl mx-auto space-y-6">
+    <div className="p-4 lg:p-6 max-w-3xl mx-auto space-y-6">
         {/* Breadcrumb */}
         <button
           onClick={() => router.push("/dashboard/home-care/workforce")}
@@ -108,7 +107,7 @@ export default function PSHDashboardPage() {
             K
           </div>
           <div>
-            <h1 className="text-[28px] md:text-2xl font-bold text-gray-900">
+            <h1 className="text-[28px] font-bold text-gray-900">
               People, Safety &amp; Happiness — Home Care
             </h1>
             <p className="text-sm text-gray-500">
@@ -119,7 +118,7 @@ export default function PSHDashboardPage() {
 
         {/* 3 Stat Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="bg-white rounded-2xl border border-gray-100 p-5">
+          <div className="bg-card rounded-xl border border-border p-5">
             <p className="text-sm font-medium text-gray-500 mb-1">Composite Score</p>
             <div className="flex items-baseline gap-2">
               <p className="text-3xl font-bold" style={{ color: amber }}>3.1</p>
@@ -129,12 +128,12 @@ export default function PSHDashboardPage() {
             </div>
             <p className="text-xs text-gray-500 mt-1">out of 5.0</p>
           </div>
-          <div className="bg-white rounded-2xl border border-gray-100 p-5">
+          <div className="bg-card rounded-xl border border-border p-5">
             <p className="text-sm font-medium text-gray-500 mb-1">Participation</p>
             <p className="text-3xl font-bold" style={{ color: teal }}>81%</p>
             <p className="text-xs text-gray-500 mt-1">72 of 89 workers responded</p>
           </div>
-          <div className="bg-white rounded-2xl border border-gray-100 p-5">
+          <div className="bg-card rounded-xl border border-border p-5">
             <p className="text-sm font-medium text-gray-500 mb-1">Elevated Domains</p>
             <p className="text-3xl font-bold" style={{ color: terracotta }}>6</p>
             <p className="text-xs text-gray-500 mt-1">scoring below 3.0</p>
@@ -156,7 +155,7 @@ export default function PSHDashboardPage() {
         <div className="space-y-4">
           <h2 className="text-lg font-semibold text-gray-900">Elevated Domain Details</h2>
           {elevatedDomains.map((d) => (
-            <div key={d.id} className="bg-white rounded-2xl border border-gray-100 p-5 space-y-3">
+            <div key={d.id} className="bg-card rounded-xl border border-border p-5 space-y-3">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <span
@@ -186,7 +185,7 @@ export default function PSHDashboardPage() {
         </div>
 
         {/* All 16 Domains */}
-        <div className="bg-white rounded-2xl border border-gray-100 p-5">
+        <div className="bg-card rounded-xl border border-border p-5">
           <h2 className="text-sm font-semibold text-gray-900 mb-4">All 16 Domains — Sorted by Score</h2>
           <div className="space-y-2.5">
             {allDomains.map((d) => (
@@ -212,7 +211,7 @@ export default function PSHDashboardPage() {
         </div>
 
         {/* By Service */}
-        <div className="bg-white rounded-2xl border border-gray-100 p-5">
+        <div className="bg-card rounded-xl border border-border p-5">
           <h2 className="text-sm font-semibold text-gray-900 mb-4">By Service</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {serviceComparison.map((svc) => (
@@ -241,7 +240,6 @@ export default function PSHDashboardPage() {
             ))}
           </div>
         </div>
-      </div>
     </div>
   );
 }

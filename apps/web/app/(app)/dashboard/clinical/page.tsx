@@ -3,53 +3,12 @@ import { useMobile } from "@/lib/hooks/useMobile";
 import { MobileDomainScreen } from "@/components/mobile/MobileDomainScreen";
 
 import { useRouter } from "next/navigation";
-import { ChevronLeft, Mic, AlertTriangle, Activity, BarChart2, Shield, CheckCircle, FileText, MoreHorizontal, Sparkles } from "lucide-react";
-import { ChrisAvatar } from "@/components/chris/ChrisAvatar";
+import { AlertTriangle, Activity, BarChart2, Shield, CheckCircle, FileText } from "lucide-react";
+import { ActionCard } from "@/components/dashboard/ActionCard";
+import { PageHeader } from "@/components/dashboard/PageHeader";
 import { SituationReport } from "@/components/chris/SituationReport";
 import { AgentPulse } from "@/components/chris/AgentPulse";
 import { clinicalReport } from "@/lib/chris/situation-reports";
-
-// ============================================================================
-// CLINICAL CONTROL CENTRE
-// Actions front and centre. Sub-features are navigation, not where you act.
-// ============================================================================
-
-function ActionCard({ urgency, icon, title, chris, actionLabel, onAction, deadline, meta }: {
-  urgency: "critical" | "warning" | "info" | "positive";
-  icon: React.ReactNode; title: string; chris: string; actionLabel: string;
-  onAction: () => void; deadline?: string; meta?: string;
-}) {
-  const styles = {
-    critical: { border: "border-l-[hsl(var(--brand-terracotta))]", bg: "rgba(196,112,74,0.06)", shadow: "0 4px 24px rgba(0,0,0,0.10)" },
-    warning: { border: "border-l-[hsl(var(--brand-amber))]", bg: "rgba(212,160,23,0.06)", shadow: "0 4px 24px rgba(0,0,0,0.10)" },
-    info: { border: "border-l-[hsl(var(--brand-forest))]", bg: "", shadow: "" },
-    positive: { border: "border-l-[hsl(var(--brand-teal))]", bg: "", shadow: "" },
-  }[urgency];
-
-  return (
-    <div className={`rounded-xl p-4 border border-border border-l-4 ${styles.border} mb-3`} style={{ background: styles.bg || "hsl(var(--card))", boxShadow: styles.shadow || undefined }}>
-      <div className="flex items-start gap-3">
-        <div className="mt-0.5 shrink-0">{icon}</div>
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center justify-between mb-1">
-            <p className="text-sm font-semibold text-foreground">{title}</p>
-            {deadline && <span className="text-[10px] text-muted-foreground font-mono shrink-0">{deadline}</span>}
-          </div>
-          <p className="text-xs text-muted-foreground leading-relaxed mb-2">{chris}</p>
-          {meta && <p className="text-[10px] text-muted-foreground/60 mb-2">{meta}</p>}
-          <div className="flex items-center gap-2">
-            <button onClick={onAction} className="text-xs font-medium px-3 py-2 rounded-lg bg-primary text-primary-foreground hover:opacity-90">
-              {actionLabel}
-            </button>
-            <button className="text-xs text-muted-foreground hover:text-foreground p-1.5 rounded-lg hover:bg-muted transition-colors">
-              <MoreHorizontal className="w-4 h-4" />
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 export default function ClinicalControlCentre() {
   const mobile = useMobile();
@@ -60,20 +19,7 @@ export default function ClinicalControlCentre() {
   return (
     <div className="p-4 lg:p-6 max-w-3xl mx-auto">
       {/* Header */}
-      <div className="flex items-center justify-between mb-5">
-        <div className="flex items-center gap-2">
-          <button onClick={() => router.push("/dashboard")} className="p-1 -ml-1 hover:bg-muted rounded-lg">
-            <ChevronLeft className="w-5 h-5 text-foreground" />
-          </button>
-          <div>
-            <p className="text-[28px] font-bold text-foreground tracking-tight leading-tight">Clinical Control Centre</p>
-            <p className="text-[10px] text-muted-foreground">The Holy Grail Bowral</p>
-          </div>
-        </div>
-        <button className="flex items-center gap-1.5 text-xs font-medium px-3 py-2 rounded-lg border border-border text-foreground hover:bg-muted">
-          <Mic className="w-3.5 h-3.5" /> Ask CHRIS
-        </button>
-      </div>
+      <PageHeader title="Clinical Control Centre" subtitle="The Holy Grail Bowral" />
 
       {/* Live status strip */}
       <div className="flex gap-2 mb-4 overflow-x-auto">

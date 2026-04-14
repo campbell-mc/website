@@ -59,8 +59,7 @@ export default function BriefingPage() {
   const router = useRouter();
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6 lg:p-8">
-      <div className="max-w-7xl mx-auto space-y-6">
+    <div className="p-4 lg:p-6 max-w-3xl mx-auto space-y-6">
         {/* Breadcrumb */}
         <button
           onClick={() => router.push("/dashboard/home-care")}
@@ -80,7 +79,7 @@ export default function BriefingPage() {
             <span className="text-white font-bold text-sm">C</span>
           </div>
           <div>
-            <h1 className="text-[28px] md:text-2xl font-bold text-gray-900">Morning Briefing</h1>
+            <h1 className="text-[28px] font-bold text-gray-900">Morning Briefing</h1>
             <div className="flex items-center gap-2 text-sm text-gray-500">
               <span>{dateStr}</span>
               <span className="text-gray-300">·</span>
@@ -112,7 +111,7 @@ export default function BriefingPage() {
           {actions.map((a) => (
             <div
               key={a.priority}
-              className="bg-white rounded-2xl border border-gray-100 p-5 space-y-3"
+              className="bg-card rounded-xl border border-border p-5 space-y-3"
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
@@ -148,7 +147,7 @@ export default function BriefingPage() {
         </div>
 
         {/* Service Snapshot */}
-        <div className="bg-white rounded-2xl border border-gray-100 p-5">
+        <div className="bg-card rounded-xl border border-border p-5">
           <h2 className="text-sm font-semibold text-gray-900 mb-4">Service Snapshot — Today</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {serviceSnapshot.map((svc) => (
@@ -175,7 +174,6 @@ export default function BriefingPage() {
             ))}
           </div>
         </div>
-      </div>
     </div>
   );
 }

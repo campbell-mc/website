@@ -86,8 +86,7 @@ export default function ClientIntelligencePage() {
   const router = useRouter();
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6 lg:p-8">
-      <div className="max-w-7xl mx-auto space-y-6">
+    <div className="p-4 lg:p-6 max-w-3xl mx-auto space-y-6">
         {/* Header */}
         <div>
           <button
@@ -96,7 +95,7 @@ export default function ClientIntelligencePage() {
           >
             Home Care <ChevronRight className="w-3 h-3" /> Clients
           </button>
-          <h1 className="text-[28px] md:text-2xl font-bold text-gray-900">Client Intelligence</h1>
+          <h1 className="text-[28px] font-bold text-gray-900">Client Intelligence</h1>
           <p className="text-sm text-gray-500 mt-1">
             {combined.active_clients} active clients
           </p>
@@ -105,19 +104,19 @@ export default function ClientIntelligencePage() {
         {/* Stat Cards */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {statCards.map((card) => (
-            <div key={card.label} className="bg-white rounded-2xl border border-gray-100 p-5">
+            <div key={card.label} className="bg-card rounded-xl border border-border p-5">
               <div className="flex items-center justify-between mb-3">
                 <span className="text-sm font-medium text-gray-500">{card.label}</span>
                 <card.icon className="w-4 h-4" style={{ color: card.color }} />
               </div>
-              <p className="text-[28px] md:text-2xl font-bold text-gray-900">{card.value}</p>
+              <p className="text-[28px] font-bold text-gray-900">{card.value}</p>
               <p className="text-xs mt-1" style={{ color: card.color }}>{card.sub}</p>
             </div>
           ))}
         </div>
 
         {/* High Risk Clients */}
-        <div className="bg-white rounded-2xl border border-gray-100 p-5">
+        <div className="bg-card rounded-xl border border-border p-5">
           <div className="flex items-center gap-2 mb-4">
             <ShieldAlert className="w-4 h-4 text-[#C4704A]" />
             <h2 className="text-sm font-semibold text-gray-900">High Risk Clients</h2>
@@ -163,7 +162,7 @@ export default function ClientIntelligencePage() {
         </div>
 
         {/* Care Plan Currency */}
-        <div className="bg-white rounded-2xl border border-gray-100 p-5">
+        <div className="bg-card rounded-xl border border-border p-5">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-sm font-semibold text-gray-900">Care Plan Currency</h2>
             <span className="text-xs font-medium" style={{ color: "#D4A017" }}>
@@ -191,14 +190,14 @@ export default function ClientIntelligencePage() {
         </div>
 
         {/* Client Satisfaction */}
-        <div className="bg-white rounded-2xl border border-gray-100 p-5">
+        <div className="bg-card rounded-xl border border-border p-5">
           <div className="flex items-center gap-2 mb-4">
             <Heart className="w-4 h-4 text-[#2D7D73]" />
             <h2 className="text-sm font-semibold text-gray-900">Client Satisfaction</h2>
           </div>
           <div className="flex items-end gap-4">
             <div>
-              <p className="text-[28px] md:text-3xl font-bold text-gray-900">{metrics.client_satisfaction}</p>
+              <p className="text-[28px] font-bold text-gray-900">{metrics.client_satisfaction}</p>
               <p className="text-xs text-gray-500">/100</p>
             </div>
             <div className="flex items-center gap-1 mb-1">
@@ -218,7 +217,6 @@ export default function ClientIntelligencePage() {
             <span>100</span>
           </div>
         </div>
-      </div>
     </div>
   );
 }

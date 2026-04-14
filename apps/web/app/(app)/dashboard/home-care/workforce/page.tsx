@@ -102,8 +102,7 @@ export default function WorkforcePage() {
   const router = useRouter();
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6 lg:p-8">
-      <div className="max-w-7xl mx-auto space-y-6">
+    <div className="p-4 lg:p-6 max-w-3xl mx-auto space-y-6">
         {/* Breadcrumb */}
         <button
           onClick={() => router.push("/dashboard/home-care")}
@@ -114,7 +113,7 @@ export default function WorkforcePage() {
 
         {/* Header */}
         <div>
-          <h1 className="text-[28px] md:text-2xl font-bold text-gray-900">
+          <h1 className="text-[28px] font-bold text-gray-900">
             Workforce Control Centre
           </h1>
           <p className="text-sm text-gray-500 mt-1">
@@ -125,19 +124,19 @@ export default function WorkforcePage() {
         {/* 4 Stat Cards */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {statCards.map((card) => (
-            <div key={card.label} className="bg-white rounded-2xl border border-gray-100 p-5">
+            <div key={card.label} className="bg-card rounded-xl border border-border p-5">
               <div className="flex items-center justify-between mb-3">
                 <span className="text-sm font-medium text-gray-500">{card.label}</span>
                 <card.icon className="w-4 h-4" style={{ color: card.color }} />
               </div>
-              <p className="text-[28px] md:text-2xl font-bold text-gray-900">{card.value}</p>
+              <p className="text-[28px] font-bold text-gray-900">{card.value}</p>
               <p className="text-xs text-gray-500 mt-1">{card.sub}</p>
             </div>
           ))}
         </div>
 
         {/* Keeper Signals */}
-        <div className="bg-white rounded-2xl border border-gray-100 p-5">
+        <div className="bg-card rounded-xl border border-border p-5">
           <div className="flex items-center gap-3 mb-4">
             <div
               className="w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm"
@@ -173,7 +172,7 @@ export default function WorkforcePage() {
         </div>
 
         {/* By Service Table */}
-        <div className="bg-white rounded-2xl border border-gray-100 p-5">
+        <div className="bg-card rounded-xl border border-border p-5">
           <h2 className="text-sm font-semibold text-gray-900 mb-4">By Service</h2>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
@@ -210,7 +209,7 @@ export default function WorkforcePage() {
         </div>
 
         {/* PSH by Coordinator */}
-        <div className="bg-white rounded-2xl border border-gray-100 p-5">
+        <div className="bg-card rounded-xl border border-border p-5">
           <h2 className="text-sm font-semibold text-gray-900 mb-4">PSH by Coordinator</h2>
           <div className="space-y-3">
             {coordinators.map((c) => (
@@ -235,7 +234,7 @@ export default function WorkforcePage() {
         </div>
 
         {/* Credentials */}
-        <div className="bg-white rounded-2xl border border-gray-100 p-5">
+        <div className="bg-card rounded-xl border border-border p-5">
           <h2 className="text-sm font-semibold text-gray-900 mb-4">Credentials &amp; Compliance</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {/* WWVP */}
@@ -275,7 +274,7 @@ export default function WorkforcePage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <button
             onClick={() => router.push("/dashboard/home-care/workforce/psh")}
-            className="bg-white rounded-2xl border border-gray-100 p-5 flex items-center justify-between hover:shadow-sm transition-all text-left"
+            className="bg-card rounded-xl border border-border p-5 flex items-center justify-between hover:shadow-sm transition-all text-left"
           >
             <div className="flex items-center gap-3">
               <div
@@ -294,7 +293,7 @@ export default function WorkforcePage() {
 
           <button
             onClick={() => router.push("/dashboard/home-care/workforce/training")}
-            className="bg-white rounded-2xl border border-gray-100 p-5 flex items-center justify-between hover:shadow-sm transition-all text-left"
+            className="bg-card rounded-xl border border-border p-5 flex items-center justify-between hover:shadow-sm transition-all text-left"
           >
             <div className="flex items-center gap-3">
               <div
@@ -311,7 +310,6 @@ export default function WorkforcePage() {
             <ArrowRight className="w-5 h-5 text-gray-400" />
           </button>
         </div>
-      </div>
     </div>
   );
 }

@@ -52,8 +52,7 @@ export default function PackageIntelligencePage() {
   const router = useRouter();
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6 lg:p-8">
-      <div className="max-w-7xl mx-auto space-y-6">
+    <div className="p-4 lg:p-6 max-w-3xl mx-auto space-y-6">
         {/* Header */}
         <div>
           <button
@@ -62,7 +61,7 @@ export default function PackageIntelligencePage() {
           >
             Home Care <ChevronRight className="w-3 h-3" /> Packages
           </button>
-          <h1 className="text-[28px] md:text-2xl font-bold text-gray-900">Package Intelligence</h1>
+          <h1 className="text-[28px] font-bold text-gray-900">Package Intelligence</h1>
           <p className="text-sm text-gray-500 mt-1">
             Support at Home · {combined.active_clients} active clients
           </p>
@@ -71,19 +70,19 @@ export default function PackageIntelligencePage() {
         {/* Stat Cards */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {statCards.map((card) => (
-            <div key={card.label} className="bg-white rounded-2xl border border-gray-100 p-5">
+            <div key={card.label} className="bg-card rounded-xl border border-border p-5">
               <div className="flex items-center justify-between mb-3">
                 <span className="text-sm font-medium text-gray-500">{card.label}</span>
                 <card.icon className="w-4 h-4" style={{ color: card.color }} />
               </div>
-              <p className="text-[28px] md:text-2xl font-bold text-gray-900">{card.value}</p>
+              <p className="text-[28px] font-bold text-gray-900">{card.value}</p>
               <p className="text-xs mt-1" style={{ color: card.color }}>{card.sub}</p>
             </div>
           ))}
         </div>
 
         {/* Oracle Underspend Risk Alert */}
-        <div className="bg-white rounded-2xl border border-gray-100 border-l-4 border-l-[#D4A017] p-5" style={{ background: "rgba(212,160,23,0.04)" }}>
+        <div className="bg-card rounded-xl border border-border border-l-4 border-l-[#D4A017] p-5" style={{ background: "rgba(212,160,23,0.04)" }}>
           <div className="flex items-center gap-2 mb-3">
             <AlertTriangle className="w-5 h-5 text-[#D4A017]" />
             <h2 className="text-sm font-bold text-gray-900">Oracle Underspend Risk</h2>
@@ -107,7 +106,7 @@ export default function PackageIntelligencePage() {
         </div>
 
         {/* Utilisation by Service Category */}
-        <div className="bg-white rounded-2xl border border-gray-100 p-5">
+        <div className="bg-card rounded-xl border border-border p-5">
           <h2 className="text-sm font-semibold text-gray-900 mb-4">Utilisation by Service Category</h2>
           <div className="space-y-4">
             {packages.by_service_category.map((cat) => (
@@ -139,7 +138,7 @@ export default function PackageIntelligencePage() {
         </div>
 
         {/* Quarterly Budget Statements */}
-        <div className="bg-white rounded-2xl border border-gray-100 p-5">
+        <div className="bg-card rounded-xl border border-border p-5">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-sm font-semibold text-gray-900">Quarterly Budget Statements</h2>
             <span className="text-xs text-gray-500">Q3 FY2026</span>
@@ -164,7 +163,6 @@ export default function PackageIntelligencePage() {
             </div>
           </div>
         </div>
-      </div>
     </div>
   );
 }

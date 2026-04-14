@@ -3,8 +3,10 @@ import { useMobile } from "@/lib/hooks/useMobile";
 import { MobileDomainScreen } from "@/components/mobile/MobileDomainScreen";
 
 import { useRouter } from "next/navigation";
-import { ChevronLeft, ChevronRight, Mic, DollarSign, AlertTriangle, FileText, MoreHorizontal, CheckCircle } from "lucide-react";
+import { ChevronRight, DollarSign, AlertTriangle, FileText, CheckCircle } from "lucide-react";
 import { ChrisAvatar } from "@/components/chris/ChrisAvatar";
+import { ActionCard } from "@/components/dashboard/ActionCard";
+import { PageHeader } from "@/components/dashboard/PageHeader";
 import { financial_monthly, facility } from "@/lib/seed-data";
 import { PortfolioFinancialScorecard } from "@/components/financial/PortfolioFinancialScorecard";
 import { SituationReport } from "@/components/chris/SituationReport";
@@ -19,33 +21,6 @@ const latestRevVar = Math.round(latest.revenue.variance_pct * 1000) / 10;
 const latestCareRatio = Math.round(latest.care_ratio * 1000) / 10;
 const latestAgency = Math.round(latest.expenditure.direct_care_agency / 1000);
 const latestBudgetVar = Math.round((latest.budget_variance_pct ?? 0) * 1000) / 10;
-
-// --- Action card (unchanged design) ---
-function ActionCard({ urgency, icon, title, chris, actionLabel, onAction, deadline, meta }: {
-  urgency: "critical" | "warning" | "info" | "positive"; icon: React.ReactNode; title: string;
-  chris: string; actionLabel: string; onAction: () => void; deadline?: string; meta?: string;
-}) {
-  const styles = { critical: { border: "border-l-[hsl(var(--brand-terracotta))]", bg: "rgba(196,112,74,0.06)", shadow: "0 4px 24px rgba(0,0,0,0.10)" }, warning: { border: "border-l-[hsl(var(--brand-amber))]", bg: "rgba(212,160,23,0.06)", shadow: "0 4px 24px rgba(0,0,0,0.10)" }, info: { border: "border-l-[hsl(var(--brand-forest))]", bg: "transparent", shadow: "" }, positive: { border: "border-l-[hsl(var(--brand-teal))]", bg: "transparent", shadow: "" } }[urgency]; const border = styles.border;
-  return (
-    <div className={`rounded-xl p-4 border border-border border-l-4 ${border} mb-3`} style={{ background: styles.bg || "var(--color-card)", boxShadow: styles.shadow || "" }}>
-      <div className="flex items-start gap-3">
-        <div className="mt-0.5 shrink-0">{icon}</div>
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center justify-between mb-1">
-            <p className="text-sm font-semibold text-foreground">{title}</p>
-            {deadline && <span className="text-[10px] text-muted-foreground font-mono shrink-0">{deadline}</span>}
-          </div>
-          <p className="text-xs text-muted-foreground leading-relaxed mb-2">{chris}</p>
-          {meta && <p className="text-[10px] text-muted-foreground/60 mb-2">{meta}</p>}
-          <div className="flex items-center gap-2">
-            <button onClick={onAction} className="text-xs font-medium px-3 py-2 rounded-lg bg-primary text-primary-foreground hover:opacity-90">{actionLabel}</button>
-            <button className="text-xs text-muted-foreground hover:text-foreground p-1.5 rounded-lg hover:bg-muted"><MoreHorizontal className="w-4 h-4" /></button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 // --- Care Ratio Story chart data ---
 const MONTHS = ["Oct", "Nov", "Dec", "Jan", "Feb", "Mar"];
@@ -107,16 +82,7 @@ export default function FinancialControlCentre() {
   return (
     <div className="p-4 lg:p-6 max-w-3xl mx-auto">
       {/* Header */}
-      <div className="flex items-center justify-between mb-5">
-        <div className="flex items-center gap-2">
-          <button onClick={() => router.push("/dashboard")} className="p-1 -ml-1 hover:bg-muted rounded-lg"><ChevronLeft className="w-5 h-5 text-foreground" /></button>
-          <div>
-            <p className="text-[28px] font-bold text-foreground tracking-tight leading-tight">Financial Control Centre</p>
-            <p className="text-[10px] text-muted-foreground">{facility.provider_name} · FY2026 · {latest.period}</p>
-          </div>
-        </div>
-        <button onClick={() => router.push("/dashboard/coach")} className="flex items-center gap-1.5 text-xs font-medium px-3 py-2 rounded-lg border border-border text-foreground hover:bg-muted"><Mic className="w-3.5 h-3.5" /> Ask CHRIS</button>
-      </div>
+      <PageHeader title="Financial Control Centre" subtitle={`${facility.provider_name} · FY2026 · ${latest.period}`} />
 
       {/* Headline metrics — tappable, each opens a detail screen */}
       <div className="grid grid-cols-2 gap-2 mb-4">

@@ -2,36 +2,11 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { ChevronLeft, ChevronRight, Mic, FileText, AlertTriangle, MessageSquare, MoreHorizontal, CheckCircle, Sparkles } from "lucide-react";
-import { ChrisAvatar } from "@/components/chris/ChrisAvatar";
+import { ChevronRight, FileText, AlertTriangle, MessageSquare, Sparkles } from "lucide-react";
+import { ActionCard } from "@/components/dashboard/ActionCard";
+import { PageHeader } from "@/components/dashboard/PageHeader";
 import { facility, governance_packs, workforce_monthly, financial_monthly, compliance_obligations } from "@/lib/seed-data";
 import { ALL_FACILITIES, portfolio_summary } from "@/lib/seed-facilities";
-
-function ActionCard({ urgency, icon, title, chris, actionLabel, onAction, deadline, meta }: {
-  urgency: "critical" | "warning" | "info" | "positive"; icon: React.ReactNode; title: string;
-  chris: string; actionLabel: string; onAction: () => void; deadline?: string; meta?: string;
-}) {
-  const styles = { critical: { border: "border-l-[hsl(var(--brand-terracotta))]", bg: "rgba(196,112,74,0.06)", shadow: "0 4px 24px rgba(0,0,0,0.10)" }, warning: { border: "border-l-[hsl(var(--brand-amber))]", bg: "rgba(212,160,23,0.06)", shadow: "0 4px 24px rgba(0,0,0,0.10)" }, info: { border: "border-l-[hsl(var(--brand-forest))]", bg: "transparent", shadow: "" }, positive: { border: "border-l-[hsl(var(--brand-teal))]", bg: "transparent", shadow: "" } }[urgency]; const border = styles.border;
-  return (
-    <div className={`rounded-xl p-4 border border-border border-l-4 ${border} mb-3`} style={{ background: styles.bg || "var(--color-card)", boxShadow: styles.shadow || "" }}>
-      <div className="flex items-start gap-3">
-        <div className="mt-0.5 shrink-0">{icon}</div>
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center justify-between mb-1">
-            <p className="text-sm font-semibold text-foreground">{title}</p>
-            {deadline && <span className="text-[10px] text-muted-foreground font-mono shrink-0">{deadline}</span>}
-          </div>
-          <p className="text-xs text-muted-foreground leading-relaxed mb-2">{chris}</p>
-          {meta && <p className="text-[10px] text-muted-foreground/60 mb-2">{meta}</p>}
-          <div className="flex items-center gap-2">
-            <button onClick={onAction} className="text-xs font-medium px-3 py-2 rounded-lg bg-primary text-primary-foreground hover:opacity-90">{actionLabel}</button>
-            <button className="text-xs text-muted-foreground hover:text-foreground p-1.5 rounded-lg hover:bg-muted"><MoreHorizontal className="w-4 h-4" /></button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 const FACILITIES = ALL_FACILITIES.map((f) => ({
   name: f.name,
@@ -47,13 +22,7 @@ export default function PortfolioDashboard() {
 
   return (
     <div className="p-4 lg:p-6 max-w-3xl mx-auto">
-      <div className="flex items-center justify-between mb-5">
-        <div className="flex items-center gap-2">
-          <button onClick={() => router.push("/dashboard")} className="p-1 -ml-1 hover:bg-muted rounded-lg"><ChevronLeft className="w-5 h-5 text-foreground" /></button>
-          <div><p className="text-[28px] font-bold text-foreground tracking-tight leading-tight">Portfolio Command</p><p className="text-[10px] text-muted-foreground">{facility.provider_name} · 4 residential · 2 home care · 365 beds · 84 HCP</p></div>
-        </div>
-        <button onClick={() => router.push("/dashboard/coach")} className="flex items-center gap-1.5 text-xs font-medium px-3 py-2 rounded-lg border border-border text-foreground hover:bg-muted"><Mic className="w-3.5 h-3.5" /> Ask CHRIS</button>
-      </div>
+      <PageHeader title="Portfolio Command" subtitle={`${facility.provider_name} · 4 residential · 2 home care · 365 beds · 84 HCP`} />
 
       <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-[0.08em] mb-2">Needs your attention</p>
 

@@ -84,8 +84,7 @@ export default function ComplianceRegisterPage() {
   const router = useRouter();
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6 lg:p-8">
-      <div className="max-w-7xl mx-auto space-y-6">
+    <div className="p-4 lg:p-6 max-w-3xl mx-auto space-y-6">
         {/* Header */}
         <div>
           <button
@@ -94,7 +93,7 @@ export default function ComplianceRegisterPage() {
           >
             Home Care <ChevronRight className="w-3 h-3" /> Compliance
           </button>
-          <h1 className="text-[28px] md:text-2xl font-bold text-gray-900">Compliance Register</h1>
+          <h1 className="text-[28px] font-bold text-gray-900">Compliance Register</h1>
           <p className="text-sm text-gray-500 mt-1">
             Support at Home · Aged Care Act 2024
           </p>
@@ -103,18 +102,18 @@ export default function ComplianceRegisterPage() {
         {/* Stat Cards */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {statCards.map((card) => (
-            <div key={card.label} className="bg-white rounded-2xl border border-gray-100 p-5">
+            <div key={card.label} className="bg-card rounded-xl border border-border p-5">
               <div className="flex items-center justify-between mb-3">
                 <span className="text-sm font-medium text-gray-500">{card.label}</span>
                 <card.icon className="w-4 h-4" style={{ color: card.color }} />
               </div>
-              <p className="text-[28px] md:text-2xl font-bold text-gray-900">{card.value}</p>
+              <p className="text-[28px] font-bold text-gray-900">{card.value}</p>
             </div>
           ))}
         </div>
 
         {/* Obligations List */}
-        <div className="bg-white rounded-2xl border border-gray-100 p-5">
+        <div className="bg-card rounded-xl border border-border p-5">
           <h2 className="text-sm font-semibold text-gray-900 mb-4">Regulatory Obligations</h2>
           <div className="space-y-3">
             {obligations.map((ob) => {
@@ -144,7 +143,6 @@ export default function ComplianceRegisterPage() {
             })}
           </div>
         </div>
-      </div>
     </div>
   );
 }
