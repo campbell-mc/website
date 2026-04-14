@@ -10,13 +10,8 @@ const nextConfig = {
   experimental: {
     optimizePackageImports: ["recharts", "lucide-react"],
   },
-  // Skip static prerendering — all pages render on request
-  // Required because many pages use useSearchParams/useParams
-  // and the app has no database connection yet for build-time data
-  output: "standalone",
-  // Treat prerender errors as warnings, not build failures
   typescript: {
-    ignoreBuildErrors: true,  // Type checking done locally — Docker build skips for speed
+    ignoreBuildErrors: true,
   },
   eslint: {
     ignoreDuringBuilds: true,
