@@ -123,7 +123,7 @@ export function RoiCalculator() {
             <br />
             <em className="italic" style={{ color: "#86EFAC" }}>to your organisation?</em>
           </h2>
-          <p className="text-[15px] text-white/85 max-w-lg leading-relaxed">
+          <p className="text-[15px] max-w-lg leading-relaxed" style={{ color: "rgba(255,255,255,0.90)" }}>
             Adjust the inputs to match your facility. Every number is grounded in
             real aged care operational data — your actual leader time, your actual
             AN-ACC exposure, your actual compliance risk.
