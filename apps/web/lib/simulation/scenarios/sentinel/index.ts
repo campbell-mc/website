@@ -83,7 +83,7 @@ export const sentinelScenarios: Scenario[] = [
     world: {
       ...healthy,
       sirs_open: [
-        { id: 'SIRS-SIM-002', category: 2, incident_type: 'Medication error', deadline: '2026-04-20T00:00:00', hours_remaining: 168, status: 'assessed' },
+        { id: 'SIRS-SIM-002', category: 2, incident_type: 'Medication error', deadline: '2026-04-17T00:00:00', hours_remaining: 70, status: 'assessed' },
       ],
     },
     events: [],

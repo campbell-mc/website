@@ -125,15 +125,18 @@ export const homeCareScenarios: Scenario[] = [
       },
     ],
     ground_truth: {
-      expected_findings: [
-        { agent: 'sentinel', finding_type: 'sirs_deadline_approaching', severity: 'urgent', max_ticks_to_detect: 5, description: 'SIRS Cat 2 detected — client fall during visit' },
+      // A newly logged Cat 2 with 720h (30 days) remaining should NOT trigger
+      // deadline alert — it's well within the 7-day warning window.
+      // But the Chronicler SHOULD draft the notification immediately.
+      expected_findings: [],
+      expected_silence: [
+        { agent: 'sentinel', should_not_fire: 'sirs_deadline' }, // 720h is not approaching deadline
       ],
-      expected_silence: [],
       expected_actions: [
         { type: 'chronicler_draft', description: 'Chronicler drafts SIRS Cat 2 notification for HC context' },
       ],
     },
-    rubric: { timeliness: 0.3, actionability: 0.25, accuracy: 0.2, convergence: 0.0, completeness: 0.25 },
+    rubric: { timeliness: 0.2, actionability: 0.25, accuracy: 0.3, convergence: 0.0, completeness: 0.25 },
   },
 
   // ── 26. CASUAL WORKER INCIDENT CORRELATION ─────────────────

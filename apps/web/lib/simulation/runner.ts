@@ -91,9 +91,11 @@ async function invokeAgent(
   const findings: AgentFinding[] = [];
   const actions: AgentAction[] = [];
 
+  const careType = world.facility.care_type;
+
   switch (agentType) {
     case 'sentinel':
-      findings.push(...runSentinelScan(world, tick));
+      findings.push(...runSentinelScan(world, tick, careType));
       break;
     case 'oracle':
       findings.push(...runOracleScan(world, tick));
@@ -117,19 +119,20 @@ async function invokeAgent(
 
 // ── SENTINEL SCAN ────────────────────────────────────────────
 
-function runSentinelScan(world: SimWorld, tick: number): AgentFinding[] {
+function runSentinelScan(world: SimWorld, tick: number, careType: string = 'residential'): AgentFinding[] {
   const findings: AgentFinding[] = [];
+  const isResidential = careType === 'residential';
   const km = AGED_CARE_KNOWLEDGE.care_minutes;
 
-  // Care minutes check
-  if (world.care_minutes.projected_total < km.total_minutes_per_resident_day * km.chris_critical_threshold_pct) {
+  // Care minutes check — RESIDENTIAL ONLY (home care uses visit hours, not care minutes)
+  if (isResidential && world.care_minutes.projected_total < km.total_minutes_per_resident_day * km.chris_critical_threshold_pct) {
     findings.push({
       agent: 'sentinel', type: 'care_minutes_critical', severity: 'immediate',
       title: 'Care minutes below critical threshold',
       detail: `Projected ${world.care_minutes.projected_total} min — below ${km.total_minutes_per_resident_day * km.chris_critical_threshold_pct} critical`,
       tick,
     });
-  } else if (world.care_minutes.projected_total < km.total_minutes_per_resident_day * km.chris_alert_threshold_pct) {
+  } else if (isResidential && world.care_minutes.projected_total < km.total_minutes_per_resident_day * km.chris_alert_threshold_pct) {
     findings.push({
       agent: 'sentinel', type: 'care_minutes_at_risk', severity: 'urgent',
       title: 'Care minutes at risk',
@@ -138,8 +141,8 @@ function runSentinelScan(world: SimWorld, tick: number): AgentFinding[] {
     });
   }
 
-  // RN minutes check
-  if (world.care_minutes.rn_minutes < km.rn_minutes_per_resident_day * km.chris_critical_threshold_pct) {
+  // RN minutes check — RESIDENTIAL ONLY
+  if (isResidential && world.care_minutes.rn_minutes < km.rn_minutes_per_resident_day * km.chris_critical_threshold_pct) {
     findings.push({
       agent: 'sentinel', type: 'rn_gap_tonight', severity: 'immediate',
       title: 'RN minutes below critical threshold',
@@ -205,8 +208,8 @@ function runSentinelScan(world: SimWorld, tick: number): AgentFinding[] {
     }
   }
 
-  // RN roster gap
-  for (const shift of world.roster) {
+  // RN roster gap — RESIDENTIAL ONLY (home care doesn't have shift-based RN coverage)
+  if (isResidential) for (const shift of world.roster) {
     if (!shift.rn_confirmed) {
       findings.push({
         agent: 'sentinel', type: 'rn_gap_tonight', severity: 'immediate',
