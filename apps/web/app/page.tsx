@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import ChrisPublicChat from "@/components/ChrisPublicChat";
 
 // ─── Agent data ──────────────────────────────────────────────────────────────
 
@@ -357,6 +358,38 @@ function AgentHub() {
   );
 }
 
+function ChrisCoachCTA() {
+  return (
+    <div className="bg-[#EDE9DF] border-y border-[#1B4332]/8">
+      <section className="max-w-6xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+          <div>
+            <div className="text-[11px] font-medium tracking-[0.08em] uppercase text-[#2D7D73] mb-4">
+              Talk to CHRIS
+            </div>
+            <h2 className="text-[clamp(28px,3.5vw,42px)] font-normal leading-[1.12] tracking-[-0.02em] text-[#1B4332] mb-5" style={{ fontFamily: "var(--font-instrument-serif, 'Georgia'), serif" }}>
+              Ask the question<br />you&apos;ve been sitting on.
+            </h2>
+            <p className="text-[16px] leading-relaxed text-stone-500 mb-6">
+              CHRIS knows aged care. Ask about care minutes, SIRS,
+              psychosocial compliance, AN-ACC revenue, agency costs,
+              or what the Aged Care Act 2024 actually requires of you.
+              No login. No signup. Just the conversation.
+            </p>
+            <p className="text-xs text-stone-400">
+              You&apos;re talking to a public preview of CHRIS.
+              The full platform connects to your systems.
+            </p>
+          </div>
+          <div>
+            <ChrisPublicChat />
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
 function ExecutionSection() {
   return (
     <div className="bg-stone-50 border-y border-[#1B4332]/8">
@@ -478,6 +511,7 @@ export default function LandingPage() {
       <SystemsStrip />
       <LiveTicker />
       <AgentHub />
+      <ChrisCoachCTA />
       <ExecutionSection />
       <RolesSection />
       <DemoSection />
