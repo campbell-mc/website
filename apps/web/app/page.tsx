@@ -158,7 +158,7 @@ function Hero() {
         needs action, CHRIS executes it.
       </p>
 
-      <div className="flex items-center gap-4 flex-wrap mb-7">
+      <div className="flex items-center gap-3 flex-wrap mb-7">
         <button
           className="bg-[#1B4332] text-white px-7 py-3.5 rounded-lg text-sm font-medium hover:bg-[#1B4332]/90 transition-colors"
           onClick={() => document.getElementById("agent-section")?.scrollIntoView({ behavior: "smooth" })}
@@ -169,7 +169,13 @@ function Hero() {
           href="/dashboard"
           className="border border-[#1B4332]/25 text-[#1B4332] px-7 py-3.5 rounded-lg text-sm font-normal hover:border-[#1B4332]/50 transition-colors"
         >
-          Enter demo
+          Enter demo — Residential
+        </Link>
+        <Link
+          href="/dashboard/home-care?care=home_care"
+          className="border border-[#1B4332]/25 text-[#1B4332] px-7 py-3.5 rounded-lg text-sm font-normal hover:border-[#1B4332]/50 transition-colors"
+        >
+          Enter demo — Home Care
         </Link>
       </div>
 
