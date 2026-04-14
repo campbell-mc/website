@@ -93,7 +93,7 @@ export default function HomeCareDashboard() {
   const router = useRouter();
 
   return (
-    <div className="p-4 lg:p-6 max-w-3xl mx-auto space-y-6">
+    <div className="p-4 lg:p-8 max-w-5xl mx-auto space-y-6">
         {/* Demo role switcher */}
         <div className="bg-[#1B4332] rounded-xl p-3 overflow-hidden">
           <p className="text-[10px] font-semibold uppercase tracking-wider mb-2" style={{ color: "white" }}>Demo — switch role</p>

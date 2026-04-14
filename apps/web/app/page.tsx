@@ -126,68 +126,72 @@ const ROLES = [
 
 function Nav() {
   return (
-    <nav className="flex items-center justify-between px-6 md:px-10 py-5 border-b border-[#1B4332]/10">
-      <div className="flex items-center gap-2.5">
-        <div className="w-8 h-8 bg-[#1B4332] rounded-lg flex items-center justify-center text-white text-sm font-medium tracking-tight">
-          C
+    <nav className="border-b border-[#1B4332]/10">
+      <div className="max-w-6xl mx-auto flex items-center justify-between px-6 lg:px-16 py-5">
+        <div className="flex items-center gap-2.5">
+          <div className="w-8 h-8 bg-[#1B4332] rounded-lg flex items-center justify-center text-white text-sm font-medium tracking-tight">
+            C
+          </div>
+          <span className="text-[#1B4332] text-[15px] font-medium tracking-tight">CHRIS-OS</span>
         </div>
-        <span className="text-[#1B4332] text-[15px] font-medium tracking-tight">CHRIS-OS</span>
+        <span className="text-[13px] text-stone-400 hidden md:block">chris-os.io</span>
       </div>
-      <span className="text-[13px] text-stone-400 hidden md:block">chris-os.io</span>
     </nav>
   );
 }
 
 function Hero() {
   return (
-    <section className="px-6 md:px-10 pt-12 md:pt-20 pb-12 md:pb-16 max-w-3xl">
-      <div className="inline-flex items-center gap-2 text-xs font-medium tracking-widest uppercase text-[#1B4332] mb-6">
-        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-        Live with providers in NSW and VIC
-      </div>
+    <section className="max-w-6xl mx-auto px-6 lg:px-16 pt-16 lg:pt-24 pb-16 lg:pb-20">
+      <div className="max-w-2xl">
+        <div className="inline-flex items-center gap-2 text-xs font-medium tracking-widest uppercase text-[#1B4332] mb-6">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+          Live with providers in NSW and VIC
+        </div>
 
-      <h1 className="font-[var(--font-instrument-serif)] text-[clamp(32px,5vw,58px)] font-normal leading-[1.08] tracking-[-0.02em] text-[#1B4332] mb-7" style={{ fontFamily: "var(--font-instrument-serif), Georgia, serif" }}>
-        Your aged care organisation,{" "}
-        <em className="italic text-[#2D7D73]">running with intelligence.</em>
-      </h1>
+        <h1 className="text-[clamp(36px,5vw,58px)] font-normal leading-[1.08] tracking-[-0.02em] text-[#1B4332] mb-7" style={{ fontFamily: "var(--font-instrument-serif, 'Georgia'), serif" }}>
+          Your aged care organisation,{" "}
+          <em className="italic text-[#2D7D73]">running with intelligence.</em>
+        </h1>
 
-      <p className="text-base md:text-[17px] leading-[1.65] text-stone-600 max-w-xl mb-10 font-light">
-        Six AI agents monitor every domain of your operation — clinical,
-        financial, workforce, compliance, governance — continuously,
-        simultaneously, and across every system you already run. When something
-        needs action, CHRIS executes it.
-      </p>
+        <p className="text-[17px] leading-[1.65] text-stone-500 max-w-xl mb-10">
+          Six AI agents monitor every domain of your operation — clinical,
+          financial, workforce, compliance, governance — continuously,
+          simultaneously, and across every system you already run. When something
+          needs action, CHRIS executes it.
+        </p>
 
-      <div className="flex items-center gap-3 flex-wrap mb-7">
-        <button
-          className="bg-[#1B4332] text-white px-7 py-3.5 rounded-lg text-sm font-medium hover:bg-[#1B4332]/90 transition-colors"
-          onClick={() => document.getElementById("agent-section")?.scrollIntoView({ behavior: "smooth" })}
-        >
-          See the agents →
-        </button>
-        <Link
-          href="/dashboard"
-          className="border border-[#1B4332]/25 text-[#1B4332] px-7 py-3.5 rounded-lg text-sm font-normal hover:border-[#1B4332]/50 transition-colors"
-        >
-          Enter demo — Residential
-        </Link>
-        <Link
-          href="/dashboard/home-care?care=home_care"
-          className="border border-[#1B4332]/25 text-[#1B4332] px-7 py-3.5 rounded-lg text-sm font-normal hover:border-[#1B4332]/50 transition-colors"
-        >
-          Enter demo — Home Care
-        </Link>
-      </div>
+        <div className="flex items-center gap-3 flex-wrap mb-8">
+          <button
+            className="bg-[#1B4332] text-white px-7 py-3.5 rounded-lg text-sm font-medium hover:bg-[#1B4332]/90 transition-colors"
+            onClick={() => document.getElementById("agent-section")?.scrollIntoView({ behavior: "smooth" })}
+          >
+            See the agents →
+          </button>
+          <Link
+            href="/dashboard"
+            className="border border-[#1B4332]/25 text-[#1B4332] px-7 py-3.5 rounded-lg text-sm font-normal hover:border-[#1B4332]/50 transition-colors"
+          >
+            Enter demo — Residential
+          </Link>
+          <Link
+            href="/dashboard/home-care?care=home_care"
+            className="border border-[#1B4332]/25 text-[#1B4332] px-7 py-3.5 rounded-lg text-sm font-normal hover:border-[#1B4332]/50 transition-colors"
+          >
+            Enter demo — Home Care
+          </Link>
+        </div>
 
-      <div className="flex items-center gap-3 md:gap-5 flex-wrap">
-        {["Residential care", "Home care", "Built for Australian operators", "Aged Care Act 2024 ready"].map(
-          (item, i, arr) => (
-            <span key={item} className="flex items-center gap-3 md:gap-5">
-              <span className="text-xs text-stone-400">{item}</span>
-              {i < arr.length - 1 && <span className="w-1 h-1 rounded-full bg-stone-300" />}
-            </span>
-          )
-        )}
+        <div className="flex items-center gap-5 flex-wrap">
+          {["Residential care", "Home care", "Built for Australian operators", "Aged Care Act 2024 ready"].map(
+            (item, i, arr) => (
+              <span key={item} className="flex items-center gap-5">
+                <span className="text-xs text-stone-400">{item}</span>
+                {i < arr.length - 1 && <span className="w-1 h-1 rounded-full bg-stone-300" />}
+              </span>
+            )
+          )}
+        </div>
       </div>
     </section>
   );
@@ -195,18 +199,20 @@ function Hero() {
 
 function SystemsStrip() {
   return (
-    <div className="border-y border-[#1B4332]/8 bg-stone-50 px-6 md:px-10 py-3.5 flex items-center gap-3 overflow-hidden">
-      <span className="text-[11px] font-medium tracking-[0.05em] uppercase text-stone-400 whitespace-nowrap flex-shrink-0">
-        Connects to
-      </span>
-      <div className="w-px h-4 bg-[#1B4332]/15 flex-shrink-0" />
-      <div className="flex gap-2 overflow-hidden flex-wrap">
-        {SYSTEMS.map((s) => (
-          <span key={s} className="inline-flex items-center gap-1.5 bg-white border border-[#1B4332]/12 rounded-full px-2.5 py-1 text-[11px] text-stone-500 whitespace-nowrap">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#2D7D73]/70" />
-            {s}
-          </span>
-        ))}
+    <div className="border-y border-[#1B4332]/8 bg-stone-50">
+      <div className="max-w-6xl mx-auto px-6 lg:px-16 py-3.5 flex items-center gap-3 overflow-hidden">
+        <span className="text-[11px] font-medium tracking-[0.05em] uppercase text-stone-400 whitespace-nowrap flex-shrink-0">
+          Connects to
+        </span>
+        <div className="w-px h-4 bg-[#1B4332]/15 flex-shrink-0" />
+        <div className="flex gap-2 overflow-hidden flex-wrap">
+          {SYSTEMS.map((s) => (
+            <span key={s} className="inline-flex items-center gap-1.5 bg-white border border-[#1B4332]/12 rounded-full px-2.5 py-1 text-[11px] text-stone-500 whitespace-nowrap">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#2D7D73]/70" />
+              {s}
+            </span>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -241,14 +247,14 @@ function AgentCard({
       style={{ top: agent.position.top, left: agent.position.left }}
       onClick={onClick}
     >
-      <div className={`bg-white border rounded-xl px-3.5 py-3 w-32 shadow-sm transition-all duration-200 group-hover:shadow-md group-hover:border-[#1B4332]/25 ${
+      <div className={`bg-white border rounded-xl px-4 py-3.5 w-[160px] shadow-sm transition-all duration-200 group-hover:shadow-md group-hover:border-[#1B4332]/25 ${
         isSelected ? "border-[#1B4332]/40 shadow-md ring-1 ring-[#1B4332]/10" : "border-[#1B4332]/12"
       }`}>
-        <span className={`inline-block text-[9px] font-medium tracking-[0.04em] uppercase px-1.5 py-0.5 rounded mb-1.5 ${agent.cadenceColor}`}>
+        <span className={`inline-block text-[10px] font-medium tracking-[0.04em] uppercase px-1.5 py-0.5 rounded mb-1.5 ${agent.cadenceColor}`}>
           ● {agent.cadence}
         </span>
-        <div className="text-[12px] font-medium text-stone-800 mb-0.5">{agent.name}</div>
-        <div className="text-[10px] text-stone-400 leading-tight">{agent.role}</div>
+        <div className="text-[13px] font-medium text-stone-800 mb-0.5">{agent.name}</div>
+        <div className="text-[11px] text-stone-400 leading-snug">{agent.role}</div>
       </div>
     </div>
   );
@@ -259,70 +265,93 @@ function AgentHub() {
   const selectedAgent = AGENTS.find((a) => a.id === selected);
 
   return (
-    <section className="px-6 md:px-10 py-12 md:py-18" id="agent-section">
-      <div className="mb-4">
-        <div className="text-[11px] font-medium tracking-[0.08em] uppercase text-stone-400 mb-4">
-          The intelligence layer
+    <section className="py-16 lg:py-24" id="agent-section">
+      <div className="max-w-6xl mx-auto px-6 lg:px-16">
+        <div className="mb-8">
+          <div className="text-[11px] font-medium tracking-[0.08em] uppercase text-stone-400 mb-4">
+            The intelligence layer
+          </div>
+          <h2 className="text-[clamp(28px,3.5vw,42px)] font-normal leading-[1.12] tracking-[-0.02em] text-[#1B4332] mb-4" style={{ fontFamily: "var(--font-instrument-serif, 'Georgia'), serif" }}>
+            Six agents.<br />Every domain. Always on.
+          </h2>
+          <p className="text-[16px] leading-relaxed text-stone-500 max-w-xl mb-0">
+            Each agent has a domain, a cadence, and a job. Together they give
+            every leader in your organisation a dedicated intelligence layer —
+            working underneath them, 24 hours a day.
+          </p>
         </div>
-        <h2 className="text-[clamp(28px,3.5vw,42px)] font-normal leading-[1.12] tracking-[-0.02em] text-[#1B4332] mb-4" style={{ fontFamily: "var(--font-instrument-serif), Georgia, serif" }}>
-          Six agents.<br />Every domain. Always on.
-        </h2>
-        <p className="text-[15px] md:text-[16px] leading-relaxed text-stone-500 max-w-lg mb-12 font-light">
-          Each agent has a domain, a cadence, and a job. Together they give
-          every leader in your organisation a dedicated intelligence layer —
-          working underneath them, 24 hours a day.
-        </p>
-      </div>
 
-      {/* Hub diagram — hidden on mobile, show list instead */}
-      <div className="hidden md:block relative w-full max-w-[680px] h-[500px]">
-        <div className="absolute rounded-full border border-dashed border-[#1B4332]/12 -translate-x-1/2 -translate-y-1/2" style={{ width: 280, height: 280, left: "50%", top: "50%" }} />
-        <div className="absolute rounded-full border border-dashed border-[#1B4332]/8 -translate-x-1/2 -translate-y-1/2" style={{ width: 440, height: 440, left: "50%", top: "50%" }} />
+        {/* Desktop: hub diagram centred */}
+        <div className="hidden lg:flex justify-center mb-10">
+          <div className="relative w-[720px] h-[540px]">
+            <div className="absolute rounded-full border border-dashed border-[#1B4332]/12 -translate-x-1/2 -translate-y-1/2" style={{ width: 300, height: 300, left: "50%", top: "50%" }} />
+            <div className="absolute rounded-full border border-dashed border-[#1B4332]/8 -translate-x-1/2 -translate-y-1/2" style={{ width: 480, height: 480, left: "50%", top: "50%" }} />
 
-        <div className="absolute -translate-x-1/2 -translate-y-1/2 z-20" style={{ left: "50%", top: "50%" }}>
-          <div className="w-28 h-28 bg-[#1B4332] rounded-full flex flex-col items-center justify-center" style={{ boxShadow: "0 0 0 16px rgba(27,67,50,0.08), 0 0 0 32px rgba(27,67,50,0.04)" }}>
-            <span className="text-white text-[22px] italic leading-none" style={{ fontFamily: "var(--font-instrument-serif), Georgia, serif" }}>CHRIS</span>
-            <span className="text-white/50 text-[9px] tracking-[0.1em] uppercase mt-1">always watching</span>
+            <div className="absolute -translate-x-1/2 -translate-y-1/2 z-20" style={{ left: "50%", top: "50%" }}>
+              <div className="w-32 h-32 bg-[#1B4332] rounded-full flex flex-col items-center justify-center" style={{ boxShadow: "0 0 0 20px rgba(27,67,50,0.08), 0 0 0 40px rgba(27,67,50,0.04)" }}>
+                <span className="text-white text-[26px] italic leading-none" style={{ fontFamily: "var(--font-instrument-serif, 'Georgia'), serif" }}>CHRIS</span>
+                <span className="text-white/50 text-[9px] tracking-[0.1em] uppercase mt-1.5">always watching</span>
+              </div>
+            </div>
+
+            {AGENTS.map((agent) => (
+              <AgentCard key={agent.id} agent={agent} isSelected={selected === agent.id} onClick={() => setSelected(selected === agent.id ? null : agent.id)} />
+            ))}
           </div>
         </div>
 
-        {AGENTS.map((agent) => (
-          <AgentCard key={agent.id} agent={agent} isSelected={selected === agent.id} onClick={() => setSelected(selected === agent.id ? null : agent.id)} />
-        ))}
-      </div>
+        {/* Tablet: hub diagram smaller */}
+        <div className="hidden md:flex lg:hidden justify-center mb-10">
+          <div className="relative w-full max-w-[600px] h-[460px]">
+            <div className="absolute rounded-full border border-dashed border-[#1B4332]/12 -translate-x-1/2 -translate-y-1/2" style={{ width: 250, height: 250, left: "50%", top: "50%" }} />
+            <div className="absolute rounded-full border border-dashed border-[#1B4332]/8 -translate-x-1/2 -translate-y-1/2" style={{ width: 400, height: 400, left: "50%", top: "50%" }} />
 
-      {/* Mobile agent list */}
-      <div className="md:hidden space-y-3 mb-6">
-        {AGENTS.map((agent) => (
-          <button
-            key={agent.id}
-            onClick={() => setSelected(selected === agent.id ? null : agent.id)}
-            className={`w-full text-left bg-white border rounded-xl px-4 py-3 transition-all ${
-              selected === agent.id ? "border-[#1B4332]/40 shadow-md" : "border-[#1B4332]/12"
-            }`}
-          >
-            <span className={`inline-block text-[9px] font-medium tracking-[0.04em] uppercase px-1.5 py-0.5 rounded mb-1.5 ${agent.cadenceColor}`}>
-              ● {agent.cadence}
-            </span>
-            <div className="text-[13px] font-medium text-stone-800 mb-0.5">{agent.name}</div>
-            <div className="text-[11px] text-stone-400 leading-tight">{agent.role}</div>
-          </button>
-        ))}
-      </div>
+            <div className="absolute -translate-x-1/2 -translate-y-1/2 z-20" style={{ left: "50%", top: "50%" }}>
+              <div className="w-28 h-28 bg-[#1B4332] rounded-full flex flex-col items-center justify-center" style={{ boxShadow: "0 0 0 16px rgba(27,67,50,0.08), 0 0 0 32px rgba(27,67,50,0.04)" }}>
+                <span className="text-white text-[22px] italic leading-none" style={{ fontFamily: "var(--font-instrument-serif, 'Georgia'), serif" }}>CHRIS</span>
+                <span className="text-white/50 text-[9px] tracking-[0.1em] uppercase mt-1">always watching</span>
+              </div>
+            </div>
 
-      {/* Detail panel */}
-      <div className={`bg-white border border-[#1B4332]/12 rounded-xl p-5 mt-6 md:mt-8 max-w-lg transition-opacity duration-200 ${selectedAgent ? "opacity-100" : "opacity-30"}`}>
-        <div className="text-[18px] md:text-[20px] text-[#1B4332] mb-1.5" style={{ fontFamily: "var(--font-instrument-serif), Georgia, serif" }}>
-          {selectedAgent?.detail.title ?? "Tap any agent to learn more"}
-        </div>
-        <div className="text-[13px] text-stone-500 leading-relaxed">
-          {selectedAgent?.detail.body ?? "Each agent has a specific domain, cadence, and scope. Together they replace the hours of manual data synthesis currently distributed across your leadership team."}
-        </div>
-        {selectedAgent && (
-          <div className="mt-3 px-3 py-2.5 bg-stone-50 rounded-lg text-[12px] text-stone-500 italic border-l-2 border-[#2D7D73] leading-relaxed">
-            {selectedAgent.detail.example}
+            {AGENTS.map((agent) => (
+              <AgentCard key={agent.id} agent={agent} isSelected={selected === agent.id} onClick={() => setSelected(selected === agent.id ? null : agent.id)} />
+            ))}
           </div>
-        )}
+        </div>
+
+        {/* Mobile: card list */}
+        <div className="md:hidden space-y-3 mb-6">
+          {AGENTS.map((agent) => (
+            <button
+              key={agent.id}
+              onClick={() => setSelected(selected === agent.id ? null : agent.id)}
+              className={`w-full text-left bg-white border rounded-xl px-4 py-3 transition-all ${
+                selected === agent.id ? "border-[#1B4332]/40 shadow-md" : "border-[#1B4332]/12"
+              }`}
+            >
+              <span className={`inline-block text-[9px] font-medium tracking-[0.04em] uppercase px-1.5 py-0.5 rounded mb-1.5 ${agent.cadenceColor}`}>
+                ● {agent.cadence}
+              </span>
+              <div className="text-[13px] font-medium text-stone-800 mb-0.5">{agent.name}</div>
+              <div className="text-[11px] text-stone-400 leading-tight">{agent.role}</div>
+            </button>
+          ))}
+        </div>
+
+        {/* Detail panel */}
+        <div className={`bg-white border border-[#1B4332]/12 rounded-xl p-6 lg:p-8 max-w-2xl mx-auto transition-opacity duration-200 ${selectedAgent ? "opacity-100" : "opacity-30"}`}>
+          <div className="text-[20px] lg:text-[24px] text-[#1B4332] mb-2" style={{ fontFamily: "var(--font-instrument-serif, 'Georgia'), serif" }}>
+            {selectedAgent?.detail.title ?? "Click any agent to learn more"}
+          </div>
+          <div className="text-[14px] text-stone-500 leading-relaxed">
+            {selectedAgent?.detail.body ?? "Each agent has a specific domain, cadence, and scope. Together they replace the hours of manual data synthesis currently distributed across your leadership team."}
+          </div>
+          {selectedAgent && (
+            <div className="mt-4 px-4 py-3 bg-stone-50 rounded-lg text-[13px] text-stone-500 italic border-l-2 border-[#2D7D73] leading-relaxed">
+              {selectedAgent.detail.example}
+            </div>
+          )}
+        </div>
       </div>
     </section>
   );
@@ -331,25 +360,25 @@ function AgentHub() {
 function ExecutionSection() {
   return (
     <div className="bg-stone-50 border-y border-[#1B4332]/8">
-      <section className="px-6 md:px-10 py-12 md:py-18">
+      <section className="max-w-6xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
         <div className="text-[11px] font-medium tracking-[0.08em] uppercase text-stone-400 mb-4">
           The execution layer
         </div>
-        <h2 className="text-[clamp(28px,3.5vw,42px)] font-normal leading-[1.12] tracking-[-0.02em] text-[#1B4332] mb-4" style={{ fontFamily: "var(--font-instrument-serif), Georgia, serif" }}>
+        <h2 className="text-[clamp(28px,3.5vw,42px)] font-normal leading-[1.12] tracking-[-0.02em] text-[#1B4332] mb-4" style={{ fontFamily: "var(--font-instrument-serif, 'Georgia'), serif" }}>
           CHRIS doesn&apos;t just tell you.<br />It acts.
         </h2>
-        <p className="text-[15px] md:text-[16px] leading-relaxed text-stone-500 max-w-lg mb-12 font-light">
+        <p className="text-[16px] leading-relaxed text-stone-500 max-w-xl mb-12">
           Most analytics tools give you data to interpret. CHRIS delivers a
           drafted document, a specific action, or a coordinated recommendation
           — ready for your review and approval.
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 sm:divide-x sm:divide-y divide-[#1B4332]/8 border border-[#1B4332]/8 rounded-xl overflow-hidden">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-[#1B4332]/8 border border-[#1B4332]/8 rounded-xl overflow-hidden">
           {EXECUTION_PILLARS.map((p) => (
-            <div key={p.title} className="bg-white p-5 md:p-6">
-              <div className="text-lg mb-2.5">{p.icon}</div>
-              <div className="text-[13px] font-medium text-stone-800 mb-2">{p.title}</div>
-              <div className="text-[12px] text-stone-400 leading-relaxed">{p.body}</div>
+            <div key={p.title} className="bg-white p-6 lg:p-7">
+              <div className="text-xl lg:text-2xl mb-3">{p.icon}</div>
+              <div className="text-[14px] font-medium text-stone-800 mb-2">{p.title}</div>
+              <div className="text-[13px] text-stone-400 leading-relaxed">{p.body}</div>
             </div>
           ))}
         </div>
@@ -360,24 +389,24 @@ function ExecutionSection() {
 
 function RolesSection() {
   return (
-    <section className="px-6 md:px-10 py-12 md:py-18">
+    <section className="max-w-6xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
       <div className="text-[11px] font-medium tracking-[0.08em] uppercase text-stone-400 mb-4">
         Built for every leader
       </div>
-      <h2 className="text-[clamp(28px,3.5vw,42px)] font-normal leading-[1.12] tracking-[-0.02em] text-[#1B4332] mb-4" style={{ fontFamily: "var(--font-instrument-serif), Georgia, serif" }}>
+      <h2 className="text-[clamp(28px,3.5vw,42px)] font-normal leading-[1.12] tracking-[-0.02em] text-[#1B4332] mb-4" style={{ fontFamily: "var(--font-instrument-serif, 'Georgia'), serif" }}>
         One platform.<br />Every leader in your organisation.
       </h2>
-      <p className="text-[15px] md:text-[16px] leading-relaxed text-stone-500 max-w-lg mb-12 font-light">
+      <p className="text-[16px] leading-relaxed text-stone-500 max-w-xl mb-12">
         CHRIS adapts to the role looking at it. The CEO sees the portfolio
         view. The DON sees clinical and operational signals. The CFO sees the
         financial intelligence. The WHS Lead sees the psychosocial picture.
       </p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {ROLES.map((r) => (
-          <div key={r.title} className="bg-white border border-[#1B4332]/10 rounded-xl p-4 hover:border-[#1B4332]/25 transition-colors">
-            <div className="text-[13px] font-medium text-stone-800 mb-1">{r.title}</div>
-            <div className="text-[11px] text-stone-400 leading-relaxed">{r.desc}</div>
+          <div key={r.title} className="bg-white border border-[#1B4332]/10 rounded-xl p-5 lg:p-6 hover:border-[#1B4332]/25 hover:shadow-sm transition-all">
+            <div className="text-[14px] font-medium text-stone-800 mb-1.5">{r.title}</div>
+            <div className="text-[13px] text-stone-400 leading-relaxed">{r.desc}</div>
           </div>
         ))}
       </div>
@@ -387,52 +416,54 @@ function RolesSection() {
 
 function DemoSection() {
   return (
-    <section className="px-6 md:px-10 py-12 md:py-18 bg-stone-50 border-t border-[#1B4332]/8">
-      <div className="max-w-2xl">
+    <div className="bg-stone-50 border-t border-[#1B4332]/8">
+      <section className="max-w-6xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
         <div className="text-[11px] font-medium tracking-[0.08em] uppercase text-stone-400 mb-4">
           See it working
         </div>
-        <h2 className="text-[clamp(24px,3vw,36px)] font-normal leading-[1.15] tracking-[-0.02em] text-[#1B4332] mb-4" style={{ fontFamily: "var(--font-instrument-serif), Georgia, serif" }}>
+        <h2 className="text-[clamp(24px,3vw,36px)] font-normal leading-[1.15] tracking-[-0.02em] text-[#1B4332] mb-4" style={{ fontFamily: "var(--font-instrument-serif, 'Georgia'), serif" }}>
           Enter the demo
         </h2>
-        <p className="text-[15px] leading-relaxed text-stone-500 max-w-lg mb-8 font-light">
+        <p className="text-[16px] leading-relaxed text-stone-500 max-w-xl mb-10">
           Choose a care type to explore. You are entering a demo environment with representative data. Nothing you interact with affects a real facility.
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-2xl">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl">
           <Link
             href="/dashboard"
-            className="flex flex-col items-center gap-2 px-6 py-5 bg-[#1B4332] text-white rounded-xl hover:bg-[#2D7D73] transition-colors text-center"
+            className="flex flex-col items-center gap-2.5 px-6 py-6 bg-[#1B4332] text-white rounded-xl hover:bg-[#2D7D73] transition-colors text-center"
           >
             <span className="text-base font-semibold">Residential Care</span>
             <span className="text-xs text-white/60">137-bed facility · DON view · 6 agents active</span>
           </Link>
           <Link
             href="/dashboard/home-care?care=home_care"
-            className="flex flex-col items-center gap-2 px-6 py-5 bg-[#1B4332] text-white rounded-xl hover:bg-[#2D7D73] transition-colors text-center"
+            className="flex flex-col items-center gap-2.5 px-6 py-6 bg-[#1B4332] text-white rounded-xl hover:bg-[#2D7D73] transition-colors text-center"
           >
             <span className="text-base font-semibold">Home Care</span>
             <span className="text-xs text-white/60">247 clients · 2 services · Support at Home</span>
           </Link>
-          <div className="flex flex-col items-center gap-2 px-6 py-5 bg-[#1B4332]/60 text-white/70 rounded-xl text-center cursor-default">
+          <div className="flex flex-col items-center gap-2.5 px-6 py-6 bg-[#1B4332]/60 text-white/70 rounded-xl text-center cursor-default">
             <span className="text-base font-semibold">NDIS</span>
             <span className="text-xs text-white/40">Coming soon</span>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }
 
 function Footer() {
   return (
-    <footer className="border-t border-[#1B4332]/10 px-6 md:px-10 py-6 bg-stone-50 flex items-center justify-between flex-wrap gap-3">
-      <span className="text-[12px] text-stone-400">
-        CHRIS-OS — The operational intelligence and execution system for Australian aged care
-      </span>
-      <span className="text-[12px] text-stone-400">
-        chris-os.io · Live in NSW and VIC
-      </span>
+    <footer className="border-t border-[#1B4332]/10 bg-stone-50">
+      <div className="max-w-6xl mx-auto px-6 lg:px-16 py-6 flex items-center justify-between flex-wrap gap-3">
+        <span className="text-[12px] text-stone-400">
+          CHRIS-OS — The operational intelligence and execution system for Australian aged care
+        </span>
+        <span className="text-[12px] text-stone-400">
+          chris-os.io · Live in NSW and VIC
+        </span>
+      </div>
     </footer>
   );
 }
@@ -441,7 +472,7 @@ function Footer() {
 
 export default function LandingPage() {
   return (
-    <div className="bg-[#F5F2EB] text-stone-900 overflow-hidden" style={{ fontFamily: "var(--font-dm-sans), 'DM Sans', system-ui, sans-serif" }}>
+    <div className="bg-[#F5F2EB] text-stone-900 overflow-hidden" style={{ fontFamily: "var(--font-dm-sans, 'DM Sans'), system-ui, sans-serif" }}>
       <Nav />
       <Hero />
       <SystemsStrip />
