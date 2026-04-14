@@ -3,7 +3,6 @@
 import { useRouter } from "next/navigation";
 import {
   Users,
-  ChevronRight,
   TrendingDown,
   GraduationCap,
   Briefcase,
@@ -13,6 +12,7 @@ import {
   CheckCircle2,
   BarChart3,
 } from "lucide-react";
+import { PageHeader } from "@/components/dashboard/PageHeader";
 
 /* ── colours ── */
 const forest = "#1B4332";
@@ -103,34 +103,19 @@ export default function WorkforcePage() {
 
   return (
     <div className="p-4 lg:p-8 max-w-5xl mx-auto space-y-6">
-        {/* Breadcrumb */}
-        <button
-          onClick={() => router.push("/dashboard/home-care")}
-          className="text-xs text-gray-500 hover:text-gray-700 mb-2 flex items-center gap-1"
-        >
-          Home Care <ChevronRight className="w-3 h-3" /> Workforce
-        </button>
-
         {/* Header */}
-        <div>
-          <h1 className="text-[28px] font-bold text-gray-900">
-            Workforce Control Centre
-          </h1>
-          <p className="text-sm text-gray-500 mt-1">
-            89 support workers · Camelot and Avalon · Knights of the Holy Grail
-          </p>
-        </div>
+        <PageHeader title="Workforce Control Centre" subtitle="KHG Home Care Southern Highlands" backHref="/dashboard/home-care" />
 
         {/* 4 Stat Cards */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {statCards.map((card) => (
             <div key={card.label} className="bg-card rounded-xl border border-border p-5">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-sm font-medium text-gray-500">{card.label}</span>
+                <span className="text-sm font-medium text-muted-foreground">{card.label}</span>
                 <card.icon className="w-4 h-4" style={{ color: card.color }} />
               </div>
-              <p className="text-[28px] font-bold text-gray-900">{card.value}</p>
-              <p className="text-xs text-gray-500 mt-1">{card.sub}</p>
+              <p className="text-[28px] font-bold text-foreground">{card.value}</p>
+              <p className="text-xs text-muted-foreground mt-1">{card.sub}</p>
             </div>
           ))}
         </div>
@@ -144,7 +129,7 @@ export default function WorkforcePage() {
             >
               K
             </div>
-            <h2 className="text-sm font-semibold text-gray-900">Keeper Signals</h2>
+            <h2 className="text-sm font-semibold text-foreground">Keeper Signals</h2>
           </div>
           <div className="space-y-3">
             {keeperSignals.map((sig, i) => (
@@ -162,8 +147,8 @@ export default function WorkforcePage() {
                     style={{ color: severityColor(sig.severity) }}
                   />
                   <div>
-                    <p className="text-sm font-medium text-gray-900">{sig.text}</p>
-                    <p className="text-xs text-gray-600 mt-1">{sig.detail}</p>
+                    <p className="text-sm font-medium text-foreground">{sig.text}</p>
+                    <p className="text-xs text-muted-foreground mt-1">{sig.detail}</p>
                   </div>
                 </div>
               </div>
@@ -173,24 +158,24 @@ export default function WorkforcePage() {
 
         {/* By Service Table */}
         <div className="bg-card rounded-xl border border-border p-5">
-          <h2 className="text-sm font-semibold text-gray-900 mb-4">By Service</h2>
+          <h2 className="text-sm font-semibold text-foreground mb-4">By Service</h2>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-gray-100">
-                  <th className="text-left text-xs font-medium text-gray-500 pb-3">Service</th>
-                  <th className="text-right text-xs font-medium text-gray-500 pb-3">Workers</th>
-                  <th className="text-right text-xs font-medium text-gray-500 pb-3">Agency %</th>
-                  <th className="text-right text-xs font-medium text-gray-500 pb-3">Turnover</th>
-                  <th className="text-right text-xs font-medium text-gray-500 pb-3">PSH</th>
+                <tr className="border-b border-border">
+                  <th className="text-left text-xs font-medium text-muted-foreground pb-3">Service</th>
+                  <th className="text-right text-xs font-medium text-muted-foreground pb-3">Workers</th>
+                  <th className="text-right text-xs font-medium text-muted-foreground pb-3">Agency %</th>
+                  <th className="text-right text-xs font-medium text-muted-foreground pb-3">Turnover</th>
+                  <th className="text-right text-xs font-medium text-muted-foreground pb-3">PSH</th>
                 </tr>
               </thead>
               <tbody>
                 {services.map((svc) => (
                   <tr key={svc.name} className="border-b border-gray-50">
-                    <td className="py-3 font-medium text-gray-900">{svc.name}</td>
-                    <td className="py-3 text-right text-gray-700">{svc.workers}</td>
-                    <td className="py-3 text-right text-gray-700">{svc.agency}</td>
+                    <td className="py-3 font-medium text-foreground">{svc.name}</td>
+                    <td className="py-3 text-right text-foreground">{svc.workers}</td>
+                    <td className="py-3 text-right text-foreground">{svc.agency}</td>
                     <td className="py-3 text-right">
                       <span style={{ color: parseFloat(svc.turnover) > 31 ? terracotta : teal }}>
                         {svc.turnover}
@@ -210,12 +195,12 @@ export default function WorkforcePage() {
 
         {/* PSH by Coordinator */}
         <div className="bg-card rounded-xl border border-border p-5">
-          <h2 className="text-sm font-semibold text-gray-900 mb-4">PSH by Coordinator</h2>
+          <h2 className="text-sm font-semibold text-foreground mb-4">PSH by Coordinator</h2>
           <div className="space-y-3">
             {coordinators.map((c) => (
               <div key={c.name} className="flex items-center gap-3">
-                <span className="text-sm text-gray-700 w-20 shrink-0">{c.name}</span>
-                <div className="flex-1 h-5 bg-gray-100 rounded-full overflow-hidden">
+                <span className="text-sm text-foreground w-20 shrink-0">{c.name}</span>
+                <div className="flex-1 h-5 bg-muted rounded-full overflow-hidden">
                   <div
                     className="h-full rounded-full"
                     style={{
@@ -227,7 +212,7 @@ export default function WorkforcePage() {
                 <span className="text-sm font-bold w-8 text-right" style={{ color: scoreColor(c.score) }}>
                   {c.score.toFixed(1)}
                 </span>
-                <span className="text-xs text-gray-400 w-12 text-right">{c.participation}%</span>
+                <span className="text-xs text-muted-foreground/60 w-12 text-right">{c.participation}%</span>
               </div>
             ))}
           </div>
@@ -235,13 +220,13 @@ export default function WorkforcePage() {
 
         {/* Credentials */}
         <div className="bg-card rounded-xl border border-border p-5">
-          <h2 className="text-sm font-semibold text-gray-900 mb-4">Credentials &amp; Compliance</h2>
+          <h2 className="text-sm font-semibold text-foreground mb-4">Credentials &amp; Compliance</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {/* WWVP */}
-            <div className="rounded-xl bg-gray-50 p-4">
+            <div className="rounded-xl bg-muted/50 p-4">
               <div className="flex items-center gap-2 mb-2">
                 <ShieldCheck className="w-4 h-4" style={{ color: teal }} />
-                <p className="text-sm font-semibold text-gray-900">WWVP</p>
+                <p className="text-sm font-semibold text-foreground">WWVP</p>
               </div>
               <p className="text-lg font-bold" style={{ color: teal }}>86 / 89</p>
               <div className="flex items-center gap-1.5 mt-1">
@@ -250,22 +235,22 @@ export default function WorkforcePage() {
               </div>
             </div>
             {/* AHPRA */}
-            <div className="rounded-xl bg-gray-50 p-4">
+            <div className="rounded-xl bg-muted/50 p-4">
               <div className="flex items-center gap-2 mb-2">
                 <CheckCircle2 className="w-4 h-4" style={{ color: teal }} />
-                <p className="text-sm font-semibold text-gray-900">AHPRA</p>
+                <p className="text-sm font-semibold text-foreground">AHPRA</p>
               </div>
               <p className="text-lg font-bold" style={{ color: teal }}>12 / 12</p>
-              <p className="text-xs text-gray-500 mt-1">All registrations current</p>
+              <p className="text-xs text-muted-foreground mt-1">All registrations current</p>
             </div>
             {/* Training */}
-            <div className="rounded-xl bg-gray-50 p-4">
+            <div className="rounded-xl bg-muted/50 p-4">
               <div className="flex items-center gap-2 mb-2">
                 <GraduationCap className="w-4 h-4" style={{ color: teal }} />
-                <p className="text-sm font-semibold text-gray-900">Training</p>
+                <p className="text-sm font-semibold text-foreground">Training</p>
               </div>
               <p className="text-lg font-bold" style={{ color: amber }}>88%</p>
-              <p className="text-xs text-gray-500 mt-1">Mandatory compliance rate</p>
+              <p className="text-xs text-muted-foreground mt-1">Mandatory compliance rate</p>
             </div>
           </div>
         </div>
@@ -274,7 +259,7 @@ export default function WorkforcePage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <button
             onClick={() => router.push("/dashboard/home-care/workforce/psh")}
-            className="bg-card rounded-xl border border-border p-5 flex items-center justify-between hover:shadow-sm transition-all text-left"
+            className="bg-card rounded-xl border border-border p-5 flex items-center justify-between hover:shadow-warm transition-all text-left"
           >
             <div className="flex items-center gap-3">
               <div
@@ -284,16 +269,16 @@ export default function WorkforcePage() {
                 <BarChart3 className="w-5 h-5" style={{ color: keeperOrange }} />
               </div>
               <div>
-                <p className="text-sm font-semibold text-gray-900">Full PSH Dashboard</p>
-                <p className="text-xs text-gray-500">All 16 domains, service comparison, practices</p>
+                <p className="text-sm font-semibold text-foreground">Full PSH Dashboard</p>
+                <p className="text-xs text-muted-foreground">All 16 domains, service comparison, practices</p>
               </div>
             </div>
-            <ArrowRight className="w-5 h-5 text-gray-400" />
+            <ArrowRight className="w-5 h-5 text-muted-foreground/60" />
           </button>
 
           <button
             onClick={() => router.push("/dashboard/home-care/workforce/training")}
-            className="bg-card rounded-xl border border-border p-5 flex items-center justify-between hover:shadow-sm transition-all text-left"
+            className="bg-card rounded-xl border border-border p-5 flex items-center justify-between hover:shadow-warm transition-all text-left"
           >
             <div className="flex items-center gap-3">
               <div
@@ -303,11 +288,11 @@ export default function WorkforcePage() {
                 <GraduationCap className="w-5 h-5" style={{ color: teal }} />
               </div>
               <div>
-                <p className="text-sm font-semibold text-gray-900">Training Compliance</p>
-                <p className="text-xs text-gray-500">9 modules, credential status, gaps</p>
+                <p className="text-sm font-semibold text-foreground">Training Compliance</p>
+                <p className="text-xs text-muted-foreground">9 modules, credential status, gaps</p>
               </div>
             </div>
-            <ArrowRight className="w-5 h-5 text-gray-400" />
+            <ArrowRight className="w-5 h-5 text-muted-foreground/60" />
           </button>
         </div>
     </div>

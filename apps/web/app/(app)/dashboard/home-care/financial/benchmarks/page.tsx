@@ -1,7 +1,7 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { ChevronRight, AlertTriangle } from "lucide-react";
+import { AlertTriangle } from "lucide-react";
+import { PageHeader } from "@/components/dashboard/PageHeader";
 
 /* ── colours ── */
 const forest = "#1B4332";
@@ -142,31 +142,15 @@ function formatVal(val: number, unit: string) {
 }
 
 export default function BenchmarksPage() {
-  const router = useRouter();
-
   return (
     <div className="p-4 lg:p-8 max-w-5xl mx-auto space-y-6">
-        {/* Breadcrumb */}
-        <button
-          onClick={() => router.push("/dashboard/home-care/financial")}
-          className="text-xs text-gray-500 hover:text-gray-700 flex items-center gap-1"
-        >
-          Home Care <ChevronRight className="w-3 h-3" /> Financial <ChevronRight className="w-3 h-3" /> Benchmarks
-        </button>
-
         {/* Header */}
-        <div>
-          <h1 className="text-[28px] font-bold text-gray-900">Home Care Benchmarks</h1>
-          <p className="text-sm text-gray-500 mt-1">
-            StewartBrown ACFPS FY25 Home Care · 247 providers
-          </p>
-          <p className="text-sm text-gray-500">Knights of the Holy Grail</p>
-        </div>
+        <PageHeader title="Benchmarks" subtitle="StewartBrown ACFPS FY25" backHref="/dashboard/home-care/financial" />
 
         {/* Categories */}
         {categories.map((cat) => (
           <div key={cat.title} className="bg-card rounded-xl border border-border p-5 space-y-5">
-            <h2 className="text-sm font-semibold text-gray-900">{cat.title}</h2>
+            <h2 className="text-sm font-semibold text-foreground">{cat.title}</h2>
 
             {cat.metrics.map((m) => {
               const status = metricStatus(m);
@@ -175,14 +159,14 @@ export default function BenchmarksPage() {
               return (
                 <div key={m.label} className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-700">{m.label}</span>
+                    <span className="text-sm text-foreground">{m.label}</span>
                     <span className="text-lg font-bold" style={{ color: statusColor(status) }}>
                       {formatVal(m.kothg, m.unit)}
                     </span>
                   </div>
 
                   {/* Benchmark bar */}
-                  <div className="relative h-6 bg-gray-100 rounded-full overflow-visible">
+                  <div className="relative h-6 bg-muted rounded-full overflow-visible">
                     {/* KOTHG bar */}
                     <div
                       className="absolute top-0 left-0 h-full rounded-full"
@@ -194,10 +178,10 @@ export default function BenchmarksPage() {
                     />
                     {/* Sector avg marker */}
                     <div
-                      className="absolute top-0 h-full w-0.5 bg-gray-500"
+                      className="absolute top-0 h-full w-0.5 bg-muted/500"
                       style={{ left: `${(m.sectorAvg / barMax) * 100}%` }}
                     >
-                      <span className="absolute -top-5 -translate-x-1/2 text-[10px] text-gray-500 whitespace-nowrap">
+                      <span className="absolute -top-5 -translate-x-1/2 text-[10px] text-muted-foreground whitespace-nowrap">
                         Sector avg
                       </span>
                     </div>
@@ -217,7 +201,7 @@ export default function BenchmarksPage() {
                     )}
                   </div>
 
-                  <div className="flex items-center gap-4 text-xs text-gray-500 pt-1">
+                  <div className="flex items-center gap-4 text-xs text-muted-foreground pt-1">
                     <span>
                       KOTHG: <strong>{formatVal(m.kothg, m.unit)}</strong>
                     </span>
@@ -244,7 +228,7 @@ export default function BenchmarksPage() {
                         <AlertTriangle className="w-4 h-4 shrink-0" style={{ color: amber }} />
                       )}
                       <div className="flex items-center gap-4 text-xs">
-                        <span className="text-gray-700">
+                        <span className="text-foreground">
                           Camelot:{" "}
                           <strong
                             style={{
@@ -259,8 +243,8 @@ export default function BenchmarksPage() {
                             {formatVal(m.serviceSplit.camelot, m.unit)}
                           </strong>
                         </span>
-                        <span className="text-gray-400">vs</span>
-                        <span className="text-gray-700">
+                        <span className="text-muted-foreground/60">vs</span>
+                        <span className="text-foreground">
                           Avalon:{" "}
                           <strong
                             style={{

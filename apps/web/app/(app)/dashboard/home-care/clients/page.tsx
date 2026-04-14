@@ -1,16 +1,15 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import {
   Users,
   AlertTriangle,
-  ChevronRight,
   FileCheck,
   MessageSquare,
   TrendingUp,
   Heart,
   ShieldAlert,
 } from "lucide-react";
+import { PageHeader } from "@/components/dashboard/PageHeader";
 import { holy_grail_home_care } from "@/lib/seed-data";
 
 const combined = holy_grail_home_care.combined;
@@ -83,33 +82,20 @@ const riskBadgeColors: Record<string, { bg: string; text: string }> = {
 };
 
 export default function ClientIntelligencePage() {
-  const router = useRouter();
-
   return (
     <div className="p-4 lg:p-8 max-w-5xl mx-auto space-y-6">
         {/* Header */}
-        <div>
-          <button
-            onClick={() => router.push("/dashboard/home-care")}
-            className="text-xs text-gray-500 hover:text-gray-700 mb-2 flex items-center gap-1"
-          >
-            Home Care <ChevronRight className="w-3 h-3" /> Clients
-          </button>
-          <h1 className="text-[28px] font-bold text-gray-900">Client Intelligence</h1>
-          <p className="text-sm text-gray-500 mt-1">
-            {combined.active_clients} active clients
-          </p>
-        </div>
+        <PageHeader title="Client Intelligence" subtitle={`KHG Home Care · ${combined.active_clients} active clients`} backHref="/dashboard/home-care" />
 
         {/* Stat Cards */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {statCards.map((card) => (
             <div key={card.label} className="bg-card rounded-xl border border-border p-5">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-sm font-medium text-gray-500">{card.label}</span>
+                <span className="text-sm font-medium text-muted-foreground">{card.label}</span>
                 <card.icon className="w-4 h-4" style={{ color: card.color }} />
               </div>
-              <p className="text-[28px] font-bold text-gray-900">{card.value}</p>
+              <p className="text-[28px] font-bold text-foreground">{card.value}</p>
               <p className="text-xs mt-1" style={{ color: card.color }}>{card.sub}</p>
             </div>
           ))}
@@ -119,19 +105,19 @@ export default function ClientIntelligencePage() {
         <div className="bg-card rounded-xl border border-border p-5">
           <div className="flex items-center gap-2 mb-4">
             <ShieldAlert className="w-4 h-4 text-[#C4704A]" />
-            <h2 className="text-sm font-semibold text-gray-900">High Risk Clients</h2>
-            <span className="text-xs text-gray-500 ml-auto">{metrics.high_risk_clients} total</span>
+            <h2 className="text-sm font-semibold text-foreground">High Risk Clients</h2>
+            <span className="text-xs text-muted-foreground ml-auto">{metrics.high_risk_clients} total</span>
           </div>
           <div className="space-y-3">
             {highRiskClients.map((client) => (
               <div
                 key={client.id}
-                className="rounded-xl border border-gray-100 p-4 hover:shadow-sm transition-all"
+                className="rounded-xl border border-border p-4 hover:shadow-warm transition-all"
               >
                 <div className="flex items-start justify-between mb-2">
                   <div>
-                    <p className="text-sm font-semibold text-gray-900">{client.name}</p>
-                    <p className="text-xs text-gray-500">{client.service} · Last visit: {client.lastVisit}</p>
+                    <p className="text-sm font-semibold text-foreground">{client.name}</p>
+                    <p className="text-xs text-muted-foreground">{client.service} · Last visit: {client.lastVisit}</p>
                   </div>
                   <span
                     className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium ${
@@ -145,7 +131,7 @@ export default function ClientIntelligencePage() {
                 </div>
                 <div className="flex flex-wrap gap-1.5">
                   {client.riskFactors.map((factor) => {
-                    const colors = riskBadgeColors[factor] || { bg: "bg-gray-50", text: "text-gray-700" };
+                    const colors = riskBadgeColors[factor] || { bg: "bg-muted/50", text: "text-foreground" };
                     return (
                       <span
                         key={factor}
@@ -164,13 +150,13 @@ export default function ClientIntelligencePage() {
         {/* Care Plan Currency */}
         <div className="bg-card rounded-xl border border-border p-5">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-sm font-semibold text-gray-900">Care Plan Currency</h2>
+            <h2 className="text-sm font-semibold text-foreground">Care Plan Currency</h2>
             <span className="text-xs font-medium" style={{ color: "#D4A017" }}>
               {metrics.care_plans_overdue} overdue
             </span>
           </div>
           <div className="flex items-center gap-3 mb-3">
-            <div className="flex-1 h-3 rounded-full bg-gray-100 overflow-hidden">
+            <div className="flex-1 h-3 rounded-full bg-muted overflow-hidden">
               <div
                 className="h-full rounded-full"
                 style={{
@@ -179,7 +165,7 @@ export default function ClientIntelligencePage() {
                 }}
               />
             </div>
-            <span className="text-sm font-semibold text-gray-900">{metrics.care_plans_current_pct}%</span>
+            <span className="text-sm font-semibold text-foreground">{metrics.care_plans_current_pct}%</span>
           </div>
           <div className="flex items-center gap-2 rounded-lg bg-amber-50 px-3 py-2">
             <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0" />
@@ -193,27 +179,27 @@ export default function ClientIntelligencePage() {
         <div className="bg-card rounded-xl border border-border p-5">
           <div className="flex items-center gap-2 mb-4">
             <Heart className="w-4 h-4 text-[#2D7D73]" />
-            <h2 className="text-sm font-semibold text-gray-900">Client Satisfaction</h2>
+            <h2 className="text-sm font-semibold text-foreground">Client Satisfaction</h2>
           </div>
           <div className="flex items-end gap-4">
             <div>
-              <p className="text-[28px] font-bold text-gray-900">{metrics.client_satisfaction}</p>
-              <p className="text-xs text-gray-500">/100</p>
+              <p className="text-[28px] font-bold text-foreground">{metrics.client_satisfaction}</p>
+              <p className="text-xs text-muted-foreground">/100</p>
             </div>
             <div className="flex items-center gap-1 mb-1">
               <TrendingUp className="w-4 h-4 text-emerald-500" />
               <span className="text-xs font-medium text-emerald-600">Above sector average (79.1)</span>
             </div>
           </div>
-          <div className="mt-3 h-2.5 rounded-full bg-gray-100 overflow-hidden">
+          <div className="mt-3 h-2.5 rounded-full bg-muted overflow-hidden">
             <div
               className="h-full rounded-full"
               style={{ width: `${metrics.client_satisfaction}%`, backgroundColor: "#2D7D73" }}
             />
           </div>
-          <div className="flex justify-between mt-1.5 text-[10px] text-gray-400">
+          <div className="flex justify-between mt-1.5 text-[10px] text-muted-foreground/60">
             <span>0</span>
-            <span className="text-gray-500 font-medium">Sector avg 79.1</span>
+            <span className="text-muted-foreground font-medium">Sector avg 79.1</span>
             <span>100</span>
           </div>
         </div>

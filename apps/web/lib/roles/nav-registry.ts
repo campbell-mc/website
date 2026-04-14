@@ -162,6 +162,7 @@ const NAV_SECTIONS: Record<string, NavSection | WeeklyLoopSection> = {
     alwaysOpen: true,
     items: [
       { label: "Home", href: "/dashboard/home-care", icon: "Home" },
+      { label: "Review Queue", href: "/don/queue", icon: "ClipboardList" },
       { label: "Morning Briefing", href: "/dashboard/home-care/briefing", icon: "FileText" },
       { label: "Documents", href: "/dashboard/home-care/documents", icon: "FileText" },
       { label: "CHRIS Coach", href: "/dashboard/coach", icon: "Sparkles" },

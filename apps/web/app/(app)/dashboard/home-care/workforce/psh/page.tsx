@@ -76,7 +76,7 @@ const serviceComparison = [
 function TrendIcon({ trend }: { trend: "improving" | "worsening" | "stable" }) {
   if (trend === "improving") return <ArrowUpRight className="w-3.5 h-3.5 text-emerald-600" />;
   if (trend === "worsening") return <ArrowDownRight className="w-3.5 h-3.5 text-red-500" />;
-  return <Minus className="w-3.5 h-3.5 text-gray-400" />;
+  return <Minus className="w-3.5 h-3.5 text-muted-foreground/60" />;
 }
 
 function scoreColor(score: number) {
@@ -93,7 +93,7 @@ export default function PSHDashboardPage() {
         {/* Breadcrumb */}
         <button
           onClick={() => router.push("/dashboard/home-care/workforce")}
-          className="text-xs text-gray-500 hover:text-gray-700 flex items-center gap-1"
+          className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1"
         >
           Home Care <ChevronRight className="w-3 h-3" /> Workforce <ChevronRight className="w-3 h-3" /> PSH
         </button>
@@ -107,10 +107,10 @@ export default function PSHDashboardPage() {
             K
           </div>
           <div>
-            <h1 className="text-[28px] font-bold text-gray-900">
+            <h1 className="text-[28px] font-bold text-foreground">
               People, Safety &amp; Happiness — Home Care
             </h1>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-muted-foreground">
               Keeper · Cycle 8 · Knights of the Holy Grail
             </p>
           </div>
@@ -119,31 +119,31 @@ export default function PSHDashboardPage() {
         {/* 3 Stat Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="bg-card rounded-xl border border-border p-5">
-            <p className="text-sm font-medium text-gray-500 mb-1">Composite Score</p>
+            <p className="text-sm font-medium text-muted-foreground mb-1">Composite Score</p>
             <div className="flex items-baseline gap-2">
               <p className="text-3xl font-bold" style={{ color: amber }}>3.1</p>
               <span className="text-xs font-medium text-emerald-600 flex items-center gap-0.5">
                 <TrendingUp className="w-3 h-3" /> improving
               </span>
             </div>
-            <p className="text-xs text-gray-500 mt-1">out of 5.0</p>
+            <p className="text-xs text-muted-foreground mt-1">out of 5.0</p>
           </div>
           <div className="bg-card rounded-xl border border-border p-5">
-            <p className="text-sm font-medium text-gray-500 mb-1">Participation</p>
+            <p className="text-sm font-medium text-muted-foreground mb-1">Participation</p>
             <p className="text-3xl font-bold" style={{ color: teal }}>81%</p>
-            <p className="text-xs text-gray-500 mt-1">72 of 89 workers responded</p>
+            <p className="text-xs text-muted-foreground mt-1">72 of 89 workers responded</p>
           </div>
           <div className="bg-card rounded-xl border border-border p-5">
-            <p className="text-sm font-medium text-gray-500 mb-1">Elevated Domains</p>
+            <p className="text-sm font-medium text-muted-foreground mb-1">Elevated Domains</p>
             <p className="text-3xl font-bold" style={{ color: terracotta }}>6</p>
-            <p className="text-xs text-gray-500 mt-1">scoring below 3.0</p>
+            <p className="text-xs text-muted-foreground mt-1">scoring below 3.0</p>
           </div>
         </div>
 
         {/* HC PSH Context Box */}
         <div className="rounded-2xl border-l-4 p-5 bg-amber-50" style={{ borderColor: amber }}>
-          <p className="text-sm font-semibold text-gray-900 mb-2">Home Care PSH Context</p>
-          <p className="text-[15px] md:text-sm text-gray-700 leading-relaxed">
+          <p className="text-sm font-semibold text-foreground mb-2">Home Care PSH Context</p>
+          <p className="text-[15px] md:text-sm text-foreground leading-relaxed">
             <strong>PSH_09</strong> (Remote/Isolated Work), <strong>PSH_10</strong> (Violence &amp; Aggression),
             and <strong>PSH_01</strong> (Job Demands) are the highest-risk domains in home care — driven by
             lone worker exposure, in-home aggression risk, and travel-plus-visit intensity.
@@ -153,7 +153,7 @@ export default function PSHDashboardPage() {
 
         {/* 3 Elevated Domain Detail Cards */}
         <div className="space-y-4">
-          <h2 className="text-lg font-semibold text-gray-900">Elevated Domain Details</h2>
+          <h2 className="text-lg font-semibold text-foreground">Elevated Domain Details</h2>
           {elevatedDomains.map((d) => (
             <div key={d.id} className="bg-card rounded-xl border border-border p-5 space-y-3">
               <div className="flex items-center justify-between">
@@ -164,21 +164,21 @@ export default function PSHDashboardPage() {
                   >
                     {d.id}
                   </span>
-                  <span className="text-sm font-semibold text-gray-900">{d.label}</span>
+                  <span className="text-sm font-semibold text-foreground">{d.label}</span>
                 </div>
                 <span className="text-2xl font-bold" style={{ color: terracotta }}>
                   {d.score.toFixed(1)}
                 </span>
               </div>
-              <p className="text-[15px] md:text-sm text-gray-600 leading-relaxed">{d.explanation}</p>
-              <div className="rounded-xl bg-gray-50 p-3 flex items-start gap-3">
+              <p className="text-[15px] md:text-sm text-muted-foreground leading-relaxed">{d.explanation}</p>
+              <div className="rounded-xl bg-muted/50 p-3 flex items-start gap-3">
                 <span
                   className="text-xs font-mono font-medium px-2 py-0.5 rounded shrink-0"
                   style={{ backgroundColor: `${teal}18`, color: teal }}
                 >
                   {d.practice}
                 </span>
-                <p className="text-xs text-gray-700">{d.practiceLabel}</p>
+                <p className="text-xs text-foreground">{d.practiceLabel}</p>
               </div>
             </div>
           ))}
@@ -186,13 +186,13 @@ export default function PSHDashboardPage() {
 
         {/* All 16 Domains */}
         <div className="bg-card rounded-xl border border-border p-5">
-          <h2 className="text-sm font-semibold text-gray-900 mb-4">All 16 Domains — Sorted by Score</h2>
+          <h2 className="text-sm font-semibold text-foreground mb-4">All 16 Domains — Sorted by Score</h2>
           <div className="space-y-2.5">
             {allDomains.map((d) => (
               <div key={d.id} className="flex items-center gap-3">
-                <span className="text-xs font-mono text-gray-400 w-14 shrink-0">{d.id}</span>
-                <span className="text-xs text-gray-700 w-40 shrink-0 truncate">{d.label}</span>
-                <div className="flex-1 h-5 bg-gray-100 rounded-full overflow-hidden relative">
+                <span className="text-xs font-mono text-muted-foreground/60 w-14 shrink-0">{d.id}</span>
+                <span className="text-xs text-foreground w-40 shrink-0 truncate">{d.label}</span>
+                <div className="flex-1 h-5 bg-muted rounded-full overflow-hidden relative">
                   <div
                     className="h-full rounded-full"
                     style={{
@@ -212,12 +212,12 @@ export default function PSHDashboardPage() {
 
         {/* By Service */}
         <div className="bg-card rounded-xl border border-border p-5">
-          <h2 className="text-sm font-semibold text-gray-900 mb-4">By Service</h2>
+          <h2 className="text-sm font-semibold text-foreground mb-4">By Service</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {serviceComparison.map((svc) => (
-              <div key={svc.name} className="rounded-xl bg-gray-50 p-4">
+              <div key={svc.name} className="rounded-xl bg-muted/50 p-4">
                 <div className="flex items-center justify-between mb-3">
-                  <p className="text-sm font-semibold text-gray-900">{svc.name}</p>
+                  <p className="text-sm font-semibold text-foreground">{svc.name}</p>
                   <p className="text-2xl font-bold" style={{ color: scoreColor(svc.composite) }}>
                     {svc.composite.toFixed(1)}
                   </p>
@@ -233,7 +233,7 @@ export default function PSHDashboardPage() {
                     </span>
                   ))}
                   {svc.elevated.length === 0 && (
-                    <span className="text-xs text-gray-400">No elevated domains</span>
+                    <span className="text-xs text-muted-foreground/60">No elevated domains</span>
                   )}
                 </div>
               </div>

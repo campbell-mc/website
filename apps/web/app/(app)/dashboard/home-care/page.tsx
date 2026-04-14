@@ -13,6 +13,9 @@ import {
   Briefcase,
   Activity,
 } from "lucide-react";
+import { PageHeader } from "@/components/dashboard/PageHeader";
+import { ChrisAvatar } from "@/components/chris/ChrisAvatar";
+import { AgentPulse } from "@/components/chris/AgentPulse";
 import { holy_grail_home_care } from "@/lib/seed-data";
 
 const org = holy_grail_home_care.organisation;
@@ -113,27 +116,33 @@ export default function HomeCareDashboard() {
         </div>
 
         {/* Header */}
-        <div>
-          <div className="flex items-center gap-2 mb-2">
-            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium" style={{ backgroundColor: "rgba(27,67,50,0.08)", color: "#1B4332" }}>
-              Support at Home
-            </span>
+        <PageHeader title="Home Care Dashboard" subtitle={`${org.name} · ${org.location}`} backHref="/dashboard" showAskChris={true} />
+
+        {/* CHRIS Briefing — avatar above, never beside */}
+        <div className="rounded-xl p-5" style={{ background: "rgba(27,67,50,0.05)" }}>
+          <div className="flex items-center gap-2.5 mb-3">
+            <ChrisAvatar size="small" showGlow className="shrink-0" />
+            <div>
+              <p className="text-sm font-semibold text-foreground">CHRIS</p>
+              <p className="text-[10px] text-muted-foreground">Updated 2h ago</p>
+            </div>
           </div>
-          <h1 className="text-[28px] font-bold text-gray-900">Good morning, Guinevere</h1>
-          <p className="text-sm text-gray-500 mt-1">
-            {org.name} · {org.location} · {combined.active_clients} active clients
+          <p className="text-sm text-foreground leading-relaxed font-serif-accent">
+            Good morning, Guinevere. Visit compliance is tracking at {metrics.visit_compliance_pct}% — just above your 97% target. {metrics.high_risk_clients} high-risk clients need enhanced monitoring today. {metrics.care_plans_overdue} care plans are overdue for review. Unspent funds across {combined.active_clients} packages sit at {metrics.unspent_funds_pct}% — Oracle has flagged {combined.packages.underspend_risk} clients at risk of clawback before quarter end.
           </p>
         </div>
+
+        <AgentPulse domain="home_care" />
 
         {/* Stat Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {statCards.map((card) => (
             <div key={card.label} className="bg-card rounded-xl border border-border p-5">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-sm font-medium text-gray-500">{card.label}</span>
-                <card.icon className="w-4 h-4 text-gray-400" />
+                <span className="text-sm font-medium text-muted-foreground">{card.label}</span>
+                <card.icon className="w-4 h-4 text-muted-foreground/60" />
               </div>
-              <p className="text-[28px] font-bold text-gray-900">{card.value}</p>
+              <p className="text-[28px] font-bold text-foreground">{card.value}</p>
               <p className="text-xs mt-1" style={{ color: card.color }}>{card.target}</p>
             </div>
           ))}
@@ -141,7 +150,7 @@ export default function HomeCareDashboard() {
 
         {/* Domain Strip */}
         <div className="bg-card rounded-xl border border-border p-5">
-          <h2 className="text-sm font-semibold text-gray-900 mb-4">Domain Overview</h2>
+          <h2 className="text-sm font-semibold text-foreground mb-4">Domain Overview</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
             {domains.map((d) => {
               const sc = statusColors[d.status];
@@ -149,17 +158,17 @@ export default function HomeCareDashboard() {
                 <button
                   key={d.label}
                   onClick={() => router.push(d.href)}
-                  className="flex flex-col items-start gap-2 rounded-xl border border-gray-100 p-3 hover:border-gray-200 hover:shadow-sm transition-all text-left"
+                  className="flex flex-col items-start gap-2 rounded-xl border border-border p-3 hover:border-border hover:shadow-warm transition-all text-left"
                 >
                   <div className="flex items-center gap-2 w-full">
-                    <d.icon className="w-4 h-4 text-gray-400" />
-                    <span className="text-sm font-medium text-gray-900">{d.label}</span>
+                    <d.icon className="w-4 h-4 text-muted-foreground/60" />
+                    <span className="text-sm font-medium text-foreground">{d.label}</span>
                   </div>
                   <div className="flex items-center gap-1.5">
                     <span className={`w-1.5 h-1.5 rounded-full ${sc.dot}`} />
                     <span className={`text-xs font-medium ${sc.text}`}>{d.status}</span>
                   </div>
-                  <p className="text-[11px] text-gray-500">{d.detail}</p>
+                  <p className="text-[11px] text-muted-foreground">{d.detail}</p>
                 </button>
               );
             })}
@@ -168,7 +177,7 @@ export default function HomeCareDashboard() {
 
         {/* Needs Attention */}
         <div className="bg-card rounded-xl border border-border p-5">
-          <h2 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
+          <h2 className="text-sm font-semibold text-foreground mb-4 flex items-center gap-2">
             <AlertTriangle className="w-4 h-4 text-amber-500" />
             Needs Attention
           </h2>
@@ -177,17 +186,17 @@ export default function HomeCareDashboard() {
               <button
                 key={i}
                 onClick={() => router.push(item.href)}
-                className={`w-full flex items-center justify-between rounded-xl border p-4 text-left transition-all hover:shadow-sm ${
+                className={`w-full flex items-center justify-between rounded-xl border p-4 text-left transition-all hover:shadow-warm ${
                   item.urgency === "critical"
-                    ? "border-l-4 border-l-[#C4704A] border-gray-100 bg-[rgba(196,112,74,0.04)]"
-                    : "border-l-4 border-l-[#D4A017] border-gray-100 bg-[rgba(212,160,23,0.04)]"
+                    ? "border-l-4 border-l-[#C4704A] border-border bg-[rgba(196,112,74,0.04)]"
+                    : "border-l-4 border-l-[#D4A017] border-border bg-[rgba(212,160,23,0.04)]"
                 }`}
               >
                 <div>
-                  <p className="text-sm font-semibold text-gray-900">{item.title}</p>
-                  <p className="text-xs text-gray-500 mt-0.5">{item.detail}</p>
+                  <p className="text-sm font-semibold text-foreground">{item.title}</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">{item.detail}</p>
                 </div>
-                <ChevronRight className="w-4 h-4 text-gray-400 shrink-0" />
+                <ChevronRight className="w-4 h-4 text-muted-foreground/60 shrink-0" />
               </button>
             ))}
           </div>
@@ -196,7 +205,7 @@ export default function HomeCareDashboard() {
         {/* Financial Snapshot */}
         <div className="bg-card rounded-xl border border-border p-5">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-sm font-semibold text-gray-900">Financial Snapshot</h2>
+            <h2 className="text-sm font-semibold text-foreground">Financial Snapshot</h2>
             <button
               onClick={() => router.push("/dashboard/home-care/financial")}
               className="text-xs font-medium flex items-center gap-1 hover:underline"
@@ -206,17 +215,17 @@ export default function HomeCareDashboard() {
             </button>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div className="rounded-xl bg-gray-50 p-4">
-              <p className="text-xs text-gray-500 mb-1">Revenue per client per day</p>
-              <p className="text-[28px] font-bold text-gray-900">${financial.revenue_per_client_per_day.toFixed(2)}</p>
+            <div className="rounded-xl bg-muted/50 p-4">
+              <p className="text-xs text-muted-foreground mb-1">Revenue per client per day</p>
+              <p className="text-[28px] font-bold text-foreground">${financial.revenue_per_client_per_day.toFixed(2)}</p>
             </div>
-            <div className="rounded-xl bg-gray-50 p-4">
-              <p className="text-xs text-gray-500 mb-1">Care Management</p>
-              <p className="text-[28px] font-bold text-gray-900">{financial.care_management_pct}%</p>
+            <div className="rounded-xl bg-muted/50 p-4">
+              <p className="text-xs text-muted-foreground mb-1">Care Management</p>
+              <p className="text-[28px] font-bold text-foreground">{financial.care_management_pct}%</p>
             </div>
-            <div className="rounded-xl bg-gray-50 p-4">
-              <p className="text-xs text-gray-500 mb-1">EBITDA Return</p>
-              <p className="text-[28px] font-bold text-gray-900">{financial.ebitda_return_pct}%</p>
+            <div className="rounded-xl bg-muted/50 p-4">
+              <p className="text-xs text-muted-foreground mb-1">EBITDA Return</p>
+              <p className="text-[28px] font-bold text-foreground">{financial.ebitda_return_pct}%</p>
             </div>
           </div>
         </div>

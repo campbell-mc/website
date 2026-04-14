@@ -1,9 +1,7 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import {
   Shield,
-  ChevronRight,
   CheckCircle,
   AlertTriangle,
   Clock,
@@ -11,6 +9,7 @@ import {
   Users,
   Activity,
 } from "lucide-react";
+import { PageHeader } from "@/components/dashboard/PageHeader";
 import { holy_grail_home_care } from "@/lib/seed-data";
 
 const metrics = holy_grail_home_care.combined.metrics;
@@ -81,40 +80,27 @@ const statCards = [
 ];
 
 export default function ComplianceRegisterPage() {
-  const router = useRouter();
-
   return (
     <div className="p-4 lg:p-8 max-w-5xl mx-auto space-y-6">
         {/* Header */}
-        <div>
-          <button
-            onClick={() => router.push("/dashboard/home-care")}
-            className="text-xs text-gray-500 hover:text-gray-700 mb-2 flex items-center gap-1"
-          >
-            Home Care <ChevronRight className="w-3 h-3" /> Compliance
-          </button>
-          <h1 className="text-[28px] font-bold text-gray-900">Compliance Register</h1>
-          <p className="text-sm text-gray-500 mt-1">
-            Support at Home · Aged Care Act 2024
-          </p>
-        </div>
+        <PageHeader title="Compliance Register" subtitle="KHG Home Care Southern Highlands" backHref="/dashboard/home-care" />
 
         {/* Stat Cards */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {statCards.map((card) => (
             <div key={card.label} className="bg-card rounded-xl border border-border p-5">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-sm font-medium text-gray-500">{card.label}</span>
+                <span className="text-sm font-medium text-muted-foreground">{card.label}</span>
                 <card.icon className="w-4 h-4" style={{ color: card.color }} />
               </div>
-              <p className="text-[28px] font-bold text-gray-900">{card.value}</p>
+              <p className="text-[28px] font-bold text-foreground">{card.value}</p>
             </div>
           ))}
         </div>
 
         {/* Obligations List */}
         <div className="bg-card rounded-xl border border-border p-5">
-          <h2 className="text-sm font-semibold text-gray-900 mb-4">Regulatory Obligations</h2>
+          <h2 className="text-sm font-semibold text-foreground mb-4">Regulatory Obligations</h2>
           <div className="space-y-3">
             {obligations.map((ob) => {
               const config = statusConfig[ob.status];
@@ -122,20 +108,20 @@ export default function ComplianceRegisterPage() {
               return (
                 <div
                   key={ob.name}
-                  className="flex items-start gap-4 rounded-xl border border-gray-100 p-4 hover:shadow-sm transition-all"
+                  className="flex items-start gap-4 rounded-xl border border-border p-4 hover:shadow-warm transition-all"
                 >
                   <div className={`shrink-0 w-8 h-8 rounded-lg ${config.bg} flex items-center justify-center`}>
                     <ob.icon className={`w-4 h-4 ${config.text}`} />
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
-                      <p className="text-sm font-semibold text-gray-900">{ob.name}</p>
+                      <p className="text-sm font-semibold text-foreground">{ob.name}</p>
                       <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium ${config.bg} ${config.text}`}>
                         <span className={`w-1.5 h-1.5 rounded-full ${config.dot}`} />
                         {ob.status === "met" ? "Met" : ob.status === "at_risk" ? "At Risk" : "Upcoming"}
                       </span>
                     </div>
-                    <p className="text-xs text-gray-500">{ob.detail}</p>
+                    <p className="text-xs text-muted-foreground">{ob.detail}</p>
                   </div>
                   <StatusIcon className={`w-5 h-5 shrink-0 ${config.text}`} />
                 </div>

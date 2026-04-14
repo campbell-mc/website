@@ -63,7 +63,7 @@ export default function BriefingPage() {
         {/* Breadcrumb */}
         <button
           onClick={() => router.push("/dashboard/home-care")}
-          className="text-xs text-gray-500 hover:text-gray-700 flex items-center gap-1"
+          className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1"
         >
           Home Care <ChevronRight className="w-3 h-3" /> Morning Briefing
         </button>
@@ -79,8 +79,8 @@ export default function BriefingPage() {
             <span className="text-white font-bold text-sm">C</span>
           </div>
           <div>
-            <h1 className="text-[28px] font-bold text-gray-900">Morning Briefing</h1>
-            <div className="flex items-center gap-2 text-sm text-gray-500">
+            <h1 className="text-[28px] font-bold text-foreground">Morning Briefing</h1>
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <span>{dateStr}</span>
               <span className="text-gray-300">·</span>
               <div className="flex items-center gap-1">
@@ -107,7 +107,7 @@ export default function BriefingPage() {
 
         {/* Top 3 Actions */}
         <div className="space-y-4">
-          <h2 className="text-lg font-semibold text-gray-900">Priority Actions</h2>
+          <h2 className="text-lg font-semibold text-foreground">Priority Actions</h2>
           {actions.map((a) => (
             <div
               key={a.priority}
@@ -121,7 +121,7 @@ export default function BriefingPage() {
                   >
                     {a.priority}
                   </span>
-                  <span className="text-sm font-semibold text-gray-900">{a.label}</span>
+                  <span className="text-sm font-semibold text-foreground">{a.label}</span>
                 </div>
                 <span
                   className="text-xs font-bold px-2.5 py-1 rounded-full"
@@ -133,7 +133,7 @@ export default function BriefingPage() {
                   {a.urgency}
                 </span>
               </div>
-              <p className="text-[15px] md:text-sm text-gray-600 leading-relaxed">{a.detail}</p>
+              <p className="text-[15px] md:text-sm text-muted-foreground leading-relaxed">{a.detail}</p>
               <button
                 onClick={() => router.push(a.route)}
                 className="flex items-center gap-2 text-sm font-medium transition-colors"
@@ -148,17 +148,17 @@ export default function BriefingPage() {
 
         {/* Service Snapshot */}
         <div className="bg-card rounded-xl border border-border p-5">
-          <h2 className="text-sm font-semibold text-gray-900 mb-4">Service Snapshot — Today</h2>
+          <h2 className="text-sm font-semibold text-foreground mb-4">Service Snapshot — Today</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {serviceSnapshot.map((svc) => (
-              <div key={svc.name} className="rounded-xl bg-gray-50 p-4">
-                <p className="text-sm font-semibold text-gray-900 mb-3">{svc.name}</p>
+              <div key={svc.name} className="rounded-xl bg-muted/50 p-4">
+                <p className="text-sm font-semibold text-foreground mb-3">{svc.name}</p>
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-2xl font-bold" style={{ color: forest }}>
                       {svc.visits}
                     </p>
-                    <p className="text-xs text-gray-500">visits scheduled</p>
+                    <p className="text-xs text-muted-foreground">visits scheduled</p>
                   </div>
                   <div className="text-right">
                     <p
@@ -167,7 +167,7 @@ export default function BriefingPage() {
                     >
                       {svc.compliance}%
                     </p>
-                    <p className="text-xs text-gray-500">visit compliance</p>
+                    <p className="text-xs text-muted-foreground">visit compliance</p>
                   </div>
                 </div>
               </div>
