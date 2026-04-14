@@ -115,7 +115,7 @@ export function RoiCalculator() {
     <section className="bg-[#1B4332]" id="roi-calculator">
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
         <div className="mb-10">
-          <div className="text-[11px] font-medium tracking-[0.08em] uppercase text-white/50 mb-3">
+          <div className="text-[11px] font-medium tracking-[0.08em] uppercase text-white/70 mb-3">
             Business case calculator
           </div>
           <h2 className="text-[clamp(26px,3.5vw,42px)] font-normal leading-[1.1] tracking-[-0.02em] mb-4" style={{ fontFamily: "var(--font-instrument-serif, 'Georgia'), serif", color: "#ffffff" }}>
@@ -123,7 +123,7 @@ export function RoiCalculator() {
             <br />
             <em className="italic" style={{ color: "#86EFAC" }}>to your organisation?</em>
           </h2>
-          <p className="text-[14px] text-white/60 max-w-lg leading-relaxed">
+          <p className="text-[15px] text-white/85 max-w-lg leading-relaxed">
             Adjust the inputs to match your facility. Every number is grounded in
             real aged care operational data — your actual leader time, your actual
             AN-ACC exposure, your actual compliance risk.
@@ -172,11 +172,11 @@ export function RoiCalculator() {
               </div>
 
               <div className="bg-[#1B4332] rounded-xl p-5 mb-4">
-                <div className="text-[11px] text-white/50 mb-1">Total annual value</div>
+                <div className="text-[11px] text-white/75 mb-1">Total annual value</div>
                 <div className="text-[42px] text-white leading-none mb-1" style={{ fontFamily: "var(--font-instrument-serif, 'Georgia'), serif" }}>
                   {fmt(r.totalValue)}
                 </div>
-                <div className="text-[11px] text-white/40">
+                <div className="text-[11px] text-white/65">
                   across {inp.sites} facilit{inp.sites === 1 ? "y" : "ies"} · {r.totalLeaders} leaders
                 </div>
               </div>
@@ -233,7 +233,7 @@ export function RoiCalculator() {
             </div>
 
             <div className="bg-white/8 border border-white/10 rounded-xl p-4">
-              <div className="text-[10px] text-white/45 leading-relaxed">
+              <div className="text-[10px] text-white/65 leading-relaxed">
                 Time value uses loaded hourly rate including super and overhead.
                 AN-ACC uplift modelled at 12 months per reclassification.
                 SIRS penalty uses $330,000 (1,000 penalty units x $330 — s.179
@@ -248,7 +248,7 @@ export function RoiCalculator() {
           <Link href="/" className="bg-white text-[#1B4332] px-8 py-3.5 rounded-lg text-[13px] font-medium hover:bg-white/90 transition-colors">
             Enter the demo →
           </Link>
-          <Link href="/newsroom" className="border border-white/20 text-white/65 px-8 py-3.5 rounded-lg text-[13px] hover:border-white/38 hover:text-white/85 transition-colors">
+          <Link href="/newsroom" className="border border-white/30 text-white/80 px-8 py-3.5 rounded-lg text-[13px] hover:border-white/50 hover:text-white transition-colors">
             Read the regulatory context
           </Link>
         </div>
