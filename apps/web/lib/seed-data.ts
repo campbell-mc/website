@@ -169,6 +169,66 @@ export const workforce_monthly = [
     open_vacancies: { rn: 1, en: 0, ain: 2 },
     notes: 'Workforce stabilising. PSH improving in Wattle Wing — PSH_01 from 0.81 to 0.71. Practice from Cycle 8 showing early effect.',
   },
+  // Apr 2026
+  {
+    period: '2026-04', facility_id: 'FAC-001',
+    headcount: { rn: 30, en: 25, ain: 190, allied_health: 12, admin: 14, management: 8, total: 279 },
+    employment_basis: { permanent_ft: 148, permanent_pt: 93, casual: 38 },
+    agency_hours_pct: 0.135, turnover_rolling_12m: 0.26, absenteeism_rate: 0.074,
+    sick_leave_hours_by_role: { rn: 96, en: 88, ain: 652 },
+    wc_hours: 40, training_compliance_pct: 0.95, credentials_expiring_30d: 1,
+    new_starters: 4, separations: 2, open_vacancies: { rn: 0, en: 0, ain: 2 },
+  },
+  // May 2026
+  {
+    period: '2026-05', facility_id: 'FAC-001',
+    headcount: { rn: 31, en: 25, ain: 192, allied_health: 12, admin: 14, management: 8, total: 282 },
+    employment_basis: { permanent_ft: 151, permanent_pt: 94, casual: 37 },
+    agency_hours_pct: 0.117, turnover_rolling_12m: 0.24, absenteeism_rate: 0.069,
+    sick_leave_hours_by_role: { rn: 88, en: 82, ain: 624 },
+    wc_hours: 24, training_compliance_pct: 0.96, credentials_expiring_30d: 0,
+    new_starters: 3, separations: 1, open_vacancies: { rn: 0, en: 0, ain: 1 },
+  },
+  // Jun 2026
+  {
+    period: '2026-06', facility_id: 'FAC-001',
+    headcount: { rn: 31, en: 26, ain: 193, allied_health: 13, admin: 14, management: 8, total: 285 },
+    employment_basis: { permanent_ft: 154, permanent_pt: 95, casual: 36 },
+    agency_hours_pct: 0.102, turnover_rolling_12m: 0.22, absenteeism_rate: 0.065,
+    sick_leave_hours_by_role: { rn: 82, en: 78, ain: 598 },
+    wc_hours: 16, training_compliance_pct: 0.97, credentials_expiring_30d: 0,
+    new_starters: 3, separations: 1, open_vacancies: { rn: 0, en: 0, ain: 0 },
+  },
+  // Jul 2026
+  {
+    period: '2026-07', facility_id: 'FAC-001',
+    headcount: { rn: 32, en: 26, ain: 194, allied_health: 13, admin: 14, management: 8, total: 287 },
+    employment_basis: { permanent_ft: 156, permanent_pt: 96, casual: 35 },
+    agency_hours_pct: 0.090, turnover_rolling_12m: 0.20, absenteeism_rate: 0.062,
+    sick_leave_hours_by_role: { rn: 78, en: 74, ain: 578 },
+    wc_hours: 8, training_compliance_pct: 0.97, credentials_expiring_30d: 1,
+    new_starters: 2, separations: 1, open_vacancies: { rn: 0, en: 0, ain: 0 },
+  },
+  // Aug 2026
+  {
+    period: '2026-08', facility_id: 'FAC-001',
+    headcount: { rn: 32, en: 26, ain: 195, allied_health: 13, admin: 14, management: 8, total: 288 },
+    employment_basis: { permanent_ft: 158, permanent_pt: 96, casual: 34 },
+    agency_hours_pct: 0.080, turnover_rolling_12m: 0.19, absenteeism_rate: 0.058,
+    sick_leave_hours_by_role: { rn: 74, en: 70, ain: 558 },
+    wc_hours: 0, training_compliance_pct: 0.98, credentials_expiring_30d: 0,
+    new_starters: 2, separations: 0, open_vacancies: { rn: 0, en: 0, ain: 0 },
+  },
+  // Sep 2026
+  {
+    period: '2026-09', facility_id: 'FAC-001',
+    headcount: { rn: 32, en: 27, ain: 196, allied_health: 13, admin: 14, management: 8, total: 290 },
+    employment_basis: { permanent_ft: 160, permanent_pt: 97, casual: 33 },
+    agency_hours_pct: 0.069, turnover_rolling_12m: 0.18, absenteeism_rate: 0.055,
+    sick_leave_hours_by_role: { rn: 70, en: 66, ain: 538 },
+    wc_hours: 0, training_compliance_pct: 0.98, credentials_expiring_30d: 0,
+    new_starters: 2, separations: 1, open_vacancies: { rn: 0, en: 0, ain: 0 },
+  },
 ];
 
 // ============================================================
@@ -208,6 +268,38 @@ export const care_minutes_weekly = [
   { week: '2026-W11', avg_total: 221, avg_rn: 46.1, avg_ain: 174.9, compliant_days: 7, non_compliant_days: 0, rn_gap_days: 0 },
   { week: '2026-W12', avg_total: 219, avg_rn: 45.6, avg_ain: 173.4, compliant_days: 7, non_compliant_days: 0, rn_gap_days: 0 },
   { week: '2026-W13', avg_total: 216, avg_rn: 44.4, avg_ain: 171.6, compliant_days: 6, non_compliant_days: 1, rn_gap_days: 0 },
+  // Apr 2026 — strong recovery
+  { week: '2026-W14', avg_total: 222, avg_rn: 45.8, avg_ain: 176.2, compliant_days: 7, non_compliant_days: 0, rn_gap_days: 0 },
+  { week: '2026-W15', avg_total: 224, avg_rn: 46.1, avg_ain: 177.9, compliant_days: 7, non_compliant_days: 0, rn_gap_days: 0 },
+  { week: '2026-W16', avg_total: 221, avg_rn: 45.4, avg_ain: 175.6, compliant_days: 7, non_compliant_days: 0, rn_gap_days: 0 },
+  { week: '2026-W17', avg_total: 226, avg_rn: 46.8, avg_ain: 179.2, compliant_days: 7, non_compliant_days: 0, rn_gap_days: 0 },
+  // May 2026
+  { week: '2026-W18', avg_total: 225, avg_rn: 46.4, avg_ain: 178.6, compliant_days: 7, non_compliant_days: 0, rn_gap_days: 0 },
+  { week: '2026-W19', avg_total: 228, avg_rn: 47.2, avg_ain: 180.8, compliant_days: 7, non_compliant_days: 0, rn_gap_days: 0 },
+  { week: '2026-W20', avg_total: 223, avg_rn: 45.9, avg_ain: 177.1, compliant_days: 7, non_compliant_days: 0, rn_gap_days: 0 },
+  { week: '2026-W21', avg_total: 227, avg_rn: 46.6, avg_ain: 180.4, compliant_days: 7, non_compliant_days: 0, rn_gap_days: 0 },
+  { week: '2026-W22', avg_total: 230, avg_rn: 47.8, avg_ain: 182.2, compliant_days: 7, non_compliant_days: 0, rn_gap_days: 0 },
+  // Jun 2026
+  { week: '2026-W23', avg_total: 229, avg_rn: 47.4, avg_ain: 181.6, compliant_days: 7, non_compliant_days: 0, rn_gap_days: 0 },
+  { week: '2026-W24', avg_total: 231, avg_rn: 48.0, avg_ain: 183.0, compliant_days: 7, non_compliant_days: 0, rn_gap_days: 0 },
+  { week: '2026-W25', avg_total: 228, avg_rn: 47.1, avg_ain: 180.9, compliant_days: 7, non_compliant_days: 0, rn_gap_days: 0 },
+  { week: '2026-W26', avg_total: 232, avg_rn: 48.2, avg_ain: 183.8, compliant_days: 7, non_compliant_days: 0, rn_gap_days: 0 },
+  // Jul 2026
+  { week: '2026-W27', avg_total: 230, avg_rn: 47.6, avg_ain: 182.4, compliant_days: 7, non_compliant_days: 0, rn_gap_days: 0 },
+  { week: '2026-W28', avg_total: 233, avg_rn: 48.4, avg_ain: 184.6, compliant_days: 7, non_compliant_days: 0, rn_gap_days: 0 },
+  { week: '2026-W29', avg_total: 231, avg_rn: 48.0, avg_ain: 183.0, compliant_days: 7, non_compliant_days: 0, rn_gap_days: 0 },
+  { week: '2026-W30', avg_total: 234, avg_rn: 48.8, avg_ain: 185.2, compliant_days: 7, non_compliant_days: 0, rn_gap_days: 0 },
+  // Aug 2026
+  { week: '2026-W31', avg_total: 232, avg_rn: 48.2, avg_ain: 183.8, compliant_days: 7, non_compliant_days: 0, rn_gap_days: 0 },
+  { week: '2026-W32', avg_total: 235, avg_rn: 49.0, avg_ain: 186.0, compliant_days: 7, non_compliant_days: 0, rn_gap_days: 0 },
+  { week: '2026-W33', avg_total: 233, avg_rn: 48.6, avg_ain: 184.4, compliant_days: 7, non_compliant_days: 0, rn_gap_days: 0 },
+  { week: '2026-W34', avg_total: 236, avg_rn: 49.2, avg_ain: 186.8, compliant_days: 7, non_compliant_days: 0, rn_gap_days: 0 },
+  { week: '2026-W35', avg_total: 234, avg_rn: 48.8, avg_ain: 185.2, compliant_days: 7, non_compliant_days: 0, rn_gap_days: 0 },
+  // Sep 2026
+  { week: '2026-W36', avg_total: 237, avg_rn: 49.4, avg_ain: 187.6, compliant_days: 7, non_compliant_days: 0, rn_gap_days: 0 },
+  { week: '2026-W37', avg_total: 235, avg_rn: 49.0, avg_ain: 186.0, compliant_days: 7, non_compliant_days: 0, rn_gap_days: 0 },
+  { week: '2026-W38', avg_total: 238, avg_rn: 49.6, avg_ain: 188.4, compliant_days: 7, non_compliant_days: 0, rn_gap_days: 0 },
+  { week: '2026-W39', avg_total: 236, avg_rn: 49.2, avg_ain: 186.8, compliant_days: 7, non_compliant_days: 0, rn_gap_days: 0 },
 ];
 
 // ============================================================
@@ -708,6 +800,55 @@ export const financial_monthly = [
     notes: 'Agency reducing month on month. Revenue above budget. Care ratio still below 55% target — projected to recover Q3 as agency normalises.',
     chris_signal: { type: 'PREDICTIVE', confidence: 'STRONG', message: 'If agency dependency returns to Oct 2025 levels (11%) by June 2026, care ratio recovers to 55%+ and FY EBITDA recovers $180K of $240K YTD adverse variance.' },
   },
+  // Apr 2026 — recovery continues
+  {
+    period: '2026-04', facility_id: 'FAC-001',
+    revenue: { annacc_residential: 1855000, support_at_home: 145200, other: 14200, total: 2014400, budget: 1996000, variance: 18400, variance_pct: 0.009 },
+    expenditure: { direct_care_permanent: 886000, direct_care_agency: 138000, hotel_services: 186000, admin_management: 123000, capital: 22000, total: 1355000, budget: 1322000, variance: -33000 },
+    care_ratio: 0.509, labour_cost_per_bed_day: 296.1, agency_cost_pct_of_care_workforce: 0.135,
+    ebitda: 659400, budget_variance_pct: -0.017, occupancy_pct: 0.985,
+  },
+  // May 2026
+  {
+    period: '2026-05', facility_id: 'FAC-001',
+    revenue: { annacc_residential: 1862800, support_at_home: 145600, other: 14800, total: 2023200, budget: 1996000, variance: 27200, variance_pct: 0.014 },
+    expenditure: { direct_care_permanent: 893000, direct_care_agency: 118000, hotel_services: 185000, admin_management: 122000, capital: 22000, total: 1340000, budget: 1322000, variance: -18000 },
+    care_ratio: 0.500, labour_cost_per_bed_day: 293.4, agency_cost_pct_of_care_workforce: 0.117,
+    ebitda: 683200, budget_variance_pct: -0.009, occupancy_pct: 0.989,
+  },
+  // Jun 2026
+  {
+    period: '2026-06', facility_id: 'FAC-001',
+    revenue: { annacc_residential: 1870600, support_at_home: 146000, other: 15200, total: 2031800, budget: 2000000, variance: 31800, variance_pct: 0.016 },
+    expenditure: { direct_care_permanent: 898000, direct_care_agency: 102000, hotel_services: 184000, admin_management: 121000, capital: 22000, total: 1327000, budget: 1326000, variance: -1000 },
+    care_ratio: 0.492, labour_cost_per_bed_day: 290.8, agency_cost_pct_of_care_workforce: 0.102,
+    ebitda: 704800, budget_variance_pct: 0.000, occupancy_pct: 0.993,
+  },
+  // Jul 2026
+  {
+    period: '2026-07', facility_id: 'FAC-001',
+    revenue: { annacc_residential: 1878400, support_at_home: 146400, other: 15600, total: 2040400, budget: 2004000, variance: 36400, variance_pct: 0.018 },
+    expenditure: { direct_care_permanent: 904000, direct_care_agency: 89000, hotel_services: 183000, admin_management: 120000, capital: 22000, total: 1318000, budget: 1330000, variance: 12000 },
+    care_ratio: 0.487, labour_cost_per_bed_day: 288.2, agency_cost_pct_of_care_workforce: 0.090,
+    ebitda: 722400, budget_variance_pct: 0.009, occupancy_pct: 0.993,
+  },
+  // Aug 2026
+  {
+    period: '2026-08', facility_id: 'FAC-001',
+    revenue: { annacc_residential: 1886200, support_at_home: 146800, other: 16000, total: 2049000, budget: 2004000, variance: 45000, variance_pct: 0.022 },
+    expenditure: { direct_care_permanent: 908000, direct_care_agency: 79000, hotel_services: 182000, admin_management: 119000, capital: 22000, total: 1310000, budget: 1330000, variance: 20000 },
+    care_ratio: 0.482, labour_cost_per_bed_day: 286.4, agency_cost_pct_of_care_workforce: 0.080,
+    ebitda: 739000, budget_variance_pct: 0.015, occupancy_pct: 0.996,
+  },
+  // Sep 2026
+  {
+    period: '2026-09', facility_id: 'FAC-001',
+    revenue: { annacc_residential: 1894000, support_at_home: 147200, other: 16400, total: 2057600, budget: 2004000, variance: 53600, variance_pct: 0.027 },
+    expenditure: { direct_care_permanent: 912000, direct_care_agency: 68000, hotel_services: 181000, admin_management: 118000, capital: 22000, total: 1301000, budget: 1330000, variance: 29000 },
+    care_ratio: 0.476, labour_cost_per_bed_day: 284.6, agency_cost_pct_of_care_workforce: 0.069,
+    ebitda: 756600, budget_variance_pct: 0.022, occupancy_pct: 0.996,
+    chris_signal: { type: 'POSITIVE', confidence: 'STRONG', message: 'Agency dependency at 6.9% — below 10% benchmark for the first time since pre-crisis. Care ratio recovered to 47.6%. FY EBITDA on track to exceed budget.' },
+  },
 ];
 
 // ============================================================
@@ -782,9 +923,9 @@ export const governance_packs = [
 // ============================================================
 
 export const todays_picture = {
-  generated_at: '2026-04-12 04:51:00',
-  cycle: 8,
-  chris_text: "Good news first — the Wattle Wing practice from last fortnight worked. PSH_08 (Traumatic Exposure) dropped 0.08 this cycle, the strongest single-cycle improvement we've seen there. Care minutes have been compliant every day this week after a difficult December–January. There are two things that need your attention: the Board Pack needs your approval before the 17th — it's sitting at 8 days out — and the Wing B bathroom falls prevention corrective action is overdue. Falls are still trending above the national benchmark for a third quarter, but CHRIS has traced this to agency coverage patterns, not care planning. The corrective actions in motion should start showing in Q3 data.",
+  generated_at: '2026-04-15 04:51:00',
+  cycle: 9,
+  chris_text: "The recovery from the January staffing crisis is holding. Care minutes at 226 this week — comfortably above the 215 target and the strongest sustained period since October. Agency is down to 13.5%, headed in the right direction. The Wattle Wing PSH intervention continues to work — PSH_08 dropped again this cycle, now at 0.52, well below the 0.60 threshold. Two things need your attention today: the Thursday night RN shift is unconfirmed and needs cover by 3pm, and the Board Pack for Q3 needs your approval before the 22nd. Falls remain above the national benchmark for a third quarter — but the trend is finally turning. April data shows a 12% reduction correlating directly with the decline in agency coverage. The Oracle has flagged 3 AN-ACC reclassification opportunities worth an estimated $11,400/month — the clinical reviews should be scheduled for next Tuesday when the ward has capacity.",
   domain_status: [
     { domain: 'Clinical', status: 'warning', summary: 'Care minutes compliant · QI_03 above benchmark 3rd quarter · 1 QI submission due 21 Apr' },
     { domain: 'Workforce', status: 'warning', summary: 'PSH improving in Wattle Wing · Grevillea Wing convergence persisting 6 cycles · Agency 18%' },
