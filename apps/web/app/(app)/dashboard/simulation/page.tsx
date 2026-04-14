@@ -4,9 +4,18 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import type { SuiteReport, Verdict } from "@/lib/simulation/types";
 
+const SUITES = [
+  { id: "all", label: "All Scenarios", count: 20 },
+  { id: "sentinel", label: "Sentinel", count: 8 },
+  { id: "oracle", label: "Oracle", count: 4 },
+  { id: "keeper", label: "Keeper", count: 4 },
+  { id: "multi", label: "Multi-Agent", count: 4 },
+];
+
 export default function SimulationPage() {
   const router = useRouter();
   const [running, setRunning] = useState(false);
+  const [selectedSuite, setSelectedSuite] = useState("all");
   const [report, setReport] = useState<SuiteReport | null>(null);
   const [expanded, setExpanded] = useState<string | null>(null);
 
@@ -14,7 +23,7 @@ export default function SimulationPage() {
     setRunning(true);
     setReport(null);
     try {
-      const res = await fetch("/api/simulation/run", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ suite: "sentinel" }) });
+      const res = await fetch("/api/simulation/run", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ suite: selectedSuite }) });
       const data = await res.json();
       setReport(data);
     } catch (e) {
@@ -31,8 +40,17 @@ export default function SimulationPage() {
           <p className="text-[13px] md:text-sm text-gray-500 mt-0.5">Run agents through scripted scenarios · Measure accuracy</p>
         </div>
         <button onClick={runSimulation} disabled={running} className={`text-sm font-medium px-4 py-2.5 rounded-xl ${running ? "bg-gray-200 text-gray-400" : "bg-[#1B4332] text-white hover:opacity-90"}`}>
-          {running ? "Running..." : "Run Sentinel Suite"}
+          {running ? "Running..." : "Run Suite"}
         </button>
+      </div>
+
+      {/* Suite selector */}
+      <div className="flex gap-2 overflow-x-auto pb-1 mb-5">
+        {SUITES.map((s) => (
+          <button key={s.id} onClick={() => setSelectedSuite(s.id)} className={`shrink-0 px-4 py-2 rounded-xl text-sm font-medium transition-colors ${selectedSuite === s.id ? "bg-[#1B4332] text-white" : "bg-white border border-gray-200 text-gray-600"}`}>
+            {s.label} <span className="text-xs opacity-60">({s.count})</span>
+          </button>
+        ))}
       </div>
 
       {/* Running state */}
@@ -160,13 +178,13 @@ export default function SimulationPage() {
           </div>
           <h2 className="text-lg font-bold text-gray-900 mb-2">Agent Simulation Engine</h2>
           <p className="text-sm text-gray-500 mb-4 max-w-md mx-auto">
-            Run CHRIS agents through scripted aged care scenarios. 8 Sentinel micro-scenarios test care minutes, SIRS deadlines, connector health, compliance, and PSH convergence detection.
+            Run CHRIS agents through 20 scripted aged care scenarios. Sentinel (8), Oracle (4), Keeper (4), and multi-agent coordination (4) — testing care minutes, SIRS, revenue intelligence, workforce signals, and cross-agent prioritisation.
           </p>
           <p className="text-xs text-gray-400 mb-6">
-            Each scenario has ground truth — expected detections, expected silence (false positive tests), and scoring rubric.
+            Each scenario has ground truth — expected detections, expected silence (false positive tests), and weighted scoring rubric.
           </p>
           <button onClick={runSimulation} className="px-6 py-3 bg-[#1B4332] text-white rounded-xl text-sm font-medium hover:opacity-90">
-            Run Sentinel Suite →
+            Run All 20 Scenarios →
           </button>
         </div>
       )}
