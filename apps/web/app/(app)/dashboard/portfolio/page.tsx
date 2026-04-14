@@ -65,12 +65,12 @@ export default function PortfolioDashboard() {
       <ActionCard urgency="critical" icon={<AlertTriangle className="w-5 h-5 text-[hsl(var(--brand-terracotta))]" />}
         title="Facility C: three-domain reinforcing loop"
         chris="Falls rate, agency dependency, and traumatic exposure are co-elevated and reinforcing. Agency instability reduces care consistency → increasing fall risk → increasing traumatic exposure → driving turnover. Breaking the loop at workforce stability is the highest-leverage intervention."
-        actionLabel="Add to ELT agenda →" onAction={() => {}} meta="Clinical · Workforce · PSH · AMPLIFYING · STRONG" />
+        actionLabel="Add to ELT agenda →" onAction={() => router.push("/dashboard/coach")} meta="Clinical · Workforce · PSH · AMPLIFYING · STRONG" />
 
       <ActionCard urgency="warning" icon={<Sparkles className="w-5 h-5 text-[hsl(var(--brand-amber))]" />}
         title="The Holy Grail Bowral: turnover risk building"
         chris="PSH_02 + PSH_16 co-elevated for 3 cycles in Wing B. Historically precedes voluntary turnover within 2-4 cycles in 71% of comparable teams. No turnover yet — intervention window is open."
-        actionLabel="Share with HR →" onAction={() => {}} meta="Workforce · PSH · PREDICTIVE · EMERGING" />
+        actionLabel="Share with HR →" onAction={() => router.push("/dashboard/coach")} meta="Workforce · PSH · PREDICTIVE · EMERGING" />
 
       <ActionCard urgency="info" icon={<FileText className="w-5 h-5 text-[hsl(var(--brand-forest))]" />}
         title="ELT Pack — draft ready"

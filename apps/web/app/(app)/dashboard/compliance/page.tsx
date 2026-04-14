@@ -72,12 +72,12 @@ export default function GovernanceControlCentre() {
       <ActionCard urgency="warning" icon={<Shield className="w-5 h-5 text-[hsl(var(--brand-amber))]" />}
         title="QS 2.8.2 — evidence gap"
         chris="Worker consultation record needs updating. Pulse participation data from last cycle satisfies this. Takes 2 minutes."
-        actionLabel="Fix now — 2 min →" onAction={() => {}} />
+        actionLabel="Fix now — 2 min →" onAction={() => router.push("/dashboard/coach")} />
 
       <ActionCard urgency="warning" icon={<AlertTriangle className="w-5 h-5 text-[hsl(var(--brand-terracotta))]" />}
         title="2 corrective actions overdue"
         chris="Medication audit non-conformance (5 days overdue) and SIRS corrective action (3 days overdue). Both assigned to Quality Lead."
-        actionLabel="Review overdue items →" onAction={() => {}} />
+        actionLabel="Review overdue items →" onAction={() => router.push("/dashboard/corrective-actions")} />
 
       <ActionCard urgency="info" icon={<FileText className="w-5 h-5 text-[hsl(var(--brand-forest))]" />}
         title="Board Pack — needs CEO approval"
@@ -97,7 +97,7 @@ export default function GovernanceControlCentre() {
       <ActionCard urgency="positive" icon={<CheckCircle className="w-5 h-5 text-[hsl(var(--brand-teal))]" />}
         title="ISO 45003 evidence — all current"
         chris="All 4 evidence categories up to date. Evidence pack exportable for audit."
-        actionLabel="Export pack →" onAction={() => {}} />
+        actionLabel="Export pack →" onAction={() => router.push("/dashboard/workforce/psh/iso45003")} />
 
       <div className="bg-card rounded-xl p-4 shadow-warm border border-border mb-4">
         <div className="flex items-center gap-1.5 mb-1.5">

@@ -87,12 +87,12 @@ export default function OperationsControlCentre() {
       <ActionCard urgency="info" icon={<Clipboard className="w-5 h-5 text-[hsl(var(--brand-forest))]" />}
         title="Huddle agenda · Not confirmed"
         chris="3 pre-written questions based on this week's data. Copy to clipboard or run the huddle with CHRIS by voice."
-        actionLabel="View agenda →" onAction={() => {}} />
+        actionLabel="View agenda →" onAction={() => router.push("/dashboard/coach")} />
 
       <ActionCard urgency="info" icon={<MessageSquare className="w-5 h-5 text-[hsl(var(--brand-forest))]" />}
         title="Family follow-up flagged"
         chris="1 family communication follow-up outstanding from Tuesday's incident. CHRIS has drafted a response."
-        actionLabel="Review draft →" onAction={() => {}} />
+        actionLabel="Review draft →" onAction={() => router.push("/dashboard/coach")} />
 
       <ActionCard urgency="positive" icon={<CheckCircle className="w-5 h-5 text-[hsl(var(--brand-teal))]" />}
         title="Handover notes captured"

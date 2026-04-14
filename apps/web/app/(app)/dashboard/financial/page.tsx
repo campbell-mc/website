@@ -155,22 +155,22 @@ export default function FinancialControlCentre() {
       <ActionCard urgency="warning" icon={<DollarSign className="w-5 h-5 text-[hsl(var(--brand-amber))]" />}
         title={`Care ratio below target — ${latestCareRatio}% vs 55%`}
         chris={`Primary driver: agency cost surge following 2 Wattle Wing RN resignations in December. Agency peaked at 28% of RN hours in January ($${Math.round(financial_monthly[3].expenditure.direct_care_agency / 1000)}K). Now reducing — ${Math.round(latest.agency_cost_pct_of_care_workforce * 100)}% of care workforce cost. CHRIS has traced this to a 4-cycle PSH_13 decline. Culture signal, not labour market.`}
-        actionLabel="See full analysis →" onAction={() => {}} meta="Financial · Workforce · PSH · CAUSAL · STRONG" />
+        actionLabel="See full analysis →" onAction={() => router.push("/dashboard/financial/care-ratio")} meta="Financial · Workforce · PSH · CAUSAL · STRONG" />
 
       <ActionCard urgency="critical" icon={<AlertTriangle className="w-5 h-5 text-[hsl(var(--brand-terracotta))]" />}
         title={`Agency cost $${latestAgency}K — ${Math.round(latest.agency_cost_pct_of_care_workforce * 100)}% of care workforce`}
         chris={`Down from $${Math.round(financial_monthly[3].expenditure.direct_care_agency / 1000)}K in January. Reducing month on month as new RN settles in. YTD agency overspend: $${Math.round(financial_monthly.reduce((s, m) => s + Math.max(0, m.expenditure.direct_care_agency - 98000), 0) / 1000)}K. At current trajectory, normalises to ~11% by June.`}
-        actionLabel="Reduce agency dependency →" onAction={() => {}} />
+        actionLabel="Reduce agency dependency →" onAction={() => router.push("/dashboard/financial/agency")} />
 
       <ActionCard urgency="warning" icon={<AlertTriangle className="w-5 h-5 text-[hsl(var(--brand-amber))]" />}
         title="3 residents approaching AN-ACC reassessment"
         chris="Moderate risk of downward reclassification. Estimated revenue impact: $8.2K/month if all reclassify. DON should prioritise clinical review before assessment dates."
-        actionLabel="Alert DON →" onAction={() => {}} meta="Est. impact: $8.2K/month" />
+        actionLabel="Alert DON →" onAction={() => router.push("/dashboard/coach")} meta="Est. impact: $8.2K/month" />
 
       <ActionCard urgency="info" icon={<FileText className="w-5 h-5 text-[hsl(var(--brand-forest))]" />}
         title="QFR Q2 — draft ready"
         chris="CHRIS has compiled QFR data from connectors. Formatted for GPMS. CFO review: 15 min."
-        actionLabel="Review QFR →" onAction={() => {}} deadline="14 days" />
+        actionLabel="Review QFR →" onAction={() => router.push("/dashboard/documents")} deadline="14 days" />
 
       <ActionCard urgency="info" icon={<FileText className="w-5 h-5 text-[hsl(var(--brand-forest))]" />}
         title="ELT finance section — draft ready"
@@ -180,7 +180,7 @@ export default function FinancialControlCentre() {
       <ActionCard urgency="positive" icon={<CheckCircle className="w-5 h-5 text-[hsl(var(--brand-teal))]" />}
         title={`Revenue above budget — +${(latest.revenue.variance_pct * 100).toFixed(1)}% in ${MONTHS[MONTHS.length - 1]}`}
         chris={`Revenue $${Math.round(latest.revenue.variance / 1000)}K above budget this month. Occupancy at ${(latest.occupancy_pct * 100).toFixed(1)}%. Partially offsets agency overspend. Worth noting in Board commentary.`}
-        actionLabel="Add to Board pack →" onAction={() => {}} />
+        actionLabel="Add to Board pack →" onAction={() => router.push("/dashboard/reporting")} />
 
       {/* CHRIS intelligence signal */}
       <div className="bg-card rounded-xl p-4 shadow-warm border border-border mb-4">

@@ -393,7 +393,7 @@ function DemoSection() {
           Choose a care type to explore. You are entering a demo environment with representative data. Nothing you interact with affects a real facility.
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-lg">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-2xl">
           <Link
             href="/dashboard"
             className="flex flex-col items-center gap-2 px-6 py-5 bg-[#1B4332] text-white rounded-xl hover:bg-[#2D7D73] transition-colors text-center"
@@ -408,6 +408,10 @@ function DemoSection() {
             <span className="text-base font-semibold">Home Care</span>
             <span className="text-xs text-white/60">247 clients · 2 services · Support at Home</span>
           </Link>
+          <div className="flex flex-col items-center gap-2 px-6 py-5 bg-[#1B4332]/60 text-white/70 rounded-xl text-center cursor-default">
+            <span className="text-base font-semibold">NDIS</span>
+            <span className="text-xs text-white/40">Coming soon</span>
+          </div>
         </div>
       </div>
     </section>
