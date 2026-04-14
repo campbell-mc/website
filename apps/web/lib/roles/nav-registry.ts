@@ -32,9 +32,6 @@ const NAV_SECTIONS: Record<string, NavSection | WeeklyLoopSection> = {
       { label: "Home", href: "/dashboard", icon: "Home" },
       { label: "Review Queue", href: "/don/queue", icon: "ClipboardList" },
       { label: "Documents", href: "/dashboard/documents", icon: "FileText" },
-      { label: "CHRIS Coach", href: "/dashboard/coach", icon: "Sparkles" },
-      { label: "Agents", href: "/dashboard/agents", icon: "Activity" },
-      { label: "iMessage Demo", href: "/dashboard/demo/imessage", icon: "FileText" },
     ],
   },
   operations: {
@@ -165,9 +162,6 @@ const NAV_SECTIONS: Record<string, NavSection | WeeklyLoopSection> = {
       { label: "Review Queue", href: "/don/queue", icon: "ClipboardList" },
       { label: "Morning Briefing", href: "/dashboard/home-care/briefing", icon: "FileText" },
       { label: "Documents", href: "/dashboard/home-care/documents", icon: "FileText" },
-      { label: "CHRIS Coach", href: "/dashboard/coach", icon: "Sparkles" },
-      { label: "Agents", href: "/dashboard/agents", icon: "Activity" },
-      { label: "iMessage Demo", href: "/dashboard/home-care/demo/imessage", icon: "FileText" },
     ],
   },
   hc_workforce: {
@@ -289,6 +283,24 @@ const NAV_SECTIONS: Record<string, NavSection | WeeklyLoopSection> = {
   briefing: {
     title: "BRIEFING",
     items: [],
+  },
+  tools: {
+    title: "TOOLS",
+    items: [
+      { label: "Agent Activity", href: "/dashboard/agents", icon: "Activity" },
+      { label: "The Newsroom", href: "/newsroom", icon: "FileText" },
+      { label: "iMessage Demo", href: "/dashboard/demo/imessage", icon: "FileText" },
+      { label: "References", href: "/dashboard/references", icon: "FileText" },
+    ],
+  },
+  hc_tools: {
+    title: "TOOLS",
+    items: [
+      { label: "Agent Activity", href: "/dashboard/agents", icon: "Activity" },
+      { label: "The Newsroom", href: "/newsroom", icon: "FileText" },
+      { label: "iMessage Demo", href: "/dashboard/home-care/demo/imessage", icon: "FileText" },
+      { label: "References", href: "/dashboard/references", icon: "FileText" },
+    ],
   },
   coach: {
     title: "COACH",

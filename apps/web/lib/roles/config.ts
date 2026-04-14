@@ -151,7 +151,7 @@ export const ROLE_CONFIG: Record<RoleName, RoleConfig> = {
     display_name: 'Facility Manager',
     data_scope: 'single_facility',
     home_route: '/dashboard/fm',
-    nav_sections: ['operations', 'clinical', 'residents', 'workforce', 'financial', 'governance', 'loops'],
+    nav_sections: ['operations', 'clinical', 'residents', 'workforce', 'financial', 'governance', 'loops', 'tools'],
     bottom_tabs: ['home', 'queue', 'coach', 'briefing', 'more'],
     domain_strip: {
       residential: ['Clinical', 'Workforce', 'Financial', 'Governance', 'Residents'],
@@ -211,7 +211,7 @@ export const ROLE_CONFIG: Record<RoleName, RoleConfig> = {
     display_name: 'Director of Nursing',
     data_scope: 'single_facility',
     home_route: '/dashboard/don',
-    nav_sections: ['clinical', 'operations', 'residents', 'workforce', 'financial_ops', 'governance', 'loops'],
+    nav_sections: ['clinical', 'operations', 'residents', 'workforce', 'financial_ops', 'governance', 'loops', 'tools'],
     bottom_tabs: ['home', 'queue', 'coach', 'briefing', 'more'],
     domain_strip: {
       residential: ['Clinical', 'Workforce', 'Operations', 'Governance', 'Residents'],
@@ -271,7 +271,7 @@ export const ROLE_CONFIG: Record<RoleName, RoleConfig> = {
     display_name: 'Chief Executive Officer',
     data_scope: 'portfolio',
     home_route: '/dashboard/ceo',
-    nav_sections: ['portfolio', 'financial', 'governance', 'workforce', 'compliance'],
+    nav_sections: ['portfolio', 'financial', 'governance', 'workforce', 'compliance', 'tools'],
     bottom_tabs: ['home', 'portfolio', 'coach', 'briefing', 'more'],
     domain_strip: {
       residential: ['Portfolio', 'Financial', 'Workforce', 'Compliance', 'Governance'],
@@ -330,7 +330,7 @@ export const ROLE_CONFIG: Record<RoleName, RoleConfig> = {
     display_name: 'Chief Financial Officer',
     data_scope: 'portfolio',
     home_route: '/dashboard/cfo',
-    nav_sections: ['financial', 'portfolio', 'governance', 'compliance'],
+    nav_sections: ['financial', 'portfolio', 'governance', 'compliance', 'tools'],
     bottom_tabs: ['home', 'revenue', 'coach', 'briefing', 'more'],
     domain_strip: {
       residential: ['Revenue', 'Care Ratio', 'Accommodation', 'Benchmarks', 'Reporting'],
@@ -390,7 +390,7 @@ export const ROLE_CONFIG: Record<RoleName, RoleConfig> = {
     display_name: 'Clinical Director',
     data_scope: 'portfolio',
     home_route: '/dashboard/clinical-director',
-    nav_sections: ['clinical', 'quality', 'residents', 'workforce'],
+    nav_sections: ['clinical', 'quality', 'residents', 'workforce', 'tools'],
     bottom_tabs: ['home', 'clinical', 'coach', 'briefing', 'more'],
     domain_strip: {
       residential: ['AN-ACC', 'Care Minutes', 'Quality Indicators', 'Clinical Audits', 'Residents'],
@@ -449,7 +449,7 @@ export const ROLE_CONFIG: Record<RoleName, RoleConfig> = {
     display_name: 'Quality and Risk Lead',
     data_scope: 'single_facility',
     home_route: '/dashboard/quality',
-    nav_sections: ['compliance', 'quality', 'governance', 'residents'],
+    nav_sections: ['compliance', 'quality', 'governance', 'residents', 'tools'],
     bottom_tabs: ['home', 'sirs', 'coach', 'briefing', 'more'],
     domain_strip: {
       residential: ['SIRS', 'Quality Indicators', 'Audits', 'Corrective Actions', 'Compliance'],
@@ -509,7 +509,7 @@ export const ROLE_CONFIG: Record<RoleName, RoleConfig> = {
     display_name: 'WHS Lead',
     data_scope: 'single_facility',
     home_route: '/dashboard/whs',
-    nav_sections: ['psh', 'whs', 'compliance', 'workforce'],
+    nav_sections: ['psh', 'whs', 'compliance', 'workforce', 'tools'],
     bottom_tabs: ['home', 'psh', 'coach', 'briefing', 'more'],
     domain_strip: {
       residential: ['PSH Hazards', 'Incidents', 'ISO 45003', 'WC Risk', 'Corrective Actions'],
@@ -569,7 +569,7 @@ export const ROLE_CONFIG: Record<RoleName, RoleConfig> = {
     display_name: 'HR Manager',
     data_scope: 'portfolio',
     home_route: '/dashboard/hr',
-    nav_sections: ['workforce', 'financial_ops', 'loops', 'compliance', 'governance'],
+    nav_sections: ['workforce', 'financial_ops', 'loops', 'compliance', 'governance', 'tools'],
     bottom_tabs: ['home', 'workforce', 'coach', 'briefing', 'more'],
     domain_strip: {
       residential: ['Turnover Risk', 'Composition', 'Training', 'Award Compliance', 'Recruitment'],
@@ -628,7 +628,7 @@ export const ROLE_CONFIG: Record<RoleName, RoleConfig> = {
     display_name: 'Board Member',
     data_scope: 'aggregate',
     home_route: '/dashboard/board',
-    nav_sections: ['governance', 'financial', 'compliance'],
+    nav_sections: ['governance', 'financial', 'compliance', 'tools'],
     bottom_tabs: ['home', 'pack', 'coach', 'briefing', 'more'],
     domain_strip: {
       residential: ['EBITDA', 'Prudential', 'Compliance', 'Star Rating', 'Quality'],
@@ -687,7 +687,7 @@ export const ROLE_CONFIG: Record<RoleName, RoleConfig> = {
     display_name: 'Team Leader',
     data_scope: 'single_team',
     home_route: '/dashboard/team-leader',
-    nav_sections: ['team', 'loops', 'coach'],
+    nav_sections: ['team', 'loops', 'tools'],
     bottom_tabs: ['home', 'team', 'coach', 'briefing', 'more'],
     domain_strip: {
       residential: ['My Team', 'Pulse', 'Practice', 'Briefing', 'Coach'],
@@ -813,7 +813,7 @@ export const ROLE_CONFIG: Record<RoleName, RoleConfig> = {
     display_name: 'ELT Member',
     data_scope: 'portfolio',
     home_route: '/dashboard/elt',
-    nav_sections: ['portfolio', 'financial', 'governance', 'compliance'],
+    nav_sections: ['portfolio', 'financial', 'governance', 'compliance', 'tools'],
     bottom_tabs: ['home', 'portfolio', 'coach', 'briefing', 'more'],
     domain_strip: {
       residential: ['Portfolio', 'Compliance', 'Workforce', 'Financial', 'Governance'],
@@ -929,7 +929,7 @@ export const ROLE_CONFIG: Record<RoleName, RoleConfig> = {
     display_name: 'Home Care Manager',
     data_scope: 'single_facility',
     home_route: '/dashboard/home-care',
-    nav_sections: ['hc_overview', 'care_management', 'clients', 'budget_management', 'hc_workforce', 'hc_financial', 'hc_compliance', 'loops'],
+    nav_sections: ['hc_overview', 'care_management', 'clients', 'budget_management', 'hc_workforce', 'hc_financial', 'hc_compliance', 'loops', 'hc_tools'],
     bottom_tabs: ['home', 'queue', 'coach', 'briefing', 'more'],
     domain_strip: { residential: [], home_care: ['Visits', 'Workforce', 'Budget', 'Compliance', 'Clients'], ndis: [] },
     briefings: {
