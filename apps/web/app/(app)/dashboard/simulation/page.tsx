@@ -5,11 +5,12 @@ import { useRouter } from "next/navigation";
 import type { SuiteReport, Verdict } from "@/lib/simulation/types";
 
 const SUITES = [
-  { id: "all", label: "All Scenarios", count: 20 },
+  { id: "all", label: "All Scenarios", count: 28 },
   { id: "sentinel", label: "Sentinel", count: 8 },
   { id: "oracle", label: "Oracle", count: 4 },
   { id: "keeper", label: "Keeper", count: 4 },
   { id: "multi", label: "Multi-Agent", count: 4 },
+  { id: "home_care", label: "Home Care", count: 8 },
 ];
 
 export default function SimulationPage() {
@@ -178,13 +179,13 @@ export default function SimulationPage() {
           </div>
           <h2 className="text-lg font-bold text-gray-900 mb-2">Agent Simulation Engine</h2>
           <p className="text-sm text-gray-500 mb-4 max-w-md mx-auto">
-            Run CHRIS agents through 20 scripted aged care scenarios. Sentinel (8), Oracle (4), Keeper (4), and multi-agent coordination (4) — testing care minutes, SIRS, revenue intelligence, workforce signals, and cross-agent prioritisation.
+            Run CHRIS agents through 28 scripted aged care scenarios across residential and home care. Sentinel (8), Oracle (4), Keeper (4), multi-agent coordination (4), and Home Care (8) — testing care minutes, SIRS, revenue intelligence, workforce signals, lone worker safety, visit compliance, and cross-agent prioritisation.
           </p>
           <p className="text-xs text-gray-400 mb-6">
             Each scenario has ground truth — expected detections, expected silence (false positive tests), and weighted scoring rubric.
           </p>
           <button onClick={runSimulation} className="px-6 py-3 bg-[#1B4332] text-white rounded-xl text-sm font-medium hover:opacity-90">
-            Run All 20 Scenarios →
+            Run All 28 Scenarios →
           </button>
         </div>
       )}
