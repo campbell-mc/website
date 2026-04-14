@@ -200,6 +200,9 @@ export default function SimulationPage() {
         </>
       )}
 
+      {/* Run history + failure patterns — always visible */}
+      <HistorySection />
+
       {/* Empty state */}
       {!running && !report && (
         <div className="bg-white rounded-2xl border border-gray-100 p-8 text-center">
@@ -220,6 +223,119 @@ export default function SimulationPage() {
       )}
 
       <div className="h-16" />
+    </div>
+  );
+}
+
+// ── HISTORY SECTION ──────────────────────────────────────────
+
+function HistorySection() {
+  const [history, setHistory] = useState<any>(null);
+  const [loaded, setLoaded] = useState(false);
+
+  async function loadHistory() {
+    if (loaded) return;
+    try {
+      const res = await fetch("/api/simulation/history");
+      const data = await res.json();
+      setHistory(data);
+      setLoaded(true);
+    } catch (e) {
+      setLoaded(true);
+    }
+  }
+
+  // Load on first render
+  if (!loaded) loadHistory();
+
+  if (!history || history.runs.length === 0) return null;
+
+  return (
+    <div className="space-y-4 mt-6">
+      {/* Score trend */}
+      {history.trend.length > 1 && (
+        <div className="bg-white rounded-2xl border border-gray-100 p-5">
+          <h3 className="text-sm font-semibold text-gray-900 mb-3">Score trend</h3>
+          <div className="flex items-end gap-1 h-24">
+            {history.trend.map((t: any, i: number) => {
+              const height = Math.round(t.score * 100);
+              return (
+                <div key={i} className="flex-1 flex flex-col items-center gap-1">
+                  <span className="text-[9px] text-gray-400">{Math.round(t.score * 100)}%</span>
+                  <div
+                    className={`w-full rounded-t ${t.score >= 0.9 ? "bg-[#2D7D73]" : t.score >= 0.7 ? "bg-[#D4A017]" : "bg-[#C4704A]"}`}
+                    style={{ height: `${height}%` }}
+                  />
+                  <span className="text-[8px] text-gray-400">#{t.run_id}</span>
+                </div>
+              );
+            })}
+          </div>
+          <div className="flex justify-between text-[9px] text-gray-400 mt-1">
+            <span>Oldest</span>
+            <span>Latest</span>
+          </div>
+        </div>
+      )}
+
+      {/* Recent runs */}
+      <div className="bg-white rounded-2xl border border-gray-100 p-5">
+        <h3 className="text-sm font-semibold text-gray-900 mb-3">Recent runs</h3>
+        <div className="space-y-2">
+          {history.runs.slice(0, 5).map((run: any) => (
+            <div key={run.id} className="flex items-center justify-between py-2 border-b border-gray-50 last:border-0">
+              <div>
+                <p className="text-sm text-gray-900">Run #{run.id} · {run.suite}</p>
+                <p className="text-xs text-gray-400">{run.passed}/{run.total_scenarios} passed · {run.duration_ms}ms</p>
+              </div>
+              <span className={`text-sm font-bold ${run.overall_score >= 0.9 ? "text-[#2D7D73]" : run.overall_score >= 0.7 ? "text-[#D4A017]" : "text-[#C4704A]"}`}>
+                {Math.round(run.overall_score * 100)}%
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Failure patterns + threshold recommendations */}
+      {history.failure_patterns.length > 0 && (
+        <div className="bg-[#FFFBF0] rounded-2xl border border-[#D4A017]/30 p-5">
+          <h3 className="text-sm font-semibold text-gray-900 mb-1">Threshold tuning recommendations</h3>
+          <p className="text-xs text-gray-500 mb-3">Based on recurring failure patterns across runs</p>
+          <div className="space-y-3">
+            {history.failure_patterns.map((pattern: any, i: number) => (
+              <div key={i} className="bg-white rounded-xl p-3">
+                <div className="flex items-center justify-between mb-1">
+                  <code className="text-xs text-[#D4A017] font-mono">{pattern.threshold}</code>
+                  <span className="text-xs font-bold text-[#C4704A]">{pattern.failure_count} failures</span>
+                </div>
+                <p className="text-xs text-gray-600">{pattern.suggestion}</p>
+                <p className="text-[10px] text-gray-400 mt-1">Affects: {pattern.scenarios_affected.join(", ")}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Unresolved failures */}
+      {history.unresolved_failures.length > 0 && (
+        <div className="bg-white rounded-2xl border border-gray-100 p-5">
+          <div className="flex items-center justify-between mb-3">
+            <h3 className="text-sm font-semibold text-gray-900">Unresolved failures</h3>
+            <span className="text-xs text-[#C4704A] font-medium">{history.unresolved_failures.length} open</span>
+          </div>
+          <div className="space-y-2">
+            {history.unresolved_failures.slice(0, 10).map((f: any) => (
+              <div key={f.id} className="flex items-start gap-2 py-1.5 border-b border-gray-50 last:border-0">
+                <span className="text-xs text-[#C4704A] shrink-0 mt-0.5">✗</span>
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs text-gray-700">{f.expected}</p>
+                  <p className="text-[10px] text-gray-400">{f.scenario_id} · {f.failure_type} · {f.agent}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

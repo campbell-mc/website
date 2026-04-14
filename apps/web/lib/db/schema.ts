@@ -387,3 +387,64 @@ export const responseTokens = pgTable('response_tokens', {
   responded_at: timestamp('responded_at'),
   created_at: timestamp('created_at').defaultNow(),
 });
+
+// ── SIMULATION RUNS ──────────────────────────────────────────
+// Every simulation run is persisted. Enables historical tracking,
+// regression detection, and threshold tuning recommendations.
+
+export const simulationRuns = pgTable('simulation_runs', {
+  id: serial('id').primaryKey(),
+  suite: text('suite').notNull(),                    // 'all' | 'sentinel' | 'oracle' | 'keeper' | 'multi' | 'home_care'
+  total_scenarios: integer('total_scenarios').notNull(),
+  passed: integer('passed').notNull(),
+  failed: integer('failed').notNull(),
+  overall_score: real('overall_score').notNull(),
+  llm_judge_enabled: boolean('llm_judge_enabled').default(false),
+  llm_avg_quality: real('llm_avg_quality'),
+  duration_ms: integer('duration_ms').notNull(),
+  by_agent: jsonb('by_agent'),                       // { sentinel: { total, passed, avg_score }, ... }
+  by_tier: jsonb('by_tier'),                         // { micro: { total, passed, avg_score }, ... }
+  git_sha: text('git_sha'),                          // commit hash for regression tracking
+  triggered_by: text('triggered_by').default('manual'), // 'manual' | 'ci' | 'scheduled'
+  created_at: timestamp('created_at').defaultNow(),
+});
+
+export const simulationVerdicts = pgTable('simulation_verdicts', {
+  id: serial('id').primaryKey(),
+  run_id: integer('run_id').notNull(),               // FK to simulationRuns
+  scenario_id: text('scenario_id').notNull(),
+  scenario_name: text('scenario_name').notNull(),
+  pass: boolean('pass').notNull(),
+  overall_score: real('overall_score').notNull(),
+  detection_rate: real('detection_rate').notNull(),
+  silence_rate: real('silence_rate').notNull(),
+  timeliness_score: real('timeliness_score').notNull(),
+  findings_count: integer('findings_count').notNull(),
+  actions_count: integer('actions_count').notNull(),
+  duration_ms: integer('duration_ms').notNull(),
+  detections: jsonb('detections'),                   // full detection details
+  silence_checks: jsonb('silence_checks'),
+  llm_quality: real('llm_quality'),
+  llm_summary: text('llm_summary'),
+  created_at: timestamp('created_at').defaultNow(),
+});
+
+// ── SIMULATION FAILURES ──────────────────────────────────────
+// Dedicated table for failures — feeds threshold tuning and agent improvement.
+
+export const simulationFailures = pgTable('simulation_failures', {
+  id: serial('id').primaryKey(),
+  run_id: integer('run_id').notNull(),
+  scenario_id: text('scenario_id').notNull(),
+  failure_type: text('failure_type').notNull(),       // 'missed_detection' | 'false_positive' | 'late_detection' | 'wrong_severity'
+  agent: text('agent').notNull(),
+  expected: text('expected').notNull(),               // what should have happened
+  actual: text('actual'),                             // what did happen (null if missed)
+  related_threshold: text('related_threshold'),       // e.g. 'care_minutes.chris_alert_threshold_pct'
+  threshold_value: real('threshold_value'),
+  suggested_adjustment: text('suggested_adjustment'), // e.g. 'Lower from 0.95 to 0.93'
+  resolved: boolean('resolved').default(false),
+  resolved_at: timestamp('resolved_at'),
+  resolved_by: text('resolved_by'),                   // 'code_fix' | 'threshold_change' | 'scenario_updated'
+  created_at: timestamp('created_at').defaultNow(),
+});

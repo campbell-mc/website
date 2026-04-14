@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { runSuite } from '@/lib/simulation';
+import { persistRun } from '@/lib/simulation/persist';
 import { sentinelScenarios } from '@/lib/simulation/scenarios/sentinel';
 import { oracleScenarios } from '@/lib/simulation/scenarios/oracle';
 import { keeperScenarios } from '@/lib/simulation/scenarios/keeper';
@@ -23,5 +24,6 @@ export async function POST(request: NextRequest) {
   const llmJudge = body.llm_judge ?? false;
   const scenarios = SUITES[suite] ?? ALL_SCENARIOS;
   const report = await runSuite(scenarios, { llmJudge });
-  return NextResponse.json(report);
+  const runId = persistRun(report, suite, 'manual');
+  return NextResponse.json({ ...report, run_id: runId });
 }
