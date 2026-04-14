@@ -10,6 +10,9 @@ import {
   CheckCircle,
 } from "lucide-react";
 import { PageHeader } from "@/components/dashboard/PageHeader";
+import { AgentPulse } from "@/components/chris/AgentPulse";
+import { SituationReport } from "@/components/chris/SituationReport";
+import { hcFinancialReport } from "@/lib/chris/situation-reports";
 import { holy_grail_home_care } from "@/lib/seed-data";
 
 const financial = holy_grail_home_care.combined.financial;
@@ -100,6 +103,9 @@ export default function FinancialDashboardPage() {
             );
           })}
         </div>
+
+        <AgentPulse domain="hc_financial" />
+        <SituationReport domain="financial" narrative={hcFinancialReport.narrative} refreshedAt={hcFinancialReport.refreshedAt} context={hcFinancialReport.context} signals={hcFinancialReport.signals} />
 
         {/* StewartBrown benchmark label */}
         <p className="text-[10px] text-muted-foreground/60 -mt-3">

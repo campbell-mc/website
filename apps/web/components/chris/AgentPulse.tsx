@@ -18,6 +18,14 @@ const DOMAIN_AGENTS: Record<string, string[]> = {
   residents: ['Sentinel', 'Chronicler', 'Oracle'],
   loops: ['Keeper', 'Sentinel'],
   all: ['Sentinel', 'Oracle', 'Steward', 'Chronicler', 'Keeper', 'Town Crier'],
+  // Home Care domains
+  home_care: ['Sentinel', 'Oracle', 'Steward', 'Chronicler', 'Keeper', 'Town Crier'],
+  visits: ['Sentinel', 'Steward', 'Town Crier'],
+  clients: ['Sentinel', 'Chronicler', 'Keeper'],
+  packages: ['Oracle', 'Steward'],
+  hc_workforce: ['Keeper', 'Sentinel', 'Town Crier'],
+  hc_financial: ['Oracle', 'Steward'],
+  hc_compliance: ['Sentinel', 'Chronicler'],
 };
 
 const STATUS_DOT: Record<AgentStatus, string> = {

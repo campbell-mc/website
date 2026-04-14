@@ -10,6 +10,9 @@ import {
   MapPin,
 } from "lucide-react";
 import { PageHeader } from "@/components/dashboard/PageHeader";
+import { AgentPulse } from "@/components/chris/AgentPulse";
+import { SituationReport } from "@/components/chris/SituationReport";
+import { hcVisitsReport } from "@/lib/chris/situation-reports";
 import { holy_grail_home_care } from "@/lib/seed-data";
 
 const visits = holy_grail_home_care.combined.visits_today;
@@ -42,6 +45,9 @@ export default function VisitCompliancePage() {
             </div>
           ))}
         </div>
+
+        <AgentPulse domain="visits" />
+        <SituationReport domain="visits" narrative={hcVisitsReport.narrative} refreshedAt={hcVisitsReport.refreshedAt} context={hcVisitsReport.context} signals={hcVisitsReport.signals} />
 
         {/* Lone Worker Safety Alert */}
         <div className="bg-card rounded-xl border border-border border-l-4 border-l-[#C4704A] p-5" style={{ background: "rgba(196,112,74,0.04)" }}>

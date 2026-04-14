@@ -10,6 +10,9 @@ import {
   Activity,
 } from "lucide-react";
 import { PageHeader } from "@/components/dashboard/PageHeader";
+import { AgentPulse } from "@/components/chris/AgentPulse";
+import { SituationReport } from "@/components/chris/SituationReport";
+import { hcComplianceReport } from "@/lib/chris/situation-reports";
 import { holy_grail_home_care } from "@/lib/seed-data";
 
 const metrics = holy_grail_home_care.combined.metrics;
@@ -97,6 +100,9 @@ export default function ComplianceRegisterPage() {
             </div>
           ))}
         </div>
+
+        <AgentPulse domain="hc_compliance" />
+        <SituationReport domain="compliance" narrative={hcComplianceReport.narrative} refreshedAt={hcComplianceReport.refreshedAt} context={hcComplianceReport.context} signals={hcComplianceReport.signals} />
 
         {/* Obligations List */}
         <div className="bg-card rounded-xl border border-border p-5">

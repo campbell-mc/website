@@ -10,6 +10,9 @@ import {
   ShieldAlert,
 } from "lucide-react";
 import { PageHeader } from "@/components/dashboard/PageHeader";
+import { AgentPulse } from "@/components/chris/AgentPulse";
+import { SituationReport } from "@/components/chris/SituationReport";
+import { hcClientsReport } from "@/lib/chris/situation-reports";
 import { holy_grail_home_care } from "@/lib/seed-data";
 
 const combined = holy_grail_home_care.combined;
@@ -100,6 +103,9 @@ export default function ClientIntelligencePage() {
             </div>
           ))}
         </div>
+
+        <AgentPulse domain="clients" />
+        <SituationReport domain="clients" narrative={hcClientsReport.narrative} refreshedAt={hcClientsReport.refreshedAt} context={hcClientsReport.context} signals={hcClientsReport.signals} />
 
         {/* High Risk Clients */}
         <div className="bg-card rounded-xl border border-border p-5">

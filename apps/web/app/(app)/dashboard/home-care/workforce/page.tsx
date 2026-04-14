@@ -13,6 +13,9 @@ import {
   BarChart3,
 } from "lucide-react";
 import { PageHeader } from "@/components/dashboard/PageHeader";
+import { AgentPulse } from "@/components/chris/AgentPulse";
+import { SituationReport } from "@/components/chris/SituationReport";
+import { hcWorkforceReport } from "@/lib/chris/situation-reports";
 
 /* ── colours ── */
 const forest = "#1B4332";
@@ -119,6 +122,9 @@ export default function WorkforcePage() {
             </div>
           ))}
         </div>
+
+        <AgentPulse domain="hc_workforce" />
+        <SituationReport domain="workforce" narrative={hcWorkforceReport.narrative} refreshedAt={hcWorkforceReport.refreshedAt} context={hcWorkforceReport.context} signals={hcWorkforceReport.signals} />
 
         {/* Keeper Signals */}
         <div className="bg-card rounded-xl border border-border p-5">

@@ -112,6 +112,90 @@ export const governanceReport = {
 // RESIDENTS
 // ============================================================
 
+// ============================================================
+// HOME CARE — VISITS
+// ============================================================
+
+export const hcVisitsReport = {
+  narrative: `Visit compliance is holding at 95.2% — just below the 97% target and worth watching. The shortfall concentrates in the Southern Highlands afternoon round where travel time between clients is eating into visit windows. 3 missed visits last week were all lone worker safety holds — workers couldn't check in via the app due to mobile coverage gaps in Bundanoon. Sentinel flagged a pattern: Monday and Friday visits in the outer zones have a 12% higher missed-visit rate than mid-week. Steward recommends restructuring the Tuesday/Thursday rounds to absorb the high-risk outer zone clients, reducing travel clustering. SIRS register is clean — no open notifications.`,
+  refreshedAt: "2h ago",
+  context: "Visit compliance 95.2% · 247 active clients",
+  signals: [
+    { domain: "Visits", active: true },
+    { domain: "Workforce", active: true },
+    { domain: "Compliance", active: false },
+    { domain: "Financial", active: false },
+  ] as SignalDot[],
+};
+
+// ============================================================
+// HOME CARE — CLIENTS
+// ============================================================
+
+export const hcClientsReport = {
+  narrative: `6 clients are flagged as high-risk this fortnight — up from 4 last cycle. Margaret T. and Ronald S. both live alone with compounding risk factors and need weekly case conference review. 7 care plans are overdue for review — 3 are in the Southern Highlands service where the new coordinator is still onboarding. Feedback is tracking well: 77% satisfaction overall, but 3 open complaints need attention. The oldest (communication gap on care plan changes for Dorothy M.) is at 8 days — nearing the 14-day resolution threshold. Keeper has flagged that care worker continuity in the outer zones is declining — the same clients are seeing different workers each visit, which correlates with the satisfaction dip in that area.`,
+  refreshedAt: "2h ago",
+  context: "247 active clients · 6 high-risk · 7 care plans overdue",
+  signals: [
+    { domain: "Clients", active: true },
+    { domain: "Workforce", active: true },
+    { domain: "Compliance", active: false },
+    { domain: "Financial", active: false },
+  ] as SignalDot[],
+};
+
+// ============================================================
+// HOME CARE — WORKFORCE
+// ============================================================
+
+export const hcWorkforceReport = {
+  narrative: `The workforce picture has two threads this fortnight. First, the good news: training compliance is at 94% and trending up — the online module push in March is paying off. Credential currency is strong with only 2 AHPRA renewals due in the next 30 days. Second, Keeper has detected a turnover precursor in the Camelot team — PSH_13 (role clarity) has been declining for 3 consecutive cycles. This pattern historically precedes voluntary turnover in 71% of comparable home care teams. The driver appears to be the new rostering system rollout — workers are unclear on their schedules and reporting confusion about client assignments. Absenteeism in the same team is up 18% this cycle, concentrated on Mondays — a classic early signal. Recommend: team leader conversation this cycle before the pattern establishes.`,
+  refreshedAt: "2h ago",
+  context: "89 active care workers · training 94% · 2 credentials expiring",
+  signals: [
+    { domain: "Workforce", active: true },
+    { domain: "Visits", active: true },
+    { domain: "Clients", active: false },
+    { domain: "Financial", active: false },
+  ] as SignalDot[],
+};
+
+// ============================================================
+// HOME CARE — FINANCIAL
+// ============================================================
+
+export const hcFinancialReport = {
+  narrative: `Revenue per client per day sits at $84.20 against the sector benchmark of $84.89 — close but below. The gap is driven by 12 clients tracking below 75% package utilisation this quarter. Oracle estimates $47.2K at risk of returning to government under Support at Home rules if utilisation isn't addressed before June 30. The highest-impact opportunity: 4 Level 4 clients with combined $47K unspent are all in the category of "carer reluctance" — primary carers preferring to provide care themselves. Care coordinator conversations are scheduled for 3 of the 4 this fortnight. EBITDA return at 5.8% is within target but below the StewartBrown HC sector median of 7.1%. The main drag is care management costs running 19.1% vs the 18.7% benchmark — driven by coordinator workload from the onboarding surge in February.`,
+  refreshedAt: "2h ago",
+  context: "Revenue $84.20/client/day · EBITDA 5.8% · $47K unspent at risk",
+  signals: [
+    { domain: "Financial", active: true },
+    { domain: "Clients", active: true },
+    { domain: "Workforce", active: false },
+    { domain: "Compliance", active: false },
+  ] as SignalDot[],
+};
+
+// ============================================================
+// HOME CARE — COMPLIANCE
+// ============================================================
+
+export const hcComplianceReport = {
+  narrative: `Compliance register sits at 82% — 3 obligations at risk. The overdue corrective action on missed visit notifications is the priority: 3 clients weren't notified of cancelled visits in March, and the process fix (automated SMS) is in progress but not yet live. Lone worker check-in compliance has improved from 82% to 88% after the app reminder enhancement, but still below the 95% target. SIRS register is clean — no open Cat 1 or Cat 2 notifications. The next quality indicator submission is due 28 April — CHRIS has compiled the data and it's ready for review. Worker screening currency is strong: all NDIS Worker Screening checks current after the renewal push in February.`,
+  refreshedAt: "2h ago",
+  context: "Compliance 82% · 1 corrective action overdue · SIRS clear",
+  signals: [
+    { domain: "Compliance", active: true },
+    { domain: "Visits", active: true },
+    { domain: "Workforce", active: false },
+    { domain: "Financial", active: false },
+  ] as SignalDot[],
+};
+
+// ============================================================
+// RESIDENTIAL — RESIDENTS
+// ============================================================
+
 export const residentsReport = {
   narrative: `The resident picture needs a closer look in the dementia wings this week. Grevillea and Acacia are showing declining voice scores for the third consecutive fortnight — both sitting below 3.5 on "feeling listened to" — and CHRIS has cross-referenced this with the PSH_08 elevation in those teams. Staff carrying unaddressed traumatic exposure tend to withdraw emotionally, and residents experience that as not being heard. The two care plans overdue for review are both in these wings — worth combining the care plan review with a check-in on what residents are experiencing. The one open complaint (food quality, Wattle Wing) has ${ri.complaints.open_items[0]?.days_remaining} days left in the response window and is the third food quality complaint in 6 months — a pattern, not an isolated event. Overall consumer experience remains above benchmark at ${ri.consumer_experience.qi_11_score} — the dementia wing pattern is an early signal, not yet a headline number.`,
   refreshedAt: "2h ago",
