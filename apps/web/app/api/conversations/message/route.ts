@@ -154,13 +154,6 @@ export async function POST(request: NextRequest) {
       });
     } catch (err) {
       console.error("[ConversationAPI] Claude call failed, falling back to demo:", err);
-      // Temporarily return error details for debugging
-      return NextResponse.json({
-        id: messageId,
-        content: `[DEBUG] Claude call failed: ${err instanceof Error ? err.message : String(err)}`,
-        attachments: [],
-        suggested_actions: [],
-      });
     }
   }
 
