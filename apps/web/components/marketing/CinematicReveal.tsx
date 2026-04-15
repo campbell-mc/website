@@ -93,7 +93,7 @@ export function CinematicReveal() {
         <div className="transition-all duration-700" style={{ width: 60, height: 2, backgroundColor: "#D4A017", margin: "2.5rem 0 2rem 0", opacity: visible ? 1 : 0, transitionDelay: "3600ms" }} />
 
         {/* Footnote */}
-        <div className="transition-all duration-700" style={{ opacity: visible ? 0.55 : 0, transitionDelay: "3800ms", fontSize: "0.8125rem", lineHeight: 1.7, color: "rgba(250,247,242,0.55)" }}>
+        <div className="transition-all duration-700" style={{ opacity: visible ? 1 : 0, transitionDelay: "3800ms", fontSize: "0.875rem", lineHeight: 1.7, color: "rgba(250,247,242,0.80)" }}>
           <p style={{ margin: "0 0 0.25em" }}>The Chronicler agent. Event-driven. Always watching.</p>
           <p style={{ margin: 0 }}>Civil penalties for late SIRS notifications. Zero missed deadlines at current pilots.</p>
         </div>
