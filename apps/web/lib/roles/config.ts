@@ -210,7 +210,7 @@ export const ROLE_CONFIG: Record<RoleName, RoleConfig> = {
   don: {
     display_name: 'Director of Nursing',
     data_scope: 'single_facility',
-    home_route: '/dashboard/don',
+    home_route: '/dashboard',
     nav_sections: ['clinical', 'operations', 'residents', 'workforce', 'financial_ops', 'governance', 'loops', 'tools'],
     bottom_tabs: ['home', 'queue', 'coach', 'briefing', 'more'],
     domain_strip: {
