@@ -211,7 +211,7 @@ function Hero() {
           <div className="hidden lg:flex justify-center">
             <div className="relative" style={{ animation: "heroFloat 7s ease-in-out infinite" }}>
               <div className="rounded-2xl overflow-hidden" style={{ transform: "rotate(2deg)", boxShadow: "0 32px 80px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.08)" }}>
-                <Image src="/screenshots/dashboard-home.png" alt="CHRIS OS Dashboard — Good morning, Sarah" width={480} height={360} className="w-[480px] h-auto" priority />
+                <Image src="/screenshots/dashboard-home.png" alt="CHRIS OS Dashboard — Good morning, Sarah" width={560} height={420} className="w-[560px] h-auto" priority />
               </div>
             </div>
           </div>
