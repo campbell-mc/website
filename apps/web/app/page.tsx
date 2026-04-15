@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import ChrisPublicChat from "@/components/ChrisPublicChat";
 import { RoiCalculator } from "@/components/RoiCalculator";
 import { NineJobs } from "@/components/NineJobs";
@@ -210,57 +211,7 @@ function Hero() {
           <div className="hidden lg:flex justify-center">
             <div className="relative" style={{ animation: "heroFloat 7s ease-in-out infinite" }}>
               <div className="rounded-2xl overflow-hidden" style={{ transform: "rotate(2deg)", boxShadow: "0 32px 80px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.08)" }}>
-                {/* High-fidelity dashboard representation */}
-                <div className="w-[420px] bg-[#f0ede8] p-3 rounded-2xl">
-                  {/* Sidebar hint */}
-                  <div className="flex gap-2">
-                    <div className="w-[100px] bg-[#e8e4de] rounded-xl p-2 space-y-2 shrink-0">
-                      <div className="h-2 bg-[#1B4332] rounded w-8 mb-3" />
-                      <div className="h-1.5 bg-[#1B4332]/20 rounded w-full" />
-                      <div className="h-1.5 bg-[#1B4332]/10 rounded w-4/5" />
-                      <div className="h-1.5 bg-[#1B4332]/10 rounded w-full" />
-                      <div className="h-1.5 bg-[#1B4332]/10 rounded w-3/4" />
-                      <div className="h-px bg-[#1B4332]/5 my-2" />
-                      <div className="h-1.5 bg-[#1B4332]/10 rounded w-full" />
-                      <div className="h-1.5 bg-[#1B4332]/10 rounded w-4/5" />
-                    </div>
-                    {/* Main content */}
-                    <div className="flex-1 bg-white rounded-xl p-3 space-y-3">
-                      <div>
-                        <div className="text-[11px] font-semibold text-[#1B4332]">Good morning, Sarah</div>
-                        <div className="text-[8px] text-stone-400">The Holy Grail Bowral · Tuesday 15 April</div>
-                      </div>
-                      <div className="bg-[rgba(27,67,50,0.05)] rounded-lg p-2.5">
-                        <div className="flex items-center gap-1.5 mb-1.5">
-                          <div className="w-4 h-4 rounded-full bg-gradient-to-br from-[#1B4332] to-[#D4A017]" />
-                          <span className="text-[8px] font-semibold text-[#1B4332]">CHRIS</span>
-                        </div>
-                        <div className="space-y-1">
-                          <div className="h-1 bg-[#1B4332]/10 rounded w-full" />
-                          <div className="h-1 bg-[#1B4332]/10 rounded w-11/12" />
-                          <div className="h-1 bg-[#1B4332]/10 rounded w-4/5" />
-                        </div>
-                      </div>
-                      <div className="flex gap-1.5">
-                        {[["226", "Care Min", "#2D7D73"], ["13.5%", "Agency", "#D4A017"], ["17/20", "Compliance", "#2D7D73"]].map(([v, l, c]) => (
-                          <div key={l} className="flex-1 bg-[#faf7f2] rounded-lg p-2 text-center">
-                            <div className="text-[10px] font-bold" style={{ color: c as string }}>{v}</div>
-                            <div className="text-[7px] text-stone-400">{l}</div>
-                          </div>
-                        ))}
-                      </div>
-                      <div className="space-y-1.5">
-                        {["Clinical", "Workforce", "Financial"].map((d) => (
-                          <div key={d} className="flex items-center gap-2 px-2 py-1.5 bg-[#faf7f2] rounded-lg">
-                            <span className="text-[8px]">✅</span>
-                            <span className="text-[8px] font-medium text-[#1B4332]">{d}</span>
-                            <div className="flex-1 h-1 bg-[#1B4332]/5 rounded ml-1" />
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <Image src="/screenshots/dashboard-home.png" alt="CHRIS OS Dashboard — Good morning, Sarah" width={480} height={360} className="w-[480px] h-auto" priority />
               </div>
             </div>
           </div>

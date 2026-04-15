@@ -1,25 +1,30 @@
-export function ScreenshotShowcase() {
-  const screenshots = [
-    {
-      title: "The Review Queue",
-      caption: "Everything that needs action, ranked by urgency, drafted and ready.",
-      rotate: "-1.5deg",
-      bg: "#1B4332",
-    },
-    {
-      title: "Care Minutes — Live",
-      caption: "Every shift. With CHRIS telling you what it means.",
-      rotate: "1deg",
-      bg: "#2D7D73",
-    },
-    {
-      title: "SIRS Notification",
-      caption: "Drafted by The Chronicler. Auto-populated. Awaiting your approval.",
-      rotate: "-0.5deg",
-      bg: "#C4704A",
-    },
-  ];
+import Image from "next/image";
 
+const screenshots = [
+  {
+    src: "/screenshots/review-queue.png",
+    alt: "DON Review Queue — IMMEDIATE, URGENT, ROUTINE priorities",
+    title: "The Review Queue",
+    caption: "Everything that needs action, ranked by urgency, drafted and ready.",
+    rotate: "-1.5deg",
+  },
+  {
+    src: "/screenshots/care-minutes.png",
+    alt: "Care Minutes Dashboard — 226/215 compliant",
+    title: "Care Minutes — Live",
+    caption: "Every shift. With CHRIS telling you what it means.",
+    rotate: "1deg",
+  },
+  {
+    src: "/screenshots/sirs-draft.png",
+    alt: "SIRS Notification Draft — Priority 1, fields auto-populated",
+    title: "SIRS Notification",
+    caption: "Drafted by The Chronicler. Auto-populated. Awaiting your approval.",
+    rotate: "-0.5deg",
+  },
+];
+
+export function ScreenshotShowcase() {
   return (
     <section className="bg-[#faf7f2] border-y border-[#1B4332]/8">
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
@@ -37,39 +42,23 @@ export function ScreenshotShowcase() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-6">
-          {screenshots.map((shot, i) => (
+          {screenshots.map((shot) => (
             <div key={shot.title} className="group">
               <div
-                className="rounded-2xl overflow-hidden shadow-[0_24px_64px_rgba(0,0,0,0.12),0_0_0_1px_rgba(0,0,0,0.06)] transition-all duration-300 group-hover:shadow-[0_40px_80px_rgba(0,0,0,0.16)] group-hover:-translate-y-2"
+                className="rounded-2xl overflow-hidden shadow-[0_24px_64px_rgba(0,0,0,0.12),0_0_0_1px_rgba(0,0,0,0.06)] transition-all duration-300 group-hover:shadow-[0_40px_80px_rgba(0,0,0,0.16)] group-hover:-translate-y-2 lg:group-hover:!rotate-0"
                 style={{ transform: `rotate(${shot.rotate})` }}
               >
-                {/* Placeholder screenshot representation */}
-                <div className="aspect-[4/3] relative" style={{ backgroundColor: shot.bg }}>
-                  <div className="absolute inset-0 flex flex-col items-center justify-center p-8">
-                    <div className="w-full max-w-sm">
-                      {/* Simulated UI elements */}
-                      <div className="bg-white/10 rounded-lg p-3 mb-3">
-                        <div className="h-2 bg-white/20 rounded w-2/3 mb-2" />
-                        <div className="h-2 bg-white/15 rounded w-full mb-2" />
-                        <div className="h-2 bg-white/15 rounded w-4/5" />
-                      </div>
-                      <div className="bg-white/10 rounded-lg p-3 mb-3">
-                        <div className="h-2 bg-white/20 rounded w-1/2 mb-2" />
-                        <div className="h-2 bg-white/15 rounded w-full" />
-                      </div>
-                      <div className="bg-white/10 rounded-lg p-3">
-                        <div className="h-2 bg-white/20 rounded w-3/4 mb-2" />
-                        <div className="h-2 bg-white/15 rounded w-full mb-2" />
-                        <div className="h-2 bg-white/15 rounded w-2/3" />
-                      </div>
-                    </div>
-                    <div className="absolute bottom-4 left-4 right-4">
-                      <div className="text-white/80 text-[13px] font-medium">{shot.title}</div>
-                    </div>
-                  </div>
-                </div>
+                <Image
+                  src={shot.src}
+                  alt={shot.alt}
+                  width={600}
+                  height={450}
+                  className="w-full h-auto"
+                />
               </div>
-              <p className="text-[13px] text-stone-500 text-center mt-4 leading-relaxed px-4">{shot.caption}</p>
+              <p className="text-[13px] text-stone-500 text-center mt-4 leading-relaxed px-4">
+                <span className="font-medium text-[#1B4332]">{shot.title}.</span> {shot.caption}
+              </p>
             </div>
           ))}
         </div>
