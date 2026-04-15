@@ -1,7 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import { ChevronDown } from "lucide-react";
+
+const WorkflowWalkthrough = dynamic(
+  () => import("@/components/marketing/WorkflowWalkthrough").then((m) => ({ default: m.WorkflowWalkthrough })),
+  { ssr: false }
+);
 
 interface Job {
   number: string;
@@ -134,7 +140,7 @@ const JOBS: Job[] = [
   },
 ];
 
-function JobCard({ job }: { job: Job }) {
+function JobCard({ job, onOpenWorkflow }: { job: Job; onOpenWorkflow?: (id: string) => void }) {
   const [expanded, setExpanded] = useState(false);
 
   return (
@@ -182,9 +188,16 @@ function JobCard({ job }: { job: Job }) {
               ))}
             </div>
 
-            <div className="bg-[#FEF7F0] rounded-lg px-3 py-2.5">
+            <div className="bg-[#FEF7F0] rounded-lg px-3 py-2.5 mb-3">
               <p className="text-[12px] font-medium" style={{ color: job.accent }}>{job.stakes}</p>
             </div>
+
+            <button
+              onClick={(e) => { e.stopPropagation(); onOpenWorkflow?.(job.number); }}
+              className="text-[13px] font-medium text-[#2D7D73] hover:underline transition-colors"
+            >
+              See how this works in the platform →
+            </button>
           </div>
         </div>
       </div>
@@ -193,7 +206,11 @@ function JobCard({ job }: { job: Job }) {
 }
 
 export function NineJobs() {
+  const [activeWorkflow, setActiveWorkflow] = useState<string | null>(null);
+
   return (
+    <>
+    <WorkflowWalkthrough jobId={activeWorkflow} onClose={() => setActiveWorkflow(null)} />
     <section className="bg-[#F5F2EB] border-y border-[#1B4332]/8" id="nine-jobs">
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
         <div className="text-[11px] font-medium tracking-[0.08em] uppercase text-[#1B4332]/50 mb-4" style={{ fontFamily: "var(--font-instrument-serif, 'Georgia'), serif" }}>
@@ -211,7 +228,7 @@ export function NineJobs() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {JOBS.map((job) => (
-            <JobCard key={job.number} job={job} />
+            <JobCard key={job.number} job={job} onOpenWorkflow={setActiveWorkflow} />
           ))}
         </div>
 
@@ -231,5 +248,6 @@ export function NineJobs() {
         </div>
       </div>
     </section>
+    </>
   );
 }
