@@ -284,44 +284,85 @@ export async function POST(request: NextRequest) {
   // Persist user message
   const userMsg = addMessage(fid, role, "user", message);
 
-  // Get persisted history for Claude context (last 20 messages)
-  const history = getMessageHistory(fid, role, 20);
+  // Get persisted history for Claude context (full history)
+  const history = getMessageHistory(fid, role, 50);
 
   const apiKey = process.env.ANTHROPIC_API_KEY;
+  const wantStream = body.stream === true;
 
   // ── Try live Claude call ──────────────────────────────────────
 
   if (apiKey && apiKey !== "sk-ant-your-key-here") {
     try {
-      const { callClaudeConversation } = await import("@/lib/anthropic/client");
+      const Anthropic = (await import("@anthropic-ai/sdk")).default;
+      const client = new Anthropic({ apiKey });
 
       const memoryContext = buildMemoryContext(fid, role);
       const systemPrompt = buildSystemPrompt(context_type, context_data, role, facility_name) + memoryContext;
 
-      const result = await callClaudeConversation({
-        system: systemPrompt,
-        history: history.slice(0, -1), // exclude the message we just added (it's the newMessage)
-        newMessage: message,
-        maxTokens: 800,
+      const messages = [
+        ...history.slice(0, -1).map((m) => ({ role: m.role, content: m.content })),
+        { role: "user" as const, content: message },
+      ];
+
+      // ── Streaming response ──────────────────────────────────
+      if (wantStream) {
+        const stream = await client.messages.stream({
+          model: "claude-sonnet-4-20250514",
+          max_tokens: 800,
+          system: systemPrompt,
+          messages,
+        });
+
+        let fullText = "";
+        const readable = new ReadableStream({
+          async start(controller) {
+            for await (const chunk of stream) {
+              if (chunk.type === "content_block_delta" && chunk.delta.type === "text_delta") {
+                fullText += chunk.delta.text;
+                controller.enqueue(new TextEncoder().encode(chunk.delta.text));
+              }
+            }
+            controller.close();
+
+            // Persist after stream completes
+            addMessage(fid, role, "assistant", fullText);
+            const conv = getOrCreateConversation(fid, role);
+            extractInsights(message, fullText, role, fid, conv.id);
+          },
+        });
+
+        return new Response(readable, {
+          headers: {
+            "Content-Type": "text/plain; charset=utf-8",
+            "Transfer-Encoding": "chunked",
+            "Cache-Control": "no-cache",
+          },
+        });
+      }
+
+      // ── Non-streaming (legacy) ──────────────────────────────
+      const result = await client.messages.create({
         model: "claude-sonnet-4-20250514",
-        facilityId: fid,
-        agentName: "chris_conversation",
+        max_tokens: 800,
+        system: systemPrompt,
+        messages,
       });
 
-      // Persist assistant response
-      const assistantMsg = addMessage(fid, role, "assistant", result.text);
+      const text = result.content
+        .filter((b) => b.type === "text")
+        .map((b) => (b as { type: "text"; text: string }).text)
+        .join("");
 
-      // Extract insights for memory
+      const assistantMsg = addMessage(fid, role, "assistant", text);
       const conv = getOrCreateConversation(fid, role);
-      extractInsights(message, result.text, role, fid, conv.id);
+      extractInsights(message, text, role, fid, conv.id);
 
-      console.log(
-        `[ConversationAPI] ${role} | ${userMsg.id} → ${assistantMsg.id} | tokens=${result.inputTokens}in/${result.outputTokens}out`
-      );
+      console.log(`[ConversationAPI] ${role} | ${userMsg.id} → ${assistantMsg.id}`);
 
       return NextResponse.json({
         id: assistantMsg.id,
-        content: result.text,
+        content: text,
         attachments: [],
         suggested_actions: [],
       });

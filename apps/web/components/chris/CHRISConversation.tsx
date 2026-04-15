@@ -367,42 +367,67 @@ export function CHRISConversation({
           body: JSON.stringify({
             conversation_id: conversationId,
             message: text.trim(),
-            history: [...messages, userMessage].map((m) => ({
-              sender_type: m.sender_type,
-              content: m.content,
-            })),
-            context: {
-              context_type,
-              context_id,
-              context_data,
-              facility_id,
-              current_user_role,
-            },
+            stream: true,
+            facility_id,
+            facility_name: facility_id === "FAC-005" ? "KHG Home Care Southern Highlands" : "The Holy Grail Bowral",
+            user_role: current_user_role,
+            context_type,
+            context_id,
+            context_data,
           }),
         });
 
-        const data = await res.json();
+        const contentType = res.headers.get("content-type") ?? "";
 
-        const chrisMessage: Message = {
-          id: uid(),
-          sender_type: "chris",
-          content: data.content,
-          attachments: data.attachments,
-          suggested_actions: data.suggested_actions,
-          created_at: new Date().toISOString(),
-        };
+        if (contentType.includes("text/plain")) {
+          // Streaming response — add empty message and stream into it
+          const streamMsgId = uid();
+          setMessages((prev) => [...prev, {
+            id: streamMsgId,
+            sender_type: "chris",
+            content: "",
+            created_at: new Date().toISOString(),
+          }]);
+          setThinking(false);
 
-        setMessages((prev) => [...prev, chrisMessage]);
+          const reader = res.body?.getReader();
+          const decoder = new TextDecoder();
+          if (reader) {
+            while (true) {
+              const { done, value } = await reader.read();
+              if (done) break;
+              const chunk = decoder.decode(value, { stream: true });
+              setMessages((prev) => {
+                const updated = [...prev];
+                const last = updated[updated.length - 1];
+                if (last && last.id === streamMsgId) {
+                  updated[updated.length - 1] = { ...last, content: last.content + chunk };
+                }
+                return updated;
+              });
+            }
+          }
+        } else {
+          // JSON response (demo mode or non-streaming fallback)
+          const data = await res.json();
+          setThinking(false);
+          setMessages((prev) => [...prev, {
+            id: uid(),
+            sender_type: "chris",
+            content: data.content,
+            attachments: data.attachments,
+            suggested_actions: data.suggested_actions,
+            created_at: new Date().toISOString(),
+          }]);
+        }
       } catch {
-        const errorMessage: Message = {
+        setThinking(false);
+        setMessages((prev) => [...prev, {
           id: uid(),
           sender_type: "system",
           content: "Message failed to send. Please try again.",
           created_at: new Date().toISOString(),
-        };
-        setMessages((prev) => [...prev, errorMessage]);
-      } finally {
-        setThinking(false);
+        }]);
       }
     },
     [thinking, conversationId, messages, context_type, context_id, context_data, facility_id, current_user_role],
