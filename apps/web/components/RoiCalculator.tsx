@@ -244,10 +244,13 @@ export function RoiCalculator() {
           </div>
         </div>
 
-        <div className="mt-10 flex items-center gap-4 flex-wrap">
-          <Link href="/" className="bg-white text-[#1B4332] px-8 py-3.5 rounded-lg text-[13px] font-medium hover:bg-white/90 transition-colors">
-            Enter the demo →
-          </Link>
+        <p className="mt-6 text-[13px] text-center" style={{ color: "rgba(255,255,255,0.55)" }}>
+          Want to see this modelled against your actual facility data?
+        </p>
+        <div className="mt-4 flex items-center gap-4 flex-wrap justify-center">
+          <a href="#waitlist" className="bg-white text-[#1B4332] px-8 py-3.5 rounded-lg text-[13px] font-medium hover:bg-white/90 transition-colors">
+            Book a conversation →
+          </a>
           <Link href="/newsroom" className="border border-white/30 text-white/80 px-8 py-3.5 rounded-lg text-[13px] hover:border-white/50 hover:text-white transition-colors">
             Read the regulatory context
           </Link>

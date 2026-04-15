@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import ChrisPublicChat from "@/components/ChrisPublicChat";
 import { RoiCalculator } from "@/components/RoiCalculator";
+import { NineJobs } from "@/components/NineJobs";
 
 // ─── Agent data ──────────────────────────────────────────────────────────────
 
@@ -171,22 +172,16 @@ function Hero() {
         <div className="flex items-center gap-3 flex-wrap mb-8">
           <button
             className="bg-[#1B4332] text-white px-7 py-3.5 rounded-lg text-sm font-medium hover:bg-[#1B4332]/90 transition-colors"
+            onClick={() => document.getElementById("nine-jobs")?.scrollIntoView({ behavior: "smooth" })}
+          >
+            See the 9 jobs CHRIS handles →
+          </button>
+          <button
+            className="border border-[#1B4332]/25 text-[#1B4332] px-7 py-3.5 rounded-lg text-sm font-normal hover:border-[#1B4332]/50 transition-colors"
             onClick={() => document.getElementById("agent-section")?.scrollIntoView({ behavior: "smooth" })}
           >
             See the agents →
           </button>
-          <Link
-            href="/dashboard"
-            className="border border-[#1B4332]/25 text-[#1B4332] px-7 py-3.5 rounded-lg text-sm font-normal hover:border-[#1B4332]/50 transition-colors"
-          >
-            Enter demo — Residential
-          </Link>
-          <Link
-            href="/dashboard/home-care?care=home_care"
-            className="border border-[#1B4332]/25 text-[#1B4332] px-7 py-3.5 rounded-lg text-sm font-normal hover:border-[#1B4332]/50 transition-colors"
-          >
-            Enter demo — Home Care
-          </Link>
         </div>
 
         <div className="flex items-center gap-5 flex-wrap">
@@ -444,7 +439,7 @@ function RolesSection() {
         financial intelligence. The WHS Lead sees the psychosocial picture.
       </p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
         {ROLES.map((r) => (
           <div key={r.title} className="bg-white border border-[#1B4332]/10 rounded-xl p-5 lg:p-6 hover:border-[#1B4332]/25 hover:shadow-sm transition-all">
             <div className="text-[14px] font-medium text-stone-800 mb-1.5">{r.title}</div>
@@ -452,46 +447,12 @@ function RolesSection() {
           </div>
         ))}
       </div>
+      <div className="text-center">
+        <a href="#waitlist" className="bg-[#1B4332] text-white px-8 py-3.5 rounded-lg text-[14px] font-medium hover:bg-[#1B4332]/90 transition-colors inline-block">
+          Join the waitlist →
+        </a>
+      </div>
     </section>
-  );
-}
-
-function DemoSection() {
-  return (
-    <div className="bg-stone-50 border-t border-[#1B4332]/8">
-      <section className="max-w-6xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
-        <div className="text-[11px] font-medium tracking-[0.08em] uppercase text-stone-400 mb-4">
-          See it working
-        </div>
-        <h2 className="text-[clamp(24px,3vw,36px)] font-normal leading-[1.15] tracking-[-0.02em] text-[#1B4332] mb-4" style={{ fontFamily: "var(--font-instrument-serif, 'Georgia'), serif" }}>
-          Enter the demo
-        </h2>
-        <p className="text-[16px] leading-relaxed text-stone-500 max-w-xl mb-10">
-          Choose a care type to explore. You are entering a demo environment with representative data. Nothing you interact with affects a real facility.
-        </p>
-
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl">
-          <Link
-            href="/dashboard"
-            className="flex flex-col items-center gap-2.5 px-6 py-6 bg-[#1B4332] text-white rounded-xl hover:bg-[#2D7D73] transition-colors text-center"
-          >
-            <span className="text-base font-semibold">Residential Care</span>
-            <span className="text-xs text-white/60">137-bed facility · DON view · 6 agents active</span>
-          </Link>
-          <Link
-            href="/dashboard/home-care?care=home_care"
-            className="flex flex-col items-center gap-2.5 px-6 py-6 bg-[#1B4332] text-white rounded-xl hover:bg-[#2D7D73] transition-colors text-center"
-          >
-            <span className="text-base font-semibold">Home Care</span>
-            <span className="text-xs text-white/60">247 clients · 2 services · Support at Home</span>
-          </Link>
-          <div className="flex flex-col items-center gap-2.5 px-6 py-6 bg-[#1B4332]/60 text-white/70 rounded-xl text-center cursor-default">
-            <span className="text-base font-semibold">NDIS</span>
-            <span className="text-xs text-white/40">Coming soon</span>
-          </div>
-        </div>
-      </section>
-    </div>
   );
 }
 
@@ -636,14 +597,14 @@ export default function LandingPage() {
     <div className="bg-[#F5F2EB] text-stone-900 overflow-hidden" style={{ fontFamily: "var(--font-dm-sans, 'DM Sans'), system-ui, sans-serif" }}>
       <Nav />
       <Hero />
-      <SystemsStrip />
       <LiveTicker />
+      <SystemsStrip />
+      <NineJobs />
       <AgentHub />
       <ChrisCoachCTA />
       <ExecutionSection />
       <RoiCalculator />
       <RolesSection />
-      <DemoSection />
       <WaitlistSection />
       <Footer />
     </div>
