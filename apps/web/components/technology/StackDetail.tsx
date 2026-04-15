@@ -15,7 +15,7 @@ export function StackDetail() {
         <h2 className="text-[clamp(24px,3vw,36px)] font-normal leading-[1.1] tracking-[-0.02em] text-[#1B4332] mb-4" style={{ fontFamily: "var(--font-instrument-serif, 'Georgia'), serif" }}>
           Built for production.<br /><em className="italic" style={{ color: "#2D7D73" }}>Deployed in Australian aged care.</em>
         </h2>
-        <p className="text-[14px] text-stone-500 max-w-xl mb-12 leading-relaxed">Infrastructure cost at current scale: under $200/month per facility. Gross margin per facility exceeds 90% at full deployment.</p>
+        <p className="text-[14px] text-stone-500 max-w-xl mb-12 leading-relaxed">Built on the same cloud infrastructure used by Australia's major health systems. No on-premise hardware. No IT project. Connected to your existing systems within weeks, not months.</p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {STACK.map(({ category, items }) => (
