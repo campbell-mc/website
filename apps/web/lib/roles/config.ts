@@ -761,7 +761,7 @@ export const ROLE_CONFIG: Record<RoleName, RoleConfig> = {
   frontline_staff: {
     display_name: 'Care Team Member',
     data_scope: 'single_team',
-    home_route: '/dashboard/staff',
+    home_route: '/dashboard/team-leader',
     nav_sections: ['pulse', 'coach'],
     bottom_tabs: ['home', 'pulse', 'coach'],
     domain_strip: {
@@ -812,7 +812,7 @@ export const ROLE_CONFIG: Record<RoleName, RoleConfig> = {
   elt_member: {
     display_name: 'ELT Member',
     data_scope: 'portfolio',
-    home_route: '/dashboard/elt',
+    home_route: '/dashboard/ceo',
     nav_sections: ['portfolio', 'financial', 'governance', 'compliance', 'tools'],
     bottom_tabs: ['home', 'portfolio', 'coach', 'briefing', 'more'],
     domain_strip: {
@@ -956,7 +956,7 @@ export const ROLE_CONFIG: Record<RoleName, RoleConfig> = {
   care_coordinator: {
     display_name: 'Care Coordinator',
     data_scope: 'single_facility',
-    home_route: '/dashboard/care-coordinator',
+    home_route: '/dashboard/home-care',
     nav_sections: ['care_management', 'clients', 'workforce', 'compliance', 'lone_worker'],
     bottom_tabs: ['home', 'queue', 'coach', 'briefing', 'more'],
     domain_strip: { residential: [], home_care: ['Visits', 'Clients', 'Workforce', 'Compliance', 'Budget'], ndis: [] },
@@ -984,7 +984,7 @@ export const ROLE_CONFIG: Record<RoleName, RoleConfig> = {
   support_coordinator_hc: {
     display_name: 'Support Coordinator',
     data_scope: 'single_facility',
-    home_route: '/dashboard/support-coordinator-hc',
+    home_route: '/dashboard/home-care',
     nav_sections: ['clients', 'budget_management', 'compliance'],
     bottom_tabs: ['home', 'clients', 'coach', 'briefing', 'more'],
     domain_strip: { residential: [], home_care: ['Clients', 'Budget', 'Plans', 'Compliance', 'Reports'], ndis: [] },
@@ -1012,7 +1012,7 @@ export const ROLE_CONFIG: Record<RoleName, RoleConfig> = {
   community_support_worker: {
     display_name: 'Community Support Worker',
     data_scope: 'single_team',
-    home_route: '/dashboard/csw',
+    home_route: '/dashboard/home-care',
     nav_sections: ['pulse', 'coach'],
     bottom_tabs: ['home', 'visits', 'coach'],
     domain_strip: { residential: [], home_care: ['My Visits', 'Pulse', 'Coach'], ndis: [] },
@@ -1044,7 +1044,7 @@ export const ROLE_CONFIG: Record<RoleName, RoleConfig> = {
   ndis_manager: {
     display_name: 'NDIS Manager',
     data_scope: 'single_facility',
-    home_route: '/dashboard/ndis-manager',
+    home_route: '/dashboard',
     nav_sections: ['participants', 'plan_budgets', 'supports', 'workforce', 'compliance', 'worker_screening', 'loops'],
     bottom_tabs: ['home', 'queue', 'coach', 'briefing', 'more'],
     domain_strip: { residential: [], home_care: [], ndis: ['Participants', 'Plans', 'Workforce', 'Quality', 'Compliance'] },
@@ -1072,7 +1072,7 @@ export const ROLE_CONFIG: Record<RoleName, RoleConfig> = {
   support_coordinator_ndis: {
     display_name: 'Support Coordinator',
     data_scope: 'single_facility',
-    home_route: '/dashboard/support-coordinator-ndis',
+    home_route: '/dashboard',
     nav_sections: ['participants', 'plan_budgets', 'supports', 'compliance'],
     bottom_tabs: ['home', 'participants', 'coach', 'briefing', 'more'],
     domain_strip: { residential: [], home_care: [], ndis: ['Participants', 'Plans', 'Supports', 'Goals', 'Compliance'] },
@@ -1100,7 +1100,7 @@ export const ROLE_CONFIG: Record<RoleName, RoleConfig> = {
   behaviour_support_practitioner: {
     display_name: 'Behaviour Support Practitioner',
     data_scope: 'single_facility',
-    home_route: '/dashboard/bsp',
+    home_route: '/dashboard',
     nav_sections: ['participants', 'compliance'],
     bottom_tabs: ['home', 'bsp', 'coach', 'briefing', 'more'],
     domain_strip: { residential: [], home_care: [], ndis: ['Participants', 'BSP Register', 'Restrictive Practices', 'Compliance', 'Reports'] },
@@ -1128,7 +1128,7 @@ export const ROLE_CONFIG: Record<RoleName, RoleConfig> = {
   support_worker_ndis: {
     display_name: 'Support Worker',
     data_scope: 'single_team',
-    home_route: '/dashboard/support-worker-ndis',
+    home_route: '/dashboard',
     nav_sections: ['pulse', 'coach'],
     bottom_tabs: ['home', 'supports', 'coach'],
     domain_strip: { residential: [], home_care: [], ndis: ['My Supports', 'Pulse', 'Coach'] },
