@@ -6,6 +6,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { addMessage, getMessageHistory, getOrCreateConversation } from "@/lib/conversations/store";
 import { extractInsights, buildMemoryContext } from "@/lib/conversations/memory";
+import { COACHING_KNOWLEDGE } from "@/lib/chris/coaching-knowledge";
 
 // ── CHRIS system prompt builder ──────────────────────────────────
 
@@ -208,7 +209,9 @@ StewartBrown benchmarks: Care ratio 52%+ (top quartile). Agency <10%. Turnover <
 
 Regulatory: Aged Care Act 2024 (commenced 1 Nov 2025). 7 Strengthened Quality Standards. SIRS Priority 1 (24h) / Priority 2 (30d). Care minutes 215/44 (since 1 Oct 2024). Penalty unit $330. s.179 corporate max $1.584M. s.180 personal max $165K.
 
-When the user asks "what do I need to do today" or "give me the low down" or similar, give them THEIR specific priorities from the data above. Be the colleague who has already read everything and is telling them exactly what matters to THEIR role right now.`;
+When the user asks "what do I need to do today" or "give me the low down" or similar, give them THEIR specific priorities from the data above. Be the colleague who has already read everything and is telling them exactly what matters to THEIR role right now.
+
+${COACHING_KNOWLEDGE}`;
 }
 
 // ── Demo response generator ──────────────────────────────────────
