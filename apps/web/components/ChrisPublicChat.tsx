@@ -8,14 +8,14 @@ type Message = {
   content: string;
 };
 
-const OPENING_MESSAGE = `You're looking at CHRIS — the operational intelligence layer for aged care.
+const OPENING_MESSAGE = `You're talking to CHRIS — operational intelligence and leadership coach for aged care.
 
-Ask me anything about care minutes, SIRS obligations, workforce pressure, psychosocial compliance, AN-ACC revenue, or what it actually takes to lead in this sector right now. No login required.`;
+I know the regulatory landscape, the financial pressures, and what it actually takes to lead in this sector. Ask me about compliance, workforce, funding — or tell me about a leadership challenge you're facing. I coach aged care leaders through difficult conversations, team dynamics, and the pressure that comes with the role. No login required.`;
 
 const SUGGESTION_CHIPS = [
+  "Help me prepare for a difficult conversation",
   "What keeps a DON up at night?",
   "How do I reduce agency costs?",
-  "How does care minutes compliance work?",
 ];
 
 function stripMarkdown(text: string): string {

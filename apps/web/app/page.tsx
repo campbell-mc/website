@@ -371,20 +371,23 @@ function ChrisCoachCTA() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           <div>
             <div className="text-[11px] font-medium tracking-[0.08em] uppercase text-[#2D7D73] mb-4">
-              Talk to CHRIS
+              Operational intelligence + leadership coach
             </div>
             <h2 className="text-[clamp(28px,3.5vw,42px)] font-normal leading-[1.12] tracking-[-0.02em] text-[#1B4332] mb-5" style={{ fontFamily: "var(--font-instrument-serif, 'Georgia'), serif" }}>
               Ask the question<br />you&apos;ve been sitting on.
             </h2>
             <p className="text-[16px] leading-relaxed text-stone-500 mb-6">
-              CHRIS knows aged care. Ask about care minutes, SIRS,
-              psychosocial compliance, AN-ACC revenue, agency costs,
-              or what the Aged Care Act 2024 actually requires of you.
-              No login. No signup. Just the conversation.
+              CHRIS is an operational intelligence layer and a leadership
+              coach built specifically for aged care. Ask about compliance,
+              workforce, funding — or bring a leadership challenge. Preparing
+              for a difficult conversation, navigating team conflict, managing
+              the pressure of the role. CHRIS coaches the way a trusted
+              colleague would — direct, warm, and grounded in what actually
+              works in this sector. No login. No signup.
             </p>
             <p className="text-xs text-stone-400">
               You&apos;re talking to a public preview of CHRIS.
-              The full platform connects to your systems.
+              The full platform connects to your systems and knows your team.
             </p>
           </div>
           <div>
