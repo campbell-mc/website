@@ -7,7 +7,7 @@ import ChrisPublicChat from "@/components/ChrisPublicChat";
 import { RoiCalculator } from "@/components/RoiCalculator";
 import { NineJobs } from "@/components/NineJobs";
 import { CinematicStats } from "@/components/marketing/CinematicStats";
-import { CinematicText } from "@/components/marketing/CinematicText";
+import { CinematicReveal } from "@/components/marketing/CinematicReveal";
 import { ScreenshotShowcase } from "@/components/marketing/ScreenshotShowcase";
 
 // ─── Agent data ──────────────────────────────────────────────────────────────
@@ -634,7 +634,7 @@ export default function LandingPage() {
         { number: "11.6×", label: "average ROI · current pilots", accent: "#2D7D73" },
       ]} />
       <NineJobs />
-      <CinematicText />
+      <CinematicReveal />
       <ScreenshotShowcase />
       <AgentHub />
       <CinematicStats id="stats-2" stats={[
