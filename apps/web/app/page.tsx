@@ -503,7 +503,7 @@ function WaitlistSection() {
             </p>
             <div className="space-y-3">
               {[
-                "No implementation fee for foundation clients",
+                "Cost effective implementation for foundation clients",
                 "Live within 4 weeks of signed agreement",
                 "Your data stays in Australia (Sydney region)",
                 "Cancel anytime — your data is always exportable",
