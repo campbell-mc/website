@@ -5,6 +5,9 @@ import Link from "next/link";
 import ChrisPublicChat from "@/components/ChrisPublicChat";
 import { RoiCalculator } from "@/components/RoiCalculator";
 import { NineJobs } from "@/components/NineJobs";
+import { CinematicStats } from "@/components/marketing/CinematicStats";
+import { CinematicText } from "@/components/marketing/CinematicText";
+import { ScreenshotShowcase } from "@/components/marketing/ScreenshotShowcase";
 
 // ─── Agent data ──────────────────────────────────────────────────────────────
 
@@ -150,51 +153,126 @@ function Nav() {
 
 function Hero() {
   return (
-    <section className="max-w-6xl mx-auto px-6 lg:px-16 pt-16 lg:pt-24 pb-16 lg:pb-20">
-      <div className="max-w-2xl">
-        <div className="inline-flex items-center gap-2 text-xs font-medium tracking-widest uppercase text-[#1B4332] mb-6">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-          Live with providers in NSW and VIC
-        </div>
+    <section className="relative overflow-hidden" style={{ background: "#1B4332", backgroundImage: "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(45,125,115,0.25) 0%, transparent 60%)" }}>
+      <div className="max-w-6xl mx-auto px-6 lg:px-16 pt-16 lg:pt-24 pb-16 lg:pb-24">
+        <div className="grid grid-cols-1 lg:grid-cols-[55%_45%] gap-12 lg:gap-8 items-center">
+          {/* Left — text */}
+          <div>
+            <div className="inline-flex items-center gap-2 text-[11px] font-medium tracking-widest uppercase mb-8" style={{ color: "#D4A017" }}>
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              Live with providers in NSW and VIC
+            </div>
 
-        <h1 className="text-[clamp(36px,5vw,58px)] font-normal leading-[1.08] tracking-[-0.02em] text-[#1B4332] mb-7" style={{ fontFamily: "var(--font-instrument-serif, 'Georgia'), serif" }}>
-          Your aged care organisation,{" "}
-          <em className="italic text-[#2D7D73]">running with intelligence.</em>
-        </h1>
-
-        <p className="text-[17px] leading-[1.65] text-stone-500 max-w-xl mb-10">
-          Six AI agents monitor every domain of your operation — clinical,
-          financial, workforce, compliance, governance — continuously,
-          simultaneously, and across every system you already run. When something
-          needs action, CHRIS executes it.
-        </p>
-
-        <div className="flex items-center gap-3 flex-wrap mb-8">
-          <button
-            className="bg-[#1B4332] text-white px-7 py-3.5 rounded-lg text-sm font-medium hover:bg-[#1B4332]/90 transition-colors"
-            onClick={() => document.getElementById("nine-jobs")?.scrollIntoView({ behavior: "smooth" })}
-          >
-            See the 9 jobs CHRIS handles →
-          </button>
-          <button
-            className="border border-[#1B4332]/25 text-[#1B4332] px-7 py-3.5 rounded-lg text-sm font-normal hover:border-[#1B4332]/50 transition-colors"
-            onClick={() => document.getElementById("agent-section")?.scrollIntoView({ behavior: "smooth" })}
-          >
-            See the agents →
-          </button>
-        </div>
-
-        <div className="flex items-center gap-5 flex-wrap">
-          {["Residential care", "Home care", "Built for Australian operators", "Aged Care Act 2024 ready"].map(
-            (item, i, arr) => (
-              <span key={item} className="flex items-center gap-5">
-                <span className="text-xs text-stone-400">{item}</span>
-                {i < arr.length - 1 && <span className="w-1 h-1 rounded-full bg-stone-300" />}
+            <h1 className="text-[clamp(2.5rem,6vw,5rem)] font-semibold leading-[1.06] tracking-[-0.02em] mb-7" style={{ color: "#faf7f2" }}>
+              Your aged care{"\n"}organisation,{" "}
+              <span className="font-normal italic" style={{ fontFamily: "var(--font-instrument-serif, 'Source Serif 4', Georgia), serif", background: "linear-gradient(135deg, #D4A017, #2D7D73)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+                running with intelligence.
               </span>
-            )
-          )}
+            </h1>
+
+            <p className="text-[17px] leading-[1.65] max-w-[480px] mb-10" style={{ color: "rgba(250,247,242,0.65)" }}>
+              Six AI agents monitor every domain of your operation — clinical,
+              financial, workforce, compliance, governance — continuously,
+              simultaneously, and across every system you already run. When something
+              needs action, CHRIS executes it.
+            </p>
+
+            <div className="flex items-center gap-3 flex-wrap mb-8">
+              <button
+                className="px-7 py-3.5 rounded-xl text-sm font-medium text-white transition-colors hover:opacity-90"
+                style={{ backgroundColor: "#C4704A" }}
+                onClick={() => document.getElementById("nine-jobs")?.scrollIntoView({ behavior: "smooth" })}
+              >
+                See the 9 jobs CHRIS handles →
+              </button>
+              <button
+                className="px-7 py-3.5 rounded-xl text-sm transition-colors hover:border-white/50"
+                style={{ border: "1px solid rgba(250,247,242,0.25)", color: "rgba(250,247,242,0.8)" }}
+                onClick={() => document.getElementById("agent-section")?.scrollIntoView({ behavior: "smooth" })}
+              >
+                See the agents →
+              </button>
+            </div>
+
+            <div className="flex items-center gap-4 flex-wrap">
+              {["Residential care", "Home care", "Built for Australian operators", "Aged Care Act 2024 ready"].map(
+                (item, i, arr) => (
+                  <span key={item} className="flex items-center gap-4">
+                    <span className="text-[12px]" style={{ color: "rgba(250,247,242,0.4)" }}>{item}</span>
+                    {i < arr.length - 1 && <span className="w-1 h-1 rounded-full" style={{ backgroundColor: "rgba(250,247,242,0.2)" }} />}
+                  </span>
+                )
+              )}
+            </div>
+          </div>
+
+          {/* Right — floating product screenshot */}
+          <div className="hidden lg:flex justify-center">
+            <div className="relative" style={{ animation: "heroFloat 7s ease-in-out infinite" }}>
+              <div className="rounded-2xl overflow-hidden" style={{ transform: "rotate(2deg)", boxShadow: "0 32px 80px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.08)" }}>
+                {/* High-fidelity dashboard representation */}
+                <div className="w-[420px] bg-[#f0ede8] p-3 rounded-2xl">
+                  {/* Sidebar hint */}
+                  <div className="flex gap-2">
+                    <div className="w-[100px] bg-[#e8e4de] rounded-xl p-2 space-y-2 shrink-0">
+                      <div className="h-2 bg-[#1B4332] rounded w-8 mb-3" />
+                      <div className="h-1.5 bg-[#1B4332]/20 rounded w-full" />
+                      <div className="h-1.5 bg-[#1B4332]/10 rounded w-4/5" />
+                      <div className="h-1.5 bg-[#1B4332]/10 rounded w-full" />
+                      <div className="h-1.5 bg-[#1B4332]/10 rounded w-3/4" />
+                      <div className="h-px bg-[#1B4332]/5 my-2" />
+                      <div className="h-1.5 bg-[#1B4332]/10 rounded w-full" />
+                      <div className="h-1.5 bg-[#1B4332]/10 rounded w-4/5" />
+                    </div>
+                    {/* Main content */}
+                    <div className="flex-1 bg-white rounded-xl p-3 space-y-3">
+                      <div>
+                        <div className="text-[11px] font-semibold text-[#1B4332]">Good morning, Sarah</div>
+                        <div className="text-[8px] text-stone-400">The Holy Grail Bowral · Tuesday 15 April</div>
+                      </div>
+                      <div className="bg-[rgba(27,67,50,0.05)] rounded-lg p-2.5">
+                        <div className="flex items-center gap-1.5 mb-1.5">
+                          <div className="w-4 h-4 rounded-full bg-gradient-to-br from-[#1B4332] to-[#D4A017]" />
+                          <span className="text-[8px] font-semibold text-[#1B4332]">CHRIS</span>
+                        </div>
+                        <div className="space-y-1">
+                          <div className="h-1 bg-[#1B4332]/10 rounded w-full" />
+                          <div className="h-1 bg-[#1B4332]/10 rounded w-11/12" />
+                          <div className="h-1 bg-[#1B4332]/10 rounded w-4/5" />
+                        </div>
+                      </div>
+                      <div className="flex gap-1.5">
+                        {[["226", "Care Min", "#2D7D73"], ["13.5%", "Agency", "#D4A017"], ["17/20", "Compliance", "#2D7D73"]].map(([v, l, c]) => (
+                          <div key={l} className="flex-1 bg-[#faf7f2] rounded-lg p-2 text-center">
+                            <div className="text-[10px] font-bold" style={{ color: c as string }}>{v}</div>
+                            <div className="text-[7px] text-stone-400">{l}</div>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="space-y-1.5">
+                        {["Clinical", "Workforce", "Financial"].map((d) => (
+                          <div key={d} className="flex items-center gap-2 px-2 py-1.5 bg-[#faf7f2] rounded-lg">
+                            <span className="text-[8px]">✅</span>
+                            <span className="text-[8px] font-medium text-[#1B4332]">{d}</span>
+                            <div className="flex-1 h-1 bg-[#1B4332]/5 rounded ml-1" />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes heroFloat {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-12px); }
+        }
+      `}</style>
     </section>
   );
 }
@@ -599,8 +677,20 @@ export default function LandingPage() {
       <Hero />
       <LiveTicker />
       <SystemsStrip />
+      <CinematicStats id="stats-1" stats={[
+        { number: "$1.58M", label: "maximum corporate penalty · serious failure", accent: "#C4704A" },
+        { number: "3 hrs", label: "returned to every leader · every week", accent: "#D4A017" },
+        { number: "11.6×", label: "average ROI · current pilots", accent: "#2D7D73" },
+      ]} />
       <NineJobs />
+      <CinematicText />
+      <ScreenshotShowcase />
       <AgentHub />
+      <CinematicStats id="stats-2" stats={[
+        { number: "549,000", label: "aged care workers · no operational OS · until now", accent: "#D4A017" },
+        { number: "4 weeks", label: "from signed agreement to live · foundation clients", accent: "#2D7D73" },
+        { number: "$349K", label: "average net annual benefit · per facility", accent: "#C4704A" },
+      ]} />
       <ChrisCoachCTA />
       <ExecutionSection />
       <RoiCalculator />
