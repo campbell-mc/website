@@ -390,17 +390,17 @@ function AgentHub() {
 
 function ChrisCoachCTA() {
   return (
-    <div className="bg-[#EDE9DF] border-y border-[#1B4332]/8">
+    <div className="bg-[#1B4332]">
       <section className="max-w-6xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           <div>
-            <div className="text-[11px] font-medium tracking-[0.08em] uppercase text-[#2D7D73] mb-4">
+            <div className="text-[11px] font-medium tracking-[0.08em] uppercase mb-4" style={{ color: "#86EFAC" }}>
               Operational intelligence + leadership coach
             </div>
-            <h2 className="text-[clamp(28px,3.5vw,42px)] font-normal leading-[1.12] tracking-[-0.02em] text-[#1B4332] mb-5" style={{ fontFamily: "var(--font-instrument-serif, 'Georgia'), serif" }}>
+            <h2 className="text-[clamp(28px,3.5vw,42px)] font-normal leading-[1.12] tracking-[-0.02em] mb-5" style={{ fontFamily: "var(--font-instrument-serif, 'Georgia'), serif", color: "#ffffff" }}>
               Ask the question<br />you&apos;ve been sitting on.
             </h2>
-            <p className="text-[16px] leading-relaxed text-stone-500 mb-6">
+            <p className="text-[16px] leading-relaxed mb-6" style={{ color: "rgba(250,247,242,0.80)" }}>
               CHRIS is an operational intelligence layer and a leadership
               coach built specifically for aged care. Ask about compliance,
               workforce, funding — or bring a leadership challenge. Preparing
@@ -409,7 +409,7 @@ function ChrisCoachCTA() {
               colleague would — direct, warm, and grounded in what actually
               works in this sector. No login. No signup.
             </p>
-            <p className="text-xs text-stone-400">
+            <p className="text-xs" style={{ color: "rgba(250,247,242,0.45)" }}>
               You&apos;re talking to a public preview of CHRIS.
               The full platform connects to your systems and knows your team.
             </p>
@@ -637,11 +637,6 @@ export default function LandingPage() {
       <CinematicReveal />
       <ScreenshotShowcase />
       <AgentHub />
-      <CinematicStats id="stats-2" stats={[
-        { number: "549,000", label: "aged care workers · no operational OS · until now", accent: "#D4A017" },
-        { number: "4 weeks", label: "from signed agreement to live · foundation clients", accent: "#2D7D73" },
-        { number: "$349K", label: "average net annual benefit · per facility", accent: "#C4704A" },
-      ]} />
       <ChrisCoachCTA />
       <ExecutionSection />
       <RoiCalculator />
