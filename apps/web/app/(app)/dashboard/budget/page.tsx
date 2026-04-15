@@ -128,7 +128,7 @@ export default function BudgetManagementPage() {
       <div className="mb-16">
         <button
           data-has-handler="true"
-          onClick={() => router.push("/dashboard/budget/claim")}
+          onClick={() => router.push("/dashboard/coach")}
           className="w-full text-sm font-medium px-4 py-3 rounded-xl bg-[#1B4332] text-white hover:opacity-90 flex items-center justify-center gap-2"
         >
           <DollarSign className="w-4 h-4" />

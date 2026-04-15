@@ -154,7 +154,7 @@ export default function VisitCompliancePage() {
               </p>
               <button
                 data-has-handler="true"
-                onClick={() => router.push("/dashboard/incidents")}
+                onClick={() => router.push("/dashboard/operations/incidents")}
                 className="text-xs font-medium px-3 py-2 rounded-lg bg-[#1B4332] text-white hover:opacity-90"
               >
                 Document missed visit
