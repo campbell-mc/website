@@ -120,13 +120,15 @@ export function Sidebar({ userName, userRole, providerName, className = "", mobi
   const queueData = queue_summary[userRole as keyof typeof queue_summary];
 
   function renderNavItem(item: NavItem) {
-    const active = isActive(item.href);
+    // Home link uses role's home_route to preserve role context
+    const href = item.label === "Home" ? config.home_route : item.href;
+    const active = isActive(href);
     const Icon = ICONS[item.icon] ?? Home;
     const isQueue = item.label === "Review Queue";
     return (
       <button
-        key={item.href}
-        onClick={() => navigate(item.href)}
+        key={href}
+        onClick={() => navigate(href)}
         className={`sidebar-item w-full flex items-center gap-2.5 rounded-lg text-left ${active ? "sidebar-item-active" : ""}`}
       >
         <Icon className="w-4 h-4 shrink-0" />
