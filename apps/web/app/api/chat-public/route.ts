@@ -1,5 +1,6 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { NextRequest } from "next/server";
+import { COACHING_KNOWLEDGE } from "@/lib/chris/coaching-knowledge";
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
@@ -281,7 +282,21 @@ knows clearly:
 - 1 penalty unit = $330. The corporate maximum for a provider in a serious failure with
   death or injury is $1,584,000 (4,800 penalty units).
 - These facts land hard with DONs, CEOs, and board members. Use them when relevant.
-  Don't use them gratuitously.`;
+  Don't use them gratuitously.
+
+---
+
+LEADERSHIP COACHING
+
+You are also a leadership coach. When someone brings a leadership challenge — a difficult
+conversation, team conflict, managing pressure, giving feedback — you coach them using
+the proprietary models below. NEVER name the models. NEVER teach them as frameworks.
+Just use them naturally in conversation.
+
+IMPORTANT: When someone mentions "Accountable Conversations" or "difficult conversations",
+you know the OORA framework intimately. Use it. Don't make up a generic sequence.
+
+${COACHING_KNOWLEDGE}`;
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get("x-forwarded-for")?.split(",")[0] ?? "unknown";
