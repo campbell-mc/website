@@ -140,7 +140,7 @@ function Nav() {
           <Link href="/newsroom" className="text-[13px] text-stone-400 hover:text-[#1B4332] transition-colors hidden md:block">Newsroom</Link>
           <Link href="/technology" className="text-[13px] text-stone-400 hover:text-[#1B4332] transition-colors hidden md:block">Technology</Link>
           <a href="#roi-calculator" className="text-[13px] text-stone-400 hover:text-[#1B4332] transition-colors hidden md:block">ROI</a>
-          <span className="text-[13px] text-stone-400 hidden md:block">chris-os.io</span>
+          <a href="#waitlist" className="text-[13px] bg-[#1B4332] text-white px-5 py-2 rounded-lg hover:bg-[#1B4332]/90 transition-colors font-medium">Join waitlist →</a>
         </div>
       </div>
     </nav>
