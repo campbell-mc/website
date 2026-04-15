@@ -112,6 +112,7 @@ interface Props {
 
 export function WorkflowWalkthrough({ jobId, onClose }: Props) {
   const [step, setStep] = useState(0);
+  const [zoomedImg, setZoomedImg] = useState<string | null>(null);
 
   const workflow = jobId ? WORKFLOWS[jobId] : null;
   const totalSteps = workflow ? workflow.steps.length + 1 : 0; // +1 for final CTA step
@@ -147,6 +148,14 @@ export function WorkflowWalkthrough({ jobId, onClose }: Props) {
         style={{ backgroundColor: "#1B4332", boxShadow: "0 40px 120px rgba(0,0,0,0.5)" }}
         onClick={(e) => e.stopPropagation()}
       >
+        {/* Image zoom overlay */}
+        {zoomedImg && (
+          <div className="fixed inset-0 z-[110] bg-black/95 flex items-center justify-center p-4 cursor-pointer" onClick={() => setZoomedImg(null)}>
+            <button className="absolute top-4 right-4 p-2 rounded-lg hover:bg-white/10" style={{ color: "rgba(255,255,255,0.6)" }}><X className="w-6 h-6" /></button>
+            <Image src={zoomedImg} alt="Screenshot enlarged" width={1400} height={1050} className="max-w-full max-h-[90vh] object-contain rounded-xl" onClick={(e) => e.stopPropagation()} />
+          </div>
+        )}
+
         {/* Close */}
         <button onClick={onClose} className="absolute top-4 right-4 z-10 p-2 rounded-lg hover:bg-white/10 transition-colors" style={{ color: "rgba(250,247,242,0.5)" }}>
           <X className="w-5 h-5" />
@@ -171,15 +180,18 @@ export function WorkflowWalkthrough({ jobId, onClose }: Props) {
           {/* Step content */}
           {currentStep && !isFinalStep ? (
             <div className="grid grid-cols-1 lg:grid-cols-[55%_45%] gap-8">
-              {/* Screenshot */}
-              <div className="rounded-xl overflow-hidden relative" style={{ backgroundColor: currentStep.screenshotBg }}>
+              {/* Screenshot — click to zoom */}
+              <div className="rounded-xl overflow-hidden relative cursor-pointer" style={{ backgroundColor: currentStep.screenshot ? "transparent" : currentStep.screenshotBg }} onClick={() => currentStep.screenshot && setZoomedImg(currentStep.screenshot)}>
                 {currentStep.screenshot ? (
                   <div className="relative">
-                    <Image src={currentStep.screenshot} alt={currentStep.screenshotLabel} width={560} height={420} className="w-full h-auto" />
+                    <Image src={currentStep.screenshot} alt={currentStep.screenshotLabel} width={800} height={600} className="w-full h-auto rounded-xl" />
                     <div className="absolute top-3 left-3">
-                      <div className="text-[10px] font-medium uppercase tracking-wider px-2 py-1 rounded bg-black/40 backdrop-blur-sm w-fit" style={{ color: "rgba(250,247,242,0.9)" }}>
+                      <div className="text-[10px] font-medium uppercase tracking-wider px-2 py-1 rounded bg-black/50 backdrop-blur-sm w-fit" style={{ color: "rgba(250,247,242,0.9)" }}>
                         {currentStep.agent}
                       </div>
+                    </div>
+                    <div className="absolute bottom-3 right-3">
+                      <div className="text-[10px] px-2 py-1 rounded bg-black/40 backdrop-blur-sm" style={{ color: "rgba(250,247,242,0.7)" }}>Click to enlarge</div>
                     </div>
                   </div>
                 ) : (
