@@ -492,6 +492,123 @@ function DemoSection() {
   );
 }
 
+function WaitlistSection() {
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [role, setRole] = useState("");
+  const [org, setOrg] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!email || submitting) return;
+    setSubmitting(true);
+    try {
+      await fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, name, role, organisation: org }),
+      });
+      setSubmitted(true);
+    } catch {
+      setSubmitted(true);
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
+  return (
+    <section className="bg-[#1B4332]" id="waitlist">
+      <div className="max-w-6xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+          <div>
+            <div className="text-[11px] font-medium tracking-[0.08em] uppercase text-white/50 mb-4">
+              Join the waitlist
+            </div>
+            <h2 className="text-[clamp(28px,3.5vw,42px)] font-normal leading-[1.1] tracking-[-0.02em] mb-5" style={{ fontFamily: "var(--font-instrument-serif, 'Georgia'), serif", color: "#ffffff" }}>
+              Be first to run CHRIS
+              <br />
+              <em className="italic" style={{ color: "#86EFAC" }}>at your organisation.</em>
+            </h2>
+            <p className="text-[15px] leading-relaxed mb-6" style={{ color: "rgba(255,255,255,0.85)" }}>
+              CHRIS-OS is live with providers in NSW and VIC. We are onboarding
+              new organisations in order. Join the waitlist and we will be in
+              touch to discuss your facility, your systems, and what CHRIS
+              would look like connected to your operation.
+            </p>
+            <div className="space-y-3">
+              {[
+                "No implementation fee for foundation clients",
+                "Live within 4 weeks of signed agreement",
+                "Your data stays in Australia (Sydney region)",
+                "Cancel anytime — your data is always exportable",
+              ].map((item) => (
+                <div key={item} className="flex items-center gap-2.5">
+                  <div className="w-4 h-4 rounded-full bg-emerald-400/20 flex items-center justify-center flex-shrink-0">
+                    <svg width="8" height="8" viewBox="0 0 10 10"><path d="M2 5l2 2 4-4" stroke="#86EFAC" strokeWidth="1.5" fill="none" strokeLinecap="round" /></svg>
+                  </div>
+                  <span className="text-[13px]" style={{ color: "rgba(255,255,255,0.70)" }}>{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            {submitted ? (
+              <div className="bg-white/8 border border-white/12 rounded-2xl p-8 text-center">
+                <div className="w-12 h-12 rounded-full bg-emerald-400/20 flex items-center justify-center mx-auto mb-4">
+                  <svg width="20" height="20" viewBox="0 0 20 20"><path d="M4 10l4 4 8-8" stroke="#86EFAC" strokeWidth="2" fill="none" strokeLinecap="round" /></svg>
+                </div>
+                <p className="text-[16px] font-medium mb-2" style={{ color: "#ffffff" }}>You are on the waitlist.</p>
+                <p className="text-[14px]" style={{ color: "rgba(255,255,255,0.65)" }}>
+                  We will be in touch at {email} to discuss connecting CHRIS to your organisation.
+                </p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="bg-white/8 border border-white/12 rounded-2xl p-6 space-y-4">
+                <div>
+                  <label className="text-[11px] font-medium tracking-[0.04em] uppercase text-white/50 mb-1.5 block">Work email *</label>
+                  <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)}
+                    placeholder="you@organisation.com.au"
+                    className="w-full px-4 py-3 rounded-lg bg-white/6 border border-white/12 text-[14px] text-white placeholder:text-white/30 focus:outline-none focus:border-white/30" />
+                </div>
+                <div>
+                  <label className="text-[11px] font-medium tracking-[0.04em] uppercase text-white/50 mb-1.5 block">Your name</label>
+                  <input type="text" value={name} onChange={(e) => setName(e.target.value)}
+                    placeholder="Full name"
+                    className="w-full px-4 py-3 rounded-lg bg-white/6 border border-white/12 text-[14px] text-white placeholder:text-white/30 focus:outline-none focus:border-white/30" />
+                </div>
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="text-[11px] font-medium tracking-[0.04em] uppercase text-white/50 mb-1.5 block">Role</label>
+                    <input type="text" value={role} onChange={(e) => setRole(e.target.value)}
+                      placeholder="e.g. CEO, DON"
+                      className="w-full px-4 py-3 rounded-lg bg-white/6 border border-white/12 text-[14px] text-white placeholder:text-white/30 focus:outline-none focus:border-white/30" />
+                  </div>
+                  <div>
+                    <label className="text-[11px] font-medium tracking-[0.04em] uppercase text-white/50 mb-1.5 block">Organisation</label>
+                    <input type="text" value={org} onChange={(e) => setOrg(e.target.value)}
+                      placeholder="Provider name"
+                      className="w-full px-4 py-3 rounded-lg bg-white/6 border border-white/12 text-[14px] text-white placeholder:text-white/30 focus:outline-none focus:border-white/30" />
+                  </div>
+                </div>
+                <button type="submit" disabled={submitting || !email}
+                  className="w-full py-3.5 rounded-lg text-[14px] font-medium bg-white text-[#1B4332] hover:bg-white/90 disabled:opacity-50 transition-colors">
+                  {submitting ? "Joining..." : "Join the waitlist →"}
+                </button>
+                <p className="text-[10px] text-center" style={{ color: "rgba(255,255,255,0.35)" }}>
+                  No spam. No sales calls. Just a conversation about your facility.
+                </p>
+              </form>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Footer() {
   return (
     <footer className="border-t border-[#1B4332]/10 bg-stone-50">
@@ -524,6 +641,7 @@ export default function LandingPage() {
       <RoiCalculator />
       <RolesSection />
       <DemoSection />
+      <WaitlistSection />
       <Footer />
     </div>
   );
