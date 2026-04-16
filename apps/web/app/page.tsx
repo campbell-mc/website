@@ -632,6 +632,7 @@ export default function LandingPage() {
         { number: "$1.5M", label: "maximum corporate penalty · serious failure · Aged Care Act 2024", accent: "#C4704A" },
         { number: "549,000", label: "aged care workers · no operational OS · until now", accent: "#D4A017" },
         { number: "17", label: "mandated psychosocial hazards · one spreadsheet between them and you", accent: "#2D7D73" },
+        { number: "$159K", label: "spent annually per facility · leaders stitching together 8 systems that should talk to each other", accent: "#D4A017" },
       ]} />
       <NineJobs />
       <CinematicReveal />
