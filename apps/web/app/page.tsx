@@ -629,9 +629,9 @@ export default function LandingPage() {
       <LiveTicker />
       <SystemsStrip />
       <CinematicStats id="stats-1" stats={[
-        { number: "$1.58M", label: "maximum corporate penalty · serious failure", accent: "#C4704A" },
-        { number: "3 hrs", label: "returned to every leader · every week", accent: "#D4A017" },
-        { number: "11.6×", label: "average ROI · current pilots", accent: "#2D7D73" },
+        { number: "$783,000", label: "maximum penalty · one missed SIRS notification", accent: "#C4704A" },
+        { number: "549,000", label: "aged care workers · no operational OS · until now", accent: "#D4A017" },
+        { number: "17", label: "mandated psychosocial hazards · one spreadsheet between them and you", accent: "#2D7D73" },
       ]} />
       <NineJobs />
       <CinematicReveal />
