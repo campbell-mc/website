@@ -222,7 +222,7 @@ export function NineJobs() {
           Then another. Then another.
         </h2>
         <p className="text-[16px] leading-relaxed text-stone-500 max-w-xl mb-3">
-          Pick the one that&apos;s costing you the most right now.
+          Pick the one workflow that&apos;s costing you the most right now.
           CHRIS handles it end-to-end. You approve the outcome.
         </p>
         <p className="text-[16px] leading-relaxed text-stone-400 max-w-[480px] mb-12">
