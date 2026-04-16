@@ -629,7 +629,7 @@ export default function LandingPage() {
       <LiveTicker />
       <SystemsStrip />
       <CinematicStats id="stats-1" stats={[
-        { number: "$783,000", label: "maximum penalty · one missed SIRS notification", accent: "#C4704A" },
+        { number: "$1.5M", label: "maximum corporate penalty · serious failure · Aged Care Act 2024", accent: "#C4704A" },
         { number: "549,000", label: "aged care workers · no operational OS · until now", accent: "#D4A017" },
         { number: "17", label: "mandated psychosocial hazards · one spreadsheet between them and you", accent: "#2D7D73" },
       ]} />
