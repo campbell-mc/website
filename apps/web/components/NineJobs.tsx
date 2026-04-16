@@ -214,16 +214,21 @@ export function NineJobs() {
     <section className="bg-[#F5F2EB] border-y border-[#1B4332]/8" id="nine-jobs">
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
         <div className="text-[11px] font-medium tracking-[0.08em] uppercase text-[#1B4332]/50 mb-4" style={{ fontFamily: "var(--font-instrument-serif, 'Georgia'), serif" }}>
-          The nine jobs
+          Where we start
         </div>
         <h2 className="text-[clamp(28px,3.5vw,42px)] font-normal leading-[1.1] tracking-[-0.02em] text-[#1B4332] mb-4" style={{ fontFamily: "var(--font-instrument-serif, 'Georgia'), serif" }}>
           We don&apos;t sell a platform.<br />
           We fix a problem.<br />
           Then another. Then another.
         </h2>
-        <p className="text-[16px] leading-relaxed text-stone-500 max-w-xl mb-12">
+        <p className="text-[16px] leading-relaxed text-stone-500 max-w-xl mb-3">
           Pick the one that&apos;s costing you the most right now.
           CHRIS handles it end-to-end. You approve the outcome.
+        </p>
+        <p className="text-[16px] leading-relaxed text-stone-400 max-w-[480px] mb-12">
+          These are the problems we see most often.
+          Yours might be something else entirely.
+          Either way, we&apos;ll find it in a single conversation.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -233,18 +238,12 @@ export function NineJobs() {
         </div>
 
         <div className="mt-12 text-center">
-          <p className="text-[14px] text-stone-500 mb-6 max-w-lg mx-auto leading-relaxed">
-            Every job is a complete workflow — from signal to action to evidence trail.
-            We start with the one that matters most to you right now.
+          <a href="#waitlist" className="inline-block bg-[#1B4332] text-white px-8 py-3.5 rounded-xl text-[14px] font-medium hover:bg-[#1B4332]/90 transition-colors mb-3">
+            Start with one conversation →
+          </a>
+          <p className="text-[13px] text-stone-400">
+            30 minutes. No demo. Just your operation and ours.
           </p>
-          <div className="flex items-center gap-4 justify-center flex-wrap">
-            <a href="#waitlist" className="bg-[#1B4332] text-white px-7 py-3.5 rounded-lg text-[14px] font-medium hover:bg-[#1B4332]/90 transition-colors">
-              Tell us your biggest headache →
-            </a>
-            <a href="#agent-section" className="border border-[#1B4332]/25 text-[#1B4332] px-7 py-3.5 rounded-lg text-[14px] hover:border-[#1B4332]/50 transition-colors">
-              See how CHRIS handles it
-            </a>
-          </div>
         </div>
       </div>
     </section>
