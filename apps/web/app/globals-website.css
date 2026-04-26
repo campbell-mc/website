@@ -1,0 +1,18 @@
+/* Website brand tokens — Direction F: warm aubergine */
+:root {
+  --ground-dark: #1a1218;
+  --ground-dark-2: #2d1f2a;
+  --ground-cream: #faf7f2;
+  --ground-white: #ffffff;
+  --ink: #f5ede3;
+  --ink-dark: #1a1218;
+  --ink-muted-dark: rgba(245,237,227,0.78);
+  --ink-muted-light: rgba(26,18,24,0.78);
+  --accent-copper: #c89a3c;
+  --accent-copper-dark: #8b6914;
+  --accent-warm: #c4674a;
+  --state-good: #2d6a4f;
+  --state-warn: #b5572a;
+  --state-bad: #b21f1f;
+  --state-calm: #8aa888;
+}
