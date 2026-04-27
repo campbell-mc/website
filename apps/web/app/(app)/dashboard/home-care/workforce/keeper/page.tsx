@@ -110,7 +110,7 @@ export default function HomeCareKeeperPage() {
             The Keeper &middot; Home Care Signals
           </h1>
           <p className="text-sm text-[#6B7280]">
-            Workforce intelligence &middot; Knights of the Holy Grail &middot;
+            Workforce intelligence &middot; Mt Gib Gardens &middot;
             Support at Home
           </p>
         </div>

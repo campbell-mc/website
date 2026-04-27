@@ -4,7 +4,7 @@ import { WCFinancialPanel } from "@/components/financial/WCFinancialPanel";
 
 const config: RoleHomeConfig = {
   greeting: "Good morning, Karen",
-  subtitle: "Knights of the Holy Grail · Workforce Safety & PSH",
+  subtitle: "Mt Gib Gardens · Workforce Safety & PSH",
   todaysPicture: "The overall PSH picture is improving this cycle — 2 teams elevated, down from 4 last cycle. However, Round Table Wing still has a critical convergence: PSH_01 and PSH_08 have both been above threshold for 3 cycles. CHRIS has flagged a WC risk — this pattern has a 68% correlation with claims within 4-6 weeks, estimated exposure $288K. A DON-level intervention is recommended. ISO 45003 evidence is current across all 4 categories — the evidence pack is exportable if needed.",
   domains: [
     { name: "Elevated Teams", status: "watch", summary: "2 teams · down from 4 · improving trend", href: "/dashboard/whs/hazard-map" },

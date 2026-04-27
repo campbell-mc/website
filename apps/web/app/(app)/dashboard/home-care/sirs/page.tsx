@@ -95,7 +95,7 @@ export default function SirsPage() {
       <div>
         <h1 className="text-xl font-bold text-[#111827]">SIRS Register</h1>
         <p className="text-sm text-[#6B7280]">
-          Support at Home &middot; Aged Care Act 2024 &middot; Knights of the Holy Grail
+          Support at Home &middot; Aged Care Act 2024 &middot; Mt Gib Gardens
         </p>
       </div>
 

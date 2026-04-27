@@ -13,11 +13,11 @@ import { PageHeader } from "@/components/dashboard/PageHeader";
 import { AgentPulse } from "@/components/chris/AgentPulse";
 import { SituationReport } from "@/components/chris/SituationReport";
 import { hcVisitsReport } from "@/lib/chris/situation-reports";
-import { holy_grail_home_care } from "@/lib/seed-data";
+import { mt_gib_home_care } from "@/lib/seed-data";
 
-const visits = holy_grail_home_care.combined.visits_today;
-const metrics = holy_grail_home_care.combined.metrics;
-const coordinators = holy_grail_home_care.combined.by_coordinator;
+const visits = mt_gib_home_care.combined.visits_today;
+const metrics = mt_gib_home_care.combined.metrics;
+const coordinators = mt_gib_home_care.combined.by_coordinator;
 
 const statCards = [
   { label: "Completed Today", value: visits.completed, icon: CheckCircle, color: "#2D7D73" },
@@ -30,7 +30,7 @@ export default function VisitCompliancePage() {
   return (
     <div className="p-4 lg:p-8 max-w-5xl mx-auto space-y-6">
         {/* Header */}
-        <PageHeader title="Visit Compliance" subtitle="KHG Home Care Southern Highlands" backHref="/dashboard/home-care" />
+        <PageHeader title="Visit Compliance" subtitle="Mt Gib Home Care Southern Highlands" backHref="/dashboard/home-care" />
 
         {/* Stat Cards */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">

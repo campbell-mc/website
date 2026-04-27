@@ -32,7 +32,7 @@ interface Thread {
 }
 
 // ---------------------------------------------------------------------------
-// HC iMessage threads — Knights of the Holy Grail (Camelot + Avalon)
+// HC iMessage threads — Mt Gib Gardens (Camelot + Avalon)
 // ---------------------------------------------------------------------------
 
 const THREADS: Thread[] = [

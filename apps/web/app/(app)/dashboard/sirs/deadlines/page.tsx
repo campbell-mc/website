@@ -14,7 +14,7 @@ export default function SIRSDeadlinesPage() {
           <button onClick={() => router.push("/dashboard/sirs")} className="p-1 -ml-1 hover:bg-muted rounded-lg"><ChevronLeft className="w-5 h-5 text-foreground" /></button>
           <div>
             <p className="text-[28px] font-bold text-foreground tracking-tight leading-tight">SIRS Deadlines</p>
-            <p className="text-[10px] text-muted-foreground">The Holy Grail Bowral · Active and upcoming</p>
+            <p className="text-[10px] text-muted-foreground">Mt Gib Gardens Bowral · Active and upcoming</p>
           </div>
         </div>
         <button onClick={() => router.push("/dashboard/coach")} className="flex items-center gap-1.5 text-xs font-medium px-3 py-2 rounded-lg border border-border text-foreground hover:bg-muted"><Mic className="w-3.5 h-3.5" /> Ask CHRIS</button>

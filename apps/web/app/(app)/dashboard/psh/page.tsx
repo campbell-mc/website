@@ -9,7 +9,7 @@ export default function PSHControlCentre() {
   const router = useRouter();
   return (
     <div className="p-4 lg:p-6 max-w-3xl mx-auto">
-      <PageHeader title="PSH / Workforce Safety" subtitle="The Holy Grail Bowral · ISO 45003" />
+      <PageHeader title="PSH / Workforce Safety" subtitle="Mt Gib Gardens Bowral · ISO 45003" />
 
       <div className="flex gap-2 mb-4">
         {[

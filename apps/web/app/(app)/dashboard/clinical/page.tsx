@@ -19,7 +19,7 @@ export default function ClinicalControlCentre() {
   return (
     <div className="p-4 lg:p-6 max-w-3xl mx-auto">
       {/* Header */}
-      <PageHeader title="Clinical Control Centre" subtitle="The Holy Grail Bowral" />
+      <PageHeader title="Clinical Control Centre" subtitle="Mt Gib Gardens Bowral" />
 
       {/* Live status strip */}
       <div className="flex gap-2 mb-4 overflow-x-auto">

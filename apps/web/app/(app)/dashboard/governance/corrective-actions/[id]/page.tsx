@@ -73,7 +73,7 @@ export default function CorrectiveActionDetailPage() {
         documentId={`ca-${id}`}
         documentType="corrective_action"
         title={`Corrective Action Plan — ${id}`}
-        subtitle="Falls rate above national benchmark — The Holy Grail Bowral"
+        subtitle="Falls rate above national benchmark — Mt Gib Gardens Bowral"
         generatedBy="chronicler"
         generatedAt={generatedAt}
         status="draft"

@@ -17,7 +17,7 @@ export default function OperationsControlCentre() {
   const router = useRouter();
   return (
     <div className="p-4 lg:p-6 max-w-3xl mx-auto">
-      <PageHeader title="Operations Control Centre" subtitle="The Holy Grail Bowral · Day shift" />
+      <PageHeader title="Operations Control Centre" subtitle="Mt Gib Gardens Bowral · Day shift" />
 
       <div className="flex gap-2 mb-4">
         {[

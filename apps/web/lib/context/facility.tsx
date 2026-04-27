@@ -12,9 +12,9 @@ interface FacilityContextValue {
 
 const FacilityContext = createContext<FacilityContextValue>({
   facilityId: "FAC-001",
-  facilityName: "The Holy Grail Bowral",
+  facilityName: "Mt Gib Gardens Bowral",
   careType: "residential",
-  providerName: "Knights of the Holy Grail",
+  providerName: "Mt Gib Gardens",
 });
 
 export const useFacility = () => useContext(FacilityContext);

@@ -17,7 +17,7 @@ export default function GovernanceControlCentre() {
   const router = useRouter();
   return (
     <div className="p-4 lg:p-6 max-w-3xl mx-auto">
-      <PageHeader title="Governance Control Centre" subtitle="The Holy Grail Bowral" />
+      <PageHeader title="Governance Control Centre" subtitle="Mt Gib Gardens Bowral" />
 
       <div className="flex gap-2 mb-4">
         {[

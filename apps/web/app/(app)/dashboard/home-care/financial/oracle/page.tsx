@@ -26,7 +26,7 @@ const REPORT = {
   opportunities: 3,
   total_uplift: 28_400,
   summary:
-    "Oracle identified 3 revenue and efficiency opportunities across Knights of the Holy Grail home care services. Combined uplift potential of $28,400 this quarter. Highest priority: underspend recovery across 12 clients approaching quarter-end fund expiry.",
+    "Oracle identified 3 revenue and efficiency opportunities across Mt Gib Gardens home care services. Combined uplift potential of $28,400 this quarter. Highest priority: underspend recovery across 12 clients approaching quarter-end fund expiry.",
 };
 
 interface ServiceBreakdown {
@@ -269,7 +269,7 @@ export default function OraclePage() {
         <div>
           <h1 className="text-xl font-bold text-[#111827]">Oracle Report</h1>
           <p className="text-sm text-[#6B7280]">
-            Home Care &middot; Knights of the Holy Grail
+            Home Care &middot; Mt Gib Gardens
           </p>
         </div>
       </div>

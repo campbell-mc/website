@@ -64,7 +64,7 @@ export default function HomeCarIncidentsPage() {
       {/* Header */}
       <div>
         <h1 className="text-xl font-bold text-[#111827]">
-          Incidents &middot; Knights of the Holy Grail &middot; Support at Home
+          Incidents &middot; Mt Gib Gardens &middot; Support at Home
         </h1>
         <p className="text-sm text-[#6B7280]">
           All home care incident records &middot; Camelot Leichhardt &amp; Avalon Manly

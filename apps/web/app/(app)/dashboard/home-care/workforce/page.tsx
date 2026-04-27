@@ -107,7 +107,7 @@ export default function WorkforcePage() {
   return (
     <div className="p-4 lg:p-8 max-w-5xl mx-auto space-y-6">
         {/* Header */}
-        <PageHeader title="Workforce Control Centre" subtitle="KHG Home Care Southern Highlands" backHref="/dashboard/home-care" />
+        <PageHeader title="Workforce Control Centre" subtitle="Mt Gib Home Care Southern Highlands" backHref="/dashboard/home-care" />
 
         {/* 4 Stat Cards */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">

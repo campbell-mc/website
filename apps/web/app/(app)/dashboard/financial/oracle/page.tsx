@@ -42,7 +42,7 @@ export default function OracleWeeklyReportPage() {
           {
             id: "summary",
             title: "Weekly Summary",
-            content: "The Oracle has identified 3 revenue optimisation opportunities for The Holy Grail Bowral this week, with a combined potential uplift of $11,400 per month ($136,800 annualised).\n\nPriority: AN-ACC reclassification is the highest-value opportunity and has the shortest action window. 4 residents have had significant care need changes since their last assessment that may warrant AN-ACC reclassification.\n\nAll figures are based on current IHACPA pricing and StewartBrown benchmarking data.",
+            content: "The Oracle has identified 3 revenue optimisation opportunities for Mt Gib Gardens Bowral this week, with a combined potential uplift of $11,400 per month ($136,800 annualised).\n\nPriority: AN-ACC reclassification is the highest-value opportunity and has the shortest action window. 4 residents have had significant care need changes since their last assessment that may warrant AN-ACC reclassification.\n\nAll figures are based on current IHACPA pricing and StewartBrown benchmarking data.",
             editable: false,
             required: false,
             type: "readonly",
@@ -74,7 +74,7 @@ export default function OracleWeeklyReportPage() {
           {
             id: "benchmarks",
             title: "Benchmarking — StewartBrown Comparison",
-            content: "The Holy Grail Bowral vs StewartBrown Aged Care Financial Performance Survey (Q1 2026):\n\n                          Actual        Benchmark     Status\nEBITDA per bed day        $31.50        $28.00        ✓ Above\nCare labour ratio         71.2%         68.0%         ⚠ Above (watch)\nOccupancy                 94.1%         92.5%         ✓ Above\nAgency as % of labour     7.5%          4.8%          ⚠ Above (act)\nRevenue per bed day       $312          $298          ✓ Above\nFood cost per bed day     $28.40        $24.80        ⚠ Above (watch)\nAdmin cost ratio          8.2%          9.1%          ✓ Below\n\nKey insight: Agency cost reduction from 7.5% to benchmark 4.8% would save approximately $4,200/month. Combined with the 3 opportunities above, total addressable revenue gap is $15,600/month.",
+            content: "Mt Gib Gardens Bowral vs StewartBrown Aged Care Financial Performance Survey (Q1 2026):\n\n                          Actual        Benchmark     Status\nEBITDA per bed day        $31.50        $28.00        ✓ Above\nCare labour ratio         71.2%         68.0%         ⚠ Above (watch)\nOccupancy                 94.1%         92.5%         ✓ Above\nAgency as % of labour     7.5%          4.8%          ⚠ Above (act)\nRevenue per bed day       $312          $298          ✓ Above\nFood cost per bed day     $28.40        $24.80        ⚠ Above (watch)\nAdmin cost ratio          8.2%          9.1%          ✓ Below\n\nKey insight: Agency cost reduction from 7.5% to benchmark 4.8% would save approximately $4,200/month. Combined with the 3 opportunities above, total addressable revenue gap is $15,600/month.",
             editable: false,
             required: false,
             type: "readonly",

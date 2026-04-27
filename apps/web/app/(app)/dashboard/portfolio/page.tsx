@@ -37,7 +37,7 @@ export default function PortfolioDashboard() {
         actionLabel="Add to ELT agenda →" onAction={() => router.push("/dashboard/coach")} meta="Clinical · Workforce · PSH · AMPLIFYING · STRONG" />
 
       <ActionCard urgency="warning" icon={<Sparkles className="w-5 h-5 text-[hsl(var(--brand-amber))]" />}
-        title="The Holy Grail Bowral: turnover risk building"
+        title="Mt Gib Gardens Bowral: turnover risk building"
         chris="PSH_02 + PSH_16 co-elevated for 3 cycles in Wing B. Historically precedes voluntary turnover within 2-4 cycles in 71% of comparable teams. No turnover yet — intervention window is open."
         actionLabel="Share with HR →" onAction={() => router.push("/dashboard/coach")} meta="Workforce · PSH · PREDICTIVE · EMERGING" />
 

@@ -71,9 +71,9 @@
   --font-serif: 'Source Serif 4', Georgia, serif;
 
   /* Rich Forest + Amber palette (HSL for Tailwind) */
-  --background: 30 33% 97%;
+  --background: 0 0% 100%;
   --foreground: 152 45% 15%;
-  --card: 30 25% 99%;
+  --card: 0 0% 100%;
   --card-foreground: 152 45% 15%;
   --popover: 30 25% 99%;
   --popover-foreground: 152 45% 15%;

@@ -2,9 +2,9 @@
 
 import { useRouter } from "next/navigation";
 import { ChevronLeft, AlertTriangle, CheckCircle, MessageSquare, FileText } from "lucide-react";
-import { holy_grail_home_care } from "@/lib/seed-data";
+import { mt_gib_home_care } from "@/lib/seed-data";
 
-const metrics = holy_grail_home_care.combined.metrics;
+const metrics = mt_gib_home_care.combined.metrics;
 
 interface Complaint {
   id: string;
@@ -52,7 +52,7 @@ export default function HCFeedbackPage() {
         </button>
         <div>
           <p className="text-[28px] font-bold text-foreground tracking-tight leading-tight">Feedback & Complaints</p>
-          <p className="text-[10px] text-muted-foreground">KHG Home Care Southern Highlands</p>
+          <p className="text-[10px] text-muted-foreground">Mt Gib Home Care Southern Highlands</p>
         </div>
       </div>
 

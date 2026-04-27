@@ -3,7 +3,7 @@ import { RoleHomeScreen, type RoleHomeConfig } from "@/components/dashboard/Role
 
 const config: RoleHomeConfig = {
   greeting: "Good morning, Sandra",
-  subtitle: "Wattle Wing Evening · The Holy Grail Bowral",
+  subtitle: "Wattle Wing Evening · Mt Gib Gardens Bowral",
   todaysPicture: "Your team's practice last fortnight worked — 'Protect breaks under pressure' reduced the workload hazard score by 0.08, the strongest improvement this cycle. Pulse participation was 78% — above the 50% threshold. Your team scored highest on Belonging (4.3) this cycle, which is a real strength to build on. One thing to watch: Psychological Safety dipped slightly to 3.6 — the Team Briefing has more detail on what might be driving that.",
   domains: [
     { name: "Team PSH", status: "clear", summary: "Workload improving · Psych Safety to watch", href: "/dashboard/risk" },

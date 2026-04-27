@@ -23,23 +23,23 @@ const CARE_TYPE_FACILITIES: Record<string, {
 }> = {
   residential: {
     facilityId: "FAC-001",
-    facilityName: "The Holy Grail Bowral",
+    facilityName: "Mt Gib Gardens Bowral",
     careType: "residential",
-    providerName: "Knights of the Holy Grail",
+    providerName: "Mt Gib Gardens",
     defaultUser: { name: "Sarah Mitchell", role: "don" },
   },
   home_care: {
     facilityId: "FAC-005",
-    facilityName: "KHG Home Care Southern Highlands",
+    facilityName: "Mt Gib Home Care Southern Highlands",
     careType: "home_care",
-    providerName: "Knights of the Holy Grail",
+    providerName: "Mt Gib Gardens",
     defaultUser: { name: "Tom Nguyen", role: "home_care_manager" },
   },
   ndis: {
     facilityId: "FAC-007",
-    facilityName: "KHG NDIS Services",
+    facilityName: "Mt Gib NDIS Services",
     careType: "ndis",
-    providerName: "Knights of the Holy Grail",
+    providerName: "Mt Gib Gardens",
     defaultUser: { name: "David Okafor", role: "ndis_manager" },
   },
 };

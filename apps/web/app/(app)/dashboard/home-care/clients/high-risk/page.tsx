@@ -2,9 +2,9 @@
 
 import { useRouter } from "next/navigation";
 import { ChevronLeft, AlertTriangle, ShieldAlert, Phone, MapPin, Clock, Heart } from "lucide-react";
-import { holy_grail_home_care } from "@/lib/seed-data";
+import { mt_gib_home_care } from "@/lib/seed-data";
 
-const metrics = holy_grail_home_care.combined.metrics;
+const metrics = mt_gib_home_care.combined.metrics;
 
 interface HighRiskClient {
   id: string;
@@ -22,10 +22,10 @@ interface HighRiskClient {
 const HIGH_RISK_CLIENTS: HighRiskClient[] = [
   { id: "HC-001", name: "Margaret T.", age: 87, service: "Camelot Home Care", riskLevel: "critical", riskFactors: ["Falls risk", "Lives alone", "Medication complexity"], lastVisit: "Today 9:30am", nextVisit: "Tomorrow 8:00am", carePlanStatus: "current", notes: "3 falls in last 6 months. OT review completed. Enhanced monitoring in place." },
   { id: "HC-015", name: "Ronald S.", age: 91, service: "Camelot Home Care", riskLevel: "critical", riskFactors: ["Cognitive decline", "Lives alone", "Carer fatigue"], lastVisit: "Today 11:00am", nextVisit: "Tomorrow 9:00am", carePlanStatus: "review_due", notes: "MMSE score declining. Primary carer (daughter) showing signs of burnout. Respite referral pending." },
-  { id: "HC-023", name: "Dorothy M.", age: 84, service: "KHG Home Care Southern Highlands", riskLevel: "high", riskFactors: ["Diabetes management", "Vision impairment"], lastVisit: "Yesterday 2:00pm", nextVisit: "Today 3:00pm", carePlanStatus: "current", notes: "BSL levels unstable this week. Endocrinologist appointment booked for 18 Apr." },
-  { id: "HC-031", name: "James W.", age: 79, service: "KHG Home Care Southern Highlands", riskLevel: "high", riskFactors: ["Post-surgical", "Pain management", "Mobility limitations"], lastVisit: "Today 7:30am", nextVisit: "Today 4:00pm", carePlanStatus: "current", notes: "Hip replacement 2 weeks ago. Physio program on track. Pain medication review needed." },
+  { id: "HC-023", name: "Dorothy M.", age: 84, service: "Mt Gib Home Care Southern Highlands", riskLevel: "high", riskFactors: ["Diabetes management", "Vision impairment"], lastVisit: "Yesterday 2:00pm", nextVisit: "Today 3:00pm", carePlanStatus: "current", notes: "BSL levels unstable this week. Endocrinologist appointment booked for 18 Apr." },
+  { id: "HC-031", name: "James W.", age: 79, service: "Mt Gib Home Care Southern Highlands", riskLevel: "high", riskFactors: ["Post-surgical", "Pain management", "Mobility limitations"], lastVisit: "Today 7:30am", nextVisit: "Today 4:00pm", carePlanStatus: "current", notes: "Hip replacement 2 weeks ago. Physio program on track. Pain medication review needed." },
   { id: "HC-044", name: "Evelyn K.", age: 92, service: "Camelot Home Care", riskLevel: "high", riskFactors: ["Nutritional risk", "Social isolation", "Falls history"], lastVisit: "Yesterday 10:00am", nextVisit: "Tomorrow 10:00am", carePlanStatus: "overdue", notes: "Weight loss 3kg in 2 months. Meal delivery service arranged. Social worker visit scheduled." },
-  { id: "HC-052", name: "Arthur B.", age: 88, service: "KHG Home Care Southern Highlands", riskLevel: "high", riskFactors: ["Wandering risk", "Sundowning", "Carer stress"], lastVisit: "Today 8:00am", nextVisit: "Today 5:30pm", carePlanStatus: "current", notes: "GPS tracker in place. Evening check-in calls established. Dementia support referral completed." },
+  { id: "HC-052", name: "Arthur B.", age: 88, service: "Mt Gib Home Care Southern Highlands", riskLevel: "high", riskFactors: ["Wandering risk", "Sundowning", "Carer stress"], lastVisit: "Today 8:00am", nextVisit: "Today 5:30pm", carePlanStatus: "current", notes: "GPS tracker in place. Evening check-in calls established. Dementia support referral completed." },
 ];
 
 const RISK_DOT: Record<string, string> = {
@@ -51,7 +51,7 @@ export default function HighRiskClientsPage() {
         </button>
         <div>
           <p className="text-[28px] font-bold text-foreground tracking-tight leading-tight">High Risk Clients</p>
-          <p className="text-[10px] text-muted-foreground">KHG Home Care · {HIGH_RISK_CLIENTS.length} clients requiring enhanced monitoring</p>
+          <p className="text-[10px] text-muted-foreground">Mt Gib Home Care · {HIGH_RISK_CLIENTS.length} clients requiring enhanced monitoring</p>
         </div>
       </div>
 

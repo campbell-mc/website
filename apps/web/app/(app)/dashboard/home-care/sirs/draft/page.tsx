@@ -27,7 +27,7 @@ export default function HomeCaresSirsDraftPage() {
           {
             id: "provider_name",
             title: "Approved provider name",
-            content: "Knights of the Holy Grail Aged Care Ltd",
+            content: "Mt Gib Gardens Aged Care Ltd",
             editable: false,
             required: true,
             type: "readonly",

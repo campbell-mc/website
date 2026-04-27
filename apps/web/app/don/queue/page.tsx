@@ -134,7 +134,7 @@ export default function ReviewQueuePage() {
           </button>
           <div>
             <p className="text-[28px] font-bold text-foreground tracking-tight leading-tight">Review Queue</p>
-            <p className="text-[10px] text-muted-foreground">The Holy Grail Bowral · {items.length} items pending</p>
+            <p className="text-[10px] text-muted-foreground">Mt Gib Gardens Bowral · {items.length} items pending</p>
           </div>
         </div>
         <button className="flex items-center gap-1.5 text-xs font-medium px-3 py-2 rounded-lg border border-border text-foreground hover:bg-muted">

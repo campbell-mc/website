@@ -132,7 +132,7 @@ export default function ComplaintResponsePage() {
             id: "sign_off",
             title: "Sign Off",
             content:
-              "[REVIEW REQUIRED] Yours sincerely,\n\n[Your name]\n[Your position]\nThe Holy Grail Bowral\nPhone: [direct number]\nEmail: [email address]",
+              "[REVIEW REQUIRED] Yours sincerely,\n\n[Your name]\n[Your position]\nMt Gib Gardens Bowral\nPhone: [direct number]\nEmail: [email address]",
             editable: true,
             required: true,
             type: "textarea",

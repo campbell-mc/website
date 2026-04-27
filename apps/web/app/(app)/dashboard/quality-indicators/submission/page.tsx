@@ -23,7 +23,7 @@ export default function QISubmissionPage() {
           {
             id: "qi_period",
             title: "Reporting Period",
-            content: "Q2 2026 — 1 January 2026 to 31 March 2026\nProvider: Knights of the Holy Grail\nService: The Holy Grail Bowral\nTotal care recipients at end of quarter: 68",
+            content: "Q2 2026 — 1 January 2026 to 31 March 2026\nProvider: Mt Gib Gardens\nService: Mt Gib Gardens Bowral\nTotal care recipients at end of quarter: 68",
             editable: false,
             required: true,
             type: "readonly",

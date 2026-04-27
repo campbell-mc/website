@@ -266,7 +266,7 @@ export default function StatementsPage() {
           Quarterly Budget Statements &middot; {QUARTER}
         </h1>
         <p className="text-sm text-[#6B7280]">
-          Knights of the Holy Grail &middot; Support at Home
+          Mt Gib Gardens &middot; Support at Home
         </p>
       </div>
 

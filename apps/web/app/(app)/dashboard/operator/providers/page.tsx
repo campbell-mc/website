@@ -17,13 +17,13 @@ interface Facility {
 const PROVIDERS = [
   {
     id: "PRV-001",
-    name: "Knights of the Holy Grail",
+    name: "Mt Gib Gardens",
     status: "healthy" as const,
     facilities: [
-      { id: "FAC-001", name: "The Holy Grail Bowral", careType: "Residential", beds: 120, connectorStatus: "healthy" as const, lastSync: "12 min ago", agents: 6, agentsActive: 6 },
-      { id: "FAC-002", name: "The Holy Grail Moss Vale", careType: "Residential", beds: 85, connectorStatus: "healthy" as const, lastSync: "15 min ago", agents: 6, agentsActive: 6 },
-      { id: "FAC-005", name: "KHG Home Care Southern Highlands", careType: "Home Care", beds: 247, connectorStatus: "healthy" as const, lastSync: "8 min ago", agents: 5, agentsActive: 5 },
-      { id: "FAC-007", name: "KHG NDIS Services", careType: "NDIS", beds: 64, connectorStatus: "healthy" as const, lastSync: "20 min ago", agents: 4, agentsActive: 4 },
+      { id: "FAC-001", name: "Mt Gib Gardens Bowral", careType: "Residential", beds: 120, connectorStatus: "healthy" as const, lastSync: "12 min ago", agents: 6, agentsActive: 6 },
+      { id: "FAC-002", name: "Mt Gib Gardens Moss Vale", careType: "Residential", beds: 85, connectorStatus: "healthy" as const, lastSync: "15 min ago", agents: 6, agentsActive: 6 },
+      { id: "FAC-005", name: "Mt Gib Home Care Southern Highlands", careType: "Home Care", beds: 247, connectorStatus: "healthy" as const, lastSync: "8 min ago", agents: 5, agentsActive: 5 },
+      { id: "FAC-007", name: "Mt Gib NDIS Services", careType: "NDIS", beds: 64, connectorStatus: "healthy" as const, lastSync: "20 min ago", agents: 4, agentsActive: 4 },
     ],
   },
   {

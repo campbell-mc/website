@@ -43,7 +43,7 @@ export default function CorrectiveActionsPage() {
         </button>
         <div>
           <p className="text-[28px] font-bold text-foreground tracking-tight leading-tight">Corrective Actions</p>
-          <p className="text-[10px] text-muted-foreground">The Holy Grail Bowral · {ACTIONS.length} total actions</p>
+          <p className="text-[10px] text-muted-foreground">Mt Gib Gardens Bowral · {ACTIONS.length} total actions</p>
         </div>
       </div>
 

@@ -342,7 +342,7 @@ export default function LoneWorkerPage() {
         <div>
           <h1 className="text-xl font-bold text-[#111827]">Lone Worker Safety</h1>
           <p className="text-sm text-[#6B7280]">
-            Sentinel Live Monitoring &middot; Knights of the Holy Grail
+            Sentinel Live Monitoring &middot; Mt Gib Gardens
           </p>
         </div>
       </div>

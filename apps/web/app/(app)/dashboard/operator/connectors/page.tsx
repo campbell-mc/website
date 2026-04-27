@@ -16,10 +16,10 @@ interface Connector {
 }
 
 const CONNECTORS: Connector[] = [
-  { id: "CON-001", name: "Deputy → Rostering", provider: "Knights of the Holy Grail", facility: "The Holy Grail Bowral", type: "rostering", status: "healthy", lastSync: "12 min ago", recordsProcessed: 1247, errorRate: 0 },
-  { id: "CON-002", name: "ELMO → HR/Training", provider: "Knights of the Holy Grail", facility: "The Holy Grail Bowral", type: "workforce", status: "healthy", lastSync: "15 min ago", recordsProcessed: 892, errorRate: 0.1 },
-  { id: "CON-003", name: "Leecare → Clinical", provider: "Knights of the Holy Grail", facility: "The Holy Grail Bowral", type: "clinical", status: "healthy", lastSync: "8 min ago", recordsProcessed: 3401, errorRate: 0 },
-  { id: "CON-004", name: "RiskMan → Incidents", provider: "Knights of the Holy Grail", facility: "The Holy Grail Bowral", type: "incidents", status: "healthy", lastSync: "20 min ago", recordsProcessed: 156, errorRate: 0 },
+  { id: "CON-001", name: "Deputy → Rostering", provider: "Mt Gib Gardens", facility: "Mt Gib Gardens Bowral", type: "rostering", status: "healthy", lastSync: "12 min ago", recordsProcessed: 1247, errorRate: 0 },
+  { id: "CON-002", name: "ELMO → HR/Training", provider: "Mt Gib Gardens", facility: "Mt Gib Gardens Bowral", type: "workforce", status: "healthy", lastSync: "15 min ago", recordsProcessed: 892, errorRate: 0.1 },
+  { id: "CON-003", name: "Leecare → Clinical", provider: "Mt Gib Gardens", facility: "Mt Gib Gardens Bowral", type: "clinical", status: "healthy", lastSync: "8 min ago", recordsProcessed: 3401, errorRate: 0 },
+  { id: "CON-004", name: "RiskMan → Incidents", provider: "Mt Gib Gardens", facility: "Mt Gib Gardens Bowral", type: "incidents", status: "healthy", lastSync: "20 min ago", recordsProcessed: 156, errorRate: 0 },
   { id: "CON-005", name: "Deputy → Rostering", provider: "Southern Cross Aged Care", facility: "Southern Cross Manly", type: "rostering", status: "warning", lastSync: "1.5h ago", recordsProcessed: 743, errorRate: 2.1 },
   { id: "CON-006", name: "ELMO → HR/Training", provider: "Southern Cross Aged Care", facility: "Southern Cross Manly", type: "workforce", status: "warning", lastSync: "2h ago", recordsProcessed: 412, errorRate: 3.8 },
   { id: "CON-007", name: "Deputy → Visits", provider: "Pacific Blue Care Group", facility: "Pacific Blue Liverpool", type: "rostering", status: "stale", lastSync: "4h ago", recordsProcessed: 2104, errorRate: 0 },

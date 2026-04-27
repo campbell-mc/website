@@ -4,7 +4,7 @@ import { ComplianceFinancialPanel } from "@/components/financial/ComplianceFinan
 
 const config: RoleHomeConfig = {
   greeting: "Good morning, Lisa",
-  subtitle: "Knights of the Holy Grail · Quality & Compliance",
+  subtitle: "Mt Gib Gardens · Quality & Compliance",
   todaysPicture: "Compliance score is 84 — up 3 points from last month. Two obligations are at risk: QS 2.8.2 has an evidence gap that CHRIS can fix from pulse data in about 2 minutes, and one corrective action from the March medication audit is 3 days overdue. The SIRS Cat 2 draft from last Tuesday is ready for your review — 22 days remaining. One note: the QI_01 movement this quarter reflects the high-acuity admissions cohort, not a care quality issue — worth including that context in the Q&R pack.",
   domains: [
     { name: "Compliance Score", status: "watch", summary: "84 · up 3 pts · 2 obligations at risk", href: "/dashboard/compliance" },

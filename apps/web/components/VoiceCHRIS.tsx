@@ -26,7 +26,7 @@ function stripMarkdown(text: string): string {
 export function VoiceCHRIS({
   facilityId = "FAC-001",
   userRole = "don",
-  facilityName = "The Holy Grail Bowral",
+  facilityName = "Mt Gib Gardens Bowral",
   onTranscriptSent,
   onResponseReceived,
 }: VoiceCHRISProps) {

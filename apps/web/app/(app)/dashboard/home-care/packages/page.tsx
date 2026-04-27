@@ -10,9 +10,9 @@ import {
   BarChart3,
 } from "lucide-react";
 import { PageHeader } from "@/components/dashboard/PageHeader";
-import { holy_grail_home_care } from "@/lib/seed-data";
+import { mt_gib_home_care } from "@/lib/seed-data";
 
-const combined = holy_grail_home_care.combined;
+const combined = mt_gib_home_care.combined;
 const metrics = combined.metrics;
 const financial = combined.financial;
 const packages = combined.packages;

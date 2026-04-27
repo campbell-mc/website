@@ -46,7 +46,7 @@ export default function TrainingCompliancePage() {
         <div>
           <h1 className="text-[28px] font-bold text-foreground">Training Compliance</h1>
           <p className="text-sm text-muted-foreground mt-1">
-            Knights of the Holy Grail · Home Care · Camelot and Avalon
+            Mt Gib Gardens · Home Care · Camelot and Avalon
           </p>
         </div>
 

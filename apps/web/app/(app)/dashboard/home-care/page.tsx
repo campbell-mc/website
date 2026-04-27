@@ -16,10 +16,10 @@ import {
 import { PageHeader } from "@/components/dashboard/PageHeader";
 import { ChrisAvatar } from "@/components/chris/ChrisAvatar";
 import { AgentPulse } from "@/components/chris/AgentPulse";
-import { holy_grail_home_care } from "@/lib/seed-data";
+import { mt_gib_home_care } from "@/lib/seed-data";
 
-const org = holy_grail_home_care.organisation;
-const combined = holy_grail_home_care.combined;
+const org = mt_gib_home_care.organisation;
+const combined = mt_gib_home_care.combined;
 const metrics = combined.metrics;
 const financial = combined.financial;
 

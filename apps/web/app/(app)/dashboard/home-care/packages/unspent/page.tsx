@@ -2,9 +2,9 @@
 
 import { useRouter } from "next/navigation";
 import { ChevronLeft, AlertTriangle, DollarSign, TrendingDown, Clock, Phone } from "lucide-react";
-import { holy_grail_home_care } from "@/lib/seed-data";
+import { mt_gib_home_care } from "@/lib/seed-data";
 
-const combined = holy_grail_home_care.combined;
+const combined = mt_gib_home_care.combined;
 const metrics = combined.metrics;
 
 interface UnspentClient {
@@ -48,7 +48,7 @@ export default function UnspentFundsPage() {
         </button>
         <div>
           <p className="text-[28px] font-bold text-foreground tracking-tight leading-tight">Unspent Funds</p>
-          <p className="text-[10px] text-muted-foreground">KHG Home Care · Clients at risk of fund clawback</p>
+          <p className="text-[10px] text-muted-foreground">Mt Gib Home Care · Clients at risk of fund clawback</p>
         </div>
       </div>
 

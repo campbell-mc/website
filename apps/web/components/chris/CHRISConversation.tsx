@@ -369,7 +369,7 @@ export function CHRISConversation({
             message: text.trim(),
             stream: true,
             facility_id,
-            facility_name: facility_id === "FAC-005" ? "KHG Home Care Southern Highlands" : "The Holy Grail Bowral",
+            facility_name: facility_id === "FAC-005" ? "Mt Gib Home Care Southern Highlands" : "Mt Gib Gardens Bowral",
             user_role: current_user_role,
             context_type,
             context_id,

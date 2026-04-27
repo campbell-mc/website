@@ -1,6 +1,6 @@
 /**
  * CHRIS Platform — Multi-Facility Seed Data
- * Knights of the Holy Grail — 4 residential + 2 home care
+ * Mt Gib Gardens — 4 residential + 2 home care
  *
  * Each facility has its own narrative arc derived from the Bowral template.
  * Data covers Oct 2025 – Mar 2026 (6 months).
@@ -37,7 +37,7 @@ export interface FacilityConfig {
 export const ALL_FACILITIES: FacilityConfig[] = [
   {
     id: "FAC-001",
-    name: "The Holy Grail Bowral",
+    name: "Mt Gib Gardens Bowral",
     type: "residential",
     care_type: "residential",
     beds: 137,
@@ -121,7 +121,7 @@ export const ALL_FACILITIES: FacilityConfig[] = [
   },
   {
     id: "FAC-005",
-    name: "KHG Home Care Southern Highlands",
+    name: "Mt Gib Home Care Southern Highlands",
     type: "home_care",
     care_type: "home_care",
     packages: 48,
@@ -141,7 +141,7 @@ export const ALL_FACILITIES: FacilityConfig[] = [
   },
   {
     id: "FAC-006",
-    name: "KHG Home Care Goulburn",
+    name: "Mt Gib Home Care Goulburn",
     type: "home_care",
     care_type: "home_care",
     packages: 36,
@@ -166,7 +166,7 @@ export const ALL_FACILITIES: FacilityConfig[] = [
 // ============================================================
 
 export const portfolio_summary = {
-  provider_name: "Knights of the Holy Grail",
+  provider_name: "Mt Gib Gardens",
   total_beds: 365,
   total_hcp: 84,
   residential_facilities: 4,
@@ -194,14 +194,14 @@ export const portfolio_summary = {
     {
       type: "PREDICTIVE" as const,
       confidence: "EMERGING" as const,
-      facility: "The Holy Grail Bowral",
+      facility: "Mt Gib Gardens Bowral",
       headline: "Bowral: turnover risk building in Wing B",
       detail: "PSH_02 + PSH_16 co-elevated for 3 cycles. Historically precedes voluntary turnover within 2-4 cycles in 71% of comparable teams.",
     },
     {
       type: "CAUSAL" as const,
       confidence: "STRONG" as const,
-      facility: "The Holy Grail Bowral",
+      facility: "Mt Gib Gardens Bowral",
       headline: "Agency cost spike traced to PSH_13 decline",
       detail: "Dec-Jan agency surge ($240K YTD adverse) follows 4-cycle PSH_13 (Recognition) decline in Wattle Wing. Culture signal, not rostering failure.",
     },
@@ -213,12 +213,12 @@ export const portfolio_summary = {
 // ============================================================
 
 export const facility_financials = [
-  { facility_id: "FAC-001", name: "The Holy Grail Bowral", revenue: 2003400, expenditure: 1373000, ebitda: 630400, care_ratio: 0.519, agency_cost: 161000, budget_variance_pct: -0.028 },
+  { facility_id: "FAC-001", name: "Mt Gib Gardens Bowral", revenue: 2003400, expenditure: 1373000, ebitda: 630400, care_ratio: 0.519, agency_cost: 161000, budget_variance_pct: -0.028 },
   { facility_id: "FAC-002", name: "The Holy Grail Goulburn", revenue: 1402400, expenditure: 924000, ebitda: 478400, care_ratio: 0.562, agency_cost: 72000, budget_variance_pct: 0.012 },
   { facility_id: "FAC-003", name: "The Holy Grail Young", revenue: 1051800, expenditure: 738000, ebitda: 313800, care_ratio: 0.484, agency_cost: 98000, budget_variance_pct: -0.044 },
   { facility_id: "FAC-004", name: "The Holy Grail Temora", revenue: 876500, expenditure: 598000, ebitda: 278500, care_ratio: 0.578, agency_cost: 31000, budget_variance_pct: 0.008 },
-  { facility_id: "FAC-005", name: "KHG Home Care SH", revenue: 384000, expenditure: 298000, ebitda: 86000, budget_variance_pct: 0.003 },
-  { facility_id: "FAC-006", name: "KHG Home Care Goulburn", revenue: 288000, expenditure: 231000, ebitda: 57000, budget_variance_pct: -0.002 },
+  { facility_id: "FAC-005", name: "Mt Gib Home Care SH", revenue: 384000, expenditure: 298000, ebitda: 86000, budget_variance_pct: 0.003 },
+  { facility_id: "FAC-006", name: "Mt Gib Home Care Goulburn", revenue: 288000, expenditure: 231000, ebitda: 57000, budget_variance_pct: -0.002 },
 ];
 
 // ============================================================
@@ -226,12 +226,12 @@ export const facility_financials = [
 // ============================================================
 
 export const facility_workforce = [
-  { facility_id: "FAC-001", name: "The Holy Grail Bowral", headcount: 271, rn: 27, en: 25, ain: 185, agency_pct: 18, turnover: 29, psh_elevated: 3, vacancies: { rn: 1, en: 0, ain: 2 } },
+  { facility_id: "FAC-001", name: "Mt Gib Gardens Bowral", headcount: 271, rn: 27, en: 25, ain: 185, agency_pct: 18, turnover: 29, psh_elevated: 3, vacancies: { rn: 1, en: 0, ain: 2 } },
   { facility_id: "FAC-002", name: "The Holy Grail Goulburn", headcount: 188, rn: 19, en: 16, ain: 124, agency_pct: 11, turnover: 24, psh_elevated: 1, vacancies: { rn: 0, en: 0, ain: 1 } },
   { facility_id: "FAC-003", name: "The Holy Grail Young", headcount: 134, rn: 13, en: 11, ain: 89, agency_pct: 22, turnover: 33, psh_elevated: 2, vacancies: { rn: 2, en: 0, ain: 3 } },
   { facility_id: "FAC-004", name: "The Holy Grail Temora", headcount: 112, rn: 11, en: 10, ain: 74, agency_pct: 8, turnover: 21, psh_elevated: 0, vacancies: { rn: 0, en: 0, ain: 1 } },
-  { facility_id: "FAC-005", name: "KHG Home Care SH", headcount: 42, agency_pct: 5, turnover: 18, psh_elevated: 0 },
-  { facility_id: "FAC-006", name: "KHG Home Care Goulburn", headcount: 31, agency_pct: 3, turnover: 15, psh_elevated: 0 },
+  { facility_id: "FAC-005", name: "Mt Gib Home Care SH", headcount: 42, agency_pct: 5, turnover: 18, psh_elevated: 0 },
+  { facility_id: "FAC-006", name: "Mt Gib Home Care Goulburn", headcount: 31, agency_pct: 3, turnover: 15, psh_elevated: 0 },
 ];
 
 export default {

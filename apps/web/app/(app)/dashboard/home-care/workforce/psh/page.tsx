@@ -111,7 +111,7 @@ export default function PSHDashboardPage() {
               People, Safety &amp; Happiness — Home Care
             </h1>
             <p className="text-sm text-muted-foreground">
-              Keeper · Cycle 8 · Knights of the Holy Grail
+              Keeper · Cycle 8 · Mt Gib Gardens
             </p>
           </div>
         </div>

@@ -3,7 +3,7 @@
  * CHRIS Platform — Expanded Synthetic Data Generator
  * 12 months: October 2025 – September 2026
  *
- * Facility: The Holy Grail Bowral (FAC-001)
+ * Facility: Mt Gib Gardens Bowral (FAC-001)
  * Self-contained — no imports from seed-data.ts
  *
  * Narrative arc (extended):

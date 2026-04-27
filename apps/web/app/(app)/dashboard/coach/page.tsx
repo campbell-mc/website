@@ -21,7 +21,7 @@ export default function CoachPage() {
         context_type="general"
         context_label="Ask CHRIS anything"
         facility_id="FAC-001"
-        facility_name="The Holy Grail Bowral"
+        facility_name="Mt Gib Gardens Bowral"
         current_user_role="don"
         mode="fullscreen"
       />
@@ -31,7 +31,7 @@ export default function CoachPage() {
         <VoiceCHRIS
           facilityId="FAC-001"
           userRole="don"
-          facilityName="The Holy Grail Bowral"
+          facilityName="Mt Gib Gardens Bowral"
         />
       </div>
     </div>

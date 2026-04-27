@@ -154,7 +154,7 @@ PSH: No elevated domains. PSH_01 at 0.55 (watch). All others below 0.50.
 Training: 14/15 current. 1 overdue (manual handling).
 Incidents: 0 this week. 2 falls in last 30 days (both during agency shifts).`,
 
-  home_care_manager: `You are speaking to the Home Care Manager — Guinevere Walsh. She owns KHG Home Care Southern Highlands — 247 active clients, 89 care workers, 2 services.
+  home_care_manager: `You are speaking to the Home Care Manager — Guinevere Walsh. She owns Mt Gib Home Care Southern Highlands — 247 active clients, 89 care workers, 2 services.
 
 HER TOP PRIORITIES TODAY:
 1. Visit compliance at 95.2% — below 97% target. Shortfall in Southern Highlands afternoon round (travel time clustering).
@@ -192,8 +192,8 @@ function buildSystemPrompt(
 - Tailor everything to this person's role. A CFO cares about care ratio and revenue. A DON cares about care minutes and SIRS. A WHS Lead cares about PSH convergence and ISO 45003. Give them what THEY need.
 
 ## Context
-- Facility: ${facility_name || "The Holy Grail Bowral"}
-- Provider: Knights of the Holy Grail
+- Facility: ${facility_name || "Mt Gib Gardens Bowral"}
+- Provider: Mt Gib Gardens
 - Context type: ${context_type || "general"}
 ${context_data ? `- Additional context: ${JSON.stringify(context_data)}` : ""}
 
@@ -203,8 +203,8 @@ ${roleContext}
 
 ## SHARED FACILITY CONTEXT
 
-Facility: The Holy Grail Bowral. 137 beds. Provider: Knights of the Holy Grail. Located in Bowral, NSW.
-Also operates: KHG Home Care Southern Highlands (247 clients), KHG NDIS Services (64 participants).
+Facility: Mt Gib Gardens Bowral. 137 beds. Provider: Mt Gib Gardens. Located in Bowral, NSW.
+Also operates: Mt Gib Home Care Southern Highlands (247 clients), Mt Gib NDIS Services (64 participants).
 
 StewartBrown benchmarks: Care ratio 52%+ (top quartile). Agency <10%. Turnover <25%. Care minutes 215/44. EBITDA $18.68/bed/day.
 

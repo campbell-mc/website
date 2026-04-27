@@ -1,13 +1,13 @@
 
 /**
- * CHRIS Platform — The Holy Grail Bowral Seed Data
+ * CHRIS Platform — Mt Gib Gardens Bowral Seed Data
  * 6 months: October 2025 – March 2026
  * 
- * Facility: The Holy Grail Bowral (FAC-001)
+ * Facility: Mt Gib Gardens Bowral (FAC-001)
  * Beds: 137 residential + 2 home care services
  * Staff: ~350 (35 leaders, ~315 frontline)
  * Teams: 8 residential teams + 2 HC teams
- * Provider: Knights of the Holy Grail (PROV-001)
+ * Provider: Mt Gib Gardens (PROV-001)
  * 
  * Narrative arc:
  * Oct-Nov: Care minutes pressure, PSH_01 elevated across 3 teams
@@ -28,8 +28,8 @@
 export const facility = {
   id: 'FAC-001',
   provider_id: 'PROV-001',
-  name: 'The Holy Grail Bowral',
-  provider_name: 'Knights of the Holy Grail',
+  name: 'Mt Gib Gardens Bowral',
+  provider_name: 'Mt Gib Gardens',
   care_types: ['residential', 'home_care'],
   beds: 137,
   home_care_packages: 48,
@@ -1119,13 +1119,13 @@ export const resident_intelligence = {
 
 // ============================================================
 // ============================================================
-// HOME CARE SEED DATA — FAC-005 KHG Home Care Southern Highlands
+// HOME CARE SEED DATA — FAC-005 Mt Gib Home Care Southern Highlands
 // ============================================================
 
 export const home_care_data = {
   facility_id: 'FAC-005',
   care_type: 'home_care' as const,
-  name: 'KHG Home Care Southern Highlands',
+  name: 'Mt Gib Home Care Southern Highlands',
   clients: 48,
 
   visit_schedule_today: {
@@ -1560,8 +1560,8 @@ export const steward_structural_finding = {
 // ── HOLY GRAIL HOME CARE ──────────────────────────────────────
 // Two services: Camelot (Inner West Sydney), Avalon (Northern Beaches Sydney)
 
-export const holy_grail_home_care = {
-  organisation: { id: 'holy-grail-hc', name: 'Knights of the Holy Grail', care_type: 'home_care' as const, location: 'Sydney NSW', program: 'Support at Home' },
+export const mt_gib_home_care = {
+  organisation: { id: 'holy-grail-hc', name: 'Mt Gib Gardens', care_type: 'home_care' as const, location: 'Sydney NSW', program: 'Support at Home' },
   services: {
     camelot: { facility_id: 'camelot-hc-001', name: 'Camelot Home Care', suburb: 'Leichhardt', region: 'Inner West Sydney', active_clients: 134, active_workers: 48, care_coordinators: 3, service_manager: 'Guinevere Walsh' },
     avalon: { facility_id: 'avalon-hc-001', name: 'Avalon Home Care', suburb: 'Manly', region: 'Northern Beaches Sydney', active_clients: 113, active_workers: 41, care_coordinators: 3, service_manager: 'Arthur Pendragon' },
@@ -1727,5 +1727,5 @@ export default {
   steward_structural_finding,
   leave_current,
   ndis_data,
-  holy_grail_home_care,
+  mt_gib_home_care,
 };

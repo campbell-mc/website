@@ -24,7 +24,7 @@ export default function BoardPackPage() {
           {
             id: "executive_summary",
             title: "Executive Summary",
-            content: "The Holy Grail Bowral continues to operate within acceptable compliance parameters with one area of concern. Occupancy is stable at 94.1% (64/68 beds). Revenue is tracking 2.3% above budget YTD. Falls rate remains above national benchmark and is the primary quality focus for this period.\n\nKey highlights:\n• SIRS Cat 1 notification lodged 13 April (fall with injury) — within 24hr requirement\n• QI Q2 submission prepared — due 21 April\n• AN-ACC reassessment opportunity identified — potential $8,200/month uplift\n• Staff turnover reduced to 18.2% (from 24.1% prior quarter)\n• Zero restrictive practice incidents this quarter",
+            content: "Mt Gib Gardens Bowral continues to operate within acceptable compliance parameters with one area of concern. Occupancy is stable at 94.1% (64/68 beds). Revenue is tracking 2.3% above budget YTD. Falls rate remains above national benchmark and is the primary quality focus for this period.\n\nKey highlights:\n• SIRS Cat 1 notification lodged 13 April (fall with injury) — within 24hr requirement\n• QI Q2 submission prepared — due 21 April\n• AN-ACC reassessment opportunity identified — potential $8,200/month uplift\n• Staff turnover reduced to 18.2% (from 24.1% prior quarter)\n• Zero restrictive practice incidents this quarter",
             editable: true,
             required: true,
             type: "textarea",

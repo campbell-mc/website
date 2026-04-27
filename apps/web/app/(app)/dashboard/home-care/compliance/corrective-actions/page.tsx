@@ -42,7 +42,7 @@ export default function HCCorrectiveActionsPage() {
         </button>
         <div>
           <p className="text-[28px] font-bold text-foreground tracking-tight leading-tight">Corrective Actions</p>
-          <p className="text-[10px] text-muted-foreground">KHG Home Care Southern Highlands · {ACTIONS.length} total</p>
+          <p className="text-[10px] text-muted-foreground">Mt Gib Home Care Southern Highlands · {ACTIONS.length} total</p>
         </div>
       </div>
 

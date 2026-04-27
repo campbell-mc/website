@@ -14,7 +14,7 @@ interface Provider {
 }
 
 const PROVIDERS: Provider[] = [
-  { id: "PRV-001", name: "Knights of the Holy Grail", facilities: 4, status: "healthy", connectors: 6, connectorsHealthy: 6, lastSync: "12 min ago" },
+  { id: "PRV-001", name: "Mt Gib Gardens", facilities: 4, status: "healthy", connectors: 6, connectorsHealthy: 6, lastSync: "12 min ago" },
   { id: "PRV-002", name: "Southern Cross Aged Care", facilities: 8, status: "warning", connectors: 8, connectorsHealthy: 6, lastSync: "45 min ago" },
   { id: "PRV-003", name: "Bright Horizons Living", facilities: 3, status: "healthy", connectors: 4, connectorsHealthy: 4, lastSync: "8 min ago" },
   { id: "PRV-004", name: "Pacific Blue Care Group", facilities: 12, status: "critical", connectors: 12, connectorsHealthy: 8, lastSync: "3h ago" },

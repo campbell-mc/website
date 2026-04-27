@@ -135,7 +135,7 @@ export default function SIRSIncidentDetail() {
                 <p className="text-sm font-medium text-foreground">Sarah Mitchell · Director of Nursing</p>
               </div>
               <button onClick={() => setSubmitted(true)} className="w-full py-3.5 rounded-xl font-medium text-white bg-primary hover:opacity-90">Submit to ACQSC via GPMS →</button>
-              <p className="text-[10px] text-muted-foreground text-center mt-2">Category 2 · The Holy Grail Bowral · Will be recorded by ACQSC</p>
+              <p className="text-[10px] text-muted-foreground text-center mt-2">Category 2 · Mt Gib Gardens Bowral · Will be recorded by ACQSC</p>
             </div>
           )}
         </div>

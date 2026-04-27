@@ -13,7 +13,7 @@ export default function SIRSDraftPage() {
         documentId="sirs-2026-001"
         documentType="sirs_notification"
         title="SIRS Category 1 Notification"
-        subtitle="Unexpected fall — Wing B bathroom · The Holy Grail Bowral"
+        subtitle="Unexpected fall — Wing B bathroom · Mt Gib Gardens Bowral"
         generatedBy="chronicler"
         generatedAt={generatedAt}
         status="ready"
@@ -25,7 +25,7 @@ export default function SIRSDraftPage() {
           {
             id: "provider_name",
             title: "Provider Name",
-            content: "Knights of the Holy Grail",
+            content: "Mt Gib Gardens",
             editable: false,
             required: true,
             type: "readonly",
@@ -33,7 +33,7 @@ export default function SIRSDraftPage() {
           {
             id: "service_name",
             title: "Service Name",
-            content: "The Holy Grail Bowral",
+            content: "Mt Gib Gardens Bowral",
             editable: false,
             required: true,
             type: "readonly",

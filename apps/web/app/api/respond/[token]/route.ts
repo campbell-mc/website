@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 // Demo response tokens for testing
 const DEMO_TOKENS: Record<string, any> = {
   "demo-roster-gap": {
-    type: "roster_gap", facility_name: "The Holy Grail Bowral",
+    type: "roster_gap", facility_name: "Mt Gib Gardens Bowral",
     message: "Tonight's AIN shift in Grevillea Wing (2pm–10pm) is unfilled. Can you cover?",
     options: [
       { id: "yes", label: "Yes, I can cover", value: "yes_cover", style: "primary" },
@@ -14,7 +14,7 @@ const DEMO_TOKENS: Record<string, any> = {
     already_responded: false,
   },
   "demo-leader-loop": {
-    type: "leader_loop", facility_name: "The Holy Grail Bowral",
+    type: "leader_loop", facility_name: "Mt Gib Gardens Bowral",
     message: "Anika has asked for your quick, anonymous feedback on their leadership this fortnight.",
     options: [
       { id: "yes", label: "Yes, definitely", value: "yes_definitely", style: "primary" },

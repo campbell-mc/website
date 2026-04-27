@@ -159,7 +159,7 @@ export default function CarePlansPage() {
       <div>
         <h1 className="text-xl font-bold text-[#111827]">Care Plan Review</h1>
         <p className="text-sm text-[#6B7280]">
-          Annual review required under Support at Home &middot; Knights of the Holy Grail
+          Annual review required under Support at Home &middot; Mt Gib Gardens
         </p>
       </div>
 
