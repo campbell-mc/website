@@ -134,19 +134,19 @@ function Hero() {
         </div>
       </div>
 
-      {/* Product cards — 3 live UI cards, Care Minutes centre and tallest */}
-      <div className="relative z-10 max-w-[1100px] mx-auto px-6 lg:px-8 mt-10 lg:mt-16">
-        <div className="flex flex-col lg:flex-row items-start justify-center gap-5">
-          {/* Left — Review Queue (shorter, pushed down) */}
-          <div className="w-full lg:w-[320px] lg:mt-12 shrink-0">
+      {/* Product cards — 3 live UI cards, symmetric, Care Minutes centre + tallest */}
+      <div className="relative z-10 max-w-[1060px] mx-auto px-6 lg:px-8 mt-10 lg:mt-16">
+        <div className="flex flex-col lg:flex-row items-center lg:items-end justify-center gap-5">
+          {/* Left — Review Queue (same width, aligned to bottom) */}
+          <div className="w-full lg:w-[300px] shrink-0">
             <ReviewQueueCard />
           </div>
-          {/* Centre — Care Minutes (tallest, hero) */}
-          <div className="w-full lg:w-[380px] shrink-0">
+          {/* Centre — Care Minutes (wider + taller, rises above sides) */}
+          <div className="w-full lg:w-[380px] lg:-mb-8 shrink-0">
             <CareMinutesCard />
           </div>
-          {/* Right — Agent Activity (shorter, pushed down) */}
-          <div className="w-full lg:w-[320px] lg:mt-12 shrink-0">
+          {/* Right — Agent Activity (same width as left, aligned to bottom) */}
+          <div className="w-full lg:w-[300px] shrink-0">
             <AgentActivityCard />
           </div>
         </div>
