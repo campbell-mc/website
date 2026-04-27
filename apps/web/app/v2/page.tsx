@@ -72,6 +72,22 @@ const TOOLS = [
       </svg>
     ),
   },
+  {
+    title: "Team Briefing demo",
+    blurb: "See what your team leaders would receive. Operational data in, prioritised briefing out.",
+    cta: "Generate a briefing →",
+    href: "/tools/team-briefing",
+    stat: "14",
+    statLabel: "day cycle. One briefing. One practice. Measured.",
+    accent: "#2D7D73",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <rect x="4" y="4" width="20" height="20" rx="4" stroke="#2D7D73" strokeWidth="2" />
+        <path d="M9 10h10M9 14h7M9 18h4" stroke="#2D7D73" strokeWidth="1.5" strokeLinecap="round" />
+        <circle cx="22" cy="8" r="3" fill="#2D7D73" fillOpacity="0.4"><animate attributeName="fillOpacity" values="0.3;0.6;0.3" dur="2s" repeatCount="indefinite" /></circle>
+      </svg>
+    ),
+  },
 ];
 
 const STATS = [
@@ -381,7 +397,7 @@ function ToolsStrip() {
         </div>
 
         {/* Tool cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
           {TOOLS.map((tool) => (
             <Link key={tool.title} href={tool.href}
               className="group relative rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl"
