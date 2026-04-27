@@ -397,111 +397,133 @@ const ARCH_SYSTEMS = [
 ];
 
 function WhatChrisIsSection() {
+  const [expanded, setExpanded] = useState<number | null>(null);
+
+  const cards = [
+    {
+      eyebrow: "Agentic AI",
+      headline: "Software that doesn\u2019t wait to be asked.",
+      body: "Chris reads what's happening across your operation, decides what matters, and takes the next step. Drafts the SIRS notification. Logs the supervision check-in. Flags the roster gap before it becomes a clinical incident. Built for the work aged care leaders actually do, not for generic enterprise.",
+    },
+    {
+      eyebrow: "Reads",
+      headline: "Connects to your existing stack.",
+      body: "Chris reads from the systems your operators already use: clinical, rostering, finance, compliance, family. No migration. No re-platforming. No schema mapping. Your data stays where it is.",
+    },
+    {
+      eyebrow: "Acts",
+      headline: "Productivity, not paperwork.",
+      body: "Chris doesn't just see. It acts. Drafts briefings, logs actions, sends follow-ups, prepares board materials, surfaces convergence patterns to the leaders who can act on them. The work your operators do not have time for, handled by agents working alongside them.",
+    },
+    {
+      eyebrow: "Compliance",
+      headline: "Reports straight to GPMS via the B2G gateway.",
+      body: "Aligned with the Aged Care Act 2024. Chris connects to the Government Provider Management System through the Business-to-Government APIs. Mandatory reporting flows from your operation to the Department of Health, the Aged Care Quality and Safety Commission, and the NDIA without manual handling.",
+    },
+  ];
+
   return (
     <section style={{ backgroundColor: C.dark }}>
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-14 lg:py-20">
         {/* Headline block */}
         <div className="text-center max-w-[60ch] mx-auto mb-12 lg:mb-16">
           <p className="text-[10px] font-semibold uppercase tracking-[0.15em] mb-4" style={{ color: C.copper }}>What Chris is</p>
-          <h2 className="text-[clamp(1.5rem,3.5vw,2.5rem)] font-bold leading-[1.1] tracking-[-0.01em] mb-4" style={{ color: "#ffffff" }}>
+          <h2 className="text-[clamp(1.8rem,4vw,3rem)] font-bold leading-[1.08] tracking-[-0.02em] mb-5" style={{ color: "#ffffff" }}>
             The intelligence layer between your stack and your leaders.
           </h2>
-          <p className="text-[16px] leading-[1.7]" style={{ color: "rgba(245,237,227,0.6)" }}>
+          <p className="text-[17px] leading-[1.7]" style={{ color: "rgba(245,237,227,0.6)" }}>
             Chris reads what your systems already capture, surfaces what matters, and acts on the productivity work your operators don&apos;t have time for. Cross-domain agents, built for aged care.
           </p>
         </div>
 
-        {/* Architecture diagram */}
-        <div className="max-w-4xl mx-auto mb-12 lg:mb-16">
-          {/* Leaders band */}
-          <div className="rounded-xl p-4 lg:p-5 mb-1" style={{ backgroundColor: C.cream, border: "1px solid rgba(45,106,79,0.12)" }}>
-            <p className="text-[9px] font-semibold uppercase tracking-[0.12em] mb-3" style={{ color: "rgba(26,18,24,0.35)" }}>Your leaders</p>
+        {/* Vertical architecture diagram: Systems → Chris → Leaders */}
+        <div className="max-w-lg mx-auto mb-14 lg:mb-18">
+          {/* Band 1: Systems (bottom of stack, shown first = top visually for vertical reading) */}
+          <div className="rounded-2xl p-5 lg:p-6" style={{ backgroundColor: C.cream, border: "1px solid rgba(26,18,24,0.06)", boxShadow: "0 2px 12px rgba(0,0,0,0.03)" }}>
+            <p className="text-[11px] font-bold uppercase tracking-[0.12em] mb-3 text-center" style={{ color: "rgba(26,18,24,0.4)" }}>The systems you already run</p>
             <div className="flex flex-wrap gap-2 justify-center">
-              {ARCH_ROLES.map((role) => (
-                <span key={role} className="text-[10px] font-medium px-3 py-1.5 rounded-md" style={{ backgroundColor: "rgba(26,18,24,0.04)", color: "rgba(26,18,24,0.55)" }}>{role}</span>
+              {ARCH_SYSTEMS.map((sys) => (
+                <span key={sys.name} className="text-[11px] font-bold px-3 py-1.5 rounded-lg" style={{ backgroundColor: `${sys.color}12`, color: sys.color }}>{sys.name}</span>
               ))}
             </div>
           </div>
 
-          {/* Arrows: SUPPORTS + ACTS going up */}
-          <div className="flex items-center justify-center gap-12 py-2">
-            <div className="flex flex-col items-center">
-              <svg width="12" height="20" viewBox="0 0 12 20" fill="none"><path d="M6 20V2M2 6l4-4 4 4" stroke={C.good} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-              <span className="text-[8px] font-semibold uppercase tracking-wider mt-0.5" style={{ color: C.good }}>Supports</span>
-            </div>
-            <div className="flex flex-col items-center">
-              <svg width="12" height="20" viewBox="0 0 12 20" fill="none"><path d="M6 20V2M2 6l4-4 4 4" stroke={C.copper} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-              <span className="text-[8px] font-semibold uppercase tracking-wider mt-0.5" style={{ color: C.copper }}>Acts</span>
-            </div>
+          {/* Arrow: READS ↓ */}
+          <div className="flex flex-col items-center py-3">
+            <span className="text-[9px] font-bold uppercase tracking-[0.15em] mb-1" style={{ color: C.good }}>Reads</span>
+            <svg width="14" height="28" viewBox="0 0 14 28" fill="none"><path d="M7 0v24M3 20l4 4 4-4" stroke={C.good} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
           </div>
 
-          {/* Chris band */}
-          <div className="rounded-xl p-4 lg:p-5 mb-1" style={{ background: `linear-gradient(135deg, ${C.dark2}, rgba(45,106,79,0.15))`, border: "1px solid rgba(200,154,60,0.15)" }}>
-            <p className="text-[9px] font-semibold uppercase tracking-[0.12em] mb-3 text-center" style={{ color: C.copper }}>Chris</p>
+          {/* Band 2: Chris (the intelligence layer) */}
+          <div className="rounded-2xl p-5 lg:p-6 relative" style={{ background: `linear-gradient(180deg, ${C.dark2}, rgba(45,106,79,0.2))`, border: "1px solid rgba(200,154,60,0.2)", boxShadow: "0 0 40px rgba(200,154,60,0.06)" }}>
+            <p className="text-[13px] font-bold uppercase tracking-[0.12em] mb-4 text-center" style={{ color: C.copper }}>Chris</p>
             <div className="flex flex-wrap gap-3 justify-center">
               {ARCH_AGENTS.map((agent) => (
-                <div key={agent.name} className="flex flex-col items-center gap-0.5">
-                  <span className="text-[11px] font-bold px-3 py-1.5 rounded-md" style={{ backgroundColor: `${agent.color}18`, color: agent.color }}>{agent.name}</span>
-                  <span className="text-[8px]" style={{ color: "rgba(245,237,227,0.35)" }}>{agent.verb}</span>
+                <div key={agent.name} className="flex flex-col items-center gap-1">
+                  <span className="text-[13px] font-bold px-4 py-2 rounded-lg" style={{ backgroundColor: `${agent.color}20`, color: agent.color, boxShadow: `0 0 12px ${agent.color}15` }}>{agent.name}</span>
+                  <span className="text-[10px] font-medium" style={{ color: "rgba(245,237,227,0.4)" }}>{agent.verb}</span>
                 </div>
               ))}
-              <div className="flex flex-col items-center gap-0.5">
-                <span className="text-[11px] font-medium px-3 py-1.5 rounded-md" style={{ backgroundColor: "rgba(245,237,227,0.06)", color: "rgba(245,237,227,0.35)" }}>+ 6 more</span>
-                <span className="text-[8px]" style={{ color: "rgba(245,237,227,0.2)" }}>in build</span>
+              <div className="flex flex-col items-center gap-1">
+                <span className="text-[13px] font-medium px-4 py-2 rounded-lg" style={{ backgroundColor: "rgba(245,237,227,0.06)", color: "rgba(245,237,227,0.3)" }}>+ 6 more</span>
+                <span className="text-[10px]" style={{ color: "rgba(245,237,227,0.2)" }}>in build</span>
               </div>
             </div>
           </div>
 
-          {/* Arrow: READS going up */}
-          <div className="flex items-center justify-center py-2">
+          {/* Arrows: SUPPORTS + ACTS ↓ */}
+          <div className="flex items-center justify-center gap-10 py-3">
             <div className="flex flex-col items-center">
-              <svg width="12" height="20" viewBox="0 0 12 20" fill="none"><path d="M6 20V2M2 6l4-4 4 4" stroke={C.good} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-              <span className="text-[8px] font-semibold uppercase tracking-wider mt-0.5" style={{ color: C.good }}>Reads</span>
+              <span className="text-[9px] font-bold uppercase tracking-[0.15em] mb-1" style={{ color: C.good }}>Supports</span>
+              <svg width="14" height="28" viewBox="0 0 14 28" fill="none"><path d="M7 0v24M3 20l4 4 4-4" stroke={C.good} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+            </div>
+            <div className="flex flex-col items-center">
+              <span className="text-[9px] font-bold uppercase tracking-[0.15em] mb-1" style={{ color: C.copper }}>Acts</span>
+              <svg width="14" height="28" viewBox="0 0 14 28" fill="none"><path d="M7 0v24M3 20l4 4 4-4" stroke={C.copper} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
             </div>
           </div>
 
-          {/* Systems band */}
-          <div className="rounded-xl p-4 lg:p-5" style={{ backgroundColor: C.cream, border: "1px solid rgba(26,18,24,0.06)" }}>
-            <p className="text-[9px] font-semibold uppercase tracking-[0.12em] mb-3 text-center" style={{ color: "rgba(26,18,24,0.35)" }}>The systems you already run</p>
+          {/* Band 3: Leaders */}
+          <div className="rounded-2xl p-5 lg:p-6" style={{ backgroundColor: C.cream, border: "1px solid rgba(45,106,79,0.12)", boxShadow: "0 2px 12px rgba(0,0,0,0.03)" }}>
+            <p className="text-[11px] font-bold uppercase tracking-[0.12em] mb-3 text-center" style={{ color: "rgba(26,18,24,0.4)" }}>Your leaders</p>
             <div className="flex flex-wrap gap-2 justify-center">
-              {ARCH_SYSTEMS.map((sys) => (
-                <span key={sys.name} className="text-[9px] font-semibold px-2 py-1 rounded" style={{ backgroundColor: `${sys.color}12`, color: sys.color }}>{sys.name}</span>
+              {ARCH_ROLES.map((role) => (
+                <span key={role} className="text-[12px] font-semibold px-3 py-1.5 rounded-lg" style={{ backgroundColor: "rgba(26,18,24,0.04)", color: "rgba(26,18,24,0.6)" }}>{role}</span>
               ))}
             </div>
           </div>
         </div>
 
-        {/* Three explainer cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
-          {[
-            {
-              eyebrow: "Agentic AI",
-              headline: "Software that doesn't wait to be asked.",
-              body: "Chris reads what's happening across your operation, decides what matters, and takes the next step. Drafts the SIRS notification. Logs the supervision check-in. Flags the roster gap before it becomes a clinical incident. Built for the work aged care leaders actually do, not for generic enterprise.",
-            },
-            {
-              eyebrow: "Reads",
-              headline: "Connects to your existing stack.",
-              body: "Chris reads from the systems your operators already use: clinical, rostering, finance, compliance, family. No migration. No re-platforming. No schema mapping. Your data stays where it is.",
-            },
-            {
-              eyebrow: "Acts",
-              headline: "Productivity, not paperwork.",
-              body: "Chris doesn't just see. It acts. Drafts briefings, logs actions, sends follow-ups, prepares board materials, surfaces convergence patterns to the leaders who can act on them. The work your operators do not have time for, handled by agents working alongside them.",
-            },
-          ].map((card) => (
-            <div key={card.eyebrow} className="rounded-lg p-5" style={{ backgroundColor: "#fff", boxShadow: "0 1px 3px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.03)" }}>
-              <p className="text-[9px] font-semibold uppercase tracking-[0.12em] mb-2" style={{ color: C.copper }}>{card.eyebrow}</p>
-              <h3 className="text-[15px] font-semibold mb-2" style={{ color: C.inkDark }}>{card.headline}</h3>
-              <p className="text-[12px] leading-[1.65]" style={{ color: "rgba(26,18,24,0.55)" }}>{card.body}</p>
-            </div>
-          ))}
+        {/* Four explainer cards with progressive disclosure */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+          {cards.map((card, i) => {
+            const isOpen = expanded === i;
+            return (
+              <button key={card.eyebrow} onClick={() => setExpanded(isOpen ? null : i)}
+                className="rounded-xl text-left transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                style={{ backgroundColor: "#fff", boxShadow: isOpen ? "0 4px 20px rgba(0,0,0,0.08)" : "0 1px 3px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.03)" }}>
+                <div className="p-5">
+                  <div className="flex items-center justify-between mb-2">
+                    <p className="text-[10px] font-bold uppercase tracking-[0.12em]" style={{ color: C.copper }}>{card.eyebrow}</p>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className={`transition-transform duration-300 ${isOpen ? "rotate-45" : ""}`}>
+                      <path d="M8 3v10M3 8h10" stroke={C.copper} strokeWidth="1.5" strokeLinecap="round" />
+                    </svg>
+                  </div>
+                  <h3 className="text-[16px] font-bold mb-1 leading-snug" style={{ color: C.inkDark }}>{card.headline}</h3>
+                  <div className={`overflow-hidden transition-all duration-300 ${isOpen ? "max-h-[200px] opacity-100 mt-2" : "max-h-0 opacity-0"}`}>
+                    <p className="text-[13px] leading-[1.65]" style={{ color: "rgba(26,18,24,0.55)" }}>{card.body}</p>
+                  </div>
+                  {!isOpen && <p className="text-[11px] mt-1" style={{ color: "rgba(26,18,24,0.3)" }}>Tap to read more</p>}
+                </div>
+              </button>
+            );
+          })}
         </div>
 
         {/* Live status line */}
         <div className="text-center">
-          <p className="text-[12px]" style={{ color: "rgba(245,237,227,0.4)" }}>
-            <span className="inline-flex items-center gap-1.5 mr-1"><span className="w-1.5 h-1.5 rounded-full bg-[#2d6a4f] animate-pulse" /></span>
+          <p className="text-[13px]" style={{ color: "rgba(245,237,227,0.45)" }}>
+            <span className="inline-flex items-center gap-1.5 mr-1"><span className="w-2 h-2 rounded-full bg-[#2d6a4f] animate-pulse" /></span>
             Eleven agents already running with leaders in NSW and VIC. Seven cross-domain agents in build for clinical, workforce, finance, compliance and governance.
           </p>
         </div>
@@ -1328,8 +1350,8 @@ export default function V2Page() {
       <AgentRibbon />
       <WhatChrisIsSection />
       <ToolsStrip />
-      <IntegrationsSection />
-      <GPMSCallout />
+      {/* IntegrationsSection removed: logos now in architecture diagram above */}
+      {/* GPMSCallout removed: merged into 4th explainer card in architecture section */}
       <HowItWorksSection />
       <StatRow />
       <JobsSection />
