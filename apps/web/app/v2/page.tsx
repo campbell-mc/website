@@ -7,21 +7,38 @@ import { CareMinutesCard } from "@/components/marketing/cards/CareMinutesCard";
 import { ReviewQueueCard } from "@/components/marketing/cards/ReviewQueueCard";
 import { AgentActivityCard } from "@/components/marketing/cards/AgentActivityCard";
 
-// ─── Brand tokens (Direction F — aubergine) ─────────────────────────────────
+// ─── Marketing visual identity v5 (operator-grade hybrid) ───────────────────
+// Mercury/Ramp density + Anthropic/Stripe accent discipline.
+// Warm Culture Crunch palette (forest/amber) ONLY inside the briefing artefact.
 const C = {
-  dark: "#1a1218",
-  dark2: "#2d1f2a",
-  cream: "#faf7f2",
-  white: "#ffffff",
-  ink: "#f5ede3",
-  inkMuted: "rgba(245,237,227,0.78)",
-  inkDark: "#1a1218",
-  inkMutedLight: "rgba(26,18,24,0.78)",
-  copper: "#c89a3c",
-  copperDark: "#8b6914",
-  warm: "#c4674a",
-  good: "#2d6a4f",
-  warn: "#b5572a",
+  // Canvas
+  canvas: "#FAFAF6",
+  card: "#FFFFFF",
+  // Text
+  text: "#0E0E0E",
+  textMuted: "#5A5A57",
+  textFaint: "#8A8A85",
+  // Accents
+  teal: "#1F6F66",
+  amber: "#BA7517",
+  red: "#A32D2D",
+  // Surfaces
+  successBg: "#E1F5EE",
+  warningBg: "#FAEEDA",
+  alertBg: "#FCEBEB",
+  // Borders
+  border: "rgba(15,23,42,0.10)",
+  borderSubtle: "rgba(15,23,42,0.07)",
+  // CTA
+  ctaBg: "#0E0E0E",
+  ctaText: "#FAFAF6",
+  // Inside-product tokens (briefing artefact ONLY)
+  forest: "#1B4332",
+  gold: "#D4A853",
+  // Legacy aliases for components not yet migrated
+  dark: "#0E0E0E", dark2: "#1a1a1a", cream: "#FAFAF6", white: "#FFFFFF",
+  ink: "#FAFAF6", inkDark: "#0E0E0E", inkMuted: "#5A5A57", inkMutedLight: "#5A5A57",
+  copper: "#1F6F66", copperDark: "#1F6F66", warm: "#A32D2D", good: "#1F6F66", warn: "#BA7517",
 };
 
 // ─── Data ───────────────────────────────────────────────────────────────────
@@ -280,16 +297,16 @@ const ROLES = [
 
 function Nav() {
   return (
-    <nav className="sticky top-0 z-50 transition-colors" style={{ backgroundColor: C.dark, borderBottom: `1px solid rgba(245,237,227,0.08)` }}>
-      <div className="max-w-6xl mx-auto flex items-center justify-between px-6 lg:px-16 py-4">
-        <Link href="/v2" className="text-[15px] font-medium tracking-tight" style={{ color: C.ink }}>
-          Chris<span style={{ color: C.copper }}>·</span>OS
+    <nav className="sticky top-0 z-50" style={{ backgroundColor: C.canvas, borderBottom: `0.5px solid ${C.borderSubtle}` }}>
+      <div className="max-w-6xl mx-auto flex items-center justify-between px-6 lg:px-16 py-3">
+        <Link href="/v2" className="text-[15px] font-medium tracking-tight" style={{ color: C.text }}>
+          Chris<span style={{ color: C.teal }}>·</span>OS
         </Link>
         <div className="flex items-center gap-6">
-          <Link href="/tools/care-minutes" className="text-[13px] hidden md:block transition-colors hover:opacity-80" style={{ color: C.inkMuted }}>Tools</Link>
-          <Link href="/technology" className="text-[13px] hidden md:block transition-colors hover:opacity-80" style={{ color: C.inkMuted }}>Technology</Link>
-          <Link href="/newsroom" className="text-[13px] hidden md:block transition-colors hover:opacity-80" style={{ color: C.inkMuted }}>Newsroom</Link>
-          <a href="#book" className="text-[13px] font-medium px-5 py-2 rounded transition-colors" style={{ backgroundColor: C.copper, color: C.dark }}>
+          <Link href="/tools/care-minutes" className="text-[13px] hidden md:block hover:opacity-70" style={{ color: C.textMuted }}>Tools</Link>
+          <Link href="/technology" className="text-[13px] hidden md:block hover:opacity-70" style={{ color: C.textMuted }}>Technology</Link>
+          <Link href="/newsroom" className="text-[13px] hidden md:block hover:opacity-70" style={{ color: C.textMuted }}>Newsroom</Link>
+          <a href="#book" className="text-[13px] font-medium px-[18px] py-[11px] rounded-[4px]" style={{ backgroundColor: C.ctaBg, color: C.ctaText }}>
             Book a conversation
           </a>
         </div>
@@ -300,50 +317,38 @@ function Nav() {
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden" style={{ backgroundColor: C.dark }}>
-      {/* Grain texture */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.03]" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`, backgroundSize: "200px 200px" }} />
+    <section style={{ backgroundColor: C.canvas }}>
+      <div className="max-w-6xl mx-auto px-6 lg:px-16 pt-14 lg:pt-20 pb-16 lg:pb-24">
+        <div className="max-w-[580px]">
+          <p className="text-[11px] font-medium tracking-[0.08em] uppercase mb-6" style={{ color: C.teal }}>
+            Live with providers in NSW and VIC.
+          </p>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-16 pt-16 lg:pt-24 pb-20 lg:pb-28">
-        <div className="max-w-2xl mx-auto text-center">
-          <div className="text-[11px] font-medium tracking-[0.15em] uppercase mb-8" style={{ color: C.copper }}>
-            Live with providers in NSW and VIC
-          </div>
-
-          <h1 className="text-[clamp(2rem,5vw,3.5rem)] font-bold leading-[1.12] tracking-[-0.02em] mb-5" style={{ color: "#ffffff" }}>
+          <h1 className="text-[clamp(2rem,5vw,42px)] font-medium leading-[1.04] tracking-[-0.028em] mb-5" style={{ color: C.text }}>
             Hold quality. Protect margin. Lead with confidence.
           </h1>
 
-          <p className="text-[17px] leading-[1.65] max-w-[540px] mx-auto mb-10" style={{ color: "rgba(245,237,227,0.7)" }}>
+          <p className="text-[15px] leading-[1.6] max-w-[500px] mb-8" style={{ color: C.textMuted }}>
             In aged care, problems chain across domains. Rosters into clinical into compliance into cost. Chris makes the chain legible, supports your leaders today, and extends across clinical, workforce, finance, compliance and governance.
           </p>
 
-          <div className="flex items-center gap-3 flex-wrap justify-center">
-            <a href="#book" className="px-7 py-3.5 rounded text-[14px] font-medium transition-colors hover:opacity-90" style={{ backgroundColor: C.warm, color: "#ffffff" }}>
+          <div className="flex items-center gap-5">
+            <a href="#book" className="text-[13px] font-medium px-[18px] py-[11px] rounded-[4px]" style={{ backgroundColor: C.ctaBg, color: C.ctaText }}>
               Book a 30-min conversation
             </a>
-            <a href="#how-it-works" className="px-7 py-3.5 rounded text-[14px] transition-colors" style={{ border: `1px solid rgba(245,237,227,0.25)`, color: "rgba(245,237,227,0.65)" }}>
+            <a href="#how-it-works" className="text-[13px] font-medium" style={{ color: C.text }}>
               How Chris works, layer by layer →
             </a>
           </div>
         </div>
       </div>
 
-      {/* Product cards — 3 live UI cards, symmetric, Care Minutes centre + tallest */}
-      <div className="relative z-10 max-w-[1060px] mx-auto px-6 lg:px-8 mt-6 lg:mt-8 pb-10 lg:pb-14">
-        <div className="flex flex-col lg:flex-row items-center lg:items-end justify-center gap-5">
-          {/* Left — Review Queue (same width, aligned to bottom) */}
-          <div className="w-full lg:w-[300px] shrink-0">
-            <ReviewQueueCard />
-          </div>
-          {/* Centre — Care Minutes (wider + taller, rises above sides) */}
-          <div className="w-full lg:w-[380px] lg:-mb-8 shrink-0">
-            <CareMinutesCard />
-          </div>
-          {/* Right — Agent Activity (same width as left, aligned to bottom) */}
-          <div className="w-full lg:w-[300px] shrink-0">
-            <AgentActivityCard />
-          </div>
+      {/* Product cards — 3-up operator-grade layout */}
+      <div className="max-w-6xl mx-auto px-6 lg:px-16 mt-10 lg:mt-14 pb-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <ReviewQueueCard />
+          <CareMinutesCard />
+          <AgentActivityCard />
         </div>
       </div>
     </section>
@@ -352,25 +357,25 @@ function Hero() {
 
 function AgentRibbon() {
   const items = [
-    { agent: "SENTINEL", color: "#2d6a4f", text: "Care minutes at 180 · RN gap detected · afternoon shift unfilled" },
-    { agent: "ORACLE", color: "#c89a3c", text: "3 AN-ACC reclassification opportunities · $11.4K/month identified" },
-    { agent: "STEWARD", color: "#2d6a4f", text: "Sunday PM structural gap confirmed · 7th consecutive week" },
-    { agent: "CHRONICLER", color: "#c4674a", text: "SIRS Priority 1 draft ready · awaiting DON review" },
-    { agent: "KEEPER", color: "#c4674a", text: "Turnover precursor detected · Grevillea Wing · PSH_13 declining" },
-    { agent: "TOWN CRIER", color: "#2d6a4f", text: "Oracle + Steward merged · 1 coordinated recommendation delivered" },
-    { agent: "CURATOR", color: "#8aa888", text: "ACQSC compliance decision published · 2 new regulatory updates" },
+    { agent: "SENTINEL", color: C.teal, text: "Care minutes at 180. RN gap detected. Afternoon shift unfilled." },
+    { agent: "ORACLE", color: C.amber, text: "3 AN-ACC reclassification opportunities. $11.4K/month identified." },
+    { agent: "STEWARD", color: C.teal, text: "Sunday PM structural gap confirmed. 7th consecutive week." },
+    { agent: "CHRONICLER", color: C.red, text: "SIRS Priority 1 draft ready. Awaiting DON review." },
+    { agent: "KEEPER", color: C.amber, text: "Turnover precursor detected. Grevillea Wing. PSH_13 declining." },
+    { agent: "TOWN CRIER", color: C.teal, text: "Oracle + Steward merged. 1 coordinated recommendation delivered." },
+    { agent: "CURATOR", color: C.teal, text: "ACQSC compliance decision published. 2 new regulatory updates." },
   ];
   const doubled = [...items, ...items];
 
   return (
-    <div className="overflow-hidden" style={{ backgroundColor: C.copper, borderTop: `1px solid rgba(255,255,255,0.15)`, borderBottom: `1px solid rgba(255,255,255,0.15)` }}>
-      <div className="flex items-center h-11 animate-ticker whitespace-nowrap">
+    <div className="overflow-hidden" style={{ backgroundColor: C.canvas, borderTop: `0.5px solid ${C.border}`, borderBottom: `0.5px solid ${C.border}` }}>
+      <div className="flex items-center h-10 animate-ticker whitespace-nowrap">
         {doubled.map((item, i) => (
-          <span key={i} className="inline-flex items-center gap-2 text-[11px] tracking-wide mx-6 shrink-0" style={{ color: "rgba(26,18,24,0.55)" }}>
-            <span className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: item.color }} />
-            <span className="font-semibold uppercase tracking-wider text-[10px]" style={{ color: C.dark }}>{item.agent}</span>
-            <span style={{ color: "rgba(26,18,24,0.3)" }}>·</span>
-            <span style={{ color: "rgba(26,18,24,0.7)" }}>{item.text}</span>
+          <span key={i} className="inline-flex items-center gap-2 text-[11px] mx-6 shrink-0">
+            <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: item.color }} />
+            <span className="font-medium uppercase tracking-[0.06em] text-[10px]" style={{ color: C.text }}>{item.agent}</span>
+            <span style={{ color: C.textFaint }}>·</span>
+            <span style={{ color: C.textMuted }}>{item.text}</span>
           </span>
         ))}
       </div>
@@ -557,67 +562,50 @@ function WhatChrisIsSection() {
 
 function ToolsStrip() {
   return (
-    <section style={{ backgroundColor: C.dark }}>
-      <div className="max-w-6xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
+    <section style={{ backgroundColor: C.canvas, borderTop: `0.5px solid ${C.border}` }}>
+      <div className="max-w-6xl mx-auto px-6 lg:px-16 py-14 lg:py-18">
         {/* Header */}
-        <div className="text-center mb-12">
-          <p className="text-[11px] font-medium tracking-[0.15em] uppercase mb-4" style={{ color: C.copper }}>
-            See your own numbers · 3 minutes · No signup
+        <div className="max-w-[540px] mb-10">
+          <p className="text-[11px] font-medium tracking-[0.08em] uppercase mb-3" style={{ color: C.teal }}>
+            See your own numbers. 3 minutes. No signup.
           </p>
-          <h2 className="text-[clamp(1.5rem,3.5vw,2.5rem)] font-normal leading-[1.1] tracking-[-0.01em] mb-4" style={{ fontFamily: "Georgia, serif", color: "#ffffff" }}>
-            Three tools. Run them on your facility{" "}
-            <em className="italic" style={{ color: C.copper }}>before we ever talk.</em>
+          <h2 className="text-[clamp(1.4rem,3vw,1.65rem)] font-medium leading-[1.1] tracking-[-0.025em] mb-3" style={{ color: C.text }}>
+            Four tools. Run them on your facility before we ever talk.
           </h2>
-          <p className="text-[15px] leading-[1.7] max-w-xl mx-auto" style={{ color: "rgba(245,237,227,0.65)" }}>
+          <p className="text-[14px] leading-[1.6]" style={{ color: C.textMuted }}>
             Built on the same intelligence layer Chris runs on. The numbers you see are the numbers we would model on day one.
           </p>
         </div>
 
         {/* Tool cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {TOOLS.map((tool) => (
             <Link key={tool.title} href={tool.href}
-              className="group relative rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl"
-              style={{ backgroundColor: "rgba(245,237,227,0.06)", border: "1px solid rgba(245,237,227,0.1)" }}>
-              {/* Accent top bar */}
-              <div className="h-1" style={{ background: `linear-gradient(90deg, ${tool.accent}, ${tool.accent}88)` }} />
+              className="group rounded-[5px] overflow-hidden transition-all duration-200 hover:-translate-y-0.5"
+              style={{ backgroundColor: C.card, border: `0.5px solid ${C.border}` }}>
+              <div className="h-[2px]" style={{ backgroundColor: tool.accent }} />
 
-              <div className="p-6">
-                {/* Icon + stat row */}
-                <div className="flex items-center justify-between mb-5">
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ backgroundColor: `${tool.accent}18` }}>
+              <div className="p-4">
+                {/* Stat */}
+                <div className="flex items-baseline justify-between mb-3">
+                  <p className="text-[28px] font-medium tracking-[-0.02em] leading-none" style={{ color: tool.accent }}>{tool.stat}</p>
+                  <div className="w-9 h-9 rounded-[5px] flex items-center justify-center" style={{ backgroundColor: `${tool.accent}10` }}>
                     {tool.icon}
                   </div>
-                  <div className="text-right">
-                    <p className="text-[28px] font-light tracking-tight leading-none" style={{ fontFamily: "Georgia, serif", color: tool.accent }}>{tool.stat}</p>
-                  </div>
                 </div>
 
-                {/* Stat context */}
-                <p className="text-[11px] mb-4 leading-relaxed" style={{ color: "rgba(245,237,227,0.5)" }}>{tool.statLabel}</p>
+                <p className="text-[10px] mb-3 leading-relaxed" style={{ color: C.textFaint }}>{tool.statLabel}</p>
 
-                {/* Title + blurb */}
-                <h3 className="text-[17px] font-semibold mb-2 leading-tight" style={{ color: "#ffffff" }}>{tool.title}</h3>
-                <p className="text-[14px] leading-[1.65] mb-5" style={{ color: "rgba(245,237,227,0.7)" }}>{tool.blurb}</p>
+                <h3 className="text-[14px] font-medium mb-1 leading-snug" style={{ color: C.text }}>{tool.title}</h3>
+                <p className="text-[12px] leading-[1.55] mb-4" style={{ color: C.textMuted }}>{tool.blurb}</p>
 
-                {/* CTA */}
-                <div className="flex items-center gap-2">
-                  <span className="text-[13px] font-semibold transition-colors duration-300" style={{ color: tool.accent }}>{tool.cta}</span>
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="transition-transform duration-300 group-hover:translate-x-1">
-                    <path d="M5 3l4 4-4 4" stroke={tool.accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </div>
+                <span className="text-[12px] font-medium group-hover:underline" style={{ color: tool.accent }}>{tool.cta}</span>
               </div>
-
-              {/* Hover glow */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                style={{ background: `radial-gradient(ellipse at 50% 0%, ${tool.accent}0a, transparent 70%)` }} />
             </Link>
           ))}
         </div>
 
-        {/* Trust line */}
-        <p className="text-center text-[12px] mt-8" style={{ color: "rgba(245,237,227,0.4)" }}>
+        <p className="text-[11px] mt-6" style={{ color: C.textFaint }}>
           No email required. No demo. Just your numbers.
         </p>
       </div>
@@ -642,11 +630,11 @@ const INTEGRATIONS = [
 
 function IntegrationsSection() {
   return (
-    <section style={{ backgroundColor: C.cream, borderTop: "1px solid rgba(26,18,24,0.04)" }}>
+    <section style={{ backgroundColor: C.canvas, borderTop: "1px solid rgba(26,18,24,0.04)" }}>
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-14 lg:py-20">
         <div className="text-center mb-10">
           <p className="text-[11px] font-medium tracking-[0.12em] uppercase mb-3" style={{ color: C.good }}>Integrations</p>
-          <h2 className="text-[clamp(1.3rem,3vw,2rem)] font-normal leading-[1.15] tracking-[-0.01em] mb-3" style={{ fontFamily: "Georgia, serif", color: C.inkDark }}>
+          <h2 className="text-[clamp(1.3rem,3vw,2rem)] font-normal leading-[1.15] tracking-[-0.01em] mb-3" style={{ color: C.inkDark }}>
             Reads what you already run
           </h2>
           <p className="text-[15px] leading-[1.7] max-w-lg mx-auto" style={{ color: C.inkMutedLight }}>
@@ -671,14 +659,14 @@ function IntegrationsSection() {
               </div>
               <div className="text-center">
                 <p className="text-[12px] font-semibold leading-tight" style={{ color: C.inkDark }}>{int.name}</p>
-                <p className="text-[10px] mt-0.5 font-medium" style={{ color: "rgba(26,18,24,0.4)" }}>{int.sub}</p>
+                <p className="text-[10px] mt-0.5 font-medium" style={{ color: C.textFaint }}>{int.sub}</p>
               </div>
             </div>
           ))}
         </div>
 
         <div className="mt-8 text-center">
-          <p className="text-[12px] leading-relaxed" style={{ color: "rgba(26,18,24,0.4)" }}>
+          <p className="text-[12px] leading-relaxed" style={{ color: C.textFaint }}>
             Plus ichris, AlayaCare, Tanda, Roubler, Visual Care, and any system with an API or structured export.
           </p>
           <div className="flex items-center justify-center gap-2 mt-3">
@@ -693,13 +681,13 @@ function IntegrationsSection() {
 
 function GPMSCallout() {
   return (
-    <section style={{ backgroundColor: C.cream }}>
+    <section style={{ backgroundColor: C.canvas }}>
       <div className="max-w-6xl mx-auto px-6 lg:px-16 pb-14 lg:pb-20">
         <div className="rounded-2xl overflow-hidden" style={{ backgroundColor: "#fff", border: "1px solid rgba(26,18,24,0.06)", boxShadow: "0 1px 4px rgba(0,0,0,0.03)" }}>
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-6 lg:gap-10 p-6 lg:p-8 items-center">
             <div>
               <p className="text-[10px] font-medium tracking-[0.12em] uppercase mb-2" style={{ color: C.good }}>Compliance, handled</p>
-              <h3 className="text-[clamp(1.1rem,2.5vw,1.5rem)] font-normal leading-[1.2] mb-3" style={{ fontFamily: "Georgia, serif", color: C.inkDark }}>
+              <h3 className="text-[clamp(1.1rem,2.5vw,1.5rem)] font-normal leading-[1.2] mb-3" style={{ color: C.inkDark }}>
                 Reports straight to GPMS via the B2G gateway
               </h3>
               <p className="text-[14px] leading-[1.7] max-w-2xl" style={{ color: C.inkMutedLight }}>
@@ -871,13 +859,13 @@ function HowItWorksSection() {
   }, [userTouched]);
 
   return (
-    <section id="how-it-works" style={{ backgroundColor: C.cream }}>
+    <section id="how-it-works" style={{ backgroundColor: C.canvas }}>
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
         {/* Header */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-16 mb-14 lg:mb-18">
           <div>
             <p className="text-[11px] font-medium tracking-[0.12em] uppercase mb-4" style={{ color: C.good }}>How it works</p>
-            <h2 className="text-[clamp(1.5rem,3.5vw,2.5rem)] font-normal leading-[1.1] tracking-[-0.01em]" style={{ fontFamily: "Georgia, serif", color: C.inkDark }}>
+            <h2 className="text-[clamp(1.5rem,3.5vw,2.5rem)] font-normal leading-[1.1] tracking-[-0.01em]" style={{ color: C.inkDark }}>
               Aged care, with intelligence in every layer
             </h2>
           </div>
@@ -913,7 +901,7 @@ function HowItWorksSection() {
           </div>
           <div className="order-1 lg:order-2">
             <p className="text-[11px] font-medium tracking-[0.1em] uppercase mb-3" style={{ color: stage.accent }}>{stage.num} {stage.label}</p>
-            <h3 className="text-[clamp(1.3rem,3vw,1.8rem)] font-normal leading-[1.15] tracking-[-0.01em] mb-5" style={{ fontFamily: "Georgia, serif", color: C.inkDark }}>{stage.title}</h3>
+            <h3 className="text-[clamp(1.3rem,3vw,1.8rem)] font-normal leading-[1.15] tracking-[-0.01em] mb-5" style={{ color: C.inkDark }}>{stage.title}</h3>
             <p className="text-[15px] leading-[1.75] mb-6" style={{ color: C.inkMutedLight }}>{stage.body}</p>
             <div className="flex flex-wrap gap-2">
               {stage.pills.map((pill) => (
@@ -933,13 +921,13 @@ function HowItWorksSection() {
 
 function StatRow() {
   return (
-    <section style={{ backgroundColor: C.dark }}>
-      <div className="max-w-6xl mx-auto px-6 lg:px-16 pt-14 lg:pt-20 pb-4">
+    <section style={{ backgroundColor: C.canvas, borderTop: `0.5px solid ${C.border}` }}>
+      <div className="max-w-6xl mx-auto px-6 lg:px-16 py-12 lg:py-14">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-0">
           {STATS.map((stat, i) => (
-            <div key={stat.label} className={`flex flex-col items-center text-center lg:py-0 ${i < STATS.length - 1 ? "lg:border-r" : ""}`} style={{ borderColor: "rgba(245,237,227,0.1)" }}>
-              <div className="text-[clamp(2.2rem,5vw,3.5rem)] font-bold leading-none mb-2" style={{ color: stat.color }}>{stat.number}</div>
-              <div className="text-[11px] uppercase tracking-[0.06em] leading-snug max-w-[200px]" style={{ color: "rgba(245,237,227,0.4)" }}>{stat.label}</div>
+            <div key={stat.label} className={`flex flex-col items-center text-center lg:py-0 ${i < STATS.length - 1 ? "lg:border-r" : ""}`} style={{ borderColor: C.border }}>
+              <div className="text-[clamp(2rem,5vw,3rem)] font-medium leading-none tracking-[-0.02em] mb-2" style={{ color: stat.color }}>{stat.number}</div>
+              <div className="text-[11px] uppercase tracking-[0.06em] leading-snug max-w-[200px]" style={{ color: C.textFaint }}>{stat.label}</div>
             </div>
           ))}
         </div>
@@ -953,17 +941,17 @@ function JobsSection() {
   const job = selected !== null ? JOBS[selected] : null;
 
   return (
-    <section style={{ backgroundColor: C.cream }} id="jobs">
+    <section style={{ backgroundColor: C.canvas }} id="jobs">
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
         <div className="text-[11px] font-medium tracking-[0.08em] uppercase mb-4" style={{ color: C.copperDark }}>Where we start</div>
-        <h2 className="text-[clamp(1.5rem,3vw,2.5rem)] font-normal leading-[1.1] tracking-[-0.01em] mb-3" style={{ fontFamily: "Georgia, serif", color: C.inkDark }}>
+        <h2 className="text-[clamp(1.5rem,3vw,2.5rem)] font-normal leading-[1.1] tracking-[-0.01em] mb-3" style={{ color: C.inkDark }}>
           We don&apos;t sell a platform. We fix a problem.<br />
           <em className="italic" style={{ color: C.copperDark }}>Then another. Then another.</em>
         </h2>
         <p className="text-[16px] leading-relaxed mb-3" style={{ color: C.inkMutedLight }}>
           Pick the one workflow that&apos;s costing you the most right now. Chris handles it end-to-end. You approve the outcome.
         </p>
-        <p className="text-[15px] leading-relaxed mb-12" style={{ color: "rgba(26,18,24,0.5)" }}>
+        <p className="text-[15px] leading-relaxed mb-12" style={{ color: C.textMuted }}>
           These are the problems we see most often. Yours might be something else entirely. Either way, we&apos;ll find it in a single conversation.
         </p>
 
@@ -971,10 +959,10 @@ function JobsSection() {
           {JOBS.map((job, i) => (
             <button key={job.n} onClick={() => setSelected(i)}
               className="w-full text-left border rounded-lg transition-all hover:-translate-y-0.5 hover:shadow-md cursor-pointer"
-              style={{ backgroundColor: "#fff", borderColor: "rgba(26,18,24,0.08)", borderLeftWidth: 4, borderLeftColor: job.accent }}>
+              style={{ backgroundColor: "#fff", borderColor: C.border, borderLeftWidth: 4, borderLeftColor: job.accent }}>
               <div className="p-5">
                 <div className="flex items-start justify-between mb-2">
-                  <span className="text-[12px] italic" style={{ fontFamily: "Georgia, serif", color: "rgba(26,18,24,0.3)" }}>{job.n}</span>
+                  <span className="text-[12px] italic" style={{ color: C.textFaint }}>{job.n}</span>
                   <span className="text-[10px] font-medium uppercase tracking-wider px-2 py-0.5 rounded-full" style={{ backgroundColor: "rgba(26,18,24,0.06)", color: C.inkDark }}>{job.role}</span>
                 </div>
                 <h3 className="text-[15px] font-medium mb-2" style={{ color: C.inkDark }}>{job.title}</h3>
@@ -988,7 +976,7 @@ function JobsSection() {
           <a href="#book" className="inline-block px-8 py-3.5 rounded text-[14px] font-medium transition-colors hover:opacity-90 mb-3" style={{ backgroundColor: C.dark, color: C.ink }}>
             Start with one conversation →
           </a>
-          <p className="text-[13px]" style={{ color: "rgba(26,18,24,0.45)" }}>30 minutes. No demo. Just your operation and ours.</p>
+          <p className="text-[13px]" style={{ color: C.textMuted }}>30 minutes. No demo. Just your operation and ours.</p>
         </div>
       </div>
 
@@ -1002,10 +990,10 @@ function JobsSection() {
               <div className="flex items-center justify-between">
                 <div>
                   <div className="flex items-center gap-3 mb-1">
-                    <span className="text-[12px] italic" style={{ fontFamily: "Georgia, serif", color: "rgba(245,237,227,0.35)" }}>{job.n}</span>
+                    <span className="text-[12px] italic" style={{ color: "rgba(245,237,227,0.35)" }}>{job.n}</span>
                     <span className="text-[10px] font-medium uppercase tracking-wider px-2 py-0.5 rounded-full" style={{ backgroundColor: "rgba(245,237,227,0.1)", color: C.inkMuted }}>{job.role}</span>
                   </div>
-                  <h3 className="text-[20px] font-normal" style={{ fontFamily: "Georgia, serif", color: C.ink }}>{job.title}</h3>
+                  <h3 className="text-[20px] font-normal" style={{ color: C.ink }}>{job.title}</h3>
                 </div>
                 <button onClick={() => setSelected(null)} className="text-[20px] w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/10 transition-colors" style={{ color: C.inkMuted }}>×</button>
               </div>
@@ -1014,7 +1002,7 @@ function JobsSection() {
             <div className="px-6 py-5 space-y-5">
               {/* The scenario */}
               <div className="rounded-lg px-4 py-3" style={{ backgroundColor: "rgba(26,18,24,0.02)", border: "1px solid rgba(26,18,24,0.06)" }}>
-                <p className="text-[14px] italic leading-relaxed" style={{ fontFamily: "Georgia, serif", color: "rgba(26,18,24,0.55)" }}>{job.hook}</p>
+                <p className="text-[14px] italic leading-relaxed" style={{ color: C.textMuted }}>{job.hook}</p>
               </div>
 
               {/* CHRIS does */}
@@ -1022,7 +1010,7 @@ function JobsSection() {
                 <p className="text-[10px] font-medium uppercase tracking-wider mb-3" style={{ color: C.copperDark }}>CHRIS does</p>
                 <ul className="space-y-2">
                   {job.chrisDoes.map((item, i) => (
-                    <li key={i} className="flex items-start gap-2.5 text-[13px] leading-relaxed" style={{ color: "rgba(26,18,24,0.65)" }}>
+                    <li key={i} className="flex items-start gap-2.5 text-[13px] leading-relaxed" style={{ color: C.textMuted }}>
                       <span className="shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-medium mt-0.5" style={{ backgroundColor: "rgba(200,154,60,0.1)", color: C.copperDark }}>{i + 1}</span>
                       {item}
                     </li>
@@ -1035,7 +1023,7 @@ function JobsSection() {
                 <p className="text-[10px] font-medium uppercase tracking-wider mb-3" style={{ color: C.good }}>You do</p>
                 <ul className="space-y-2">
                   {job.humanDoes.map((item, i) => (
-                    <li key={i} className="flex items-start gap-2.5 text-[13px] leading-relaxed" style={{ color: "rgba(26,18,24,0.65)" }}>
+                    <li key={i} className="flex items-start gap-2.5 text-[13px] leading-relaxed" style={{ color: C.textMuted }}>
                       <span className="shrink-0 mt-1" style={{ color: C.good }}>✓</span>
                       {item}
                     </li>
@@ -1045,8 +1033,8 @@ function JobsSection() {
 
               {/* What's at stake */}
               <div className="rounded-lg px-4 py-3" style={{ borderLeft: `3px solid ${job.accent}`, backgroundColor: "rgba(26,18,24,0.02)" }}>
-                <p className="text-[10px] font-medium uppercase tracking-wider mb-1" style={{ color: "rgba(26,18,24,0.35)" }}>What&apos;s at stake</p>
-                <p className="text-[13px] leading-relaxed" style={{ color: "rgba(26,18,24,0.6)" }}>{job.stakes}</p>
+                <p className="text-[10px] font-medium uppercase tracking-wider mb-1" style={{ color: C.textFaint }}>What&apos;s at stake</p>
+                <p className="text-[13px] leading-relaxed" style={{ color: C.textMuted }}>{job.stakes}</p>
               </div>
 
               {/* CTA */}
@@ -1063,24 +1051,20 @@ function JobsSection() {
 
 function ScenarioSection() {
   return (
-    <section className="relative overflow-hidden" style={{ backgroundColor: C.dark, padding: "clamp(80px, 10vh, 140px) clamp(24px, 5vw, 80px)" }}>
-      <div className="absolute inset-0 pointer-events-none opacity-[0.03]" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`, backgroundSize: "200px 200px" }} />
-      <div className="relative z-10 max-w-[720px] mx-auto">
-        <div className="text-[11px] font-medium tracking-[0.18em] uppercase mb-10" style={{ color: C.copper }}>A real scenario. Every facility. Every week.</div>
-        <div className="text-[clamp(2.5rem,5vw,4.5rem)] leading-[1.1] mb-6" style={{ fontFamily: "Georgia, serif", fontStyle: "italic", color: "#ffffff" }}>11:04pm Friday.</div>
-        <div className="space-y-1 mb-8">
-          <p className="text-[clamp(1.05rem,1.8vw,1.3rem)]" style={{ color: "rgba(245,237,227,0.55)" }}>A Priority 1 incident. 24 hours to notify ACQSC.</p>
+    <section style={{ backgroundColor: C.canvas, borderTop: `0.5px solid ${C.border}` }}>
+      <div className="max-w-[640px] mx-auto px-6 lg:px-16 py-16 lg:py-20">
+        <p className="text-[11px] font-medium tracking-[0.08em] uppercase mb-6" style={{ color: C.teal }}>A real scenario. Every facility. Every week.</p>
+        <h2 className="text-[clamp(2rem,4vw,2.8rem)] font-medium leading-[1.08] tracking-[-0.025em] mb-5" style={{ color: C.text }}>11:04pm Friday.</h2>
+        <p className="text-[15px] mb-6" style={{ color: C.textMuted }}>A Priority 1 incident. 24 hours to notify ACQSC.</p>
+        <p className="text-[clamp(1.2rem,2vw,1.5rem)] font-medium mb-4" style={{ color: C.text }}>Chris classified it in 4 minutes.</p>
+        <div className="space-y-1 mb-6">
+          <p className="text-[15px]" style={{ color: C.textMuted }}>The draft was waiting in the DON&apos;s inbox by 11:09.</p>
+          <p className="text-[15px]" style={{ color: C.textMuted }}>She approved it before midnight.</p>
         </div>
-        <p className="text-[clamp(1.3rem,2.2vw,1.8rem)] font-medium mb-2" style={{ color: "#ffffff" }}>Chris classified it in 4 minutes.</p>
-        <div className="space-y-1 mb-8">
-          <p className="text-[clamp(1.1rem,2vw,1.5rem)] italic" style={{ fontFamily: "Georgia, serif", color: "rgba(255,255,255,0.9)" }}>The draft was waiting in the DON&apos;s inbox by 11:09.</p>
-          <p className="text-[clamp(1.1rem,2vw,1.5rem)] italic" style={{ fontFamily: "Georgia, serif", color: "rgba(255,255,255,0.9)" }}>She approved it before midnight.</p>
-        </div>
-        <p className="text-[clamp(1rem,1.6vw,1.2rem)] mb-1" style={{ color: "rgba(245,237,227,0.6)" }}>That&apos;s not a feature.</p>
-        <p className="text-[clamp(1.3rem,2.2vw,1.8rem)] font-medium" style={{ color: C.copper }}>That&apos;s the difference between a penalty and a clean record.</p>
-
-        <div className="mt-10 mb-6" style={{ width: 60, height: 2, backgroundColor: C.copper }} />
-        <p className="text-[13px]" style={{ color: "rgba(245,237,227,0.55)" }}>The Chronicler agent · event-driven · always watching</p>
+        <p className="text-[13px] mb-1" style={{ color: C.textFaint }}>That&apos;s not a feature.</p>
+        <p className="text-[15px] font-medium" style={{ color: C.teal }}>That&apos;s the difference between a penalty and a clean record.</p>
+        <div className="mt-8 mb-4" style={{ width: 40, height: 1, backgroundColor: C.border }} />
+        <p className="text-[11px]" style={{ color: C.textFaint }}>The Chronicler agent. Event-driven. Always watching.</p>
       </div>
     </section>
   );
@@ -1091,10 +1075,10 @@ function AgentsSection() {
   const agent = selected !== null ? AGENTS[selected] : null;
 
   return (
-    <section style={{ backgroundColor: C.cream }}>
+    <section style={{ backgroundColor: C.canvas }}>
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
         <div className="text-[11px] font-medium tracking-[0.08em] uppercase mb-4" style={{ color: C.copperDark }}>The intelligence layer</div>
-        <h2 className="text-[clamp(1.5rem,3vw,2.5rem)] font-normal leading-[1.1] mb-3" style={{ fontFamily: "Georgia, serif", color: C.inkDark }}>
+        <h2 className="text-[clamp(1.5rem,3vw,2.5rem)] font-normal leading-[1.1] mb-3" style={{ color: C.inkDark }}>
           Seven agents. Every domain. <em className="italic" style={{ color: C.copperDark }}>Always on.</em>
         </h2>
         <p className="text-[15px] leading-relaxed max-w-xl mb-12" style={{ color: C.inkMutedLight }}>
@@ -1105,7 +1089,7 @@ function AgentsSection() {
           {AGENTS.map((agent, i) => (
             <button key={agent.name} onClick={() => setSelected(i)}
               className="border rounded-lg p-4 text-left transition-all hover:-translate-y-0.5 hover:shadow-md cursor-pointer"
-              style={{ backgroundColor: "#fff", borderColor: "rgba(26,18,24,0.08)" }}>
+              style={{ backgroundColor: "#fff", borderColor: C.border }}>
               <div className="flex items-center gap-2 mb-1">
                 <span className="w-2 h-2 rounded-full" style={{ backgroundColor: agent.color }} />
                 <span className="text-[10px] font-medium uppercase tracking-wider" style={{ color: C.copperDark }}>{agent.cadence}</span>
@@ -1130,7 +1114,7 @@ function AgentsSection() {
                     <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: agent.color }} />
                     <span className="text-[10px] font-medium uppercase tracking-wider" style={{ color: C.copper }}>{agent.cadence}</span>
                   </div>
-                  <h3 className="text-[22px] font-normal" style={{ fontFamily: "Georgia, serif", color: C.ink }}>{agent.name}</h3>
+                  <h3 className="text-[22px] font-normal" style={{ color: C.ink }}>{agent.name}</h3>
                   <p className="text-[13px] mt-0.5" style={{ color: C.inkMuted }}>{agent.domain}</p>
                 </div>
                 <button onClick={() => setSelected(null)} className="text-[20px] w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/10 transition-colors" style={{ color: C.inkMuted }}>×</button>
@@ -1143,10 +1127,10 @@ function AgentsSection() {
 
               {/* What it watches */}
               <div>
-                <p className="text-[10px] font-medium uppercase tracking-wider mb-2" style={{ color: "rgba(26,18,24,0.35)" }}>What it watches</p>
+                <p className="text-[10px] font-medium uppercase tracking-wider mb-2" style={{ color: C.textFaint }}>What it watches</p>
                 <ul className="space-y-1.5">
                   {agent.watches.map((w, i) => (
-                    <li key={i} className="flex items-start gap-2 text-[13px]" style={{ color: "rgba(26,18,24,0.65)" }}>
+                    <li key={i} className="flex items-start gap-2 text-[13px]" style={{ color: C.textMuted }}>
                       <span className="w-1 h-1 rounded-full shrink-0 mt-2" style={{ backgroundColor: agent.color }} />
                       {w}
                     </li>
@@ -1156,10 +1140,10 @@ function AgentsSection() {
 
               {/* What it delivers */}
               <div>
-                <p className="text-[10px] font-medium uppercase tracking-wider mb-2" style={{ color: "rgba(26,18,24,0.35)" }}>What it delivers</p>
+                <p className="text-[10px] font-medium uppercase tracking-wider mb-2" style={{ color: C.textFaint }}>What it delivers</p>
                 <ul className="space-y-1.5">
                   {agent.delivers.map((d, i) => (
-                    <li key={i} className="flex items-start gap-2 text-[13px]" style={{ color: "rgba(26,18,24,0.65)" }}>
+                    <li key={i} className="flex items-start gap-2 text-[13px]" style={{ color: C.textMuted }}>
                       <span className="shrink-0 mt-0.5" style={{ color: C.copper }}>→</span>
                       {d}
                     </li>
@@ -1170,7 +1154,7 @@ function AgentsSection() {
               {/* Example scenario */}
               <div className="rounded-lg p-4" style={{ backgroundColor: "rgba(26,18,24,0.02)", border: "1px solid rgba(26,18,24,0.06)" }}>
                 <p className="text-[10px] font-medium uppercase tracking-wider mb-2" style={{ color: C.copperDark }}>Example</p>
-                <p className="text-[13px] leading-relaxed italic" style={{ fontFamily: "Georgia, serif", color: "rgba(26,18,24,0.6)" }}>{agent.example}</p>
+                <p className="text-[13px] leading-relaxed italic" style={{ color: C.textMuted }}>{agent.example}</p>
               </div>
             </div>
           </div>
@@ -1182,18 +1166,18 @@ function AgentsSection() {
 
 function AISupportSection() {
   return (
-    <section style={{ backgroundColor: C.dark }}>
-      <div className="max-w-6xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+    <section style={{ backgroundColor: C.canvas, borderTop: `0.5px solid ${C.border}` }}>
+      <div className="max-w-6xl mx-auto px-6 lg:px-16 py-14 lg:py-18">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
           <div>
-            <div className="text-[11px] font-medium tracking-[0.08em] uppercase mb-4" style={{ color: C.copper }}>Operational intelligence + AI support</div>
-            <h2 className="text-[clamp(1.5rem,3vw,2.5rem)] font-normal leading-[1.1] mb-5" style={{ fontFamily: "Georgia, serif", color: "#ffffff" }}>
-              Ask the question <em className="italic" style={{ color: C.copper }}>you&apos;ve been sitting on.</em>
+            <p className="text-[11px] font-medium tracking-[0.08em] uppercase mb-4" style={{ color: C.teal }}>Operational intelligence + AI support</p>
+            <h2 className="text-[clamp(1.4rem,3vw,1.65rem)] font-medium leading-[1.1] tracking-[-0.025em] mb-4" style={{ color: C.text }}>
+              Ask the question you&apos;ve been sitting on.
             </h2>
-            <p className="text-[15px] leading-relaxed mb-6" style={{ color: "rgba(245,237,227,0.7)" }}>
-              Chris is an operational intelligence layer and AI support built specifically for aged care. Ask about compliance, workforce, funding, or bring a leadership challenge. Preparing for a difficult conversation, navigating team conflict, managing the pressure of the role. Chris supports the way a trusted colleague would: direct, warm, and grounded in what actually works in this sector. No login. No signup.
+            <p className="text-[14px] leading-[1.6] mb-5" style={{ color: C.textMuted }}>
+              Chris is an operational intelligence layer and AI support built specifically for aged care. Ask about compliance, workforce, funding, or bring a leadership challenge. Chris supports the way a trusted colleague would: direct, warm, and grounded in what actually works in this sector. No login. No signup.
             </p>
-            <p className="text-[12px]" style={{ color: "rgba(245,237,227,0.5)" }}>
+            <p className="text-[11px]" style={{ color: C.textFaint }}>
               You&apos;re talking to a public preview of Chris. The full platform connects to your systems and knows your team.
             </p>
           </div>
@@ -1206,10 +1190,10 @@ function AISupportSection() {
 
 function ExecutionSection() {
   return (
-    <section style={{ backgroundColor: C.cream }}>
+    <section style={{ backgroundColor: C.canvas }}>
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
         <div className="text-[11px] font-medium tracking-[0.08em] uppercase mb-4" style={{ color: C.copperDark }}>The execution layer</div>
-        <h2 className="text-[clamp(1.5rem,3vw,2.5rem)] font-normal leading-[1.1] mb-3" style={{ fontFamily: "Georgia, serif", color: C.inkDark }}>
+        <h2 className="text-[clamp(1.5rem,3vw,2.5rem)] font-normal leading-[1.1] mb-3" style={{ color: C.inkDark }}>
           Chris doesn&apos;t just tell you. <em className="italic" style={{ color: C.copperDark }}>It acts.</em>
         </h2>
         <p className="text-[15px] leading-relaxed max-w-xl mb-12" style={{ color: C.inkMutedLight }}>
@@ -1218,7 +1202,7 @@ function ExecutionSection() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {EXECUTION.map((item) => (
-            <div key={item.title} className="border rounded-lg p-6" style={{ backgroundColor: C.white, borderColor: "rgba(26,18,24,0.08)" }}>
+            <div key={item.title} className="border rounded-lg p-6" style={{ backgroundColor: C.white, borderColor: C.border }}>
               <div className="text-[20px] mb-3">{item.icon}</div>
               <p className="text-[14px] font-medium mb-2" style={{ color: C.inkDark }}>{item.title}</p>
               <p className="text-[13px] leading-relaxed" style={{ color: C.inkMutedLight }}>{item.body}</p>
@@ -1232,10 +1216,10 @@ function ExecutionSection() {
 
 function RolesSection() {
   return (
-    <section style={{ backgroundColor: C.cream }}>
+    <section style={{ backgroundColor: C.canvas }}>
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
         <div className="text-[11px] font-medium tracking-[0.08em] uppercase mb-4" style={{ color: C.copperDark }}>Built for every leader</div>
-        <h2 className="text-[clamp(1.5rem,3vw,2.5rem)] font-normal leading-[1.1] mb-3" style={{ fontFamily: "Georgia, serif", color: C.inkDark }}>
+        <h2 className="text-[clamp(1.5rem,3vw,2.5rem)] font-normal leading-[1.1] mb-3" style={{ color: C.inkDark }}>
           One platform. <em className="italic" style={{ color: C.copperDark }}>Every leader in your organisation.</em>
         </h2>
         <p className="text-[15px] leading-relaxed max-w-xl mb-12" style={{ color: C.inkMutedLight }}>
@@ -1244,7 +1228,7 @@ function RolesSection() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
           {ROLES.map((r) => (
-            <div key={r.title} className="border rounded-lg p-5" style={{ backgroundColor: C.white, borderColor: "rgba(26,18,24,0.08)" }}>
+            <div key={r.title} className="border rounded-lg p-5" style={{ backgroundColor: C.white, borderColor: C.border }}>
               <p className="text-[14px] font-medium mb-1" style={{ color: C.inkDark }}>{r.title}</p>
               <p className="text-[13px]" style={{ color: C.inkMutedLight }}>{r.desc}</p>
             </div>
@@ -1270,41 +1254,39 @@ function FinalCTA() {
   }
 
   return (
-    <section style={{ backgroundColor: C.dark }} id="book">
-      <div className="max-w-6xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
-        <div className="text-[11px] font-medium tracking-[0.08em] uppercase mb-6" style={{ color: "rgba(245,237,227,0.4)" }}>Two ways in</div>
-        <h2 className="text-[clamp(1.5rem,3vw,2.5rem)] font-normal leading-[1.1] mb-10" style={{ fontFamily: "Georgia, serif", color: "#ffffff" }}>
+    <section style={{ backgroundColor: C.canvas, borderTop: `0.5px solid ${C.border}` }} id="book">
+      <div className="max-w-6xl mx-auto px-6 lg:px-16 py-14 lg:py-18">
+        <p className="text-[11px] font-medium tracking-[0.08em] uppercase mb-4" style={{ color: C.teal }}>Two ways in</p>
+        <h2 className="text-[clamp(1.4rem,3vw,1.65rem)] font-medium leading-[1.1] tracking-[-0.025em] mb-8" style={{ color: C.text }}>
           Pick the one that fits where you are.
         </h2>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Book */}
-          <div className="rounded-lg p-6 lg:p-8" style={{ backgroundColor: C.dark2, border: `1px solid ${C.copper}40` }}>
-            <h3 className="text-[18px] font-semibold mb-3" style={{ color: "#ffffff" }}>Book a 30-min conversation</h3>
-            <p className="text-[14px] leading-relaxed mb-6" style={{ color: "rgba(245,237,227,0.65)" }}>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <div className="rounded-[5px] p-6 lg:p-7" style={{ backgroundColor: C.card, border: `0.5px solid ${C.border}` }}>
+            <h3 className="text-[16px] font-medium mb-2" style={{ color: C.text }}>Book a 30-min conversation</h3>
+            <p className="text-[13px] leading-[1.6] mb-5" style={{ color: C.textMuted }}>
               For CEOs, CFOs, DONs ready to see Chris modelled against their actual facility data. No demo. Just your operation and ours.
             </p>
-            <a href="mailto:hello@culturecrunch.io?subject=Chris-OS%20Diagnostic" className="inline-block px-6 py-3 rounded text-[14px] font-medium transition-colors hover:opacity-90" style={{ backgroundColor: C.copper, color: C.dark }}>
+            <a href="mailto:hello@culturecrunch.io?subject=Chris-OS%20Diagnostic" className="inline-block text-[13px] font-medium px-[18px] py-[11px] rounded-[4px]" style={{ backgroundColor: C.ctaBg, color: C.ctaText }}>
               Book now →
             </a>
           </div>
 
-          {/* Waitlist */}
-          <div className="rounded-lg p-6 lg:p-8" style={{ backgroundColor: C.dark2, border: "1px solid rgba(245,237,227,0.12)" }}>
-            <h3 className="text-[18px] font-semibold mb-3" style={{ color: "#ffffff" }}>Join the waitlist</h3>
-            <p className="text-[14px] leading-relaxed mb-6" style={{ color: "rgba(245,237,227,0.65)" }}>
+          <div className="rounded-[5px] p-6 lg:p-7" style={{ backgroundColor: C.card, border: `0.5px solid ${C.border}` }}>
+            <h3 className="text-[16px] font-medium mb-2" style={{ color: C.text }}>Join the waitlist</h3>
+            <p className="text-[13px] leading-[1.6] mb-5" style={{ color: C.textMuted }}>
               For organisations that want to be in the next cohort. We onboard in order. We&apos;ll be in touch when there&apos;s room.
             </p>
             {submitted ? (
-              <p className="text-[14px]" style={{ color: C.copper }}>You&apos;re on the list. We&apos;ll be in touch.</p>
+              <p className="text-[13px] font-medium" style={{ color: C.teal }}>You&apos;re on the list. We&apos;ll be in touch.</p>
             ) : (
               <form onSubmit={handleWaitlist} className="space-y-3">
-                <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Work email" className="w-full px-4 py-2.5 rounded text-[13px] bg-transparent focus:outline-none" style={{ border: "1px solid rgba(245,237,227,0.15)", color: C.ink }} />
+                <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Work email" className="w-full px-4 py-2.5 rounded-[4px] text-[13px] focus:outline-none" style={{ border: `0.5px solid ${C.border}`, color: C.text }} />
                 <div className="grid grid-cols-2 gap-3">
-                  <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" className="px-4 py-2.5 rounded text-[13px] bg-transparent focus:outline-none" style={{ border: "1px solid rgba(245,237,227,0.15)", color: C.ink }} />
-                  <input type="text" value={org} onChange={(e) => setOrg(e.target.value)} placeholder="Organisation" className="px-4 py-2.5 rounded text-[13px] bg-transparent focus:outline-none" style={{ border: "1px solid rgba(245,237,227,0.15)", color: C.ink }} />
+                  <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" className="px-4 py-2.5 rounded-[4px] text-[13px] focus:outline-none" style={{ border: `0.5px solid ${C.border}`, color: C.text }} />
+                  <input type="text" value={org} onChange={(e) => setOrg(e.target.value)} placeholder="Organisation" className="px-4 py-2.5 rounded-[4px] text-[13px] focus:outline-none" style={{ border: `0.5px solid ${C.border}`, color: C.text }} />
                 </div>
-                <button type="submit" className="w-full py-2.5 rounded text-[13px] font-medium transition-colors" style={{ border: `1px solid ${C.copper}`, color: C.copper }}>
+                <button type="submit" className="w-full py-2.5 rounded-[4px] text-[13px] font-medium" style={{ backgroundColor: C.ctaBg, color: C.ctaText }}>
                   Join the waitlist
                 </button>
               </form>
@@ -1312,7 +1294,7 @@ function FinalCTA() {
           </div>
         </div>
 
-        <p className="text-[12px] text-center mt-6" style={{ color: "rgba(245,237,227,0.3)" }}>No spam. No sales calls. Just a conversation about your facility.</p>
+        <p className="text-[11px] text-center mt-5" style={{ color: C.textFaint }}>No spam. No sales calls. Just a conversation about your facility.</p>
       </div>
     </section>
   );
@@ -1320,43 +1302,43 @@ function FinalCTA() {
 
 function Footer() {
   return (
-    <footer style={{ backgroundColor: C.dark, borderTop: "1px solid rgba(245,237,227,0.06)" }}>
+    <footer style={{ backgroundColor: C.canvas, borderTop: `0.5px solid ${C.border}` }}>
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-10">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
           <div>
-            <p className="text-[11px] font-medium uppercase tracking-wider mb-3" style={{ color: "rgba(245,237,227,0.35)" }}>Product</p>
+            <p className="text-[11px] font-medium uppercase tracking-wider mb-3" style={{ color: C.textFaint }}>Product</p>
             <div className="space-y-2">
               {[["Tools", "/tools/care-minutes"], ["Technology", "/technology"], ["Newsroom", "/newsroom"], ["Book a conversation", "#book"]].map(([label, href]) => (
-                <Link key={label} href={href} className="block text-[13px] transition-colors hover:opacity-80" style={{ color: "rgba(245,237,227,0.55)" }}>{label}</Link>
+                <Link key={label} href={href} className="block text-[13px] hover:opacity-70" style={{ color: C.textMuted }}>{label}</Link>
               ))}
             </div>
           </div>
           <div>
-            <p className="text-[11px] font-medium uppercase tracking-wider mb-3" style={{ color: "rgba(245,237,227,0.35)" }}>Company</p>
+            <p className="text-[11px] font-medium uppercase tracking-wider mb-3" style={{ color: C.textFaint }}>Company</p>
             <div className="space-y-2">
-              <a href="mailto:hello@culturecrunch.io" className="block text-[13px]" style={{ color: "rgba(245,237,227,0.55)" }}>Contact</a>
+              <a href="mailto:hello@culturecrunch.io" className="block text-[13px] hover:opacity-70" style={{ color: C.textMuted }}>Contact</a>
             </div>
           </div>
           <div>
-            <p className="text-[11px] font-medium uppercase tracking-wider mb-3" style={{ color: "rgba(245,237,227,0.35)" }}>Legal</p>
+            <p className="text-[11px] font-medium uppercase tracking-wider mb-3" style={{ color: C.textFaint }}>Legal</p>
             <div className="space-y-2">
               {[["Privacy", "/legal"], ["Sources & references", "/dashboard/references"]].map(([label, href]) => (
-                <Link key={label} href={href} className="block text-[13px] transition-colors hover:opacity-80" style={{ color: "rgba(245,237,227,0.55)" }}>{label}</Link>
+                <Link key={label} href={href} className="block text-[13px] hover:opacity-70" style={{ color: C.textMuted }}>{label}</Link>
               ))}
             </div>
           </div>
           <div>
-            <p className="text-[11px] font-medium uppercase tracking-wider mb-3" style={{ color: "rgba(245,237,227,0.35)" }}>Status</p>
-            <p className="text-[13px]" style={{ color: "rgba(245,237,227,0.55)" }}>Live in NSW & VIC</p>
-            <p className="text-[12px] mt-1" style={{ color: "rgba(245,237,227,0.3)" }}>australia-southeast1</p>
+            <p className="text-[11px] font-medium uppercase tracking-wider mb-3" style={{ color: C.textFaint }}>Status</p>
+            <p className="text-[13px]" style={{ color: C.textMuted }}>Live in NSW & VIC</p>
+            <p className="text-[11px] mt-1" style={{ color: C.textFaint }}>australia-southeast1</p>
           </div>
         </div>
-        <div className="pt-6 flex items-center justify-between flex-wrap gap-3" style={{ borderTop: "1px solid rgba(245,237,227,0.06)" }}>
+        <div className="pt-6 flex items-center justify-between flex-wrap gap-3" style={{ borderTop: `0.5px solid ${C.border}` }}>
           <div>
-            <span className="text-[14px] font-medium" style={{ color: C.ink }}>Chris<span style={{ color: C.copper }}>·</span>OS</span>
-            <p className="text-[12px] mt-1" style={{ color: "rgba(245,237,227,0.35)" }}>Operational intelligence and execution for Australian aged care. Built by Culture Crunch.</p>
+            <span className="text-[14px] font-medium" style={{ color: C.text }}>Chris<span style={{ color: C.teal }}>·</span>OS</span>
+            <p className="text-[12px] mt-1" style={{ color: C.textFaint }}>Operational intelligence and execution for Australian aged care. Built by Culture Crunch.</p>
           </div>
-          <span className="text-[11px]" style={{ color: "rgba(245,237,227,0.25)" }}>© 2026 Culture Crunch Pty Ltd</span>
+          <span className="text-[11px]" style={{ color: C.textFaint }}>© 2026 Culture Crunch Pty Ltd</span>
         </div>
       </div>
     </footer>
@@ -1367,7 +1349,7 @@ function Footer() {
 
 export default function V2Page() {
   return (
-    <div style={{ fontFamily: "system-ui, -apple-system, sans-serif" }}>
+    <div style={{ fontFamily: "'Inter', system-ui, -apple-system, sans-serif" }}>
       <Nav />
       <Hero />
       <AgentRibbon />
