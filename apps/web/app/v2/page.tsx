@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import ChrisPublicChat from "@/components/ChrisPublicChat";
@@ -132,76 +132,96 @@ function Hero() {
         </div>
       </div>
 
-      {/* Floating product cards — Prism-style horizontal staggered pyramid */}
-      <div className="relative z-10 pb-0 -mb-20 lg:-mb-36 overflow-hidden">
-        {/* Desktop: pyramid spread — 3 rows, staggered horizontally */}
-        <div className="hidden lg:block max-w-[1400px] mx-auto px-8">
-          {/* Row 1: 2 cards, wide, top of pyramid */}
-          <div className="flex justify-center gap-6 mb-[-30px]">
-            {[
-              { src: "/screenshots/card-1.png", alt: "Monday Briefing", rotate: "-1.5deg", delay: "0s" },
-              { src: "/screenshots/card-2.png", alt: "Review Queue", rotate: "1.2deg", delay: "0.15s" },
-            ].map((card) => (
-              <div key={card.alt} className="group w-[44%] shrink-0" style={{ animation: `cardFloat 8s ease-in-out infinite`, animationDelay: card.delay }}>
-                <div className="rounded-2xl overflow-hidden transition-all duration-500 group-hover:-translate-y-3 group-hover:scale-[1.02]"
-                  style={{ transform: `rotate(${card.rotate})`, boxShadow: "0 32px 80px rgba(0,0,0,0.3), 0 0 0 1px rgba(245,237,227,0.06)" }}>
-                  <Image src={card.src} alt={card.alt} width={800} height={600} className="w-full h-auto" />
-                </div>
-              </div>
-            ))}
+      {/* Floating product cards — Prism-style constellation with centre hero */}
+      <div className="relative z-10 pb-0 -mb-16 lg:-mb-28">
+        {/* Desktop: constellation layout */}
+        <div className="hidden lg:block relative mx-auto" style={{ maxWidth: "1400px", height: "620px" }}>
+          {/* Centre hero card — Care Minutes, largest, dominant */}
+          <div className="absolute group" style={{ left: "50%", top: "50%", transform: "translate(-50%, -50%)", width: "42%", zIndex: 10 }}>
+            <div className="rounded-2xl overflow-hidden transition-all duration-500 group-hover:scale-[1.03]"
+              style={{ boxShadow: "0 40px 100px rgba(0,0,0,0.4), 0 0 0 1px rgba(245,237,227,0.08)" }}>
+              <Image src="/screenshots/card-3.png" alt="Care Minutes" width={800} height={600} className="w-full h-auto" priority />
+            </div>
           </div>
-          {/* Row 2: 3 cards, medium, middle of pyramid */}
-          <div className="flex justify-center gap-5 mb-[-25px]">
-            {[
-              { src: "/screenshots/card-3.png", alt: "Care Minutes", rotate: "1.8deg", delay: "0.3s" },
-              { src: "/screenshots/card-4.png", alt: "SIRS Register", rotate: "-0.8deg", delay: "0.45s" },
-              { src: "/screenshots/card-5.png", alt: "Resident Intelligence", rotate: "1.3deg", delay: "0.6s" },
-            ].map((card) => (
-              <div key={card.alt} className="group w-[32%] shrink-0" style={{ animation: `cardFloat 8s ease-in-out infinite`, animationDelay: card.delay }}>
-                <div className="rounded-2xl overflow-hidden transition-all duration-500 group-hover:-translate-y-3 group-hover:scale-[1.02]"
-                  style={{ transform: `rotate(${card.rotate})`, boxShadow: "0 28px 70px rgba(0,0,0,0.25), 0 0 0 1px rgba(245,237,227,0.06)" }}>
-                  <Image src={card.src} alt={card.alt} width={600} height={450} className="w-full h-auto" />
-                </div>
-              </div>
-            ))}
+
+          {/* Satellite cards — scattered around centre, edges bleeding off */}
+
+          {/* Top-left — partially off-screen */}
+          <div className="absolute group" style={{ left: "-3%", top: "20px", width: "28%", zIndex: 5, animation: "satFloat 9s ease-in-out infinite" }}>
+            <div className="rounded-xl overflow-hidden transition-all duration-500 group-hover:scale-[1.04]"
+              style={{ transform: "rotate(-4deg)", boxShadow: "0 24px 60px rgba(0,0,0,0.25)" }}>
+              <Image src="/screenshots/card-2.png" alt="Review Queue" width={500} height={375} className="w-full h-auto" />
+            </div>
           </div>
-          {/* Row 3: 3 cards, smaller, bottom of pyramid — widest spread */}
-          <div className="flex justify-center gap-4">
-            {[
-              { src: "/screenshots/card-6.png", alt: "PSH Dashboard", rotate: "-2deg", delay: "0.75s" },
-              { src: "/screenshots/card-8.png", alt: "Training Compliance", rotate: "0.5deg", delay: "0.9s" },
-              { src: "/screenshots/card-9.png", alt: "Reporting Cycles", rotate: "-1.2deg", delay: "1.05s" },
-            ].map((card) => (
-              <div key={card.alt} className="group w-[30%] shrink-0" style={{ animation: `cardFloat 8s ease-in-out infinite`, animationDelay: card.delay }}>
-                <div className="rounded-xl overflow-hidden transition-all duration-500 group-hover:-translate-y-3 group-hover:scale-[1.02]"
-                  style={{ transform: `rotate(${card.rotate})`, boxShadow: "0 24px 60px rgba(0,0,0,0.2), 0 0 0 1px rgba(245,237,227,0.06)" }}>
-                  <Image src={card.src} alt={card.alt} width={500} height={375} className="w-full h-auto" />
-                </div>
-              </div>
-            ))}
+
+          {/* Top-right — partially off-screen */}
+          <div className="absolute group" style={{ right: "-4%", top: "10px", width: "26%", zIndex: 4, animation: "satFloat 10s ease-in-out infinite", animationDelay: "1s" }}>
+            <div className="rounded-xl overflow-hidden transition-all duration-500 group-hover:scale-[1.04]"
+              style={{ transform: "rotate(3.5deg)", boxShadow: "0 24px 60px rgba(0,0,0,0.25)" }}>
+              <Image src="/screenshots/card-1.png" alt="Dashboard Home" width={500} height={375} className="w-full h-auto" />
+            </div>
+          </div>
+
+          {/* Left middle — bleeding off left edge */}
+          <div className="absolute group" style={{ left: "-5%", top: "220px", width: "24%", zIndex: 6, animation: "satFloat 11s ease-in-out infinite", animationDelay: "2s" }}>
+            <div className="rounded-xl overflow-hidden transition-all duration-500 group-hover:scale-[1.04]"
+              style={{ transform: "rotate(2deg)", boxShadow: "0 20px 50px rgba(0,0,0,0.2)" }}>
+              <Image src="/screenshots/card-5.png" alt="Resident Intelligence" width={450} height={340} className="w-full h-auto" />
+            </div>
+          </div>
+
+          {/* Right middle */}
+          <div className="absolute group" style={{ right: "-3%", top: "240px", width: "25%", zIndex: 6, animation: "satFloat 8s ease-in-out infinite", animationDelay: "0.5s" }}>
+            <div className="rounded-xl overflow-hidden transition-all duration-500 group-hover:scale-[1.04]"
+              style={{ transform: "rotate(-2.5deg)", boxShadow: "0 20px 50px rgba(0,0,0,0.2)" }}>
+              <Image src="/screenshots/card-6.png" alt="PSH Dashboard" width={450} height={340} className="w-full h-auto" />
+            </div>
+          </div>
+
+          {/* Bottom-left */}
+          <div className="absolute group" style={{ left: "5%", bottom: "-20px", width: "22%", zIndex: 7, animation: "satFloat 10s ease-in-out infinite", animationDelay: "3s" }}>
+            <div className="rounded-xl overflow-hidden transition-all duration-500 group-hover:scale-[1.04]"
+              style={{ transform: "rotate(3deg)", boxShadow: "0 20px 50px rgba(0,0,0,0.2)" }}>
+              <Image src="/screenshots/card-4.png" alt="SIRS Register" width={400} height={300} className="w-full h-auto" />
+            </div>
+          </div>
+
+          {/* Bottom-centre-right */}
+          <div className="absolute group" style={{ right: "15%", bottom: "-30px", width: "23%", zIndex: 8, animation: "satFloat 9s ease-in-out infinite", animationDelay: "1.5s" }}>
+            <div className="rounded-xl overflow-hidden transition-all duration-500 group-hover:scale-[1.04]"
+              style={{ transform: "rotate(-1.5deg)", boxShadow: "0 20px 50px rgba(0,0,0,0.2)" }}>
+              <Image src="/screenshots/card-8.png" alt="Training" width={400} height={300} className="w-full h-auto" />
+            </div>
+          </div>
+
+          {/* Bottom-right — bleeding off edge */}
+          <div className="absolute group" style={{ right: "-6%", bottom: "30px", width: "20%", zIndex: 3, animation: "satFloat 12s ease-in-out infinite", animationDelay: "2.5s" }}>
+            <div className="rounded-xl overflow-hidden transition-all duration-500 group-hover:scale-[1.04]"
+              style={{ transform: "rotate(4deg)", boxShadow: "0 16px 40px rgba(0,0,0,0.15)" }}>
+              <Image src="/screenshots/card-9.png" alt="Reporting" width={380} height={285} className="w-full h-auto" />
+            </div>
           </div>
         </div>
-        {/* Tablet: 2 rows */}
-        <div className="hidden md:block lg:hidden max-w-3xl mx-auto px-6">
-          <div className="flex justify-center gap-4 mb-[-20px]">
-            {["card-1", "card-2"].map((name, i) => (
-              <div key={name} className="w-[48%]">
-                <div className="rounded-xl overflow-hidden" style={{ transform: `rotate(${i === 0 ? "-1.5deg" : "1deg"})`, boxShadow: "0 24px 64px rgba(0,0,0,0.3)" }}>
-                  <Image src={`/screenshots/${name}.png`} alt={name} width={600} height={450} className="w-full h-auto" />
-                </div>
-              </div>
-            ))}
+
+        {/* Tablet: overlapping stack */}
+        <div className="hidden md:block lg:hidden relative mx-auto px-6" style={{ maxWidth: "700px", height: "400px" }}>
+          <div className="absolute" style={{ left: "0", top: "0", width: "55%", zIndex: 2 }}>
+            <div className="rounded-xl overflow-hidden" style={{ transform: "rotate(-2deg)", boxShadow: "0 24px 60px rgba(0,0,0,0.3)" }}>
+              <Image src="/screenshots/card-1.png" alt="Dashboard" width={600} height={450} className="w-full h-auto" />
+            </div>
           </div>
-          <div className="flex justify-center gap-4">
-            {["card-3", "card-4", "card-5"].map((name, i) => (
-              <div key={name} className="w-[32%]">
-                <div className="rounded-xl overflow-hidden" style={{ transform: `rotate(${[-1, 0.5, -0.8][i]}deg)`, boxShadow: "0 20px 50px rgba(0,0,0,0.2)" }}>
-                  <Image src={`/screenshots/${name}.png`} alt={name} width={400} height={300} className="w-full h-auto" />
-                </div>
-              </div>
-            ))}
+          <div className="absolute" style={{ right: "0", top: "20px", width: "52%", zIndex: 3 }}>
+            <div className="rounded-xl overflow-hidden" style={{ transform: "rotate(1.5deg)", boxShadow: "0 24px 60px rgba(0,0,0,0.3)" }}>
+              <Image src="/screenshots/card-2.png" alt="Review Queue" width={600} height={450} className="w-full h-auto" />
+            </div>
+          </div>
+          <div className="absolute" style={{ left: "10%", bottom: "-10px", width: "45%", zIndex: 4 }}>
+            <div className="rounded-xl overflow-hidden" style={{ transform: "rotate(2deg)", boxShadow: "0 20px 50px rgba(0,0,0,0.25)" }}>
+              <Image src="/screenshots/card-3.png" alt="Care Minutes" width={500} height={375} className="w-full h-auto" />
+            </div>
           </div>
         </div>
+
         {/* Mobile: horizontal scroll */}
         <div className="md:hidden flex gap-4 overflow-x-auto pb-4 px-6 snap-x">
           {[1,2,3,4,5,6,8,9].map((n) => (
@@ -213,9 +233,9 @@ function Hero() {
       </div>
 
       <style jsx>{`
-        @keyframes cardFloat {
+        @keyframes satFloat {
           0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-6px); }
+          50% { transform: translateY(-8px); }
         }
       `}</style>
     </section>
