@@ -353,22 +353,69 @@ function ToolsStrip() {
   );
 }
 
-function TrustStrip() {
+const INTEGRATIONS = [
+  { name: "Leecare", sub: "Clinical & Care Planning", color: "#464fa1", wordmark: "Leecare", wordmarkSize: "14px", fontWeight: 700 },
+  { name: "AutumnCare", sub: "Clinical", color: "#4a8c5c", wordmark: "autumn", wordmarkSize: "15px", letterSpacing: "0.04em", fontWeight: 500 },
+  { name: "Person Centred Software", sub: "Clinical", color: "#00B28C", wordmark: "PCS", wordmarkSize: "18px", fontWeight: 700 },
+  { name: "eCase", sub: "Compliance", color: "#9966cc", color2: "#007ba7", wordmark: "eCase", wordmarkSize: "14px", fontWeight: 600 },
+  { name: "Carelink+", sub: "Resident Management", color: "#1a3a6b", wordmark: "Carelink+", wordmarkSize: "12px", fontWeight: 600 },
+  { name: "Humanforce", sub: "Workforce & Rostering", color: "#50B848", color2: "#3C479D", wordmark: "hf", wordmarkSize: "20px", fontWeight: 800 },
+  { name: "Manad Plus", sub: "Operations", color: "#009EFF", color2: "#00004B", wordmark: "manad+", wordmarkSize: "13px", fontWeight: 700 },
+  { name: "Xero", sub: "Finance", color: "#13B5EA", wordmark: "xero", wordmarkSize: "18px", letterSpacing: "0.02em", fontWeight: 700 },
+  { name: "Deputy", sub: "Rostering & Time", color: "#0c017b", color2: "#37cfcd", wordmark: "Deputy", wordmarkSize: "13px", fontWeight: 600 },
+  { name: "Employment Hero", sub: "HR & Payroll", color: "#7622D7", wordmark: "EH", wordmarkSize: "20px", fontWeight: 800 },
+  { name: "ELMO", sub: "HR & Payroll", color: "#2b5ea7", wordmark: "ELMO", wordmarkSize: "16px", letterSpacing: "0.08em", fontWeight: 800 },
+  { name: "RiskMan", sub: "Incident Management", color: "#c0392b", wordmark: "RiskMan", wordmarkSize: "11px", fontWeight: 700 },
+];
+
+function IntegrationsSection() {
   return (
-    <div style={{ backgroundColor: C.dark }}>
-      <div className="max-w-6xl mx-auto px-6 lg:px-16 py-4 flex items-center gap-3 overflow-hidden">
-        <span className="text-[11px] font-medium tracking-[0.05em] uppercase whitespace-nowrap shrink-0" style={{ color: "rgba(245,237,227,0.4)" }}>Connects to</span>
-        <div className="w-px h-4 shrink-0" style={{ backgroundColor: "rgba(245,237,227,0.12)" }} />
-        <div className="flex gap-2 overflow-hidden flex-wrap">
-          {["Clinical systems", "Rostering & HR", "Finance & payroll", "WHS registers", "ACQSC portal", "AN-ACC data", "GPMS", "StewartBrown benchmarks", "Pulse surveys"].map((s) => (
-            <span key={s} className="inline-flex items-center gap-1.5 border rounded-full px-2.5 py-1 text-[11px] whitespace-nowrap" style={{ borderColor: "rgba(245,237,227,0.12)", color: "rgba(245,237,227,0.5)" }}>
-              <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: C.good }} />
-              {s}
-            </span>
+    <section style={{ backgroundColor: C.cream, borderTop: "1px solid rgba(26,18,24,0.04)" }}>
+      <div className="max-w-6xl mx-auto px-6 lg:px-16 py-14 lg:py-20">
+        <div className="text-center mb-10">
+          <p className="text-[11px] font-medium tracking-[0.12em] uppercase mb-3" style={{ color: C.good }}>Integrations</p>
+          <h2 className="text-[clamp(1.3rem,3vw,2rem)] font-normal leading-[1.15] tracking-[-0.01em] mb-3" style={{ fontFamily: "Georgia, serif", color: C.inkDark }}>
+            Reads what you already run
+          </h2>
+          <p className="text-[15px] leading-[1.7] max-w-lg mx-auto" style={{ color: C.inkMutedLight }}>
+            No migration. No re-platforming. Chris connects to the systems your teams use today.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+          {INTEGRATIONS.map((int) => (
+            <div key={int.name} className="group flex flex-col items-center gap-3 px-3 py-5 rounded-2xl transition-all duration-300 hover:-translate-y-1"
+              style={{ backgroundColor: "#fff", boxShadow: "0 1px 4px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.03)" }}>
+              <div className="w-14 h-14 rounded-2xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
+                style={{
+                  background: int.color2 ? `linear-gradient(135deg, ${int.color}, ${int.color2})` : int.color,
+                  boxShadow: `0 4px 12px ${int.color}25`,
+                }}>
+                <span style={{
+                  color: "#fff", fontSize: int.wordmarkSize ?? "14px", fontWeight: int.fontWeight ?? 600,
+                  letterSpacing: int.letterSpacing ?? "0", fontFamily: "system-ui, -apple-system, sans-serif",
+                  lineHeight: 1, textShadow: "0 1px 2px rgba(0,0,0,0.15)",
+                }}>{int.wordmark}</span>
+              </div>
+              <div className="text-center">
+                <p className="text-[12px] font-semibold leading-tight" style={{ color: C.inkDark }}>{int.name}</p>
+                <p className="text-[10px] mt-0.5 font-medium" style={{ color: "rgba(26,18,24,0.4)" }}>{int.sub}</p>
+              </div>
+            </div>
           ))}
         </div>
+
+        <div className="mt-8 text-center">
+          <p className="text-[12px] leading-relaxed" style={{ color: "rgba(26,18,24,0.4)" }}>
+            Plus Chris21, AlayaCare, Tanda, Roubler, Visual Care, GPMS, and any system with an API or structured export.
+          </p>
+          <div className="flex items-center justify-center gap-2 mt-3">
+            <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: C.good, opacity: 0.5 }} />
+            <span className="text-[11px] font-medium" style={{ color: C.good }}>New connectors added monthly</span>
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
 
@@ -813,7 +860,7 @@ export default function V2Page() {
       <Hero />
       <AgentRibbon />
       <ToolsStrip />
-      <TrustStrip />
+      <IntegrationsSection />
       <StatRow />
       <JobsSection />
       <ScenarioSection />
