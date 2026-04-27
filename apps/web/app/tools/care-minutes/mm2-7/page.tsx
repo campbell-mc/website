@@ -131,7 +131,7 @@ export default function MM27Calculator() {
     <div style={{ fontFamily: "system-ui, sans-serif" }}>
       <nav className="sticky top-0 z-50" style={{ backgroundColor: C.dark, borderBottom: "1px solid rgba(245,237,227,0.08)" }}>
         <div className="max-w-6xl mx-auto flex items-center justify-between px-6 lg:px-16 py-4">
-          <Link href="/v2" className="text-[15px] font-medium tracking-tight" style={{ color: C.ink }}>CHRIS<span style={{ color: C.copper }}>·</span>OS</Link>
+          <Link href="/v2" className="text-[15px] font-medium tracking-tight" style={{ color: C.ink }}>Chris<span style={{ color: C.copper }}>·</span>OS</Link>
           <div className="flex items-center gap-4">
             <Link href="/tools/care-minutes" className="text-[13px] hidden md:block" style={{ color: C.inkMuted }}>← Care minutes hub</Link>
             <a href="/v2#book" className="text-[13px] font-medium px-5 py-2 rounded" style={{ backgroundColor: C.copper, color: C.dark }}>Book a conversation</a>

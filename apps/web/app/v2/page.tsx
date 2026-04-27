@@ -48,7 +48,7 @@ const TOOLS = [
     cta: "Start the assessment →",
     href: "/tools/psh-assessment",
     stat: "16",
-    statLabel: "hazard domains. One conversation with CHRIS.",
+    statLabel: "hazard domains. One conversation with Chris.",
     accent: C.good,
     icon: (
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
@@ -88,7 +88,7 @@ const JOBS = [
     chrisDoes: [
       "Classifies incident as Priority 1 or Priority 2 within minutes of ingestion",
       "Drafts the ACQSC notification with all mandatory fields populated",
-      "Monitors the deadline countdown — escalates via iMessage if unactioned",
+      "Monitors the deadline countdown. Escalates via iMessage if unactioned",
       "Submits to GPMS portal after DON approval",
     ],
     humanDoes: ["Reviews the draft", "Approves and submits"],
@@ -101,9 +101,9 @@ const JOBS = [
       "Pulls rostering data from Deputy / Humanforce every 2 hours",
       "Calculates total and RN minutes per resident against 215/44 thresholds",
       "Projects end-of-shift compliance based on current roster",
-      "Alerts DON when breach risk detected — before the shift ends",
+      "Alerts DON when breach risk detected, before the shift ends",
     ],
-    humanDoes: ["Acts on the alert — calls agency, adjusts roster"],
+    humanDoes: ["Acts on the alert: calls agency, adjusts roster"],
     stakes: "AN-ACC funding risk + regulatory exposure across every reporting period. Only 45.9% of services meeting both targets nationally.",
   },
   {
@@ -135,12 +135,12 @@ const JOBS = [
     hook: "Sunday night. Someone has to pull together what's happening across the facility.", accent: C.good,
     chrisDoes: [
       "Synthesises care minutes, SIRS status, workforce signals, and compliance data",
-      "Generates a role-specific briefing for every leader — DON, CFO, WHS Lead, Team Leaders",
+      "Generates a role-specific briefing for every leader (DON, CFO, WHS Lead, Team Leaders)",
       "Queues 3 specific actions with context and evidence",
       "Delivers via iMessage link before Monday morning",
     ],
     humanDoes: ["Reads the briefing", "Runs the week"],
-    stakes: "3 hours per leader per week returned — 1,872 hours/year across a 12-leader facility.",
+    stakes: "3 hours per leader per week returned. 1,872 hours/year across a 12-leader facility.",
   },
   {
     n: "06", role: "CEO", title: "Produce board and committee packs from live data",
@@ -149,7 +149,7 @@ const JOBS = [
       "Assembles all 8 board pack sections from the canonical data layer",
       "Drafts the executive narrative, risk register, and decisions required",
       "Generates Quality & Risk, Finance, Clinical Governance, and P&C committee packs",
-      "Notifies CEO when ready — average review time under 30 minutes",
+      "Notifies CEO when ready. Average review time under 30 minutes",
     ],
     humanDoes: ["Reviews the pack", "Approves and distributes"],
     stakes: "8 hours per pack returned to leadership per month.",
@@ -158,7 +158,7 @@ const JOBS = [
     n: "07", role: "WHS Lead", title: "Know which workforce risks are real before they become incidents",
     hook: "Three staff resigned in the same wing in four weeks. Nobody connected the signals.", accent: C.copper,
     chrisDoes: [
-      "Runs fortnightly pulse survey across all teams — 16 PSH domains",
+      "Runs fortnightly pulse survey across all teams, 16 PSH domains",
       "Correlates pulse signals with rostering, incident, and HR data",
       "Confirms real hazards vs noise using convergence detection",
       "Recommends a specific micro-practice for the team leader to implement",
@@ -195,35 +195,35 @@ const JOBS = [
 const AGENTS = [
   {
     name: "The Sentinel", cadence: "2-hr cycle", domain: "Clinical & compliance vigilance", color: C.good,
-    summary: "The always-on orchestrator. Runs the fortnightly cascade — connector pulls, PSH cycle management, briefing generation, alert routing. The heartbeat of CHRIS.",
+    summary: "The always-on orchestrator. Runs the fortnightly cascade: connector pulls, PSH cycle management, briefing generation, alert routing. The heartbeat of Chris.",
     watches: ["Care minutes compliance (215/44 targets)", "SIRS incident classification and deadline tracking", "Regulatory obligation countdowns", "Connector health and data freshness", "PSH convergence detection across wings"],
     delivers: ["Real-time compliance position every 2 hours", "Immediate escalation when thresholds breach", "Priority 1 SIRS alerts within minutes of event", "Connector stale-data warnings before gaps become blind spots"],
-    example: "2:14pm — RN calls in sick. Sentinel detects projected care minutes drop to 188/215 within 12 minutes. Alerts DON with agency options priced. Chronicler drafts contingency roster note.",
+    example: "2:14pm. RN calls in sick. Sentinel detects projected care minutes drop to 188/215 within 12 minutes. Alerts DON with agency options priced. Chronicler drafts contingency roster note.",
   },
   {
     name: "The Oracle", cadence: "Weekly", domain: "Revenue & funding intelligence", color: C.copper,
-    summary: "Scans AN-ACC classification, accommodation pricing, occupancy, and hotelling for revenue optimisation opportunities. Identifies and quantifies — never acts without human approval.",
+    summary: "Scans AN-ACC classification, accommodation pricing, occupancy, and hotelling for revenue optimisation opportunities. Identifies and quantifies. Never acts without human approval.",
     watches: ["AN-ACC reclassification opportunities", "Accommodation pricing vs market benchmarks", "Occupancy gaps and vacancy cost", "Home care package utilisation rates", "Care minutes supplement entitlement (MM1)"],
     delivers: ["Monthly revenue uplift opportunities quantified in dollars", "Accommodation gap analysis against sector benchmarks", "Vacancy cost per day per bed", "Home care under-spend alerts before quarter-end"],
-    example: "Sunday 9pm — Oracle identifies 3 residents whose clinical signals suggest higher AN-ACC classification. Estimated uplift: $11,400/month. Clinical reviews queued for Tuesday.",
+    example: "Sunday 9pm. Oracle identifies 3 residents whose clinical signals suggest higher AN-ACC classification. Estimated uplift: $11,400/month. Clinical reviews queued for Tuesday.",
   },
   {
     name: "The Steward", cadence: "Daily", domain: "Capacity & operational structure", color: C.good,
-    summary: "Reads structural operational patterns — roster architecture gaps, care minutes compliance buffer, training capacity, operational flow. Distinguishes structural problems from one-off gaps.",
+    summary: "Reads structural operational patterns: roster architecture gaps, care minutes compliance buffer, training capacity, operational flow. Distinguishes structural problems from one-off gaps.",
     watches: ["Roster architecture and structural gaps", "Shift-by-shift staffing adequacy", "Agency dependency patterns and cost", "Training and credential scheduling capacity", "Overtime concentration and fatigue risk"],
     delivers: ["Structural vs episodic gap classification", "Agency cost projections with permanent-hire alternatives", "Shift-level staffing recommendations", "Overtime alerts before they become WHS incidents"],
-    example: "Sunday PM AIN gap detected 6 out of 8 weeks. Steward classifies as structural — recommends permanent part-time hire. Saving: $4,940/year vs continued agency fill.",
+    example: "Sunday PM AIN gap detected 6 out of 8 weeks. Steward classifies as structural. Recommends permanent part-time hire. Saving: $4,940/year vs continued agency fill.",
   },
   {
     name: "The Chronicler", cadence: "Event-driven", domain: "Auto-documentation & evidence", color: C.copper,
-    summary: "Fires on SIRS events, audit completions, complaints, voice sessions, PSH cycle close, monthly close. Drafts every document the moment the triggering event occurs. Leaders review and approve — never auto-submits.",
+    summary: "Fires on SIRS events, audit completions, complaints, voice sessions, PSH cycle close, monthly close. Drafts every document the moment the triggering event occurs. Leaders review and approve. Never auto-submits.",
     watches: ["SIRS incidents requiring notification", "Board pack deadlines and governance cycles", "QI submission windows", "Complaint and feedback documentation needs", "Audit evidence gaps"],
     delivers: ["SIRS notification drafts within minutes of classification", "Board packs pre-drafted 8 days before meeting", "QI submissions with evidence compiled", "Corrective action plans with regulatory cross-references"],
     example: "Fall logged at 11:04pm Friday. Sentinel classifies as SIRS Priority 1. Chronicler drafts the notification within 4 minutes. DON reviews on their phone Saturday morning. Submitted before the 24-hour deadline.",
   },
   {
     name: "The Keeper", cadence: "Fortnightly", domain: "Workforce intelligence & people health", color: C.warm,
-    summary: "Owns the full workforce intelligence layer — culture health, engagement signals, retention risk, Leader Loop outcomes, PSH trend analysis, team dynamics, and ISO 45003 compliance evidence generation.",
+    summary: "Owns the full workforce intelligence layer: culture health, engagement signals, retention risk, Leader Loop outcomes, PSH trend analysis, team dynamics, and ISO 45003 compliance evidence generation.",
     watches: ["16 PSH domains (ISO 45003) per team per cycle", "Turnover precursor signals (71% probability model)", "Absenteeism patterns and clustering", "AHPRA/credential expiry windows", "Leave liability accrual thresholds", "Leader Loop engagement and participation"],
     delivers: ["PSH convergence alerts when multiple hazards compound", "Turnover probability scores with intervention recommendations", "Micro-practice prescriptions matched to specific signals", "Team briefing content tailored to current PSH state", "WHS compliance evidence generated automatically"],
     example: "PSH_13 (Role Clarity) declining 3 cycles in Camelot team. Keeper flags 71% turnover probability. Root cause: new rostering system rollout. Prescribes role-clarity micro-practice for next team briefing.",
@@ -232,23 +232,23 @@ const AGENTS = [
     name: "The Town Crier", cadence: "Continuous", domain: "Signal coordination & clarity", color: C.inkMutedLight,
     summary: "The coordination layer. When multiple agents detect related signals, Town Crier merges them into a single coherent insight. Prevents alert fatigue by combining related findings and routing the unified message to the right leader.",
     watches: ["Cross-agent signal overlap", "Alert volume and leader attention capacity", "Briefing compilation windows", "Escalation chains and routing logic"],
-    delivers: ["Merged insights from 2+ agents into single actionable items", "Monday briefings compiled from all agent findings", "Role-appropriate routing — DON sees clinical, CFO sees financial", "De-duplicated alert streams that respect attention bandwidth"],
-    example: "Steward detects overtime spike + Keeper detects fatigue PSH signal in same wing. Town Crier merges into one escalation: 'Grevillea Wing — overtime-driven fatigue risk. Two agents confirm.' Routed to DON as combined risk.",
+    delivers: ["Merged insights from 2+ agents into single actionable items", "Monday briefings compiled from all agent findings", "Role-appropriate routing: DON sees clinical, CFO sees financial", "De-duplicated alert streams that respect attention bandwidth"],
+    example: "Steward detects overtime spike + Keeper detects fatigue PSH signal in same wing. Town Crier merges into one escalation: 'Grevillea Wing, overtime-driven fatigue risk. Two agents confirm.' Routed to DON as combined risk.",
   },
   {
     name: "The Curator", cadence: "2-hr cycle", domain: "Sector intelligence & regulatory watch", color: C.inkMutedLight,
-    summary: "Monitors the external landscape — regulatory changes, sector news, compliance updates, funding announcements. Ensures CHRIS and your leadership team are never caught off-guard by a change in the operating environment.",
+    summary: "Monitors the external landscape: regulatory changes, sector news, compliance updates, funding announcements. Ensures Chris and your leadership team are never caught off-guard by a change in the operating environment.",
     watches: ["ACQSC regulatory updates and enforcement actions", "Department of Health funding announcements", "Aged Care Act amendments and subordinate instruments", "State WHS regulator bulletins", "Sector media and industry body publications"],
     delivers: ["Regulatory change alerts with impact assessment", "Sector news digest filtered to your care type", "Compliance obligation updates before they take effect", "Enforcement action pattern analysis across the sector"],
-    example: "ACQSC publishes new guidance on psychosocial risk documentation. Curator flags within 2 hours. Impact assessment: your current PSH evidence satisfies 6 of 7 new requirements. Gap: worker consultation record needs updating — 2-minute fix.",
+    example: "ACQSC publishes new guidance on psychosocial risk documentation. Curator flags within 2 hours. Impact assessment: your current PSH evidence satisfies 6 of 7 new requirements. Gap: worker consultation record needs updating, 2-minute fix.",
   },
 ];
 
 const EXECUTION = [
-  { icon: "✦", title: "Documents drafted", body: "SIRS notifications, QI submissions, corrective action plans, board packs — written by CHRIS within minutes of the triggering event, reviewed and approved by you." },
-  { icon: "⬡", title: "Actions queued", body: "CHRIS prioritises what needs your attention today. Not a list of 40 alerts — a ranked queue of 3 actions with context, evidence, and a single button to act." },
-  { icon: "→", title: "Leaders briefed", body: "Every leader in your organisation receives a briefing tailored to their role — DON, CFO, Facility Manager, WHS Lead — before they walk in the door." },
-  { icon: "↗", title: "Delivered via iMessage", body: "CHRIS reaches leaders where they already are. Not another portal to log into — a message on your phone with a link to act, approve, or respond." },
+  { icon: "✦", title: "Documents drafted", body: "SIRS notifications, QI submissions, corrective action plans, board packs. Written by Chris within minutes of the triggering event, reviewed and approved by you." },
+  { icon: "⬡", title: "Actions queued", body: "Chris prioritises what needs your attention today. Not a list of 40 alerts: a ranked queue of 3 actions with context, evidence, and a single button to act." },
+  { icon: "→", title: "Leaders briefed", body: "Every leader in your organisation receives a briefing tailored to their role (DON, CFO, Facility Manager, WHS Lead) before they walk in the door." },
+  { icon: "↗", title: "Delivered via iMessage", body: "Chris reaches leaders where they already are. Not another portal to log into: a message on your phone with a link to act, approve, or respond." },
 ];
 
 const ROLES = [
@@ -267,7 +267,7 @@ function Nav() {
     <nav className="sticky top-0 z-50 transition-colors" style={{ backgroundColor: C.dark, borderBottom: `1px solid rgba(245,237,227,0.08)` }}>
       <div className="max-w-6xl mx-auto flex items-center justify-between px-6 lg:px-16 py-4">
         <Link href="/v2" className="text-[15px] font-medium tracking-tight" style={{ color: C.ink }}>
-          CHRIS<span style={{ color: C.copper }}>·</span>OS
+          Chris<span style={{ color: C.copper }}>·</span>OS
         </Link>
         <div className="flex items-center gap-6">
           <Link href="/tools/care-minutes" className="text-[13px] hidden md:block transition-colors hover:opacity-80" style={{ color: C.inkMuted }}>Tools</Link>
@@ -353,7 +353,7 @@ function AgentRibbon() {
           <span key={i} className="inline-flex items-center gap-2 text-[11px] tracking-wide mx-6 shrink-0" style={{ color: "rgba(26,18,24,0.55)" }}>
             <span className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: item.color }} />
             <span className="font-semibold uppercase tracking-wider text-[10px]" style={{ color: C.dark }}>{item.agent}</span>
-            <span style={{ color: "rgba(26,18,24,0.3)" }}>—</span>
+            <span style={{ color: "rgba(26,18,24,0.3)" }}>·</span>
             <span style={{ color: "rgba(26,18,24,0.7)" }}>{item.text}</span>
           </span>
         ))}
@@ -678,7 +678,7 @@ function HowItWorksSection() {
   }, [userTouched]);
 
   return (
-    <section style={{ backgroundColor: C.cream }}>
+    <section id="how-it-works" style={{ backgroundColor: C.cream }}>
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
         {/* Header */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-16 mb-14 lg:mb-18">
@@ -768,7 +768,7 @@ function JobsSection() {
           <em className="italic" style={{ color: C.copperDark }}>Then another. Then another.</em>
         </h2>
         <p className="text-[16px] leading-relaxed mb-3" style={{ color: C.inkMutedLight }}>
-          Pick the one workflow that&apos;s costing you the most right now. CHRIS handles it end-to-end. You approve the outcome.
+          Pick the one workflow that&apos;s costing you the most right now. Chris handles it end-to-end. You approve the outcome.
         </p>
         <p className="text-[15px] leading-relaxed mb-12" style={{ color: "rgba(26,18,24,0.5)" }}>
           These are the problems we see most often. Yours might be something else entirely. Either way, we&apos;ll find it in a single conversation.
@@ -878,7 +878,7 @@ function ScenarioSection() {
         <div className="space-y-1 mb-8">
           <p className="text-[clamp(1.05rem,1.8vw,1.3rem)]" style={{ color: "rgba(245,237,227,0.55)" }}>A Priority 1 incident. 24 hours to notify ACQSC.</p>
         </div>
-        <p className="text-[clamp(1.3rem,2.2vw,1.8rem)] font-medium mb-2" style={{ color: "#ffffff" }}>CHRIS classified it in 4 minutes.</p>
+        <p className="text-[clamp(1.3rem,2.2vw,1.8rem)] font-medium mb-2" style={{ color: "#ffffff" }}>Chris classified it in 4 minutes.</p>
         <div className="space-y-1 mb-8">
           <p className="text-[clamp(1.1rem,2vw,1.5rem)] italic" style={{ fontFamily: "Georgia, serif", color: "rgba(255,255,255,0.9)" }}>The draft was waiting in the DON&apos;s inbox by 11:09.</p>
           <p className="text-[clamp(1.1rem,2vw,1.5rem)] italic" style={{ fontFamily: "Georgia, serif", color: "rgba(255,255,255,0.9)" }}>She approved it before midnight.</p>
@@ -905,7 +905,7 @@ function AgentsSection() {
           Seven agents. Every domain. <em className="italic" style={{ color: C.copperDark }}>Always on.</em>
         </h2>
         <p className="text-[15px] leading-relaxed max-w-xl mb-12" style={{ color: C.inkMutedLight }}>
-          Each agent has a domain, a cadence, and a job. Together they give every leader in your organisation a dedicated intelligence layer — working underneath them, 24 hours a day.
+          Each agent has a domain, a cadence, and a job. Together they give every leader in your organisation a dedicated intelligence layer, working underneath them, 24 hours a day.
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
@@ -998,10 +998,10 @@ function AISupportSection() {
               Ask the question <em className="italic" style={{ color: C.copper }}>you&apos;ve been sitting on.</em>
             </h2>
             <p className="text-[15px] leading-relaxed mb-6" style={{ color: "rgba(245,237,227,0.7)" }}>
-              CHRIS is an operational intelligence layer and AI support built specifically for aged care. Ask about compliance, workforce, funding, or bring a leadership challenge. Preparing for a difficult conversation, navigating team conflict, managing the pressure of the role. CHRIS supports the way a trusted colleague would: direct, warm, and grounded in what actually works in this sector. No login. No signup.
+              Chris is an operational intelligence layer and AI support built specifically for aged care. Ask about compliance, workforce, funding, or bring a leadership challenge. Preparing for a difficult conversation, navigating team conflict, managing the pressure of the role. Chris supports the way a trusted colleague would: direct, warm, and grounded in what actually works in this sector. No login. No signup.
             </p>
             <p className="text-[12px]" style={{ color: "rgba(245,237,227,0.5)" }}>
-              You&apos;re talking to a public preview of CHRIS. The full platform connects to your systems and knows your team.
+              You&apos;re talking to a public preview of Chris. The full platform connects to your systems and knows your team.
             </p>
           </div>
           <div><ChrisPublicChat /></div>
@@ -1017,10 +1017,10 @@ function ExecutionSection() {
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
         <div className="text-[11px] font-medium tracking-[0.08em] uppercase mb-4" style={{ color: C.copperDark }}>The execution layer</div>
         <h2 className="text-[clamp(1.5rem,3vw,2.5rem)] font-normal leading-[1.1] mb-3" style={{ fontFamily: "Georgia, serif", color: C.inkDark }}>
-          CHRIS doesn&apos;t just tell you. <em className="italic" style={{ color: C.copperDark }}>It acts.</em>
+          Chris doesn&apos;t just tell you. <em className="italic" style={{ color: C.copperDark }}>It acts.</em>
         </h2>
         <p className="text-[15px] leading-relaxed max-w-xl mb-12" style={{ color: C.inkMutedLight }}>
-          Most analytics tools give you data to interpret. CHRIS delivers a drafted document, a specific action, or a coordinated recommendation — ready for your review and approval.
+          Most analytics tools give you data to interpret. Chris delivers a drafted document, a specific action, or a coordinated recommendation, ready for your review and approval.
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -1046,7 +1046,7 @@ function RolesSection() {
           One platform. <em className="italic" style={{ color: C.copperDark }}>Every leader in your organisation.</em>
         </h2>
         <p className="text-[15px] leading-relaxed max-w-xl mb-12" style={{ color: C.inkMutedLight }}>
-          CHRIS adapts to the role looking at it. The CEO sees the portfolio view. The DON sees clinical and operational signals. The CFO sees the financial intelligence. The WHS Lead sees the psychosocial picture.
+          Chris adapts to the role looking at it. The CEO sees the portfolio view. The DON sees clinical and operational signals. The CFO sees the financial intelligence. The WHS Lead sees the psychosocial picture.
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
@@ -1089,9 +1089,9 @@ function FinalCTA() {
           <div className="rounded-lg p-6 lg:p-8" style={{ backgroundColor: C.dark2, border: `1px solid ${C.copper}40` }}>
             <h3 className="text-[18px] font-semibold mb-3" style={{ color: "#ffffff" }}>Book a 30-min conversation</h3>
             <p className="text-[14px] leading-relaxed mb-6" style={{ color: "rgba(245,237,227,0.65)" }}>
-              For CEOs, CFOs, DONs ready to see CHRIS modelled against their actual facility data. No demo. Just your operation and ours.
+              For CEOs, CFOs, DONs ready to see Chris modelled against their actual facility data. No demo. Just your operation and ours.
             </p>
-            <a href="mailto:hello@culturecrunch.io?subject=CHRIS-OS%20Diagnostic" className="inline-block px-6 py-3 rounded text-[14px] font-medium transition-colors hover:opacity-90" style={{ backgroundColor: C.copper, color: C.dark }}>
+            <a href="mailto:hello@culturecrunch.io?subject=Chris-OS%20Diagnostic" className="inline-block px-6 py-3 rounded text-[14px] font-medium transition-colors hover:opacity-90" style={{ backgroundColor: C.copper, color: C.dark }}>
               Book now →
             </a>
           </div>
@@ -1160,7 +1160,7 @@ function Footer() {
         </div>
         <div className="pt-6 flex items-center justify-between flex-wrap gap-3" style={{ borderTop: "1px solid rgba(245,237,227,0.06)" }}>
           <div>
-            <span className="text-[14px] font-medium" style={{ color: C.ink }}>CHRIS<span style={{ color: C.copper }}>·</span>OS</span>
+            <span className="text-[14px] font-medium" style={{ color: C.ink }}>Chris<span style={{ color: C.copper }}>·</span>OS</span>
             <p className="text-[12px] mt-1" style={{ color: "rgba(245,237,227,0.35)" }}>Operational intelligence and execution for Australian aged care. Built by Culture Crunch.</p>
           </div>
           <span className="text-[11px]" style={{ color: "rgba(245,237,227,0.25)" }}>© 2026 Culture Crunch Pty Ltd</span>

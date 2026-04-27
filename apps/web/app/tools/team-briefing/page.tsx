@@ -305,7 +305,7 @@ export default function TeamBriefingTool() {
       {/* Nav */}
       <nav className="sticky top-0 z-50" style={{ backgroundColor: W.dark, borderBottom: "1px solid rgba(245,237,227,0.08)" }}>
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 lg:px-16 py-4">
-          <Link href="/v2" className="text-[15px] font-medium tracking-tight" style={{ color: W.ink }}>CHRIS<span style={{ color: W.copper }}>·</span>OS</Link>
+          <Link href="/v2" className="text-[15px] font-medium tracking-tight" style={{ color: W.ink }}>Chris<span style={{ color: W.copper }}>·</span>OS</Link>
           <a href="/v2#book" className="text-[13px] font-medium px-5 py-2 rounded" style={{ backgroundColor: W.copper, color: W.dark }}>Book a conversation</a>
         </div>
       </nav>

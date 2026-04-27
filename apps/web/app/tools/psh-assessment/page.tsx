@@ -11,7 +11,7 @@ function stripMd(text: string): string {
   return text.replace(/\*\*(.+?)\*\*/g, "$1").replace(/\*(.+?)\*/g, "$1").replace(/__(.+?)__/g, "$1").replace(/_(.+?)_/g, "$1").replace(/^#{1,6}\s+/gm, "").replace(/`(.+?)`/g, "$1").replace(/\[(.+?)\]\(.+?\)/g, "$1");
 }
 
-const OPENING = `I'm the CHRIS psychosocial risk assessor. I'll evaluate your organisation against the seven pillars of a defensible psychosocial risk system — the standard regulators apply in 2026.
+const OPENING = `I'm the Chris psychosocial risk assessor. I'll evaluate your organisation against the seven pillars of a defensible psychosocial risk system — the standard regulators apply in 2026.
 
 This takes 12–15 minutes. I'll ask questions conversationally. You answer in your own words. At the end, you'll receive a maturity score, your strongest and weakest pillars, and the three highest-priority controls for your context.
 
@@ -93,7 +93,7 @@ export default function PSHAssessment() {
       {/* Nav */}
       <nav style={{ borderBottom: "1px solid rgba(245,237,227,0.08)" }}>
         <div className="max-w-6xl mx-auto flex items-center justify-between px-6 lg:px-16 py-4">
-          <Link href="/v2" className="text-[15px] font-medium tracking-tight" style={{ color: C.ink }}>CHRIS<span style={{ color: C.copper }}>·</span>OS</Link>
+          <Link href="/v2" className="text-[15px] font-medium tracking-tight" style={{ color: C.ink }}>Chris<span style={{ color: C.copper }}>·</span>OS</Link>
           <a href="/v2#book" className="text-[13px] font-medium px-5 py-2 rounded" style={{ backgroundColor: C.copper, color: C.dark }}>Book a conversation</a>
         </div>
       </nav>
