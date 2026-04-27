@@ -343,13 +343,28 @@ function Hero() {
         </div>
       </div>
 
+      {/* Setup line above mockups */}
+      <div className="max-w-6xl mx-auto px-6 lg:px-16 mt-8">
+        <div className="max-w-[520px]">
+          <p className="text-[11px] font-medium uppercase tracking-[0.08em] mb-1.5" style={{ color: C.teal }}>A facility on Chris, right now</p>
+          <p className="text-[14px] leading-[1.5]" style={{ color: C.textMuted }}>Three live views from Mt Gibraltar Gardens, Monday morning.</p>
+        </div>
+      </div>
+
       {/* Product cards — 3-up operator-grade layout */}
-      <div className="max-w-6xl mx-auto px-6 lg:px-16 mt-10 lg:mt-14 pb-6">
+      <div className="max-w-6xl mx-auto px-6 lg:px-16 mt-4 lg:mt-5">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           <ReviewQueueCard />
           <CareMinutesCard />
           <AgentActivityCard />
         </div>
+      </div>
+
+      {/* Bridge link to architecture section */}
+      <div className="max-w-6xl mx-auto px-6 lg:px-16 mt-5 pb-14 lg:pb-18">
+        <a href="#what-chris-is" className="text-[13px] font-medium hover:underline" style={{ color: C.text }}>
+          See how this morning was built →
+        </a>
       </div>
     </section>
   );
@@ -427,7 +442,7 @@ function WhatChrisIsSection() {
   }
 
   return (
-    <section style={{ backgroundColor: canvas }}>
+    <section id="what-chris-is" style={{ backgroundColor: canvas }}>
       <div className="max-w-5xl mx-auto px-6 lg:px-12 py-14 lg:py-18">
         {/* Header */}
         <div className="mb-8 lg:mb-10">
