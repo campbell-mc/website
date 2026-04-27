@@ -293,6 +293,17 @@ const ROLES = [
   { title: "Team Leaders", desc: "Team briefings, micro-practice recommendations, workforce health signals" },
 ];
 
+// ─── Typography ─────────────────────────────────────────────────────────────
+// Fraunces Italic for display emphasis. Inter for everything else.
+// Load via @fontsource CDN: Fraunces 400i, Inter 400/500.
+const fraunces = "'Fraunces', Georgia, serif";
+const inter = "'Inter', system-ui, -apple-system, sans-serif";
+
+// Italic eyebrow for section openers (replaces all-caps .chris-label on section openers)
+function SectionEyebrow({ children }: { children: React.ReactNode }) {
+  return <p className="text-[17px] mb-3" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>{children}</p>;
+}
+
 // ─── Components ─────────────────────────────────────────────────────────────
 
 function Nav() {
@@ -324,19 +335,20 @@ function Hero() {
             Live with providers in NSW and VIC.
           </p>
 
-          <h1 className="text-[clamp(2rem,5vw,42px)] font-medium leading-[1.04] tracking-[-0.028em] mb-5" style={{ color: C.text }}>
-            Hold quality. Protect margin. Lead with confidence.
+          <h1 className="text-[clamp(2.5rem,6vw,52px)] font-medium leading-[1.02] tracking-[-0.030em] mb-6" style={{ color: C.text }}>
+            Hold quality. Protect margin. Lead with{" "}
+            <span style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.012em" }}>confidence.</span>
           </h1>
 
-          <p className="text-[15px] leading-[1.6] max-w-[500px] mb-8" style={{ color: C.textMuted }}>
+          <p className="text-[16px] leading-[1.6] max-w-[520px] mb-8" style={{ color: C.textMuted }}>
             In aged care, problems chain across domains. Rosters into clinical into compliance into cost. Chris makes the chain legible, supports your leaders today, and extends across clinical, workforce, finance, compliance and governance.
           </p>
 
           <div className="flex items-center gap-5">
-            <a href="#book" className="text-[13px] font-medium px-[18px] py-[11px] rounded-[4px]" style={{ backgroundColor: C.ctaBg, color: C.ctaText }}>
+            <a href="#book" className="text-[14px] font-medium px-[20px] py-[12px] rounded-[4px]" style={{ backgroundColor: C.ctaBg, color: C.ctaText }}>
               Book a 30-min conversation
             </a>
-            <a href="#how-it-works" className="text-[13px] font-medium" style={{ color: C.text }}>
+            <a href="#how-it-works" className="text-[14px] font-medium" style={{ color: C.text }}>
               How Chris works, layer by layer →
             </a>
           </div>
@@ -447,9 +459,9 @@ function WhatChrisIsSection() {
       <div className="max-w-5xl mx-auto px-6 lg:px-12 py-14 lg:py-18">
         {/* Header */}
         <div className="mb-8 lg:mb-10">
-          <p className="text-[11px] font-medium uppercase tracking-[0.08em] mb-3" style={{ color: teal }}>What Chris is</p>
-          <h2 className="text-[clamp(1.4rem,3vw,1.65rem)] font-medium leading-[1.1] tracking-[-0.025em] mb-3 max-w-[540px]" style={{ color: textPrimary }}>
-            A morning at Mt Gibraltar Gardens.
+          <p className="text-[17px] mb-3" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: teal }}>What Chris is</p>
+          <h2 className="text-[clamp(1.75rem,4vw,34px)] font-medium leading-[1.08] tracking-[-0.025em] mb-3 max-w-[540px]" style={{ color: textPrimary }}>
+            A <span style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.012em" }}>morning</span> at Mt Gibraltar Gardens.
           </h2>
           <p className="text-[12.5px] leading-[1.55] max-w-[520px]" style={{ color: textSecondary }}>
             Monday morning. While Sarah&apos;s team finished the night shift, Chris built her team briefing. The agents that built it are on the left. The artefact she opened before the morning huddle is on the right.
@@ -583,10 +595,10 @@ function ToolsStrip() {
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-14 lg:py-18">
         {/* Header */}
         <div className="max-w-[560px] mb-10">
-          <p className="text-[11px] font-medium tracking-[0.08em] uppercase mb-3" style={{ color: C.teal }}>
-            See your own numbers. 3 minutes. No signup.
+          <p className="text-[17px] mb-3" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>
+            See your own numbers
           </p>
-          <h2 className="text-[clamp(1.4rem,3vw,1.65rem)] font-medium leading-[1.1] tracking-[-0.025em] mb-3" style={{ color: C.text }}>
+          <h2 className="text-[clamp(1.75rem,4vw,34px)] font-medium leading-[1.08] tracking-[-0.025em] mb-3" style={{ color: C.text }}>
             Four tools. Run them on your facility before we ever talk.
           </h2>
           <p className="text-[14px] leading-[1.6] mb-2" style={{ color: C.textMuted }}>
@@ -884,9 +896,9 @@ function HowItWorksSection() {
         {/* Header */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-16 mb-14 lg:mb-18">
           <div>
-            <p className="text-[11px] font-medium tracking-[0.12em] uppercase mb-4" style={{ color: C.good }}>How it works</p>
-            <h2 className="text-[clamp(1.5rem,3.5vw,2.5rem)] font-normal leading-[1.1] tracking-[-0.01em]" style={{ color: C.inkDark }}>
-              Aged care, with intelligence in every layer
+            <p className="text-[17px] mb-3" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>How it works</p>
+            <h2 className="text-[clamp(1.75rem,4vw,34px)] font-medium leading-[1.08] tracking-[-0.025em]" style={{ color: C.text }}>
+              Aged care, with <span style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.012em" }}>intelligence</span> in every layer
             </h2>
           </div>
           <div className="lg:pt-8">
@@ -963,8 +975,8 @@ function JobsSection() {
   return (
     <section style={{ backgroundColor: C.canvas }} id="jobs">
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
-        <div className="text-[11px] font-medium tracking-[0.08em] uppercase mb-4" style={{ color: C.copperDark }}>Where we start</div>
-        <h2 className="text-[clamp(1.5rem,3vw,2.5rem)] font-normal leading-[1.1] tracking-[-0.01em] mb-3" style={{ color: C.inkDark }}>
+        <p className="text-[17px] mb-3" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>Where we start</p>
+        <h2 className="text-[clamp(1.75rem,4vw,34px)] font-medium leading-[1.08] tracking-[-0.025em] mb-3" style={{ color: C.text }}>
           We don&apos;t sell a platform. We fix a problem.<br />
           <em className="italic" style={{ color: C.copperDark }}>Then another. Then another.</em>
         </h2>
@@ -1073,8 +1085,8 @@ function ScenarioSection() {
   return (
     <section style={{ backgroundColor: C.canvas, borderTop: `0.5px solid ${C.border}` }}>
       <div className="max-w-[640px] mx-auto px-6 lg:px-16 py-16 lg:py-20">
-        <p className="text-[11px] font-medium tracking-[0.08em] uppercase mb-6" style={{ color: C.teal }}>A real scenario. Every facility. Every week.</p>
-        <h2 className="text-[clamp(2rem,4vw,2.8rem)] font-medium leading-[1.08] tracking-[-0.025em] mb-5" style={{ color: C.text }}>11:04pm Friday.</h2>
+        <p className="text-[17px] mb-4" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>A real scenario. Every facility. Every week.</p>
+        <h2 className="text-[clamp(1.75rem,4vw,34px)] font-medium leading-[1.08] tracking-[-0.025em] mb-5" style={{ color: C.text }}>11:04pm <span style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.012em" }}>Friday.</span></h2>
         <p className="text-[15px] mb-6" style={{ color: C.textMuted }}>A Priority 1 incident. 24 hours to notify ACQSC.</p>
         <p className="text-[clamp(1.2rem,2vw,1.5rem)] font-medium mb-4" style={{ color: C.text }}>Chris classified it in 4 minutes.</p>
         <div className="space-y-1 mb-6">
@@ -1097,9 +1109,9 @@ function AgentsSection() {
   return (
     <section style={{ backgroundColor: C.canvas }}>
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
-        <div className="text-[11px] font-medium tracking-[0.08em] uppercase mb-4" style={{ color: C.copperDark }}>The intelligence layer</div>
-        <h2 className="text-[clamp(1.5rem,3vw,2.5rem)] font-normal leading-[1.1] mb-3" style={{ color: C.inkDark }}>
-          Named agents. Every domain. <em className="italic" style={{ color: C.copperDark }}>Always on.</em>
+        <p className="text-[17px] mb-3" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>The intelligence layer</p>
+        <h2 className="text-[clamp(1.75rem,4vw,34px)] font-medium leading-[1.08] tracking-[-0.025em] mb-3" style={{ color: C.text }}>
+          Named agents. Every domain. <span style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.012em" }}>Always on.</span>
         </h2>
         <p className="text-[15px] leading-relaxed max-w-xl mb-12" style={{ color: C.inkMutedLight }}>
           Each agent has a domain, a cadence, and a job. Together they give every leader in your organisation a dedicated intelligence layer, working underneath them, 24 hours a day.
@@ -1190,9 +1202,9 @@ function AISupportSection() {
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-14 lg:py-18">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
           <div>
-            <p className="text-[11px] font-medium tracking-[0.08em] uppercase mb-4" style={{ color: C.teal }}>Operational intelligence + AI support</p>
-            <h2 className="text-[clamp(1.4rem,3vw,1.65rem)] font-medium leading-[1.1] tracking-[-0.025em] mb-4" style={{ color: C.text }}>
-              Ask the question you&apos;ve been sitting on.
+            <p className="text-[17px] mb-3" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>AI support</p>
+            <h2 className="text-[clamp(1.75rem,4vw,34px)] font-medium leading-[1.08] tracking-[-0.025em] mb-4" style={{ color: C.text }}>
+              Ask the question you&apos;ve been <span style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.012em" }}>sitting on.</span>
             </h2>
             <p className="text-[14px] leading-[1.6] mb-5" style={{ color: C.textMuted }}>
               Chris is an operational intelligence layer and AI support built specifically for aged care. Ask about compliance, workforce, funding, or bring a leadership challenge. Chris supports the way a trusted colleague would: direct, warm, and grounded in what actually works in this sector. No login. No signup.
@@ -1212,9 +1224,9 @@ function ExecutionSection() {
   return (
     <section style={{ backgroundColor: C.canvas }}>
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
-        <div className="text-[11px] font-medium tracking-[0.08em] uppercase mb-4" style={{ color: C.copperDark }}>The execution layer</div>
-        <h2 className="text-[clamp(1.5rem,3vw,2.5rem)] font-normal leading-[1.1] mb-3" style={{ color: C.inkDark }}>
-          Chris doesn&apos;t just tell you. <em className="italic" style={{ color: C.copperDark }}>It acts.</em>
+        <p className="text-[17px] mb-3" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>The execution layer</p>
+        <h2 className="text-[clamp(1.75rem,4vw,34px)] font-medium leading-[1.08] tracking-[-0.025em] mb-3" style={{ color: C.text }}>
+          Chris doesn&apos;t just tell you. It <span style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.012em" }}>acts.</span>
         </h2>
         <p className="text-[15px] leading-relaxed max-w-xl mb-12" style={{ color: C.inkMutedLight }}>
           Most analytics tools give you data to interpret. Chris delivers a drafted document, a specific action, or a coordinated recommendation, ready for your review and approval.
@@ -1238,8 +1250,8 @@ function RolesSection() {
   return (
     <section style={{ backgroundColor: C.canvas }}>
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
-        <div className="text-[11px] font-medium tracking-[0.08em] uppercase mb-4" style={{ color: C.copperDark }}>Built for every leader</div>
-        <h2 className="text-[clamp(1.5rem,3vw,2.5rem)] font-normal leading-[1.1] mb-3" style={{ color: C.inkDark }}>
+        <p className="text-[17px] mb-3" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>Built for every leader</p>
+        <h2 className="text-[clamp(1.75rem,4vw,34px)] font-medium leading-[1.08] tracking-[-0.025em] mb-3" style={{ color: C.text }}>
           One platform. <em className="italic" style={{ color: C.copperDark }}>Every leader in your organisation.</em>
         </h2>
         <p className="text-[15px] leading-relaxed max-w-xl mb-12" style={{ color: C.inkMutedLight }}>
@@ -1276,8 +1288,8 @@ function FinalCTA() {
   return (
     <section style={{ backgroundColor: C.canvas, borderTop: `0.5px solid ${C.border}` }} id="book">
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-14 lg:py-18">
-        <p className="text-[11px] font-medium tracking-[0.08em] uppercase mb-4" style={{ color: C.teal }}>Two ways in</p>
-        <h2 className="text-[clamp(1.4rem,3vw,1.65rem)] font-medium leading-[1.1] tracking-[-0.025em] mb-8" style={{ color: C.text }}>
+        <p className="text-[17px] mb-3" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>Two ways in</p>
+        <h2 className="text-[clamp(1.75rem,4vw,34px)] font-medium leading-[1.08] tracking-[-0.025em] mb-8" style={{ color: C.text }}>
           Pick the one that fits where you are.
         </h2>
 
@@ -1369,7 +1381,14 @@ function Footer() {
 
 export default function V2Page() {
   return (
-    <div style={{ fontFamily: "'Inter', system-ui, -apple-system, sans-serif" }}>
+    <div style={{ fontFamily: inter }}>
+      {/* Font loading: Inter 400/500 + Fraunces 400 italic */}
+      {/* eslint-disable-next-line @next/next/no-page-custom-font */}
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5/400.css" />
+      {/* eslint-disable-next-line @next/next/no-page-custom-font */}
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5/500.css" />
+      {/* eslint-disable-next-line @next/next/no-page-custom-font */}
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/fraunces@5/400-italic.css" />
       <Nav />
       <Hero />
       <AgentRibbon />
