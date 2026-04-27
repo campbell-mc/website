@@ -63,15 +63,23 @@ const STAGES = [
   },
 ];
 
-const INTEGRATIONS = [
-  { name: "Leecare", sub: "Clinical & Care Planning", color: "#3b7dd8" },
-  { name: "AutumnCare", sub: "Clinical", color: "#d4896c" },
-  { name: "Person Centred Software", sub: "Clinical", color: "#5a7d6a" },
-  { name: "eCase", sub: "Compliance", color: "#7c6bb5" },
-  { name: "Carelink+", sub: "Resident Management", color: "#3b7dd8" },
-  { name: "HumanForce", sub: "Workforce & Rostering", color: "#d4896c" },
-  { name: "Manad Plus", sub: "Operations", color: "#5a7d6a" },
-  { name: "Xero", sub: "Finance", color: "#13b5ea" },
+// Verified brand colors from official websites
+const INTEGRATIONS: Array<{
+  name: string; sub: string; color: string; color2?: string;
+  wordmark: string; wordmarkSize?: string; letterSpacing?: string; fontWeight?: number;
+}> = [
+  { name: "Leecare", sub: "Clinical & Care Planning", color: "#464fa1", wordmark: "Leecare", fontWeight: 700 },
+  { name: "AutumnCare", sub: "Clinical", color: "#4a8c5c", wordmark: "autumn", wordmarkSize: "15px", letterSpacing: "0.04em", fontWeight: 500 },
+  { name: "Person Centred Software", sub: "Clinical", color: "#00B28C", wordmark: "PCS", wordmarkSize: "18px", fontWeight: 700 },
+  { name: "eCase", sub: "Compliance", color: "#9966cc", color2: "#007ba7", wordmark: "eCase", fontWeight: 600 },
+  { name: "Carelink+", sub: "Resident Management", color: "#1a3a6b", wordmark: "Carelink+", wordmarkSize: "12px", fontWeight: 600 },
+  { name: "Humanforce", sub: "Workforce & Rostering", color: "#50B848", color2: "#3C479D", wordmark: "hf", wordmarkSize: "20px", fontWeight: 800 },
+  { name: "Manad Plus", sub: "Operations", color: "#009EFF", color2: "#00004B", wordmark: "manad+", wordmarkSize: "13px", fontWeight: 700 },
+  { name: "Xero", sub: "Finance", color: "#13B5EA", wordmark: "xero", wordmarkSize: "18px", letterSpacing: "0.02em", fontWeight: 700 },
+  { name: "Deputy", sub: "Rostering & Time", color: "#0c017b", color2: "#37cfcd", wordmark: "Deputy", wordmarkSize: "13px", fontWeight: 600 },
+  { name: "Employment Hero", sub: "HR & Payroll", color: "#7622D7", wordmark: "EH", wordmarkSize: "20px", fontWeight: 800 },
+  { name: "ELMO", sub: "HR & Payroll", color: "#2b5ea7", wordmark: "ELMO", wordmarkSize: "16px", letterSpacing: "0.08em", fontWeight: 800 },
+  { name: "RiskMan", sub: "Incident Management", color: "#c0392b", wordmark: "RiskMan", wordmarkSize: "11px", fontWeight: 700 },
 ];
 
 // ─── SVG Illustrations ──────────────────────────────────────────────────────
@@ -266,18 +274,39 @@ function ActIllustration() {
 const ILLUSTRATIONS = [ConnectIllustration, WatchIllustration, SupportIllustration, ActIllustration];
 
 // ─── Integration Logo ───────────────────────────────────────────────────────
-function IntegrationLogo({ name, sub, color }: { name: string; sub: string; color: string }) {
+function IntegrationLogo({ name, sub, color, color2, wordmark, wordmarkSize, letterSpacing, fontWeight }: {
+  name: string; sub: string; color: string; color2?: string;
+  wordmark: string; wordmarkSize?: string; letterSpacing?: string; fontWeight?: number;
+}) {
   return (
-    <div className="flex flex-col items-center gap-2 px-3 py-4 rounded-xl transition-all hover:scale-105"
-      style={{ backgroundColor: P.white, boxShadow: "0 1px 3px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.03)" }}>
-      {/* Wordmark circle */}
-      <div className="w-12 h-12 rounded-xl flex items-center justify-center text-[15px] font-semibold"
-        style={{ backgroundColor: `${color}10`, color }}>
-        {name.charAt(0)}
+    <div className="group flex flex-col items-center gap-3 px-3 py-5 rounded-2xl transition-all duration-300 hover:-translate-y-1"
+      style={{
+        backgroundColor: P.white,
+        boxShadow: "0 1px 4px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.03)",
+      }}>
+      {/* Branded wordmark tile */}
+      <div className="w-14 h-14 rounded-2xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
+        style={{
+          background: color2
+            ? `linear-gradient(135deg, ${color}, ${color2})`
+            : color,
+          boxShadow: `0 4px 12px ${color}25`,
+        }}>
+        <span style={{
+          color: "#fff",
+          fontSize: wordmarkSize ?? "14px",
+          fontWeight: fontWeight ?? 600,
+          letterSpacing: letterSpacing ?? "0",
+          fontFamily: "system-ui, -apple-system, sans-serif",
+          lineHeight: 1,
+          textShadow: "0 1px 2px rgba(0,0,0,0.15)",
+        }}>
+          {wordmark}
+        </span>
       </div>
       <div className="text-center">
-        <p className="text-[12px] font-medium leading-tight" style={{ color: P.ink }}>{name}</p>
-        <p className="text-[10px] mt-0.5" style={{ color: P.inkMuted }}>{sub}</p>
+        <p className="text-[12px] font-semibold leading-tight" style={{ color: P.ink }}>{name}</p>
+        <p className="text-[10px] mt-0.5 font-medium" style={{ color: P.inkMuted }}>{sub}</p>
       </div>
     </div>
   );
@@ -412,26 +441,32 @@ export default function HowItWorksPage() {
 
       {/* ─── Integrations block ───────────────────────────────────────────── */}
       <section style={{ backgroundColor: P.canvasAlt, borderTop: `1px solid ${P.inkFaint}` }}>
-        <div className="max-w-6xl mx-auto px-6 lg:px-16 py-16 lg:py-20">
-          <div className="text-center mb-10">
+        <div className="max-w-6xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
+          <div className="text-center mb-12">
             <p className="text-[11px] font-semibold tracking-[0.15em] uppercase mb-3" style={{ color: P.sage }}>Integrations</p>
             <h2 className="text-[clamp(1.3rem,3vw,2rem)] font-semibold leading-[1.15] tracking-[-0.01em] mb-3" style={{ color: P.ink }}>
               Reads what you already run
             </h2>
-            <p className="text-[15px]" style={{ color: P.inkMuted }}>
-              No migration. No re-platforming.
+            <p className="text-[16px] leading-[1.7] max-w-lg mx-auto" style={{ color: P.inkSoft }}>
+              No migration. No re-platforming. Chris connects to the systems your teams use today.
             </p>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
             {INTEGRATIONS.map((int) => (
               <IntegrationLogo key={int.name} {...int} />
             ))}
           </div>
 
-          <p className="text-center text-[12px] mt-8" style={{ color: P.inkMuted }}>
-            Plus Deputy, Employment Hero, Chris21, ELMO, RiskMan, GPMS, and any system with an API or structured export.
-          </p>
+          <div className="mt-10 text-center">
+            <p className="text-[13px] leading-relaxed" style={{ color: P.inkMuted }}>
+              Plus Chris21, AlayaCare, Tanda, Roubler, Visual Care, GPMS, and any system with an API or structured export.
+            </p>
+            <div className="flex items-center justify-center gap-2 mt-4">
+              <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: P.sage, opacity: 0.4 }} />
+              <span className="text-[11px] font-medium" style={{ color: P.sage }}>New connectors added monthly</span>
+            </div>
+          </div>
         </div>
       </section>
 
