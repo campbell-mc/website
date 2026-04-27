@@ -396,142 +396,159 @@ const ARCH_SYSTEMS = [
   { name: "ELMO", color: "#2b5ea7" }, { name: "RiskMan", color: "#c0392b" },
 ];
 
-function WhatChrisIsSection() {
-  const [expanded, setExpanded] = useState<number | null>(null);
+// ── Timeline events ─────────────────────────────────────────────────────────
+const TIMELINE = [
+  { time: "02:47", agent: "Sentinel", verb: "monitors", action: "Detected unfilled RN shift. Drafted bank list message.", color: "#1F6F66", filled: false },
+  { time: "04:07", agent: "Sentinel", verb: "monitors", action: "RN confirmed. Cover locked. Roster updated.", color: "#1F6F66", filled: true, badge: 3 },
+  { time: "04:38", agent: "Keeper", verb: "protects", action: "Compliance scan flagged a SIRS-eligible incident.", color: "#BA7517", filled: false },
+  { time: "05:12", agent: "Oracle", verb: "recommends", action: "Wing B converging. Pattern matches December.", color: "#BA7517", filled: false, badge: 1 },
+  { time: "05:33", agent: "Chronicler", verb: "drafts", action: "SIRS Priority 1 draft with deadline and reference.", color: "#A32D2D", filled: false, badge: 2 },
+  { time: "06:14", agent: "Steward", verb: "optimises", action: "Assembled the briefing. Released to Sarah's phone.", color: "#1F6F66", filled: false },
+  { time: "06:47", agent: "Delivered", verb: "→", action: "Sarah opens her phone.", color: "#1F6F66", filled: true, climax: true },
+];
 
-  const cards = [
-    {
-      eyebrow: "Agentic AI",
-      headline: "Software that doesn\u2019t wait to be asked.",
-      body: "Chris reads what's happening across your operation, decides what matters, and takes the next step. Drafts the SIRS notification. Logs the supervision check-in. Flags the roster gap before it becomes a clinical incident. Built for the work aged care leaders actually do, not for generic enterprise.",
-    },
-    {
-      eyebrow: "Reads",
-      headline: "Connects to your existing stack.",
-      body: "Chris reads from the systems your operators already use: clinical, rostering, finance, compliance, family. No migration. No re-platforming. No schema mapping. Your data stays where it is.",
-    },
-    {
-      eyebrow: "Acts",
-      headline: "Productivity, not paperwork.",
-      body: "Chris doesn't just see. It acts. Drafts briefings, logs actions, sends follow-ups, prepares board materials, surfaces convergence patterns to the leaders who can act on them. The work your operators do not have time for, handled by agents working alongside them.",
-    },
-    {
-      eyebrow: "Compliance",
-      headline: "Reports straight to GPMS via the B2G gateway.",
-      body: "Aligned with the Aged Care Act 2024. Chris connects to the Government Provider Management System through the Business-to-Government APIs. Mandatory reporting flows from your operation to the Department of Health, the Aged Care Quality and Safety Commission, and the NDIA without manual handling.",
-    },
-  ];
+function WhatChrisIsSection() {
+
+  const teal = "#1F6F66";
+  const amber = "#BA7517";
+  const red = "#A32D2D";
+  const textPrimary = "#0E0E0E";
+  const textSecondary = "#5A5A57";
+  const canvas = "#FAFAF6";
+  const borderDefault = "rgba(15,23,42,0.08)";
+
+  function Badge({ n }: { n: number }) {
+    return <span className="w-[14px] h-[14px] rounded-full flex items-center justify-center text-[9px] font-medium shrink-0" style={{ backgroundColor: "#E1F5EE", color: teal }}>{n}</span>;
+  }
 
   return (
-    <section style={{ backgroundColor: C.dark }}>
-      <div className="max-w-6xl mx-auto px-6 lg:px-16 py-12 lg:py-16">
-        {/* Headline block */}
-        <div className="text-center max-w-[60ch] mx-auto mb-8 lg:mb-10">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.15em] mb-3" style={{ color: C.copper }}>What Chris is</p>
-          <h2 className="text-[clamp(1.8rem,4vw,3rem)] font-bold leading-[1.08] tracking-[-0.02em] mb-4" style={{ color: "#ffffff" }}>
-            The intelligence layer between your stack and your leaders.
+    <section style={{ backgroundColor: canvas }}>
+      <div className="max-w-5xl mx-auto px-6 lg:px-12 py-14 lg:py-18">
+        {/* Header */}
+        <div className="mb-8 lg:mb-10">
+          <p className="text-[11px] font-medium uppercase tracking-[0.08em] mb-3" style={{ color: teal }}>What Chris is</p>
+          <h2 className="text-[clamp(1.4rem,3vw,1.65rem)] font-medium leading-[1.1] tracking-[-0.025em] mb-3 max-w-[540px]" style={{ color: textPrimary }}>
+            A morning at Mt Gibraltar Gardens.
           </h2>
-          <p className="text-[17px] leading-[1.7]" style={{ color: "rgba(245,237,227,0.6)" }}>
-            Chris reads what your systems already capture, surfaces what matters, and acts on the productivity work your operators don&apos;t have time for. Cross-domain agents, built for aged care.
+          <p className="text-[12.5px] leading-[1.55] max-w-[520px]" style={{ color: textSecondary }}>
+            Monday 28 April. While the DON was asleep, Chris built her morning briefing. The agents that built it are on the left. The artefact she opened at 6:47am is on the right.
           </p>
         </div>
 
-        {/* Architecture diagram: 3 vertical cards side by side with arrows between */}
-        <div className="max-w-5xl mx-auto mb-8 lg:mb-10">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr_auto_1fr] items-stretch gap-0">
-            {/* Card 1: Systems */}
-            <div className="rounded-2xl p-5 lg:p-6 flex flex-col" style={{ backgroundColor: C.cream, border: "1px solid rgba(26,18,24,0.06)", boxShadow: "0 2px 12px rgba(0,0,0,0.03)" }}>
-              <p className="text-[12px] font-bold uppercase tracking-[0.12em] mb-4" style={{ color: "rgba(26,18,24,0.4)" }}>The systems you already run</p>
-              <div className="flex flex-col gap-1.5 flex-1">
-                {ARCH_SYSTEMS.map((sys) => (
-                  <span key={sys.name} className="text-[12px] font-bold px-3 py-1.5 rounded-lg" style={{ backgroundColor: `${sys.color}12`, color: sys.color }}>{sys.name}</span>
-                ))}
-              </div>
-            </div>
+        {/* Two-column body */}
+        <div className="flex flex-col lg:flex-row gap-5 lg:gap-5">
+          {/* Left: Timeline */}
+          <div className="w-full lg:w-[240px] shrink-0">
+            <p className="text-[10px] font-medium uppercase tracking-[0.08em] mb-4" style={{ color: teal }}>Overnight. Built by</p>
+            <div className="relative">
+              {/* Vertical line */}
+              <div className="absolute left-[42px] top-2 bottom-2 w-px" style={{ backgroundColor: "rgba(15,23,42,0.12)" }} />
 
-            {/* Arrow: READS → */}
-            <div className="flex flex-col items-center justify-center px-3 py-4 lg:py-0">
-              <span className="text-[9px] font-bold uppercase tracking-[0.15em] mb-1 lg:mb-0 lg:mr-1" style={{ color: C.good }}>Reads</span>
-              {/* Horizontal on desktop, vertical on mobile */}
-              <svg width="28" height="14" viewBox="0 0 28 14" fill="none" className="hidden lg:block"><path d="M0 7h24M20 3l4 4-4 4" stroke={C.good} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
-              <svg width="14" height="28" viewBox="0 0 14 28" fill="none" className="lg:hidden"><path d="M7 0v24M3 20l4 4 4-4" stroke={C.good} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
-            </div>
+              <div className="space-y-4">
+                {TIMELINE.map((ev, i) => (
+                  <div key={i} className="flex items-start gap-2.5 relative">
+                    {/* Timestamp */}
+                    <span className={`text-[10px] tabular-nums text-right shrink-0 mt-0.5 ${ev.climax ? "font-medium" : ""}`}
+                      style={{ width: 30, color: ev.climax ? textPrimary : textSecondary }}>{ev.time}</span>
 
-            {/* Card 2: Chris */}
-            <div className="rounded-2xl p-5 lg:p-6 flex flex-col" style={{ background: `linear-gradient(180deg, ${C.dark2}, rgba(45,106,79,0.2))`, border: "1px solid rgba(200,154,60,0.2)", boxShadow: "0 0 40px rgba(200,154,60,0.06)" }}>
-              <p className="text-[14px] font-bold uppercase tracking-[0.12em] mb-4" style={{ color: C.copper }}>Chris</p>
-              <div className="flex flex-col gap-2 flex-1">
-                {ARCH_AGENTS.map((agent) => (
-                  <div key={agent.name} className="flex items-center gap-2">
-                    <span className="text-[14px] font-bold px-3 py-1.5 rounded-lg" style={{ backgroundColor: `${agent.color}20`, color: agent.color, boxShadow: `0 0 12px ${agent.color}15` }}>{agent.name}</span>
-                    <span className="text-[11px] font-medium" style={{ color: "rgba(245,237,227,0.4)" }}>{agent.verb}</span>
+                    {/* Badge (if any) sits left of dot */}
+                    <div className="relative flex items-start">
+                      {ev.badge && <div className="absolute -left-[18px] top-0"><Badge n={ev.badge} /></div>}
+                      {/* Dot */}
+                      <span className="shrink-0 mt-1 rounded-full z-10"
+                        style={{
+                          width: ev.climax ? 11 : 9, height: ev.climax ? 11 : 9,
+                          backgroundColor: ev.filled ? ev.color : canvas,
+                          border: ev.filled ? "none" : `1.5px solid ${ev.color}`,
+                        }} />
+                    </div>
+
+                    {/* Content */}
+                    <div className="min-w-0 flex-1">
+                      <p className="text-[10px] leading-none mb-0.5">
+                        <span className="font-medium uppercase tracking-[0.06em]" style={{ color: textPrimary }}>{ev.agent}</span>
+                        {ev.verb !== "→" && <span style={{ color: textSecondary }}> · {ev.verb}</span>}
+                        {ev.verb === "→" && <span style={{ color: teal }}> →</span>}
+                      </p>
+                      <p className={`text-[11px] leading-[1.45] ${ev.climax ? "font-medium" : ""}`}
+                        style={{ color: ev.climax ? textPrimary : textSecondary }}>{ev.action}</p>
+                    </div>
                   </div>
                 ))}
-                <div className="flex items-center gap-2 mt-1">
-                  <span className="text-[13px] font-medium px-3 py-1.5 rounded-lg" style={{ backgroundColor: "rgba(245,237,227,0.06)", color: "rgba(245,237,227,0.3)" }}>+ 6 more</span>
-                  <span className="text-[10px]" style={{ color: "rgba(245,237,227,0.2)" }}>in build</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Right: Briefing artefact */}
+          <div className="flex-1 min-w-[300px]">
+            <div className="rounded-[5px] overflow-hidden" style={{ backgroundColor: "#fff", border: `0.5px solid ${borderDefault}`, boxShadow: "0 0 0 4px rgba(31,111,102,0.08)" }}>
+              {/* Forest header */}
+              <div className="px-4 py-3" style={{ backgroundColor: "#1B4332" }}>
+                <p className="text-[9px] font-medium uppercase tracking-[0.08em] mb-0.5" style={{ color: "rgba(255,255,255,0.85)" }}>Site Operational Briefing · Sarah Mitchell, DON</p>
+                <p className="text-[13px] font-medium" style={{ color: "#ffffff" }}>Mt Gibraltar Gardens · Monday 28 April</p>
+              </div>
+
+              {/* CHRIS Insight */}
+              <div className="px-4 py-3 relative" style={{ borderBottom: `0.5px solid ${borderDefault}` }}>
+                <div className="absolute top-3 right-3"><Badge n={1} /></div>
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="w-[18px] h-[18px] rounded-full flex items-center justify-center shrink-0" style={{ background: "linear-gradient(135deg, #1B4332 0%, #D4A853 100%)" }}>
+                    <span className="text-white text-[9px] font-medium">C</span>
+                  </div>
+                  <span className="text-[9px] font-medium uppercase tracking-[0.08em]" style={{ color: textSecondary }}>Chris Insight</span>
+                </div>
+                <p className="text-[13px] leading-[1.4] italic" style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: textPrimary }}>
+                  Wing B is converging. Clinical incidents up, agency hours up, three new starters with no probation review yet. Pattern matches December.
+                </p>
+              </div>
+
+              {/* What's Showing Up */}
+              <div className="px-4 py-3" style={{ borderBottom: `0.5px solid ${borderDefault}` }}>
+                <p className="text-[9px] font-medium uppercase tracking-[0.08em] mb-2.5" style={{ color: textSecondary }}>What&apos;s showing up</p>
+                <div className="space-y-2">
+                  {[
+                    { bar: red, text: "Care minutes 84%. RN at 71%. Supplement at risk.", badge: null },
+                    { bar: amber, text: "SIRS Priority 1 draft awaiting your review.", badge: 2 },
+                    { bar: teal, text: "RN confirmed for tonight. Cover locked.", badge: 3 },
+                  ].map((row, i) => (
+                    <div key={i} className="flex items-center gap-2">
+                      <div className="w-[3px] h-4 rounded-full shrink-0" style={{ backgroundColor: row.bar }} />
+                      <p className="text-[11px] leading-[1.4] flex-1" style={{ color: textPrimary }}>{row.text}</p>
+                      {row.badge && <Badge n={row.badge} />}
+                    </div>
+                  ))}
                 </div>
               </div>
-            </div>
 
-            {/* Arrows: SUPPORTS + ACTS → */}
-            <div className="flex flex-col items-center justify-center px-3 py-4 lg:py-0 gap-3">
-              <div className="flex flex-col items-center">
-                <span className="text-[9px] font-bold uppercase tracking-[0.15em]" style={{ color: C.good }}>Supports</span>
-                <svg width="28" height="14" viewBox="0 0 28 14" fill="none" className="hidden lg:block"><path d="M0 7h24M20 3l4 4-4 4" stroke={C.good} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                <svg width="14" height="28" viewBox="0 0 14 28" fill="none" className="lg:hidden"><path d="M7 0v24M3 20l4 4 4-4" stroke={C.good} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
-              </div>
-              <div className="flex flex-col items-center">
-                <span className="text-[9px] font-bold uppercase tracking-[0.15em]" style={{ color: C.copper }}>Acts</span>
-                <svg width="28" height="14" viewBox="0 0 28 14" fill="none" className="hidden lg:block"><path d="M0 7h24M20 3l4 4-4 4" stroke={C.copper} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                <svg width="14" height="28" viewBox="0 0 14 28" fill="none" className="lg:hidden"><path d="M7 0v24M3 20l4 4 4-4" stroke={C.copper} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
-              </div>
-            </div>
-
-            {/* Card 3: Leaders */}
-            <div className="rounded-2xl p-5 lg:p-6 flex flex-col" style={{ backgroundColor: C.cream, border: "1px solid rgba(45,106,79,0.12)", boxShadow: "0 2px 12px rgba(0,0,0,0.03)" }}>
-              <p className="text-[12px] font-bold uppercase tracking-[0.12em] mb-4" style={{ color: "rgba(26,18,24,0.4)" }}>Your leaders</p>
-              <div className="flex flex-col gap-1.5 flex-1">
-                {ARCH_ROLES.map((role) => (
-                  <span key={role} className="text-[13px] font-semibold px-3 py-1.5 rounded-lg" style={{ backgroundColor: "rgba(26,18,24,0.04)", color: "rgba(26,18,24,0.6)" }}>{role}</span>
-                ))}
+              {/* Three Actions Today */}
+              <div className="px-4 py-3">
+                <p className="text-[9px] font-medium uppercase tracking-[0.08em] mb-2.5" style={{ color: textSecondary }}>Three actions today</p>
+                <div className="space-y-1.5">
+                  {[
+                    "Review Wing B roster pattern with Operations Manager.",
+                    "Approve SIRS Priority 1 draft before 9am.",
+                    "Probation reviews for three new starters.",
+                  ].map((action, i) => (
+                    <div key={i} className="flex items-start gap-2">
+                      <span className="text-[11px] tabular-nums shrink-0 mt-px" style={{ color: textSecondary }}>{i + 1}.</span>
+                      <p className="text-[11px] leading-[1.4]" style={{ color: textPrimary }}>{action}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Four explainer cards — horizontal grid, progressive disclosure */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          {cards.map((card, i) => {
-            const isOpen = expanded === i;
-            return (
-              <button key={card.eyebrow} onClick={() => setExpanded(isOpen ? null : i)}
-                className="rounded-xl text-left transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
-                style={{ backgroundColor: "#fff", boxShadow: isOpen ? "0 4px 20px rgba(0,0,0,0.08)" : "0 1px 3px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.03)" }}>
-                <div className="p-5">
-                  <div className="flex items-center justify-between mb-2">
-                    <p className="text-[10px] font-bold uppercase tracking-[0.12em]" style={{ color: C.copper }}>{card.eyebrow}</p>
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className={`transition-transform duration-300 ${isOpen ? "rotate-45" : ""}`}>
-                      <path d="M8 3v10M3 8h10" stroke={C.copper} strokeWidth="1.5" strokeLinecap="round" />
-                    </svg>
-                  </div>
-                  <h3 className="text-[16px] font-bold mb-1 leading-snug" style={{ color: C.inkDark }}>{card.headline}</h3>
-                  <div className={`overflow-hidden transition-all duration-300 ${isOpen ? "max-h-[200px] opacity-100 mt-2" : "max-h-0 opacity-0"}`}>
-                    <p className="text-[13px] leading-[1.65]" style={{ color: "rgba(26,18,24,0.55)" }}>{card.body}</p>
-                  </div>
-                  {!isOpen && <p className="text-[11px] mt-1" style={{ color: "rgba(26,18,24,0.3)" }}>Tap to read more</p>}
-                </div>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Live status line */}
-        <div className="text-center">
-          <p className="text-[13px]" style={{ color: "rgba(245,237,227,0.45)" }}>
-            <span className="inline-flex items-center gap-1.5 mr-1"><span className="w-2 h-2 rounded-full bg-[#2d6a4f] animate-pulse" /></span>
-            Eleven agents already running with leaders in NSW and VIC. Seven cross-domain agents in build for clinical, workforce, finance, compliance and governance.
+        {/* Footer line */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mt-6 pt-4 gap-2" style={{ borderTop: `0.5px solid rgba(15,23,42,0.08)` }}>
+          <p className="text-[11px]" style={{ color: textSecondary }}>
+            This morning, Chris ran <span className="font-medium" style={{ color: textPrimary }}>47 actions across 5 facilities</span>. Seven are above.
           </p>
+          <div className="flex items-center gap-1.5">
+            <span className="w-[7px] h-[7px] rounded-full animate-pulse" style={{ backgroundColor: teal }} />
+            <span className="text-[11px]" style={{ color: textSecondary }}>Live with providers in NSW and VIC.</span>
+          </div>
         </div>
       </div>
     </section>
