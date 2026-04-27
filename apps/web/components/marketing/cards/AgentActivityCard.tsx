@@ -38,7 +38,7 @@ export function AgentActivityCard() {
       <div className="flex items-center justify-between mb-4">
         <p className="text-[13px] font-semibold text-[#1a1218]">Agent activity</p>
         <div className="flex items-center gap-2">
-          <span className="text-[10px] font-medium text-[#1a1218]/35">5/5</span>
+          <span className="text-[10px] font-medium text-[#1a1218]/35">All</span>
           <div className="flex items-center gap-1">
             <span className="w-1.5 h-1.5 rounded-full bg-[#2d6a4f] animate-pulse" />
             <span className="text-[9px] font-medium text-[#1a1218]/30">Running</span>

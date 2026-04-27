@@ -348,7 +348,8 @@ function Hero() {
         <div className="max-w-[560px]">
           <p className="text-[11px] font-medium uppercase tracking-[0.08em] mb-1.5" style={{ color: C.teal }}>A facility using Chris, right now</p>
           <p className="text-[14px] leading-[1.5] mb-3" style={{ color: C.textMuted }}>Three live views from Mt Gibraltar Gardens, Monday morning. The DON&apos;s review queue, today&apos;s care minutes, and Chris&apos;s agents working in the background.</p>
-          <p className="text-[13px] leading-[1.55]" style={{ color: C.textFaint }}>Agentic AI means software that does the productivity work without being asked. Five agents, each with one job: Sentinel monitors, Chronicler drafts, Oracle recommends, Keeper protects, Steward optimises. They read your systems and act in the flow of work, while your leaders run care.</p>
+          {/* NOTE: The three product mockup cards below show operational dashboards (review queue, care minutes, agent activity). These need reworking to people-layer surfaces in a follow-up pass to fully resolve live-vs-in-build consistency. The architecture section below is already aligned to people-layer work. */}
+          <p className="text-[13px] leading-[1.55]" style={{ color: C.textFaint }}>Agentic AI means software that does the productivity work without being asked. Each agent has one job. Sentinel monitors. Chronicler drafts. Oracle recommends. Keeper protects. Steward optimises. They read your systems and act in the flow of work, while your leaders run care.</p>
         </div>
       </div>
 
@@ -417,15 +418,14 @@ const ARCH_SYSTEMS = [
   { name: "ELMO", color: "#2b5ea7" }, { name: "RiskMan", color: "#c0392b" },
 ];
 
-// ── Timeline events ─────────────────────────────────────────────────────────
+// ── Timeline events (people-layer work, aligned to what is live today) ───────
 const TIMELINE = [
-  { time: "02:47", agent: "Sentinel", verb: "monitors", action: "Detected unfilled RN shift. Drafted bank list message.", color: "#1F6F66", filled: false },
-  { time: "04:07", agent: "Sentinel", verb: "monitors", action: "RN confirmed. Cover locked. Roster updated.", color: "#1F6F66", filled: true, badge: 3 },
-  { time: "04:38", agent: "Keeper", verb: "protects", action: "Compliance scan flagged a SIRS-eligible incident.", color: "#BA7517", filled: false },
-  { time: "05:12", agent: "Oracle", verb: "recommends", action: "Wing B converging. Pattern matches December.", color: "#BA7517", filled: false, badge: 1 },
-  { time: "05:33", agent: "Chronicler", verb: "drafts", action: "SIRS Priority 1 draft with deadline and reference.", color: "#A32D2D", filled: false, badge: 2 },
-  { time: "06:14", agent: "Steward", verb: "optimises", action: "Assembled the briefing. Released to Sarah's phone.", color: "#1F6F66", filled: false },
-  { time: "06:47", agent: "Delivered", verb: "→", action: "Sarah opens her phone.", color: "#1F6F66", filled: true, climax: true },
+  { time: "02:47", agent: "Sentinel", verb: "monitors", action: "Read pulse cycle 8 overnight. Detected sentiment drift in the afternoon shift team.", color: "#BA7517", filled: false },
+  { time: "04:38", agent: "Keeper", verb: "protects", action: "Reviewed the PSH register. Two intervention review dates this week.", color: "#BA7517", filled: false },
+  { time: "05:12", agent: "Oracle", verb: "recommends", action: "Surfaced workload and voice convergence. Pattern matches December cycle.", color: "#BA7517", filled: false, badge: 1 },
+  { time: "05:33", agent: "Chronicler", verb: "drafts", action: "Drafted Sarah's team briefing. Pulse summary, three micro-practices, conversation guide.", color: "#BA7517", filled: false, badge: 2 },
+  { time: "06:14", agent: "Steward", verb: "assembles", action: "Assembled and released to Sarah's phone before the huddle.", color: "#1F6F66", filled: false, badge: 3 },
+  { time: "06:47", agent: "Delivered", verb: "→", action: "Sarah opens her team briefing.", color: "#1F6F66", filled: true, climax: true },
 ];
 
 function WhatChrisIsSection() {
@@ -452,7 +452,7 @@ function WhatChrisIsSection() {
             A morning at Mt Gibraltar Gardens.
           </h2>
           <p className="text-[12.5px] leading-[1.55] max-w-[520px]" style={{ color: textSecondary }}>
-            Monday 28 April. While the DON was asleep, Chris built her morning briefing. The agents that built it are on the left. The artefact she opened at 6:47am is on the right.
+            Monday morning. While Sarah&apos;s team finished the night shift, Chris built her team briefing. The agents that built it are on the left. The artefact she opened before the morning huddle is on the right.
           </p>
         </div>
 
@@ -500,16 +500,16 @@ function WhatChrisIsSection() {
             </div>
           </div>
 
-          {/* Right: Briefing artefact */}
+          {/* Right: Team Briefing artefact (people-layer, what is live today) */}
           <div className="flex-1 min-w-[300px]">
             <div className="rounded-[5px] overflow-hidden" style={{ backgroundColor: "#fff", border: `0.5px solid ${borderDefault}`, boxShadow: "0 0 0 4px rgba(31,111,102,0.08)" }}>
               {/* Forest header */}
               <div className="px-4 py-3" style={{ backgroundColor: "#1B4332" }}>
-                <p className="text-[9px] font-medium uppercase tracking-[0.08em] mb-0.5" style={{ color: "rgba(255,255,255,0.85)" }}>Site Operational Briefing · Sarah Mitchell, DON</p>
-                <p className="text-[13px] font-medium" style={{ color: "#ffffff" }}>Mt Gibraltar Gardens · Monday 28 April</p>
+                <p className="text-[9px] font-medium uppercase tracking-[0.08em] mb-0.5" style={{ color: "rgba(255,255,255,0.85)" }}>Team Briefing · Sarah Mitchell, Team Leader</p>
+                <p className="text-[13px] font-medium" style={{ color: "#ffffff" }}>Mt Gibraltar Gardens · Cycle 8 · Monday morning</p>
               </div>
 
-              {/* CHRIS Insight */}
+              {/* Chris Insight */}
               <div className="px-4 py-3 relative" style={{ borderBottom: `0.5px solid ${borderDefault}` }}>
                 <div className="absolute top-3 right-3"><Badge n={1} /></div>
                 <div className="flex items-center gap-2 mb-2">
@@ -519,7 +519,7 @@ function WhatChrisIsSection() {
                   <span className="text-[9px] font-medium uppercase tracking-[0.08em]" style={{ color: textSecondary }}>Chris Insight</span>
                 </div>
                 <p className="text-[13px] leading-[1.4] italic" style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: textPrimary }}>
-                  Wing B is converging. Clinical incidents up, agency hours up, three new starters with no probation review yet. Pattern matches December.
+                  Your team&apos;s voice is under strain. The pattern matches what we saw in December: workload up, voice scores down, two new starters without supervision.
                 </p>
               </div>
 
@@ -528,27 +528,27 @@ function WhatChrisIsSection() {
                 <p className="text-[9px] font-medium uppercase tracking-[0.08em] mb-2.5" style={{ color: textSecondary }}>What&apos;s showing up</p>
                 <div className="space-y-2">
                   {[
-                    { bar: red, text: "Care minutes 84%. RN at 71%. Supplement at risk.", badge: null },
-                    { bar: amber, text: "SIRS Priority 1 draft awaiting your review.", badge: 2 },
-                    { bar: teal, text: "RN confirmed for tonight. Cover locked.", badge: 3 },
+                    { bar: amber, text: "Voice scores down 18% in the afternoon shift.", badge: null },
+                    { bar: amber, text: "Two new starters without their first supervision yet.", badge: null },
+                    { bar: teal, text: "Trust in leadership holding above sector benchmark.", badge: null },
                   ].map((row, i) => (
                     <div key={i} className="flex items-center gap-2">
                       <div className="w-[3px] h-4 rounded-full shrink-0" style={{ backgroundColor: row.bar }} />
                       <p className="text-[11px] leading-[1.4] flex-1" style={{ color: textPrimary }}>{row.text}</p>
-                      {row.badge && <Badge n={row.badge} />}
                     </div>
                   ))}
                 </div>
               </div>
 
-              {/* Three Actions Today */}
-              <div className="px-4 py-3">
-                <p className="text-[9px] font-medium uppercase tracking-[0.08em] mb-2.5" style={{ color: textSecondary }}>Three actions today</p>
+              {/* Three Micro-Practices This Fortnight */}
+              <div className="px-4 py-3 relative">
+                <div className="absolute top-3 right-3"><Badge n={2} /></div>
+                <p className="text-[9px] font-medium uppercase tracking-[0.08em] mb-2.5" style={{ color: textSecondary }}>Three micro-practices this fortnight</p>
                 <div className="space-y-1.5">
                   {[
-                    "Review Wing B roster pattern with Operations Manager.",
-                    "Approve SIRS Priority 1 draft before 9am.",
-                    "Probation reviews for three new starters.",
+                    "Open the next huddle with one specific check-in question for the afternoon team.",
+                    "Run a 15-minute supervision with each new starter this week.",
+                    "Name the workload pressure in your next team message.",
                   ].map((action, i) => (
                     <div key={i} className="flex items-start gap-2">
                       <span className="text-[11px] tabular-nums shrink-0 mt-px" style={{ color: textSecondary }}>{i + 1}.</span>
@@ -556,6 +556,7 @@ function WhatChrisIsSection() {
                     </div>
                   ))}
                 </div>
+                <div className="absolute bottom-3 right-3"><Badge n={3} /></div>
               </div>
             </div>
           </div>
@@ -564,11 +565,11 @@ function WhatChrisIsSection() {
         {/* Footer line */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mt-6 pt-4 gap-2" style={{ borderTop: `0.5px solid rgba(15,23,42,0.08)` }}>
           <p className="text-[11px]" style={{ color: textSecondary }}>
-            This morning, Chris ran <span className="font-medium" style={{ color: textPrimary }}>47 actions across 5 facilities</span>. Seven are above.
+            This morning&apos;s briefing assembled itself overnight. The agents above are the cast for this scene.
           </p>
           <div className="flex items-center gap-1.5">
             <span className="w-[7px] h-[7px] rounded-full animate-pulse" style={{ backgroundColor: teal }} />
-            <span className="text-[11px]" style={{ color: textSecondary }}>Live with providers in NSW and VIC.</span>
+            <span className="text-[11px]" style={{ color: textSecondary }}>Live with providers in NSW and VIC. Cross-domain agents in build for clinical, workforce, finance, compliance and governance.</span>
           </div>
         </div>
       </div>
@@ -1095,7 +1096,7 @@ function AgentsSection() {
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
         <div className="text-[11px] font-medium tracking-[0.08em] uppercase mb-4" style={{ color: C.copperDark }}>The intelligence layer</div>
         <h2 className="text-[clamp(1.5rem,3vw,2.5rem)] font-normal leading-[1.1] mb-3" style={{ color: C.inkDark }}>
-          Seven agents. Every domain. <em className="italic" style={{ color: C.copperDark }}>Always on.</em>
+          Named agents. Every domain. <em className="italic" style={{ color: C.copperDark }}>Always on.</em>
         </h2>
         <p className="text-[15px] leading-relaxed max-w-xl mb-12" style={{ color: C.inkMutedLight }}>
           Each agent has a domain, a cadence, and a job. Together they give every leader in your organisation a dedicated intelligence layer, working underneath them, 24 hours a day.
