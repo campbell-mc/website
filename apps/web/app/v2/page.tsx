@@ -40,15 +40,114 @@ const STATS = [
 ];
 
 const JOBS = [
-  { n: "01", role: "DON", title: "Handle SIRS without missing a deadline", hook: "A Priority 1 incident. 11pm. The 24-hour clock is running.", accent: C.warm },
-  { n: "02", role: "DON", title: "Stay on the right side of care minutes every day", hook: "2pm. Your RN called in sick. Nobody's run the numbers.", accent: C.copper },
-  { n: "03", role: "Quality Lead", title: "Submit QI without the quarterly scramble", hook: "The GPMS window opens. Someone has to pull 14 indicator domains from three systems.", accent: C.good },
-  { n: "04", role: "Quality Lead", title: "Track corrective actions so nothing falls through", hook: "A corrective action was opened six weeks ago. Nobody knows who owns it.", accent: C.dark },
-  { n: "05", role: "DON", title: "Give every leader their Monday briefing", hook: "Sunday night. Someone has to pull together what's happening across the facility.", accent: C.good },
-  { n: "06", role: "CEO", title: "Produce board and committee packs from live data", hook: "Three days before the board meeting. Five systems. One Sunday lost.", accent: C.dark },
-  { n: "07", role: "WHS Lead", title: "Know which workforce risks are real before they become incidents", hook: "Three staff resigned in the same wing in four weeks. Nobody connected the signals.", accent: C.copper },
-  { n: "08", role: "CFO", title: "Optimise AN-ACC funding without a consultant", hook: "Your revenue per bed is 8% below sector average. Nobody knows why.", accent: C.warm },
-  { n: "09", role: "CEO", title: "See what's coming before it hits", hook: "A complaint pattern built for six weeks. In hindsight, the signals were there.", accent: C.dark },
+  {
+    n: "01", role: "DON", title: "Handle SIRS without missing a deadline",
+    hook: "A Priority 1 incident. 11pm. The 24-hour clock is running.", accent: C.warm,
+    chrisDoes: [
+      "Classifies incident as Priority 1 or Priority 2 within minutes of ingestion",
+      "Drafts the ACQSC notification with all mandatory fields populated",
+      "Monitors the deadline countdown — escalates via iMessage if unactioned",
+      "Submits to GPMS portal after DON approval",
+    ],
+    humanDoes: ["Reviews the draft", "Approves and submits"],
+    stakes: "Civil penalties and compliance action for late notifications. The 24-hour clock starts from when any staff member becomes aware.",
+  },
+  {
+    n: "02", role: "DON", title: "Stay on the right side of care minutes every day",
+    hook: "2pm. Your RN called in sick. Nobody's run the numbers.", accent: C.copper,
+    chrisDoes: [
+      "Pulls rostering data from Deputy / Humanforce every 2 hours",
+      "Calculates total and RN minutes per resident against 215/44 thresholds",
+      "Projects end-of-shift compliance based on current roster",
+      "Alerts DON when breach risk detected — before the shift ends",
+    ],
+    humanDoes: ["Acts on the alert — calls agency, adjusts roster"],
+    stakes: "AN-ACC funding risk + regulatory exposure across every reporting period. Only 45.9% of services meeting both targets nationally.",
+  },
+  {
+    n: "03", role: "Quality Lead", title: "Submit QI without the quarterly scramble",
+    hook: "The GPMS window opens. Someone has to pull 14 indicator domains from three systems.", accent: C.good,
+    chrisDoes: [
+      "Aggregates all 14 QI domains from connected clinical systems",
+      "Flags data quality anomalies before submission",
+      "Prepares the GPMS-ready submission package",
+      "Notifies Quality Lead when ready for review",
+    ],
+    humanDoes: ["Reviews the submission", "Confirms and submits to ACQSC"],
+    stakes: "Regulatory standing, star rating, accreditation readiness.",
+  },
+  {
+    n: "04", role: "Quality Lead", title: "Track corrective actions so nothing falls through",
+    hook: "A corrective action was opened six weeks ago. Nobody knows who owns it.", accent: C.dark,
+    chrisDoes: [
+      "Creates corrective actions from incidents, audits, or ACQSC findings",
+      "Assigns owner, sets deadline, tracks status continuously",
+      "Escalates overdue actions via iMessage to responsible leader",
+      "Populates the evidence register automatically as actions close",
+    ],
+    humanDoes: ["Executes the corrective action", "Confirms completion"],
+    stakes: "Audit readiness, accreditation, regulatory standing.",
+  },
+  {
+    n: "05", role: "DON", title: "Give every leader their Monday briefing",
+    hook: "Sunday night. Someone has to pull together what's happening across the facility.", accent: C.good,
+    chrisDoes: [
+      "Synthesises care minutes, SIRS status, workforce signals, and compliance data",
+      "Generates a role-specific briefing for every leader — DON, CFO, WHS Lead, Team Leaders",
+      "Queues 3 specific actions with context and evidence",
+      "Delivers via iMessage link before Monday morning",
+    ],
+    humanDoes: ["Reads the briefing", "Runs the week"],
+    stakes: "3 hours per leader per week returned — 1,872 hours/year across a 12-leader facility.",
+  },
+  {
+    n: "06", role: "CEO", title: "Produce board and committee packs from live data",
+    hook: "Three days before the board meeting. Five systems. One Sunday lost.", accent: C.dark,
+    chrisDoes: [
+      "Assembles all 8 board pack sections from the canonical data layer",
+      "Drafts the executive narrative, risk register, and decisions required",
+      "Generates Quality & Risk, Finance, Clinical Governance, and P&C committee packs",
+      "Notifies CEO when ready — average review time under 30 minutes",
+    ],
+    humanDoes: ["Reviews the pack", "Approves and distributes"],
+    stakes: "8 hours per pack returned to leadership per month.",
+  },
+  {
+    n: "07", role: "WHS Lead", title: "Know which workforce risks are real before they become incidents",
+    hook: "Three staff resigned in the same wing in four weeks. Nobody connected the signals.", accent: C.copper,
+    chrisDoes: [
+      "Runs fortnightly pulse survey across all teams — 16 PSH domains",
+      "Correlates pulse signals with rostering, incident, and HR data",
+      "Confirms real hazards vs noise using convergence detection",
+      "Recommends a specific micro-practice for the team leader to implement",
+    ],
+    humanDoes: ["Delivers the practice", "Captures the outcome"],
+    stakes: "Standard 2 compliance + >$1M penalty exposure across Victorian and NSW PSH regulations.",
+  },
+  {
+    n: "08", role: "CFO", title: "Optimise AN-ACC funding without a consultant",
+    hook: "Your revenue per bed is 8% below sector average. Nobody knows why.", accent: C.warm,
+    chrisDoes: [
+      "Monitors resident classifications continuously against AN-ACC funding rules",
+      "Identifies reclassification opportunities before the quarter closes",
+      "Benchmarks your funding performance against StewartBrown sector data",
+      "Surfaces revenue uplift alerts with specific detail",
+    ],
+    humanDoes: ["Reviews opportunities", "Initiates reclassification with clinical team"],
+    stakes: "$14K+ annual revenue uplift per facility at current pilot scale.",
+  },
+  {
+    n: "09", role: "CEO", title: "See what's coming before it hits",
+    hook: "A complaint pattern built for six weeks. In hindsight, the signals were there.", accent: C.dark,
+    chrisDoes: [
+      "Monitors patterns across clinical, workforce, financial, and compliance data simultaneously",
+      "Detects precursor signatures that match historical incident patterns",
+      "Alerts leadership queue before the pattern becomes a crisis",
+      "Synthesises cross-domain intelligence into a single weekly Oracle report",
+    ],
+    humanDoes: ["Reviews the intelligence", "Decides how to act"],
+    stakes: "Reputation, regulatory standing, resident safety, board confidence.",
+  },
 ];
 
 const AGENTS = [
@@ -291,7 +390,8 @@ function StatRow() {
 }
 
 function JobsSection() {
-  const [expanded, setExpanded] = useState<string | null>(null);
+  const [selected, setSelected] = useState<number | null>(null);
+  const job = selected !== null ? JOBS[selected] : null;
 
   return (
     <section style={{ backgroundColor: C.cream }} id="jobs">
@@ -309,10 +409,10 @@ function JobsSection() {
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {JOBS.map((job) => (
-            <button key={job.n} onClick={() => setExpanded(expanded === job.n ? null : job.n)}
-              className="w-full text-left border rounded-lg transition-all hover:-translate-y-1"
-              style={{ backgroundColor: C.white, borderColor: "rgba(26,18,24,0.08)", borderLeftWidth: 4, borderLeftColor: job.accent }}>
+          {JOBS.map((job, i) => (
+            <button key={job.n} onClick={() => setSelected(i)}
+              className="w-full text-left border rounded-lg transition-all hover:-translate-y-0.5 hover:shadow-md cursor-pointer"
+              style={{ backgroundColor: "#fff", borderColor: "rgba(26,18,24,0.08)", borderLeftWidth: 4, borderLeftColor: job.accent }}>
               <div className="p-5">
                 <div className="flex items-start justify-between mb-2">
                   <span className="text-[12px] italic" style={{ fontFamily: "Georgia, serif", color: "rgba(26,18,24,0.3)" }}>{job.n}</span>
@@ -332,6 +432,72 @@ function JobsSection() {
           <p className="text-[13px]" style={{ color: "rgba(26,18,24,0.45)" }}>30 minutes. No demo. Just your operation and ours.</p>
         </div>
       </div>
+
+      {/* Job detail popup */}
+      {job && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" onClick={() => setSelected(null)}>
+          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
+          <div className="relative bg-white rounded-2xl max-w-2xl w-full max-h-[85vh] overflow-y-auto shadow-2xl" onClick={(e) => e.stopPropagation()}>
+            {/* Header */}
+            <div className="sticky top-0 z-10 rounded-t-2xl px-6 py-5" style={{ backgroundColor: C.dark }}>
+              <div className="flex items-center justify-between">
+                <div>
+                  <div className="flex items-center gap-3 mb-1">
+                    <span className="text-[12px] italic" style={{ fontFamily: "Georgia, serif", color: "rgba(245,237,227,0.35)" }}>{job.n}</span>
+                    <span className="text-[10px] font-medium uppercase tracking-wider px-2 py-0.5 rounded-full" style={{ backgroundColor: "rgba(245,237,227,0.1)", color: C.inkMuted }}>{job.role}</span>
+                  </div>
+                  <h3 className="text-[20px] font-normal" style={{ fontFamily: "Georgia, serif", color: C.ink }}>{job.title}</h3>
+                </div>
+                <button onClick={() => setSelected(null)} className="text-[20px] w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/10 transition-colors" style={{ color: C.inkMuted }}>×</button>
+              </div>
+            </div>
+
+            <div className="px-6 py-5 space-y-5">
+              {/* The scenario */}
+              <div className="rounded-lg px-4 py-3" style={{ backgroundColor: "rgba(26,18,24,0.02)", border: "1px solid rgba(26,18,24,0.06)" }}>
+                <p className="text-[14px] italic leading-relaxed" style={{ fontFamily: "Georgia, serif", color: "rgba(26,18,24,0.55)" }}>{job.hook}</p>
+              </div>
+
+              {/* CHRIS does */}
+              <div>
+                <p className="text-[10px] font-medium uppercase tracking-wider mb-3" style={{ color: C.copperDark }}>CHRIS does</p>
+                <ul className="space-y-2">
+                  {job.chrisDoes.map((item, i) => (
+                    <li key={i} className="flex items-start gap-2.5 text-[13px] leading-relaxed" style={{ color: "rgba(26,18,24,0.65)" }}>
+                      <span className="shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-medium mt-0.5" style={{ backgroundColor: "rgba(200,154,60,0.1)", color: C.copperDark }}>{i + 1}</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* You do */}
+              <div>
+                <p className="text-[10px] font-medium uppercase tracking-wider mb-3" style={{ color: C.good }}>You do</p>
+                <ul className="space-y-2">
+                  {job.humanDoes.map((item, i) => (
+                    <li key={i} className="flex items-start gap-2.5 text-[13px] leading-relaxed" style={{ color: "rgba(26,18,24,0.65)" }}>
+                      <span className="shrink-0 mt-1" style={{ color: C.good }}>✓</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* What's at stake */}
+              <div className="rounded-lg px-4 py-3" style={{ borderLeft: `3px solid ${job.accent}`, backgroundColor: "rgba(26,18,24,0.02)" }}>
+                <p className="text-[10px] font-medium uppercase tracking-wider mb-1" style={{ color: "rgba(26,18,24,0.35)" }}>What&apos;s at stake</p>
+                <p className="text-[13px] leading-relaxed" style={{ color: "rgba(26,18,24,0.6)" }}>{job.stakes}</p>
+              </div>
+
+              {/* CTA */}
+              <a href="#book" onClick={() => setSelected(null)} className="block w-full text-center py-3.5 rounded-lg text-[14px] font-medium hover:opacity-90 transition-colors" style={{ backgroundColor: C.copper, color: C.dark }}>
+                Start with this problem →
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
