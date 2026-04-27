@@ -910,13 +910,13 @@ function HowItWorksSection() {
 
 function StatRow() {
   return (
-    <section style={{ backgroundColor: C.cream }}>
-      <div className="max-w-6xl mx-auto px-6 lg:px-16 py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-0">
+    <section style={{ backgroundColor: C.dark }}>
+      <div className="max-w-6xl mx-auto px-6 lg:px-16 pt-14 lg:pt-20 pb-4">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-0">
           {STATS.map((stat, i) => (
-            <div key={stat.label} className={`flex flex-col items-center text-center py-6 lg:py-0 ${i < STATS.length - 1 ? "border-b lg:border-b-0 lg:border-r" : ""}`} style={{ borderColor: "rgba(26,18,24,0.08)" }}>
-              <div className="text-[clamp(2rem,4vw,3rem)] font-normal leading-none mb-2" style={{ fontFamily: "Georgia, serif", color: stat.color }}>{stat.number}</div>
-              <div className="text-[12px] uppercase tracking-[0.06em] leading-snug max-w-[200px]" style={{ color: C.inkMutedLight }}>{stat.label}</div>
+            <div key={stat.label} className={`flex flex-col items-center text-center lg:py-0 ${i < STATS.length - 1 ? "lg:border-r" : ""}`} style={{ borderColor: "rgba(245,237,227,0.1)" }}>
+              <div className="text-[clamp(2.2rem,5vw,3.5rem)] font-bold leading-none mb-2" style={{ color: stat.color }}>{stat.number}</div>
+              <div className="text-[11px] uppercase tracking-[0.06em] leading-snug max-w-[200px]" style={{ color: "rgba(245,237,227,0.4)" }}>{stat.label}</div>
             </div>
           ))}
         </div>
@@ -1349,11 +1349,9 @@ export default function V2Page() {
       <Hero />
       <AgentRibbon />
       <WhatChrisIsSection />
-      <ToolsStrip />
-      {/* IntegrationsSection removed: logos now in architecture diagram above */}
-      {/* GPMSCallout removed: merged into 4th explainer card in architecture section */}
-      <HowItWorksSection />
       <StatRow />
+      <ToolsStrip />
+      <HowItWorksSection />
       <JobsSection />
       <ScenarioSection />
       <AgentsSection />
