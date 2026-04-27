@@ -436,83 +436,90 @@ function WhatChrisIsSection() {
           </p>
         </div>
 
-        {/* Vertical architecture diagram: Systems → Chris → Leaders */}
-        <div className="max-w-lg mx-auto mb-8 lg:mb-10">
-          {/* Band 1: Systems (bottom of stack, shown first = top visually for vertical reading) */}
-          <div className="rounded-2xl p-5 lg:p-6" style={{ backgroundColor: C.cream, border: "1px solid rgba(26,18,24,0.06)", boxShadow: "0 2px 12px rgba(0,0,0,0.03)" }}>
-            <p className="text-[11px] font-bold uppercase tracking-[0.12em] mb-3 text-center" style={{ color: "rgba(26,18,24,0.4)" }}>The systems you already run</p>
-            <div className="flex flex-wrap gap-2 justify-center">
-              {ARCH_SYSTEMS.map((sys) => (
-                <span key={sys.name} className="text-[11px] font-bold px-3 py-1.5 rounded-lg" style={{ backgroundColor: `${sys.color}12`, color: sys.color }}>{sys.name}</span>
-              ))}
-            </div>
-          </div>
-
-          {/* Arrow: READS ↓ */}
-          <div className="flex flex-col items-center py-2">
-            <span className="text-[9px] font-bold uppercase tracking-[0.15em] mb-1" style={{ color: C.good }}>Reads</span>
-            <svg width="14" height="28" viewBox="0 0 14 28" fill="none"><path d="M7 0v24M3 20l4 4 4-4" stroke={C.good} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
-          </div>
-
-          {/* Band 2: Chris (the intelligence layer) */}
-          <div className="rounded-2xl p-5 lg:p-6 relative" style={{ background: `linear-gradient(180deg, ${C.dark2}, rgba(45,106,79,0.2))`, border: "1px solid rgba(200,154,60,0.2)", boxShadow: "0 0 40px rgba(200,154,60,0.06)" }}>
-            <p className="text-[13px] font-bold uppercase tracking-[0.12em] mb-4 text-center" style={{ color: C.copper }}>Chris</p>
-            <div className="flex flex-wrap gap-3 justify-center">
-              {ARCH_AGENTS.map((agent) => (
-                <div key={agent.name} className="flex flex-col items-center gap-1">
-                  <span className="text-[13px] font-bold px-4 py-2 rounded-lg" style={{ backgroundColor: `${agent.color}20`, color: agent.color, boxShadow: `0 0 12px ${agent.color}15` }}>{agent.name}</span>
-                  <span className="text-[10px] font-medium" style={{ color: "rgba(245,237,227,0.4)" }}>{agent.verb}</span>
-                </div>
-              ))}
-              <div className="flex flex-col items-center gap-1">
-                <span className="text-[13px] font-medium px-4 py-2 rounded-lg" style={{ backgroundColor: "rgba(245,237,227,0.06)", color: "rgba(245,237,227,0.3)" }}>+ 6 more</span>
-                <span className="text-[10px]" style={{ color: "rgba(245,237,227,0.2)" }}>in build</span>
+        {/* Architecture diagram: 3 vertical cards side by side with arrows between */}
+        <div className="max-w-5xl mx-auto mb-8 lg:mb-10">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr_auto_1fr] items-stretch gap-0">
+            {/* Card 1: Systems */}
+            <div className="rounded-2xl p-5 lg:p-6 flex flex-col" style={{ backgroundColor: C.cream, border: "1px solid rgba(26,18,24,0.06)", boxShadow: "0 2px 12px rgba(0,0,0,0.03)" }}>
+              <p className="text-[12px] font-bold uppercase tracking-[0.12em] mb-4" style={{ color: "rgba(26,18,24,0.4)" }}>The systems you already run</p>
+              <div className="flex flex-col gap-1.5 flex-1">
+                {ARCH_SYSTEMS.map((sys) => (
+                  <span key={sys.name} className="text-[12px] font-bold px-3 py-1.5 rounded-lg" style={{ backgroundColor: `${sys.color}12`, color: sys.color }}>{sys.name}</span>
+                ))}
               </div>
             </div>
-          </div>
 
-          {/* Arrows: SUPPORTS + ACTS ↓ */}
-          <div className="flex items-center justify-center gap-10 py-2">
-            <div className="flex flex-col items-center">
-              <span className="text-[9px] font-bold uppercase tracking-[0.15em] mb-1" style={{ color: C.good }}>Supports</span>
-              <svg width="14" height="28" viewBox="0 0 14 28" fill="none"><path d="M7 0v24M3 20l4 4 4-4" stroke={C.good} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+            {/* Arrow: READS → */}
+            <div className="flex flex-col items-center justify-center px-3 py-4 lg:py-0">
+              <span className="text-[9px] font-bold uppercase tracking-[0.15em] mb-1 lg:mb-0 lg:mr-1" style={{ color: C.good }}>Reads</span>
+              {/* Horizontal on desktop, vertical on mobile */}
+              <svg width="28" height="14" viewBox="0 0 28 14" fill="none" className="hidden lg:block"><path d="M0 7h24M20 3l4 4-4 4" stroke={C.good} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+              <svg width="14" height="28" viewBox="0 0 14 28" fill="none" className="lg:hidden"><path d="M7 0v24M3 20l4 4 4-4" stroke={C.good} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
             </div>
-            <div className="flex flex-col items-center">
-              <span className="text-[9px] font-bold uppercase tracking-[0.15em] mb-1" style={{ color: C.copper }}>Acts</span>
-              <svg width="14" height="28" viewBox="0 0 14 28" fill="none"><path d="M7 0v24M3 20l4 4 4-4" stroke={C.copper} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
-            </div>
-          </div>
 
-          {/* Band 3: Leaders */}
-          <div className="rounded-2xl p-5 lg:p-6" style={{ backgroundColor: C.cream, border: "1px solid rgba(45,106,79,0.12)", boxShadow: "0 2px 12px rgba(0,0,0,0.03)" }}>
-            <p className="text-[11px] font-bold uppercase tracking-[0.12em] mb-3 text-center" style={{ color: "rgba(26,18,24,0.4)" }}>Your leaders</p>
-            <div className="flex flex-wrap gap-2 justify-center">
-              {ARCH_ROLES.map((role) => (
-                <span key={role} className="text-[12px] font-semibold px-3 py-1.5 rounded-lg" style={{ backgroundColor: "rgba(26,18,24,0.04)", color: "rgba(26,18,24,0.6)" }}>{role}</span>
-              ))}
+            {/* Card 2: Chris */}
+            <div className="rounded-2xl p-5 lg:p-6 flex flex-col" style={{ background: `linear-gradient(180deg, ${C.dark2}, rgba(45,106,79,0.2))`, border: "1px solid rgba(200,154,60,0.2)", boxShadow: "0 0 40px rgba(200,154,60,0.06)" }}>
+              <p className="text-[14px] font-bold uppercase tracking-[0.12em] mb-4" style={{ color: C.copper }}>Chris</p>
+              <div className="flex flex-col gap-2 flex-1">
+                {ARCH_AGENTS.map((agent) => (
+                  <div key={agent.name} className="flex items-center gap-2">
+                    <span className="text-[14px] font-bold px-3 py-1.5 rounded-lg" style={{ backgroundColor: `${agent.color}20`, color: agent.color, boxShadow: `0 0 12px ${agent.color}15` }}>{agent.name}</span>
+                    <span className="text-[11px] font-medium" style={{ color: "rgba(245,237,227,0.4)" }}>{agent.verb}</span>
+                  </div>
+                ))}
+                <div className="flex items-center gap-2 mt-1">
+                  <span className="text-[13px] font-medium px-3 py-1.5 rounded-lg" style={{ backgroundColor: "rgba(245,237,227,0.06)", color: "rgba(245,237,227,0.3)" }}>+ 6 more</span>
+                  <span className="text-[10px]" style={{ color: "rgba(245,237,227,0.2)" }}>in build</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Arrows: SUPPORTS + ACTS → */}
+            <div className="flex flex-col items-center justify-center px-3 py-4 lg:py-0 gap-3">
+              <div className="flex flex-col items-center">
+                <span className="text-[9px] font-bold uppercase tracking-[0.15em]" style={{ color: C.good }}>Supports</span>
+                <svg width="28" height="14" viewBox="0 0 28 14" fill="none" className="hidden lg:block"><path d="M0 7h24M20 3l4 4-4 4" stroke={C.good} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                <svg width="14" height="28" viewBox="0 0 14 28" fill="none" className="lg:hidden"><path d="M7 0v24M3 20l4 4 4-4" stroke={C.good} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+              </div>
+              <div className="flex flex-col items-center">
+                <span className="text-[9px] font-bold uppercase tracking-[0.15em]" style={{ color: C.copper }}>Acts</span>
+                <svg width="28" height="14" viewBox="0 0 28 14" fill="none" className="hidden lg:block"><path d="M0 7h24M20 3l4 4-4 4" stroke={C.copper} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                <svg width="14" height="28" viewBox="0 0 14 28" fill="none" className="lg:hidden"><path d="M7 0v24M3 20l4 4 4-4" stroke={C.copper} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+              </div>
+            </div>
+
+            {/* Card 3: Leaders */}
+            <div className="rounded-2xl p-5 lg:p-6 flex flex-col" style={{ backgroundColor: C.cream, border: "1px solid rgba(45,106,79,0.12)", boxShadow: "0 2px 12px rgba(0,0,0,0.03)" }}>
+              <p className="text-[12px] font-bold uppercase tracking-[0.12em] mb-4" style={{ color: "rgba(26,18,24,0.4)" }}>Your leaders</p>
+              <div className="flex flex-col gap-1.5 flex-1">
+                {ARCH_ROLES.map((role) => (
+                  <span key={role} className="text-[13px] font-semibold px-3 py-1.5 rounded-lg" style={{ backgroundColor: "rgba(26,18,24,0.04)", color: "rgba(26,18,24,0.6)" }}>{role}</span>
+                ))}
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Four explainer cards — vertical stack, progressive disclosure */}
-        <div className="max-w-2xl mx-auto space-y-2 mb-8">
+        {/* Four explainer cards — horizontal grid, progressive disclosure */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           {cards.map((card, i) => {
             const isOpen = expanded === i;
             return (
               <button key={card.eyebrow} onClick={() => setExpanded(isOpen ? null : i)}
-                className="w-full rounded-xl text-left transition-all duration-300"
-                style={{ backgroundColor: isOpen ? "#fff" : "rgba(255,255,255,0.97)", boxShadow: isOpen ? "0 4px 20px rgba(0,0,0,0.08)" : "0 1px 3px rgba(0,0,0,0.03)" }}>
-                <div className="px-5 py-4">
-                  <div className="flex items-center gap-4">
-                    <p className="text-[10px] font-bold uppercase tracking-[0.12em] shrink-0 w-16" style={{ color: C.copper }}>{card.eyebrow}</p>
-                    <h3 className="text-[17px] font-bold leading-snug flex-1" style={{ color: C.inkDark }}>{card.headline}</h3>
-                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" className={`shrink-0 transition-transform duration-300 ${isOpen ? "rotate-45" : ""}`}>
-                      <path d="M9 4v10M4 9h10" stroke={C.copper} strokeWidth="2" strokeLinecap="round" />
+                className="rounded-xl text-left transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                style={{ backgroundColor: "#fff", boxShadow: isOpen ? "0 4px 20px rgba(0,0,0,0.08)" : "0 1px 3px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.03)" }}>
+                <div className="p-5">
+                  <div className="flex items-center justify-between mb-2">
+                    <p className="text-[10px] font-bold uppercase tracking-[0.12em]" style={{ color: C.copper }}>{card.eyebrow}</p>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className={`transition-transform duration-300 ${isOpen ? "rotate-45" : ""}`}>
+                      <path d="M8 3v10M3 8h10" stroke={C.copper} strokeWidth="1.5" strokeLinecap="round" />
                     </svg>
                   </div>
-                  <div className={`overflow-hidden transition-all duration-300 ${isOpen ? "max-h-[200px] opacity-100 mt-3 pl-20" : "max-h-0 opacity-0"}`}>
-                    <p className="text-[14px] leading-[1.7]" style={{ color: "rgba(26,18,24,0.55)" }}>{card.body}</p>
+                  <h3 className="text-[16px] font-bold mb-1 leading-snug" style={{ color: C.inkDark }}>{card.headline}</h3>
+                  <div className={`overflow-hidden transition-all duration-300 ${isOpen ? "max-h-[200px] opacity-100 mt-2" : "max-h-0 opacity-0"}`}>
+                    <p className="text-[13px] leading-[1.65]" style={{ color: "rgba(26,18,24,0.55)" }}>{card.body}</p>
                   </div>
+                  {!isOpen && <p className="text-[11px] mt-1" style={{ color: "rgba(26,18,24,0.3)" }}>Tap to read more</p>}
                 </div>
               </button>
             );
