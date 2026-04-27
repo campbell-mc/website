@@ -155,6 +155,34 @@ function Hero() {
   );
 }
 
+function AgentRibbon() {
+  const items = [
+    { agent: "SENTINEL", color: "#2d6a4f", text: "Care minutes at 180 · RN gap detected · afternoon shift unfilled" },
+    { agent: "ORACLE", color: "#c89a3c", text: "3 AN-ACC reclassification opportunities · $11.4K/month identified" },
+    { agent: "STEWARD", color: "#2d6a4f", text: "Sunday PM structural gap confirmed · 7th consecutive week" },
+    { agent: "CHRONICLER", color: "#c4674a", text: "SIRS Priority 1 draft ready · awaiting DON review" },
+    { agent: "KEEPER", color: "#c4674a", text: "Turnover precursor detected · Grevillea Wing · PSH_13 declining" },
+    { agent: "TOWN CRIER", color: "#2d6a4f", text: "Oracle + Steward merged · 1 coordinated recommendation delivered" },
+    { agent: "CURATOR", color: "#8aa888", text: "ACQSC compliance decision published · 2 new regulatory updates" },
+  ];
+  const doubled = [...items, ...items];
+
+  return (
+    <div className="overflow-hidden" style={{ backgroundColor: C.dark, borderTop: "1px solid rgba(245,237,227,0.06)", borderBottom: "1px solid rgba(245,237,227,0.06)" }}>
+      <div className="flex items-center h-10 animate-ticker whitespace-nowrap">
+        {doubled.map((item, i) => (
+          <span key={i} className="inline-flex items-center gap-2 text-[11px] tracking-wide mx-6 shrink-0" style={{ color: "rgba(245,237,227,0.45)" }}>
+            <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: item.color }} />
+            <span className="font-medium" style={{ color: "rgba(245,237,227,0.65)" }}>{item.agent}</span>
+            <span>—</span>
+            <span>{item.text}</span>
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function ToolsStrip() {
   return (
     <section className="pt-12 lg:pt-16 pb-12" style={{ backgroundColor: C.cream }}>
@@ -509,6 +537,7 @@ export default function V2Page() {
     <div style={{ fontFamily: "system-ui, -apple-system, sans-serif" }}>
       <Nav />
       <Hero />
+      <AgentRibbon />
       <ToolsStrip />
       <TrustStrip />
       <StatRow />
