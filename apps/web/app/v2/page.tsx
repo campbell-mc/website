@@ -111,16 +111,17 @@ function Hero() {
             Live with providers in NSW and VIC
           </div>
 
-          <h1 className="text-[clamp(2rem,5vw,3.5rem)] font-normal leading-[1.12] tracking-[-0.02em] mb-7" style={{ fontFamily: "Georgia, serif", color: C.ink }}>
-            Your aged care organisation,{" "}
-            <em className="italic" style={{ color: C.copper }}>running with intelligence.</em>
+          <h1 className="text-[clamp(2rem,5vw,3.5rem)] font-normal leading-[1.12] tracking-[-0.02em] mb-5" style={{ fontFamily: "Georgia, serif", color: C.ink }}>
+            Hold quality. Protect margin.{" "}
+            <em className="italic" style={{ color: C.copper }}>Lead with confidence.</em>
           </h1>
 
-          <p className="text-[17px] leading-[1.65] max-w-[500px] mx-auto mb-10" style={{ color: C.inkMuted }}>
-            Seven AI agents monitor every domain of your operation — clinical,
-            financial, workforce, compliance, governance — continuously,
-            simultaneously, and across every system you already run. When something
-            needs action, CHRIS executes it.
+          <p className="text-[17px] leading-[1.65] max-w-[540px] mx-auto mb-10" style={{ color: C.inkMuted }}>
+            In aged care, the problems chain across domains. Rosters into clinical
+            into compliance into cost. The signals are there days before the incident
+            lands. CHRIS makes that chain legible — in the flow of work with your
+            leaders today, extending across clinical, workforce, finance, compliance
+            and governance.
           </p>
 
           <div className="flex items-center gap-3 flex-wrap justify-center">
