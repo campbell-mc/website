@@ -419,6 +419,197 @@ function IntegrationsSection() {
   );
 }
 
+// ─── How it works (4-stage tabbed component) ────────────────────────────────
+const HIW_STAGES = [
+  { num: "01", label: "Connect", title: "Your operation, in one view",
+    body: "Chris connects to the systems you already run: clinical, rostering, finance, compliance, family. No migration. No re-platforming. No schema mapping. Your data stays where it is. Chris reads what's already there.",
+    pills: ["Native Integrations", "Living Memory", "Zero Migration"], accent: C.good },
+  { num: "02", label: "Watch", title: "Every domain, every shift",
+    body: "Chris watches what's happening across the operation: workforce, clinical, compliance, finance, governance. Continuous, simultaneous, cross-domain. The signals that used to surface days late, surfaced before they land.",
+    pills: ["Cross-Domain Watch", "Continuous Oversight", "Early Signals"], accent: C.good },
+  { num: "03", label: "Support", title: "Leadership in the flow of work",
+    body: "A roster gap on Sunday is a clinical risk on Monday is a Commission notification on Friday. Chris makes that chain legible. It surfaces what matters to the people who can act on it, in the flow of their work, with the context they need to lead.",
+    pills: ["Chain Detection", "Leader Support", "Flow-of-Work"], accent: C.copper },
+  { num: "04", label: "Act", title: "Routine work, handled",
+    body: "When something is routine and the path is clear, Chris handles it. Drafting the response. Logging the action. Closing the loop. Your leaders spend their judgment on the work that actually needs them.",
+    pills: ["Routine Automation", "Closed Loop", "Leader-Led"], accent: C.copper },
+];
+
+function HIWConnectSVG() {
+  return (
+    <svg viewBox="0 0 400 300" fill="none" className="w-full h-full">
+      <rect width="400" height="300" rx="16" fill="rgba(45,106,79,0.04)" />
+      {[{ cx: 60, cy: 60, l: "Clinical" }, { cx: 60, cy: 150, l: "Roster" }, { cx: 60, cy: 240, l: "Finance" }, { cx: 170, cy: 45, l: "Compliance" }, { cx: 170, cy: 255, l: "Family" }].map((n, i) => (
+        <g key={i}>
+          <line x1={n.cx + 30} y1={n.cy} x2={280} y2={150} stroke={C.good} strokeWidth="1.5" strokeOpacity="0.2" strokeDasharray="4 4"><animate attributeName="stroke-dashoffset" from="8" to="0" dur={`${2 + i * 0.3}s`} repeatCount="indefinite" /></line>
+          <circle cx={n.cx} cy={n.cy} r="22" fill="#fff" stroke={C.good} strokeWidth="1.5" strokeOpacity="0.3" />
+          <circle cx={n.cx} cy={n.cy} r="3" fill={C.good} fillOpacity="0.6" />
+          <text x={n.cx} y={n.cy + 36} textAnchor="middle" fill="rgba(26,18,24,0.35)" fontSize="9" fontFamily="system-ui">{n.l}</text>
+        </g>
+      ))}
+      <circle cx="300" cy="150" r="48" fill="#fff" stroke={C.good} strokeWidth="2" strokeOpacity="0.3" />
+      <circle cx="300" cy="150" r="32" fill="rgba(45,106,79,0.08)" />
+      <circle cx="300" cy="150" r="6" fill={C.good}><animate attributeName="r" values="5;7;5" dur="3s" repeatCount="indefinite" /></circle>
+      <text x="300" y="215" textAnchor="middle" fill={C.inkDark} fontSize="11" fontWeight="500" fontFamily="system-ui">One view</text>
+    </svg>
+  );
+}
+
+function HIWWatchSVG() {
+  return (
+    <svg viewBox="0 0 400 300" fill="none" className="w-full h-full">
+      <rect width="400" height="300" rx="16" fill="rgba(45,106,79,0.03)" />
+      {[[140, 75], [200, 75], [260, 75], [110, 130], [170, 130], [230, 130], [290, 130], [140, 185], [200, 185], [260, 185], [170, 240], [230, 240]].map(([cx, cy], i) => {
+        const on = [1, 4, 5, 8, 10].includes(i);
+        return (
+          <g key={i}>
+            <polygon points={`${cx},${cy! - 22} ${cx! + 19},${cy! - 11} ${cx! + 19},${cy! + 11} ${cx},${cy! + 22} ${cx! - 19},${cy! + 11} ${cx! - 19},${cy! - 11}`}
+              fill={on ? "rgba(45,106,79,0.08)" : "rgba(26,18,24,0.02)"} stroke={on ? C.good : "rgba(26,18,24,0.08)"} strokeWidth="1" strokeOpacity={on ? "0.4" : "1"} />
+            {on && <circle cx={cx} cy={cy} r="4" fill={C.good} fillOpacity="0.5"><animate attributeName="fillOpacity" values="0.3;0.7;0.3" dur={`${2 + i * 0.2}s`} repeatCount="indefinite" /></circle>}
+          </g>
+        );
+      })}
+      {[[200, 75, 170, 130], [200, 75, 230, 130], [170, 130, 200, 185], [230, 130, 200, 185], [200, 185, 230, 240]].map(([x1, y1, x2, y2], i) => (
+        <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke={C.good} strokeWidth="1" strokeOpacity="0.2"><animate attributeName="strokeOpacity" values="0.1;0.35;0.1" dur={`${1.5 + i * 0.3}s`} repeatCount="indefinite" /></line>
+      ))}
+      {[[55, 90, "Workforce"], [55, 150, "Clinical"], [55, 210, "Finance"], [330, 90, "Compliance"], [330, 150, "Governance"], [330, 210, "Quality"]].map(([x, y, label], i) => (
+        <text key={i} x={x as number} y={y as number} textAnchor={i < 3 ? "end" : "start"} fill="rgba(26,18,24,0.35)" fontSize="9" fontFamily="system-ui">{label as string}</text>
+      ))}
+    </svg>
+  );
+}
+
+function HIWSupportSVG() {
+  return (
+    <svg viewBox="0 0 400 300" fill="none" className="w-full h-full">
+      <rect width="400" height="300" rx="16" fill="rgba(200,154,60,0.04)" />
+      <rect x="60" y="45" width="280" height="210" rx="12" fill="#fff" stroke="rgba(26,18,24,0.08)" strokeWidth="1" />
+      <rect x="60" y="45" width="280" height="32" rx="12" fill="rgba(26,18,24,0.03)" />
+      <rect x="60" y="65" width="280" height="12" fill="rgba(26,18,24,0.03)" />
+      <circle cx="78" cy="61" r="4" fill={C.good} fillOpacity="0.4" />
+      <circle cx="90" cy="61" r="4" fill={C.copper} fillOpacity="0.4" />
+      <circle cx="102" cy="61" r="4" fill="rgba(26,18,24,0.1)" />
+      {[{ y: 90, w: 250, color: C.warm, label: "RN gap detected. Sunday PM." },
+        { y: 130, w: 220, color: C.good, label: "Care minutes: 188/215. Action needed." },
+        { y: 170, w: 240, color: C.good, label: "SIRS Cat 1 draft ready. Review." }].map((c, i) => (
+        <g key={i}>
+          <rect x="80" y={c.y} width={c.w} height="30" rx="6" fill={c.color} fillOpacity="0.1" stroke={c.color} strokeWidth="1" strokeOpacity="0.15" />
+          <circle cx="94" cy={c.y + 15} r="4" fill={c.color} fillOpacity="0.4"><animate attributeName="fillOpacity" values="0.25;0.5;0.25" dur={`${2.5 + i * 0.4}s`} repeatCount="indefinite" /></circle>
+          <text x="106" y={c.y + 19} fill="rgba(26,18,24,0.5)" fontSize="9" fontFamily="system-ui">{c.label}</text>
+        </g>
+      ))}
+      <path d="M 94 120 L 94 130 L 94 160 L 94 170" stroke={C.copper} strokeWidth="1.5" strokeDasharray="3 3" strokeOpacity="0.3"><animate attributeName="stroke-dashoffset" from="6" to="0" dur="2s" repeatCount="indefinite" /></path>
+      <rect x="80" y="215" width="100" height="24" rx="12" fill="rgba(200,154,60,0.1)" />
+      <text x="130" y="231" textAnchor="middle" fill={C.copper} fontSize="9" fontWeight="500" fontFamily="system-ui">DON, Monday 7am</text>
+    </svg>
+  );
+}
+
+function HIWActSVG() {
+  return (
+    <svg viewBox="0 0 400 300" fill="none" className="w-full h-full">
+      <rect width="400" height="300" rx="16" fill="rgba(200,154,60,0.03)" />
+      <circle cx="200" cy="150" r="90" fill="none" stroke={C.good} strokeWidth="2" strokeOpacity="0.1" />
+      <circle cx="200" cy="150" r="90" fill="none" stroke={C.good} strokeWidth="2.5" strokeOpacity="0.35" strokeDasharray="480 85">
+        <animateTransform attributeName="transform" type="rotate" from="0 200 150" to="360 200 150" dur="12s" repeatCount="indefinite" />
+      </circle>
+      <circle cx="200" cy="150" r="70" fill="none" stroke={C.copper} strokeWidth="2" strokeOpacity="0.15" />
+      <circle cx="200" cy="150" r="70" fill="none" stroke={C.copper} strokeWidth="2.5" strokeOpacity="0.4" strokeDasharray="380 60" strokeLinecap="round">
+        <animateTransform attributeName="transform" type="rotate" from="360 200 150" to="0 200 150" dur="16s" repeatCount="indefinite" />
+      </circle>
+      {[{ a: -90, l: "Trigger", c: C.good }, { a: 0, l: "Draft", c: C.good }, { a: 90, l: "Log", c: C.copper }, { a: 180, l: "Close", c: C.copper }].map((m, i) => {
+        const rad = (m.a * Math.PI) / 180;
+        const cx = 200 + 90 * Math.cos(rad);
+        const cy = 150 + 90 * Math.sin(rad);
+        return (
+          <g key={i}>
+            <circle cx={cx} cy={cy} r="14" fill="#fff" stroke={m.c} strokeWidth="1.5" strokeOpacity="0.3" />
+            <circle cx={cx} cy={cy} r="5" fill={m.c} fillOpacity="0.35" />
+            <text x={cx} y={cy + 28} textAnchor="middle" fill="rgba(26,18,24,0.35)" fontSize="9" fontFamily="system-ui">{m.l}</text>
+          </g>
+        );
+      })}
+      <circle cx="200" cy="150" r="28" fill="rgba(45,106,79,0.08)" />
+      <path d="M 188 150 L 196 158 L 214 140" stroke={C.good} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+    </svg>
+  );
+}
+
+const HIW_ILLUSTRATIONS = [HIWConnectSVG, HIWWatchSVG, HIWSupportSVG, HIWActSVG];
+
+function HowItWorksSection() {
+  const [active, setActive] = useState(0);
+  const [userTouched, setUserTouched] = useState(false);
+  const stage = HIW_STAGES[active];
+  const Illus = HIW_ILLUSTRATIONS[active];
+
+  useEffect(() => {
+    if (userTouched) return;
+    const t = setInterval(() => setActive((p) => (p + 1) % 4), 6000);
+    return () => clearInterval(t);
+  }, [userTouched]);
+
+  return (
+    <section style={{ backgroundColor: C.cream }}>
+      <div className="max-w-6xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
+        {/* Header */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-16 mb-14 lg:mb-18">
+          <div>
+            <p className="text-[11px] font-medium tracking-[0.12em] uppercase mb-4" style={{ color: C.good }}>How it works</p>
+            <h2 className="text-[clamp(1.5rem,3.5vw,2.5rem)] font-normal leading-[1.1] tracking-[-0.01em]" style={{ fontFamily: "Georgia, serif", color: C.inkDark }}>
+              Aged care, with intelligence in every layer
+            </h2>
+          </div>
+          <div className="lg:pt-8">
+            <p className="text-[16px] leading-[1.7]" style={{ color: C.inkMutedLight }}>
+              Cross-domain intelligence working alongside your leaders. Reading every system you already run, catching what slips between domains, supporting the people running care, and handling the routine so they can lead.
+            </p>
+          </div>
+        </div>
+
+        {/* Tab bar */}
+        <div className="flex gap-1 mb-10 lg:mb-14 overflow-x-auto pb-1">
+          {HIW_STAGES.map((s, i) => (
+            <button key={s.num} onClick={() => { setActive(i); setUserTouched(true); }}
+              className="relative flex-1 min-w-[130px] text-left px-5 py-4 rounded-xl transition-all duration-300"
+              style={{
+                backgroundColor: active === i ? "#fff" : "transparent",
+                boxShadow: active === i ? "0 2px 12px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.03)" : "none",
+              }}>
+              <p className="text-[10px] font-medium tracking-[0.1em] uppercase mb-1 transition-colors duration-300"
+                style={{ color: active === i ? s.accent : "rgba(26,18,24,0.3)" }}>{s.num}</p>
+              <p className="text-[14px] font-medium transition-colors duration-300"
+                style={{ color: active === i ? C.inkDark : "rgba(26,18,24,0.35)" }}>{s.label}</p>
+              {active === i && <div className="absolute bottom-0 left-5 right-5 h-[2px] rounded-full" style={{ backgroundColor: s.accent }} />}
+            </button>
+          ))}
+        </div>
+
+        {/* Content: illustration + copy */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+          <div className="order-2 lg:order-1 rounded-2xl overflow-hidden" style={{ backgroundColor: "rgba(26,18,24,0.02)", border: "1px solid rgba(26,18,24,0.04)" }}>
+            <div className="p-4 lg:p-6"><Illus /></div>
+          </div>
+          <div className="order-1 lg:order-2">
+            <p className="text-[11px] font-medium tracking-[0.1em] uppercase mb-3" style={{ color: stage.accent }}>{stage.num} {stage.label}</p>
+            <h3 className="text-[clamp(1.3rem,3vw,1.8rem)] font-normal leading-[1.15] tracking-[-0.01em] mb-5" style={{ fontFamily: "Georgia, serif", color: C.inkDark }}>{stage.title}</h3>
+            <p className="text-[15px] leading-[1.75] mb-6" style={{ color: C.inkMutedLight }}>{stage.body}</p>
+            <div className="flex flex-wrap gap-2">
+              {stage.pills.map((pill) => (
+                <span key={pill} className="px-4 py-2 rounded-full text-[12px] font-medium"
+                  style={{
+                    backgroundColor: stage.accent === C.copper ? "rgba(200,154,60,0.1)" : "rgba(45,106,79,0.08)",
+                    color: stage.accent === C.copper ? C.copperDark : C.good,
+                  }}>{pill}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function StatRow() {
   return (
     <section style={{ backgroundColor: C.cream }}>
@@ -861,6 +1052,7 @@ export default function V2Page() {
       <AgentRibbon />
       <ToolsStrip />
       <IntegrationsSection />
+      <HowItWorksSection />
       <StatRow />
       <JobsSection />
       <ScenarioSection />
