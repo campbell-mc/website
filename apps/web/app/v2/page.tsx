@@ -135,7 +135,7 @@ function Hero() {
       </div>
 
       {/* Product cards — 3 live UI cards, symmetric, Care Minutes centre + tallest */}
-      <div className="relative z-10 max-w-[1060px] mx-auto px-6 lg:px-8 mt-10 lg:mt-16">
+      <div className="relative z-10 max-w-[1060px] mx-auto px-6 lg:px-8 mt-6 lg:mt-8">
         <div className="flex flex-col lg:flex-row items-center lg:items-end justify-center gap-5">
           {/* Left — Review Queue (same width, aligned to bottom) */}
           <div className="w-full lg:w-[300px] shrink-0">
