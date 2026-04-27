@@ -27,9 +27,51 @@ const C = {
 // ─── Data ───────────────────────────────────────────────────────────────────
 
 const TOOLS = [
-  { title: "Care minutes & supplement", blurb: "Are you meeting 215/44? See your compliance position and your financial exposure.", cta: "Run the check →", href: "/tools/care-minutes" },
-  { title: "PSH self-assessment", blurb: "Score your facility across all 16 ISO 45003 psychosocial hazards. Get your convergence risk.", cta: "Start the assessment →", href: "/tools/psh-assessment" },
-  { title: "EX workforce ROI", blurb: "What's turnover, agency dependence, and burnout costing you? Modelled on your facility.", cta: "Calculate ROI →", href: "/tools/ex-roi" },
+  {
+    title: "Care minutes & supplement",
+    blurb: "Are you meeting 215/44? See your compliance position and your financial exposure.",
+    cta: "Run the check →",
+    href: "/tools/care-minutes",
+    stat: "45.9%",
+    statLabel: "of services meeting both targets nationally",
+    accent: C.warm,
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <circle cx="14" cy="14" r="11" stroke="#b5572a" strokeWidth="2.5" strokeDasharray="56 14" strokeLinecap="round"><animateTransform attributeName="transform" type="rotate" from="0 14 14" to="360 14 14" dur="20s" repeatCount="indefinite" /></circle>
+        <text x="14" y="17" textAnchor="middle" fill="#b5572a" fontSize="8" fontWeight="700" fontFamily="system-ui">215</text>
+      </svg>
+    ),
+  },
+  {
+    title: "PSH self-assessment",
+    blurb: "Score your facility across all 16 ISO 45003 psychosocial hazards. Get your convergence risk.",
+    cta: "Start the assessment →",
+    href: "/tools/psh-assessment",
+    stat: "16",
+    statLabel: "hazard domains. One conversation with CHRIS.",
+    accent: C.good,
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        {[0, 1, 2, 3, 4, 5].map((i) => { const a = (i * 60 - 90) * Math.PI / 180; return <circle key={i} cx={14 + 9 * Math.cos(a)} cy={14 + 9 * Math.sin(a)} r="3" fill="#2d6a4f" fillOpacity={0.15 + i * 0.12}><animate attributeName="fillOpacity" values={`${0.15 + i * 0.12};${0.5 + i * 0.08};${0.15 + i * 0.12}`} dur={`${2 + i * 0.3}s`} repeatCount="indefinite" /></circle>; })}
+        <circle cx="14" cy="14" r="4" fill="#2d6a4f" fillOpacity="0.3" />
+      </svg>
+    ),
+  },
+  {
+    title: "EX workforce ROI",
+    blurb: "What's turnover, agency dependence, and burnout costing you? Modelled on your facility.",
+    cta: "Calculate ROI →",
+    href: "/tools/ex-roi",
+    stat: "28%",
+    statLabel: "average aged care turnover rate. What's yours costing?",
+    accent: C.copper,
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <path d="M4 22 L10 14 L16 17 L24 6" stroke="#c89a3c" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+        <circle cx="24" cy="6" r="3" fill="#c89a3c" fillOpacity="0.3"><animate attributeName="r" values="2.5;3.5;2.5" dur="2s" repeatCount="indefinite" /></circle>
+      </svg>
+    ),
+  },
 ];
 
 const STATS = [
@@ -327,27 +369,69 @@ function AgentRibbon() {
 
 function ToolsStrip() {
   return (
-    <section className="pt-12 lg:pt-16 pb-12" style={{ backgroundColor: C.cream }}>
-      <div className="max-w-6xl mx-auto px-6 lg:px-16">
-        <div className="text-[11px] font-medium tracking-[0.12em] uppercase mb-3" style={{ color: C.copperDark }}>
-          See your own numbers · 3 minutes · No signup
+    <section style={{ backgroundColor: C.dark }}>
+      <div className="max-w-6xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <p className="text-[11px] font-medium tracking-[0.15em] uppercase mb-4" style={{ color: C.copper }}>
+            See your own numbers · 3 minutes · No signup
+          </p>
+          <h2 className="text-[clamp(1.5rem,3.5vw,2.5rem)] font-normal leading-[1.1] tracking-[-0.01em] mb-4" style={{ fontFamily: "Georgia, serif", color: C.ink }}>
+            Three tools. Run them on your facility{" "}
+            <em className="italic" style={{ color: C.copper }}>before we ever talk.</em>
+          </h2>
+          <p className="text-[15px] leading-[1.7] max-w-xl mx-auto" style={{ color: C.inkMuted }}>
+            Built on the same intelligence layer Chris runs on. The numbers you see are the numbers we would model on day one.
+          </p>
         </div>
-        <h2 className="text-[clamp(1.3rem,2.5vw,1.8rem)] font-normal leading-[1.2] mb-2" style={{ fontFamily: "Georgia, serif", color: C.inkDark }}>
-          Three tools. Run them on your facility before we ever talk.
-        </h2>
-        <p className="text-[15px] mb-8" style={{ color: C.inkMutedLight }}>
-          Built on the same intelligence layer CHRIS runs on. The numbers you see are the numbers we'd model on day one.
-        </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {/* Tool cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {TOOLS.map((tool) => (
-            <Link key={tool.title} href={tool.href} className="border rounded-lg p-5 transition-all hover:-translate-y-1" style={{ backgroundColor: C.white, borderColor: "rgba(26,18,24,0.1)" }}>
-              <h3 className="text-[15px] font-medium mb-2" style={{ color: C.inkDark }}>{tool.title}</h3>
-              <p className="text-[13px] leading-relaxed mb-3" style={{ color: C.inkMutedLight }}>{tool.blurb}</p>
-              <span className="text-[13px] font-medium" style={{ color: C.copperDark }}>{tool.cta}</span>
+            <Link key={tool.title} href={tool.href}
+              className="group relative rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl"
+              style={{ backgroundColor: "rgba(245,237,227,0.06)", border: "1px solid rgba(245,237,227,0.08)" }}>
+              {/* Accent top bar */}
+              <div className="h-1" style={{ background: `linear-gradient(90deg, ${tool.accent}, ${tool.accent}88)` }} />
+
+              <div className="p-6">
+                {/* Icon + stat row */}
+                <div className="flex items-center justify-between mb-5">
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ backgroundColor: `${tool.accent}15` }}>
+                    {tool.icon}
+                  </div>
+                  <div className="text-right">
+                    <p className="text-[28px] font-light tracking-tight leading-none" style={{ fontFamily: "Georgia, serif", color: tool.accent }}>{tool.stat}</p>
+                  </div>
+                </div>
+
+                {/* Stat context */}
+                <p className="text-[11px] mb-4 leading-relaxed" style={{ color: "rgba(245,237,227,0.35)" }}>{tool.statLabel}</p>
+
+                {/* Title + blurb */}
+                <h3 className="text-[17px] font-medium mb-2 leading-tight" style={{ color: C.ink }}>{tool.title}</h3>
+                <p className="text-[13px] leading-[1.65] mb-5" style={{ color: C.inkMuted }}>{tool.blurb}</p>
+
+                {/* CTA */}
+                <div className="flex items-center gap-2">
+                  <span className="text-[13px] font-medium transition-colors duration-300" style={{ color: tool.accent }}>{tool.cta}</span>
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="transition-transform duration-300 group-hover:translate-x-1">
+                    <path d="M5 3l4 4-4 4" stroke={tool.accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </div>
+              </div>
+
+              {/* Hover glow */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                style={{ background: `radial-gradient(ellipse at 50% 0%, ${tool.accent}08, transparent 70%)` }} />
             </Link>
           ))}
         </div>
+
+        {/* Trust line */}
+        <p className="text-center text-[12px] mt-8" style={{ color: "rgba(245,237,227,0.25)" }}>
+          No email required. No demo. Just your numbers.
+        </p>
       </div>
     </section>
   );
