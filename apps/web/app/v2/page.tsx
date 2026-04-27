@@ -2,8 +2,10 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import ChrisPublicChat from "@/components/ChrisPublicChat";
+import { CareMinutesCard } from "@/components/marketing/cards/CareMinutesCard";
+import { ReviewQueueCard } from "@/components/marketing/cards/ReviewQueueCard";
+import { AgentActivityCard } from "@/components/marketing/cards/AgentActivityCard";
 
 // ─── Brand tokens (Direction F — aubergine) ─────────────────────────────────
 const C = {
@@ -132,66 +134,21 @@ function Hero() {
         </div>
       </div>
 
-      {/* Product cards — 7 cards, no rotation, clean symmetric layout */}
-      <div className="relative z-10 max-w-[1200px] mx-auto px-6 lg:px-0 mt-8 lg:mt-12">
-        {/* Desktop: 3 rows — 2 / 3 (centre tall) / 2 */}
-        <div className="hidden lg:flex flex-col gap-4">
-          {/* Row 1: 2 cards */}
-          <div className="flex justify-center gap-4">
-            <div className="w-[340px] rounded-xl overflow-hidden" style={{ boxShadow: "0 20px 50px rgba(0,0,0,0.2), 0 0 0 1px rgba(245,237,227,0.06)" }}>
-              <Image src="/screenshots/card-2.png" alt="Review Queue" width={680} height={510} className="w-full h-auto" />
-            </div>
-            <div className="w-[340px] rounded-xl overflow-hidden" style={{ boxShadow: "0 20px 50px rgba(0,0,0,0.2), 0 0 0 1px rgba(245,237,227,0.06)" }}>
-              <Image src="/screenshots/card-1.png" alt="Dashboard Home" width={680} height={510} className="w-full h-auto" />
-            </div>
+      {/* Product cards — 3 live UI cards, Care Minutes centre and tallest */}
+      <div className="relative z-10 max-w-[1100px] mx-auto px-6 lg:px-8 mt-10 lg:mt-16">
+        <div className="flex flex-col lg:flex-row items-start justify-center gap-5">
+          {/* Left — Review Queue (shorter, pushed down) */}
+          <div className="w-full lg:w-[320px] lg:mt-12 shrink-0">
+            <ReviewQueueCard />
           </div>
-          {/* Row 2: 3 cards — centre is taller/wider */}
-          <div className="flex justify-center items-start gap-4">
-            <div className="w-[280px] mt-4 rounded-xl overflow-hidden" style={{ boxShadow: "0 20px 50px rgba(0,0,0,0.2), 0 0 0 1px rgba(245,237,227,0.06)" }}>
-              <Image src="/screenshots/card-5.png" alt="Resident Intelligence" width={560} height={420} className="w-full h-auto" />
-            </div>
-            <div className="w-[400px] rounded-xl overflow-hidden" style={{ boxShadow: "0 32px 80px rgba(0,0,0,0.35), 0 0 0 1px rgba(245,237,227,0.08)" }}>
-              <Image src="/screenshots/card-3.png" alt="Care Minutes" width={800} height={600} className="w-full h-auto" />
-            </div>
-            <div className="w-[280px] mt-4 rounded-xl overflow-hidden" style={{ boxShadow: "0 20px 50px rgba(0,0,0,0.2), 0 0 0 1px rgba(245,237,227,0.06)" }}>
-              <Image src="/screenshots/card-6.png" alt="PSH Dashboard" width={560} height={420} className="w-full h-auto" />
-            </div>
+          {/* Centre — Care Minutes (tallest, hero) */}
+          <div className="w-full lg:w-[380px] shrink-0">
+            <CareMinutesCard />
           </div>
-          {/* Row 3: 2 cards */}
-          <div className="flex justify-center gap-4">
-            <div className="w-[340px] rounded-xl overflow-hidden" style={{ boxShadow: "0 20px 50px rgba(0,0,0,0.2), 0 0 0 1px rgba(245,237,227,0.06)" }}>
-              <Image src="/screenshots/card-4.png" alt="SIRS Register" width={680} height={510} className="w-full h-auto" />
-            </div>
-            <div className="w-[340px] rounded-xl overflow-hidden" style={{ boxShadow: "0 20px 50px rgba(0,0,0,0.2), 0 0 0 1px rgba(245,237,227,0.06)" }}>
-              <Image src="/screenshots/card-8.png" alt="Training Compliance" width={680} height={510} className="w-full h-auto" />
-            </div>
+          {/* Right — Agent Activity (shorter, pushed down) */}
+          <div className="w-full lg:w-[320px] lg:mt-12 shrink-0">
+            <AgentActivityCard />
           </div>
-        </div>
-
-        {/* Tablet: 2 + 1 tall + 2 */}
-        <div className="hidden md:flex lg:hidden flex-col gap-3">
-          <div className="flex justify-center gap-3">
-            <div className="w-[45%] rounded-xl overflow-hidden" style={{ boxShadow: "0 16px 40px rgba(0,0,0,0.2)" }}>
-              <Image src="/screenshots/card-2.png" alt="Review Queue" width={500} height={375} className="w-full h-auto" />
-            </div>
-            <div className="w-[45%] rounded-xl overflow-hidden" style={{ boxShadow: "0 16px 40px rgba(0,0,0,0.2)" }}>
-              <Image src="/screenshots/card-1.png" alt="Dashboard Home" width={500} height={375} className="w-full h-auto" />
-            </div>
-          </div>
-          <div className="flex justify-center">
-            <div className="w-[55%] rounded-xl overflow-hidden" style={{ boxShadow: "0 24px 60px rgba(0,0,0,0.3)" }}>
-              <Image src="/screenshots/card-3.png" alt="Care Minutes" width={600} height={450} className="w-full h-auto" />
-            </div>
-          </div>
-        </div>
-
-        {/* Mobile: horizontal scroll */}
-        <div className="md:hidden flex gap-3 overflow-x-auto pb-4 snap-x">
-          {[3,2,1,5,6,4,8].map((n) => (
-            <div key={n} className="shrink-0 w-[280px] rounded-xl overflow-hidden snap-start" style={{ boxShadow: "0 16px 40px rgba(0,0,0,0.2)" }}>
-              <Image src={`/screenshots/card-${n}.png`} alt={`Card ${n}`} width={560} height={420} className="w-full h-auto" />
-            </div>
-          ))}
         </div>
       </div>
     </section>
