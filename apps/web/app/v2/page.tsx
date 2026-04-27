@@ -168,14 +168,14 @@ function AgentRibbon() {
   const doubled = [...items, ...items];
 
   return (
-    <div className="overflow-hidden" style={{ backgroundColor: C.dark, borderTop: "1px solid rgba(245,237,227,0.06)", borderBottom: "1px solid rgba(245,237,227,0.06)" }}>
-      <div className="flex items-center h-10 animate-ticker whitespace-nowrap">
+    <div className="overflow-hidden" style={{ backgroundColor: C.copper, borderTop: `1px solid rgba(255,255,255,0.15)`, borderBottom: `1px solid rgba(255,255,255,0.15)` }}>
+      <div className="flex items-center h-11 animate-ticker whitespace-nowrap">
         {doubled.map((item, i) => (
-          <span key={i} className="inline-flex items-center gap-2 text-[11px] tracking-wide mx-6 shrink-0" style={{ color: "rgba(245,237,227,0.45)" }}>
-            <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: item.color }} />
-            <span className="font-medium" style={{ color: "rgba(245,237,227,0.65)" }}>{item.agent}</span>
-            <span>—</span>
-            <span>{item.text}</span>
+          <span key={i} className="inline-flex items-center gap-2 text-[11px] tracking-wide mx-6 shrink-0" style={{ color: "rgba(26,18,24,0.55)" }}>
+            <span className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: item.color }} />
+            <span className="font-semibold uppercase tracking-wider text-[10px]" style={{ color: C.dark }}>{item.agent}</span>
+            <span style={{ color: "rgba(26,18,24,0.3)" }}>—</span>
+            <span style={{ color: "rgba(26,18,24,0.7)" }}>{item.text}</span>
           </span>
         ))}
       </div>
