@@ -582,14 +582,17 @@ function ToolsStrip() {
     <section style={{ backgroundColor: C.canvas, borderTop: `0.5px solid ${C.border}` }}>
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-14 lg:py-18">
         {/* Header */}
-        <div className="max-w-[540px] mb-10">
+        <div className="max-w-[560px] mb-10">
           <p className="text-[11px] font-medium tracking-[0.08em] uppercase mb-3" style={{ color: C.teal }}>
             See your own numbers. 3 minutes. No signup.
           </p>
           <h2 className="text-[clamp(1.4rem,3vw,1.65rem)] font-medium leading-[1.1] tracking-[-0.025em] mb-3" style={{ color: C.text }}>
             Four tools. Run them on your facility before we ever talk.
           </h2>
-          <p className="text-[14px] leading-[1.6]" style={{ color: C.textMuted }}>
+          <p className="text-[14px] leading-[1.6] mb-2" style={{ color: C.textMuted }}>
+            Each one models a question on the agenda of every aged care board right now: supplement exposure, psychosocial obligations, the cost of workforce instability, and the state of your leadership pipeline.
+          </p>
+          <p className="text-[13px] leading-[1.6]" style={{ color: C.textFaint }}>
             Built on the same intelligence layer Chris runs on. The numbers you see are the numbers we would model on day one.
           </p>
         </div>
