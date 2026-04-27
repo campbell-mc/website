@@ -460,11 +460,53 @@ export default function HowItWorksPage() {
 
           <div className="mt-10 text-center">
             <p className="text-[13px] leading-relaxed" style={{ color: P.inkMuted }}>
-              Plus Chris21, AlayaCare, Tanda, Roubler, Visual Care, GPMS, and any system with an API or structured export.
+              Plus ichris, AlayaCare, Tanda, Roubler, Visual Care, and any system with an API or structured export.
             </p>
             <div className="flex items-center justify-center gap-2 mt-4">
               <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: P.sage, opacity: 0.4 }} />
               <span className="text-[11px] font-medium" style={{ color: P.sage }}>New connectors added monthly</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── B2G / GPMS callout ─────────────────────────────────────────── */}
+      <section style={{ backgroundColor: P.canvasAlt }}>
+        <div className="max-w-6xl mx-auto px-6 lg:px-16 pb-16 lg:pb-20">
+          <div className="rounded-2xl overflow-hidden" style={{ backgroundColor: P.white, border: `1px solid ${P.inkFaint}`, boxShadow: "0 1px 4px rgba(0,0,0,0.03)" }}>
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-6 lg:gap-10 p-6 lg:p-8 items-center">
+              <div>
+                <p className="text-[10px] font-semibold tracking-[0.12em] uppercase mb-2" style={{ color: P.sage }}>Compliance, handled</p>
+                <h3 className="text-[clamp(1.1rem,2.5vw,1.5rem)] font-semibold leading-[1.2] mb-3" style={{ color: P.ink }}>
+                  Reports straight to GPMS via the B2G gateway
+                </h3>
+                <p className="text-[14px] leading-[1.7] max-w-2xl" style={{ color: P.inkSoft }}>
+                  Aligned with the Aged Care Act 2024. Chris connects to the Government Provider Management System through the Business-to-Government APIs. Mandatory reporting flows from your operation to the Department of Health, the Aged Care Quality and Safety Commission, and the NDIA without manual handling.
+                </p>
+              </div>
+              {/* B2G flow diagram */}
+              <div className="flex items-center gap-3 lg:gap-4 shrink-0">
+                <div className="flex flex-col items-center gap-1">
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ backgroundColor: `${P.sage}12` }}>
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="3" width="16" height="14" rx="2" stroke={P.sage} strokeWidth="1.5" /><path d="M6 7h8M6 10h5" stroke={P.sage} strokeWidth="1.2" strokeLinecap="round" /></svg>
+                  </div>
+                  <span className="text-[9px] font-medium" style={{ color: P.inkMuted }}>Your data</span>
+                </div>
+                <svg width="32" height="12" viewBox="0 0 32 12" fill="none"><path d="M0 6h28M24 2l4 4-4 4" stroke={P.sage} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.4" /></svg>
+                <div className="flex flex-col items-center gap-1">
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ backgroundColor: `${P.coral}12` }}>
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke={P.coral} strokeWidth="1.5" /><path d="M10 6v4l2.5 2.5" stroke={P.coral} strokeWidth="1.2" strokeLinecap="round" /></svg>
+                  </div>
+                  <span className="text-[9px] font-medium" style={{ color: P.inkMuted }}>B2G gateway</span>
+                </div>
+                <svg width="32" height="12" viewBox="0 0 32 12" fill="none"><path d="M0 6h28M24 2l4 4-4 4" stroke={P.coral} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.4" /></svg>
+                <div className="flex flex-col items-center gap-1">
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ backgroundColor: "rgba(45,42,46,0.05)" }}>
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L3 7v9h14V7L10 2z" stroke={P.ink} strokeWidth="1.5" strokeLinejoin="round" opacity="0.5" /><rect x="7.5" y="11" width="5" height="5" rx="0.5" stroke={P.ink} strokeWidth="1" opacity="0.3" /></svg>
+                  </div>
+                  <span className="text-[9px] font-medium" style={{ color: P.inkMuted }}>Government</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>

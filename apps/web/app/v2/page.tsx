@@ -407,11 +407,60 @@ function IntegrationsSection() {
 
         <div className="mt-8 text-center">
           <p className="text-[12px] leading-relaxed" style={{ color: "rgba(26,18,24,0.4)" }}>
-            Plus Chris21, AlayaCare, Tanda, Roubler, Visual Care, GPMS, and any system with an API or structured export.
+            Plus ichris, AlayaCare, Tanda, Roubler, Visual Care, and any system with an API or structured export.
           </p>
           <div className="flex items-center justify-center gap-2 mt-3">
             <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: C.good, opacity: 0.5 }} />
             <span className="text-[11px] font-medium" style={{ color: C.good }}>New connectors added monthly</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function GPMSCallout() {
+  return (
+    <section style={{ backgroundColor: C.cream }}>
+      <div className="max-w-6xl mx-auto px-6 lg:px-16 pb-14 lg:pb-20">
+        <div className="rounded-2xl overflow-hidden" style={{ backgroundColor: "#fff", border: "1px solid rgba(26,18,24,0.06)", boxShadow: "0 1px 4px rgba(0,0,0,0.03)" }}>
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-6 lg:gap-10 p-6 lg:p-8 items-center">
+            <div>
+              <p className="text-[10px] font-medium tracking-[0.12em] uppercase mb-2" style={{ color: C.good }}>Compliance, handled</p>
+              <h3 className="text-[clamp(1.1rem,2.5vw,1.5rem)] font-normal leading-[1.2] mb-3" style={{ fontFamily: "Georgia, serif", color: C.inkDark }}>
+                Reports straight to GPMS via the B2G gateway
+              </h3>
+              <p className="text-[14px] leading-[1.7] max-w-2xl" style={{ color: C.inkMutedLight }}>
+                Aligned with the Aged Care Act 2024. Chris connects to the Government Provider Management System through the Business-to-Government APIs. Mandatory reporting flows from your operation to the Department of Health, the Aged Care Quality and Safety Commission, and the NDIA without manual handling.
+              </p>
+            </div>
+            {/* B2G flow diagram */}
+            <div className="flex items-center gap-3 lg:gap-4 shrink-0">
+              <div className="flex flex-col items-center gap-1">
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ backgroundColor: "rgba(45,106,79,0.08)" }}>
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="3" width="16" height="14" rx="2" stroke={C.good} strokeWidth="1.5" /><path d="M6 7h8M6 10h5" stroke={C.good} strokeWidth="1.2" strokeLinecap="round" /></svg>
+                </div>
+                <span className="text-[9px] font-medium" style={{ color: C.inkMutedLight }}>Your data</span>
+              </div>
+              <div className="flex flex-col items-center gap-0.5">
+                <svg width="32" height="12" viewBox="0 0 32 12" fill="none"><path d="M0 6h28M24 2l4 4-4 4" stroke={C.good} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.4" /></svg>
+              </div>
+              <div className="flex flex-col items-center gap-1">
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ backgroundColor: "rgba(200,154,60,0.08)" }}>
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke={C.copper} strokeWidth="1.5" /><path d="M10 6v4l2.5 2.5" stroke={C.copper} strokeWidth="1.2" strokeLinecap="round" /></svg>
+                </div>
+                <span className="text-[9px] font-medium" style={{ color: C.inkMutedLight }}>B2G gateway</span>
+              </div>
+              <div className="flex flex-col items-center gap-0.5">
+                <svg width="32" height="12" viewBox="0 0 32 12" fill="none"><path d="M0 6h28M24 2l4 4-4 4" stroke={C.copper} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.4" /></svg>
+              </div>
+              <div className="flex flex-col items-center gap-1">
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ backgroundColor: "rgba(26,18,24,0.05)" }}>
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L3 7v9h14V7L10 2z" stroke={C.inkDark} strokeWidth="1.5" strokeLinejoin="round" opacity="0.5" /><rect x="7.5" y="11" width="5" height="5" rx="0.5" stroke={C.inkDark} strokeWidth="1" opacity="0.3" /></svg>
+                </div>
+                <span className="text-[9px] font-medium" style={{ color: C.inkMutedLight }}>Government</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1052,6 +1101,7 @@ export default function V2Page() {
       <AgentRibbon />
       <ToolsStrip />
       <IntegrationsSection />
+      <GPMSCallout />
       <HowItWorksSection />
       <StatRow />
       <JobsSection />
