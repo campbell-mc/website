@@ -345,9 +345,10 @@ function Hero() {
 
       {/* Setup line above mockups */}
       <div className="max-w-6xl mx-auto px-6 lg:px-16 mt-8">
-        <div className="max-w-[520px]">
-          <p className="text-[11px] font-medium uppercase tracking-[0.08em] mb-1.5" style={{ color: C.teal }}>A facility on Chris, right now</p>
-          <p className="text-[14px] leading-[1.5]" style={{ color: C.textMuted }}>Three live views from Mt Gibraltar Gardens, Monday morning.</p>
+        <div className="max-w-[560px]">
+          <p className="text-[11px] font-medium uppercase tracking-[0.08em] mb-1.5" style={{ color: C.teal }}>A facility using Chris, right now</p>
+          <p className="text-[14px] leading-[1.5] mb-3" style={{ color: C.textMuted }}>Three live views from Mt Gibraltar Gardens, Monday morning. The DON&apos;s review queue, today&apos;s care minutes, and Chris&apos;s agents working in the background.</p>
+          <p className="text-[13px] leading-[1.55]" style={{ color: C.textFaint }}>Agentic AI means software that does the productivity work without being asked. Five agents, each with one job: Sentinel monitors, Chronicler drafts, Oracle recommends, Keeper protects, Steward optimises. They read your systems and act in the flow of work, while your leaders run care.</p>
         </div>
       </div>
 
