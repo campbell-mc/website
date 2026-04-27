@@ -110,7 +110,8 @@ function compute(i: Inputs) {
   const netImpact105 = supplementCaptured - totalCost105;
 
   return {
-    totalMin, effectiveRnPct: Math.round(effectiveRnPct * 100), totalPct: Math.round(totalPct * 100),
+    totalMin, effectiveRn: Math.round(effectiveRn * 10) / 10, enAllowance: Math.round(enAllowance * 10) / 10,
+    effectiveRnPct: Math.round(effectiveRnPct * 100), totalPct: Math.round(totalPct * 100),
     gatingPct: Math.round(gatingPct * 100), supplementFactor: Math.round(supplementFactor * 100),
     occupiedBeds: Math.round(occupiedBeds), maxSupplement, currentEntitlement, gap, diagnosis,
     totalCostToTarget, netImpact, totalCost105, netImpact105,
@@ -207,9 +208,10 @@ export default function MM1Calculator() {
                 <Slider label="RN minutes" value={inp.rnMin} min={0} max={65} step={1} display={String(inp.rnMin)} sublabel="Counts toward both targets" onChange={set("rnMin")} />
                 <Slider label="EN minutes" value={inp.enMin} min={0} max={40} step={1} display={String(inp.enMin)} sublabel="Capped at 10% of RN target (4.4 min)" onChange={set("enMin")} />
                 <Slider label="PCW / AIN minutes" value={inp.pcwMin} min={80} max={220} step={2} display={String(inp.pcwMin)} sublabel="Total target only" onChange={set("pcwMin")} />
-                <div className="mt-3 pt-3 border-t" style={{ borderColor: "rgba(26,18,24,0.06)" }}>
-                  <div className="flex justify-between text-[12px]"><span style={{ color: "rgba(26,18,24,0.5)" }}>Total minutes</span><span className="font-medium" style={{ color: r.totalPct >= 100 ? C.good : C.warn }}>{r.totalMin} / 215</span></div>
-                  <div className="flex justify-between text-[12px] mt-1"><span style={{ color: "rgba(26,18,24,0.5)" }}>Effective RN</span><span className="font-medium" style={{ color: r.effectiveRnPct >= 100 ? C.good : C.warn }}>{r.effectiveRnPct}%</span></div>
+                <div className="mt-3 pt-3 border-t space-y-1.5" style={{ borderColor: "rgba(26,18,24,0.06)" }}>
+                  <div className="flex justify-between text-[12px]"><span style={{ color: "rgba(26,18,24,0.5)" }}>Total minutes</span><span className="font-medium" style={{ color: r.totalPct >= 100 ? C.good : C.warn }}>{r.totalMin} / 215 ({r.totalPct}%)</span></div>
+                  <div className="flex justify-between text-[12px]"><span style={{ color: "rgba(26,18,24,0.5)" }}>Effective RN</span><span className="font-medium" style={{ color: r.effectiveRnPct >= 100 ? C.good : C.warn }}>{r.effectiveRn} / 44 ({r.effectiveRnPct}%)</span></div>
+                  {r.enAllowance > 0 && <p className="text-[10px] leading-relaxed" style={{ color: "rgba(26,18,24,0.35)" }}>Effective RN = {inp.rnMin} RN + {r.enAllowance} EN allowance = {r.effectiveRn} min</p>}
                 </div>
               </div>
 
