@@ -104,7 +104,7 @@ function Hero() {
       <div className="absolute inset-0 pointer-events-none opacity-[0.03]" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`, backgroundSize: "200px 200px" }} />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-16 pt-16 lg:pt-24 pb-20 lg:pb-28">
-        <div className="max-w-2xl">
+        <div className="max-w-2xl mx-auto text-center">
           <div className="text-[11px] font-medium tracking-[0.15em] uppercase mb-8" style={{ color: C.copper }}>
             Live with providers in NSW and VIC
           </div>
@@ -114,14 +114,14 @@ function Hero() {
             <em className="italic" style={{ color: C.copper }}>running with intelligence.</em>
           </h1>
 
-          <p className="text-[17px] leading-[1.65] max-w-[500px] mb-10" style={{ color: C.inkMuted }}>
+          <p className="text-[17px] leading-[1.65] max-w-[500px] mx-auto mb-10" style={{ color: C.inkMuted }}>
             Seven AI agents monitor every domain of your operation — clinical,
             financial, workforce, compliance, governance — continuously,
             simultaneously, and across every system you already run. When something
             needs action, CHRIS executes it.
           </p>
 
-          <div className="flex items-center gap-3 flex-wrap">
+          <div className="flex items-center gap-3 flex-wrap justify-center">
             <a href="#book" className="px-7 py-3.5 rounded text-[14px] font-medium transition-colors hover:opacity-90" style={{ backgroundColor: C.copper, color: C.dark }}>
               Book a 30-min conversation
             </a>
@@ -132,119 +132,75 @@ function Hero() {
         </div>
       </div>
 
-      {/* Floating product cards — Prism-style constellation with centre hero */}
-      <div className="relative z-10 pb-0 -mb-16 lg:-mb-28">
-        {/* Desktop: constellation layout */}
-        <div className="hidden lg:block relative mx-auto" style={{ maxWidth: "1400px", height: "620px" }}>
-          {/* Centre hero card — Care Minutes, largest, dominant */}
-          <div className="absolute group" style={{ left: "50%", top: "50%", transform: "translate(-50%, -50%)", width: "42%", zIndex: 10 }}>
-            <div className="rounded-2xl overflow-hidden transition-all duration-500 group-hover:scale-[1.03]"
-              style={{ boxShadow: "0 40px 100px rgba(0,0,0,0.4), 0 0 0 1px rgba(245,237,227,0.08)" }}>
-              <Image src="/screenshots/card-3.png" alt="Care Minutes" width={800} height={600} className="w-full h-auto" priority />
+      {/* Product cards — 7 cards, no rotation, clean symmetric layout */}
+      <div className="relative z-10 max-w-[1200px] mx-auto px-6 lg:px-0 mt-8 lg:mt-12">
+        {/* Desktop: 3 rows — 2 / 3 (centre tall) / 2 */}
+        <div className="hidden lg:flex flex-col gap-4">
+          {/* Row 1: 2 cards */}
+          <div className="flex justify-center gap-4">
+            <div className="w-[340px] rounded-xl overflow-hidden" style={{ boxShadow: "0 20px 50px rgba(0,0,0,0.2), 0 0 0 1px rgba(245,237,227,0.06)" }}>
+              <Image src="/screenshots/card-2.png" alt="Review Queue" width={680} height={510} className="w-full h-auto" />
+            </div>
+            <div className="w-[340px] rounded-xl overflow-hidden" style={{ boxShadow: "0 20px 50px rgba(0,0,0,0.2), 0 0 0 1px rgba(245,237,227,0.06)" }}>
+              <Image src="/screenshots/card-1.png" alt="Dashboard Home" width={680} height={510} className="w-full h-auto" />
             </div>
           </div>
-
-          {/* Satellite cards — scattered around centre, edges bleeding off */}
-
-          {/* Top-left — partially off-screen */}
-          <div className="absolute group" style={{ left: "-3%", top: "20px", width: "28%", zIndex: 5, animation: "satFloat 9s ease-in-out infinite" }}>
-            <div className="rounded-xl overflow-hidden transition-all duration-500 group-hover:scale-[1.04]"
-              style={{ transform: "rotate(-4deg)", boxShadow: "0 24px 60px rgba(0,0,0,0.25)" }}>
-              <Image src="/screenshots/card-2.png" alt="Review Queue" width={500} height={375} className="w-full h-auto" />
+          {/* Row 2: 3 cards — centre is taller/wider */}
+          <div className="flex justify-center items-start gap-4">
+            <div className="w-[280px] mt-4 rounded-xl overflow-hidden" style={{ boxShadow: "0 20px 50px rgba(0,0,0,0.2), 0 0 0 1px rgba(245,237,227,0.06)" }}>
+              <Image src="/screenshots/card-5.png" alt="Resident Intelligence" width={560} height={420} className="w-full h-auto" />
+            </div>
+            <div className="w-[400px] rounded-xl overflow-hidden" style={{ boxShadow: "0 32px 80px rgba(0,0,0,0.35), 0 0 0 1px rgba(245,237,227,0.08)" }}>
+              <Image src="/screenshots/card-3.png" alt="Care Minutes" width={800} height={600} className="w-full h-auto" />
+            </div>
+            <div className="w-[280px] mt-4 rounded-xl overflow-hidden" style={{ boxShadow: "0 20px 50px rgba(0,0,0,0.2), 0 0 0 1px rgba(245,237,227,0.06)" }}>
+              <Image src="/screenshots/card-6.png" alt="PSH Dashboard" width={560} height={420} className="w-full h-auto" />
             </div>
           </div>
-
-          {/* Top-right — partially off-screen */}
-          <div className="absolute group" style={{ right: "-4%", top: "10px", width: "26%", zIndex: 4, animation: "satFloat 10s ease-in-out infinite", animationDelay: "1s" }}>
-            <div className="rounded-xl overflow-hidden transition-all duration-500 group-hover:scale-[1.04]"
-              style={{ transform: "rotate(3.5deg)", boxShadow: "0 24px 60px rgba(0,0,0,0.25)" }}>
-              <Image src="/screenshots/card-1.png" alt="Dashboard Home" width={500} height={375} className="w-full h-auto" />
+          {/* Row 3: 2 cards */}
+          <div className="flex justify-center gap-4">
+            <div className="w-[340px] rounded-xl overflow-hidden" style={{ boxShadow: "0 20px 50px rgba(0,0,0,0.2), 0 0 0 1px rgba(245,237,227,0.06)" }}>
+              <Image src="/screenshots/card-4.png" alt="SIRS Register" width={680} height={510} className="w-full h-auto" />
             </div>
-          </div>
-
-          {/* Left middle — bleeding off left edge */}
-          <div className="absolute group" style={{ left: "-5%", top: "220px", width: "24%", zIndex: 6, animation: "satFloat 11s ease-in-out infinite", animationDelay: "2s" }}>
-            <div className="rounded-xl overflow-hidden transition-all duration-500 group-hover:scale-[1.04]"
-              style={{ transform: "rotate(2deg)", boxShadow: "0 20px 50px rgba(0,0,0,0.2)" }}>
-              <Image src="/screenshots/card-5.png" alt="Resident Intelligence" width={450} height={340} className="w-full h-auto" />
-            </div>
-          </div>
-
-          {/* Right middle */}
-          <div className="absolute group" style={{ right: "-3%", top: "240px", width: "25%", zIndex: 6, animation: "satFloat 8s ease-in-out infinite", animationDelay: "0.5s" }}>
-            <div className="rounded-xl overflow-hidden transition-all duration-500 group-hover:scale-[1.04]"
-              style={{ transform: "rotate(-2.5deg)", boxShadow: "0 20px 50px rgba(0,0,0,0.2)" }}>
-              <Image src="/screenshots/card-6.png" alt="PSH Dashboard" width={450} height={340} className="w-full h-auto" />
-            </div>
-          </div>
-
-          {/* Bottom-left */}
-          <div className="absolute group" style={{ left: "5%", bottom: "-20px", width: "22%", zIndex: 7, animation: "satFloat 10s ease-in-out infinite", animationDelay: "3s" }}>
-            <div className="rounded-xl overflow-hidden transition-all duration-500 group-hover:scale-[1.04]"
-              style={{ transform: "rotate(3deg)", boxShadow: "0 20px 50px rgba(0,0,0,0.2)" }}>
-              <Image src="/screenshots/card-4.png" alt="SIRS Register" width={400} height={300} className="w-full h-auto" />
-            </div>
-          </div>
-
-          {/* Bottom-centre-right */}
-          <div className="absolute group" style={{ right: "15%", bottom: "-30px", width: "23%", zIndex: 8, animation: "satFloat 9s ease-in-out infinite", animationDelay: "1.5s" }}>
-            <div className="rounded-xl overflow-hidden transition-all duration-500 group-hover:scale-[1.04]"
-              style={{ transform: "rotate(-1.5deg)", boxShadow: "0 20px 50px rgba(0,0,0,0.2)" }}>
-              <Image src="/screenshots/card-8.png" alt="Training" width={400} height={300} className="w-full h-auto" />
-            </div>
-          </div>
-
-          {/* Bottom-right — bleeding off edge */}
-          <div className="absolute group" style={{ right: "-6%", bottom: "30px", width: "20%", zIndex: 3, animation: "satFloat 12s ease-in-out infinite", animationDelay: "2.5s" }}>
-            <div className="rounded-xl overflow-hidden transition-all duration-500 group-hover:scale-[1.04]"
-              style={{ transform: "rotate(4deg)", boxShadow: "0 16px 40px rgba(0,0,0,0.15)" }}>
-              <Image src="/screenshots/card-9.png" alt="Reporting" width={380} height={285} className="w-full h-auto" />
+            <div className="w-[340px] rounded-xl overflow-hidden" style={{ boxShadow: "0 20px 50px rgba(0,0,0,0.2), 0 0 0 1px rgba(245,237,227,0.06)" }}>
+              <Image src="/screenshots/card-8.png" alt="Training Compliance" width={680} height={510} className="w-full h-auto" />
             </div>
           </div>
         </div>
 
-        {/* Tablet: overlapping stack */}
-        <div className="hidden md:block lg:hidden relative mx-auto px-6" style={{ maxWidth: "700px", height: "400px" }}>
-          <div className="absolute" style={{ left: "0", top: "0", width: "55%", zIndex: 2 }}>
-            <div className="rounded-xl overflow-hidden" style={{ transform: "rotate(-2deg)", boxShadow: "0 24px 60px rgba(0,0,0,0.3)" }}>
-              <Image src="/screenshots/card-1.png" alt="Dashboard" width={600} height={450} className="w-full h-auto" />
+        {/* Tablet: 2 + 1 tall + 2 */}
+        <div className="hidden md:flex lg:hidden flex-col gap-3">
+          <div className="flex justify-center gap-3">
+            <div className="w-[45%] rounded-xl overflow-hidden" style={{ boxShadow: "0 16px 40px rgba(0,0,0,0.2)" }}>
+              <Image src="/screenshots/card-2.png" alt="Review Queue" width={500} height={375} className="w-full h-auto" />
+            </div>
+            <div className="w-[45%] rounded-xl overflow-hidden" style={{ boxShadow: "0 16px 40px rgba(0,0,0,0.2)" }}>
+              <Image src="/screenshots/card-1.png" alt="Dashboard Home" width={500} height={375} className="w-full h-auto" />
             </div>
           </div>
-          <div className="absolute" style={{ right: "0", top: "20px", width: "52%", zIndex: 3 }}>
-            <div className="rounded-xl overflow-hidden" style={{ transform: "rotate(1.5deg)", boxShadow: "0 24px 60px rgba(0,0,0,0.3)" }}>
-              <Image src="/screenshots/card-2.png" alt="Review Queue" width={600} height={450} className="w-full h-auto" />
-            </div>
-          </div>
-          <div className="absolute" style={{ left: "10%", bottom: "-10px", width: "45%", zIndex: 4 }}>
-            <div className="rounded-xl overflow-hidden" style={{ transform: "rotate(2deg)", boxShadow: "0 20px 50px rgba(0,0,0,0.25)" }}>
-              <Image src="/screenshots/card-3.png" alt="Care Minutes" width={500} height={375} className="w-full h-auto" />
+          <div className="flex justify-center">
+            <div className="w-[55%] rounded-xl overflow-hidden" style={{ boxShadow: "0 24px 60px rgba(0,0,0,0.3)" }}>
+              <Image src="/screenshots/card-3.png" alt="Care Minutes" width={600} height={450} className="w-full h-auto" />
             </div>
           </div>
         </div>
 
         {/* Mobile: horizontal scroll */}
-        <div className="md:hidden flex gap-4 overflow-x-auto pb-4 px-6 snap-x">
-          {[1,2,3,4,5,6,8,9].map((n) => (
-            <div key={n} className="shrink-0 w-[280px] rounded-xl overflow-hidden snap-start" style={{ boxShadow: "0 20px 50px rgba(0,0,0,0.25)" }}>
+        <div className="md:hidden flex gap-3 overflow-x-auto pb-4 snap-x">
+          {[3,2,1,5,6,4,8].map((n) => (
+            <div key={n} className="shrink-0 w-[280px] rounded-xl overflow-hidden snap-start" style={{ boxShadow: "0 16px 40px rgba(0,0,0,0.2)" }}>
               <Image src={`/screenshots/card-${n}.png`} alt={`Card ${n}`} width={560} height={420} className="w-full h-auto" />
             </div>
           ))}
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes satFloat {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-8px); }
-        }
-      `}</style>
     </section>
   );
 }
 
 function ToolsStrip() {
   return (
-    <section className="pt-32 lg:pt-52 pb-12" style={{ backgroundColor: C.cream }}>
+    <section className="pt-12 lg:pt-16 pb-12" style={{ backgroundColor: C.cream }}>
       <div className="max-w-6xl mx-auto px-6 lg:px-16">
         <div className="text-[11px] font-medium tracking-[0.12em] uppercase mb-3" style={{ color: C.copperDark }}>
           See your own numbers · 3 minutes · No signup
