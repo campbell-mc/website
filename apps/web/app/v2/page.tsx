@@ -27,9 +27,9 @@ const C = {
 // ─── Data ───────────────────────────────────────────────────────────────────
 
 const TOOLS = [
-  { title: "Care minutes & supplement", blurb: "Are you meeting 215/44? See your compliance position and your financial exposure.", cta: "Run the check →", href: "/care-minutes" },
-  { title: "PSH self-assessment", blurb: "Score your facility across all 16 ISO 45003 psychosocial hazards. Get your convergence risk.", cta: "Start the assessment →", href: "/v2" },
-  { title: "EX workforce ROI", blurb: "What's turnover, agency dependence, and burnout costing you? Modelled on your facility.", cta: "Calculate ROI →", href: "/v2" },
+  { title: "Care minutes & supplement", blurb: "Are you meeting 215/44? See your compliance position and your financial exposure.", cta: "Run the check →", href: "/tools/care-minutes" },
+  { title: "PSH self-assessment", blurb: "Score your facility across all 16 ISO 45003 psychosocial hazards. Get your convergence risk.", cta: "Start the assessment →", href: "/tools/psh-assessment" },
+  { title: "EX workforce ROI", blurb: "What's turnover, agency dependence, and burnout costing you? Modelled on your facility.", cta: "Calculate ROI →", href: "/tools/ex-roi" },
 ];
 
 const STATS = [
@@ -87,7 +87,7 @@ function Nav() {
           CHRIS<span style={{ color: C.copper }}>·</span>OS
         </Link>
         <div className="flex items-center gap-6">
-          <Link href="/care-minutes" className="text-[13px] hidden md:block transition-colors hover:opacity-80" style={{ color: C.inkMuted }}>Tools</Link>
+          <Link href="/tools/care-minutes" className="text-[13px] hidden md:block transition-colors hover:opacity-80" style={{ color: C.inkMuted }}>Tools</Link>
           <Link href="/technology" className="text-[13px] hidden md:block transition-colors hover:opacity-80" style={{ color: C.inkMuted }}>Technology</Link>
           <Link href="/newsroom" className="text-[13px] hidden md:block transition-colors hover:opacity-80" style={{ color: C.inkMuted }}>Newsroom</Link>
           <a href="#book" className="text-[13px] font-medium px-5 py-2 rounded transition-colors" style={{ backgroundColor: C.copper, color: C.dark }}>
@@ -494,7 +494,7 @@ function Footer() {
           <div>
             <p className="text-[11px] font-medium uppercase tracking-wider mb-3" style={{ color: "rgba(245,237,227,0.35)" }}>Product</p>
             <div className="space-y-2">
-              {[["Tools", "/care-minutes"], ["Technology", "/technology"], ["Newsroom", "/newsroom"], ["Book a conversation", "#book"]].map(([label, href]) => (
+              {[["Tools", "/tools/care-minutes"], ["Technology", "/technology"], ["Newsroom", "/newsroom"], ["Book a conversation", "#book"]].map(([label, href]) => (
                 <Link key={label} href={href} className="block text-[13px] transition-colors hover:opacity-80" style={{ color: "rgba(245,237,227,0.55)" }}>{label}</Link>
               ))}
             </div>
