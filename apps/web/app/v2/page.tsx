@@ -424,11 +424,11 @@ function WhatChrisIsSection() {
 
   return (
     <section style={{ backgroundColor: C.dark }}>
-      <div className="max-w-6xl mx-auto px-6 lg:px-16 py-14 lg:py-20">
+      <div className="max-w-6xl mx-auto px-6 lg:px-16 py-12 lg:py-16">
         {/* Headline block */}
-        <div className="text-center max-w-[60ch] mx-auto mb-12 lg:mb-16">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.15em] mb-4" style={{ color: C.copper }}>What Chris is</p>
-          <h2 className="text-[clamp(1.8rem,4vw,3rem)] font-bold leading-[1.08] tracking-[-0.02em] mb-5" style={{ color: "#ffffff" }}>
+        <div className="text-center max-w-[60ch] mx-auto mb-8 lg:mb-10">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.15em] mb-3" style={{ color: C.copper }}>What Chris is</p>
+          <h2 className="text-[clamp(1.8rem,4vw,3rem)] font-bold leading-[1.08] tracking-[-0.02em] mb-4" style={{ color: "#ffffff" }}>
             The intelligence layer between your stack and your leaders.
           </h2>
           <p className="text-[17px] leading-[1.7]" style={{ color: "rgba(245,237,227,0.6)" }}>
@@ -437,7 +437,7 @@ function WhatChrisIsSection() {
         </div>
 
         {/* Vertical architecture diagram: Systems → Chris → Leaders */}
-        <div className="max-w-lg mx-auto mb-14 lg:mb-18">
+        <div className="max-w-lg mx-auto mb-8 lg:mb-10">
           {/* Band 1: Systems (bottom of stack, shown first = top visually for vertical reading) */}
           <div className="rounded-2xl p-5 lg:p-6" style={{ backgroundColor: C.cream, border: "1px solid rgba(26,18,24,0.06)", boxShadow: "0 2px 12px rgba(0,0,0,0.03)" }}>
             <p className="text-[11px] font-bold uppercase tracking-[0.12em] mb-3 text-center" style={{ color: "rgba(26,18,24,0.4)" }}>The systems you already run</p>
@@ -449,7 +449,7 @@ function WhatChrisIsSection() {
           </div>
 
           {/* Arrow: READS ↓ */}
-          <div className="flex flex-col items-center py-3">
+          <div className="flex flex-col items-center py-2">
             <span className="text-[9px] font-bold uppercase tracking-[0.15em] mb-1" style={{ color: C.good }}>Reads</span>
             <svg width="14" height="28" viewBox="0 0 14 28" fill="none"><path d="M7 0v24M3 20l4 4 4-4" stroke={C.good} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
           </div>
@@ -472,7 +472,7 @@ function WhatChrisIsSection() {
           </div>
 
           {/* Arrows: SUPPORTS + ACTS ↓ */}
-          <div className="flex items-center justify-center gap-10 py-3">
+          <div className="flex items-center justify-center gap-10 py-2">
             <div className="flex flex-col items-center">
               <span className="text-[9px] font-bold uppercase tracking-[0.15em] mb-1" style={{ color: C.good }}>Supports</span>
               <svg width="14" height="28" viewBox="0 0 14 28" fill="none"><path d="M7 0v24M3 20l4 4 4-4" stroke={C.good} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
@@ -494,26 +494,25 @@ function WhatChrisIsSection() {
           </div>
         </div>
 
-        {/* Four explainer cards with progressive disclosure */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+        {/* Four explainer cards — vertical stack, progressive disclosure */}
+        <div className="max-w-2xl mx-auto space-y-2 mb-8">
           {cards.map((card, i) => {
             const isOpen = expanded === i;
             return (
               <button key={card.eyebrow} onClick={() => setExpanded(isOpen ? null : i)}
-                className="rounded-xl text-left transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
-                style={{ backgroundColor: "#fff", boxShadow: isOpen ? "0 4px 20px rgba(0,0,0,0.08)" : "0 1px 3px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.03)" }}>
-                <div className="p-5">
-                  <div className="flex items-center justify-between mb-2">
-                    <p className="text-[10px] font-bold uppercase tracking-[0.12em]" style={{ color: C.copper }}>{card.eyebrow}</p>
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className={`transition-transform duration-300 ${isOpen ? "rotate-45" : ""}`}>
-                      <path d="M8 3v10M3 8h10" stroke={C.copper} strokeWidth="1.5" strokeLinecap="round" />
+                className="w-full rounded-xl text-left transition-all duration-300"
+                style={{ backgroundColor: isOpen ? "#fff" : "rgba(255,255,255,0.97)", boxShadow: isOpen ? "0 4px 20px rgba(0,0,0,0.08)" : "0 1px 3px rgba(0,0,0,0.03)" }}>
+                <div className="px-5 py-4">
+                  <div className="flex items-center gap-4">
+                    <p className="text-[10px] font-bold uppercase tracking-[0.12em] shrink-0 w-16" style={{ color: C.copper }}>{card.eyebrow}</p>
+                    <h3 className="text-[17px] font-bold leading-snug flex-1" style={{ color: C.inkDark }}>{card.headline}</h3>
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" className={`shrink-0 transition-transform duration-300 ${isOpen ? "rotate-45" : ""}`}>
+                      <path d="M9 4v10M4 9h10" stroke={C.copper} strokeWidth="2" strokeLinecap="round" />
                     </svg>
                   </div>
-                  <h3 className="text-[16px] font-bold mb-1 leading-snug" style={{ color: C.inkDark }}>{card.headline}</h3>
-                  <div className={`overflow-hidden transition-all duration-300 ${isOpen ? "max-h-[200px] opacity-100 mt-2" : "max-h-0 opacity-0"}`}>
-                    <p className="text-[13px] leading-[1.65]" style={{ color: "rgba(26,18,24,0.55)" }}>{card.body}</p>
+                  <div className={`overflow-hidden transition-all duration-300 ${isOpen ? "max-h-[200px] opacity-100 mt-3 pl-20" : "max-h-0 opacity-0"}`}>
+                    <p className="text-[14px] leading-[1.7]" style={{ color: "rgba(26,18,24,0.55)" }}>{card.body}</p>
                   </div>
-                  {!isOpen && <p className="text-[11px] mt-1" style={{ color: "rgba(26,18,24,0.3)" }}>Tap to read more</p>}
                 </div>
               </button>
             );
