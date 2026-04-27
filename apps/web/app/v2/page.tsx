@@ -294,12 +294,12 @@ function Hero() {
             Live with providers in NSW and VIC
           </div>
 
-          <h1 className="text-[clamp(2rem,5vw,3.5rem)] font-normal leading-[1.12] tracking-[-0.02em] mb-5" style={{ fontFamily: "Georgia, serif", color: C.ink }}>
+          <h1 className="text-[clamp(2rem,5vw,3.5rem)] font-normal leading-[1.12] tracking-[-0.02em] mb-5" style={{ fontFamily: "Georgia, serif", color: "#ffffff" }}>
             Hold quality. Protect margin.{" "}
             <em className="italic" style={{ color: C.copper }}>Lead with confidence.</em>
           </h1>
 
-          <p className="text-[17px] leading-[1.65] max-w-[540px] mx-auto mb-10" style={{ color: C.inkMuted }}>
+          <p className="text-[17px] leading-[1.65] max-w-[540px] mx-auto mb-10" style={{ color: "rgba(245,237,227,0.7)" }}>
             In aged care, the problems chain across domains. Rosters into clinical
             into compliance into cost. The signals are there days before the incident
             lands. CHRIS makes that chain legible — in the flow of work with your
@@ -376,11 +376,11 @@ function ToolsStrip() {
           <p className="text-[11px] font-medium tracking-[0.15em] uppercase mb-4" style={{ color: C.copper }}>
             See your own numbers · 3 minutes · No signup
           </p>
-          <h2 className="text-[clamp(1.5rem,3.5vw,2.5rem)] font-normal leading-[1.1] tracking-[-0.01em] mb-4" style={{ fontFamily: "Georgia, serif", color: C.ink }}>
+          <h2 className="text-[clamp(1.5rem,3.5vw,2.5rem)] font-normal leading-[1.1] tracking-[-0.01em] mb-4" style={{ fontFamily: "Georgia, serif", color: "#ffffff" }}>
             Three tools. Run them on your facility{" "}
             <em className="italic" style={{ color: C.copper }}>before we ever talk.</em>
           </h2>
-          <p className="text-[15px] leading-[1.7] max-w-xl mx-auto" style={{ color: C.inkMuted }}>
+          <p className="text-[15px] leading-[1.7] max-w-xl mx-auto" style={{ color: "rgba(245,237,227,0.65)" }}>
             Built on the same intelligence layer Chris runs on. The numbers you see are the numbers we would model on day one.
           </p>
         </div>
@@ -390,14 +390,14 @@ function ToolsStrip() {
           {TOOLS.map((tool) => (
             <Link key={tool.title} href={tool.href}
               className="group relative rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl"
-              style={{ backgroundColor: "rgba(245,237,227,0.06)", border: "1px solid rgba(245,237,227,0.08)" }}>
+              style={{ backgroundColor: "rgba(245,237,227,0.06)", border: "1px solid rgba(245,237,227,0.1)" }}>
               {/* Accent top bar */}
               <div className="h-1" style={{ background: `linear-gradient(90deg, ${tool.accent}, ${tool.accent}88)` }} />
 
               <div className="p-6">
                 {/* Icon + stat row */}
                 <div className="flex items-center justify-between mb-5">
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ backgroundColor: `${tool.accent}15` }}>
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ backgroundColor: `${tool.accent}18` }}>
                     {tool.icon}
                   </div>
                   <div className="text-right">
@@ -406,15 +406,15 @@ function ToolsStrip() {
                 </div>
 
                 {/* Stat context */}
-                <p className="text-[11px] mb-4 leading-relaxed" style={{ color: "rgba(245,237,227,0.35)" }}>{tool.statLabel}</p>
+                <p className="text-[11px] mb-4 leading-relaxed" style={{ color: "rgba(245,237,227,0.5)" }}>{tool.statLabel}</p>
 
                 {/* Title + blurb */}
-                <h3 className="text-[17px] font-medium mb-2 leading-tight" style={{ color: C.ink }}>{tool.title}</h3>
-                <p className="text-[13px] leading-[1.65] mb-5" style={{ color: C.inkMuted }}>{tool.blurb}</p>
+                <h3 className="text-[17px] font-semibold mb-2 leading-tight" style={{ color: "#ffffff" }}>{tool.title}</h3>
+                <p className="text-[14px] leading-[1.65] mb-5" style={{ color: "rgba(245,237,227,0.7)" }}>{tool.blurb}</p>
 
                 {/* CTA */}
                 <div className="flex items-center gap-2">
-                  <span className="text-[13px] font-medium transition-colors duration-300" style={{ color: tool.accent }}>{tool.cta}</span>
+                  <span className="text-[13px] font-semibold transition-colors duration-300" style={{ color: tool.accent }}>{tool.cta}</span>
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="transition-transform duration-300 group-hover:translate-x-1">
                     <path d="M5 3l4 4-4 4" stroke={tool.accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
@@ -423,13 +423,13 @@ function ToolsStrip() {
 
               {/* Hover glow */}
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                style={{ background: `radial-gradient(ellipse at 50% 0%, ${tool.accent}08, transparent 70%)` }} />
+                style={{ background: `radial-gradient(ellipse at 50% 0%, ${tool.accent}0a, transparent 70%)` }} />
             </Link>
           ))}
         </div>
 
         {/* Trust line */}
-        <p className="text-center text-[12px] mt-8" style={{ color: "rgba(245,237,227,0.25)" }}>
+        <p className="text-center text-[12px] mt-8" style={{ color: "rgba(245,237,227,0.4)" }}>
           No email required. No demo. Just your numbers.
         </p>
       </div>
@@ -879,16 +879,16 @@ function ScenarioSection() {
       <div className="absolute inset-0 pointer-events-none opacity-[0.03]" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`, backgroundSize: "200px 200px" }} />
       <div className="relative z-10 max-w-[720px] mx-auto">
         <div className="text-[11px] font-medium tracking-[0.18em] uppercase mb-10" style={{ color: C.copper }}>A real scenario. Every facility. Every week.</div>
-        <div className="text-[clamp(2.5rem,5vw,4.5rem)] leading-[1.1] mb-6" style={{ fontFamily: "Georgia, serif", fontStyle: "italic", color: C.ink }}>11:04pm Friday.</div>
+        <div className="text-[clamp(2.5rem,5vw,4.5rem)] leading-[1.1] mb-6" style={{ fontFamily: "Georgia, serif", fontStyle: "italic", color: "#ffffff" }}>11:04pm Friday.</div>
         <div className="space-y-1 mb-8">
-          <p className="text-[clamp(1.05rem,1.8vw,1.3rem)]" style={{ color: "rgba(245,237,227,0.45)" }}>A Priority 1 incident. 24 hours to notify ACQSC.</p>
+          <p className="text-[clamp(1.05rem,1.8vw,1.3rem)]" style={{ color: "rgba(245,237,227,0.55)" }}>A Priority 1 incident. 24 hours to notify ACQSC.</p>
         </div>
-        <p className="text-[clamp(1.3rem,2.2vw,1.8rem)] font-medium mb-2" style={{ color: C.ink }}>CHRIS classified it in 4 minutes.</p>
+        <p className="text-[clamp(1.3rem,2.2vw,1.8rem)] font-medium mb-2" style={{ color: "#ffffff" }}>CHRIS classified it in 4 minutes.</p>
         <div className="space-y-1 mb-8">
-          <p className="text-[clamp(1.1rem,2vw,1.5rem)] italic" style={{ fontFamily: "Georgia, serif", color: C.ink }}>The draft was waiting in the DON&apos;s inbox by 11:09.</p>
-          <p className="text-[clamp(1.1rem,2vw,1.5rem)] italic" style={{ fontFamily: "Georgia, serif", color: C.ink }}>She approved it before midnight.</p>
+          <p className="text-[clamp(1.1rem,2vw,1.5rem)] italic" style={{ fontFamily: "Georgia, serif", color: "rgba(255,255,255,0.9)" }}>The draft was waiting in the DON&apos;s inbox by 11:09.</p>
+          <p className="text-[clamp(1.1rem,2vw,1.5rem)] italic" style={{ fontFamily: "Georgia, serif", color: "rgba(255,255,255,0.9)" }}>She approved it before midnight.</p>
         </div>
-        <p className="text-[clamp(1rem,1.6vw,1.2rem)] mb-1" style={{ color: "rgba(245,237,227,0.5)" }}>That&apos;s not a feature.</p>
+        <p className="text-[clamp(1rem,1.6vw,1.2rem)] mb-1" style={{ color: "rgba(245,237,227,0.6)" }}>That&apos;s not a feature.</p>
         <p className="text-[clamp(1.3rem,2.2vw,1.8rem)] font-medium" style={{ color: C.copper }}>That&apos;s the difference between a penalty and a clean record.</p>
 
         <div className="mt-10 mb-6" style={{ width: 60, height: 2, backgroundColor: C.copper }} />
@@ -999,13 +999,13 @@ function AISupportSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           <div>
             <div className="text-[11px] font-medium tracking-[0.08em] uppercase mb-4" style={{ color: C.copper }}>Operational intelligence + AI support</div>
-            <h2 className="text-[clamp(1.5rem,3vw,2.5rem)] font-normal leading-[1.1] mb-5" style={{ fontFamily: "Georgia, serif", color: C.ink }}>
+            <h2 className="text-[clamp(1.5rem,3vw,2.5rem)] font-normal leading-[1.1] mb-5" style={{ fontFamily: "Georgia, serif", color: "#ffffff" }}>
               Ask the question <em className="italic" style={{ color: C.copper }}>you&apos;ve been sitting on.</em>
             </h2>
-            <p className="text-[15px] leading-relaxed mb-6" style={{ color: C.inkMuted }}>
-              CHRIS is an operational intelligence layer and AI support built specifically for aged care. Ask about compliance, workforce, funding — or bring a leadership challenge. Preparing for a difficult conversation, navigating team conflict, managing the pressure of the role. CHRIS supports the way a trusted colleague would — direct, warm, and grounded in what actually works in this sector. No login. No signup.
+            <p className="text-[15px] leading-relaxed mb-6" style={{ color: "rgba(245,237,227,0.7)" }}>
+              CHRIS is an operational intelligence layer and AI support built specifically for aged care. Ask about compliance, workforce, funding, or bring a leadership challenge. Preparing for a difficult conversation, navigating team conflict, managing the pressure of the role. CHRIS supports the way a trusted colleague would: direct, warm, and grounded in what actually works in this sector. No login. No signup.
             </p>
-            <p className="text-[12px]" style={{ color: "rgba(245,237,227,0.4)" }}>
+            <p className="text-[12px]" style={{ color: "rgba(245,237,227,0.5)" }}>
               You&apos;re talking to a public preview of CHRIS. The full platform connects to your systems and knows your team.
             </p>
           </div>
@@ -1085,15 +1085,15 @@ function FinalCTA() {
     <section style={{ backgroundColor: C.dark }} id="book">
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
         <div className="text-[11px] font-medium tracking-[0.08em] uppercase mb-6" style={{ color: "rgba(245,237,227,0.4)" }}>Two ways in</div>
-        <h2 className="text-[clamp(1.5rem,3vw,2.5rem)] font-normal leading-[1.1] mb-10" style={{ fontFamily: "Georgia, serif", color: C.ink }}>
+        <h2 className="text-[clamp(1.5rem,3vw,2.5rem)] font-normal leading-[1.1] mb-10" style={{ fontFamily: "Georgia, serif", color: "#ffffff" }}>
           Pick the one that fits where you are.
         </h2>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Book */}
           <div className="rounded-lg p-6 lg:p-8" style={{ backgroundColor: C.dark2, border: `1px solid ${C.copper}40` }}>
-            <h3 className="text-[18px] font-medium mb-3" style={{ color: C.ink }}>Book a 30-min conversation</h3>
-            <p className="text-[14px] leading-relaxed mb-6" style={{ color: C.inkMuted }}>
+            <h3 className="text-[18px] font-semibold mb-3" style={{ color: "#ffffff" }}>Book a 30-min conversation</h3>
+            <p className="text-[14px] leading-relaxed mb-6" style={{ color: "rgba(245,237,227,0.65)" }}>
               For CEOs, CFOs, DONs ready to see CHRIS modelled against their actual facility data. No demo. Just your operation and ours.
             </p>
             <a href="mailto:hello@culturecrunch.io?subject=CHRIS-OS%20Diagnostic" className="inline-block px-6 py-3 rounded text-[14px] font-medium transition-colors hover:opacity-90" style={{ backgroundColor: C.copper, color: C.dark }}>
@@ -1103,8 +1103,8 @@ function FinalCTA() {
 
           {/* Waitlist */}
           <div className="rounded-lg p-6 lg:p-8" style={{ backgroundColor: C.dark2, border: "1px solid rgba(245,237,227,0.12)" }}>
-            <h3 className="text-[18px] font-medium mb-3" style={{ color: C.ink }}>Join the waitlist</h3>
-            <p className="text-[14px] leading-relaxed mb-6" style={{ color: C.inkMuted }}>
+            <h3 className="text-[18px] font-semibold mb-3" style={{ color: "#ffffff" }}>Join the waitlist</h3>
+            <p className="text-[14px] leading-relaxed mb-6" style={{ color: "rgba(245,237,227,0.65)" }}>
               For organisations that want to be in the next cohort. We onboard in order. We&apos;ll be in touch when there&apos;s room.
             </p>
             {submitted ? (
