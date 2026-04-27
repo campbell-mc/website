@@ -132,12 +132,29 @@ function Hero() {
         </div>
       </div>
 
-      {/* Floating product cards */}
-      <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-16 pb-0 -mb-16 lg:-mb-24">
-        <div className="flex gap-4 overflow-x-auto pb-4 snap-x">
-          {["dashboard-home", "review-queue", "care-minutes", "sirs-draft", "workforce"].map((name) => (
-            <div key={name} className="shrink-0 w-[280px] rounded-xl overflow-hidden snap-start" style={{ boxShadow: "0 24px 64px rgba(0,0,0,0.3), 0 0 0 1px rgba(245,237,227,0.08)" }}>
-              <Image src={`/screenshots/${name}.png`} alt={name} width={560} height={420} className="w-full h-auto" />
+      {/* Floating product cards — 2×2 jagged grid */}
+      <div className="relative z-10 max-w-5xl mx-auto px-6 lg:px-16 pb-0 -mb-20 lg:-mb-32">
+        <div className="hidden md:grid grid-cols-2 gap-5 lg:gap-6">
+          {[
+            { name: "dashboard-home", rotate: "-2.5deg", translate: "0, 12px", caption: "Monday Briefing" },
+            { name: "review-queue", rotate: "1.8deg", translate: "0, -8px", caption: "Review Queue" },
+            { name: "care-minutes", rotate: "1.2deg", translate: "0, 20px", caption: "Care Minutes" },
+            { name: "sirs-draft", rotate: "-1.5deg", translate: "0, -4px", caption: "SIRS Draft" },
+          ].map((card) => (
+            <div key={card.name} className="group relative">
+              <div className="rounded-xl overflow-hidden transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-[0_40px_80px_rgba(0,0,0,0.4)]"
+                style={{ transform: `rotate(${card.rotate}) translate(${card.translate})`, boxShadow: "0 24px 64px rgba(0,0,0,0.3), 0 0 0 1px rgba(245,237,227,0.08)" }}>
+                <Image src={`/screenshots/${card.name}.png`} alt={card.caption} width={600} height={450} className="w-full h-auto" />
+              </div>
+              <p className="text-[11px] text-center mt-3 transition-opacity duration-300 opacity-0 group-hover:opacity-100" style={{ color: "rgba(245,237,227,0.5)" }}>{card.caption}</p>
+            </div>
+          ))}
+        </div>
+        {/* Mobile: horizontal scroll */}
+        <div className="md:hidden flex gap-4 overflow-x-auto pb-4 snap-x">
+          {["dashboard-home", "review-queue", "care-minutes", "sirs-draft"].map((name) => (
+            <div key={name} className="shrink-0 w-[300px] rounded-xl overflow-hidden snap-start" style={{ boxShadow: "0 24px 64px rgba(0,0,0,0.3), 0 0 0 1px rgba(245,237,227,0.08)" }}>
+              <Image src={`/screenshots/${name}.png`} alt={name} width={600} height={450} className="w-full h-auto" />
             </div>
           ))}
         </div>
@@ -148,7 +165,7 @@ function Hero() {
 
 function ToolsStrip() {
   return (
-    <section className="pt-24 lg:pt-32 pb-12" style={{ backgroundColor: C.cream }}>
+    <section className="pt-28 lg:pt-40 pb-12" style={{ backgroundColor: C.cream }}>
       <div className="max-w-6xl mx-auto px-6 lg:px-16">
         <div className="text-[11px] font-medium tracking-[0.12em] uppercase mb-3" style={{ color: C.copperDark }}>
           See your own numbers · 3 minutes · No signup
