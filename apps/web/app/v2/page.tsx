@@ -132,29 +132,56 @@ function Hero() {
         </div>
       </div>
 
-      {/* Floating product cards — 2×2 jagged grid */}
-      <div className="relative z-10 max-w-5xl mx-auto px-6 lg:px-16 pb-0 -mb-20 lg:-mb-32">
-        <div className="hidden md:grid grid-cols-2 gap-5 lg:gap-6">
-          {[
-            { name: "dashboard-home", rotate: "-2.5deg", translate: "0, 12px", caption: "Monday Briefing" },
-            { name: "review-queue", rotate: "1.8deg", translate: "0, -8px", caption: "Review Queue" },
-            { name: "care-minutes", rotate: "1.2deg", translate: "0, 20px", caption: "Care Minutes" },
-            { name: "sirs-draft", rotate: "-1.5deg", translate: "0, -4px", caption: "SIRS Draft" },
-          ].map((card) => (
-            <div key={card.name} className="group relative">
-              <div className="rounded-xl overflow-hidden transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-[0_40px_80px_rgba(0,0,0,0.4)]"
-                style={{ transform: `rotate(${card.rotate}) translate(${card.translate})`, boxShadow: "0 24px 64px rgba(0,0,0,0.3), 0 0 0 1px rgba(245,237,227,0.08)" }}>
-                <Image src={`/screenshots/${card.name}.png`} alt={card.caption} width={600} height={450} className="w-full h-auto" />
-              </div>
-              <p className="text-[11px] text-center mt-3 transition-opacity duration-300 opacity-0 group-hover:opacity-100" style={{ color: "rgba(245,237,227,0.5)" }}>{card.caption}</p>
+      {/* Floating product cards — Prism-style overlapping spread */}
+      <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-0 pb-0 -mb-24 lg:-mb-40">
+        <div className="hidden lg:block relative" style={{ height: "480px" }}>
+          {/* Card 1 — large, back-left, slight tilt */}
+          <div className="absolute group" style={{ left: "0%", top: "0px", width: "55%", zIndex: 1 }}>
+            <div className="rounded-2xl overflow-hidden transition-all duration-500 group-hover:z-20 group-hover:-translate-y-3 group-hover:shadow-[0_48px_100px_rgba(0,0,0,0.5)]"
+              style={{ transform: "rotate(-2deg)", boxShadow: "0 32px 80px rgba(0,0,0,0.35), 0 0 0 1px rgba(245,237,227,0.06)" }}>
+              <Image src="/screenshots/dashboard-home.png" alt="Monday Briefing" width={800} height={600} className="w-full h-auto" />
             </div>
-          ))}
+          </div>
+          {/* Card 2 — overlapping right, pulled up */}
+          <div className="absolute group" style={{ right: "2%", top: "-20px", width: "50%", zIndex: 2 }}>
+            <div className="rounded-2xl overflow-hidden transition-all duration-500 group-hover:z-30 group-hover:-translate-y-3 group-hover:shadow-[0_48px_100px_rgba(0,0,0,0.5)]"
+              style={{ transform: "rotate(1.5deg)", boxShadow: "0 32px 80px rgba(0,0,0,0.35), 0 0 0 1px rgba(245,237,227,0.06)" }}>
+              <Image src="/screenshots/review-queue.png" alt="Review Queue" width={800} height={600} className="w-full h-auto" />
+            </div>
+          </div>
+          {/* Card 3 — smaller, bottom-left, overlapping card 1 */}
+          <div className="absolute group" style={{ left: "8%", bottom: "-40px", width: "42%", zIndex: 3 }}>
+            <div className="rounded-2xl overflow-hidden transition-all duration-500 group-hover:z-30 group-hover:-translate-y-3 group-hover:shadow-[0_48px_100px_rgba(0,0,0,0.5)]"
+              style={{ transform: "rotate(2deg)", boxShadow: "0 32px 80px rgba(0,0,0,0.35), 0 0 0 1px rgba(245,237,227,0.06)" }}>
+              <Image src="/screenshots/care-minutes.png" alt="Care Minutes" width={800} height={600} className="w-full h-auto" />
+            </div>
+          </div>
+          {/* Card 4 — bottom-right, tucked under card 2 */}
+          <div className="absolute group" style={{ right: "6%", bottom: "-60px", width: "44%", zIndex: 2 }}>
+            <div className="rounded-2xl overflow-hidden transition-all duration-500 group-hover:z-30 group-hover:-translate-y-3 group-hover:shadow-[0_48px_100px_rgba(0,0,0,0.5)]"
+              style={{ transform: "rotate(-1.8deg)", boxShadow: "0 32px 80px rgba(0,0,0,0.35), 0 0 0 1px rgba(245,237,227,0.06)" }}>
+              <Image src="/screenshots/sirs-draft.png" alt="SIRS Draft" width={800} height={600} className="w-full h-auto" />
+            </div>
+          </div>
+        </div>
+        {/* Tablet: 2-up with overlap */}
+        <div className="hidden md:block lg:hidden relative" style={{ height: "360px" }}>
+          <div className="absolute" style={{ left: "0%", top: "0", width: "58%", zIndex: 1 }}>
+            <div className="rounded-xl overflow-hidden" style={{ transform: "rotate(-1.5deg)", boxShadow: "0 24px 64px rgba(0,0,0,0.3)" }}>
+              <Image src="/screenshots/dashboard-home.png" alt="Dashboard" width={600} height={450} className="w-full h-auto" />
+            </div>
+          </div>
+          <div className="absolute" style={{ right: "0%", top: "30px", width: "55%", zIndex: 2 }}>
+            <div className="rounded-xl overflow-hidden" style={{ transform: "rotate(1.2deg)", boxShadow: "0 24px 64px rgba(0,0,0,0.3)" }}>
+              <Image src="/screenshots/review-queue.png" alt="Review Queue" width={600} height={450} className="w-full h-auto" />
+            </div>
+          </div>
         </div>
         {/* Mobile: horizontal scroll */}
         <div className="md:hidden flex gap-4 overflow-x-auto pb-4 snap-x">
           {["dashboard-home", "review-queue", "care-minutes", "sirs-draft"].map((name) => (
-            <div key={name} className="shrink-0 w-[300px] rounded-xl overflow-hidden snap-start" style={{ boxShadow: "0 24px 64px rgba(0,0,0,0.3), 0 0 0 1px rgba(245,237,227,0.08)" }}>
-              <Image src={`/screenshots/${name}.png`} alt={name} width={600} height={450} className="w-full h-auto" />
+            <div key={name} className="shrink-0 w-[320px] rounded-xl overflow-hidden snap-start" style={{ boxShadow: "0 24px 64px rgba(0,0,0,0.3), 0 0 0 1px rgba(245,237,227,0.08)" }}>
+              <Image src={`/screenshots/${name}.png`} alt={name} width={640} height={480} className="w-full h-auto" />
             </div>
           ))}
         </div>
@@ -165,7 +192,7 @@ function Hero() {
 
 function ToolsStrip() {
   return (
-    <section className="pt-28 lg:pt-40 pb-12" style={{ backgroundColor: C.cream }}>
+    <section className="pt-32 lg:pt-52 pb-12" style={{ backgroundColor: C.cream }}>
       <div className="max-w-6xl mx-auto px-6 lg:px-16">
         <div className="text-[11px] font-medium tracking-[0.12em] uppercase mb-3" style={{ color: C.copperDark }}>
           See your own numbers · 3 minutes · No signup
