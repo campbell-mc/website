@@ -52,13 +52,55 @@ const JOBS = [
 ];
 
 const AGENTS = [
-  { name: "The Sentinel", cadence: "2-hr cycle", domain: "Clinical & compliance vigilance", color: C.good },
-  { name: "The Oracle", cadence: "Weekly", domain: "Revenue & funding intelligence", color: C.copper },
-  { name: "The Steward", cadence: "Daily", domain: "Capacity & operational structure", color: C.good },
-  { name: "The Chronicler", cadence: "Event-driven", domain: "Auto-documentation & evidence", color: C.copper },
-  { name: "The Keeper", cadence: "Fortnightly", domain: "Workforce intelligence & people health", color: C.warm },
-  { name: "The Town Crier", cadence: "Continuous", domain: "Signal coordination & clarity", color: C.inkMuted },
-  { name: "The Curator", cadence: "2-hr cycle", domain: "Sector intelligence & regulatory watch", color: C.inkMuted },
+  {
+    name: "The Sentinel", cadence: "2-hr cycle", domain: "Clinical & compliance vigilance", color: C.good,
+    summary: "The always-on orchestrator. Runs the fortnightly cascade — connector pulls, PSH cycle management, briefing generation, alert routing. The heartbeat of CHRIS.",
+    watches: ["Care minutes compliance (215/44 targets)", "SIRS incident classification and deadline tracking", "Regulatory obligation countdowns", "Connector health and data freshness", "PSH convergence detection across wings"],
+    delivers: ["Real-time compliance position every 2 hours", "Immediate escalation when thresholds breach", "Priority 1 SIRS alerts within minutes of event", "Connector stale-data warnings before gaps become blind spots"],
+    example: "2:14pm — RN calls in sick. Sentinel detects projected care minutes drop to 188/215 within 12 minutes. Alerts DON with agency options priced. Chronicler drafts contingency roster note.",
+  },
+  {
+    name: "The Oracle", cadence: "Weekly", domain: "Revenue & funding intelligence", color: C.copper,
+    summary: "Scans AN-ACC classification, accommodation pricing, occupancy, and hotelling for revenue optimisation opportunities. Identifies and quantifies — never acts without human approval.",
+    watches: ["AN-ACC reclassification opportunities", "Accommodation pricing vs market benchmarks", "Occupancy gaps and vacancy cost", "Home care package utilisation rates", "Care minutes supplement entitlement (MM1)"],
+    delivers: ["Monthly revenue uplift opportunities quantified in dollars", "Accommodation gap analysis against sector benchmarks", "Vacancy cost per day per bed", "Home care under-spend alerts before quarter-end"],
+    example: "Sunday 9pm — Oracle identifies 3 residents whose clinical signals suggest higher AN-ACC classification. Estimated uplift: $11,400/month. Clinical reviews queued for Tuesday.",
+  },
+  {
+    name: "The Steward", cadence: "Daily", domain: "Capacity & operational structure", color: C.good,
+    summary: "Reads structural operational patterns — roster architecture gaps, care minutes compliance buffer, training capacity, operational flow. Distinguishes structural problems from one-off gaps.",
+    watches: ["Roster architecture and structural gaps", "Shift-by-shift staffing adequacy", "Agency dependency patterns and cost", "Training and credential scheduling capacity", "Overtime concentration and fatigue risk"],
+    delivers: ["Structural vs episodic gap classification", "Agency cost projections with permanent-hire alternatives", "Shift-level staffing recommendations", "Overtime alerts before they become WHS incidents"],
+    example: "Sunday PM AIN gap detected 6 out of 8 weeks. Steward classifies as structural — recommends permanent part-time hire. Saving: $4,940/year vs continued agency fill.",
+  },
+  {
+    name: "The Chronicler", cadence: "Event-driven", domain: "Auto-documentation & evidence", color: C.copper,
+    summary: "Fires on SIRS events, audit completions, complaints, voice sessions, PSH cycle close, monthly close. Drafts every document the moment the triggering event occurs. Leaders review and approve — never auto-submits.",
+    watches: ["SIRS incidents requiring notification", "Board pack deadlines and governance cycles", "QI submission windows", "Complaint and feedback documentation needs", "Audit evidence gaps"],
+    delivers: ["SIRS notification drafts within minutes of classification", "Board packs pre-drafted 8 days before meeting", "QI submissions with evidence compiled", "Corrective action plans with regulatory cross-references"],
+    example: "Fall logged at 11:04pm Friday. Sentinel classifies as SIRS Priority 1. Chronicler drafts the notification within 4 minutes. DON reviews on their phone Saturday morning. Submitted before the 24-hour deadline.",
+  },
+  {
+    name: "The Keeper", cadence: "Fortnightly", domain: "Workforce intelligence & people health", color: C.warm,
+    summary: "Owns the full workforce intelligence layer — culture health, engagement signals, retention risk, Leader Loop outcomes, PSH trend analysis, team dynamics, and ISO 45003 compliance evidence generation.",
+    watches: ["16 PSH domains (ISO 45003) per team per cycle", "Turnover precursor signals (71% probability model)", "Absenteeism patterns and clustering", "AHPRA/credential expiry windows", "Leave liability accrual thresholds", "Leader Loop engagement and participation"],
+    delivers: ["PSH convergence alerts when multiple hazards compound", "Turnover probability scores with intervention recommendations", "Micro-practice prescriptions matched to specific signals", "Team briefing content tailored to current PSH state", "WHS compliance evidence generated automatically"],
+    example: "PSH_13 (Role Clarity) declining 3 cycles in Camelot team. Keeper flags 71% turnover probability. Root cause: new rostering system rollout. Prescribes role-clarity micro-practice for next team briefing.",
+  },
+  {
+    name: "The Town Crier", cadence: "Continuous", domain: "Signal coordination & clarity", color: C.inkMutedLight,
+    summary: "The coordination layer. When multiple agents detect related signals, Town Crier merges them into a single coherent insight. Prevents alert fatigue by combining related findings and routing the unified message to the right leader.",
+    watches: ["Cross-agent signal overlap", "Alert volume and leader attention capacity", "Briefing compilation windows", "Escalation chains and routing logic"],
+    delivers: ["Merged insights from 2+ agents into single actionable items", "Monday briefings compiled from all agent findings", "Role-appropriate routing — DON sees clinical, CFO sees financial", "De-duplicated alert streams that respect attention bandwidth"],
+    example: "Steward detects overtime spike + Keeper detects fatigue PSH signal in same wing. Town Crier merges into one escalation: 'Grevillea Wing — overtime-driven fatigue risk. Two agents confirm.' Routed to DON as combined risk.",
+  },
+  {
+    name: "The Curator", cadence: "2-hr cycle", domain: "Sector intelligence & regulatory watch", color: C.inkMutedLight,
+    summary: "Monitors the external landscape — regulatory changes, sector news, compliance updates, funding announcements. Ensures CHRIS and your leadership team are never caught off-guard by a change in the operating environment.",
+    watches: ["ACQSC regulatory updates and enforcement actions", "Department of Health funding announcements", "Aged Care Act amendments and subordinate instruments", "State WHS regulator bulletins", "Sector media and industry body publications"],
+    delivers: ["Regulatory change alerts with impact assessment", "Sector news digest filtered to your care type", "Compliance obligation updates before they take effect", "Enforcement action pattern analysis across the sector"],
+    example: "ACQSC publishes new guidance on psychosocial risk documentation. Curator flags within 2 hours. Impact assessment: your current PSH evidence satisfies 6 of 7 new requirements. Gap: worker consultation record needs updating — 2-minute fix.",
+  },
 ];
 
 const EXECUTION = [
@@ -320,6 +362,9 @@ function ScenarioSection() {
 }
 
 function AgentsSection() {
+  const [selected, setSelected] = useState<number | null>(null);
+  const agent = selected !== null ? AGENTS[selected] : null;
+
   return (
     <section style={{ backgroundColor: C.cream }}>
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
@@ -332,18 +377,80 @@ function AgentsSection() {
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-          {AGENTS.map((agent) => (
-            <div key={agent.name} className="border rounded-lg p-4" style={{ backgroundColor: C.white, borderColor: "rgba(26,18,24,0.08)" }}>
+          {AGENTS.map((agent, i) => (
+            <button key={agent.name} onClick={() => setSelected(i)}
+              className="border rounded-lg p-4 text-left transition-all hover:-translate-y-0.5 hover:shadow-md cursor-pointer"
+              style={{ backgroundColor: "#fff", borderColor: "rgba(26,18,24,0.08)" }}>
               <div className="flex items-center gap-2 mb-1">
                 <span className="w-2 h-2 rounded-full" style={{ backgroundColor: agent.color }} />
                 <span className="text-[10px] font-medium uppercase tracking-wider" style={{ color: C.copperDark }}>{agent.cadence}</span>
               </div>
               <p className="text-[14px] font-medium mb-1" style={{ color: C.inkDark }}>{agent.name}</p>
               <p className="text-[12px]" style={{ color: C.inkMutedLight }}>{agent.domain}</p>
-            </div>
+            </button>
           ))}
         </div>
       </div>
+
+      {/* Agent detail popup */}
+      {agent && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" onClick={() => setSelected(null)}>
+          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
+          <div className="relative bg-white rounded-2xl max-w-2xl w-full max-h-[85vh] overflow-y-auto shadow-2xl" onClick={(e) => e.stopPropagation()}>
+            {/* Header */}
+            <div className="sticky top-0 z-10 rounded-t-2xl px-6 py-5" style={{ backgroundColor: C.dark }}>
+              <div className="flex items-center justify-between">
+                <div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: agent.color }} />
+                    <span className="text-[10px] font-medium uppercase tracking-wider" style={{ color: C.copper }}>{agent.cadence}</span>
+                  </div>
+                  <h3 className="text-[22px] font-normal" style={{ fontFamily: "Georgia, serif", color: C.ink }}>{agent.name}</h3>
+                  <p className="text-[13px] mt-0.5" style={{ color: C.inkMuted }}>{agent.domain}</p>
+                </div>
+                <button onClick={() => setSelected(null)} className="text-[20px] w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/10 transition-colors" style={{ color: C.inkMuted }}>×</button>
+              </div>
+            </div>
+
+            <div className="px-6 py-5 space-y-5">
+              {/* Summary */}
+              <p className="text-[14px] leading-relaxed" style={{ color: C.inkDark }}>{agent.summary}</p>
+
+              {/* What it watches */}
+              <div>
+                <p className="text-[10px] font-medium uppercase tracking-wider mb-2" style={{ color: "rgba(26,18,24,0.35)" }}>What it watches</p>
+                <ul className="space-y-1.5">
+                  {agent.watches.map((w, i) => (
+                    <li key={i} className="flex items-start gap-2 text-[13px]" style={{ color: "rgba(26,18,24,0.65)" }}>
+                      <span className="w-1 h-1 rounded-full shrink-0 mt-2" style={{ backgroundColor: agent.color }} />
+                      {w}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* What it delivers */}
+              <div>
+                <p className="text-[10px] font-medium uppercase tracking-wider mb-2" style={{ color: "rgba(26,18,24,0.35)" }}>What it delivers</p>
+                <ul className="space-y-1.5">
+                  {agent.delivers.map((d, i) => (
+                    <li key={i} className="flex items-start gap-2 text-[13px]" style={{ color: "rgba(26,18,24,0.65)" }}>
+                      <span className="shrink-0 mt-0.5" style={{ color: C.copper }}>→</span>
+                      {d}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Example scenario */}
+              <div className="rounded-lg p-4" style={{ backgroundColor: "rgba(26,18,24,0.02)", border: "1px solid rgba(26,18,24,0.06)" }}>
+                <p className="text-[10px] font-medium uppercase tracking-wider mb-2" style={{ color: C.copperDark }}>Example</p>
+                <p className="text-[13px] leading-relaxed italic" style={{ fontFamily: "Georgia, serif", color: "rgba(26,18,24,0.6)" }}>{agent.example}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
