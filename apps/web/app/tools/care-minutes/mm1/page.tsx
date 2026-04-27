@@ -52,36 +52,70 @@ function compute(i: Inputs) {
   else if (totalPct < 1 && effectiveRnPct >= 1) diagnosis = "Total minutes problem — RN is fine";
   else diagnosis = "Both targets failing";
 
-  // Cost to hit 100%
-  const extraRnNeeded = Math.max(0, rnTarget - effectiveRn);
-  const extraTotalNeeded = Math.max(0, totalTarget - totalMin);
-  const extraPcw = extraTotalNeeded * 0.70;
-  const extraEn = extraTotalNeeded * 0.20;
-  const extraRnResidual = extraTotalNeeded * 0.10 + extraRnNeeded;
-
+  // ── MARGINAL ROSTERING INVESTMENT (vs current state) ──────────────────
+  // Calculate blended hourly rates (perm/agency mix)
   const residentDaysPerSite = i.beds * (i.occupancy / 100) * annualDays;
   const permPct = i.permAgencySplit / 100;
   const agencyMult = 1 + (i.agencyPremium / 100);
+  const rnBlended = permPct * i.rnCost + (1 - permPct) * i.rnCost * agencyMult;
+  const enBlended = permPct * i.enCost + (1 - permPct) * i.enCost * agencyMult;
+  const pcwBlended = permPct * i.pcwCost + (1 - permPct) * i.pcwCost * agencyMult;
 
-  const costPerSite = (
-    ((extraRnResidual / 60) * residentDaysPerSite * (permPct * i.rnCost + (1 - permPct) * i.rnCost * agencyMult)) +
-    ((extraEn / 60) * residentDaysPerSite * (permPct * i.enCost + (1 - permPct) * i.enCost * agencyMult)) +
-    ((extraPcw / 60) * residentDaysPerSite * (permPct * i.pcwCost + (1 - permPct) * i.pcwCost * agencyMult))
+  // Current annual hours by role (minutes/resident/day → hours/year across portfolio)
+  const currentRnHours = (i.rnMin / 60) * residentDaysPerSite * i.sites;
+  const currentEnHours = (i.enMin / 60) * residentDaysPerSite * i.sites;
+  const currentPcwHours = (i.pcwMin / 60) * residentDaysPerSite * i.sites;
+
+  // Target hours at 100% (both targets met)
+  // RN gap: need enough RN to hit rnTarget (accounting for EN allowance)
+  const targetRnMin = Math.max(i.rnMin, rnTarget - enAllowance);
+  // Total gap: distribute extra needed across roles (70% PCW, 20% EN, 10% RN)
+  const extraTotalNeeded = Math.max(0, totalTarget - totalMin);
+  const targetPcwMin = i.pcwMin + extraTotalNeeded * 0.70;
+  const targetEnMin = i.enMin + extraTotalNeeded * 0.20;
+  const targetRnMinFinal = targetRnMin + extraTotalNeeded * 0.10;
+
+  const targetRnHours = (targetRnMinFinal / 60) * residentDaysPerSite * i.sites;
+  const targetEnHours = (targetEnMin / 60) * residentDaysPerSite * i.sites;
+  const targetPcwHours = (targetPcwMin / 60) * residentDaysPerSite * i.sites;
+
+  // Marginal hours (only the additional hours needed)
+  const deltaRnHours = Math.max(0, targetRnHours - currentRnHours);
+  const deltaEnHours = Math.max(0, targetEnHours - currentEnHours);
+  const deltaPcwHours = Math.max(0, targetPcwHours - currentPcwHours);
+
+  // Cost of the marginal hours only
+  const marginalRosteringCost = Math.round(
+    (deltaRnHours * rnBlended) +
+    (deltaEnHours * enBlended) +
+    (deltaPcwHours * pcwBlended)
   );
-  const totalCostToTarget = Math.round(costPerSite * i.sites);
-  const netImpact = gap - totalCostToTarget;
 
-  // Scenario C: 105% (defensive headroom)
-  const extra105 = totalTarget * 0.05;
-  const cost105extra = Math.round((extra105 / 60) * residentDaysPerSite * i.sites * (permPct * i.pcwCost + (1 - permPct) * i.pcwCost * agencyMult));
-  const totalCost105 = totalCostToTarget + cost105extra;
-  const netImpact105 = gap - totalCost105;
+  // Supplement captured by the move (from current entitlement to full)
+  const supplementCaptured = gap; // = maxSupplement - currentEntitlement
+
+  // The CEO line
+  const returnOnRostering = marginalRosteringCost > 0 ? supplementCaptured / marginalRosteringCost : 0;
+  const marginOnRostering = supplementCaptured - marginalRosteringCost;
+
+  // Legacy names for display compatibility
+  const totalCostToTarget = marginalRosteringCost;
+  const netImpact = marginOnRostering;
+
+  // Scenario C: 105% (defensive headroom — additional PCW hours beyond 100%)
+  const extra105Min = totalTarget * 0.05;
+  const extra105Hours = (extra105Min / 60) * residentDaysPerSite * i.sites;
+  const cost105extra = Math.round(extra105Hours * pcwBlended);
+  const totalCost105 = marginalRosteringCost + cost105extra;
+  const netImpact105 = supplementCaptured - totalCost105;
 
   return {
     totalMin, effectiveRnPct: Math.round(effectiveRnPct * 100), totalPct: Math.round(totalPct * 100),
     gatingPct: Math.round(gatingPct * 100), supplementFactor: Math.round(supplementFactor * 100),
     occupiedBeds: Math.round(occupiedBeds), maxSupplement, currentEntitlement, gap, diagnosis,
     totalCostToTarget, netImpact, totalCost105, netImpact105,
+    marginalRosteringCost, supplementCaptured, returnOnRostering: Math.round(returnOnRostering * 100) / 100, marginOnRostering,
+    deltaRnHours: Math.round(deltaRnHours), deltaEnHours: Math.round(deltaEnHours), deltaPcwHours: Math.round(deltaPcwHours),
     isSevere: gatingPct < 0.85, isCompliant: gatingPct >= 1,
     bindingTarget: effectiveRnPct < totalPct ? "RN" : "Total",
   };
@@ -211,6 +245,19 @@ export default function MM1Calculator() {
                 <p className="text-[11px] mt-1" style={{ color: "rgba(26,18,24,0.5)" }}>Binding target: {r.bindingTarget} at {r.gatingPct}% · Supplement factor: {r.supplementFactor}%</p>
               </div>
 
+              {/* Return on rostering — the CEO line */}
+              {!r.isCompliant && r.marginalRosteringCost > 0 && (
+                <div className="rounded-xl px-4 py-3 border" style={{ backgroundColor: "#fff", borderColor: "rgba(26,18,24,0.06)", borderLeftWidth: 3, borderLeftColor: r.returnOnRostering >= 1 ? C.good : C.warn }}>
+                  <div className="flex items-baseline justify-between mb-1">
+                    <p className="text-[10px] font-medium uppercase tracking-wider" style={{ color: "rgba(26,18,24,0.35)" }}>Return on marginal rostering</p>
+                    <p className="text-[20px] font-light tracking-tight" style={{ fontFamily: "Georgia, serif", color: r.returnOnRostering >= 1 ? C.good : C.warn }}>{r.returnOnRostering}x</p>
+                  </div>
+                  <p className="text-[11px] leading-relaxed" style={{ color: "rgba(26,18,24,0.5)" }}>
+                    Every $1 spent on the additional hours returns ${r.returnOnRostering.toFixed(2)} in supplement. {r.marginOnRostering > 0 ? `Net margin: ${fmt(r.marginOnRostering)}.` : "The additional rostering cost exceeds the supplement recovered."}
+                  </p>
+                </div>
+              )}
+
               {/* 3-scenario table */}
               {!r.isCompliant && (
                 <div className="bg-white rounded-xl border overflow-hidden" style={{ borderColor: "rgba(26,18,24,0.06)" }}>
@@ -224,20 +271,20 @@ export default function MM1Calculator() {
                     {/* Scenario B — Hit 100% */}
                     <div className="px-5 py-3">
                       <div className="flex justify-between mb-1"><span className="text-[12px] font-medium" style={{ color: C.inkDark }}>B · Hit 100% on both targets</span><span className="text-[12px] font-medium" style={{ color: r.netImpact > 0 ? C.good : C.warn }}>{r.netImpact > 0 ? "+" : ""}{fmt(r.netImpact)}</span></div>
-                      <p className="text-[11px]" style={{ color: "rgba(26,18,24,0.4)" }}>Supplement secured: {fmt(r.gap)} recovered. Staffing cost: {fmt(r.totalCostToTarget)}.</p>
+                      <p className="text-[11px]" style={{ color: "rgba(26,18,24,0.4)" }}>Marginal rostering investment: {fmt(r.marginalRosteringCost)}. Supplement captured: {fmt(r.supplementCaptured)}.</p>
                     </div>
                     {/* Scenario C — Hit 105% */}
                     <div className="px-5 py-3">
                       <div className="flex justify-between mb-1"><span className="text-[12px] font-medium" style={{ color: C.inkDark }}>C · Hit 105% (defensive headroom)</span><span className="text-[12px] font-medium" style={{ color: r.netImpact105 > 0 ? C.good : C.warn }}>{r.netImpact105 > 0 ? "+" : ""}{fmt(r.netImpact105)}</span></div>
-                      <p className="text-[11px]" style={{ color: "rgba(26,18,24,0.4)" }}>Buy headroom against a bad quarter. Cost: {fmt(r.totalCost105)}.</p>
+                      <p className="text-[11px]" style={{ color: "rgba(26,18,24,0.4)" }}>Buy headroom against a bad quarter. Total marginal cost: {fmt(r.totalCost105)}.</p>
                     </div>
                   </div>
                 </div>
               )}
 
-              {/* Breakdown */}
+              {/* Supplement breakdown */}
               <div className="bg-white rounded-xl p-5 border" style={{ borderColor: "rgba(26,18,24,0.06)" }}>
-                <p className="text-[10px] font-medium uppercase tracking-wider mb-3" style={{ color: "rgba(26,18,24,0.35)" }}>Breakdown</p>
+                <p className="text-[10px] font-medium uppercase tracking-wider mb-3" style={{ color: "rgba(26,18,24,0.35)" }}>Supplement position</p>
                 <div className="space-y-2 text-[12px]">
                   <div className="flex justify-between"><span style={{ color: "rgba(26,18,24,0.5)" }}>Maximum supplement available</span><span className="font-medium" style={{ color: C.inkDark }}>{fmt(r.maxSupplement)}</span></div>
                   <div className="flex justify-between"><span style={{ color: "rgba(26,18,24,0.5)" }}>Current entitlement ({r.supplementFactor}%)</span><span className="font-medium" style={{ color: C.good }}>{fmt(r.currentEntitlement)}</span></div>
@@ -245,11 +292,32 @@ export default function MM1Calculator() {
                     <div className="h-full rounded-full transition-all duration-500" style={{ width: `${r.supplementFactor}%`, backgroundColor: r.supplementFactor > 70 ? C.good : r.supplementFactor > 30 ? C.warn : C.bad }} />
                   </div>
                   <div className="flex justify-between pt-2 border-t" style={{ borderColor: "rgba(26,18,24,0.04)" }}>
-                    <span className="font-medium" style={{ color: C.inkDark }}>Funding gap</span>
+                    <span className="font-medium" style={{ color: C.inkDark }}>Supplement to capture</span>
                     <span className="font-semibold" style={{ color: C.warn }}>{fmt(r.gap)}</span>
                   </div>
                 </div>
               </div>
+
+              {/* Marginal rostering detail */}
+              {!r.isCompliant && r.marginalRosteringCost > 0 && (
+                <div className="bg-white rounded-xl p-5 border" style={{ borderColor: "rgba(26,18,24,0.06)" }}>
+                  <p className="text-[10px] font-medium uppercase tracking-wider mb-3" style={{ color: "rgba(26,18,24,0.35)" }}>Marginal rostering investment</p>
+                  <div className="space-y-2 text-[12px]">
+                    {r.deltaRnHours > 0 && <div className="flex justify-between"><span style={{ color: "rgba(26,18,24,0.5)" }}>Additional RN hours / year</span><span className="font-medium" style={{ color: C.inkDark }}>{r.deltaRnHours.toLocaleString()}</span></div>}
+                    {r.deltaEnHours > 0 && <div className="flex justify-between"><span style={{ color: "rgba(26,18,24,0.5)" }}>Additional EN hours / year</span><span className="font-medium" style={{ color: C.inkDark }}>{r.deltaEnHours.toLocaleString()}</span></div>}
+                    {r.deltaPcwHours > 0 && <div className="flex justify-between"><span style={{ color: "rgba(26,18,24,0.5)" }}>Additional PCW hours / year</span><span className="font-medium" style={{ color: C.inkDark }}>{r.deltaPcwHours.toLocaleString()}</span></div>}
+                    <div className="flex justify-between pt-2 border-t" style={{ borderColor: "rgba(26,18,24,0.04)" }}>
+                      <span className="font-medium" style={{ color: C.inkDark }}>Marginal rostering cost</span>
+                      <span className="font-semibold" style={{ color: C.warn }}>{fmt(r.marginalRosteringCost)}</span>
+                    </div>
+                    <div className="flex justify-between"><span style={{ color: "rgba(26,18,24,0.5)" }}>Supplement captured</span><span className="font-medium" style={{ color: C.good }}>{fmt(r.supplementCaptured)}</span></div>
+                    <div className="flex justify-between pt-2 border-t" style={{ borderColor: "rgba(26,18,24,0.04)" }}>
+                      <span className="font-semibold" style={{ color: C.inkDark }}>Net margin on rostering</span>
+                      <span className="font-semibold" style={{ color: r.marginOnRostering > 0 ? C.good : C.warn }}>{r.marginOnRostering > 0 ? "+" : ""}{fmt(r.marginOnRostering)}</span>
+                    </div>
+                  </div>
+                </div>
+              )}
 
               {/* CTAs */}
               <div className="space-y-3">
