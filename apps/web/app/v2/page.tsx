@@ -779,101 +779,142 @@ const HIW_STAGES = [
 ];
 
 function HIWConnectSVG() {
+  const t = C.teal;
   return (
-    <svg viewBox="0 0 400 300" fill="none" className="w-full h-full">
-      <rect width="400" height="300" rx="16" fill="rgba(45,106,79,0.04)" />
-      {[{ cx: 60, cy: 60, l: "Clinical" }, { cx: 60, cy: 150, l: "Roster" }, { cx: 60, cy: 240, l: "Finance" }, { cx: 170, cy: 45, l: "Compliance" }, { cx: 170, cy: 255, l: "Family" }].map((n, i) => (
+    <svg viewBox="0 0 400 260" fill="none" className="w-full h-full">
+      <rect width="400" height="260" rx="8" fill="#f5f5f0" />
+      {/* Source systems on the left */}
+      {[{ y: 30, l: "Clinical", w: 80 }, { y: 65, l: "Rostering", w: 88 }, { y: 100, l: "Finance", w: 72 }, { y: 135, l: "Compliance", w: 96 }, { y: 170, l: "Family", w: 68 }].map((s, i) => (
         <g key={i}>
-          <line x1={n.cx + 30} y1={n.cy} x2={280} y2={150} stroke={C.good} strokeWidth="1.5" strokeOpacity="0.2" strokeDasharray="4 4"><animate attributeName="stroke-dashoffset" from="8" to="0" dur={`${2 + i * 0.3}s`} repeatCount="indefinite" /></line>
-          <circle cx={n.cx} cy={n.cy} r="22" fill="#fff" stroke={C.good} strokeWidth="1.5" strokeOpacity="0.3" />
-          <circle cx={n.cx} cy={n.cy} r="3" fill={C.good} fillOpacity="0.6" />
-          <text x={n.cx} y={n.cy + 36} textAnchor="middle" fill="rgba(26,18,24,0.35)" fontSize="9" fontFamily="system-ui">{n.l}</text>
+          <rect x="20" y={s.y} width={s.w} height="24" rx="4" fill="#fff" stroke={t} strokeWidth="1" strokeOpacity="0.5" />
+          <text x={20 + s.w / 2} y={s.y + 16} textAnchor="middle" fill={C.text} fontSize="10" fontWeight="500" fontFamily="system-ui">{s.l}</text>
+          <line x1={20 + s.w} y1={s.y + 12} x2={240} y2={120} stroke={t} strokeWidth="1.5" strokeOpacity="0.35" strokeDasharray="4 3">
+            <animate attributeName="stroke-dashoffset" from="7" to="0" dur={`${1.5 + i * 0.25}s`} repeatCount="indefinite" />
+          </line>
         </g>
       ))}
-      <circle cx="300" cy="150" r="48" fill="#fff" stroke={C.good} strokeWidth="2" strokeOpacity="0.3" />
-      <circle cx="300" cy="150" r="32" fill="rgba(45,106,79,0.08)" />
-      <circle cx="300" cy="150" r="6" fill={C.good}><animate attributeName="r" values="5;7;5" dur="3s" repeatCount="indefinite" /></circle>
-      <text x="300" y="215" textAnchor="middle" fill={C.inkDark} fontSize="11" fontWeight="500" fontFamily="system-ui">One view</text>
+      {/* Central Chris node */}
+      <rect x="240" y="80" width="140" height="80" rx="6" fill="#fff" stroke={t} strokeWidth="1.5" />
+      <rect x="240" y="80" width="140" height="24" rx="6" fill={t} fillOpacity="0.08" />
+      <text x="310" y="96" textAnchor="middle" fill={t} fontSize="10" fontWeight="500" fontFamily="system-ui">Chris</text>
+      <text x="310" y="120" textAnchor="middle" fill={C.text} fontSize="20" fontWeight="500" fontFamily="system-ui">One view</text>
+      <text x="310" y="145" textAnchor="middle" fill={C.textFaint} fontSize="9" fontFamily="system-ui">All systems. Real time.</text>
+      {/* Live dot */}
+      <circle cx="370" cy="90" r="4" fill={t}><animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite" /></circle>
+      {/* Bottom labels */}
+      <text x="60" y="220" fill={C.textFaint} fontSize="9" fontFamily="system-ui">No migration</text>
+      <text x="160" y="220" fill={C.textFaint} fontSize="9" fontFamily="system-ui">No re-platforming</text>
+      <text x="290" y="220" fill={C.textFaint} fontSize="9" fontFamily="system-ui">Zero schema mapping</text>
     </svg>
   );
 }
 
 function HIWWatchSVG() {
+  const t = C.teal;
+  const a = C.amber;
+  const r = C.red;
   return (
-    <svg viewBox="0 0 400 300" fill="none" className="w-full h-full">
-      <rect width="400" height="300" rx="16" fill="rgba(45,106,79,0.03)" />
-      {[[140, 75], [200, 75], [260, 75], [110, 130], [170, 130], [230, 130], [290, 130], [140, 185], [200, 185], [260, 185], [170, 240], [230, 240]].map(([cx, cy], i) => {
-        const on = [1, 4, 5, 8, 10].includes(i);
-        return (
-          <g key={i}>
-            <polygon points={`${cx},${cy! - 22} ${cx! + 19},${cy! - 11} ${cx! + 19},${cy! + 11} ${cx},${cy! + 22} ${cx! - 19},${cy! + 11} ${cx! - 19},${cy! - 11}`}
-              fill={on ? "rgba(45,106,79,0.08)" : "rgba(26,18,24,0.02)"} stroke={on ? C.good : "rgba(26,18,24,0.08)"} strokeWidth="1" strokeOpacity={on ? "0.4" : "1"} />
-            {on && <circle cx={cx} cy={cy} r="4" fill={C.good} fillOpacity="0.5"><animate attributeName="fillOpacity" values="0.3;0.7;0.3" dur={`${2 + i * 0.2}s`} repeatCount="indefinite" /></circle>}
-          </g>
-        );
-      })}
-      {[[200, 75, 170, 130], [200, 75, 230, 130], [170, 130, 200, 185], [230, 130, 200, 185], [200, 185, 230, 240]].map(([x1, y1, x2, y2], i) => (
-        <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke={C.good} strokeWidth="1" strokeOpacity="0.2"><animate attributeName="strokeOpacity" values="0.1;0.35;0.1" dur={`${1.5 + i * 0.3}s`} repeatCount="indefinite" /></line>
+    <svg viewBox="0 0 400 260" fill="none" className="w-full h-full">
+      <rect width="400" height="260" rx="8" fill="#f5f5f0" />
+      {/* Domain columns */}
+      {[{ x: 20, l: "Workforce", signals: [{ y: 45, s: "Turnover 28%", c: a }, { y: 72, s: "Agency 18%", c: a }, { y: 99, s: "Sick leave +12%", c: r }] },
+        { x: 145, l: "Clinical", signals: [{ y: 45, s: "Care mins 84%", c: r }, { y: 72, s: "Falls -12%", c: t }, { y: 99, s: "RN gap PM", c: a }] },
+        { x: 270, l: "Compliance", signals: [{ y: 45, s: "SIRS on time", c: t }, { y: 72, s: "QI due 14d", c: a }, { y: 99, s: "PSH review", c: a }] },
+      ].map((col, ci) => (
+        <g key={ci}>
+          <text x={col.x + 55} y={28} textAnchor="middle" fill={C.text} fontSize="10" fontWeight="500" fontFamily="system-ui">{col.l}</text>
+          {col.signals.map((sig, si) => (
+            <g key={si}>
+              <rect x={col.x} y={sig.y} width="110" height="22" rx="3" fill="#fff" stroke={sig.c} strokeWidth="1" strokeOpacity="0.6" />
+              <circle cx={col.x + 10} cy={sig.y + 11} r="3" fill={sig.c}>
+                <animate attributeName="opacity" values="0.5;1;0.5" dur={`${1.8 + ci * 0.3 + si * 0.2}s`} repeatCount="indefinite" />
+              </circle>
+              <text x={col.x + 20} y={sig.y + 15} fill={C.text} fontSize="9" fontFamily="system-ui">{sig.s}</text>
+            </g>
+          ))}
+        </g>
       ))}
-      {[[55, 90, "Workforce"], [55, 150, "Clinical"], [55, 210, "Finance"], [330, 90, "Compliance"], [330, 150, "Governance"], [330, 210, "Quality"]].map(([x, y, label], i) => (
-        <text key={i} x={x as number} y={y as number} textAnchor={i < 3 ? "end" : "start"} fill="rgba(26,18,24,0.35)" fontSize="9" fontFamily="system-ui">{label as string}</text>
-      ))}
+      {/* Cross-domain connection lines */}
+      <line x1="130" y1="83" x2="145" y2="56" stroke={a} strokeWidth="1" strokeDasharray="3 2" strokeOpacity="0.4" />
+      <line x1="255" y1="83" x2="270" y2="83" stroke={a} strokeWidth="1" strokeDasharray="3 2" strokeOpacity="0.4" />
+      {/* Convergence alert */}
+      <rect x="80" y="145" width="240" height="36" rx="5" fill="#fff" stroke={a} strokeWidth="1.5" />
+      <circle cx="100" cy="163" r="5" fill={a}><animate attributeName="r" values="4;6;4" dur="2s" repeatCount="indefinite" /></circle>
+      <text x="115" y="159" fill={C.text} fontSize="10" fontWeight="500" fontFamily="system-ui">Convergence detected</text>
+      <text x="115" y="174" fill={C.textMuted} fontSize="9" fontFamily="system-ui">Workforce + Clinical signals correlating</text>
+      {/* Continuous label */}
+      <text x="200" y="215" textAnchor="middle" fill={C.textFaint} fontSize="9" fontFamily="system-ui">Continuous. Simultaneous. Cross-domain.</text>
     </svg>
   );
 }
 
 function HIWSupportSVG() {
+  const t = C.teal;
+  const a = C.amber;
+  const r = C.red;
   return (
-    <svg viewBox="0 0 400 300" fill="none" className="w-full h-full">
-      <rect width="400" height="300" rx="16" fill="rgba(200,154,60,0.04)" />
-      <rect x="60" y="45" width="280" height="210" rx="12" fill="#fff" stroke="rgba(26,18,24,0.08)" strokeWidth="1" />
-      <rect x="60" y="45" width="280" height="32" rx="12" fill="rgba(26,18,24,0.03)" />
-      <rect x="60" y="65" width="280" height="12" fill="rgba(26,18,24,0.03)" />
-      <circle cx="78" cy="61" r="4" fill={C.good} fillOpacity="0.4" />
-      <circle cx="90" cy="61" r="4" fill={C.copper} fillOpacity="0.4" />
-      <circle cx="102" cy="61" r="4" fill="rgba(26,18,24,0.1)" />
-      {[{ y: 90, w: 250, color: C.warm, label: "RN gap detected. Sunday PM." },
-        { y: 130, w: 220, color: C.good, label: "Care minutes: 188/215. Action needed." },
-        { y: 170, w: 240, color: C.good, label: "SIRS Cat 1 draft ready. Review." }].map((c, i) => (
+    <svg viewBox="0 0 400 260" fill="none" className="w-full h-full">
+      <rect width="400" height="260" rx="8" fill="#f5f5f0" />
+      {/* Leader's console frame */}
+      <rect x="30" y="20" width="340" height="200" rx="6" fill="#fff" stroke={C.text} strokeWidth="1" strokeOpacity="0.15" />
+      {/* Title bar */}
+      <rect x="30" y="20" width="340" height="28" rx="6" fill={C.text} fillOpacity="0.04" />
+      <text x="50" y="39" fill={C.text} fontSize="10" fontWeight="500" fontFamily="system-ui">DON Review Queue</text>
+      <circle cx="348" cy="34" r="4" fill={t}><animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite" /></circle>
+      <text x="330" y="38" textAnchor="end" fill={C.textFaint} fontSize="8" fontFamily="system-ui">Live</text>
+      {/* Queue items */}
+      {[{ y: 58, bar: r, text: "SIRS Priority 1: review draft", right: "11:09pm", urgency: "Immediate" },
+        { y: 88, bar: a, text: "Care minutes gap: tonight's RN shift", right: "2:14pm", urgency: "Urgent" },
+        { y: 118, bar: a, text: "Board Pack Q3: awaiting approval", right: "8 days", urgency: "Urgent" },
+        { y: 148, bar: t, text: "QI submission: data compiled", right: "14 days", urgency: "Routine" },
+      ].map((item, i) => (
         <g key={i}>
-          <rect x="80" y={c.y} width={c.w} height="30" rx="6" fill={c.color} fillOpacity="0.1" stroke={c.color} strokeWidth="1" strokeOpacity="0.15" />
-          <circle cx="94" cy={c.y + 15} r="4" fill={c.color} fillOpacity="0.4"><animate attributeName="fillOpacity" values="0.25;0.5;0.25" dur={`${2.5 + i * 0.4}s`} repeatCount="indefinite" /></circle>
-          <text x="106" y={c.y + 19} fill="rgba(26,18,24,0.5)" fontSize="9" fontFamily="system-ui">{c.label}</text>
+          <line x1="45" y1={item.y + 2} x2="45" y2={item.y + 20} stroke={item.bar} strokeWidth="3" strokeLinecap="round" />
+          <text x="55" y={item.y + 14} fill={C.text} fontSize="9.5" fontWeight="500" fontFamily="system-ui">{item.text}</text>
+          <text x="355" y={item.y + 14} textAnchor="end" fill={C.textFaint} fontSize="8" fontFamily="system-ui">{item.right}</text>
         </g>
       ))}
-      <path d="M 94 120 L 94 130 L 94 160 L 94 170" stroke={C.copper} strokeWidth="1.5" strokeDasharray="3 3" strokeOpacity="0.3"><animate attributeName="stroke-dashoffset" from="6" to="0" dur="2s" repeatCount="indefinite" /></path>
-      <rect x="80" y="215" width="100" height="24" rx="12" fill="rgba(200,154,60,0.1)" />
-      <text x="130" y="231" textAnchor="middle" fill={C.copper} fontSize="9" fontWeight="500" fontFamily="system-ui">DON, Monday 7am</text>
+      {/* Chain detection arrow */}
+      <path d="M 50 180 L 50 195 L 350 195" stroke={a} strokeWidth="1" strokeDasharray="4 3" strokeOpacity="0.5">
+        <animate attributeName="stroke-dashoffset" from="7" to="0" dur="2s" repeatCount="indefinite" />
+      </path>
+      <text x="200" y="210" textAnchor="middle" fill={a} fontSize="9" fontWeight="500" fontFamily="system-ui">Chain: roster gap → clinical risk → SIRS notification</text>
+      {/* Bottom label */}
+      <text x="200" y="245" textAnchor="middle" fill={C.textFaint} fontSize="9" fontFamily="system-ui">Surfaced to the leader who can act. In the flow of work.</text>
     </svg>
   );
 }
 
 function HIWActSVG() {
+  const t = C.teal;
   return (
-    <svg viewBox="0 0 400 300" fill="none" className="w-full h-full">
-      <rect width="400" height="300" rx="16" fill="rgba(200,154,60,0.03)" />
-      <circle cx="200" cy="150" r="90" fill="none" stroke={C.good} strokeWidth="2" strokeOpacity="0.1" />
-      <circle cx="200" cy="150" r="90" fill="none" stroke={C.good} strokeWidth="2.5" strokeOpacity="0.35" strokeDasharray="480 85">
-        <animateTransform attributeName="transform" type="rotate" from="0 200 150" to="360 200 150" dur="12s" repeatCount="indefinite" />
-      </circle>
-      <circle cx="200" cy="150" r="70" fill="none" stroke={C.copper} strokeWidth="2" strokeOpacity="0.15" />
-      <circle cx="200" cy="150" r="70" fill="none" stroke={C.copper} strokeWidth="2.5" strokeOpacity="0.4" strokeDasharray="380 60" strokeLinecap="round">
-        <animateTransform attributeName="transform" type="rotate" from="360 200 150" to="0 200 150" dur="16s" repeatCount="indefinite" />
-      </circle>
-      {[{ a: -90, l: "Trigger", c: C.good }, { a: 0, l: "Draft", c: C.good }, { a: 90, l: "Log", c: C.copper }, { a: 180, l: "Close", c: C.copper }].map((m, i) => {
-        const rad = (m.a * Math.PI) / 180;
-        const cx = 200 + 90 * Math.cos(rad);
-        const cy = 150 + 90 * Math.sin(rad);
-        return (
-          <g key={i}>
-            <circle cx={cx} cy={cy} r="14" fill="#fff" stroke={m.c} strokeWidth="1.5" strokeOpacity="0.3" />
-            <circle cx={cx} cy={cy} r="5" fill={m.c} fillOpacity="0.35" />
-            <text x={cx} y={cy + 28} textAnchor="middle" fill="rgba(26,18,24,0.35)" fontSize="9" fontFamily="system-ui">{m.l}</text>
-          </g>
-        );
-      })}
-      <circle cx="200" cy="150" r="28" fill="rgba(45,106,79,0.08)" />
-      <path d="M 188 150 L 196 158 L 214 140" stroke={C.good} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+    <svg viewBox="0 0 400 260" fill="none" className="w-full h-full">
+      <rect width="400" height="260" rx="8" fill="#f5f5f0" />
+      {/* Four action rows */}
+      {[{ icon: "✦", label: "Drafted", desc: "SIRS notification with all mandatory fields", status: "Ready for review", c: t },
+        { icon: "⬡", label: "Queued", desc: "3 priority actions for the DON this morning", status: "Ranked by urgency", c: C.amber },
+        { icon: "→", label: "Briefed", desc: "Monday briefing sent to every leader by 6am", status: "Delivered", c: t },
+        { icon: "↗", label: "Closed", desc: "Supervision logged. Evidence trail updated.", status: "Complete", c: t },
+      ].map((row, i) => (
+        <g key={i}>
+          <rect x="30" y={20 + i * 52} width="340" height="42" rx="5" fill="#fff" stroke={C.text} strokeWidth="0.5" strokeOpacity="0.1" />
+          {/* Icon circle */}
+          <circle cx="58" cy={41 + i * 52} r="12" fill={row.c} fillOpacity="0.1" />
+          <text x="58" y={45 + i * 52} textAnchor="middle" fill={row.c} fontSize="11" fontFamily="system-ui">{row.icon}</text>
+          {/* Label and desc */}
+          <text x="80" y={36 + i * 52} fill={C.text} fontSize="11" fontWeight="500" fontFamily="system-ui">{row.label}</text>
+          <text x="80" y={50 + i * 52} fill={C.textMuted} fontSize="9" fontFamily="system-ui">{row.desc}</text>
+          {/* Status pill */}
+          <rect x="290" y={30 + i * 52} width={row.status.length * 6 + 16} height="20" rx="10" fill={row.c} fillOpacity="0.08" />
+          <text x={290 + (row.status.length * 6 + 16) / 2} y={44 + i * 52} textAnchor="middle" fill={row.c} fontSize="8" fontWeight="500" fontFamily="system-ui">{row.status}</text>
+          {/* Animated completion tick for last two */}
+          {i >= 2 && <circle cx="370" cy={41 + i * 52} r="6" fill={t} fillOpacity="0.15"><animate attributeName="fillOpacity" values="0.1;0.3;0.1" dur="3s" repeatCount="indefinite" /></circle>}
+          {i >= 2 && <path d={`M ${367} ${41 + i * 52} L ${369} ${43 + i * 52} L ${373} ${39 + i * 52}`} stroke={t} strokeWidth="1.5" strokeLinecap="round" fill="none" />}
+        </g>
+      ))}
+      {/* Summary bar */}
+      <rect x="30" y="230" width="340" height="1" fill={C.text} fillOpacity="0.06" />
+      <text x="200" y="250" textAnchor="middle" fill={C.textFaint} fontSize="9" fontFamily="system-ui">Your leaders review and approve. Chris handles the rest.</text>
     </svg>
   );
 }
@@ -930,8 +971,8 @@ function HowItWorksSection() {
 
         {/* Content: illustration + copy */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-          <div className="order-2 lg:order-1 rounded-2xl overflow-hidden" style={{ backgroundColor: "rgba(26,18,24,0.02)", border: "1px solid rgba(26,18,24,0.04)" }}>
-            <div className="p-4 lg:p-6"><Illus /></div>
+          <div className="order-2 lg:order-1 rounded-[8px] overflow-hidden" style={{ border: `0.5px solid ${C.border}` }}>
+            <div className="p-2 lg:p-3"><Illus /></div>
           </div>
           <div className="order-1 lg:order-2">
             <p className="text-[11px] font-medium tracking-[0.1em] uppercase mb-3" style={{ color: stage.accent }}>{stage.num} {stage.label}</p>
