@@ -7,45 +7,46 @@ import { CareMinutesCard } from "@/components/marketing/cards/CareMinutesCard";
 import { ReviewQueueCard } from "@/components/marketing/cards/ReviewQueueCard";
 import { AgentActivityCard } from "@/components/marketing/cards/AgentActivityCard";
 
-// ─── Marketing visual identity v6 ────────────────────────────────────────────
-// Pure white canvas. High-saturation amber as sole accent. Monospace headlines.
-// Breaks from the Anthropic/Stripe warm-cream-teal-serif-italic convention.
+// ─── Marketing visual identity v5 (operator-grade hybrid) ───────────────────
+// Mercury/Ramp density + Anthropic/Stripe accent discipline.
+// Warm Culture Crunch palette (forest/amber) ONLY inside the briefing artefact.
 const C = {
-  // Canvas — pure white, not cream
-  canvas: "#FFFFFF",
+  // Canvas
+  canvas: "#FAFAF6",
   card: "#FFFFFF",
   // Text
   text: "#0E0E0E",
   textMuted: "#5A5A57",
   textFaint: "#8A8A85",
-  // Accent — high-saturation amber (sole saturated colour on the page)
-  accent: "#D4930A",
-  accentMuted: "rgba(212,147,10,0.12)",
-  // Alert (used sparingly for under-target signals only)
+  // Accents
+  teal: "#1F6F66",
+  amber: "#BA7517",
   red: "#A32D2D",
   // Surfaces
-  ribbon: "#D4930A",     // the one horizontal colour band
+  successBg: "#E1F5EE",
+  warningBg: "#FAEEDA",
+  alertBg: "#FCEBEB",
   // Borders
   border: "rgba(15,23,42,0.10)",
   borderSubtle: "rgba(15,23,42,0.07)",
   // CTA
   ctaBg: "#0E0E0E",
-  ctaText: "#FFFFFF",
-  // Section backgrounds
-  canvasWarm: "#FAFAF6",  // subtle warmth for alternating sections
-  canvasLight: "#FFFFFF",
-  canvasDark: "#0E0E0E",
-  textOnDark: "#FFFFFF",
+  ctaText: "#FAFAF6",
+  // Section backgrounds (3-tone system)
+  canvasWarm: "#FAFAF6",  // A sections
+  canvasLight: "#FFFFFF", // B sections
+  canvasDark: "#0E0E0E",  // C section (one only, conversion)
+  textOnDark: "#FAFAF6",
   textOnDarkMuted: "#B5B3AC",
+  cardOnLight: "#FAFAF6", // cards invert on white sections
   borderOnDark: "rgba(255,255,255,0.10)",
   // Inside-product tokens (briefing artefact ONLY)
   forest: "#1B4332",
   gold: "#D4A853",
-  // Legacy aliases
-  dark: "#0E0E0E", dark2: "#1a1a1a", cream: "#FFFFFF", white: "#FFFFFF",
-  ink: "#FFFFFF", inkDark: "#0E0E0E", inkMuted: "#5A5A57", inkMutedLight: "#5A5A57",
-  copper: "#D4930A", copperDark: "#D4930A", warm: "#A32D2D", good: "#D4930A", warn: "#D4930A",
-  teal: "#D4930A", amber: "#D4930A", // all accent refs → amber
+  // Legacy aliases for components not yet migrated
+  dark: "#0E0E0E", dark2: "#1a1a1a", cream: "#FAFAF6", white: "#FFFFFF",
+  ink: "#FAFAF6", inkDark: "#0E0E0E", inkMuted: "#5A5A57", inkMutedLight: "#5A5A57",
+  copper: "#1F6F66", copperDark: "#1F6F66", warm: "#A32D2D", good: "#1F6F66", warn: "#BA7517",
 };
 
 // ─── Data ───────────────────────────────────────────────────────────────────
@@ -299,16 +300,15 @@ const ROLES = [
   { title: "Team Leaders", desc: "Team briefings, micro-practice recommendations, workforce health signals" },
 ];
 
-// ─── Typography v6 ──────────────────────────────────────────────────────────
-// JetBrains Mono for headlines (monospace = operational intelligence signal).
-// Inter for body. Fraunces kept for briefing artefact only.
-const mono = "'JetBrains Mono', 'Söhne Mono', 'SF Mono', Consolas, monospace";
+// ─── Typography ─────────────────────────────────────────────────────────────
+// Fraunces Italic for display emphasis. Inter for everything else.
+// Load via @fontsource CDN: Fraunces 400i, Inter 400/500.
+const fraunces = "'Fraunces', Georgia, serif";
 const inter = "'Inter', system-ui, -apple-system, sans-serif";
-const fraunces = "'Fraunces', Georgia, serif"; // briefing artefact only
 
-// Section eyebrow: monospace, amber, uppercase
+// Italic eyebrow for section openers (replaces all-caps .chris-label on section openers)
 function SectionEyebrow({ children }: { children: React.ReactNode }) {
-  return <p className="text-[12px] font-medium tracking-[0.06em] uppercase mb-4" style={{ fontFamily: mono, color: C.accent }}>{children}</p>;
+  return <p className="text-[17px] mb-3" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>{children}</p>;
 }
 
 // ─── Components ─────────────────────────────────────────────────────────────
@@ -337,35 +337,50 @@ function Nav() {
 function Hero() {
   return (
     <section style={{ backgroundColor: C.canvas }}>
-      <div className="max-w-6xl mx-auto px-6 lg:px-16 pt-16 lg:pt-28 pb-16 lg:pb-24">
-        <div className="max-w-[700px]">
-          <h1 className="text-[clamp(2.8rem,8vw,80px)] leading-[1.08] tracking-[-0.04em] mb-3" style={{ fontFamily: mono, fontWeight: 500, color: C.text }}>
-            Hold quality.<br />
-            Protect margin.<br />
-            Lead with <span className="font-bold">confidence.</span>
+      <div className="max-w-6xl mx-auto px-6 lg:px-16 pt-16 lg:pt-24 pb-16 lg:pb-20">
+        <div className="max-w-[580px]">
+          <p className="text-[11px] font-medium tracking-[0.08em] uppercase mb-6" style={{ color: C.teal }}>
+            Live with providers in NSW and VIC.
+          </p>
+
+          <h1 className="text-[clamp(3.5rem,11vw,128px)] leading-[1.04] tracking-[-0.03em] mb-8" style={{ fontFamily: fraunces, fontWeight: 400, color: C.text }}>
+            Hold quality. Protect margin. Lead with{" "}
+            <span style={{ color: C.teal }}>confidence.</span>
           </h1>
 
           <p className="text-[17px] leading-[1.6] max-w-[520px] mb-8" style={{ color: C.textMuted }}>
-            Operational intelligence for Australian aged care. Run the morning before the morning.
+            Operational intelligence for aged care, in the flow of leadership work. Reads every system you already run, drafts the work your team would otherwise stitch together by hand, and keeps your leaders ahead of compliance and cost.
           </p>
 
           <div className="flex items-center gap-5 mb-10">
-            <a href="#book" className="text-[14px] font-medium px-[22px] py-[13px] rounded-[4px]" style={{ backgroundColor: C.ctaBg, color: C.ctaText }}>
+            <a href="#book" className="text-[15px] font-medium px-[22px] py-[13px] rounded-[4px]" style={{ backgroundColor: C.ctaBg, color: C.ctaText }}>
               Book 30 minutes with Campbell
             </a>
-            <a href="#how-it-works" className="text-[14px] font-medium" style={{ color: C.text }}>
+            <a href="#how-it-works" className="text-[15px] font-medium" style={{ color: C.text }}>
               How Chris works, layer by layer →
             </a>
           </div>
 
-          {/* Trust line — no dots, no eyebrow, just names */}
-          <p className="text-[13px] mb-3" style={{ color: C.textMuted }}>
-            Live with Harbison Care, Kinyara Health, 365 Care and Homewell.
-          </p>
+          {/* Trust strip */}
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 mb-5">
+            {[
+              "Live with Harbison Care, Kinyara Health, 365 Care and Homewell",
+              "Australian data residency",
+              "Human-approved on every regulatory submission",
+            ].map((item, i) => (
+              <span key={i} className="flex items-center gap-1.5 text-[13px]" style={{ color: C.textMuted }}>
+                <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: C.teal }} />
+                {item}
+              </span>
+            ))}
+          </div>
 
           {/* Price anchor */}
-          <p className="text-[13px]" style={{ color: C.textFaint }}>
-            Pilot pricing from $15,000. Partner-rate while we build in the open.
+          <p className="text-[14px] font-medium leading-[1.6]" style={{ color: C.text }}>
+            Pilot pricing from $15,000. Scaled rollouts on application.
+          </p>
+          <p className="text-[13px] leading-[1.6]" style={{ color: C.textFaint }}>
+            Partner-rate pricing while we build in the open with our first cohort.
           </p>
         </div>
       </div>
@@ -452,7 +467,7 @@ function WhatChrisIsSection() {
         <div className="mb-8 lg:mb-10">
           <p className="text-[17px] mb-3" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: teal }}>What Chris is</p>
           <h2 className="text-[clamp(1.75rem,4vw,34px)] font-medium leading-[1.08] tracking-[-0.025em] mb-3 max-w-[540px]" style={{ color: textPrimary }}>
-            A <span style={{ fontWeight: 700 }}>morning</span> at Mt Gibraltar Gardens.
+            A <span style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.012em" }}>morning</span> at Mt Gibraltar Gardens.
           </h2>
           <p className="text-[12.5px] leading-[1.55] max-w-[520px]" style={{ color: textSecondary }}>
             Monday morning. While Sarah&apos;s team finished the night shift, Chris built her team briefing. The agents that built it are on the left. The artefact she opened before the morning huddle is on the right.
@@ -586,7 +601,7 @@ function ToolsStrip() {
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-14 lg:py-18">
         {/* Header */}
         <div className="max-w-[560px] mb-10">
-          <p className="text-[17px] mb-3" style={{ fontFamily: mono, color: C.accent, letterSpacing: "0.02em" }}>
+          <p className="text-[17px] mb-3" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>
             See your own numbers
           </p>
           <h2 className="text-[clamp(1.75rem,4vw,34px)] font-medium leading-[1.08] tracking-[-0.025em] mb-3" style={{ color: C.text }}>
@@ -928,9 +943,9 @@ function HowItWorksSection() {
         {/* Header */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-16 mb-14 lg:mb-18">
           <div>
-            <p className="text-[17px] mb-3" style={{ fontFamily: mono, color: C.accent, letterSpacing: "0.02em" }}>How it works</p>
+            <p className="text-[17px] mb-3" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>How it works</p>
             <h2 className="text-[clamp(1.75rem,4vw,34px)] font-medium leading-[1.08] tracking-[-0.025em]" style={{ color: C.text }}>
-              Aged care, with <span style={{ fontWeight: 700 }}>intelligence</span> in every layer
+              Aged care, with <span style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.012em" }}>intelligence</span> in every layer
             </h2>
           </div>
           <div className="lg:pt-8">
@@ -1007,7 +1022,7 @@ function JobsSection() {
   return (
     <section style={{ backgroundColor: C.canvas }} id="jobs">
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
-        <p className="text-[17px] mb-3" style={{ fontFamily: mono, color: C.accent, letterSpacing: "0.02em" }}>Where we start</p>
+        <p className="text-[17px] mb-3" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>Where we start</p>
         <h2 className="text-[clamp(1.75rem,4vw,34px)] font-medium leading-[1.08] tracking-[-0.025em] mb-3" style={{ color: C.text }}>
           We don&apos;t sell software. We fix a problem.<br />
           <em className="italic" style={{ color: C.copperDark }}>Then another. Then another.</em>
@@ -1167,7 +1182,7 @@ function ScenarioSection() {
   return (
     <section ref={sectionRef} style={{ backgroundColor: C.canvasLight }}>
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-12 lg:py-16">
-        <p className="text-[17px] mb-8" style={{ fontFamily: mono, color: C.accent, letterSpacing: "0.02em" }}>Every facility. Every week.</p>
+        <p className="text-[17px] mb-8" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>Every facility. Every week.</p>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
           {scenarios.map((sc) => {
@@ -1197,7 +1212,7 @@ function ScenarioSection() {
                   </div>
 
                   {/* Title (always visible) */}
-                  <h3 className="text-[clamp(1.5rem,3.5vw,2rem)] leading-[1.1] mb-2" style={{ fontFamily: mono, fontWeight: 500, color: C.text, letterSpacing: "-0.02em" }}>{sc.title}</h3>
+                  <h3 className="text-[clamp(1.5rem,3.5vw,2rem)] leading-[1.1] mb-2" style={{ fontFamily: fraunces, fontStyle: "italic", color: C.text, letterSpacing: "-0.02em" }}>{sc.title}</h3>
                   <p className="text-[14px]" style={{ color: C.textFaint }}>{sc.subtitle}</p>
 
                   {/* Expanded content */}
@@ -1242,9 +1257,9 @@ function AgentsSection() {
   return (
     <section style={{ backgroundColor: C.canvas }}>
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
-        <p className="text-[17px] mb-3" style={{ fontFamily: mono, color: C.accent, letterSpacing: "0.02em" }}>The intelligence layer</p>
+        <p className="text-[17px] mb-3" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>The intelligence layer</p>
         <h2 className="text-[clamp(1.75rem,4vw,34px)] font-medium leading-[1.08] tracking-[-0.025em] mb-3" style={{ color: C.text }}>
-          Named agents. Every domain. <span style={{ fontWeight: 700 }}>Always on.</span>
+          Named agents. Every domain. <span style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.012em" }}>Always on.</span>
         </h2>
         <p className="text-[15px] leading-relaxed max-w-xl mb-12" style={{ color: C.inkMutedLight }}>
           Each agent has a domain, a cadence, and a job. Together they give every leader in your organisation a dedicated intelligence layer, working underneath them, 24 hours a day.
@@ -1335,9 +1350,9 @@ function AISupportSection() {
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-14 lg:py-18">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
           <div>
-            <p className="text-[17px] mb-3" style={{ fontFamily: mono, color: C.accent, letterSpacing: "0.02em" }}>AI support</p>
+            <p className="text-[17px] mb-3" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>AI support</p>
             <h2 className="text-[clamp(1.75rem,4vw,34px)] font-medium leading-[1.08] tracking-[-0.025em] mb-4" style={{ color: C.text }}>
-              Ask the question you&apos;ve been <span style={{ fontWeight: 700 }}>sitting on.</span>
+              Ask the question you&apos;ve been <span style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.012em" }}>sitting on.</span>
             </h2>
             <p className="text-[14px] leading-[1.6] mb-5" style={{ color: C.textMuted }}>
               Chris is an operational intelligence layer and AI support built specifically for aged care. Ask about compliance, workforce, funding, or bring a leadership challenge. Chris supports the way a trusted colleague would: direct, warm, and grounded in what actually works in this sector. No login. No signup.
@@ -1381,10 +1396,10 @@ function FoundersSection() {
   return (
     <section style={{ backgroundColor: C.canvas }}>
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-12 lg:py-16">
-        <p className="text-[17px] mb-2" style={{ fontFamily: mono, color: C.accent, letterSpacing: "0.02em" }}>Your team</p>
+        <p className="text-[17px] mb-2" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>Your team</p>
         <h2 className="text-[clamp(1.75rem,4vw,34px)] font-medium leading-[1.08] tracking-[-0.025em] mb-10" style={{ color: C.text }}>
           The humans behind Culture{" "}
-          <span style={{ fontWeight: 700 }}>Crunch.</span>
+          <span style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.012em" }}>Crunch.</span>
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1440,7 +1455,7 @@ function HonestAnswersSection() {
     <section style={{ backgroundColor: C.canvasLight }}>
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-12 lg:py-16">
         <p className="text-[11px] font-medium uppercase tracking-[0.08em] mb-3" style={{ color: C.teal }}>Honest answers</p>
-        <h2 className="text-[clamp(1.75rem,4vw,34px)] leading-[1.08] tracking-[-0.025em] mb-3" style={{ fontFamily: mono, fontWeight: 500, color: C.text }}>
+        <h2 className="text-[clamp(1.75rem,4vw,34px)] leading-[1.08] tracking-[-0.025em] mb-3" style={{ fontFamily: fraunces, fontWeight: 600, color: C.text }}>
           Yes, we know what you&apos;re{" "}
           <span style={{ color: C.teal }}>thinking.</span>
         </h2>
@@ -1500,9 +1515,9 @@ function ExecutionSection() {
   return (
     <section style={{ backgroundColor: C.canvas }}>
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
-        <p className="text-[17px] mb-3" style={{ fontFamily: mono, color: C.accent, letterSpacing: "0.02em" }}>The execution layer</p>
+        <p className="text-[17px] mb-3" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>The execution layer</p>
         <h2 className="text-[clamp(1.75rem,4vw,34px)] font-medium leading-[1.08] tracking-[-0.025em] mb-3" style={{ color: C.text }}>
-          Chris doesn&apos;t just tell you. It <span style={{ fontWeight: 700 }}>acts.</span>
+          Chris doesn&apos;t just tell you. It <span style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.012em" }}>acts.</span>
         </h2>
         <p className="text-[15px] leading-relaxed max-w-xl mb-12" style={{ color: C.inkMutedLight }}>
           Most analytics tools give you data to interpret. Chris delivers a drafted document, a specific action, or a coordinated recommendation, ready for your review and approval.
@@ -1526,9 +1541,9 @@ function RolesSection() {
   return (
     <section style={{ backgroundColor: C.canvas }}>
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
-        <p className="text-[17px] mb-3" style={{ fontFamily: mono, color: C.accent, letterSpacing: "0.02em" }}>Built for every leader</p>
+        <p className="text-[17px] mb-3" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>Built for every leader</p>
         <h2 className="text-[clamp(1.75rem,4vw,34px)] font-medium leading-[1.08] tracking-[-0.025em] mb-3" style={{ color: C.text }}>
-          Operational intelligence, in the flow of leadership work. <span style={{ fontWeight: 700 }}>Every leader.</span>
+          Operational intelligence, in the flow of leadership work. <span style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.012em" }}>Every leader.</span>
         </h2>
         <p className="text-[15px] leading-relaxed max-w-xl mb-12" style={{ color: C.inkMutedLight }}>
           Chris adapts to the role looking at it. The CEO sees the portfolio view. The DON sees clinical and operational signals. The CFO sees the financial intelligence. The WHS Lead sees the psychosocial picture.
@@ -1585,7 +1600,7 @@ function BookingModal({ open, onClose }: { open: boolean; onClose: () => void })
         <div className="p-6">
           <div className="flex items-start justify-between mb-4">
             <div>
-              <p className="text-[17px]" style={{ fontFamily: mono, color: C.accent, letterSpacing: "0.02em" }}>Start a conversation</p>
+              <p className="text-[17px]" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>Start a conversation</p>
               <p className="text-[13px] mt-1" style={{ color: C.textMuted }}>No demo deck. No sales pitch. Just your operation and ours.</p>
             </div>
             <button onClick={onClose} className="text-[18px] w-8 h-8 flex items-center justify-center rounded hover:bg-black/5" style={{ color: C.textFaint }}>×</button>
@@ -1655,7 +1670,7 @@ function ClientProof() {
     <section style={{ backgroundColor: C.canvas, borderTop: `0.5px solid ${C.border}` }}>
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-14 lg:py-18">
         {/* Eyebrow + lead */}
-        <p className="text-[17px] mb-2" style={{ fontFamily: mono, color: C.accent, letterSpacing: "0.02em" }}>6 months from the first idea. Four organisations.</p>
+        <p className="text-[17px] mb-2" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>6 months from the first idea. Four organisations.</p>
         <p className="text-[15px] leading-[1.6] max-w-[560px] mb-10" style={{ color: C.textMuted }}>
           6 months from the first idea. Four organisations across residential, home care and NDIS, including a multi-brand provider group.
         </p>
@@ -1783,9 +1798,9 @@ export default function V2Page() {
 
   return (
     <div style={{ fontFamily: inter }}>
-      {/* Font loading: JetBrains Mono (headlines), Inter (body), Fraunces + Source Serif 4 (briefing only) */}
+      {/* Font loading: Inter 400-700 + Fraunces 400-700 (regular + italic) */}
       {/* eslint-disable-next-line @next/next/no-page-custom-font */}
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&family=Fraunces:ital,opsz,wght@1,9..144,400&family=Source+Serif+4:ital,wght@1,400&display=swap" />
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght,SOFT@9..144,400,100;9..144,500,100;9..144,600,100;9..144,700,100&family=Fraunces:ital,opsz,wght,SOFT@1,9..144,400,100;1,9..144,500,100&display=swap" />
       <Nav />
       <Hero />
       {/* Section 2: Mt Gibraltar morning narrative */}
@@ -1806,11 +1821,6 @@ export default function V2Page() {
       <JobsSection />
       <ExecutionSection />
       <Footer />
-      {/* Currently watching indicator — fixed bottom-right */}
-      <div className="fixed bottom-4 right-4 z-40 hidden lg:flex items-center gap-2 px-3 py-2 rounded-[4px]" style={{ backgroundColor: C.canvas, border: `0.5px solid ${C.border}`, boxShadow: "0 2px 8px rgba(0,0,0,0.06)" }}>
-        <span className="w-[6px] h-[6px] rounded-full animate-pulse" style={{ backgroundColor: C.accent }} />
-        <span className="text-[11px] tabular-nums" style={{ fontFamily: mono, color: C.textMuted }}>4 facilities · 312 residents · 0 immediate findings</span>
-      </div>
       <BookingModal open={showBooking} onClose={() => setShowBooking(false)} />
     </div>
   );
