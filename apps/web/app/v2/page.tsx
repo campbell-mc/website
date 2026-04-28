@@ -343,9 +343,9 @@ function Hero() {
             Live with providers in NSW and VIC.
           </p>
 
-          <h1 className="text-[clamp(2.8rem,7vw,68px)] font-medium leading-[1.02] tracking-[-0.032em] mb-6" style={{ color: C.text }}>
+          <h1 className="text-[clamp(2.8rem,7vw,68px)] leading-[1.05] tracking-[-0.025em] mb-6" style={{ fontFamily: fraunces, fontWeight: 600, color: C.text }}>
             Hold quality. Protect margin. Lead with{" "}
-            <span style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.015em" }}>confidence.</span>
+            <span style={{ color: C.teal }}>confidence.</span>
           </h1>
 
           <p className="text-[17px] leading-[1.6] max-w-[520px] mb-8" style={{ color: C.textMuted }}>
@@ -1710,13 +1710,9 @@ export default function V2Page() {
 
   return (
     <div style={{ fontFamily: inter }}>
-      {/* Font loading: Inter 400/500 + Fraunces 400 italic */}
+      {/* Font loading: Inter 400-700 + Fraunces 400-700 (regular + italic) */}
       {/* eslint-disable-next-line @next/next/no-page-custom-font */}
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5/400.css" />
-      {/* eslint-disable-next-line @next/next/no-page-custom-font */}
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5/500.css" />
-      {/* eslint-disable-next-line @next/next/no-page-custom-font */}
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/fraunces@5/400-italic.css" />
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght,SOFT@9..144,400,100;9..144,500,100;9..144,600,100;9..144,700,100&family=Fraunces:ital,opsz,wght,SOFT@1,9..144,400,100;1,9..144,500,100&display=swap" />
       <Nav />
       <Hero />
       {/* Section 2: Mt Gibraltar morning narrative */}
