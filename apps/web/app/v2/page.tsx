@@ -1451,9 +1451,9 @@ function HonestAnswersSection() {
   const cards = [
     {
       eyebrow: "Data and system integration",
-      headline: "Standalone today. APIs and MCP coming.",
+      headline: "Standalone today. APIs and MCP live in May 2026.",
       today: "Chris runs as a standalone SaaS. No integration with your internal systems, networks, or databases is required during pilot. Staff access via web browser and SMS links. We get exports from your roster, finance, clinical, and incident systems on whatever cadence works, and Chris reads from those. The architecture is deliberately lean. No VPN. No on-premises components. No inbound connections to your network.",
-      coming: "APIs and MCP server connectors scoped for Q3 2026. The twelve named source systems prioritised by which pilot organisation runs them first.",
+      coming: "APIs and MCP server connectors live in May 2026. The twelve named source systems prioritised by which pilot organisation runs them first.",
       cta: "If your stack matters: tell us your three biggest systems on the first call. We will tell you exactly when integration ships for them.",
     },
     {
