@@ -1670,13 +1670,13 @@ function ClientProof() {
     <section style={{ backgroundColor: C.canvas, borderTop: `0.5px solid ${C.border}` }}>
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-14 lg:py-18">
         {/* Eyebrow + lead */}
-        <p className="text-[17px] mb-2" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>Six months. Four organisations.</p>
+        <p className="text-[17px] mb-2" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>6 months from the first idea. Four organisations.</p>
         <p className="text-[15px] leading-[1.6] max-w-[560px] mb-10" style={{ color: C.textMuted }}>
-          Six months. Four organisations across residential, home care and NDIS, including a multi-brand provider group.
+          6 months from the first idea. Four organisations across residential, home care and NDIS, including a multi-brand provider group.
         </p>
 
         {/* Logo cards */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-10">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           {CLIENTS.map((client) => (
             <div key={client.name} className="flex flex-col items-start">
               <div className="h-[36px] flex items-center mb-3">
@@ -1691,13 +1691,13 @@ function ClientProof() {
           ))}
         </div>
 
-        {/* Outcomes strip */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* Outcomes strip hidden until we have verified data. Uncomment when ready.
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-10">
           {[
             { value: "Zero", label: "missed regulatory deadlines across all pilots" },
-            { value: "[TODO]", label: "AN-ACC uplift identified" },
-            { value: "[TODO]", label: "hours per week returned to facility leadership" },
-            { value: "[TODO]", label: "workflows live in production" },
+            { value: "$X", label: "AN-ACC uplift identified" },
+            { value: "Y", label: "hours per week returned to facility leadership" },
+            { value: "Z", label: "workflows live in production" },
           ].map((stat) => (
             <div key={stat.label} className="rounded-[5px] p-4" style={{ border: `0.5px solid ${C.border}` }}>
               <p className="text-[18px] font-medium tracking-[-0.02em] mb-1" style={{ color: C.teal }}>{stat.value}</p>
@@ -1705,6 +1705,7 @@ function ClientProof() {
             </div>
           ))}
         </div>
+        */}
       </div>
     </section>
   );
