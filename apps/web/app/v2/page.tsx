@@ -1351,10 +1351,10 @@ function FinalCTA() {
 
 // ── Client proof section ────────────────────────────────────────────────────
 const CLIENTS = [
-  { name: "Harbison Care", logo: "/logos/harbison.png", fact: "[CONTENT_PLACEHOLDER: one-line operational fact about Harbison]" },
-  { name: "Kinyara Health", logo: "/logos/kinyara.png", fact: "[CONTENT_PLACEHOLDER: one-line operational fact about Kinyara Health]" },
-  { name: "Homewell", logo: "/logos/homewell.png", fact: "[CONTENT_PLACEHOLDER: one-line operational fact about Homewell]" },
-  { name: "365 Care", logo: "/logos/365care.png", fact: "[CONTENT_PLACEHOLDER: one-line operational fact about 365 Care]" },
+  { name: "Harbison Care", logo: "/logos/harbison.png", fact: "Leading residential aged care innovator. 2 large sites, 350 staff." },
+  { name: "Kinyara Health", logo: "/logos/kinyara.png", fact: "PE-backed home care and NDIS operator. Five brands along the East Coast." },
+  { name: "365 Care", logo: "/logos/365care.png", fact: "Home care and NDIS provider. Western Sydney." },
+  { name: "Homewell", logo: "/logos/homewell.png", fact: "Home care and NDIS provider. Melbourne." },
 ];
 
 function ClientProof() {
