@@ -1678,27 +1678,159 @@ function HonestAnswersSection() {
 }
 
 function ExecutionSection() {
+  const execRef = useRef<HTMLDivElement>(null);
+  const [execVis, setExecVis] = useState(false);
+  const [readCount, setReadCount] = useState(5);
+  const [showThirdBubble, setShowThirdBubble] = useState(false);
+
+  useEffect(() => {
+    const el = execRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setExecVis(true); obs.disconnect(); } }, { threshold: 0.1 });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  // Tick read count from 5 to 6 after 5 seconds of visibility
+  useEffect(() => { if (!execVis) return; const t = setTimeout(() => setReadCount(6), 5000); return () => clearTimeout(t); }, [execVis]);
+
+  const er = (delay: number) => ({ opacity: execVis ? 1 : 0, transform: execVis ? "translateY(0)" : "translateY(16px)", transition: `opacity 300ms ease-out ${delay}ms, transform 300ms ease-out ${delay}ms` });
+
   return (
-    <section style={{ backgroundColor: C.canvas }}>
-      <div className="max-w-6xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
-        <p className="text-[17px] mb-3" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>The execution layer</p>
-        <h2 className="mb-3" style={{ fontSize: "clamp(34px, 4vw, 48px)", lineHeight: 1.08, letterSpacing: "-0.025em", fontWeight: 500, color: C.text }}>
-          Chris doesn&apos;t just tell you. It <span style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.012em" }}>acts.</span>
+    <section ref={execRef} style={{ backgroundColor: C.canvasLight }}>
+      <div className="max-w-6xl mx-auto px-6 lg:px-16 py-14 lg:py-18">
+        <div style={er(0)}><SectionEyebrow>The execution layer</SectionEyebrow></div>
+        <h2 className="mb-3" style={{ fontSize: "clamp(34px, 4vw, 48px)", lineHeight: 1.08, letterSpacing: "-0.025em", fontWeight: 500, color: C.text, ...er(100) }}>
+          Chris doesn&apos;t just tell you. It <span style={{ fontFamily: fraunces, fontStyle: "italic" }}>acts.</span>
         </h2>
-        <p className="text-[15px] leading-relaxed max-w-xl mb-12" style={{ color: C.inkMutedLight }}>
+        <p className="text-[15px] leading-[1.6] max-w-xl mb-8" style={{ fontFamily: inter, color: C.textMuted, ...er(200) }}>
           Most analytics tools give you data to interpret. Chris delivers a drafted document, a specific action, or a coordinated recommendation, ready for your review and approval.
         </p>
 
+        {/* Four product UI cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {EXECUTION.map((item) => (
-            <div key={item.title} className="border rounded-lg p-6" style={{ backgroundColor: C.white, borderColor: C.border }}>
-              <div className="text-[20px] mb-3">{item.icon}</div>
-              <p className="text-[14px] font-medium mb-2" style={{ color: C.inkDark }}>{item.title}</p>
-              <p className="text-[13px] leading-relaxed" style={{ color: C.inkMutedLight }}>{item.body}</p>
+
+          {/* Card 1: Documents drafted */}
+          <div className="rounded-[5px] p-4 lg:p-5 transition-all duration-200 hover:shadow-sm" style={{ backgroundColor: C.canvasWarm, border: `0.5px solid ${C.border}`, ...er(400) }}>
+            <span className="inline-block text-[9px] font-medium uppercase tracking-[0.10em] px-2 py-1 rounded-[3px] mb-2" style={{ backgroundColor: "#E1F5EE", color: C.sage }}>Drafted · 4m ago</span>
+            <p className="text-[14px] font-medium mb-3" style={{ fontFamily: inter, color: C.text }}>SIRS Priority 1 notification</p>
+            <div className="rounded-[4px] p-3 mb-3" style={{ backgroundColor: C.card, borderTop: `0.5px solid ${C.border}` }}>
+              <p className="text-[10px] mb-1" style={{ fontFamily: inter, fontFeatureSettings: "'tnum'", color: C.textMuted }}>ACQSC ref: SIRS-2026-04-28-3742</p>
+              <p className="text-[12px] font-medium mb-1" style={{ fontFamily: inter, color: C.text }}>Wing B · Resident fall · Priority 1</p>
+              <p className="text-[10px] mb-1" style={{ fontFamily: inter, color: C.textMuted }}>Deadline: 9:00am Wednesday · <span style={{ color: C.ironstone }}>17 hours remaining</span></p>
+              <p className="text-[9px]" style={{ fontFamily: inter, color: C.textFaint }}>Drafted by documentation engine · 6:32am</p>
             </div>
-          ))}
+            <div className="flex items-center gap-3">
+              <span className="text-[11px] font-medium px-3 py-1.5 rounded-[4px]" style={{ backgroundColor: C.sage, color: "#fff" }}>Review draft</span>
+              <span className="text-[11px] font-medium" style={{ color: C.text }}>Edit</span>
+            </div>
+          </div>
+
+          {/* Card 2: Actions queued */}
+          <div className="rounded-[5px] p-4 lg:p-5 transition-all duration-200 hover:shadow-sm" style={{ backgroundColor: C.canvasWarm, border: `0.5px solid ${C.border}`, ...er(550) }}>
+            <span className="inline-block text-[9px] font-medium uppercase tracking-[0.10em] px-2 py-1 rounded-[3px] mb-2" style={{ backgroundColor: "#E1F5EE", color: C.sage }}>DON queue · Today</span>
+            <p className="text-[14px] font-medium mb-3" style={{ fontFamily: inter, color: C.text }}>Three actions ranked</p>
+            <div className="space-y-0">
+              {[
+                { priority: "Immediate", color: C.red, bg: "#FCEBEB", title: "SIRS Priority 1 · Wing B", sub: "ACQSC deadline 9am · documentation drafted" },
+                { priority: "Urgent", color: C.ironstone, bg: "#FAEEDA", title: "Roster gap · Sunday PM", sub: "Operations decision needed · flagged overnight" },
+                { priority: "Routine", color: C.sage, bg: "#E1F5EE", title: "Q3 board pack · Section 4", sub: "4 sections compiled · awaiting CEO review" },
+              ].map((row, i) => (
+                <div key={i} className="flex items-start gap-2 py-2 group" style={{ borderTop: i > 0 ? `0.5px solid ${C.border}` : "none" }}>
+                  <div className="w-[3px] h-8 rounded-full shrink-0 mt-0.5 transition-all group-hover:w-[4px]" style={{ backgroundColor: row.color }} />
+                  <div className="flex-1 min-w-0">
+                    <span className="text-[8px] font-medium uppercase tracking-[0.08em] px-1.5 py-0.5 rounded-[2px]" style={{ backgroundColor: row.bg, color: row.color }}>{row.priority}</span>
+                    <p className="text-[12px] font-medium mt-0.5" style={{ fontFamily: inter, color: C.text }}>{row.title}</p>
+                    <p className="text-[10px]" style={{ fontFamily: inter, color: C.textMuted }}>{row.sub}</p>
+                  </div>
+                  <span className="text-[11px] shrink-0 mt-2 transition-transform group-hover:translate-x-0.5" style={{ color: C.textFaint }}>→</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Card 3: Leaders briefed */}
+          <div className="rounded-[5px] p-4 lg:p-5 transition-all duration-200 hover:shadow-sm" style={{ backgroundColor: C.canvasWarm, border: `0.5px solid ${C.border}`, ...er(700) }}>
+            <span className="inline-block text-[9px] font-medium uppercase tracking-[0.10em] px-2 py-1 rounded-[3px] mb-2" style={{ backgroundColor: "#E1F5EE", color: C.sage }}>Morning briefings · Delivered</span>
+            <p className="text-[14px] font-medium mb-1" style={{ fontFamily: inter, color: C.text }}>Six leaders briefed at 6:47am</p>
+            <p className="text-[11px] mb-3" style={{ fontFamily: inter, color: C.textMuted }}>
+              <span className="inline-block w-1.5 h-1.5 rounded-full mr-1" style={{ backgroundColor: C.sage }} />
+              <span className="transition-opacity duration-500">{readCount} of 6 read</span>
+            </p>
+            <div className="space-y-2">
+              {[
+                { initials: "SM", name: "Sarah Mitchell", role: "DON · Mt Gibraltar Gardens", status: "Read 6:51am", statusColor: C.sage },
+                { initials: "JC", name: "James Chen", role: "Facility Manager · Sutton Forest", status: "Reading now", statusColor: C.ironstone, pulse: true },
+                { initials: "PN", name: "Priya Nair", role: "Quality Lead · Bowral", status: "Read 6:49am", statusColor: C.sage },
+              ].map((person) => (
+                <div key={person.initials} className="flex items-center gap-2.5 group">
+                  <div className="w-6 h-6 rounded-full flex items-center justify-center text-[9px] font-medium shrink-0 transition-transform group-hover:scale-110" style={{ backgroundColor: "#E1F5EE", color: C.sage }}>{person.initials}</div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-[12px] font-medium" style={{ fontFamily: inter, color: C.text }}>{person.name}</p>
+                    <p className="text-[10px]" style={{ fontFamily: inter, color: C.textMuted }}>{person.role}</p>
+                  </div>
+                  <span className={`text-[10px] font-medium ${person.pulse ? "animate-pulse" : ""}`} style={{ color: person.statusColor }}>{person.pulse ? "●" : "✓"} {person.status}</span>
+                </div>
+              ))}
+            </div>
+            <p className="text-[10px] mt-2" style={{ color: C.textFaint }}>+ 3 more</p>
+          </div>
+
+          {/* Card 4: iMessage delivery */}
+          <div className="rounded-[5px] p-3 lg:p-4 transition-all duration-200 hover:shadow-sm" style={{ backgroundColor: C.canvasWarm, border: `0.5px solid ${C.border}`, ...er(850) }}
+            onMouseEnter={() => { if (!showThirdBubble) setTimeout(() => setShowThirdBubble(true), 4000); }}>
+            <span className="inline-block text-[9px] font-medium uppercase tracking-[0.10em] px-2 py-1 rounded-[3px] mb-2" style={{ backgroundColor: "#E1F5EE", color: C.sage }}>iMessage · Live thread</span>
+            <p className="text-[14px] font-medium mb-3" style={{ fontFamily: inter, color: C.text }}>Where leaders already are</p>
+            {/* iMessage thread */}
+            <div className="rounded-[12px] p-2" style={{ backgroundColor: "#F2F2F7" }}>
+              <p className="text-[9px] mb-1 ml-1" style={{ color: C.textFaint }}>Chris</p>
+              {/* Bubble 1 */}
+              <div className="mb-2" style={er(execVis ? 600 : 0)}>
+                <div className="max-w-[85%] rounded-[16px] rounded-bl-[4px] px-3 py-2" style={{ backgroundColor: "#E9E9EB" }}>
+                  <p className="text-[12px]" style={{ fontFamily: inter, color: C.text }}>Your morning briefing is ready.</p>
+                  <div className="mt-1.5 rounded-[6px] overflow-hidden" style={{ width: 60, height: 32, backgroundColor: "#fff", border: `0.5px solid ${C.border}` }}>
+                    <div style={{ height: 8, backgroundColor: C.forest }} />
+                  </div>
+                  <p className="text-[10px] mt-1" style={{ color: C.sage }}>Tap to read →</p>
+                </div>
+                <p className="text-[8px] mt-0.5 ml-1" style={{ color: C.textFaint }}>6:47am</p>
+              </div>
+              {/* Bubble 2 */}
+              <div className="mb-2" style={er(execVis ? 1000 : 0)}>
+                <div className="max-w-[85%] rounded-[16px] rounded-bl-[4px] px-3 py-2" style={{ backgroundColor: "#E9E9EB" }}>
+                  <p className="text-[11px] leading-[1.4]" style={{ fontFamily: inter, color: C.text }}>Sarah marked the Wing B SIRS priority as approved. Submitted to ACQSC ref SIRS-2026-04-28-3742.</p>
+                </div>
+                <p className="text-[8px] mt-0.5 ml-1" style={{ color: C.textFaint }}>7:14am</p>
+              </div>
+              {/* Third bubble on hover */}
+              {showThirdBubble && (
+                <div className="mb-1" style={{ opacity: 0, animation: "fadeSlideUp 400ms ease-out forwards" }}>
+                  <div className="max-w-[85%] rounded-[16px] rounded-bl-[4px] px-3 py-2" style={{ backgroundColor: "#E9E9EB" }}>
+                    <p className="text-[11px] leading-[1.4]" style={{ fontFamily: inter, color: C.text }}>Care minutes confirmed for tonight. RN cover locked.</p>
+                  </div>
+                  <p className="text-[8px] mt-0.5 ml-1" style={{ color: C.textFaint }}>7:43am</p>
+                </div>
+              )}
+              {/* Typing indicator */}
+              {!showThirdBubble && execVis && (
+                <div className="flex items-center gap-1 ml-1 mt-1" style={er(1400)}>
+                  <div className="flex gap-0.5 px-2.5 py-1.5 rounded-full" style={{ backgroundColor: "#E9E9EB" }}>
+                    {[0, 1, 2].map((d) => <span key={d} className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: "#8E8E93", animationDelay: `${d * 200}ms` }} />)}
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes fadeSlideUp {
+          from { opacity: 0; transform: translateY(8px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
     </section>
   );
 }
