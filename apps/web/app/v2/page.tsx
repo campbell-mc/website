@@ -1129,7 +1129,7 @@ function JobsSection() {
 }
 
 function ScenarioSection() {
-  const [activeScenario, setActiveScenario] = useState<number | null>(null);
+  const [openScenarios, setOpenScenarios] = useState<Set<number>>(new Set());
   const sectionRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -1186,10 +1186,10 @@ function ScenarioSection() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
           {scenarios.map((sc) => {
-            const isOpen = activeScenario === sc.id;
+            const isOpen = openScenarios.has(sc.id);
             return (
               <button key={sc.id}
-                onClick={() => setActiveScenario(isOpen ? null : sc.id)}
+                onClick={() => setOpenScenarios((prev) => { const next = new Set(prev); if (next.has(sc.id)) next.delete(sc.id); else next.add(sc.id); return next; })}
                 className="text-left rounded-[8px] overflow-hidden transition-all duration-300"
                 style={{
                   backgroundColor: C.canvasWarm,
