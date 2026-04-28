@@ -329,7 +329,7 @@ function Nav() {
 function Hero() {
   return (
     <section style={{ backgroundColor: C.canvas }}>
-      <div className="max-w-6xl mx-auto px-6 lg:px-16 pt-14 lg:pt-20 pb-16 lg:pb-24">
+      <div className="max-w-6xl mx-auto px-6 lg:px-16 pt-16 lg:pt-24 pb-16 lg:pb-20">
         <div className="max-w-[580px]">
           <p className="text-[11px] font-medium tracking-[0.08em] uppercase mb-6" style={{ color: C.teal }}>
             Live with providers in NSW and VIC.
@@ -341,44 +341,37 @@ function Hero() {
           </h1>
 
           <p className="text-[16px] leading-[1.6] max-w-[520px] mb-8" style={{ color: C.textMuted }}>
-            In aged care, problems chain across domains. Rosters into clinical into compliance into cost. Chris makes the chain legible, supports your leaders today, and extends across clinical, workforce, finance, compliance and governance.
+            Operational intelligence for aged care, in the flow of leadership work. Reads every system you already run, drafts the work your team would otherwise stitch together by hand, and keeps your leaders ahead of compliance and cost.
           </p>
 
-          <div className="flex items-center gap-5">
+          <div className="flex items-center gap-5 mb-10">
             <a href="#book" className="text-[14px] font-medium px-[20px] py-[12px] rounded-[4px]" style={{ backgroundColor: C.ctaBg, color: C.ctaText }}>
-              Book a 30-min conversation
+              Book 30 minutes with Campbell
             </a>
             <a href="#how-it-works" className="text-[14px] font-medium" style={{ color: C.text }}>
               How Chris works, layer by layer →
             </a>
           </div>
-        </div>
-      </div>
 
-      {/* Setup line above mockups */}
-      <div className="max-w-6xl mx-auto px-6 lg:px-16 mt-8">
-        <div className="max-w-[560px]">
-          <p className="text-[11px] font-medium uppercase tracking-[0.08em] mb-1.5" style={{ color: C.teal }}>A facility using Chris, right now</p>
-          <p className="text-[14px] leading-[1.5] mb-3" style={{ color: C.textMuted }}>Three live views from Mt Gibraltar Gardens, Monday morning. The DON&apos;s review queue, today&apos;s care minutes, and Chris&apos;s agents working in the background.</p>
-          {/* NOTE: The three product mockup cards below show operational dashboards (review queue, care minutes, agent activity). These need reworking to people-layer surfaces in a follow-up pass to fully resolve live-vs-in-build consistency. The architecture section below is already aligned to people-layer work. */}
-          <p className="text-[13px] leading-[1.55]" style={{ color: C.textFaint }}>Agentic AI means software that does the productivity work without being asked. Each agent has one job. Sentinel monitors. Chronicler drafts. Oracle recommends. Keeper protects. Steward optimises. They read your systems and act in the flow of work, while your leaders run care.</p>
-        </div>
-      </div>
+          {/* Trust strip */}
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 mb-4">
+            {[
+              "Live with Harbison Care, Kinyara Health, 365 Care and Homewell",
+              "Australian data residency",
+              "Human-approved on every regulatory submission",
+            ].map((item, i) => (
+              <span key={i} className="flex items-center gap-1.5 text-[12px]" style={{ color: C.textFaint }}>
+                <span className="w-1 h-1 rounded-full" style={{ backgroundColor: C.teal }} />
+                {item}
+              </span>
+            ))}
+          </div>
 
-      {/* Product cards — 3-up operator-grade layout */}
-      <div className="max-w-6xl mx-auto px-6 lg:px-16 mt-4 lg:mt-5">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-          <ReviewQueueCard />
-          <CareMinutesCard />
-          <AgentActivityCard />
+          {/* Price anchor */}
+          <p className="text-[13px] leading-[1.6]" style={{ color: C.textMuted }}>
+            Pilot pricing from $15,000. Scaled rollouts on application. Partner-rate pricing while we build in the open with our first cohort.
+          </p>
         </div>
-      </div>
-
-      {/* Bridge link to architecture section */}
-      <div className="max-w-6xl mx-auto px-6 lg:px-16 mt-5 pb-14 lg:pb-18">
-        <a href="#what-chris-is" className="text-[13px] font-medium hover:underline" style={{ color: C.text }}>
-          See how this morning was built →
-        </a>
       </div>
     </section>
   );
@@ -1193,7 +1186,7 @@ function ScenarioSection() {
 
         {/* Footnote */}
         <div className="transition-all duration-700 space-y-1" style={{ opacity: visible ? 1 : 0, transitionDelay: "3800ms" }}>
-          <p className="text-[13px]" style={{ color: C.textMuted }}>The Chronicler agent. Event-driven. Always watching.</p>
+          <p className="text-[13px]" style={{ color: C.textMuted }}>Documentation drafting, event-driven. Always watching.</p>
           <p className="text-[12px]" style={{ color: C.textFaint }}>Civil penalties for late SIRS notifications. Zero missed deadlines at current pilots.</p>
         </div>
       </div>
@@ -1458,6 +1451,21 @@ const CLIENTS = [
   { name: "Homewell", logo: "/logos/homewell.png", fact: "Home care and NDIS provider. Melbourne." },
 ];
 
+function LiveFacilityView() {
+  return (
+    <section style={{ backgroundColor: C.canvas, borderTop: `0.5px solid ${C.border}` }}>
+      <div className="max-w-6xl mx-auto px-6 lg:px-16 py-14 lg:py-18">
+        <p className="text-[12px] mb-6" style={{ color: C.textFaint }}>Three live panels from a 60-bed NSW facility, captured Monday morning.</p>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <ReviewQueueCard />
+          <CareMinutesCard />
+          <AgentActivityCard />
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function ClientProof() {
   return (
     <section style={{ backgroundColor: C.canvas, borderTop: `0.5px solid ${C.border}` }}>
@@ -1578,18 +1586,23 @@ export default function V2Page() {
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/fraunces@5/400-italic.css" />
       <Nav />
       <Hero />
-      <AgentRibbon />
+      {/* Section 2: Mt Gibraltar morning narrative */}
       <WhatChrisIsSection />
+      {/* Section 3: Customer proof */}
+      <ClientProof />
+      {/* Section 4: Live facility view (cards moved from hero) */}
+      <LiveFacilityView />
+      {/* Section 5: Self-service tools */}
       <StatRow />
       <ToolsStrip />
-      <ClientProof />
       <VictorianHook />
-      <JobsSection />
+      {/* Section 6: Scenarios */}
       <ScenarioSection />
+      {/* Section 7: Trust and founders (TODO: add FoundersSection) */}
+      {/* Section 8: Three ways in (the booking modal handles this) */}
       <HowItWorksSection />
-      <AgentsSection />
+      <JobsSection />
       <ExecutionSection />
-      <RolesSection />
       <Footer />
       <BookingModal open={showBooking} onClose={() => setShowBooking(false)} />
     </div>

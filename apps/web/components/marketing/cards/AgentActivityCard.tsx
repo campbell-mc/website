@@ -3,16 +3,16 @@
 import { useEffect, useState } from "react";
 
 const AGENTS = [
-  { name: "Sentinel", action: "Care minutes compliant. RN confirmed tonight.", value: "180/215", dot: "#2d6a4f", time: "2m" },
-  { name: "Chronicler", action: "SIRS Priority 1 draft ready. Awaiting DON.", value: "1 draft", dot: "#c89a3c", time: "11m" },
-  { name: "Oracle", action: "AN-ACC reclassification opportunities identified.", value: "$11.4K/mo", dot: "#2d6a4f", time: "Sun" },
-  { name: "Keeper", action: "PSH convergence Grevillea Wing. Cycle 6.", value: "2 domains", dot: "#b5572a", time: "Fri" },
-  { name: "Steward", action: "Sunday PM structural gap. 7th consecutive week.", value: "$4.9K save", dot: "#c89a3c", time: "6am" },
-  { name: "Sentinel", action: "Falls rate down 12% this quarter. Correlating with agency reduction.", value: "-12%", dot: "#2d6a4f", time: "4h" },
-  { name: "Oracle", action: "Accommodation pricing $48K below market. 3 beds.", value: "$144K gap", dot: "#c89a3c", time: "Mon" },
-  { name: "Keeper", action: "Turnover precursor detected. Wattle Wing PSH_13.", value: "71% prob", dot: "#b5572a", time: "Thu" },
-  { name: "Chronicler", action: "Board Pack Q3 compiled. 8 sections. Awaiting CEO.", value: "8 days", dot: "#2d6a4f", time: "10am" },
-  { name: "Steward", action: "Overtime concentrated in night shift RN. 3 staff.", value: "142 hrs", dot: "#c89a3c", time: "3am" },
+  { name: "Compliance monitoring", action: "Care minutes compliant. RN confirmed tonight.", value: "180/215", dot: "#2d6a4f", time: "2m" },
+  { name: "Documentation drafting", action: "SIRS Priority 1 draft ready. Awaiting DON.", value: "1 draft", dot: "#c89a3c", time: "11m" },
+  { name: "Revenue intelligence", action: "AN-ACC reclassification opportunities identified.", value: "$11.4K/mo", dot: "#2d6a4f", time: "Sun" },
+  { name: "Workforce analysis", action: "PSH convergence Grevillea Wing. Cycle 6.", value: "2 domains", dot: "#b5572a", time: "Fri" },
+  { name: "Capacity optimisation", action: "Sunday PM structural gap. 7th consecutive week.", value: "$4.9K save", dot: "#c89a3c", time: "6am" },
+  { name: "Compliance monitoring", action: "Falls rate down 12% this quarter. Correlating with agency reduction.", value: "-12%", dot: "#2d6a4f", time: "4h" },
+  { name: "Revenue intelligence", action: "Accommodation pricing $48K below market. 3 beds.", value: "$144K gap", dot: "#c89a3c", time: "Mon" },
+  { name: "Workforce analysis", action: "Turnover precursor detected. Wattle Wing PSH_13.", value: "71% prob", dot: "#b5572a", time: "Thu" },
+  { name: "Documentation drafting", action: "Board Pack Q3 compiled. 8 sections. Awaiting CEO.", value: "8 days", dot: "#2d6a4f", time: "10am" },
+  { name: "Capacity optimisation", action: "Overtime concentrated in night shift RN. 3 staff.", value: "142 hrs", dot: "#c89a3c", time: "3am" },
 ];
 
 export function AgentActivityCard() {
@@ -36,7 +36,7 @@ export function AgentActivityCard() {
     <div className="bg-white rounded-[10px] p-5 w-full overflow-hidden" style={{ boxShadow: "0 1px 3px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.03)" }}>
       {/* Fixed header */}
       <div className="flex items-center justify-between mb-4">
-        <p className="text-[13px] font-semibold text-[#1a1218]">Agent activity</p>
+        <p className="text-[13px] font-semibold text-[#1a1218]">System activity</p>
         <div className="flex items-center gap-2">
           <span className="text-[10px] font-medium text-[#1a1218]/35">All</span>
           <div className="flex items-center gap-1">
