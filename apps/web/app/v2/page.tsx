@@ -1950,7 +1950,7 @@ function ChangeImplementationLayer() {
         {/* Move 5: live cohort indicator */}
         <div className="flex items-center gap-2 justify-center" style={reveal(1400)}>
           <span className="w-[6px] h-[6px] rounded-full animate-pulse" style={{ backgroundColor: C.ironstone }} />
-          <span className="text-[11px]" style={{ fontFamily: inter, color: C.textFaint }}>Cohort live: 4 organisations · 312 residents across the network · next pulse cycle: Monday morning</span>
+          <span className="text-[11px]" style={{ fontFamily: inter, color: C.textFaint }}>Cohort live: 4 sites/services · 650 residents/clients · 200 micro-practices implemented · next pulse cycle: Monday morning</span>
         </div>
       </div>
     </section>
@@ -2256,7 +2256,7 @@ export default function V2Page() {
       <div className="fixed bottom-[22px] right-[28px] z-50 hidden lg:flex items-center gap-[11px] px-[15px] py-[9px] backdrop-blur-[8px]"
         style={{ fontFamily: sans, fontSize: 11, fontWeight: 400, letterSpacing: "0.04em", color: C.textSoft, backgroundColor: "rgba(243,239,230,0.94)", border: `1px solid ${C.ruleCharcoal}` }}>
         <span className="w-[6px] h-[6px] rounded-full animate-pulse" style={{ backgroundColor: C.ironstone }} />
-        <span>4 facilities · 312 residents · 0 immediate findings</span>
+        <span>4 sites/services · 650 residents/clients · 200 micro-practices implemented</span>
       </div>
 
       <BookingModal open={showBooking} onClose={() => setShowBooking(false)} />
