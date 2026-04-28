@@ -1657,11 +1657,60 @@ function EICompetencyGrid() {
   );
 }
 
+function LoopCard({ eyebrow, color, headline, paragraphs, pullQuote, comparison }: {
+  eyebrow: string; color: string;
+  headline: React.ReactNode;
+  paragraphs: { text: string; size: number; primary: boolean }[];
+  pullQuote: { before: string; emphasis: string; after: string };
+  comparison: { text: string; rows: typeof TEAM_LOOP_COMPARE };
+}) {
+  const [open, setOpen] = useState(false);
+  const [compareOpen, setCompareOpen] = useState(false);
+
+  return (
+    <div className="rounded-[5px] overflow-hidden transition-all duration-200" style={{ backgroundColor: C.card, border: `0.5px solid ${open ? color : C.border}`, borderTopWidth: 3, borderTopColor: color }}>
+      <button onClick={() => setOpen(!open)} className="w-full text-left p-6 lg:p-7">
+        <div className="flex items-start justify-between">
+          <div>
+            <p className="text-[10px] font-medium uppercase tracking-[0.08em] mb-2" style={{ fontFamily: inter, color }}>{eyebrow}</p>
+            <h3 className="text-[18px] font-medium" style={{ fontFamily: inter, color: C.text }}>{headline}</h3>
+          </div>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className={`shrink-0 mt-1 transition-transform duration-200 ${open ? "rotate-45" : ""}`}>
+            <path d="M8 3v10M3 8h10" stroke={C.textFaint} strokeWidth="1.5" strokeLinecap="round" />
+          </svg>
+        </div>
+        {!open && <p className="text-[12px] mt-2" style={{ color: C.textFaint }}>Click to read more</p>}
+      </button>
+
+      <div className={`overflow-hidden transition-all duration-400 ${open ? "max-h-[1200px] opacity-100" : "max-h-0 opacity-0"}`}>
+        <div className="px-6 lg:px-7 pb-6 lg:pb-7 space-y-4" style={{ fontFamily: inter }}>
+          {paragraphs.map((p, i) => (
+            <p key={i} style={{ fontSize: p.size, lineHeight: 1.65, color: p.primary ? C.text : C.textMuted }}>{p.text}</p>
+          ))}
+          {/* Pull-quote */}
+          <div className="my-5 pl-3" style={{ borderLeft: `2px solid ${C.ironstone}` }}>
+            <p style={{ fontFamily: inter, fontSize: 17, lineHeight: 1.55, color: C.text }}>
+              {pullQuote.before}<span style={{ fontFamily: fraunces, fontStyle: "italic", fontSize: "1.05em" }}>{pullQuote.emphasis}</span>{pullQuote.after}
+            </p>
+          </div>
+          {/* Comparison expand */}
+          <button onClick={(e) => { e.stopPropagation(); setCompareOpen(!compareOpen); }} className="w-full text-left">
+            <div className="flex items-center justify-between">
+              <p className="text-[13px] leading-[1.6] italic" style={{ color: C.textMuted }}>{comparison.text}</p>
+              <span className={`text-[12px] shrink-0 ml-2 transition-transform duration-200 ${compareOpen ? "rotate-180" : ""}`} style={{ color: C.textFaint }}>↓</span>
+            </div>
+          </button>
+          <ComparePanel rows={comparison.rows} open={compareOpen} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function ChangeImplementationLayer() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
-  const [teamCompareOpen, setTeamCompareOpen] = useState(false);
-  const [leaderCompareOpen, setLeaderCompareOpen] = useState(false);
+  // Team/Leader compare state now lives inside LoopCard components
 
   // Move 3: scroll-reveal trigger
   useEffect(() => {
@@ -1715,55 +1764,38 @@ function ChangeImplementationLayer() {
           <EICompetencyGrid />
         </div>
 
-        {/* Two cards with simultaneous reveal */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-6" style={reveal(800)}>
+        {/* Genos model image */}
+        <div className="mb-10 max-w-[600px]" style={reveal(780)}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/genos-model.png" alt="Genos Core Emotional Intelligence Competencies framework" className="w-full h-auto rounded-[5px]" style={{ border: `0.5px solid ${C.border}` }} />
+          <p className="text-[11px] mt-2" style={{ fontFamily: inter, color: C.textFaint }}>The Genos model. Six competencies. Each measurable, each trainable, each integrated into Team Loop and Leader Loop.</p>
+        </div>
+
+        {/* Two cards — collapsible, with simultaneous reveal */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-6" style={reveal(850)}>
           {/* Team Loop */}
-          <div className="rounded-[5px] p-6 lg:p-7" style={{ backgroundColor: C.card, border: `0.5px solid ${C.border}`, borderTopWidth: 3, borderTopColor: C.sage }}>
-            <p className="text-[10px] font-medium uppercase tracking-[0.08em] mb-2" style={{ fontFamily: inter, color: C.sage }}>Team Loop</p>
-            <h3 className="text-[18px] font-medium mb-4" style={{ fontFamily: inter, color: C.text }}>
-              Fortnightly. <span style={{ fontFamily: fraunces, fontStyle: "italic" }}>Measured.</span> In the flow of work.
-            </h3>
-            <div className="space-y-4" style={{ fontFamily: inter }}>
-              <p className="text-[15px] leading-[1.65]" style={{ color: C.text }}>One pulse, one briefing, one practice, every fortnight. Chris delivers each team leader a briefing on their phone before the morning huddle. The leader runs the practice with the team. The next pulse measures the shift.</p>
-              <p className="text-[14px] leading-[1.65]" style={{ color: C.textMuted }}>Pulse questions drawn from a library of fourteen domains covering team voice, trust, psychological safety, recognition, role clarity, and the dimensions Genos research shows predict team performance under change.</p>
-              {/* Move 2: pull-quote on AI-adoption paragraph */}
-              <div className="my-5 pl-3" style={{ borderLeft: `2px solid ${C.ironstone}` }}>
-                <p style={{ fontFamily: inter, fontSize: 17, lineHeight: 1.55, color: C.text }}>When agents start drafting SIRS notifications, surfacing convergence patterns, and queueing actions for review, frontline teams need a <span style={{ fontFamily: fraunces, fontStyle: "italic", fontSize: "1.05em" }}>different relationship</span> with information, with their leader, and with each other. The Team Loop builds that relationship in the flow of work, every fortnight, calibrated to what the team is actually carrying.</p>
-              </div>
-              {/* Move 4: expandable comparison */}
-              <button onClick={() => setTeamCompareOpen(!teamCompareOpen)} className="w-full text-left group">
-                <div className="flex items-center justify-between">
-                  <p className="text-[13px] leading-[1.6] italic" style={{ color: C.textMuted }}>The change consulting alternative: a six-month engagement that ends. Team Loop runs continuously, integrated with the operating layer.</p>
-                  <span className={`text-[12px] shrink-0 ml-2 transition-transform duration-200 ${teamCompareOpen ? "rotate-180" : ""}`} style={{ color: C.textFaint }}>↓</span>
-                </div>
-              </button>
-              <ComparePanel rows={TEAM_LOOP_COMPARE} open={teamCompareOpen} />
-            </div>
-          </div>
+          <LoopCard
+            eyebrow="Team Loop" color={C.sage}
+            headline={<>Fortnightly. <span style={{ fontFamily: fraunces, fontStyle: "italic" }}>Measured.</span> In the flow of work.</>}
+            paragraphs={[
+              { text: "One pulse, one briefing, one practice, every fortnight. Chris delivers each team leader a briefing on their phone before the morning huddle. The leader runs the practice with the team. The next pulse measures the shift.", size: 15, primary: true },
+              { text: "Pulse questions drawn from a library of fourteen domains covering team voice, trust, psychological safety, recognition, role clarity, and the dimensions Genos research shows predict team performance under change.", size: 14, primary: false },
+            ]}
+            pullQuote={{ before: "When agents start drafting SIRS notifications, surfacing convergence patterns, and queueing actions for review, frontline teams need a ", emphasis: "different relationship", after: " with information, with their leader, and with each other. The Team Loop builds that relationship in the flow of work, every fortnight, calibrated to what the team is actually carrying." }}
+            comparison={{ text: "The change consulting alternative: a six-month engagement that ends. Team Loop runs continuously, integrated with the operating layer.", rows: TEAM_LOOP_COMPARE }}
+          />
 
           {/* Leader Loop */}
-          <div className="rounded-[5px] p-6 lg:p-7" style={{ backgroundColor: C.card, border: `0.5px solid ${C.border}`, borderTopWidth: 3, borderTopColor: C.sage }}>
-            <p className="text-[10px] font-medium uppercase tracking-[0.08em] mb-2" style={{ fontFamily: inter, color: C.sage }}>Leader Loop</p>
-            <h3 className="text-[18px] font-medium mb-4" style={{ fontFamily: inter, color: C.text }}>
-              Continuous. Tied to <span style={{ fontFamily: fraunces, fontStyle: "italic" }}>live</span> operational signals.
-            </h3>
-            <div className="space-y-4" style={{ fontFamily: inter }}>
-              <p className="text-[15px] leading-[1.65]" style={{ color: C.text }}>Each leader gets a Leader Loop briefing on the alternate fortnight. Their personal practice is tied to the operational signals their team is showing this week, not to a generic competency framework.</p>
-              <p className="text-[14px] leading-[1.65]" style={{ color: C.textMuted }}>Powered by Genos psychometrics. The Emotional Culture Index reads the team's lived experience. The Genos Leader's 360 reads how the leader shows up. Both feed into Chris's support prompts.</p>
-              {/* Move 2: pull-quote on AI-adoption paragraph */}
-              <div className="my-5 pl-3" style={{ borderLeft: `2px solid ${C.ironstone}` }}>
-                <p style={{ fontFamily: inter, fontSize: 17, lineHeight: 1.55, color: C.text }}>Leaders in AI-augmented organisations are doing different work. Less drafting, more interpreting. Less reporting, more deciding. Less data-pulling, more pattern-reading. The capability shift is <span style={{ fontFamily: fraunces, fontStyle: "italic", fontSize: "1.05em" }}>real and it is uncomfortable.</span> The Leader Loop develops the EI capability that lets leaders sit with the discomfort, lead through it, and bring their teams with them.</p>
-              </div>
-              {/* Move 4: expandable comparison */}
-              <button onClick={() => setLeaderCompareOpen(!leaderCompareOpen)} className="w-full text-left group">
-                <div className="flex items-center justify-between">
-                  <p className="text-[13px] leading-[1.6] italic" style={{ color: C.textMuted }}>The change consulting alternative: an executive coaching engagement at $300 to $500 per hour, disconnected from the work. Leader Loop runs every fortnight, alternating with Team Loop, at a fraction of executive coaching cost across the leader headcount.</p>
-                  <span className={`text-[12px] shrink-0 ml-2 transition-transform duration-200 ${leaderCompareOpen ? "rotate-180" : ""}`} style={{ color: C.textFaint }}>↓</span>
-                </div>
-              </button>
-              <ComparePanel rows={LEADER_LOOP_COMPARE} open={leaderCompareOpen} />
-            </div>
-          </div>
+          <LoopCard
+            eyebrow="Leader Loop" color={C.sage}
+            headline={<>Continuous. Tied to <span style={{ fontFamily: fraunces, fontStyle: "italic" }}>live</span> operational signals.</>}
+            paragraphs={[
+              { text: "Each leader gets a Leader Loop briefing on the alternate fortnight. Their personal practice is tied to the operational signals their team is showing this week, not to a generic competency framework.", size: 15, primary: true },
+              { text: "Powered by Genos psychometrics. The Emotional Culture Index reads the team's lived experience. The Genos Leader's 360 reads how the leader shows up. Both feed into Chris's support prompts.", size: 14, primary: false },
+            ]}
+            pullQuote={{ before: "Leaders in AI-augmented organisations are doing different work. Less drafting, more interpreting. Less reporting, more deciding. Less data-pulling, more pattern-reading. The capability shift is ", emphasis: "real and it is uncomfortable.", after: " The Leader Loop develops the EI capability that lets leaders sit with the discomfort, lead through it, and bring their teams with them." }}
+            comparison={{ text: "The change consulting alternative: an executive coaching engagement at $300 to $500 per hour, disconnected from the work. Leader Loop runs every fortnight, alternating with Team Loop, at a fraction of executive coaching cost across the leader headcount.", rows: LEADER_LOOP_COMPARE }}
+          />
         </div>
 
         {/* Move 1: fortnightly cadence visualisation */}
