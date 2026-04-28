@@ -2375,12 +2375,12 @@ export default function V2Page() {
       <VictorianHook />
       {/* Section 6: Scenarios */}
       <ScenarioSection />
-      <FoundersSection />
-      <HonestAnswersSection />
       <HowItWorksSection />
       <JobsSection />
       <ExecutionSection />
       <ChangeImplementationLayer />
+      <HonestAnswersSection />
+      <FoundersSection />
       <Footer />
       </div>{/* close relative z-[1] wrapper */}
 
