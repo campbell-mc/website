@@ -1368,6 +1368,62 @@ function AISupportSection() {
   );
 }
 
+// ── Founders section ────────────────────────────────────────────────────────
+const FOUNDERS = [
+  {
+    initials: "CM", name: "Campbell McGlynn", title: "Cofounder",
+    bio: "20+ years in HR leadership, including 6 years as Chief People Officer at IRT Group in aged care. The person who will be in your debrief and your fortnightly check-ins.",
+    color: "#1B4332",
+  },
+  {
+    initials: "IS", name: "Ivan Sanchez", title: "Cofounder",
+    bio: "Platform architecture and engineering. Makes sure the integrations, agents, and intelligence layer work reliably behind the scenes.",
+    color: "#1F6F66",
+  },
+  {
+    initials: "AJ", name: "Abhinav Jain", title: "AI/ML Lead",
+    bio: "AI and agentic lead engineer behind Chris. Builds the agentic systems, integrations, and intelligence that make the platform learn, remember, and respond in context.",
+    color: "#BA7517",
+  },
+  {
+    initials: "BP", name: "Dr Ben Palmer", title: "Coventure partner",
+    bio: "Internationally recognised CEO of Genos International. Developed Australia's first workplace model and measure of emotional intelligence through his PhD at Swinburne. 23+ years partnering with organisations from start-ups to Fortune 500.",
+    color: "#5A5A57",
+  },
+];
+
+function FoundersSection() {
+  return (
+    <section style={{ backgroundColor: C.canvas }}>
+      <div className="max-w-6xl mx-auto px-6 lg:px-16 py-12 lg:py-16">
+        <p className="text-[17px] mb-2" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>Your team</p>
+        <h2 className="text-[clamp(1.75rem,4vw,34px)] font-medium leading-[1.08] tracking-[-0.025em] mb-10" style={{ color: C.text }}>
+          The humans behind Culture{" "}
+          <span style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.012em" }}>Crunch.</span>
+        </h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {FOUNDERS.map((f) => (
+            <div key={f.name} className="rounded-[8px] p-6" style={{ backgroundColor: C.canvasLight, border: `0.5px solid ${C.border}` }}>
+              <div className="flex items-start gap-4">
+                {/* Initial circle (replace with <img> when photos available) */}
+                <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0 text-[15px] font-medium" style={{ backgroundColor: f.color, color: "#fff" }}>
+                  {f.initials}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-[16px] font-medium" style={{ color: C.text }}>{f.name}</h3>
+                  <p className="text-[12px] font-medium mb-3" style={{ color: C.teal }}>{f.title}</p>
+                  <p className="text-[13px] leading-[1.6]" style={{ color: C.textMuted }}>{f.bio}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function ExecutionSection() {
   return (
     <section style={{ backgroundColor: C.canvas }}>
@@ -1675,8 +1731,7 @@ export default function V2Page() {
       <VictorianHook />
       {/* Section 6: Scenarios */}
       <ScenarioSection />
-      {/* Section 7: Trust and founders (TODO: add FoundersSection) */}
-      {/* Section 8: Three ways in (the booking modal handles this) */}
+      <FoundersSection />
       <HowItWorksSection />
       <JobsSection />
       <ExecutionSection />
