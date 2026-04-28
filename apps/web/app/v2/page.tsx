@@ -1560,34 +1560,93 @@ function ExecutionSection() {
   );
 }
 
-function ChangeImplementationLayer() {
+// Move 4: comparison data for hover-expand on card fourth paragraphs
+const TEAM_LOOP_COMPARE = [
+  { label: "Duration", consulting: "6 months, then ends", chris: "Continuous" },
+  { label: "Cost", consulting: "$100,000 to $500,000", chris: "From $15,000 per site per year" },
+  { label: "Cadence", consulting: "Workshops on a schedule", chris: "Every fortnight, in the flow of work" },
+  { label: "Integration", consulting: "Runs beside the operating layer", chris: "Built into the operating layer" },
+];
+const LEADER_LOOP_COMPARE = [
+  { label: "Duration", consulting: "Engagement-based, then ends", chris: "Continuous, alternating with Team Loop" },
+  { label: "Cost", consulting: "$300 to $500 per hour", chris: "Included in pilot pricing" },
+  { label: "Cadence", consulting: "Monthly or ad-hoc sessions", chris: "Every fortnight, tied to live signals" },
+  { label: "Integration", consulting: "Disconnected from operations", chris: "Fed by operational and pulse data" },
+];
+
+function ComparePanel({ rows, open }: { rows: typeof TEAM_LOOP_COMPARE; open: boolean }) {
   return (
-    <section style={{ backgroundColor: C.canvasWarm }}>
+    <div className={`overflow-hidden transition-all duration-300 ${open ? "max-h-[400px] opacity-100 mt-3" : "max-h-0 opacity-0"}`}>
+      <div className="rounded-[5px] p-4" style={{ backgroundColor: C.canvasWarm, border: `0.5px solid ${C.borderSubtle}` }}>
+        <div className="grid grid-cols-3 gap-2 text-[11px]" style={{ fontFamily: inter }}>
+          <div />
+          <p className="font-medium" style={{ color: C.textFaint }}>Consulting</p>
+          <p className="font-medium" style={{ color: C.ironstone }}>Chris OS</p>
+          {rows.map((r) => (
+            <><div key={r.label} className="font-medium" style={{ color: C.text }}>{r.label}</div>
+            <div style={{ color: C.textMuted }}>{r.consulting}</div>
+            <div style={{ color: C.text }}>{r.chris}</div></>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ChangeImplementationLayer() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+  const [teamCompareOpen, setTeamCompareOpen] = useState(false);
+  const [leaderCompareOpen, setLeaderCompareOpen] = useState(false);
+
+  // Move 3: scroll-reveal trigger
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setVisible(true); obs.disconnect(); } }, { threshold: 0.1 });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  // Move 1: compute current day of fortnight for the now-indicator
+  const dayOfFortnight = Math.floor((Date.now() / 86400000) % 14);
+  const isTeamWeek = dayOfFortnight < 7;
+
+  function reveal(delay: number) {
+    return {
+      opacity: visible ? 1 : 0,
+      transform: visible ? "translateY(0)" : "translateY(16px)",
+      transition: `opacity 300ms ease-out ${delay}ms, transform 300ms ease-out ${delay}ms`,
+    };
+  }
+
+  return (
+    <section ref={sectionRef} style={{ backgroundColor: C.canvasWarm }}>
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-14 lg:py-18">
-        {/* Header */}
-        <SectionEyebrow>The change implementation layer</SectionEyebrow>
-        <h2 className="mb-6 max-w-[700px]" style={{ fontSize: "clamp(34px, 4vw, 48px)", lineHeight: 1.08, letterSpacing: "-0.025em", fontWeight: 500, color: C.text }}>
+        {/* Header with scroll-reveal */}
+        <div style={reveal(0)}><SectionEyebrow>The change implementation layer</SectionEyebrow></div>
+        <h2 className="mb-6 max-w-[700px]" style={{ fontSize: "clamp(34px, 4vw, 48px)", lineHeight: 1.08, letterSpacing: "-0.025em", fontWeight: 500, color: C.text, ...reveal(100) }}>
           Where software ends, <span style={{ fontFamily: fraunces, fontStyle: "italic" }}>leadership</span> begins.
         </h2>
 
-        {/* Positioning intro */}
+        {/* Positioning intro with staggered reveal */}
         <div className="max-w-[660px] mb-12 space-y-4">
-          <p className="text-[16px] leading-[1.65]" style={{ fontFamily: inter, color: C.text }}>
+          <p style={{ fontFamily: inter, fontSize: 16, lineHeight: 1.65, color: C.text, ...reveal(200) }}>
             Aged care is in the middle of the largest operational change since the Royal Commission. The change is not another technology rollout. It is a shift in what work is, who does it, and what leaders need to know how to do.
           </p>
-          <p className="text-[15px] leading-[1.65]" style={{ fontFamily: inter, color: C.textMuted }}>
+          <p style={{ fontFamily: inter, fontSize: 15, lineHeight: 1.65, color: C.textMuted, ...reveal(350) }}>
             Most organisations meet that change with consulting. A six-month engagement, a workshop series, a final report, a sign-off. The consultant leaves, the operating layer carries on as before, and the capability gap stays open. Most AI vendors meet it the other way. Install the platform, train on the features, hand the leadership development to someone else.
           </p>
-          <p className="text-[15px] leading-[1.65]" style={{ fontFamily: inter, color: C.textMuted }}>
+          <p style={{ fontFamily: inter, fontSize: 15, lineHeight: 1.65, color: C.textMuted, ...reveal(500) }}>
             Chris OS does both. The agent layer does the operational work that used to fill leaders' weeks. The change implementation layer develops the human capability to lead in the hybrid environment the agents create. Both, every fortnight, in the same operating system.
           </p>
-          <p className="text-[15px] leading-[1.65]" style={{ fontFamily: inter, color: C.textMuted }}>
+          <p style={{ fontFamily: inter, fontSize: 15, lineHeight: 1.65, color: C.textMuted, ...reveal(650) }}>
             Human-centred. AI-supported. Built on the Genos emotional intelligence model, founded by Dr Ben Palmer (virtual co-founder of Chris OS) and grounded in over twenty years of peer-reviewed research. Genos is among the most widely deployed EI assessments in healthcare and aged care globally.
           </p>
         </div>
 
-        {/* Two cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-10">
+        {/* Two cards with simultaneous reveal */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-6" style={reveal(800)}>
           {/* Team Loop */}
           <div className="rounded-[5px] p-6 lg:p-7" style={{ backgroundColor: C.card, border: `0.5px solid ${C.border}`, borderTopWidth: 3, borderTopColor: C.sage }}>
             <p className="text-[10px] font-medium uppercase tracking-[0.08em] mb-2" style={{ fontFamily: inter, color: C.sage }}>Team Loop</p>
@@ -1597,8 +1656,18 @@ function ChangeImplementationLayer() {
             <div className="space-y-4" style={{ fontFamily: inter }}>
               <p className="text-[15px] leading-[1.65]" style={{ color: C.text }}>One pulse, one briefing, one practice, every fortnight. Chris delivers each team leader a briefing on their phone before the morning huddle. The leader runs the practice with the team. The next pulse measures the shift.</p>
               <p className="text-[14px] leading-[1.65]" style={{ color: C.textMuted }}>Pulse questions drawn from a library of fourteen domains covering team voice, trust, psychological safety, recognition, role clarity, and the dimensions Genos research shows predict team performance under change.</p>
-              <p className="text-[15px] leading-[1.65]" style={{ color: C.text }}>When agents start drafting SIRS notifications, surfacing convergence patterns, and queueing actions for review, frontline teams need a different relationship with information, with their leader, and with each other. The Team Loop builds that relationship in the flow of work, every fortnight, calibrated to what the team is actually carrying.</p>
-              <p className="text-[13px] leading-[1.6] italic" style={{ color: C.textMuted }}>The change consulting alternative: a six-month engagement that ends. Team Loop runs continuously, integrated with the operating layer.</p>
+              {/* Move 2: pull-quote on AI-adoption paragraph */}
+              <div className="my-5 pl-3" style={{ borderLeft: `2px solid ${C.ironstone}` }}>
+                <p style={{ fontFamily: inter, fontSize: 17, lineHeight: 1.55, color: C.text }}>When agents start drafting SIRS notifications, surfacing convergence patterns, and queueing actions for review, frontline teams need a <span style={{ fontFamily: fraunces, fontStyle: "italic", fontSize: "1.05em" }}>different relationship</span> with information, with their leader, and with each other. The Team Loop builds that relationship in the flow of work, every fortnight, calibrated to what the team is actually carrying.</p>
+              </div>
+              {/* Move 4: expandable comparison */}
+              <button onClick={() => setTeamCompareOpen(!teamCompareOpen)} className="w-full text-left group">
+                <div className="flex items-center justify-between">
+                  <p className="text-[13px] leading-[1.6] italic" style={{ color: C.textMuted }}>The change consulting alternative: a six-month engagement that ends. Team Loop runs continuously, integrated with the operating layer.</p>
+                  <span className={`text-[12px] shrink-0 ml-2 transition-transform duration-200 ${teamCompareOpen ? "rotate-180" : ""}`} style={{ color: C.textFaint }}>↓</span>
+                </div>
+              </button>
+              <ComparePanel rows={TEAM_LOOP_COMPARE} open={teamCompareOpen} />
             </div>
           </div>
 
@@ -1611,14 +1680,58 @@ function ChangeImplementationLayer() {
             <div className="space-y-4" style={{ fontFamily: inter }}>
               <p className="text-[15px] leading-[1.65]" style={{ color: C.text }}>Each leader gets a Leader Loop briefing on the alternate fortnight. Their personal practice is tied to the operational signals their team is showing this week, not to a generic competency framework.</p>
               <p className="text-[14px] leading-[1.65]" style={{ color: C.textMuted }}>Powered by Genos psychometrics. The Emotional Culture Index reads the team's lived experience. The Genos Leader's 360 reads how the leader shows up. Both feed into Chris's support prompts.</p>
-              <p className="text-[15px] leading-[1.65]" style={{ color: C.text }}>Leaders in AI-augmented organisations are doing different work. Less drafting, more interpreting. Less reporting, more deciding. Less data-pulling, more pattern-reading. The capability shift is real and it is uncomfortable. The Leader Loop develops the EI capability that lets leaders sit with the discomfort, lead through it, and bring their teams with them. Week by week. Calibrated to actual operations, not generic transformation playbooks.</p>
-              <p className="text-[13px] leading-[1.6] italic" style={{ color: C.textMuted }}>The change consulting alternative: an executive coaching engagement at $300 to $500 per hour, disconnected from the work. Leader Loop runs every fortnight, alternating with Team Loop, at a fraction of executive coaching cost across the leader headcount.</p>
+              {/* Move 2: pull-quote on AI-adoption paragraph */}
+              <div className="my-5 pl-3" style={{ borderLeft: `2px solid ${C.ironstone}` }}>
+                <p style={{ fontFamily: inter, fontSize: 17, lineHeight: 1.55, color: C.text }}>Leaders in AI-augmented organisations are doing different work. Less drafting, more interpreting. Less reporting, more deciding. Less data-pulling, more pattern-reading. The capability shift is <span style={{ fontFamily: fraunces, fontStyle: "italic", fontSize: "1.05em" }}>real and it is uncomfortable.</span> The Leader Loop develops the EI capability that lets leaders sit with the discomfort, lead through it, and bring their teams with them.</p>
+              </div>
+              {/* Move 4: expandable comparison */}
+              <button onClick={() => setLeaderCompareOpen(!leaderCompareOpen)} className="w-full text-left group">
+                <div className="flex items-center justify-between">
+                  <p className="text-[13px] leading-[1.6] italic" style={{ color: C.textMuted }}>The change consulting alternative: an executive coaching engagement at $300 to $500 per hour, disconnected from the work. Leader Loop runs every fortnight, alternating with Team Loop, at a fraction of executive coaching cost across the leader headcount.</p>
+                  <span className={`text-[12px] shrink-0 ml-2 transition-transform duration-200 ${leaderCompareOpen ? "rotate-180" : ""}`} style={{ color: C.textFaint }}>↓</span>
+                </div>
+              </button>
+              <ComparePanel rows={LEADER_LOOP_COMPARE} open={leaderCompareOpen} />
             </div>
           </div>
         </div>
 
-        {/* Why this matters now */}
-        <div className="max-w-[660px] mb-4">
+        {/* Move 1: fortnightly cadence visualisation */}
+        <div className="mb-10 rounded-[5px] p-5 lg:p-6" style={{ backgroundColor: C.card, border: `0.5px solid ${C.border}`, ...reveal(1000) }}>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {[
+              { label: "Week 1: Team Loop", items: ["Pulse opens", "Briefing delivered", "Practice runs", "Pulse closes"], active: isTeamWeek },
+              { label: "Week 2: Leader Loop", items: ["Briefing delivered", "Personal practice week", "", ""], active: !isTeamWeek },
+            ].map((week) => (
+              <div key={week.label}>
+                <p className="text-[10px] font-medium uppercase tracking-[0.08em] mb-3" style={{ fontFamily: inter, color: C.sage }}>{week.label}</p>
+                <div className="flex items-center gap-0">
+                  {[0, 1, 2, 3, 4, 5, 6].map((d) => {
+                    const dayIndex = week.active ? d : d + 7;
+                    const isToday = dayIndex === dayOfFortnight;
+                    const hasLabel = week.items[Math.floor(d * week.items.filter(Boolean).length / 7)];
+                    return (
+                      <div key={d} className="flex-1 flex flex-col items-center">
+                        <div className="w-full h-[2px] mb-1.5" style={{ backgroundColor: d <= (week.active ? dayOfFortnight % 7 : (dayOfFortnight - 7) % 7) && week.active === isTeamWeek ? C.ironstone : C.border, transition: "background-color 600ms" }} />
+                        {isToday ? (
+                          <span className="w-[6px] h-[6px] rounded-full animate-pulse" style={{ backgroundColor: C.ironstone }} />
+                        ) : (
+                          <span className="w-[3px] h-[3px] rounded-full" style={{ backgroundColor: C.border }} />
+                        )}
+                        {d < week.items.length && week.items[d] && (
+                          <span className="text-[9px] mt-1 text-center leading-tight" style={{ color: C.textFaint }}>{week.items[d]}</span>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Why this matters now — with reveal */}
+        <div className="max-w-[660px] mb-6" style={reveal(1200)}>
           <p className="text-[10px] font-medium uppercase tracking-[0.08em] mb-3" style={{ fontFamily: inter, color: C.sage }}>Why this matters now</p>
           <div className="space-y-4">
             <p className="text-[15px] leading-[1.65]" style={{ fontFamily: inter, color: C.text }}>Twenty years of EI research tells us emotional intelligence is the strongest predictor of how leaders and teams adapt to change. AI is not an exception to that. It is the test case.</p>
@@ -1626,6 +1739,12 @@ function ChangeImplementationLayer() {
             <p className="text-[15px] leading-[1.65]" style={{ fontFamily: inter, color: C.text }}>Chris OS is the operating layer that does the work and develops the capability. Operationalised. Continuous. Tied to actual operations rather than to a generic transformation playbook. Genos-grounded and peer-reviewed where the consulting alternative is anecdote and PowerPoint.</p>
           </div>
           <p className="text-[14px] italic mt-4" style={{ fontFamily: inter, color: C.textMuted }}>Pilot pricing from $15,000.</p>
+        </div>
+
+        {/* Move 5: live cohort indicator */}
+        <div className="flex items-center gap-2 justify-center" style={reveal(1400)}>
+          <span className="w-[6px] h-[6px] rounded-full animate-pulse" style={{ backgroundColor: C.ironstone }} />
+          <span className="text-[11px]" style={{ fontFamily: inter, color: C.textFaint }}>Cohort live: 4 organisations · 312 residents across the network · next pulse cycle: Monday morning</span>
         </div>
       </div>
     </section>
