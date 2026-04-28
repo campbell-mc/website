@@ -784,7 +784,7 @@ function GPMSCallout() {
 const HIW_STAGES = [
   { num: "01", label: "Connect", title: "Your operation, in one view",
     body: "Chris connects to the systems you already run: clinical, rostering, finance, compliance, family. No migration. No re-platforming. No schema mapping. Your data stays where it is. Chris reads what's already there.",
-    pills: ["Native Integrations", "Living Memory", "Zero Migration"], accent: C.good },
+    pills: ["Native Integrations", "Living Memory", "Zero Migration", "Genos EI integrated"], accent: C.good },
   { num: "02", label: "Watch", title: "Every domain, every shift",
     body: "Chris watches what's happening across the operation: workforce, clinical, compliance, finance, governance. Continuous, simultaneous, cross-domain. The signals that used to surface days late, surfaced before they land.",
     pills: ["Cross-Domain Watch", "Continuous Oversight", "Early Signals"], accent: C.good },
@@ -1551,6 +1551,57 @@ function ExecutionSection() {
   );
 }
 
+function ChangeImplementationLayer() {
+  return (
+    <section style={{ backgroundColor: C.canvasWarm }}>
+      <div className="max-w-6xl mx-auto px-6 lg:px-16 py-14 lg:py-18">
+        {/* Header */}
+        <SectionEyebrow>The change implementation layer</SectionEyebrow>
+        <h2 className="mb-3 max-w-[700px]" style={{ fontSize: "clamp(34px, 4vw, 48px)", lineHeight: 1.08, letterSpacing: "-0.025em", fontWeight: 500, color: C.text }}>
+          Where software ends, <span style={{ fontFamily: fraunces, fontStyle: "italic" }}>leadership</span> begins.
+        </h2>
+        <p className="text-[15px] leading-[1.6] max-w-[540px] mb-10" style={{ fontFamily: inter, color: C.textMuted }}>
+          Agents handle the routine and surface what matters. Care is delivered by people. Chris OS includes two operationalised change implementation models that turn agent insight into team and leader capability. Continuous, integrated, partner-rate priced. Built into the operating layer rather than running beside it.
+        </p>
+
+        {/* Two cards */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-8">
+          {/* Team Loop */}
+          <div className="rounded-[5px] p-6 lg:p-7" style={{ backgroundColor: C.card, border: `0.5px solid ${C.border}`, borderTopWidth: 3, borderTopColor: C.sage }}>
+            <p className="text-[10px] font-medium uppercase tracking-[0.08em] mb-2" style={{ fontFamily: inter, color: C.sage }}>Team Loop</p>
+            <h3 className="text-[18px] font-medium mb-4" style={{ fontFamily: inter, color: C.text }}>
+              Fortnightly. <span style={{ fontFamily: fraunces, fontStyle: "italic" }}>Measured.</span> In the flow of work.
+            </h3>
+            <div className="space-y-4 text-[14px] leading-[1.6]" style={{ fontFamily: inter, color: C.textMuted }}>
+              <p>One pulse, one briefing, one practice, every fortnight. Chris delivers each team leader a briefing on their phone before the morning huddle. The leader runs the practice with the team. The next pulse measures the shift.</p>
+              <p>Built on the Genos emotional intelligence model. Pulse questions drawn from a library of fourteen domains. Practices grounded in evidence rather than assertion.</p>
+              <p>The change consulting alternative: a six-month engagement that ends. Team Loop runs continuously, every fortnight, integrated with the operating layer.</p>
+            </div>
+          </div>
+
+          {/* Leader Loop */}
+          <div className="rounded-[5px] p-6 lg:p-7" style={{ backgroundColor: C.card, border: `0.5px solid ${C.border}`, borderTopWidth: 3, borderTopColor: C.sage }}>
+            <p className="text-[10px] font-medium uppercase tracking-[0.08em] mb-2" style={{ fontFamily: inter, color: C.sage }}>Leader Loop</p>
+            <h3 className="text-[18px] font-medium mb-4" style={{ fontFamily: inter, color: C.text }}>
+              Continuous. Tied to <span style={{ fontFamily: fraunces, fontStyle: "italic" }}>live</span> operational signals.
+            </h3>
+            <div className="space-y-4 text-[14px] leading-[1.6]" style={{ fontFamily: inter, color: C.textMuted }}>
+              <p>Each leader gets a Leader Loop briefing on the alternate fortnight. Their personal practice is tied to the operational signals their team is showing this week, not to a generic competency framework.</p>
+              <p>Powered by Genos psychometrics. The Emotional Culture Index reads the team's lived experience. The Leader's 360 reads how they show up. Both feed into Chris's support prompts.</p>
+              <p>The change consulting alternative: an executive coaching engagement at $300-$500 per hour, disconnected from the work. Leader Loop runs every fortnight, alternating with Team Loop, costing a fraction of executive coaching at the leader-headcount scale.</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Summary line */}
+        <p className="text-[13px] leading-[1.6] text-center max-w-[720px] mx-auto" style={{ fontFamily: inter, color: C.textMuted }}>
+          Genos integrated. Cross-domain agents. Continuous. Operationalised. Pilot pricing from $15,000.
+        </p>
+      </div>
+    </section>
+  );
+}
+
 function RolesSection() {
   return (
     <section style={{ backgroundColor: C.canvas }}>
@@ -1842,6 +1893,7 @@ export default function V2Page() {
       <HowItWorksSection />
       <JobsSection />
       <ExecutionSection />
+      <ChangeImplementationLayer />
       <Footer />
       </div>{/* close relative z-[1] wrapper */}
 
