@@ -335,41 +335,44 @@ function Hero() {
             Live with providers in NSW and VIC.
           </p>
 
-          <h1 className="text-[clamp(2.5rem,6vw,52px)] font-medium leading-[1.02] tracking-[-0.030em] mb-6" style={{ color: C.text }}>
+          <h1 className="text-[clamp(2.8rem,7vw,68px)] font-medium leading-[1.02] tracking-[-0.032em] mb-6" style={{ color: C.text }}>
             Hold quality. Protect margin. Lead with{" "}
-            <span style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.012em" }}>confidence.</span>
+            <span style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.015em" }}>confidence.</span>
           </h1>
 
-          <p className="text-[16px] leading-[1.6] max-w-[520px] mb-8" style={{ color: C.textMuted }}>
+          <p className="text-[17px] leading-[1.6] max-w-[520px] mb-8" style={{ color: C.textMuted }}>
             Operational intelligence for aged care, in the flow of leadership work. Reads every system you already run, drafts the work your team would otherwise stitch together by hand, and keeps your leaders ahead of compliance and cost.
           </p>
 
           <div className="flex items-center gap-5 mb-10">
-            <a href="#book" className="text-[14px] font-medium px-[20px] py-[12px] rounded-[4px]" style={{ backgroundColor: C.ctaBg, color: C.ctaText }}>
+            <a href="#book" className="text-[15px] font-medium px-[22px] py-[13px] rounded-[4px]" style={{ backgroundColor: C.ctaBg, color: C.ctaText }}>
               Book 30 minutes with Campbell
             </a>
-            <a href="#how-it-works" className="text-[14px] font-medium" style={{ color: C.text }}>
+            <a href="#how-it-works" className="text-[15px] font-medium" style={{ color: C.text }}>
               How Chris works, layer by layer →
             </a>
           </div>
 
           {/* Trust strip */}
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 mb-4">
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 mb-5">
             {[
               "Live with Harbison Care, Kinyara Health, 365 Care and Homewell",
               "Australian data residency",
               "Human-approved on every regulatory submission",
             ].map((item, i) => (
-              <span key={i} className="flex items-center gap-1.5 text-[12px]" style={{ color: C.textFaint }}>
-                <span className="w-1 h-1 rounded-full" style={{ backgroundColor: C.teal }} />
+              <span key={i} className="flex items-center gap-1.5 text-[13px]" style={{ color: C.textMuted }}>
+                <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: C.teal }} />
                 {item}
               </span>
             ))}
           </div>
 
           {/* Price anchor */}
-          <p className="text-[13px] leading-[1.6]" style={{ color: C.textMuted }}>
-            Pilot pricing from $15,000. Scaled rollouts on application. Partner-rate pricing while we build in the open with our first cohort.
+          <p className="text-[14px] font-medium leading-[1.6]" style={{ color: C.text }}>
+            Pilot pricing from $15,000. Scaled rollouts on application.
+          </p>
+          <p className="text-[13px] leading-[1.6]" style={{ color: C.textFaint }}>
+            Partner-rate pricing while we build in the open with our first cohort.
           </p>
         </div>
       </div>
@@ -1126,69 +1129,74 @@ function ScenarioSection() {
     if (!el) return;
     const observer = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) { setVisible(true); observer.disconnect(); } },
-      { threshold: 0.2 }
+      { threshold: 0.15 }
     );
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
 
-  const lines: { text: string; style: string; delay: number }[] = [
-    { text: "11:04pm Friday.", style: "timestamp", delay: 0 },
-    { text: "A Priority 1 incident.", style: "setup", delay: 200 },
-    { text: "24 hours to notify ACQSC.", style: "setup", delay: 400 },
-    { text: "Chris classified it in 4 minutes.", style: "action", delay: 800 },
-    { text: "The draft was waiting in the DON\u2019s inbox by 11:09.", style: "resolution", delay: 1200 },
-    { text: "She approved it before midnight.", style: "resolution", delay: 1600 },
-    { text: "That\u2019s not a feature.", style: "pause", delay: 2200 },
-    { text: "That\u2019s the difference between a penalty", style: "punchline", delay: 2800 },
-    { text: "and a clean record.", style: "punchline", delay: 3200 },
-  ];
-
-  const styles: Record<string, React.CSSProperties> = {
-    timestamp: { fontSize: "clamp(2.5rem, 5vw, 4.5rem)", fontFamily: fraunces, fontStyle: "italic", fontWeight: 400, color: C.text, marginBottom: "0.8em", letterSpacing: "-0.02em" },
-    setup: { fontSize: "clamp(1.05rem, 1.8vw, 1.3rem)", fontWeight: 400, color: C.textFaint, marginBottom: "0.3em" },
-    action: { fontSize: "clamp(1.3rem, 2.2vw, 1.9rem)", fontWeight: 500, color: C.text, marginBottom: "0.3em" },
-    resolution: { fontSize: "clamp(1.15rem, 2vw, 1.6rem)", fontFamily: fraunces, fontStyle: "italic", fontWeight: 400, color: C.textMuted, marginBottom: "0.3em" },
-    pause: { fontSize: "clamp(1rem, 1.6vw, 1.2rem)", fontWeight: 400, color: C.textFaint, marginBottom: "0.8em" },
-    punchline: { fontSize: "clamp(1.3rem, 2.2vw, 1.9rem)", fontWeight: 500, color: C.teal, marginBottom: "0.15em" },
-  };
-
   return (
     <section ref={sectionRef} style={{ backgroundColor: C.canvas, borderTop: `0.5px solid ${C.border}` }}>
-      <div className="max-w-[720px] mx-auto px-6 lg:px-16 py-16 lg:py-20">
-        {/* Clock */}
-        <div className="flex items-center gap-3 mb-8">
-          <div className="text-[13px] font-medium tracking-[0.15em] tabular-nums" style={{ fontFamily: "'Courier New', Consolas, monospace", color: C.teal }}>23:04</div>
-          <div className="text-[9px] font-medium tracking-[0.2em] uppercase" style={{ color: C.textFaint }}>Incident detected</div>
-          <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: C.warn }} />
-        </div>
+      <div className="max-w-6xl mx-auto px-6 lg:px-16 py-12 lg:py-16">
+        <p className="text-[17px] mb-8" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>Every facility. Every week.</p>
 
-        {/* Label */}
-        <p className="text-[17px] mb-8 transition-all duration-700"
-          style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal, opacity: visible ? 1 : 0, transform: visible ? "translateY(0)" : "translateY(12px)" }}>
-          Every facility. Every week.
-        </p>
-
-        {/* Lines with staggered fade-in */}
-        {lines.map((line, i) => {
-          const s = styles[line.style];
-          const lastSetup = line.style === "setup" && lines[i + 1]?.style !== "setup";
-          return (
-            <div key={i} className="transition-all duration-700 ease-out"
-              style={{ ...s, marginBottom: lastSetup ? "1.2em" : s.marginBottom, opacity: visible ? 1 : 0, transform: visible ? "translateY(0)" : "translateY(20px)", transitionDelay: `${line.delay}ms` }}>
-              {line.text}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+          {/* Scenario 1: SIRS Friday night */}
+          <div>
+            <div className="flex items-center gap-3 mb-5">
+              <span className="text-[12px] font-medium tracking-[0.12em] tabular-nums" style={{ fontFamily: "'Courier New', Consolas, monospace", color: C.red }}>23:04</span>
+              <span className="text-[9px] font-medium tracking-[0.15em] uppercase" style={{ color: C.textFaint }}>Incident detected</span>
+              <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: C.red }} />
             </div>
-          );
-        })}
 
-        {/* Separator */}
-        <div className="transition-all duration-700" style={{ width: 40, height: 1, backgroundColor: C.border, margin: "2.5rem 0 1.5rem 0", opacity: visible ? 1 : 0, transitionDelay: "3600ms" }} />
+            {[
+              { text: "11:04pm Friday.", style: { fontSize: "clamp(1.8rem, 4vw, 2.5rem)", fontFamily: fraunces, fontStyle: "italic" as const, color: C.text, letterSpacing: "-0.02em", marginBottom: "0.6em" }, delay: 0 },
+              { text: "A Priority 1 incident. 24 hours to notify ACQSC.", style: { fontSize: "14px", color: C.textFaint, marginBottom: "0.8em" }, delay: 200 },
+              { text: "Chris classified it in 4 minutes.", style: { fontSize: "clamp(1.1rem, 2vw, 1.4rem)", fontWeight: 500, color: C.text, marginBottom: "0.3em" }, delay: 600 },
+              { text: "The draft was waiting in the DON\u2019s inbox by 11:09.", style: { fontSize: "15px", fontFamily: fraunces, fontStyle: "italic" as const, color: C.textMuted, marginBottom: "0.2em" }, delay: 1000 },
+              { text: "She approved it before midnight.", style: { fontSize: "15px", fontFamily: fraunces, fontStyle: "italic" as const, color: C.textMuted, marginBottom: "0.8em" }, delay: 1200 },
+              { text: "That is the difference between a penalty and a clean record.", style: { fontSize: "clamp(1.1rem, 2vw, 1.4rem)", fontWeight: 500, color: C.teal, marginBottom: "0" }, delay: 1800 },
+            ].map((line, i) => (
+              <div key={i} className="transition-all duration-700 ease-out"
+                style={{ ...line.style, opacity: visible ? 1 : 0, transform: visible ? "translateY(0)" : "translateY(16px)", transitionDelay: `${line.delay}ms` }}>
+                {line.text}
+              </div>
+            ))}
 
-        {/* Footnote */}
-        <div className="transition-all duration-700 space-y-1" style={{ opacity: visible ? 1 : 0, transitionDelay: "3800ms" }}>
-          <p className="text-[13px]" style={{ color: C.textMuted }}>Documentation drafting, event-driven. Always watching.</p>
-          <p className="text-[12px]" style={{ color: C.textFaint }}>Civil penalties for late SIRS notifications. Zero missed deadlines at current pilots.</p>
+            <div className="mt-6 pt-4" style={{ borderTop: `0.5px solid ${C.border}` }}>
+              <p className="text-[12px]" style={{ color: C.textFaint }}>Documentation drafting, event-driven. Always watching. Zero missed deadlines at current pilots.</p>
+            </div>
+          </div>
+
+          {/* Scenario 2: Tuesday morning revenue uplift */}
+          <div>
+            <div className="flex items-center gap-3 mb-5">
+              <span className="text-[12px] font-medium tracking-[0.12em] tabular-nums" style={{ fontFamily: "'Courier New', Consolas, monospace", color: C.teal }}>09:14</span>
+              <span className="text-[9px] font-medium tracking-[0.15em] uppercase" style={{ color: C.textFaint }}>Opportunity surfaced</span>
+              <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: C.teal }} />
+            </div>
+
+            {[
+              { text: "Tuesday morning, 9:14am.", style: { fontSize: "clamp(1.8rem, 4vw, 2.5rem)", fontFamily: fraunces, fontStyle: "italic" as const, color: C.text, letterSpacing: "-0.02em", marginBottom: "0.6em" }, delay: 200 },
+              { text: "Three residents flagged for AN-ACC reclassification.", style: { fontSize: "14px", color: C.textFaint, marginBottom: "0.8em" }, delay: 400 },
+              { text: "Chris surfaced the opportunity overnight.", style: { fontSize: "clamp(1.1rem, 2vw, 1.4rem)", fontWeight: 500, color: C.text, marginBottom: "0.3em" }, delay: 800 },
+              { text: "Clinical evidence compiled. Classification uplift quantified.", style: { fontSize: "15px", fontFamily: fraunces, fontStyle: "italic" as const, color: C.textMuted, marginBottom: "0.2em" }, delay: 1200 },
+              { text: "The CFO reviewed the numbers before morning tea.", style: { fontSize: "15px", fontFamily: fraunces, fontStyle: "italic" as const, color: C.textMuted, marginBottom: "0.8em" }, delay: 1400 },
+              { text: "$11,400 per month in revenue the facility was already entitled to.", style: { fontSize: "clamp(1.1rem, 2vw, 1.4rem)", fontWeight: 500, color: C.teal, marginBottom: "0" }, delay: 2000 },
+            ].map((line, i) => (
+              <div key={i} className="transition-all duration-700 ease-out"
+                style={{ ...line.style, opacity: visible ? 1 : 0, transform: visible ? "translateY(0)" : "translateY(16px)", transitionDelay: `${line.delay}ms` }}>
+                {line.text}
+              </div>
+            ))}
+
+            <div className="mt-6 pt-4" style={{ borderTop: `0.5px solid ${C.border}` }}>
+              <p className="text-[12px]" style={{ color: C.textFaint }}>Revenue intelligence, running weekly. Every reclassification opportunity quantified before the quarter closes.</p>
+            </div>
+          </div>
         </div>
+
+        <p className="text-[13px] mt-10" style={{ color: C.textFaint }}>Nine workflows live today, from SIRS handling to board pack generation. <a href="/workflows" className="font-medium hover:underline" style={{ color: C.text }}>See the full list →</a></p>
       </div>
     </section>
   );
