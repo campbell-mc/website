@@ -108,10 +108,9 @@ const TOOLS = [
 ];
 
 const STATS = [
-  { number: "$1.5M", label: "Maximum corporate penalty · serious failure · Aged Care Act 2024", color: C.warm },
-  { number: "549,000", label: "Aged care workers · no operational OS · until now", color: C.copper },
-  { number: "16", label: "Mandated psychosocial hazards · one spreadsheet between them and you", color: C.good },
-  { number: "$159K", label: "Spent annually per facility · leaders stitching together 8 systems that should talk to each other", color: C.copper },
+  { number: "$1.5M", label: "Maximum corporate penalty, serious failure, Aged Care Act 2024", color: C.warn },
+  { number: "549,000", label: "Aged care workers, no operational OS, until now", color: C.teal },
+  { number: "16", label: "Mandated psychosocial hazards, one spreadsheet between them and you", color: C.teal },
 ];
 
 const JOBS = [
@@ -333,7 +332,7 @@ function Hero() {
       <div className="max-w-6xl mx-auto px-6 lg:px-16 pt-14 lg:pt-20 pb-16 lg:pb-24">
         <div className="max-w-[580px]">
           <p className="text-[11px] font-medium tracking-[0.08em] uppercase mb-6" style={{ color: C.teal }}>
-            Live with providers in NSW and VIC.
+            Live with Harbison Care, Kinyara Health, Homewell, 365 Care.
           </p>
 
           <h1 className="text-[clamp(2.5rem,6vw,52px)] font-medium leading-[1.02] tracking-[-0.030em] mb-6" style={{ color: C.text }}>
@@ -956,9 +955,9 @@ function StatRow() {
   return (
     <section style={{ backgroundColor: C.canvas, borderTop: `0.5px solid ${C.border}` }}>
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-12 lg:py-14">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-0">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 lg:gap-0">
           {STATS.map((stat, i) => (
-            <div key={stat.label} className={`flex flex-col items-center text-center lg:py-0 ${i < STATS.length - 1 ? "lg:border-r" : ""}`} style={{ borderColor: C.border }}>
+            <div key={stat.label} className={`flex flex-col items-center text-center lg:py-0 ${i < STATS.length - 1 ? "sm:border-r" : ""}`} style={{ borderColor: C.border }}>
               <div className="text-[clamp(2rem,5vw,3rem)] font-medium leading-none tracking-[-0.02em] mb-2" style={{ color: stat.color }}>{stat.number}</div>
               <div className="text-[11px] uppercase tracking-[0.06em] leading-snug max-w-[200px]" style={{ color: C.textFaint }}>{stat.label}</div>
             </div>
@@ -1350,6 +1349,38 @@ function FinalCTA() {
   );
 }
 
+// ── Client proof section ────────────────────────────────────────────────────
+const CLIENTS = [
+  { name: "Harbison Care", logo: "/logos/harbison.png", fact: "[CONTENT_PLACEHOLDER: one-line operational fact about Harbison]" },
+  { name: "Kinyara Health", logo: "/logos/kinyara.png", fact: "[CONTENT_PLACEHOLDER: one-line operational fact about Kinyara Health]" },
+  { name: "Homewell", logo: "/logos/homewell.png", fact: "[CONTENT_PLACEHOLDER: one-line operational fact about Homewell]" },
+  { name: "365 Care", logo: "/logos/365care.png", fact: "[CONTENT_PLACEHOLDER: one-line operational fact about 365 Care]" },
+];
+
+function ClientProof() {
+  return (
+    <section style={{ backgroundColor: C.canvas, borderTop: `0.5px solid ${C.border}` }}>
+      <div className="max-w-6xl mx-auto px-6 lg:px-16 py-12 lg:py-16">
+        <p className="text-[17px] mb-6" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>Live with</p>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+          {CLIENTS.map((client) => (
+            <div key={client.name} className="flex flex-col items-start">
+              <div className="h-[36px] flex items-center mb-3">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={client.logo} alt={client.name} className="h-full w-auto max-w-[140px] object-contain" style={{ filter: "grayscale(0.2)" }}
+                  onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; (e.target as HTMLImageElement).nextElementSibling?.classList.remove("hidden"); }}
+                />
+                <span className="hidden text-[16px] font-medium" style={{ color: C.text }}>{client.name}</span>
+              </div>
+              <p className="text-[12px] leading-[1.5]" style={{ color: C.textFaint }}>{client.fact}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Footer() {
   return (
     <footer style={{ backgroundColor: C.canvas, borderTop: `0.5px solid ${C.border}` }}>
@@ -1413,14 +1444,14 @@ export default function V2Page() {
       <WhatChrisIsSection />
       <StatRow />
       <ToolsStrip />
-      <HowItWorksSection />
+      <ClientProof />
       <JobsSection />
       <ScenarioSection />
+      <FinalCTA />
+      <HowItWorksSection />
       <AgentsSection />
-      {/* AISupportSection removed: public chat preview is a credibility risk for cold traffic. Component and /api/chat-public route remain in codebase for future use. */}
       <ExecutionSection />
       <RolesSection />
-      <FinalCTA />
       <Footer />
     </div>
   );
