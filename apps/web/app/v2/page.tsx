@@ -357,28 +357,43 @@ function Hero() {
           <div className="flex-1 h-px max-w-[280px]" style={{ backgroundColor: C.ruleIronstone }} />
         </div>
 
-        {/* Headline */}
-        <h1 className="mb-10 max-w-[1100px]" style={{ fontFamily: serif, fontSize: "clamp(56px, 7.5vw, 92px)", lineHeight: 1.0, letterSpacing: "-0.028em", fontWeight: 400, color: C.text }}>
-          <span className="block">Hold quality.</span>
-          <span className="block">Protect margin.</span>
-          <span className="block">Lead with confidence.</span>
-        </h1>
+        {/* Two-column: headline left, image right */}
+        <div className="flex flex-col lg:flex-row lg:items-start lg:gap-12 mb-10">
+          {/* Left: headline + subhead + CTAs */}
+          <div className="flex-1 min-w-0">
+            <h1 className="mb-8" style={{ fontFamily: serif, fontSize: "clamp(56px, 7.5vw, 92px)", lineHeight: 1.0, letterSpacing: "-0.028em", fontWeight: 400, color: C.text }}>
+              <span className="block">Hold quality.</span>
+              <span className="block">Protect margin.</span>
+              <span className="block">Lead with confidence.</span>
+            </h1>
 
-        {/* Subhead */}
-        <p className="max-w-[600px] mb-11" style={{ fontFamily: sans, fontSize: "clamp(17px, 1.6vw, 20px)", lineHeight: 1.5, fontWeight: 400, color: C.textSoft }}>
-          Operational intelligence for Australian aged care and NDIS.{" "}
-          <em style={{ fontFamily: serif, fontStyle: "italic", fontWeight: 400, fontSize: "1.05em", color: C.ironstone }}>Run the morning before the morning.</em>{" "}
-          Chris reads every system you already run, drafts the work your team would otherwise stitch together by hand, and keeps your leaders ahead of compliance and cost.
-        </p>
+            <p className="max-w-[560px] mb-10" style={{ fontFamily: sans, fontSize: "clamp(17px, 1.6vw, 20px)", lineHeight: 1.5, fontWeight: 400, color: C.textSoft }}>
+              Operational intelligence for Australian aged care and NDIS.{" "}
+              <em style={{ fontFamily: serif, fontStyle: "italic", fontWeight: 400, fontSize: "1.05em", color: C.ironstone }}>Run the morning before the morning.</em>{" "}
+              Chris reads every system you already run, drafts the work your team would otherwise stitch together by hand, and keeps your leaders ahead of compliance and cost.
+            </p>
 
-        {/* CTAs */}
-        <div className="flex items-center gap-7 flex-wrap mb-16">
-          <a href="#book" className="inline-block text-[15px] font-medium px-[30px] py-[17px] transition-colors duration-200 hover:bg-[#8b3a32]" style={{ fontFamily: sans, backgroundColor: C.ctaBg, color: C.ctaText, textDecoration: "none" }}>
-            Book 30 minutes with Campbell →
-          </a>
-          <a href="#how-it-works" className="text-[15px] font-medium pb-[3px] hover:border-[#1a1a1a]" style={{ fontFamily: sans, color: C.text, textDecoration: "none", borderBottom: "1px solid rgba(26,26,26,0.4)" }}>
-            How Chris works, layer by layer
-          </a>
+            <div className="flex items-center gap-7 flex-wrap">
+              <a href="#book" className="inline-block text-[15px] font-medium px-[30px] py-[17px] transition-colors duration-200 hover:bg-[#8b3a32]" style={{ fontFamily: sans, backgroundColor: C.ctaBg, color: C.ctaText, textDecoration: "none" }}>
+                Book 30 minutes with Campbell →
+              </a>
+              <a href="#how-it-works" className="text-[15px] font-medium pb-[3px] hover:border-[#1a1a1a]" style={{ fontFamily: sans, color: C.text, textDecoration: "none", borderBottom: "1px solid rgba(26,26,26,0.4)" }}>
+                How Chris works, layer by layer
+              </a>
+            </div>
+          </div>
+
+          {/* Right: hero image */}
+          <div className="hidden lg:block lg:w-[480px] shrink-0 mt-4">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/hero-gibraltar.png" alt="Gibraltar Gardens aged care facility at sunset" className="w-full h-auto rounded-[5px]" style={{ border: `0.5px solid ${C.border}` }} />
+          </div>
+        </div>
+
+        {/* Mobile image */}
+        <div className="lg:hidden mb-10">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/hero-gibraltar.png" alt="Gibraltar Gardens aged care facility at sunset" className="w-full h-auto rounded-[5px]" style={{ border: `0.5px solid ${C.border}` }} />
         </div>
 
         {/* Trust strip */}
