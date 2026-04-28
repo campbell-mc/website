@@ -1373,22 +1373,22 @@ const FOUNDERS = [
   {
     initials: "CM", name: "Campbell McGlynn", title: "Cofounder",
     bio: "20+ years in HR leadership, including 6 years as Chief People Officer at IRT Group in aged care. The person who will be in your debrief and your fortnightly check-ins.",
-    color: "#1B4332",
+    color: "#1B4332", linkedin: "https://www.linkedin.com/in/campbellmcglynn/",
   },
   {
     initials: "IS", name: "Ivan Sanchez", title: "Cofounder",
     bio: "Platform architecture and engineering. Makes sure the integrations, agents, and intelligence layer work reliably behind the scenes.",
-    color: "#1F6F66",
+    color: "#1F6F66", linkedin: "https://www.linkedin.com/in/ivsanchez/",
   },
   {
     initials: "AJ", name: "Abhinav Jain", title: "AI/ML Lead",
     bio: "AI and agentic lead engineer behind Chris. Builds the agentic systems, integrations, and intelligence that make the platform learn, remember, and respond in context.",
-    color: "#BA7517",
+    color: "#BA7517", linkedin: "https://www.linkedin.com/in/abhinav-jain-ml/",
   },
   {
     initials: "BP", name: "Dr Ben Palmer", title: "Coventure partner",
     bio: "Internationally recognised CEO of Genos International. Developed Australia's first workplace model and measure of emotional intelligence through his PhD at Swinburne. 23+ years partnering with organisations from start-ups to Fortune 500.",
-    color: "#5A5A57",
+    color: "#5A5A57", linkedin: "https://www.linkedin.com/in/benjaminpalmer/",
   },
 ];
 
@@ -1411,7 +1411,7 @@ function FoundersSection() {
                   {f.initials}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h3 className="text-[16px] font-medium" style={{ color: C.text }}>{f.name}</h3>
+                  <a href={f.linkedin} target="_blank" rel="noopener noreferrer" className="text-[16px] font-medium hover:underline" style={{ color: C.text }}>{f.name}</a>
                   <p className="text-[12px] font-medium mb-3" style={{ color: C.teal }}>{f.title}</p>
                   <p className="text-[13px] leading-[1.6]" style={{ color: C.textMuted }}>{f.bio}</p>
                 </div>
