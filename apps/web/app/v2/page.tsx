@@ -332,7 +332,7 @@ function Hero() {
       <div className="max-w-6xl mx-auto px-6 lg:px-16 pt-14 lg:pt-20 pb-16 lg:pb-24">
         <div className="max-w-[580px]">
           <p className="text-[11px] font-medium tracking-[0.08em] uppercase mb-6" style={{ color: C.teal }}>
-            We started in October 2025. We&apos;re now live with the following.
+            Live with Harbison Care, Kinyara Health, Homewell, 365 Care.
           </p>
 
           <h1 className="text-[clamp(2.5rem,6vw,52px)] font-medium leading-[1.02] tracking-[-0.030em] mb-6" style={{ color: C.text }}>
