@@ -366,7 +366,7 @@ function Hero() {
 
         {/* Subhead */}
         <p className="max-w-[600px] mb-11" style={{ fontFamily: sans, fontSize: "clamp(17px, 1.6vw, 20px)", lineHeight: 1.5, fontWeight: 400, color: C.textSoft }}>
-          Operational intelligence for Australian aged care.{" "}
+          Operational intelligence for Australian aged care and NDIS.{" "}
           <em style={{ fontFamily: serif, fontStyle: "italic", fontWeight: 400, fontSize: "1.05em", color: C.ironstone }}>Run the morning before the morning.</em>{" "}
           Chris reads every system you already run, drafts the work your team would otherwise stitch together by hand, and keeps your leaders ahead of compliance and cost.
         </p>
