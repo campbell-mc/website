@@ -1085,7 +1085,7 @@ function ScenarioSection() {
   return (
     <section style={{ backgroundColor: C.canvas, borderTop: `0.5px solid ${C.border}` }}>
       <div className="max-w-[640px] mx-auto px-6 lg:px-16 py-16 lg:py-20">
-        <p className="text-[17px] mb-4" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>A real scenario. Every facility. Every week.</p>
+        <p className="text-[17px] mb-4" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>Every facility. Every week.</p>
         <h2 className="text-[clamp(1.75rem,4vw,34px)] font-medium leading-[1.08] tracking-[-0.025em] mb-5" style={{ color: C.text }}>11:04pm <span style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.012em" }}>Friday.</span></h2>
         <p className="text-[15px] mb-6" style={{ color: C.textMuted }}>A Priority 1 incident. 24 hours to notify ACQSC.</p>
         <p className="text-[clamp(1.2rem,2vw,1.5rem)] font-medium mb-4" style={{ color: C.text }}>Chris classified it in 4 minutes.</p>
