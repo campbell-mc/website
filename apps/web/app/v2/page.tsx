@@ -1681,7 +1681,7 @@ function LiveFacilityView() {
 
 function ClientProof() {
   return (
-    <section style={{ backgroundColor: C.canvas, borderTop: `0.5px solid ${C.border}` }}>
+    <section style={{ backgroundColor: "#FFFFFF" }}>
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-14 lg:py-18">
         {/* Eyebrow + lead */}
         <p className="text-[17px] mb-2" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>6 months from the first idea. Four organisations.</p>
