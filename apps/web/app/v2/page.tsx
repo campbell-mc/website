@@ -1412,8 +1412,8 @@ function FoundersSection() {
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-12 lg:py-16">
         <p className="text-[17px] mb-2" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>Your team</p>
         <h2 className="mb-10" style={{ fontSize: "clamp(34px, 4vw, 48px)", lineHeight: 1.08, letterSpacing: "-0.025em", fontWeight: 500, color: C.text }}>
-          The humans behind Culture{" "}
-          <span style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.012em" }}>Crunch.</span>
+          The humans behind Chris{" "}
+          <span style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.012em" }}>OS.</span>
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
