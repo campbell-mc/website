@@ -312,7 +312,7 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const { messages } = await req.json();
+  const { messages, jurisdictionContext } = await req.json();
 
   if (!Array.isArray(messages) || messages.length > 20) {
     return new Response(JSON.stringify({ error: "Invalid request" }), { status: 400 });
@@ -331,10 +331,15 @@ export async function POST(req: NextRequest) {
       content: String(m.content).slice(0, 2000),
     }));
 
+  // Inject jurisdiction-specific context if provided (from PSH tool)
+  const systemPrompt = jurisdictionContext
+    ? `${SYSTEM_PROMPT}\n\nJURISDICTION-SPECIFIC CONTEXT:\n${String(jurisdictionContext).slice(0, 1000)}`
+    : SYSTEM_PROMPT;
+
   const stream = await client.messages.stream({
     model: "claude-sonnet-4-20250514",
     max_tokens: 600,
-    system: SYSTEM_PROMPT,
+    system: systemPrompt,
     messages: sanitised,
   });
 

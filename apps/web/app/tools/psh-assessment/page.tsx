@@ -11,14 +11,35 @@ function stripMd(text: string): string {
   return text.replace(/\*\*(.+?)\*\*/g, "$1").replace(/\*(.+?)\*/g, "$1").replace(/__(.+?)__/g, "$1").replace(/_(.+?)_/g, "$1").replace(/^#{1,6}\s+/gm, "").replace(/`(.+?)`/g, "$1").replace(/\[(.+?)\]\(.+?\)/g, "$1");
 }
 
-const OPENING = `I'm the Chris psychosocial risk assessor. I'll evaluate your organisation against the seven pillars of a defensible psychosocial risk system — the standard regulators apply in 2026.
+const JURISDICTIONS: Record<string, { label: string; context: string }> = {
+  australia: { label: "Australia (default)", context: "" },
+  nsw: { label: "New South Wales", context: "Focus on SafeWork NSW requirements and the WHS Act 2011 (NSW). Note that NSW has adopted the model WHS Regulations including the psychosocial risk provisions." },
+  victoria: { label: "Victoria", context: "Focus specifically on the Victorian Occupational Health and Safety Amendment (Psychosocial Hazards) Regulations 2025, which commenced December 2025. Victoria operates under the OHS Act 2004 (not the model WHS Act). Key differences: Victoria's regulations explicitly define psychosocial hazards, require employers to identify and control psychosocial risks using the hierarchy of controls, and impose specific consultation obligations. This is the most prescriptive psychosocial hazard regime in Australia. Emphasise the December 2025 commencement date and the compliance obligations that are now in force." },
+  queensland: { label: "Queensland", context: "Focus on Workplace Health and Safety Queensland requirements. Queensland has adopted the model WHS Regulations including psychosocial risk provisions under the Work Health and Safety Act 2011 (Qld)." },
+};
 
-This takes 12–15 minutes. I'll ask questions conversationally. You answer in your own words. At the end, you'll receive a maturity score, your strongest and weakest pillars, and the three highest-priority controls for your context.
+function getOpening(jurisdiction: string): string {
+  const jur = JURISDICTIONS[jurisdiction];
+  const jurLabel = jur && jurisdiction !== "australia" ? ` with a focus on ${jur.label} requirements` : "";
+  return `I'm the Chris psychosocial risk assessor. I'll evaluate your organisation against the seven pillars of a defensible psychosocial risk system${jurLabel}.
+
+This takes 12 to 15 minutes. I'll ask questions conversationally. You answer in your own words. At the end, you'll receive a maturity score, your strongest and weakest pillars, and the three highest-priority controls for your context.
 
 Before we start: are you an aged care provider, an NDIS provider, or both?`;
+}
 
 export default function PSHAssessment() {
-  const [messages, setMessages] = useState<Message[]>([{ role: "assistant", content: OPENING }]);
+  const [jurisdiction, setJurisdiction] = useState("australia");
+  const [messages, setMessages] = useState<Message[]>([{ role: "assistant", content: getOpening("australia") }]);
+  // Read jurisdiction from URL on mount (avoids useSearchParams SSR issue)
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const jur = params.get("jurisdiction");
+    if (jur && JURISDICTIONS[jur]) {
+      setJurisdiction(jur);
+      setMessages([{ role: "assistant", content: getOpening(jur) }]);
+    }
+  }, []);
   const [input, setInput] = useState("");
   const [streaming, setStreaming] = useState(false);
   const [showCapture, setShowCapture] = useState(false);
@@ -58,7 +79,7 @@ export default function PSHAssessment() {
       const res = await fetch("/api/chat-public", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: updated.map((m) => ({ role: m.role, content: m.content })) }),
+        body: JSON.stringify({ messages: updated.map((m) => ({ role: m.role, content: m.content })), jurisdictionContext: JURISDICTIONS[jurisdiction]?.context }),
       });
       const reader = res.body?.getReader();
       const decoder = new TextDecoder();
@@ -107,6 +128,26 @@ export default function PSHAssessment() {
         <p className="text-[14px] leading-[1.65] max-w-xl mx-auto" style={{ color: C.inkMuted }}>
           Every Australian jurisdiction now has formal regulations requiring you to identify, assess, control and review psychosocial hazards. This assessment evaluates your organisation against the standard regulators apply in 2026.
         </p>
+      </div>
+
+      {/* Jurisdiction toggle */}
+      <div className="max-w-3xl mx-auto px-6 lg:px-16 pb-4">
+        <div className="flex items-center gap-2 justify-center flex-wrap">
+          {Object.entries(JURISDICTIONS).map(([key, jur]) => (
+            <button key={key} onClick={() => {
+              setJurisdiction(key);
+              if (messages.length <= 1) setMessages([{ role: "assistant", content: getOpening(key) }]);
+            }}
+              className="text-[11px] font-medium px-3 py-1.5 rounded-[4px] transition-all"
+              style={{
+                backgroundColor: jurisdiction === key ? "rgba(31,111,102,0.1)" : "transparent",
+                color: jurisdiction === key ? "#1F6F66" : "rgba(26,18,24,0.4)",
+                border: `0.5px solid ${jurisdiction === key ? "rgba(31,111,102,0.2)" : "rgba(26,18,24,0.08)"}`,
+              }}>
+              {jur.label}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Chat */}

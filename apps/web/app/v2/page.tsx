@@ -977,7 +977,7 @@ function JobsSection() {
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
         <p className="text-[17px] mb-3" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>Where we start</p>
         <h2 className="text-[clamp(1.75rem,4vw,34px)] font-medium leading-[1.08] tracking-[-0.025em] mb-3" style={{ color: C.text }}>
-          We don&apos;t sell a platform. We fix a problem.<br />
+          We don&apos;t sell software. We fix a problem.<br />
           <em className="italic" style={{ color: C.copperDark }}>Then another. Then another.</em>
         </h2>
         <p className="text-[16px] leading-relaxed mb-3" style={{ color: C.inkMutedLight }}>
@@ -1210,7 +1210,7 @@ function AISupportSection() {
               Chris is an operational intelligence layer and AI support built specifically for aged care. Ask about compliance, workforce, funding, or bring a leadership challenge. Chris supports the way a trusted colleague would: direct, warm, and grounded in what actually works in this sector. No login. No signup.
             </p>
             <p className="text-[11px]" style={{ color: C.textFaint }}>
-              You&apos;re talking to a public preview of Chris. The full platform connects to your systems and knows your team.
+              You&apos;re talking to a public preview. The full version connects to your systems and knows your team.
             </p>
           </div>
           <div><ChrisPublicChat /></div>
@@ -1252,7 +1252,7 @@ function RolesSection() {
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
         <p className="text-[17px] mb-3" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>Built for every leader</p>
         <h2 className="text-[clamp(1.75rem,4vw,34px)] font-medium leading-[1.08] tracking-[-0.025em] mb-3" style={{ color: C.text }}>
-          One platform. <em className="italic" style={{ color: C.copperDark }}>Every leader in your organisation.</em>
+          Operational intelligence, in the flow of leadership work. <span style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.012em" }}>Every leader.</span>
         </h2>
         <p className="text-[15px] leading-relaxed max-w-xl mb-12" style={{ color: C.inkMutedLight }}>
           Chris adapts to the role looking at it. The CEO sees the portfolio view. The DON sees clinical and operational signals. The CFO sees the financial intelligence. The WHS Lead sees the psychosocial picture.
@@ -1381,6 +1381,30 @@ function ClientProof() {
   );
 }
 
+function VictorianHook() {
+  return (
+    <section style={{ backgroundColor: C.canvas }}>
+      <div className="max-w-6xl mx-auto px-6 lg:px-16 pb-10">
+        <Link href="/tools/psh-assessment?jurisdiction=victoria"
+          className="block rounded-[5px] p-5 lg:p-6 transition-all hover:-translate-y-0.5"
+          style={{ backgroundColor: C.card, border: `0.5px solid ${C.border}` }}>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5">
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full" style={{ backgroundColor: C.warn }} />
+              <span className="text-[11px] font-medium uppercase tracking-[0.08em]" style={{ color: C.warn }}>Regulatory update</span>
+            </div>
+            <div className="flex-1">
+              <p className="text-[14px] font-medium" style={{ color: C.text }}>Victorian providers: see your December 2025 amendment exposure.</p>
+              <p className="text-[12px] mt-0.5" style={{ color: C.textMuted }}>The Victorian Occupational Health and Safety Amendment (Psychosocial Hazards) commenced December 2025. Run the PSH self-assessment with the Victorian filter applied.</p>
+            </div>
+            <span className="text-[13px] font-medium shrink-0" style={{ color: C.teal }}>Check your exposure →</span>
+          </div>
+        </Link>
+      </div>
+    </section>
+  );
+}
+
 function Footer() {
   return (
     <footer style={{ backgroundColor: C.canvas, borderTop: `0.5px solid ${C.border}` }}>
@@ -1445,6 +1469,7 @@ export default function V2Page() {
       <StatRow />
       <ToolsStrip />
       <ClientProof />
+      <VictorianHook />
       <JobsSection />
       <ScenarioSection />
       <FinalCTA />
