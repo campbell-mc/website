@@ -397,8 +397,9 @@ function AgentRibbon() {
   const doubled = [...items, ...items];
 
   return (
-    <div className="overflow-hidden" style={{ backgroundColor: C.canvas, borderTop: `0.5px solid ${C.border}`, borderBottom: `0.5px solid ${C.border}` }}>
-      <div className="flex items-center h-10 animate-ticker whitespace-nowrap">
+    <div style={{ backgroundColor: C.canvas, borderTop: `0.5px solid ${C.border}`, borderBottom: `0.5px solid ${C.border}` }}>
+      <div className="max-w-6xl mx-auto px-6 lg:px-16 overflow-hidden">
+        <div className="flex items-center h-10 animate-ticker whitespace-nowrap">
         {doubled.map((item, i) => (
           <span key={i} className="inline-flex items-center gap-2 text-[11px] mx-6 shrink-0">
             <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: item.color }} />
@@ -407,6 +408,7 @@ function AgentRibbon() {
             <span style={{ color: C.textMuted }}>{item.text}</span>
           </span>
         ))}
+        </div>
       </div>
     </div>
   );
