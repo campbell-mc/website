@@ -581,7 +581,7 @@ function WhatChrisIsSection() {
           </p>
           <div className="flex items-center gap-1.5">
             <span className="w-[7px] h-[7px] rounded-full animate-pulse" style={{ backgroundColor: teal }} />
-            <span className="text-[11px]" style={{ color: textSecondary }}>Live with providers in NSW and VIC. Cross-domain agents in build for clinical, workforce, finance, compliance and governance.</span>
+            <span className="text-[11px]" style={{ color: textSecondary }}>Live with Harbison Care, Kinyara Health, 365 Care, Homewell. Cross-domain agents in build for clinical, workforce, finance, compliance and governance.</span>
           </div>
         </div>
       </div>
@@ -1361,7 +1361,7 @@ function ClientProof() {
   return (
     <section style={{ backgroundColor: C.canvas, borderTop: `0.5px solid ${C.border}` }}>
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-12 lg:py-16">
-        <p className="text-[17px] mb-6" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>Live with</p>
+        <p className="text-[17px] mb-6" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>We started in October 2025. We&apos;re now live with the following.</p>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           {CLIENTS.map((client) => (
             <div key={client.name} className="flex flex-col items-start">
