@@ -1277,57 +1277,74 @@ function FinalCTA() {
   const [name, setName] = useState("");
   const [role, setRole] = useState("");
   const [org, setOrg] = useState("");
+  const [homes, setHomes] = useState("");
+  const [exposure, setExposure] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
-  async function handleWaitlist(e: React.FormEvent) {
+  const isLeaderRole = ["CEO", "CFO", "COO", "DON"].includes(role);
+
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!email) return;
-    try { await fetch("/api/waitlist", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email, name, role, organisation: org }) }); } catch {}
+    try {
+      await fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email, name, role, organisation: org, homes,
+          exposure: exposure || undefined,
+          routing: isLeaderRole ? "diagnostic-call" : "waitlist",
+          source: "v2_cta_form",
+        }),
+      });
+    } catch {}
     setSubmitted(true);
   }
 
   return (
     <section style={{ backgroundColor: C.canvas, borderTop: `0.5px solid ${C.border}` }} id="book">
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-14 lg:py-18">
-        <p className="text-[17px] mb-3" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>Two ways in</p>
-        <h2 className="text-[clamp(1.75rem,4vw,34px)] font-medium leading-[1.08] tracking-[-0.025em] mb-8" style={{ color: C.text }}>
-          Pick the one that fits where you are.
-        </h2>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          <div className="rounded-[5px] p-6 lg:p-7" style={{ backgroundColor: C.card, border: `0.5px solid ${C.border}` }}>
-            <h3 className="text-[16px] font-medium mb-2" style={{ color: C.text }}>Book a 30-min conversation</h3>
-            <p className="text-[13px] leading-[1.6] mb-5" style={{ color: C.textMuted }}>
-              For CEOs, CFOs, DONs ready to see Chris modelled against their actual facility data. No demo. Just your operation and ours.
-            </p>
-            <a href="mailto:hello@culturecrunch.io?subject=Chris-OS%20Diagnostic" className="inline-block text-[13px] font-medium px-[18px] py-[11px] rounded-[4px]" style={{ backgroundColor: C.ctaBg, color: C.ctaText }}>
-              Book now →
-            </a>
-          </div>
-
-          <div className="rounded-[5px] p-6 lg:p-7" style={{ backgroundColor: C.card, border: `0.5px solid ${C.border}` }}>
-            <h3 className="text-[16px] font-medium mb-2" style={{ color: C.text }}>Join the waitlist</h3>
-            <p className="text-[13px] leading-[1.6] mb-5" style={{ color: C.textMuted }}>
-              For organisations that want to be in the next cohort. We onboard in order. We&apos;ll be in touch when there&apos;s room.
-            </p>
-            {submitted ? (
-              <p className="text-[13px] font-medium" style={{ color: C.teal }}>You&apos;re on the list. We&apos;ll be in touch.</p>
-            ) : (
-              <form onSubmit={handleWaitlist} className="space-y-3">
-                <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Work email" className="w-full px-4 py-2.5 rounded-[4px] text-[13px] focus:outline-none" style={{ border: `0.5px solid ${C.border}`, color: C.text }} />
-                <div className="grid grid-cols-2 gap-3">
-                  <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" className="px-4 py-2.5 rounded-[4px] text-[13px] focus:outline-none" style={{ border: `0.5px solid ${C.border}`, color: C.text }} />
-                  <input type="text" value={org} onChange={(e) => setOrg(e.target.value)} placeholder="Organisation" className="px-4 py-2.5 rounded-[4px] text-[13px] focus:outline-none" style={{ border: `0.5px solid ${C.border}`, color: C.text }} />
-                </div>
-                <button type="submit" className="w-full py-2.5 rounded-[4px] text-[13px] font-medium" style={{ backgroundColor: C.ctaBg, color: C.ctaText }}>
-                  Join the waitlist
-                </button>
-              </form>
-            )}
-          </div>
+        <div className="max-w-lg">
+          <p className="text-[17px] mb-3" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>Start a conversation</p>
+          <h2 className="text-[clamp(1.75rem,4vw,34px)] font-medium leading-[1.08] tracking-[-0.025em] mb-3" style={{ color: C.text }}>
+            See Chris modelled against your facility.
+          </h2>
+          <p className="text-[14px] leading-[1.6] mb-2" style={{ color: C.textMuted }}>
+            No demo deck. No sales pitch. We walk through your data, your pain points, and what Chris would surface in week one.
+          </p>
+          <p className="text-[14px] font-medium mb-6" style={{ color: C.text }}>
+            Pilot pricing from $15,000. Scaled rollouts on application.
+          </p>
         </div>
 
-        <p className="text-[11px] text-center mt-5" style={{ color: C.textFaint }}>No spam. No sales calls. Just a conversation about your facility.</p>
+        {submitted ? (
+          <div className="max-w-lg rounded-[5px] p-6" style={{ backgroundColor: C.card, border: `0.5px solid ${C.border}` }}>
+            <p className="text-[15px] font-medium mb-1" style={{ color: C.teal }}>Received.</p>
+            <p className="text-[13px]" style={{ color: C.textMuted }}>
+              {isLeaderRole ? "We will be in touch within 48 hours to schedule a diagnostic conversation." : "You are on the list. We onboard in order and will be in touch when there is room."}
+            </p>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="max-w-lg space-y-3">
+            <div className="grid grid-cols-2 gap-3">
+              <input type="text" required value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" className="px-4 py-2.5 rounded-[4px] text-[13px] focus:outline-none" style={{ border: `0.5px solid ${C.border}`, color: C.text }} />
+              <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Work email" className="px-4 py-2.5 rounded-[4px] text-[13px] focus:outline-none" style={{ border: `0.5px solid ${C.border}`, color: C.text }} />
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              <input type="text" required value={org} onChange={(e) => setOrg(e.target.value)} placeholder="Organisation" className="px-4 py-2.5 rounded-[4px] text-[13px] focus:outline-none" style={{ border: `0.5px solid ${C.border}`, color: C.text }} />
+              <select required value={role} onChange={(e) => setRole(e.target.value)} className="px-4 py-2.5 rounded-[4px] text-[13px] focus:outline-none" style={{ border: `0.5px solid ${C.border}`, color: role ? C.text : C.textFaint }}>
+                <option value="">Role</option>
+                {["CEO", "CFO", "COO", "DON", "Quality Lead", "WHS Lead", "Facility Manager", "Other"].map((r) => <option key={r} value={r}>{r}</option>)}
+              </select>
+            </div>
+            <input type="text" value={homes} onChange={(e) => setHomes(e.target.value)} placeholder="Number of homes (optional)" className="w-full px-4 py-2.5 rounded-[4px] text-[13px] focus:outline-none" style={{ border: `0.5px solid ${C.border}`, color: C.text }} />
+            <textarea value={exposure} onChange={(e) => setExposure(e.target.value)} placeholder="What is your single biggest exposure right now? (optional)" rows={2} className="w-full px-4 py-2.5 rounded-[4px] text-[13px] focus:outline-none resize-none" style={{ border: `0.5px solid ${C.border}`, color: C.text }} />
+            <button type="submit" className="w-full py-3 rounded-[4px] text-[14px] font-medium" style={{ backgroundColor: C.ctaBg, color: C.ctaText }}>
+              Start a conversation →
+            </button>
+            <p className="text-[11px]" style={{ color: C.textFaint }}>No spam. No sales calls. Just a conversation about your facility.</p>
+          </form>
+        )}
       </div>
     </section>
   );
@@ -1400,7 +1417,7 @@ export default function V2Page() {
       <JobsSection />
       <ScenarioSection />
       <AgentsSection />
-      <AISupportSection />
+      {/* AISupportSection removed: public chat preview is a credibility risk for cold traffic. Component and /api/chat-public route remain in codebase for future use. */}
       <ExecutionSection />
       <RolesSection />
       <FinalCTA />
