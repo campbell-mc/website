@@ -2222,9 +2222,9 @@ function ClientProof() {
     <section style={{ backgroundColor: "#FFFFFF" }}>
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-14 lg:py-18">
         {/* Eyebrow + lead */}
-        <p className="text-[17px] mb-2" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>6 months from the first idea. Four organisations.</p>
+        <p className="text-[17px] mb-2" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>6 months from the first idea. Four organisations and counting.</p>
         <p className="text-[15px] leading-[1.6] max-w-[560px] mb-10" style={{ color: C.textMuted }}>
-          6 months from the first idea. Four organisations across residential, home care and NDIS, including a multi-brand provider group.
+          Four organisations across residential, home care and NDIS, including a multi-brand provider group. As at mid-April 2026. Looking for the next cohort of founding partners.
         </p>
 
         {/* Logo cards */}
