@@ -350,7 +350,7 @@ function Nav() {
 function HeroiPhone({ mobile }: { mobile?: boolean }) {
   const w = mobile ? 200 : 280;
   const h = mobile ? 414 : 582;
-  const tilt = mobile ? -2 : -4;
+  const tilt = 0;
   const r = mobile ? 40 : 56;
   const ir = r - 4;
   const dr = ir - 4;
@@ -364,7 +364,7 @@ function HeroiPhone({ mobile }: { mobile?: boolean }) {
       <figcaption className="sr-only">Sarah Mitchell's Team Briefing for Monday morning, Cycle 8, delivered at 6:47am. Voice down 18% in the afternoon shift, two new starters without supervision, trust holding above sector. Three micro-practices for the fortnight.</figcaption>
 
       {/* Phone chassis */}
-      <div className="relative z-10 transition-transform duration-600 hover:rotate-[-2deg]" style={{ width: w, height: h, borderRadius: r, background: "linear-gradient(135deg, #C8C8CA 0%, #A8A8AA 50%, #C8C8CA 100%)", padding: 4, transform: `rotate(${tilt}deg)`, boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.15), inset 0 0 0 2px rgba(0,0,0,0.05), 0 20px 60px rgba(0,0,0,0.12)" }}>
+      <div className="relative z-10" style={{ width: w, height: h, borderRadius: r, background: "linear-gradient(135deg, #C8C8CA 0%, #A8A8AA 50%, #C8C8CA 100%)", padding: 4, transform: `rotate(${tilt}deg)`, boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.15), inset 0 0 0 2px rgba(0,0,0,0.05), 0 20px 60px rgba(0,0,0,0.12)" }}>
 
         {/* Side buttons (subtle) */}
         <div className="absolute" style={{ right: -2, top: "25%", width: 3, height: mobile ? 36 : 50, borderRadius: 2, background: "linear-gradient(180deg, #B0B0B2, #909092)" }} />
@@ -439,16 +439,31 @@ function HeroiPhone({ mobile }: { mobile?: boolean }) {
                 ))}
               </div>
 
-              {/* Three Micro-Practices */}
+              {/* Three Micro-Practices — first one expanded */}
               <div style={{ padding: mobile ? "6px 12px" : "10px 16px" }}>
-                <p style={{ fontFamily: inter, fontSize: mobile ? 6 : 8, fontWeight: 500, letterSpacing: "0.10em", textTransform: "uppercase", color: "#5A5A57", marginBottom: mobile ? 4 : 6 }}>Three micro-practices</p>
+                <p style={{ fontFamily: inter, fontSize: mobile ? 6 : 8, fontWeight: 500, letterSpacing: "0.10em", textTransform: "uppercase", color: "#5A5A57", marginBottom: mobile ? 4 : 6 }}>Three micro-practices this fortnight</p>
+
+                {/* Practice 1 — expanded */}
+                <div className="mb-2">
+                  <div className="flex items-start gap-1 mb-1">
+                    <span style={{ fontFamily: inter, fontSize: mobile ? 7.5 : 10, color: "#5A5A57", flexShrink: 0 }}>1.</span>
+                    <p style={{ fontFamily: inter, fontSize: mobile ? 7.5 : 10, fontWeight: 500, color: "#0E0E0E", lineHeight: 1.4 }}>Open the next huddle with a check-in</p>
+                  </div>
+                  <div style={{ marginLeft: mobile ? 10 : 14 }}>
+                    <p style={{ fontFamily: inter, fontSize: mobile ? 6.5 : 9, color: "#5A5A57", lineHeight: 1.45, marginBottom: mobile ? 2 : 4 }}>Ask one direct question about what is making the shift harder this week. Not "how are you" but "what is the one thing that would make tomorrow easier." Listen. Write it down.</p>
+                    <div style={{ paddingLeft: mobile ? 6 : 8, borderLeft: `1.5px solid ${C.ironstone}` }}>
+                      <p style={{ fontFamily: inter, fontSize: mobile ? 6 : 8, color: "#5A5A57", lineHeight: 1.4, fontStyle: "italic" }}>Voice willingness is at 44%. This practice rebuilds the habit of speaking up in small, safe increments.</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Practices 2 and 3 — compact */}
                 {[
-                  "Open the next huddle with a check-in",
                   "15-min supervision with each new starter",
                   "Name workload pressure in next message",
                 ].map((text, i) => (
                   <div key={i} className="flex items-start gap-1 mb-1">
-                    <span style={{ fontFamily: inter, fontSize: mobile ? 7.5 : 10, color: "#5A5A57", flexShrink: 0 }}>{i + 1}.</span>
+                    <span style={{ fontFamily: inter, fontSize: mobile ? 7.5 : 10, color: "#5A5A57", flexShrink: 0 }}>{i + 2}.</span>
                     <p style={{ fontFamily: inter, fontSize: mobile ? 7.5 : 10, color: "#0E0E0E", lineHeight: 1.4 }}>{text}</p>
                   </div>
                 ))}
