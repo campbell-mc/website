@@ -941,69 +941,78 @@ const HIW_ILLUSTRATIONS = [HIWConnectSVG, HIWWatchSVG, HIWSupportSVG, HIWActSVG]
 
 function HowItWorksSection() {
   const [active, setActive] = useState(0);
-  const [userTouched, setUserTouched] = useState(false);
+  const outerRef = useRef<HTMLDivElement>(null);
+
+  // Scroll-driven stage progression on desktop
+  useEffect(() => {
+    const outer = outerRef.current;
+    if (!outer) return;
+    function onScroll() {
+      if (!outer) return;
+      const rect = outer.getBoundingClientRect();
+      const sectionHeight = outer.offsetHeight;
+      const viewportH = window.innerHeight;
+      // How far we've scrolled into the section (0 = top just hit viewport, sectionHeight - viewportH = bottom)
+      const scrolled = -rect.top;
+      const scrollableRange = sectionHeight - viewportH;
+      if (scrollableRange <= 0) return;
+      const progress = Math.max(0, Math.min(1, scrolled / scrollableRange));
+      const stage = Math.min(3, Math.floor(progress * 4));
+      setActive(stage);
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   const stage = HIW_STAGES[active];
   const Illus = HIW_ILLUSTRATIONS[active];
 
-  useEffect(() => {
-    if (userTouched) return;
-    const t = setInterval(() => setActive((p) => (p + 1) % 4), 6000);
-    return () => clearInterval(t);
-  }, [userTouched]);
-
   return (
-    <section id="how-it-works" style={{ backgroundColor: C.canvas }}>
-      <div className="max-w-6xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
-        {/* Header */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-16 mb-14 lg:mb-18">
-          <div>
-            <p className="text-[17px] mb-3" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>How it works</p>
-            <h2 style={{ fontSize: "clamp(34px, 4vw, 48px)", lineHeight: 1.08, letterSpacing: "-0.025em", fontWeight: 500, color: C.text }}>
-              Aged care, with <span style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.012em" }}>intelligence</span> in every layer
-            </h2>
+    <section id="how-it-works" ref={outerRef} style={{ backgroundColor: C.canvas, height: "300vh" }}>
+      <div className="sticky top-0" style={{ height: "100vh", display: "flex", alignItems: "center" }}>
+        <div className="max-w-6xl mx-auto px-6 lg:px-16 w-full">
+          {/* Header */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-16 mb-10">
+            <div>
+              <SectionEyebrow>How it works</SectionEyebrow>
+              <h2 className="mb-3" style={{ fontSize: "clamp(34px, 4vw, 48px)", lineHeight: 1.08, letterSpacing: "-0.025em", fontWeight: 400, fontFamily: serif, color: C.text }}>
+                Aged care, with <span style={{ fontStyle: "italic" }}>intelligence</span> in every layer
+              </h2>
+            </div>
+            <div className="lg:pt-8">
+              <p className="text-[15px] leading-[1.6]" style={{ color: C.textMuted }}>
+                Cross-domain intelligence working alongside your leaders. Reading every system you already run, catching what slips between domains, supporting the people running care, and handling the routine so they can lead.
+              </p>
+            </div>
           </div>
-          <div className="lg:pt-8">
-            <p className="text-[16px] leading-[1.7]" style={{ color: C.inkMutedLight }}>
-              Cross-domain intelligence working alongside your leaders. Reading every system you already run, catching what slips between domains, supporting the people running care, and handling the routine so they can lead.
-            </p>
-          </div>
-        </div>
 
-        {/* Tab bar */}
-        <div className="flex gap-1 mb-10 lg:mb-14 overflow-x-auto pb-1">
-          {HIW_STAGES.map((s, i) => (
-            <button key={s.num} onClick={() => { setActive(i); setUserTouched(true); }}
-              className="relative flex-1 min-w-[130px] text-left px-5 py-4 rounded-xl transition-all duration-300"
-              style={{
-                backgroundColor: active === i ? "#fff" : "transparent",
-                boxShadow: active === i ? "0 2px 12px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.03)" : "none",
-              }}>
-              <p className="text-[10px] font-medium tracking-[0.1em] uppercase mb-1 transition-colors duration-300"
-                style={{ color: active === i ? s.accent : "rgba(26,18,24,0.3)" }}>{s.num}</p>
-              <p className="text-[14px] font-medium transition-colors duration-300"
-                style={{ color: active === i ? C.inkDark : "rgba(26,18,24,0.35)" }}>{s.label}</p>
-              {active === i && <div className="absolute bottom-0 left-5 right-5 h-[2px] rounded-full" style={{ backgroundColor: s.accent }} />}
-            </button>
-          ))}
-        </div>
-
-        {/* Content: illustration + copy */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-          <div className="order-2 lg:order-1 rounded-[8px] overflow-hidden" style={{ border: `0.5px solid ${C.border}` }}>
-            <div className="p-2 lg:p-3"><Illus /></div>
+          {/* Progress bar */}
+          <div className="flex gap-1 mb-8">
+            {HIW_STAGES.map((s, i) => (
+              <div key={s.num} className="flex-1">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-[10px] font-medium tracking-[0.08em] uppercase" style={{ fontFamily: inter, color: active === i ? C.ironstone : C.textFaint }}>{s.num}</span>
+                  <span className="text-[13px] font-medium" style={{ fontFamily: inter, color: active === i ? C.text : C.textFaint }}>{s.label}</span>
+                </div>
+                <div className="h-[2px] rounded-full" style={{ backgroundColor: active >= i ? C.ironstone : C.border, transition: "background-color 300ms" }} />
+              </div>
+            ))}
           </div>
-          <div className="order-1 lg:order-2">
-            <p className="text-[11px] font-medium tracking-[0.1em] uppercase mb-3" style={{ color: stage.accent }}>{stage.num} {stage.label}</p>
-            <h3 className="text-[clamp(1.3rem,3vw,1.8rem)] font-normal leading-[1.15] tracking-[-0.01em] mb-5" style={{ color: C.inkDark }}>{stage.title}</h3>
-            <p className="text-[15px] leading-[1.75] mb-6" style={{ color: C.inkMutedLight }}>{stage.body}</p>
-            <div className="flex flex-wrap gap-2">
-              {stage.pills.map((pill) => (
-                <span key={pill} className="px-4 py-2 rounded-full text-[12px] font-medium"
-                  style={{
-                    backgroundColor: stage.accent === C.copper ? "rgba(200,154,60,0.1)" : "rgba(45,106,79,0.08)",
-                    color: stage.accent === C.copper ? C.copperDark : C.good,
-                  }}>{pill}</span>
-              ))}
+
+          {/* Content: illustration + copy */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-center">
+            <div className="order-2 lg:order-1 rounded-[8px] overflow-hidden" style={{ border: `0.5px solid ${C.border}` }}>
+              <div className="p-2 lg:p-3"><Illus /></div>
+            </div>
+            <div className="order-1 lg:order-2">
+              <p className="text-[11px] font-medium tracking-[0.08em] uppercase mb-3" style={{ fontFamily: inter, color: C.ironstone }}>{stage.num} {stage.label}</p>
+              <h3 className="mb-4" style={{ fontSize: "clamp(22px, 3vw, 28px)", lineHeight: 1.15, letterSpacing: "-0.01em", fontWeight: 500, fontFamily: serif, color: C.text }}>{stage.title}</h3>
+              <p className="text-[15px] leading-[1.65] mb-5" style={{ fontFamily: inter, color: C.textMuted }}>{stage.body}</p>
+              <div className="flex flex-wrap gap-2">
+                {stage.pills.map((pill) => (
+                  <span key={pill} className="px-3 py-1.5 rounded-full text-[11px] font-medium" style={{ backgroundColor: C.accentMuted, color: C.ironstone }}>{pill}</span>
+                ))}
+              </div>
             </div>
           </div>
         </div>
