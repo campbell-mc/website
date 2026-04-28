@@ -1730,41 +1730,57 @@ function ComparePanel({ rows, open }: { rows: typeof TEAM_LOOP_COMPARE; open: bo
   );
 }
 
-function EICompetencyGrid() {
-  const [openIdx, setOpenIdx] = useState<Set<number>>(new Set());
+function GenosFramework() {
+  const [openIdx, setOpenIdx] = useState<number | null>(null);
+
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-      {EI_COMPETENCIES.map((comp, i) => {
-        const isOpen = openIdx.has(i);
-        return (
-          <button key={comp.name} onClick={() => setOpenIdx((prev) => { const next = new Set(prev); if (next.has(i)) next.delete(i); else next.add(i); return next; })}
-            className="text-left rounded-[5px] transition-all duration-200"
-            style={{ backgroundColor: C.card, border: `0.5px solid ${isOpen ? C.ironstone : C.border}` }}>
-            <div className="p-4">
-              {/* Header row */}
-              <div className="flex items-start justify-between mb-2">
-                <p className="text-[14px] font-medium" style={{ fontFamily: inter, color: C.text }}>{comp.name}</p>
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className={`shrink-0 mt-0.5 transition-transform duration-200 ${isOpen ? "rotate-45" : ""}`}>
-                  <path d="M7 2v10M2 7h10" stroke={C.textFaint} strokeWidth="1.5" strokeLinecap="round" />
-                </svg>
-              </div>
-              {/* Productive / unproductive badges */}
-              <div className="flex items-center gap-2 mb-1">
-                <span className="text-[10px] font-semibold uppercase tracking-[0.06em]" style={{ color: C.sage }}>{comp.productive}</span>
-                <span className="text-[9px]" style={{ color: C.textFaint }}>←→</span>
-                <span className="text-[10px] font-semibold uppercase tracking-[0.06em]" style={{ color: C.red }}>{comp.unproductive}</span>
-              </div>
-              {/* Expanded content */}
-              <div className={`overflow-hidden transition-all duration-300 ${isOpen ? "max-h-[300px] opacity-100 mt-3" : "max-h-0 opacity-0"}`}>
-                <p className="text-[13px] leading-[1.6] mb-3" style={{ fontFamily: inter, color: C.textMuted }}>{comp.description}</p>
-                <div className="pl-3" style={{ borderLeft: `2px solid ${C.ironstone}` }}>
-                  <p className="text-[12px] leading-[1.55] italic" style={{ fontFamily: inter, color: C.textMuted }}>{comp.agedCare}</p>
+    <div className="max-w-[700px]">
+      {/* Header row */}
+      <div className="flex items-center justify-between mb-3 px-2">
+        <span className="text-[9px] font-semibold uppercase tracking-[0.12em]" style={{ fontFamily: inter, color: C.red }}>Unproductive states</span>
+        <span className="text-[9px] font-semibold uppercase tracking-[0.12em]" style={{ fontFamily: inter, color: C.text }}>Competency</span>
+        <span className="text-[9px] font-semibold uppercase tracking-[0.12em]" style={{ fontFamily: inter, color: C.sage }}>Productive states</span>
+      </div>
+
+      {/* Competency rows */}
+      <div className="space-y-2">
+        {EI_COMPETENCIES.map((comp, i) => {
+          const isOpen = openIdx === i;
+          return (
+            <div key={comp.name}>
+              <button onClick={() => setOpenIdx(isOpen ? null : i)} className="w-full group">
+                <div className="flex items-center gap-0 rounded-[5px] overflow-hidden transition-all duration-200" style={{ border: `0.5px solid ${isOpen ? C.ironstone : C.border}` }}>
+                  {/* Unproductive state */}
+                  <div className="w-[28%] py-2.5 px-3 text-right" style={{ backgroundColor: "rgba(139,58,50,0.06)" }}>
+                    <span className="text-[11px] font-semibold uppercase tracking-[0.04em]" style={{ fontFamily: inter, color: C.red }}>{comp.unproductive}</span>
+                  </div>
+                  {/* Competency name (centre) */}
+                  <div className="flex-1 py-2.5 px-3 flex items-center justify-center gap-2" style={{ backgroundColor: C.card }}>
+                    <span className="text-[12px] font-semibold uppercase tracking-[0.06em]" style={{ fontFamily: inter, color: C.text }}>{comp.name}</span>
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className={`shrink-0 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}>
+                      <path d="M3 5l3 3 3-3" stroke={C.textFaint} strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </div>
+                  {/* Productive state */}
+                  <div className="w-[28%] py-2.5 px-3" style={{ backgroundColor: "rgba(93,107,84,0.08)" }}>
+                    <span className="text-[11px] font-semibold uppercase tracking-[0.04em]" style={{ fontFamily: inter, color: C.sage }}>{comp.productive}</span>
+                  </div>
+                </div>
+              </button>
+
+              {/* Expanded detail */}
+              <div className={`overflow-hidden transition-all duration-300 ${isOpen ? "max-h-[300px] opacity-100" : "max-h-0 opacity-0"}`}>
+                <div className="rounded-b-[5px] px-5 py-4 mt-[-1px]" style={{ backgroundColor: C.card, border: `0.5px solid ${C.ironstone}`, borderTop: "none" }}>
+                  <p className="text-[13px] leading-[1.6] mb-3" style={{ fontFamily: inter, color: C.textMuted }}>{comp.description}</p>
+                  <div className="pl-3" style={{ borderLeft: `2px solid ${C.ironstone}` }}>
+                    <p className="text-[12px] leading-[1.55] italic" style={{ fontFamily: inter, color: C.textMuted }}>{comp.agedCare}</p>
+                  </div>
                 </div>
               </div>
             </div>
-          </button>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 }
@@ -1870,17 +1886,11 @@ function ChangeImplementationLayer() {
           </p>
         </div>
 
-        {/* Genos EI competencies — collapsible cards */}
+        {/* Genos EI framework — integrated visual + expandable detail */}
         <div className="mb-12" style={reveal(750)}>
-          <p className="text-[10px] font-medium uppercase tracking-[0.08em] mb-4" style={{ fontFamily: inter, color: C.sage }}>The six Genos EI competencies</p>
-          <EICompetencyGrid />
-        </div>
-
-        {/* Genos model image */}
-        <div className="mb-10 max-w-[600px]" style={reveal(780)}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/genos-model.png" alt="Genos Core Emotional Intelligence Competencies framework" className="w-full h-auto rounded-[5px]" style={{ border: `0.5px solid ${C.border}` }} />
-          <p className="text-[11px] mt-2" style={{ fontFamily: inter, color: C.textFaint }}>The Genos model. Six competencies. Each measurable, each trainable, each integrated into Team Loop and Leader Loop.</p>
+          <p className="text-[10px] font-medium uppercase tracking-[0.08em] mb-2" style={{ fontFamily: inter, color: C.sage }}>The Genos EI framework</p>
+          <p className="text-[13px] mb-6" style={{ fontFamily: inter, color: C.textFaint }}>Six competencies. Each measurable, each trainable, each integrated into Team Loop and Leader Loop.</p>
+          <GenosFramework />
         </div>
 
         {/* Two cards — collapsible, with simultaneous reveal */}
