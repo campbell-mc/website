@@ -1082,21 +1082,81 @@ function JobsSection() {
 }
 
 function ScenarioSection() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setVisible(true); observer.disconnect(); } },
+      { threshold: 0.2 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  const lines: { text: string; style: string; delay: number }[] = [
+    { text: "11:04pm Friday.", style: "timestamp", delay: 0 },
+    { text: "A Priority 1 incident.", style: "setup", delay: 200 },
+    { text: "24 hours to notify ACQSC.", style: "setup", delay: 400 },
+    { text: "Chris classified it in 4 minutes.", style: "action", delay: 800 },
+    { text: "The draft was waiting in the DON\u2019s inbox by 11:09.", style: "resolution", delay: 1200 },
+    { text: "She approved it before midnight.", style: "resolution", delay: 1600 },
+    { text: "That\u2019s not a feature.", style: "pause", delay: 2200 },
+    { text: "That\u2019s the difference between a penalty", style: "punchline", delay: 2800 },
+    { text: "and a clean record.", style: "punchline", delay: 3200 },
+  ];
+
+  const styles: Record<string, React.CSSProperties> = {
+    timestamp: { fontSize: "clamp(2.5rem, 5vw, 4.5rem)", fontFamily: fraunces, fontStyle: "italic", fontWeight: 400, color: C.canvas, marginBottom: "0.8em", letterSpacing: "-0.02em" },
+    setup: { fontSize: "clamp(1.05rem, 1.8vw, 1.3rem)", fontWeight: 400, color: "rgba(250,250,246,0.5)", marginBottom: "0.3em" },
+    action: { fontSize: "clamp(1.3rem, 2.2vw, 1.9rem)", fontWeight: 500, color: C.canvas, marginBottom: "0.3em" },
+    resolution: { fontSize: "clamp(1.15rem, 2vw, 1.6rem)", fontFamily: fraunces, fontStyle: "italic", fontWeight: 400, color: "rgba(250,250,246,0.9)", marginBottom: "0.3em" },
+    pause: { fontSize: "clamp(1rem, 1.6vw, 1.2rem)", fontWeight: 400, color: "rgba(250,250,246,0.45)", marginBottom: "0.8em" },
+    punchline: { fontSize: "clamp(1.3rem, 2.2vw, 1.9rem)", fontWeight: 500, color: C.teal, marginBottom: "0.15em" },
+  };
+
   return (
-    <section style={{ backgroundColor: C.canvas, borderTop: `0.5px solid ${C.border}` }}>
-      <div className="max-w-[640px] mx-auto px-6 lg:px-16 py-16 lg:py-20">
-        <p className="text-[17px] mb-4" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>Every facility. Every week.</p>
-        <h2 className="text-[clamp(1.75rem,4vw,34px)] font-medium leading-[1.08] tracking-[-0.025em] mb-5" style={{ color: C.text }}>11:04pm <span style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.012em" }}>Friday.</span></h2>
-        <p className="text-[15px] mb-6" style={{ color: C.textMuted }}>A Priority 1 incident. 24 hours to notify ACQSC.</p>
-        <p className="text-[clamp(1.2rem,2vw,1.5rem)] font-medium mb-4" style={{ color: C.text }}>Chris classified it in 4 minutes.</p>
-        <div className="space-y-1 mb-6">
-          <p className="text-[15px]" style={{ color: C.textMuted }}>The draft was waiting in the DON&apos;s inbox by 11:09.</p>
-          <p className="text-[15px]" style={{ color: C.textMuted }}>She approved it before midnight.</p>
+    <section ref={sectionRef} className="relative overflow-hidden"
+      style={{ background: C.text, backgroundImage: "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(31,111,102,0.1) 0%, transparent 70%)", padding: "clamp(80px, 10vh, 140px) clamp(24px, 5vw, 80px)" }}>
+      {/* Grain */}
+      <div className="absolute inset-0 pointer-events-none z-[1] opacity-[0.03]" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`, backgroundSize: "200px 200px" }} />
+
+      <div className="relative z-[2] max-w-[720px] mx-auto">
+        {/* Clock */}
+        <div className="flex items-center gap-3 mb-10">
+          <div className="text-[13px] font-medium tracking-[0.15em] tabular-nums" style={{ fontFamily: "'Courier New', Consolas, monospace", color: C.teal }}>23:04</div>
+          <div className="text-[9px] font-medium tracking-[0.2em] uppercase" style={{ color: "rgba(31,111,102,0.5)" }}>Incident detected</div>
+          <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: C.warn }} />
         </div>
-        <p className="text-[13px] mb-1" style={{ color: C.textFaint }}>That&apos;s not a feature.</p>
-        <p className="text-[15px] font-medium" style={{ color: C.teal }}>That&apos;s the difference between a penalty and a clean record.</p>
-        <div className="mt-8 mb-4" style={{ width: 40, height: 1, backgroundColor: C.border }} />
-        <p className="text-[11px]" style={{ color: C.textFaint }}>The Chronicler agent. Event-driven. Always watching.</p>
+
+        {/* Label */}
+        <p className="text-[11px] font-medium tracking-[0.15em] uppercase mb-10 transition-all duration-700"
+          style={{ color: C.teal, opacity: visible ? 0.8 : 0, transform: visible ? "translateY(0)" : "translateY(12px)" }}>
+          Every facility. Every week.
+        </p>
+
+        {/* Lines with staggered fade-in */}
+        {lines.map((line, i) => {
+          const s = styles[line.style];
+          const lastSetup = line.style === "setup" && lines[i + 1]?.style !== "setup";
+          return (
+            <div key={i} className="transition-all duration-700 ease-out"
+              style={{ ...s, marginBottom: lastSetup ? "1.2em" : s.marginBottom, opacity: visible ? 1 : 0, transform: visible ? "translateY(0)" : "translateY(20px)", transitionDelay: `${line.delay}ms` }}>
+              {line.text}
+            </div>
+          );
+        })}
+
+        {/* Separator */}
+        <div className="transition-all duration-700" style={{ width: 60, height: 2, backgroundColor: C.teal, margin: "2.5rem 0 2rem 0", opacity: visible ? 1 : 0, transitionDelay: "3600ms" }} />
+
+        {/* Footnote */}
+        <div className="transition-all duration-700 space-y-1" style={{ opacity: visible ? 1 : 0, transitionDelay: "3800ms" }}>
+          <p className="text-[14px]" style={{ color: "rgba(250,250,246,0.7)" }}>The Chronicler agent. Event-driven. Always watching.</p>
+          <p className="text-[13px]" style={{ color: "rgba(250,250,246,0.45)" }}>Civil penalties for late SIRS notifications. Zero missed deadlines at current pilots.</p>
+        </div>
       </div>
     </section>
   );
