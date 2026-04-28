@@ -1575,6 +1575,16 @@ function ExecutionSection() {
   );
 }
 
+// Genos EI competency data for collapsible cards
+const EI_COMPETENCIES = [
+  { name: "Self-Awareness", productive: "Present", unproductive: "Disconnected", description: "The ability to be aware of your own feelings and the impact they have on your thoughts, decisions, behaviour, and performance at work.", agedCare: "Leaders who are self-aware recognise when the shift is getting to them before their team does. They pause before reacting. In aged care, that pause is the difference between escalation and resolution." },
+  { name: "Awareness of Others", productive: "Empathetic", unproductive: "Insensitive", description: "The ability to perceive, understand, and acknowledge the way others feel.", agedCare: "Frontline teams carry emotional weight that does not show up in roster data. Leaders who read the room accurately intervene earlier, retain longer, and catch psychosocial risk before it compounds." },
+  { name: "Authenticity", productive: "Genuine", unproductive: "Untrustworthy", description: "The ability to openly and effectively express yourself, honour commitments, and encourage this behaviour in others.", agedCare: "Trust in leadership is the single strongest predictor of pulse engagement at the facilities running Chris OS. Authenticity is how trust is built. Not with announcements, but with follow-through." },
+  { name: "Emotional Reasoning", productive: "Expansive", unproductive: "Limited", description: "The ability to use the information in feelings to enhance decision-making.", agedCare: "When agents surface convergence patterns across workforce, clinical, and compliance data, leaders need to weigh operational signals alongside team sentiment. Emotional reasoning is the capability that makes that synthesis possible." },
+  { name: "Self-Management", productive: "Resilient", unproductive: "Temperamental", description: "The ability to manage your own mood and emotions, time and behaviour, and to continuously improve yourself.", agedCare: "Aged care leaders carry more concurrent operational, regulatory, and human pressures than almost any other leadership role. Self-management under that load is not a personality trait. It is a trainable capability." },
+  { name: "Inspiring Performance", productive: "Empowering", unproductive: "Indifferent", description: "The ability to facilitate high performance in others through problem-solving, providing feedback, coaching, and creating conditions where people feel valued and committed.", agedCare: "Recognition deficit is the most common leading indicator of exit intention. The leader's ability to make staff feel seen is a measurable, trainable behaviour that directly reduces turnover." },
+];
+
 // Move 4: comparison data for hover-expand on card fourth paragraphs
 const TEAM_LOOP_COMPARE = [
   { label: "Duration", consulting: "6 months, then ends", chris: "Continuous" },
@@ -1604,6 +1614,45 @@ function ComparePanel({ rows, open }: { rows: typeof TEAM_LOOP_COMPARE; open: bo
           ))}
         </div>
       </div>
+    </div>
+  );
+}
+
+function EICompetencyGrid() {
+  const [openIdx, setOpenIdx] = useState<Set<number>>(new Set());
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+      {EI_COMPETENCIES.map((comp, i) => {
+        const isOpen = openIdx.has(i);
+        return (
+          <button key={comp.name} onClick={() => setOpenIdx((prev) => { const next = new Set(prev); if (next.has(i)) next.delete(i); else next.add(i); return next; })}
+            className="text-left rounded-[5px] transition-all duration-200"
+            style={{ backgroundColor: C.card, border: `0.5px solid ${isOpen ? C.ironstone : C.border}` }}>
+            <div className="p-4">
+              {/* Header row */}
+              <div className="flex items-start justify-between mb-2">
+                <p className="text-[14px] font-medium" style={{ fontFamily: inter, color: C.text }}>{comp.name}</p>
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className={`shrink-0 mt-0.5 transition-transform duration-200 ${isOpen ? "rotate-45" : ""}`}>
+                  <path d="M7 2v10M2 7h10" stroke={C.textFaint} strokeWidth="1.5" strokeLinecap="round" />
+                </svg>
+              </div>
+              {/* Productive / unproductive badges */}
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-[10px] font-semibold uppercase tracking-[0.06em]" style={{ color: C.sage }}>{comp.productive}</span>
+                <span className="text-[9px]" style={{ color: C.textFaint }}>←→</span>
+                <span className="text-[10px] font-semibold uppercase tracking-[0.06em]" style={{ color: C.red }}>{comp.unproductive}</span>
+              </div>
+              {/* Expanded content */}
+              <div className={`overflow-hidden transition-all duration-300 ${isOpen ? "max-h-[300px] opacity-100 mt-3" : "max-h-0 opacity-0"}`}>
+                <p className="text-[13px] leading-[1.6] mb-3" style={{ fontFamily: inter, color: C.textMuted }}>{comp.description}</p>
+                <div className="pl-3" style={{ borderLeft: `2px solid ${C.ironstone}` }}>
+                  <p className="text-[12px] leading-[1.55] italic" style={{ fontFamily: inter, color: C.textMuted }}>{comp.agedCare}</p>
+                </div>
+              </div>
+            </div>
+          </button>
+        );
+      })}
     </div>
   );
 }
@@ -1658,6 +1707,12 @@ function ChangeImplementationLayer() {
           <p style={{ fontFamily: inter, fontSize: 15, lineHeight: 1.65, color: C.textMuted, ...reveal(650) }}>
             Human-centred. AI-supported. Built on the Genos emotional intelligence model, founded by Dr Ben Palmer (virtual co-founder of Chris OS) and grounded in over twenty years of peer-reviewed research. Genos is among the most widely deployed EI assessments in healthcare and aged care globally.
           </p>
+        </div>
+
+        {/* Genos EI competencies — collapsible cards */}
+        <div className="mb-12" style={reveal(750)}>
+          <p className="text-[10px] font-medium uppercase tracking-[0.08em] mb-4" style={{ fontFamily: inter, color: C.sage }}>The six Genos EI competencies</p>
+          <EICompetencyGrid />
         </div>
 
         {/* Two cards with simultaneous reveal */}
