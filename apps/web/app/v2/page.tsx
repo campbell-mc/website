@@ -1329,7 +1329,7 @@ function RolesSection() {
   );
 }
 
-function FinalCTA() {
+function BookingModal({ open, onClose }: { open: boolean; onClose: () => void }) {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [role, setRole] = useState("");
@@ -1358,52 +1358,54 @@ function FinalCTA() {
     setSubmitted(true);
   }
 
-  return (
-    <section style={{ backgroundColor: C.canvas, borderTop: `0.5px solid ${C.border}` }} id="book">
-      <div className="max-w-6xl mx-auto px-6 lg:px-16 py-14 lg:py-18">
-        <div className="max-w-lg">
-          <p className="text-[17px] mb-3" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>Start a conversation</p>
-          <h2 className="text-[clamp(1.75rem,4vw,34px)] font-medium leading-[1.08] tracking-[-0.025em] mb-3" style={{ color: C.text }}>
-            See Chris modelled against your facility.
-          </h2>
-          <p className="text-[14px] leading-[1.6] mb-2" style={{ color: C.textMuted }}>
-            No demo deck. No sales pitch. We walk through your data, your pain points, and what Chris would surface in week one.
-          </p>
-          <p className="text-[14px] font-medium mb-6" style={{ color: C.text }}>
-            Pilot pricing from $15,000. Scaled rollouts on application.
-          </p>
-        </div>
+  if (!open) return null;
 
-        {submitted ? (
-          <div className="max-w-lg rounded-[5px] p-6" style={{ backgroundColor: C.card, border: `0.5px solid ${C.border}` }}>
-            <p className="text-[15px] font-medium mb-1" style={{ color: C.teal }}>Received.</p>
-            <p className="text-[13px]" style={{ color: C.textMuted }}>
-              {isLeaderRole ? "We will be in touch within 48 hours to schedule a diagnostic conversation." : "You are on the list. We onboard in order and will be in touch when there is room."}
-            </p>
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" onClick={onClose}>
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+      <div className="relative bg-white rounded-[8px] max-w-md w-full shadow-xl" onClick={(e) => e.stopPropagation()}>
+        <div className="p-6">
+          <div className="flex items-start justify-between mb-4">
+            <div>
+              <p className="text-[17px]" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>Start a conversation</p>
+              <p className="text-[13px] mt-1" style={{ color: C.textMuted }}>No demo deck. No sales pitch. Just your operation and ours.</p>
+            </div>
+            <button onClick={onClose} className="text-[18px] w-8 h-8 flex items-center justify-center rounded hover:bg-black/5" style={{ color: C.textFaint }}>×</button>
           </div>
-        ) : (
-          <form onSubmit={handleSubmit} className="max-w-lg space-y-3">
-            <div className="grid grid-cols-2 gap-3">
-              <input type="text" required value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" className="px-4 py-2.5 rounded-[4px] text-[13px] focus:outline-none" style={{ border: `0.5px solid ${C.border}`, color: C.text }} />
-              <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Work email" className="px-4 py-2.5 rounded-[4px] text-[13px] focus:outline-none" style={{ border: `0.5px solid ${C.border}`, color: C.text }} />
+
+          <p className="text-[13px] font-medium mb-5" style={{ color: C.text }}>Pilot pricing from $15,000. Scaled rollouts on application.</p>
+
+          {submitted ? (
+            <div className="rounded-[5px] p-5" style={{ border: `0.5px solid ${C.border}` }}>
+              <p className="text-[15px] font-medium mb-1" style={{ color: C.teal }}>Received.</p>
+              <p className="text-[13px]" style={{ color: C.textMuted }}>
+                {isLeaderRole ? "We will be in touch within 48 hours to schedule a diagnostic conversation." : "You are on the list. We onboard in order and will be in touch when there is room."}
+              </p>
             </div>
-            <div className="grid grid-cols-2 gap-3">
-              <input type="text" required value={org} onChange={(e) => setOrg(e.target.value)} placeholder="Organisation" className="px-4 py-2.5 rounded-[4px] text-[13px] focus:outline-none" style={{ border: `0.5px solid ${C.border}`, color: C.text }} />
-              <select required value={role} onChange={(e) => setRole(e.target.value)} className="px-4 py-2.5 rounded-[4px] text-[13px] focus:outline-none" style={{ border: `0.5px solid ${C.border}`, color: role ? C.text : C.textFaint }}>
-                <option value="">Role</option>
-                {["CEO", "CFO", "COO", "DON", "Quality Lead", "WHS Lead", "Facility Manager", "Other"].map((r) => <option key={r} value={r}>{r}</option>)}
-              </select>
-            </div>
-            <input type="text" value={homes} onChange={(e) => setHomes(e.target.value)} placeholder="Number of homes (optional)" className="w-full px-4 py-2.5 rounded-[4px] text-[13px] focus:outline-none" style={{ border: `0.5px solid ${C.border}`, color: C.text }} />
-            <textarea value={exposure} onChange={(e) => setExposure(e.target.value)} placeholder="What is your single biggest exposure right now? (optional)" rows={2} className="w-full px-4 py-2.5 rounded-[4px] text-[13px] focus:outline-none resize-none" style={{ border: `0.5px solid ${C.border}`, color: C.text }} />
-            <button type="submit" className="w-full py-3 rounded-[4px] text-[14px] font-medium" style={{ backgroundColor: C.ctaBg, color: C.ctaText }}>
-              Start a conversation →
-            </button>
-            <p className="text-[11px]" style={{ color: C.textFaint }}>No spam. No sales calls. Just a conversation about your facility.</p>
-          </form>
-        )}
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-3">
+              <div className="grid grid-cols-2 gap-3">
+                <input type="text" required value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" className="px-4 py-2.5 rounded-[4px] text-[13px] focus:outline-none" style={{ border: `0.5px solid ${C.border}`, color: C.text }} />
+                <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Work email" className="px-4 py-2.5 rounded-[4px] text-[13px] focus:outline-none" style={{ border: `0.5px solid ${C.border}`, color: C.text }} />
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                <input type="text" required value={org} onChange={(e) => setOrg(e.target.value)} placeholder="Organisation" className="px-4 py-2.5 rounded-[4px] text-[13px] focus:outline-none" style={{ border: `0.5px solid ${C.border}`, color: C.text }} />
+                <select required value={role} onChange={(e) => setRole(e.target.value)} className="px-4 py-2.5 rounded-[4px] text-[13px] focus:outline-none" style={{ border: `0.5px solid ${C.border}`, color: role ? C.text : C.textFaint }}>
+                  <option value="">Role</option>
+                  {["CEO", "CFO", "COO", "DON", "Quality Lead", "WHS Lead", "Facility Manager", "Other"].map((r) => <option key={r} value={r}>{r}</option>)}
+                </select>
+              </div>
+              <input type="text" value={homes} onChange={(e) => setHomes(e.target.value)} placeholder="Number of homes (optional)" className="w-full px-4 py-2.5 rounded-[4px] text-[13px] focus:outline-none" style={{ border: `0.5px solid ${C.border}`, color: C.text }} />
+              <textarea value={exposure} onChange={(e) => setExposure(e.target.value)} placeholder="What is your single biggest exposure right now? (optional)" rows={2} className="w-full px-4 py-2.5 rounded-[4px] text-[13px] focus:outline-none resize-none" style={{ border: `0.5px solid ${C.border}`, color: C.text }} />
+              <button type="submit" className="w-full py-3 rounded-[4px] text-[14px] font-medium" style={{ backgroundColor: C.ctaBg, color: C.ctaText }}>
+                Start a conversation →
+              </button>
+              <p className="text-[11px]" style={{ color: C.textFaint }}>No spam. No sales calls. Just a conversation about your facility.</p>
+            </form>
+          )}
+        </div>
       </div>
-    </section>
+    </div>
   );
 }
 
@@ -1511,6 +1513,19 @@ function Footer() {
 // ─── Page ───────────────────────────────────────────────────────────────────
 
 export default function V2Page() {
+  const [showBooking, setShowBooking] = useState(false);
+
+  // Global click handler for all booking CTAs
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      const target = e.target as HTMLElement;
+      const anchor = target.closest('a[href="#book"]');
+      if (anchor) { e.preventDefault(); setShowBooking(true); }
+    }
+    document.addEventListener("click", handleClick);
+    return () => document.removeEventListener("click", handleClick);
+  }, []);
+
   return (
     <div style={{ fontFamily: inter }}>
       {/* Font loading: Inter 400/500 + Fraunces 400 italic */}
@@ -1530,12 +1545,12 @@ export default function V2Page() {
       <VictorianHook />
       <JobsSection />
       <ScenarioSection />
-      <FinalCTA />
       <HowItWorksSection />
       <AgentsSection />
       <ExecutionSection />
       <RolesSection />
       <Footer />
+      <BookingModal open={showBooking} onClose={() => setShowBooking(false)} />
     </div>
   );
 }
