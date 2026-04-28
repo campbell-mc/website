@@ -313,11 +313,12 @@ function Nav() {
         <Link href="/v2" className="text-[15px] font-medium tracking-tight" style={{ color: C.text }}>
           Chris<span style={{ color: C.teal }}>·</span>OS
         </Link>
-        <div className="flex items-center gap-6">
-          <Link href="/tools/care-minutes" className="text-[13px] hidden md:block hover:opacity-70" style={{ color: C.textMuted }}>Tools</Link>
-          <Link href="/technology" className="text-[13px] hidden md:block hover:opacity-70" style={{ color: C.textMuted }}>Technology</Link>
-          <Link href="/newsroom" className="text-[13px] hidden md:block hover:opacity-70" style={{ color: C.textMuted }}>Newsroom</Link>
-          <a href="#book" className="text-[13px] font-medium px-[18px] py-[11px] rounded-[4px]" style={{ backgroundColor: C.ctaBg, color: C.ctaText }}>
+        <div className="flex items-center gap-5">
+          <a href="#what-chris-is" className="text-[13px] hidden lg:block hover:opacity-70" style={{ color: C.textMuted }}>What Chris is</a>
+          <a href="#tools" className="text-[13px] hidden lg:block hover:opacity-70" style={{ color: C.textMuted }}>Your numbers</a>
+          <a href="#how-it-works" className="text-[13px] hidden lg:block hover:opacity-70" style={{ color: C.textMuted }}>How it works</a>
+          <a href="#jobs" className="text-[13px] hidden lg:block hover:opacity-70" style={{ color: C.textMuted }}>Where we start</a>
+          <a href="#book" className="text-[14px] font-medium px-[20px] py-[12px] rounded-[4px]" style={{ backgroundColor: C.ctaBg, color: C.ctaText }}>
             Book a conversation
           </a>
         </div>
@@ -591,7 +592,7 @@ function WhatChrisIsSection() {
 
 function ToolsStrip() {
   return (
-    <section style={{ backgroundColor: C.canvas, borderTop: `0.5px solid ${C.border}` }}>
+    <section id="tools" style={{ backgroundColor: C.canvas, borderTop: `0.5px solid ${C.border}` }}>
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-14 lg:py-18">
         {/* Header */}
         <div className="max-w-[560px] mb-10">
