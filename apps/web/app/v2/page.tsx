@@ -1749,7 +1749,7 @@ function GenosFramework() {
   const [openIdx, setOpenIdx] = useState<number | null>(null);
 
   return (
-    <div className="max-w-[700px]">
+    <div className="max-w-[700px] mx-auto">
       {/* Header row */}
       <div className="flex items-center justify-between mb-3 px-2">
         <span className="text-[9px] font-semibold uppercase tracking-[0.12em]" style={{ fontFamily: inter, color: C.red }}>Unproductive states</span>
@@ -1864,9 +1864,7 @@ function ChangeImplementationLayer() {
     return () => obs.disconnect();
   }, []);
 
-  // Move 1: compute current day of fortnight for the now-indicator
-  const dayOfFortnight = Math.floor((Date.now() / 86400000) % 14);
-  const isTeamWeek = dayOfFortnight < 7;
+  // Cadence visualisation removed; dayOfFortnight computation no longer needed
 
   function reveal(delay: number) {
     return {
@@ -1906,6 +1904,7 @@ function ChangeImplementationLayer() {
           <p className="text-[10px] font-medium uppercase tracking-[0.08em] mb-2" style={{ fontFamily: inter, color: C.sage }}>The Genos EI framework</p>
           <p className="text-[13px] mb-6" style={{ fontFamily: inter, color: C.textFaint }}>Six competencies. Each measurable, each trainable, each integrated into Team Loop and Leader Loop.</p>
           <GenosFramework />
+          <p className="text-[11px] mt-3 text-center" style={{ fontFamily: inter, color: C.textFaint }}>Based on the Genos International emotional intelligence model. <a href="https://www.genosinternational.com" target="_blank" rel="noopener noreferrer" className="hover:underline" style={{ color: C.ironstone }}>genosinternational.com</a></p>
         </div>
 
         {/* Two cards — collapsible, with simultaneous reveal */}
@@ -1935,39 +1934,6 @@ function ChangeImplementationLayer() {
           />
         </div>
 
-        {/* Move 1: fortnightly cadence visualisation */}
-        <div className="mb-10 rounded-[5px] p-5 lg:p-6" style={{ backgroundColor: C.card, border: `0.5px solid ${C.border}`, ...reveal(1000) }}>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {[
-              { label: "Week 1: Team Loop", items: ["Pulse opens", "Briefing delivered", "Practice runs", "Pulse closes"], active: isTeamWeek },
-              { label: "Week 2: Leader Loop", items: ["Briefing delivered", "Personal practice week", "", ""], active: !isTeamWeek },
-            ].map((week) => (
-              <div key={week.label}>
-                <p className="text-[10px] font-medium uppercase tracking-[0.08em] mb-3" style={{ fontFamily: inter, color: C.sage }}>{week.label}</p>
-                <div className="flex items-center gap-0">
-                  {[0, 1, 2, 3, 4, 5, 6].map((d) => {
-                    const dayIndex = week.active ? d : d + 7;
-                    const isToday = dayIndex === dayOfFortnight;
-                    const hasLabel = week.items[Math.floor(d * week.items.filter(Boolean).length / 7)];
-                    return (
-                      <div key={d} className="flex-1 flex flex-col items-center">
-                        <div className="w-full h-[2px] mb-1.5" style={{ backgroundColor: d <= (week.active ? dayOfFortnight % 7 : (dayOfFortnight - 7) % 7) && week.active === isTeamWeek ? C.ironstone : C.border, transition: "background-color 600ms" }} />
-                        {isToday ? (
-                          <span className="w-[6px] h-[6px] rounded-full animate-pulse" style={{ backgroundColor: C.ironstone }} />
-                        ) : (
-                          <span className="w-[3px] h-[3px] rounded-full" style={{ backgroundColor: C.border }} />
-                        )}
-                        {d < week.items.length && week.items[d] && (
-                          <span className="text-[9px] mt-1 text-center leading-tight" style={{ color: C.textFaint }}>{week.items[d]}</span>
-                        )}
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
 
         {/* Why this matters now — with reveal */}
         <div className="max-w-[660px] mb-6" style={reveal(1200)}>
