@@ -358,14 +358,14 @@ function Hero() {
         </div>
 
         {/* Headline */}
-        <h1 className="text-[clamp(56px,7.5vw,92px)] leading-[1.0] tracking-[-0.028em] mb-10 max-w-[1100px]" style={{ fontFamily: serif, fontWeight: 400, color: C.text }}>
+        <h1 className="mb-10 max-w-[1100px]" style={{ fontFamily: serif, fontSize: "clamp(56px, 7.5vw, 92px)", lineHeight: 1.0, letterSpacing: "-0.028em", fontWeight: 400, color: C.text }}>
           <span className="block">Hold quality.</span>
           <span className="block">Protect margin.</span>
           <span className="block">Lead with confidence.</span>
         </h1>
 
         {/* Subhead */}
-        <p className="text-[clamp(17px,1.6vw,20px)] leading-[1.5] max-w-[600px] mb-11" style={{ fontFamily: sans, fontWeight: 400, color: C.textSoft }}>
+        <p className="max-w-[600px] mb-11" style={{ fontFamily: sans, fontSize: "clamp(17px, 1.6vw, 20px)", lineHeight: 1.5, fontWeight: 400, color: C.textSoft }}>
           Operational intelligence for Australian aged care.{" "}
           <em style={{ fontFamily: serif, fontStyle: "italic", fontWeight: 400, fontSize: "1.05em", color: C.ironstone }}>Run the morning before the morning.</em>{" "}
           Chris reads every system you already run, drafts the work your team would otherwise stitch together by hand, and keeps your leaders ahead of compliance and cost.
@@ -480,8 +480,8 @@ function WhatChrisIsSection() {
         {/* Header */}
         <div className="mb-8 lg:mb-10">
           <p className="text-[17px] mb-3" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: teal }}>What Chris is</p>
-          <h2 className="text-[clamp(1.75rem,4vw,34px)] font-medium leading-[1.08] tracking-[-0.025em] mb-3 max-w-[540px]" style={{ color: textPrimary }}>
-            A <span style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.012em" }}>morning</span> at Mt Gibraltar Gardens.
+          <h2 className="mb-3 max-w-[700px]" style={{ fontSize: "clamp(34px, 4vw, 48px)", lineHeight: 1.08, letterSpacing: "-0.025em", fontWeight: 400, fontFamily: serif, color: textPrimary }}>
+            A <span style={{ fontStyle: "italic" }}>morning</span> at Mt Gibraltar Gardens.
           </h2>
           <p className="text-[12.5px] leading-[1.55] max-w-[520px]" style={{ color: textSecondary }}>
             Monday morning. While Sarah&apos;s team finished the night shift, Chris built her team briefing. The agents that built it are on the left. The artefact she opened before the morning huddle is on the right.
@@ -618,7 +618,7 @@ function ToolsStrip() {
           <p className="text-[17px] mb-3" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>
             See your own numbers
           </p>
-          <h2 className="text-[clamp(1.75rem,4vw,34px)] font-medium leading-[1.08] tracking-[-0.025em] mb-3" style={{ color: C.text }}>
+          <h2 className="mb-3" style={{ fontSize: "clamp(34px, 4vw, 48px)", lineHeight: 1.08, letterSpacing: "-0.025em", fontWeight: 500, color: C.text }}>
             Run these on your facility. No email required.
           </h2>
           <p className="text-[14px] leading-[1.6] mb-2" style={{ color: C.textMuted }}>
@@ -686,7 +686,7 @@ function IntegrationsSection() {
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-14 lg:py-20">
         <div className="text-center mb-10">
           <p className="text-[11px] font-medium tracking-[0.12em] uppercase mb-3" style={{ color: C.good }}>Integrations</p>
-          <h2 className="text-[clamp(1.3rem,3vw,2rem)] font-normal leading-[1.15] tracking-[-0.01em] mb-3" style={{ color: C.inkDark }}>
+          <h2 className="mb-3" style={{ fontSize: "clamp(34px, 4vw, 48px)", lineHeight: 1.08, letterSpacing: "-0.025em", fontWeight: 400, color: C.text }}>
             Reads what you already run
           </h2>
           <p className="text-[15px] leading-[1.7] max-w-lg mx-auto" style={{ color: C.inkMutedLight }}>
@@ -958,7 +958,7 @@ function HowItWorksSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-16 mb-14 lg:mb-18">
           <div>
             <p className="text-[17px] mb-3" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>How it works</p>
-            <h2 className="text-[clamp(1.75rem,4vw,34px)] font-medium leading-[1.08] tracking-[-0.025em]" style={{ color: C.text }}>
+            <h2 style={{ fontSize: "clamp(34px, 4vw, 48px)", lineHeight: 1.08, letterSpacing: "-0.025em", fontWeight: 500, color: C.text }}>
               Aged care, with <span style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.012em" }}>intelligence</span> in every layer
             </h2>
           </div>
@@ -1037,7 +1037,7 @@ function JobsSection() {
     <section style={{ backgroundColor: C.canvas }} id="jobs">
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
         <p className="text-[17px] mb-3" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>Where we start</p>
-        <h2 className="text-[clamp(1.75rem,4vw,34px)] font-medium leading-[1.08] tracking-[-0.025em] mb-3" style={{ color: C.text }}>
+        <h2 className="mb-3" style={{ fontSize: "clamp(34px, 4vw, 48px)", lineHeight: 1.08, letterSpacing: "-0.025em", fontWeight: 500, color: C.text }}>
           We don&apos;t sell software. We fix a problem.<br />
           <em className="italic" style={{ color: C.copperDark }}>Then another. Then another.</em>
         </h2>
@@ -1272,7 +1272,7 @@ function AgentsSection() {
     <section style={{ backgroundColor: C.canvas }}>
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
         <p className="text-[17px] mb-3" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>The intelligence layer</p>
-        <h2 className="text-[clamp(1.75rem,4vw,34px)] font-medium leading-[1.08] tracking-[-0.025em] mb-3" style={{ color: C.text }}>
+        <h2 className="mb-3" style={{ fontSize: "clamp(34px, 4vw, 48px)", lineHeight: 1.08, letterSpacing: "-0.025em", fontWeight: 500, color: C.text }}>
           Named agents. Every domain. <span style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.012em" }}>Always on.</span>
         </h2>
         <p className="text-[15px] leading-relaxed max-w-xl mb-12" style={{ color: C.inkMutedLight }}>
@@ -1365,7 +1365,7 @@ function AISupportSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
           <div>
             <p className="text-[17px] mb-3" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>AI support</p>
-            <h2 className="text-[clamp(1.75rem,4vw,34px)] font-medium leading-[1.08] tracking-[-0.025em] mb-4" style={{ color: C.text }}>
+            <h2 className="mb-4" style={{ fontSize: "clamp(34px, 4vw, 48px)", lineHeight: 1.08, letterSpacing: "-0.025em", fontWeight: 500, color: C.text }}>
               Ask the question you&apos;ve been <span style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.012em" }}>sitting on.</span>
             </h2>
             <p className="text-[14px] leading-[1.6] mb-5" style={{ color: C.textMuted }}>
@@ -1411,7 +1411,7 @@ function FoundersSection() {
     <section style={{ backgroundColor: C.canvas }}>
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-12 lg:py-16">
         <p className="text-[17px] mb-2" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>Your team</p>
-        <h2 className="text-[clamp(1.75rem,4vw,34px)] font-medium leading-[1.08] tracking-[-0.025em] mb-10" style={{ color: C.text }}>
+        <h2 className="mb-10" style={{ fontSize: "clamp(34px, 4vw, 48px)", lineHeight: 1.08, letterSpacing: "-0.025em", fontWeight: 500, color: C.text }}>
           The humans behind Culture{" "}
           <span style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.012em" }}>Crunch.</span>
         </h2>
@@ -1469,7 +1469,7 @@ function HonestAnswersSection() {
     <section style={{ backgroundColor: C.canvasLight }}>
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-12 lg:py-16">
         <p className="text-[11px] font-medium uppercase tracking-[0.08em] mb-3" style={{ color: C.teal }}>Honest answers</p>
-        <h2 className="text-[clamp(1.75rem,4vw,34px)] leading-[1.08] tracking-[-0.025em] mb-3" style={{ fontFamily: fraunces, fontWeight: 600, color: C.text }}>
+        <h2 className="mb-3" style={{ fontSize: "clamp(34px, 4vw, 48px)", lineHeight: 1.08, letterSpacing: "-0.025em", fontFamily: serif, fontWeight: 400, color: C.text }}>
           Yes, we know what you&apos;re{" "}
           <span style={{ color: C.teal }}>thinking.</span>
         </h2>
@@ -1530,7 +1530,7 @@ function ExecutionSection() {
     <section style={{ backgroundColor: C.canvas }}>
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
         <p className="text-[17px] mb-3" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>The execution layer</p>
-        <h2 className="text-[clamp(1.75rem,4vw,34px)] font-medium leading-[1.08] tracking-[-0.025em] mb-3" style={{ color: C.text }}>
+        <h2 className="mb-3" style={{ fontSize: "clamp(34px, 4vw, 48px)", lineHeight: 1.08, letterSpacing: "-0.025em", fontWeight: 500, color: C.text }}>
           Chris doesn&apos;t just tell you. It <span style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.012em" }}>acts.</span>
         </h2>
         <p className="text-[15px] leading-relaxed max-w-xl mb-12" style={{ color: C.inkMutedLight }}>
@@ -1556,7 +1556,7 @@ function RolesSection() {
     <section style={{ backgroundColor: C.canvas }}>
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
         <p className="text-[17px] mb-3" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>Built for every leader</p>
-        <h2 className="text-[clamp(1.75rem,4vw,34px)] font-medium leading-[1.08] tracking-[-0.025em] mb-3" style={{ color: C.text }}>
+        <h2 className="mb-3" style={{ fontSize: "clamp(34px, 4vw, 48px)", lineHeight: 1.08, letterSpacing: "-0.025em", fontWeight: 500, color: C.text }}>
           Operational intelligence, in the flow of leadership work. <span style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.012em" }}>Every leader.</span>
         </h2>
         <p className="text-[15px] leading-relaxed max-w-xl mb-12" style={{ color: C.inkMutedLight }}>
