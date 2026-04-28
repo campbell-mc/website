@@ -343,7 +343,7 @@ function Hero() {
             Live with providers in NSW and VIC.
           </p>
 
-          <h1 className="text-[clamp(3.2rem,9vw,96px)] leading-[1.06] tracking-[-0.025em] mb-8" style={{ fontFamily: fraunces, fontWeight: 400, color: C.text }}>
+          <h1 className="text-[clamp(3.5rem,11vw,128px)] leading-[1.04] tracking-[-0.03em] mb-8" style={{ fontFamily: fraunces, fontWeight: 400, color: C.text }}>
             Hold quality. Protect margin. Lead with{" "}
             <span style={{ color: C.teal }}>confidence.</span>
           </h1>
