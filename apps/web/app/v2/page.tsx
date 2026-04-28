@@ -7,46 +7,57 @@ import { CareMinutesCard } from "@/components/marketing/cards/CareMinutesCard";
 import { ReviewQueueCard } from "@/components/marketing/cards/ReviewQueueCard";
 import { AgentActivityCard } from "@/components/marketing/cards/AgentActivityCard";
 
-// ─── Marketing visual identity v5 (operator-grade hybrid) ───────────────────
-// Mercury/Ramp density + Anthropic/Stripe accent discipline.
-// Warm Culture Crunch palette (forest/amber) ONLY inside the briefing artefact.
+// ─── Visual identity: Ironstone ──────────────────────────────────────────────
+// Paper canvas. Ironstone accent. Fraunces serif headlines. Inter sans body.
+// Two-colour system: ironstone (voice) + sage (whisper, section eyebrows only).
 const C = {
-  // Canvas
-  canvas: "#FAFAF6",
-  card: "#FFFFFF",
-  // Text
-  text: "#0E0E0E",
-  textMuted: "#5A5A57",
-  textFaint: "#8A8A85",
-  // Accents
-  teal: "#1F6F66",
-  amber: "#BA7517",
-  red: "#A32D2D",
-  // Surfaces
-  successBg: "#E1F5EE",
-  warningBg: "#FAEEDA",
-  alertBg: "#FCEBEB",
+  // Paper
+  paper: "#f3efe6",
+  cardPaper: "#faf6ec",
+  canvas: "#f3efe6",       // alias for sections that still reference C.canvas
+  card: "#faf6ec",
+  // Ink
+  text: "#1a1a1a",
+  textSoft: "#2a2a2a",
+  textMuted: "#3a3a3a",
+  textQuiet: "#4a4a4a",
+  textFaint: "#6a6a6a",
+  // Ironstone — the brand's voice
+  ironstone: "#8b3a32",
+  ironstoneDeep: "#6e2e28",
+  // Sage — the brand's whisper (section eyebrows only, NOT in hero)
+  sage: "#5d6b54",
+  sageSoft: "#b8c0a8",
+  // Rules
+  ruleCharcoal: "rgba(26, 26, 26, 0.12)",
+  ruleIronstone: "rgba(139, 58, 50, 0.3)",
+  // Alert
+  red: "#8b3a32",
   // Borders
-  border: "rgba(15,23,42,0.10)",
-  borderSubtle: "rgba(15,23,42,0.07)",
+  border: "rgba(26, 26, 26, 0.12)",
+  borderSubtle: "rgba(26, 26, 26, 0.08)",
   // CTA
-  ctaBg: "#0E0E0E",
-  ctaText: "#FAFAF6",
-  // Section backgrounds (3-tone system)
-  canvasWarm: "#FAFAF6",  // A sections
-  canvasLight: "#FFFFFF", // B sections
-  canvasDark: "#0E0E0E",  // C section (one only, conversion)
-  textOnDark: "#FAFAF6",
+  ctaBg: "#1a1a1a",
+  ctaText: "#f3efe6",
+  // Section backgrounds
+  canvasWarm: "#f3efe6",
+  canvasLight: "#faf6ec",
+  canvasDark: "#1a1a1a",
+  textOnDark: "#f3efe6",
   textOnDarkMuted: "#B5B3AC",
-  cardOnLight: "#FAFAF6", // cards invert on white sections
   borderOnDark: "rgba(255,255,255,0.10)",
   // Inside-product tokens (briefing artefact ONLY)
   forest: "#1B4332",
   gold: "#D4A853",
-  // Legacy aliases for components not yet migrated
-  dark: "#0E0E0E", dark2: "#1a1a1a", cream: "#FAFAF6", white: "#FFFFFF",
-  ink: "#FAFAF6", inkDark: "#0E0E0E", inkMuted: "#5A5A57", inkMutedLight: "#5A5A57",
-  copper: "#1F6F66", copperDark: "#1F6F66", warm: "#A32D2D", good: "#1F6F66", warn: "#BA7517",
+  // Legacy aliases
+  dark: "#1a1a1a", dark2: "#2a2a2a", cream: "#f3efe6", white: "#faf6ec",
+  ink: "#f3efe6", inkDark: "#1a1a1a", inkMuted: "#3a3a3a", inkMutedLight: "#3a3a3a",
+  copper: "#8b3a32", copperDark: "#6e2e28", warm: "#8b3a32", good: "#5d6b54", warn: "#8b3a32",
+  teal: "#5d6b54", amber: "#8b3a32",
+  // Accent alias for components that use C.accent
+  accent: "#8b3a32",
+  accentMuted: "rgba(139, 58, 50, 0.12)",
+  successBg: "#E1F5EE", warningBg: "#FAEEDA", alertBg: "#FCEBEB",
 };
 
 // ─── Data ───────────────────────────────────────────────────────────────────
@@ -300,32 +311,34 @@ const ROLES = [
   { title: "Team Leaders", desc: "Team briefings, micro-practice recommendations, workforce health signals" },
 ];
 
-// ─── Typography ─────────────────────────────────────────────────────────────
-// Fraunces Italic for display emphasis. Inter for everything else.
-// Load via @fontsource CDN: Fraunces 400i, Inter 400/500.
-const fraunces = "'Fraunces', Georgia, serif";
-const inter = "'Inter', system-ui, -apple-system, sans-serif";
+// ─── Typography: Ironstone system ───────────────────────────────────────────
+// Fraunces for headlines + italic emphasis. Inter for body + UI.
+// Font stacks with commercial-face upgrade path.
+const serif = "'GT Sectra Display', 'Fraunces', 'Iowan Old Style', Georgia, serif";
+const sans = "'Söhne', 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif";
+// Keep legacy aliases so existing components don't break
+const fraunces = serif;
+const inter = sans;
 
-// Italic eyebrow for section openers (replaces all-caps .chris-label on section openers)
+// Section eyebrow: Fraunces italic in sage (used on all sections EXCEPT hero)
 function SectionEyebrow({ children }: { children: React.ReactNode }) {
-  return <p className="text-[17px] mb-3" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>{children}</p>;
+  return <p className="text-[17px] mb-3" style={{ fontFamily: serif, fontStyle: "italic", letterSpacing: "-0.01em", color: C.sage }}>{children}</p>;
 }
 
 // ─── Components ─────────────────────────────────────────────────────────────
 
 function Nav() {
   return (
-    <nav className="sticky top-0 z-50 backdrop-blur-sm" style={{ backgroundColor: "rgba(250,250,246,0.92)", borderBottom: `0.5px solid ${C.borderSubtle}` }}>
-      <div className="max-w-6xl mx-auto flex items-center justify-between px-6 lg:px-16 py-3">
-        <Link href="/v2" className="text-[15px] font-medium tracking-tight" style={{ color: C.text }}>
-          Chris<span style={{ color: C.teal }}>·</span>OS
+    <nav className="sticky top-0 z-50 backdrop-blur-sm" style={{ backgroundColor: "rgba(243,239,230,0.94)", borderBottom: `1px solid ${C.ruleCharcoal}` }}>
+      <div className="max-w-[1240px] mx-auto flex items-center justify-between px-6 lg:px-14 py-3">
+        <Link href="/v2" className="text-[15px] font-medium tracking-tight" style={{ fontFamily: sans, color: C.text }}>
+          Chris<span style={{ color: C.ironstone }}>·</span>OS
         </Link>
         <div className="flex items-center gap-5">
-          <a href="#what-chris-is" className="text-[13px] hidden lg:block hover:opacity-70" style={{ color: C.textMuted }}>What Chris is</a>
-          <a href="#tools" className="text-[13px] hidden lg:block hover:opacity-70" style={{ color: C.textMuted }}>Your numbers</a>
-          <a href="#how-it-works" className="text-[13px] hidden lg:block hover:opacity-70" style={{ color: C.textMuted }}>How it works</a>
-          <a href="#jobs" className="text-[13px] hidden lg:block hover:opacity-70" style={{ color: C.textMuted }}>Where we start</a>
-          <a href="#book" className="text-[14px] font-medium px-[20px] py-[12px] rounded-[4px]" style={{ backgroundColor: C.ctaBg, color: C.ctaText }}>
+          <a href="#what-chris-is" className="text-[13px] hidden lg:block hover:opacity-70" style={{ fontFamily: sans, color: C.textMuted }}>What Chris is</a>
+          <a href="#tools" className="text-[13px] hidden lg:block hover:opacity-70" style={{ fontFamily: sans, color: C.textMuted }}>Your numbers</a>
+          <a href="#how-it-works" className="text-[13px] hidden lg:block hover:opacity-70" style={{ fontFamily: sans, color: C.textMuted }}>How it works</a>
+          <a href="#book" className="text-[14px] font-medium px-[20px] py-[12px]" style={{ fontFamily: sans, backgroundColor: C.ctaBg, color: C.ctaText, transition: "background 200ms" }}>
             Book a conversation
           </a>
         </div>
@@ -336,52 +349,53 @@ function Nav() {
 
 function Hero() {
   return (
-    <section style={{ backgroundColor: C.canvas }}>
-      <div className="max-w-6xl mx-auto px-6 lg:px-16 pt-16 lg:pt-24 pb-16 lg:pb-20">
-        <div className="max-w-[580px]">
-          <p className="text-[11px] font-medium tracking-[0.08em] uppercase mb-6" style={{ color: C.teal }}>
-            Live with providers in NSW and VIC.
-          </p>
+    <section style={{ backgroundColor: C.paper }}>
+      <div className="max-w-[1240px] mx-auto px-6 lg:px-14">
+        {/* Filed-at byline */}
+        <div className="flex items-center gap-[14px] pt-14 pb-8">
+          <span className="text-[10.5px] font-semibold tracking-[0.22em] uppercase" style={{ fontFamily: sans, color: C.ironstone }}>Filed Monday · NSW &amp; VIC · Cohort live</span>
+          <div className="flex-1 h-px max-w-[280px]" style={{ backgroundColor: C.ruleIronstone }} />
+        </div>
 
-          <h1 className="text-[clamp(3.5rem,11vw,128px)] leading-[1.04] tracking-[-0.03em] mb-8" style={{ fontFamily: fraunces, fontWeight: 400, color: C.text }}>
-            Hold quality. Protect margin. Lead with{" "}
-            <span style={{ color: C.teal }}>confidence.</span>
-          </h1>
+        {/* Headline */}
+        <h1 className="text-[clamp(56px,7.5vw,92px)] leading-[1.0] tracking-[-0.028em] mb-10 max-w-[1100px]" style={{ fontFamily: serif, fontWeight: 400, color: C.text }}>
+          <span className="block">Hold quality.</span>
+          <span className="block">Protect margin.</span>
+          <span className="block">Lead with confidence.</span>
+        </h1>
 
-          <p className="text-[17px] leading-[1.6] max-w-[520px] mb-8" style={{ color: C.textMuted }}>
-            Operational intelligence for aged care, in the flow of leadership work. Reads every system you already run, drafts the work your team would otherwise stitch together by hand, and keeps your leaders ahead of compliance and cost.
-          </p>
+        {/* Subhead */}
+        <p className="text-[clamp(17px,1.6vw,20px)] leading-[1.5] max-w-[600px] mb-11" style={{ fontFamily: sans, fontWeight: 400, color: C.textSoft }}>
+          Operational intelligence for Australian aged care.{" "}
+          <em style={{ fontFamily: serif, fontStyle: "italic", fontWeight: 400, fontSize: "1.05em", color: C.ironstone }}>Run the morning before the morning.</em>{" "}
+          Chris reads every system you already run, drafts the work your team would otherwise stitch together by hand, and keeps your leaders ahead of compliance and cost.
+        </p>
 
-          <div className="flex items-center gap-5 mb-10">
-            <a href="#book" className="text-[15px] font-medium px-[22px] py-[13px] rounded-[4px]" style={{ backgroundColor: C.ctaBg, color: C.ctaText }}>
-              Book 30 minutes with Campbell
-            </a>
-            <a href="#how-it-works" className="text-[15px] font-medium" style={{ color: C.text }}>
-              How Chris works, layer by layer →
-            </a>
-          </div>
+        {/* CTAs */}
+        <div className="flex items-center gap-7 flex-wrap mb-16">
+          <a href="#book" className="inline-block text-[15px] font-medium px-[30px] py-[17px] transition-colors duration-200 hover:bg-[#8b3a32]" style={{ fontFamily: sans, backgroundColor: C.ctaBg, color: C.ctaText, textDecoration: "none" }}>
+            Book 30 minutes with Campbell →
+          </a>
+          <a href="#how-it-works" className="text-[15px] font-medium pb-[3px] hover:border-[#1a1a1a]" style={{ fontFamily: sans, color: C.text, textDecoration: "none", borderBottom: "1px solid rgba(26,26,26,0.4)" }}>
+            How Chris works, layer by layer
+          </a>
+        </div>
 
-          {/* Trust strip */}
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 mb-5">
+        {/* Trust strip */}
+        <div className="pb-14" style={{ borderTop: `1px solid ${C.ruleCharcoal}`, paddingTop: 36 }}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-[1040px]">
             {[
-              "Live with Harbison Care, Kinyara Health, 365 Care and Homewell",
-              "Australian data residency",
-              "Human-approved on every regulatory submission",
-            ].map((item, i) => (
-              <span key={i} className="flex items-center gap-1.5 text-[13px]" style={{ color: C.textMuted }}>
-                <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: C.teal }} />
-                {item}
-              </span>
+              { label: "Live cohort", value: "Harbison Care · Kinyara Health · 365 Care · Homewell" },
+              { label: "Pilot pricing", value: "From $15,000. Partner-rate while we build in the open." },
+              { label: "Australian residency", value: "Sydney region · australia-southeast1" },
+              { label: "Human approved", value: "Every regulatory submission, by a named leader" },
+            ].map((item) => (
+              <div key={item.label}>
+                <span className="block text-[10px] font-semibold tracking-[0.18em] uppercase mb-2" style={{ fontFamily: sans, color: C.ironstone }}>{item.label}</span>
+                <span className="text-[13.5px] leading-[1.55]" style={{ fontFamily: sans, color: C.textSoft }}>{item.value}</span>
+              </div>
             ))}
           </div>
-
-          {/* Price anchor */}
-          <p className="text-[14px] font-medium leading-[1.6]" style={{ color: C.text }}>
-            Pilot pricing from $15,000. Scaled rollouts on application.
-          </p>
-          <p className="text-[13px] leading-[1.6]" style={{ color: C.textFaint }}>
-            Partner-rate pricing while we build in the open with our first cohort.
-          </p>
         </div>
       </div>
     </section>
@@ -1797,10 +1811,18 @@ export default function V2Page() {
   }, []);
 
   return (
-    <div style={{ fontFamily: inter }}>
-      {/* Font loading: Inter 400-700 + Fraunces 400-700 (regular + italic) */}
+    <div style={{ fontFamily: sans, backgroundColor: C.paper, position: "relative" }}>
+      {/* Paper texture overlay */}
+      <div className="fixed inset-0 pointer-events-none z-0" style={{
+        backgroundImage: `radial-gradient(circle at 25% 30%, rgba(120,110,90,0.05) 1px, transparent 1.5px), radial-gradient(circle at 75% 70%, rgba(120,110,90,0.04) 1px, transparent 1.5px), radial-gradient(circle at 50% 50%, rgba(120,110,90,0.03) 1px, transparent 1px)`,
+        backgroundSize: "7px 7px, 11px 11px, 5px 5px",
+        mixBlendMode: "multiply",
+        opacity: 0.5,
+      }} />
+      <div className="relative z-[1]">
+      {/* Font loading: Fraunces (variable, ital) + Inter 400-600 */}
       {/* eslint-disable-next-line @next/next/no-page-custom-font */}
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght,SOFT@9..144,400,100;9..144,500,100;9..144,600,100;9..144,700,100&family=Fraunces:ital,opsz,wght,SOFT@1,9..144,400,100;1,9..144,500,100&display=swap" />
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..500;1,9..144,300..500&family=Inter:wght@400;500;600&display=swap" />
       <Nav />
       <Hero />
       {/* Section 2: Mt Gibraltar morning narrative */}
@@ -1821,6 +1843,15 @@ export default function V2Page() {
       <JobsSection />
       <ExecutionSection />
       <Footer />
+      </div>{/* close relative z-[1] wrapper */}
+
+      {/* Currently watching indicator — fixed bottom-right, desktop only */}
+      <div className="fixed bottom-[22px] right-[28px] z-50 hidden lg:flex items-center gap-[11px] px-[15px] py-[9px] backdrop-blur-[8px]"
+        style={{ fontFamily: sans, fontSize: 11, fontWeight: 400, letterSpacing: "0.04em", color: C.textSoft, backgroundColor: "rgba(243,239,230,0.94)", border: `1px solid ${C.ruleCharcoal}` }}>
+        <span className="w-[6px] h-[6px] rounded-full animate-pulse" style={{ backgroundColor: C.ironstone }} />
+        <span>4 facilities · 312 residents · 0 immediate findings</span>
+      </div>
+
       <BookingModal open={showBooking} onClose={() => setShowBooking(false)} />
     </div>
   );
