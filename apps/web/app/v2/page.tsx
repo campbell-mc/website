@@ -338,6 +338,7 @@ function Nav() {
           <a href="#what-chris-is" className="text-[13px] hidden lg:block hover:opacity-70" style={{ fontFamily: sans, color: C.textMuted }}>What Chris is</a>
           <a href="#tools" className="text-[13px] hidden lg:block hover:opacity-70" style={{ fontFamily: sans, color: C.textMuted }}>Your numbers</a>
           <a href="#how-it-works" className="text-[13px] hidden lg:block hover:opacity-70" style={{ fontFamily: sans, color: C.textMuted }}>How it works</a>
+          <a href="#lead-change" className="text-[13px] hidden lg:block hover:opacity-70" style={{ fontFamily: sans, color: C.textMuted }}>Lead change</a>
           <a href="#book" className="text-[14px] font-medium px-[20px] py-[12px]" style={{ fontFamily: sans, backgroundColor: C.ctaBg, color: C.ctaText, transition: "background 200ms" }}>
             Book a conversation
           </a>
@@ -1875,7 +1876,7 @@ function ChangeImplementationLayer() {
   }
 
   return (
-    <section ref={sectionRef} style={{ backgroundColor: C.canvasWarm }}>
+    <section id="lead-change" ref={sectionRef} style={{ backgroundColor: C.canvasWarm }}>
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-14 lg:py-18">
         {/* Header with scroll-reveal */}
         <div style={reveal(0)}><SectionEyebrow>The change implementation layer</SectionEyebrow></div>
