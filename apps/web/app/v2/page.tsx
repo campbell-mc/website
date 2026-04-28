@@ -1566,25 +1566,39 @@ function ChangeImplementationLayer() {
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-14 lg:py-18">
         {/* Header */}
         <SectionEyebrow>The change implementation layer</SectionEyebrow>
-        <h2 className="mb-3 max-w-[700px]" style={{ fontSize: "clamp(34px, 4vw, 48px)", lineHeight: 1.08, letterSpacing: "-0.025em", fontWeight: 500, color: C.text }}>
+        <h2 className="mb-6 max-w-[700px]" style={{ fontSize: "clamp(34px, 4vw, 48px)", lineHeight: 1.08, letterSpacing: "-0.025em", fontWeight: 500, color: C.text }}>
           Where software ends, <span style={{ fontFamily: fraunces, fontStyle: "italic" }}>leadership</span> begins.
         </h2>
-        <p className="text-[15px] leading-[1.6] max-w-[540px] mb-10" style={{ fontFamily: inter, color: C.textMuted }}>
-          Agents handle the routine and surface what matters. Care is delivered by people. Chris OS includes two operationalised change implementation models that turn agent insight into team and leader capability. Continuous, integrated, partner-rate priced. Built into the operating layer rather than running beside it.
-        </p>
+
+        {/* Positioning intro */}
+        <div className="max-w-[660px] mb-12 space-y-4">
+          <p className="text-[16px] leading-[1.65]" style={{ fontFamily: inter, color: C.text }}>
+            Aged care is in the middle of the largest operational change since the Royal Commission. The change is not another technology rollout. It is a shift in what work is, who does it, and what leaders need to know how to do.
+          </p>
+          <p className="text-[15px] leading-[1.65]" style={{ fontFamily: inter, color: C.textMuted }}>
+            Most organisations meet that change with consulting. A six-month engagement, a workshop series, a final report, a sign-off. The consultant leaves, the operating layer carries on as before, and the capability gap stays open. Most AI vendors meet it the other way. Install the platform, train on the features, hand the leadership development to someone else.
+          </p>
+          <p className="text-[15px] leading-[1.65]" style={{ fontFamily: inter, color: C.textMuted }}>
+            Chris OS does both. The agent layer does the operational work that used to fill leaders' weeks. The change implementation layer develops the human capability to lead in the hybrid environment the agents create. Both, every fortnight, in the same operating system.
+          </p>
+          <p className="text-[15px] leading-[1.65]" style={{ fontFamily: inter, color: C.textMuted }}>
+            Human-centred. AI-supported. Built on the Genos emotional intelligence model, founded by Dr Ben Palmer (virtual co-founder of Chris OS) and grounded in over twenty years of peer-reviewed research. Genos is among the most widely deployed EI assessments in healthcare and aged care globally.
+          </p>
+        </div>
 
         {/* Two cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-10">
           {/* Team Loop */}
           <div className="rounded-[5px] p-6 lg:p-7" style={{ backgroundColor: C.card, border: `0.5px solid ${C.border}`, borderTopWidth: 3, borderTopColor: C.sage }}>
             <p className="text-[10px] font-medium uppercase tracking-[0.08em] mb-2" style={{ fontFamily: inter, color: C.sage }}>Team Loop</p>
             <h3 className="text-[18px] font-medium mb-4" style={{ fontFamily: inter, color: C.text }}>
               Fortnightly. <span style={{ fontFamily: fraunces, fontStyle: "italic" }}>Measured.</span> In the flow of work.
             </h3>
-            <div className="space-y-4 text-[14px] leading-[1.6]" style={{ fontFamily: inter, color: C.textMuted }}>
-              <p>One pulse, one briefing, one practice, every fortnight. Chris delivers each team leader a briefing on their phone before the morning huddle. The leader runs the practice with the team. The next pulse measures the shift.</p>
-              <p>Built on the Genos emotional intelligence model. Pulse questions drawn from a library of fourteen domains. Practices grounded in evidence rather than assertion.</p>
-              <p>The change consulting alternative: a six-month engagement that ends. Team Loop runs continuously, every fortnight, integrated with the operating layer.</p>
+            <div className="space-y-4" style={{ fontFamily: inter }}>
+              <p className="text-[15px] leading-[1.65]" style={{ color: C.text }}>One pulse, one briefing, one practice, every fortnight. Chris delivers each team leader a briefing on their phone before the morning huddle. The leader runs the practice with the team. The next pulse measures the shift.</p>
+              <p className="text-[14px] leading-[1.65]" style={{ color: C.textMuted }}>Pulse questions drawn from a library of fourteen domains covering team voice, trust, psychological safety, recognition, role clarity, and the dimensions Genos research shows predict team performance under change.</p>
+              <p className="text-[15px] leading-[1.65]" style={{ color: C.text }}>When agents start drafting SIRS notifications, surfacing convergence patterns, and queueing actions for review, frontline teams need a different relationship with information, with their leader, and with each other. The Team Loop builds that relationship in the flow of work, every fortnight, calibrated to what the team is actually carrying.</p>
+              <p className="text-[13px] leading-[1.6] italic" style={{ color: C.textMuted }}>The change consulting alternative: a six-month engagement that ends. Team Loop runs continuously, integrated with the operating layer.</p>
             </div>
           </div>
 
@@ -1594,18 +1608,25 @@ function ChangeImplementationLayer() {
             <h3 className="text-[18px] font-medium mb-4" style={{ fontFamily: inter, color: C.text }}>
               Continuous. Tied to <span style={{ fontFamily: fraunces, fontStyle: "italic" }}>live</span> operational signals.
             </h3>
-            <div className="space-y-4 text-[14px] leading-[1.6]" style={{ fontFamily: inter, color: C.textMuted }}>
-              <p>Each leader gets a Leader Loop briefing on the alternate fortnight. Their personal practice is tied to the operational signals their team is showing this week, not to a generic competency framework.</p>
-              <p>Powered by Genos psychometrics. The Emotional Culture Index reads the team's lived experience. The Leader's 360 reads how they show up. Both feed into Chris's support prompts.</p>
-              <p>The change consulting alternative: an executive coaching engagement at $300-$500 per hour, disconnected from the work. Leader Loop runs every fortnight, alternating with Team Loop, costing a fraction of executive coaching at the leader-headcount scale.</p>
+            <div className="space-y-4" style={{ fontFamily: inter }}>
+              <p className="text-[15px] leading-[1.65]" style={{ color: C.text }}>Each leader gets a Leader Loop briefing on the alternate fortnight. Their personal practice is tied to the operational signals their team is showing this week, not to a generic competency framework.</p>
+              <p className="text-[14px] leading-[1.65]" style={{ color: C.textMuted }}>Powered by Genos psychometrics. The Emotional Culture Index reads the team's lived experience. The Genos Leader's 360 reads how the leader shows up. Both feed into Chris's support prompts.</p>
+              <p className="text-[15px] leading-[1.65]" style={{ color: C.text }}>Leaders in AI-augmented organisations are doing different work. Less drafting, more interpreting. Less reporting, more deciding. Less data-pulling, more pattern-reading. The capability shift is real and it is uncomfortable. The Leader Loop develops the EI capability that lets leaders sit with the discomfort, lead through it, and bring their teams with them. Week by week. Calibrated to actual operations, not generic transformation playbooks.</p>
+              <p className="text-[13px] leading-[1.6] italic" style={{ color: C.textMuted }}>The change consulting alternative: an executive coaching engagement at $300 to $500 per hour, disconnected from the work. Leader Loop runs every fortnight, alternating with Team Loop, at a fraction of executive coaching cost across the leader headcount.</p>
             </div>
           </div>
         </div>
 
-        {/* Summary line */}
-        <p className="text-[13px] leading-[1.6] text-center max-w-[720px] mx-auto" style={{ fontFamily: inter, color: C.textMuted }}>
-          Genos integrated. Cross-domain agents. Continuous. Operationalised. Pilot pricing from $15,000.
-        </p>
+        {/* Why this matters now */}
+        <div className="max-w-[660px] mb-4">
+          <p className="text-[10px] font-medium uppercase tracking-[0.08em] mb-3" style={{ fontFamily: inter, color: C.sage }}>Why this matters now</p>
+          <div className="space-y-4">
+            <p className="text-[15px] leading-[1.65]" style={{ fontFamily: inter, color: C.text }}>Twenty years of EI research tells us emotional intelligence is the strongest predictor of how leaders and teams adapt to change. AI is not an exception to that. It is the test case.</p>
+            <p className="text-[15px] leading-[1.65]" style={{ fontFamily: inter, color: C.text }}>The leaders who develop the EI capability to lead in the hybrid environment build the cultures that absorb AI adoption successfully. The ones who do not burn out, attrition out, or hold the change back.</p>
+            <p className="text-[15px] leading-[1.65]" style={{ fontFamily: inter, color: C.text }}>Chris OS is the operating layer that does the work and develops the capability. Operationalised. Continuous. Tied to actual operations rather than to a generic transformation playbook. Genos-grounded and peer-reviewed where the consulting alternative is anecdote and PowerPoint.</p>
+          </div>
+          <p className="text-[14px] italic mt-4" style={{ fontFamily: inter, color: C.textMuted }}>Pilot pricing from $15,000.</p>
+        </div>
       </div>
     </section>
   );
