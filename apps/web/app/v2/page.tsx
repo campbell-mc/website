@@ -1187,7 +1187,7 @@ function JobsSection() {
 
   return (
     <section style={{ backgroundColor: C.canvas }} id="jobs">
-      <div className="max-w-6xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
+      <div className="max-w-6xl mx-auto px-6 lg:px-16 py-10 lg:py-14">
         <p className="text-[17px] mb-3" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>Where we start</p>
         <h2 className="mb-3" style={{ fontSize: "clamp(34px, 4vw, 48px)", lineHeight: 1.08, letterSpacing: "-0.025em", fontWeight: 500, color: C.text }}>
           We don&apos;t sell software. We fix a problem.<br />
@@ -2343,9 +2343,12 @@ function ClientProof() {
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-14 lg:py-18">
         {/* Eyebrow + lead */}
         <p className="text-[17px] mb-2" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>6 months from the first idea. Four organisations and counting.</p>
-        <p className="text-[15px] leading-[1.6] max-w-[560px] mb-10" style={{ color: C.textMuted }}>
-          Four organisations across residential, home care and NDIS, including a multi-brand provider group. As at mid-April 2026. Looking for the next cohort of founding partners.
+        <p className="text-[15px] leading-[1.6] max-w-[560px] mb-6" style={{ color: C.textMuted }}>
+          Four organisations across residential, home care and NDIS, including a multi-brand provider group. As at mid-April 2026. Looking for the next cohort of founding partners. Let us build specifically for you.
         </p>
+        <a href="#book" className="inline-block text-[14px] font-medium px-[22px] py-[13px] mb-10" style={{ fontFamily: inter, backgroundColor: C.ctaBg, color: C.ctaText, textDecoration: "none" }}>
+          Become a founding partner →
+        </a>
 
         {/* Logo cards */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
