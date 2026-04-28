@@ -1983,6 +1983,38 @@ function LoopCard({ eyebrow, color, headline, paragraphs, pullQuote, comparison 
   );
 }
 
+function PositioningDetail({ visible, reveal }: { visible: boolean; reveal: (d: number) => Record<string, unknown> }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div style={reveal(300)}>
+      <button onClick={() => setOpen(!open)} className="w-full text-left rounded-[5px] transition-all duration-200" style={{ backgroundColor: C.card, border: `0.5px solid ${open ? C.ironstone : C.border}` }}>
+        <div className="p-4 lg:p-5">
+          <div className="flex items-center justify-between">
+            <p className="text-[14px] font-medium" style={{ fontFamily: inter, color: C.text }}>Why this is different from consulting and from other AI vendors</p>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className={`shrink-0 ml-3 transition-transform duration-200 ${open ? "rotate-45" : ""}`}>
+              <path d="M7 2v10M2 7h10" stroke={C.textFaint} strokeWidth="1.5" strokeLinecap="round" />
+            </svg>
+          </div>
+          {!open && <p className="text-[12px] mt-1" style={{ color: C.textFaint }}>Click to read</p>}
+          <div className={`overflow-hidden transition-all duration-400 ${open ? "max-h-[600px] opacity-100 mt-4" : "max-h-0 opacity-0"}`}>
+            <div className="space-y-4">
+              <p style={{ fontFamily: inter, fontSize: 15, lineHeight: 1.65, color: C.textMuted }}>
+                Most organisations meet that change with consulting. A six-month engagement, a workshop series, a final report, a sign-off. The consultant leaves, the operating layer carries on as before, and the capability gap stays open. Most AI vendors meet it the other way. Install the platform, train on the features, hand the leadership development to someone else.
+              </p>
+              <p style={{ fontFamily: inter, fontSize: 15, lineHeight: 1.65, color: C.textMuted }}>
+                Chris OS does both. The agent layer does the operational work that used to fill leaders' weeks. The change implementation layer develops the human capability to lead in the hybrid environment the agents create. Both, every fortnight, in the same operating system.
+              </p>
+              <p style={{ fontFamily: inter, fontSize: 15, lineHeight: 1.65, color: C.textMuted }}>
+                Human-centred. AI-supported. Built on the Genos emotional intelligence model, founded by Dr Ben Palmer (virtual co-founder of Chris OS) and grounded in over twenty years of peer-reviewed research. Genos is among the most widely deployed EI assessments in healthcare and aged care globally.
+              </p>
+            </div>
+          </div>
+        </div>
+      </button>
+    </div>
+  );
+}
+
 function ChangeImplementationLayer() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
@@ -2016,20 +2048,12 @@ function ChangeImplementationLayer() {
           Where software ends, <span style={{ fontFamily: fraunces, fontStyle: "italic" }}>leadership</span> begins.
         </h2>
 
-        {/* Positioning intro with staggered reveal */}
-        <div className="max-w-[660px] mb-12 space-y-4">
-          <p style={{ fontFamily: inter, fontSize: 16, lineHeight: 1.65, color: C.text, ...reveal(200) }}>
+        {/* Positioning intro — first paragraph visible, rest collapsible */}
+        <div className="max-w-[660px] mb-12">
+          <p className="mb-4" style={{ fontFamily: inter, fontSize: 16, lineHeight: 1.65, color: C.text, ...reveal(200) }}>
             Aged care is in the middle of the largest operational change since the Royal Commission. The change is not another technology rollout. It is a shift in what work is, who does it, and what leaders need to know how to do.
           </p>
-          <p style={{ fontFamily: inter, fontSize: 15, lineHeight: 1.65, color: C.textMuted, ...reveal(350) }}>
-            Most organisations meet that change with consulting. A six-month engagement, a workshop series, a final report, a sign-off. The consultant leaves, the operating layer carries on as before, and the capability gap stays open. Most AI vendors meet it the other way. Install the platform, train on the features, hand the leadership development to someone else.
-          </p>
-          <p style={{ fontFamily: inter, fontSize: 15, lineHeight: 1.65, color: C.textMuted, ...reveal(500) }}>
-            Chris OS does both. The agent layer does the operational work that used to fill leaders' weeks. The change implementation layer develops the human capability to lead in the hybrid environment the agents create. Both, every fortnight, in the same operating system.
-          </p>
-          <p style={{ fontFamily: inter, fontSize: 15, lineHeight: 1.65, color: C.textMuted, ...reveal(650) }}>
-            Human-centred. AI-supported. Built on the Genos emotional intelligence model, founded by Dr Ben Palmer (virtual co-founder of Chris OS) and grounded in over twenty years of peer-reviewed research. Genos is among the most widely deployed EI assessments in healthcare and aged care globally.
-          </p>
+          <PositioningDetail visible={visible} reveal={reveal} />
         </div>
 
         {/* Genos EI framework — integrated visual + expandable detail */}
