@@ -1424,6 +1424,93 @@ function FoundersSection() {
   );
 }
 
+function HonestAnswersSection() {
+  const cards = [
+    {
+      eyebrow: "Data and system integration",
+      headline: "Standalone today. APIs and MCP coming.",
+      today: "Chris runs as a standalone SaaS. No integration with your internal systems, networks, or databases is required during pilot. Staff access via web browser and SMS links. We get exports from your roster, finance, clinical, and incident systems on whatever cadence works, and Chris reads from those. The architecture is deliberately lean. No VPN. No on-premises components. No inbound connections to your network.",
+      coming: "APIs and MCP server connectors scoped for Q3 2026. The twelve named source systems prioritised by which pilot organisation runs them first.",
+      cta: "If your stack matters: tell us your three biggest systems on the first call. We will tell you exactly when integration ships for them.",
+    },
+    {
+      eyebrow: "Data privacy",
+      headline: "Australian-resident, independently reviewed, defence in depth.",
+      today: "All personally identifiable information stored in Sydney on AWS ap-southeast-2 via Supabase, SOC 2 Type 2 certified. Privacy Act 1988 compliant. All thirteen Australian Privacy Principles addressed. Notifiable Data Breaches scheme process documented. De-identified at the connector boundary. Pulse responses anonymous to leaders by default. No PII sent to the AI engine. Full review by a Tier 1 Australian aged care provider's IT security team passed in February 2026.",
+      coming: "ISO 27001 certification scoped for 2027. Q2 2026 penetration test by named third party.",
+      cta: "If your procurement requires ISO 27001 today: we can share the provider review and our internal controls documentation.",
+    },
+    {
+      eyebrow: "Cyber security",
+      headline: "Defence in depth across four layers. MFA enforced on every data-access account.",
+      today: "Edge layer with WAF and DDoS protection. Application layer with input validation, CSRF, and Content Security Policy. Database layer with Row Level Security policies on every table and AES-256 encryption at rest. Auth layer with bcrypt password hashing, JWT tokens, and MFA enforced via TOTP for every account that can access team data. SOC 2 Type 2 certified vendors across Vercel, Supabase, Twilio, and Anthropic. Anthropic runs zero-retention API, so prompts containing aggregated team patterns are not stored or used for training.",
+      coming: "Third-party penetration test in Q2 2026. STRIDE threat model alongside it. SIEM tooling in H2 2026 as we scale.",
+      cta: "If your CISO requires a mature enterprise security org as the baseline to engage: read the full review at chris-os.io/trust first.",
+    },
+  ];
+
+  const [expanded, setExpanded] = useState<number | null>(null);
+
+  return (
+    <section style={{ backgroundColor: C.canvasLight }}>
+      <div className="max-w-6xl mx-auto px-6 lg:px-16 py-12 lg:py-16">
+        <p className="text-[11px] font-medium uppercase tracking-[0.08em] mb-3" style={{ color: C.teal }}>Honest answers</p>
+        <h2 className="text-[clamp(1.75rem,4vw,34px)] leading-[1.08] tracking-[-0.025em] mb-3" style={{ fontFamily: fraunces, fontWeight: 600, color: C.text }}>
+          Yes, we know what you&apos;re{" "}
+          <span style={{ color: C.teal }}>thinking.</span>
+        </h2>
+        <p className="text-[15px] leading-[1.6] max-w-[560px] mb-10" style={{ color: C.textMuted }}>
+          Three questions every CFO and CIO asks before signing anything in aged care. We have already had this conversation with a Tier 1 Australian aged care provider. Here is the short version of how it went. The full review is at <a href="/trust" className="font-medium hover:underline" style={{ color: C.teal }}>chris-os.io/trust</a>.
+        </p>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-8">
+          {cards.map((card, i) => {
+            const isOpen = expanded === i;
+            return (
+              <button key={card.eyebrow} onClick={() => setExpanded(isOpen ? null : i)}
+                className="text-left rounded-[8px] transition-all duration-300"
+                style={{ backgroundColor: C.canvasWarm, border: `0.5px solid ${isOpen ? C.teal : C.border}` }}>
+                <div className="p-5 lg:p-6">
+                  <div className="flex items-start justify-between mb-3">
+                    <p className="text-[10px] font-medium uppercase tracking-[0.08em]" style={{ color: C.teal }}>{card.eyebrow}</p>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className={`shrink-0 transition-transform duration-300 ${isOpen ? "rotate-45" : ""}`}>
+                      <path d="M8 3v10M3 8h10" stroke={C.teal} strokeWidth="1.5" strokeLinecap="round" />
+                    </svg>
+                  </div>
+                  <h3 className="text-[15px] font-medium leading-snug mb-2" style={{ color: C.text }}>{card.headline}</h3>
+
+                  <div className={`overflow-hidden transition-all duration-500 ${isOpen ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"}`}>
+                    <div className="mt-3 space-y-4">
+                      <div>
+                        <p className="text-[10px] font-medium uppercase tracking-[0.08em] mb-1" style={{ color: C.teal }}>Today</p>
+                        <p className="text-[13px] leading-[1.6]" style={{ color: C.textMuted }}>{card.today}</p>
+                      </div>
+                      <div>
+                        <p className="text-[10px] font-medium uppercase tracking-[0.08em] mb-1" style={{ color: C.amber }}>Coming</p>
+                        <p className="text-[13px] leading-[1.6]" style={{ color: C.textMuted }}>{card.coming}</p>
+                      </div>
+                      <p className="text-[13px] leading-[1.6] font-medium" style={{ color: C.text }}>{card.cta}</p>
+                    </div>
+                  </div>
+
+                  {!isOpen && <p className="text-[12px] mt-2" style={{ color: C.textFaint }}>Click to read</p>}
+                </div>
+              </button>
+            );
+          })}
+        </div>
+
+        <p className="text-[14px] leading-[1.6] max-w-[560px] mb-3" style={{ color: C.textMuted }}>
+          We will not be the right vendor for every aged care provider in 2026. We will be the right partner for the ones who want to build the integrated operating layer with us, in the open, while we ship.
+        </p>
+        <a href="/trust" className="text-[13px] font-medium hover:underline" style={{ color: C.teal }}>
+          Read the full cybersecurity review summary and our position on every control area at chris-os.io/trust →
+        </a>
+      </div>
+    </section>
+  );
+}
+
 function ExecutionSection() {
   return (
     <section style={{ backgroundColor: C.canvas }}>
@@ -1669,7 +1756,7 @@ function Footer() {
           <div>
             <p className="text-[11px] font-medium uppercase tracking-wider mb-3" style={{ color: C.textFaint }}>Legal</p>
             <div className="space-y-2">
-              {[["Privacy", "/legal"], ["Sources & references", "/dashboard/references"]].map(([label, href]) => (
+              {[["Privacy", "/legal"], ["Security & trust", "/trust"], ["Sources & references", "/dashboard/references"]].map(([label, href]) => (
                 <Link key={label} href={href} className="block text-[13px] hover:opacity-70" style={{ color: C.textMuted }}>{label}</Link>
               ))}
             </div>
@@ -1728,6 +1815,7 @@ export default function V2Page() {
       {/* Section 6: Scenarios */}
       <ScenarioSection />
       <FoundersSection />
+      <HonestAnswersSection />
       <HowItWorksSection />
       <JobsSection />
       <ExecutionSection />
