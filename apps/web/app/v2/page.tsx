@@ -347,6 +347,120 @@ function Nav() {
   );
 }
 
+function HeroiPhone({ mobile }: { mobile?: boolean }) {
+  const w = mobile ? 200 : 280;
+  const h = mobile ? 414 : 582;
+  const tilt = mobile ? -2 : -4;
+  const r = mobile ? 40 : 56;
+  const ir = r - 4;
+  const dr = ir - 4;
+  const ss = "'SF Pro Display', -apple-system, system-ui, sans-serif";
+
+  return (
+    <figure aria-label="Team briefing artefact" className="relative" style={{ padding: mobile ? 24 : 48 }}>
+      {/* Morning warmth radial gradient */}
+      <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 80% 60% at 75% 25%, rgba(212,168,83,0.18) 0%, rgba(212,168,83,0.08) 25%, rgba(212,168,83,0.03) 45%, transparent 65%)" }} />
+
+      <figcaption className="sr-only">Sarah Mitchell's Team Briefing for Monday morning, Cycle 8, delivered at 6:47am. Voice down 18% in the afternoon shift, two new starters without supervision, trust holding above sector. Three micro-practices for the fortnight.</figcaption>
+
+      {/* Phone chassis */}
+      <div className="relative z-10 transition-transform duration-600 hover:rotate-[-2deg]" style={{ width: w, height: h, borderRadius: r, background: "linear-gradient(135deg, #C8C8CA 0%, #A8A8AA 50%, #C8C8CA 100%)", padding: 4, transform: `rotate(${tilt}deg)`, boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.15), inset 0 0 0 2px rgba(0,0,0,0.05), 0 20px 60px rgba(0,0,0,0.12)" }}>
+
+        {/* Side buttons (subtle) */}
+        <div className="absolute" style={{ right: -2, top: "25%", width: 3, height: mobile ? 36 : 50, borderRadius: 2, background: "linear-gradient(180deg, #B0B0B2, #909092)" }} />
+        <div className="absolute" style={{ left: -2, top: "18%", width: 3, height: mobile ? 16 : 22, borderRadius: 2, background: "#A0A0A2" }} />
+        <div className="absolute" style={{ left: -2, top: "24%", width: 3, height: mobile ? 28 : 38, borderRadius: 2, background: "#A0A0A2" }} />
+        <div className="absolute" style={{ left: -2, top: "32%", width: 3, height: mobile ? 28 : 38, borderRadius: 2, background: "#A0A0A2" }} />
+
+        {/* Inner bezel */}
+        <div style={{ width: "100%", height: "100%", borderRadius: ir, background: "#0A0A0A", padding: 0, overflow: "hidden" }}>
+          {/* Display */}
+          <div className="relative" style={{ width: "100%", height: "100%", borderRadius: dr, background: "#fff", overflow: "hidden" }}>
+
+            {/* Dynamic Island */}
+            <div className="absolute z-20" style={{ top: mobile ? 10 : 14, left: "50%", transform: "translateX(-50%)", width: mobile ? 72 : 100, height: mobile ? 22 : 30, borderRadius: mobile ? 13 : 18, background: "#0A0A0A" }}>
+              <div className="absolute rounded-full" style={{ right: mobile ? 14 : 20, top: "50%", transform: "translateY(-50%)", width: mobile ? 6 : 8, height: mobile ? 6 : 8, background: "#1A1A1A" }}>
+                <div className="absolute rounded-full" style={{ top: "30%", left: "30%", width: 3, height: 3, background: "#3A3A3A" }} />
+              </div>
+            </div>
+
+            {/* Status bar */}
+            <div className="absolute z-10 flex items-center justify-between px-4" style={{ top: mobile ? 10 : 16, left: 0, right: 0, height: mobile ? 20 : 24 }}>
+              <span style={{ fontFamily: ss, fontSize: mobile ? 12 : 16, fontWeight: 600, color: "#0E0E0E" }}>6:47</span>
+              <div className="flex items-center gap-1">
+                {/* Signal bars */}
+                <svg width={mobile ? 12 : 16} height={mobile ? 9 : 12} viewBox="0 0 16 12" fill="#0E0E0E">
+                  <rect x="0" y="9" width="3" height="3" rx="0.5" /><rect x="4.5" y="6" width="3" height="6" rx="0.5" /><rect x="9" y="3" width="3" height="9" rx="0.5" /><rect x="13.5" y="0" width="2.5" height="12" rx="0.5" />
+                </svg>
+                {/* WiFi */}
+                <svg width={mobile ? 12 : 14} height={mobile ? 10 : 12} viewBox="0 0 14 12" fill="none" stroke="#0E0E0E" strokeWidth="1.5" strokeLinecap="round">
+                  <path d="M1 4c3.5-3 8.5-3 12 0" /><path d="M3.5 7c2-2 5-2 7 0" /><circle cx="7" cy="10.5" r="1" fill="#0E0E0E" stroke="none" />
+                </svg>
+                {/* Battery */}
+                <svg width={mobile ? 18 : 22} height={mobile ? 9 : 11} viewBox="0 0 22 11">
+                  <rect x="0.5" y="0.5" width="18" height="10" rx="2" fill="none" stroke="#0E0E0E" strokeWidth="1" />
+                  <rect x="2" y="2" width="13" height="7" rx="1" fill="#0E0E0E" />
+                  <rect x="19.5" y="3" width="2" height="5" rx="1" fill="#0E0E0E" opacity="0.4" />
+                </svg>
+              </div>
+            </div>
+
+            {/* Briefing content */}
+            <div className="absolute inset-0 overflow-hidden" style={{ top: mobile ? 36 : 50 }}>
+              {/* Header band */}
+              <div style={{ padding: mobile ? "8px 12px" : "12px 16px", background: C.forest }}>
+                <p style={{ fontFamily: inter, fontSize: mobile ? 6 : 8, fontWeight: 500, letterSpacing: "0.10em", textTransform: "uppercase", color: "rgba(255,255,255,0.75)", marginBottom: 2 }}>Team Briefing · Sarah Mitchell</p>
+                <p style={{ fontFamily: inter, fontSize: mobile ? 9 : 12, fontWeight: 500, color: "#fff" }}>Mt Gibraltar · Cycle 8 · Monday</p>
+              </div>
+
+              {/* CHRIS Insight */}
+              <div style={{ padding: mobile ? "8px 12px" : "12px 16px", borderBottom: "0.5px solid rgba(15,23,42,0.06)" }}>
+                <div className="flex items-center gap-1.5 mb-1.5">
+                  <div className="rounded-full flex items-center justify-center shrink-0" style={{ width: mobile ? 10 : 14, height: mobile ? 10 : 14, background: `linear-gradient(135deg, ${C.forest} 0%, ${C.gold} 100%)` }}>
+                    <span style={{ color: "#fff", fontSize: mobile ? 5 : 8, fontWeight: 500 }}>C</span>
+                  </div>
+                  <span style={{ fontFamily: inter, fontSize: mobile ? 6 : 8, fontWeight: 500, letterSpacing: "0.10em", textTransform: "uppercase", color: "#5A5A57" }}>Chris Insight</span>
+                </div>
+                <p style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontSize: mobile ? 9 : 12, lineHeight: 1.4, fontStyle: "italic", color: "#0E0E0E" }}>Your team's voice is under strain. Pattern matches December.</p>
+              </div>
+
+              {/* What's Showing Up */}
+              <div style={{ padding: mobile ? "6px 12px" : "10px 16px", borderBottom: "0.5px solid rgba(15,23,42,0.06)" }}>
+                <p style={{ fontFamily: inter, fontSize: mobile ? 6 : 8, fontWeight: 500, letterSpacing: "0.10em", textTransform: "uppercase", color: "#5A5A57", marginBottom: mobile ? 4 : 6 }}>What's showing up</p>
+                {[
+                  { bar: "#BA7517", text: "Voice down 18% afternoon shift" },
+                  { bar: "#BA7517", text: "Two new starters · no supervision" },
+                  { bar: "#1F6F66", text: "Trust holding above sector" },
+                ].map((row, i) => (
+                  <div key={i} className="flex items-center gap-1.5 mb-1">
+                    <div style={{ width: 2.5, height: mobile ? 10 : 14, borderRadius: 2, background: row.bar, flexShrink: 0 }} />
+                    <p style={{ fontFamily: inter, fontSize: mobile ? 7.5 : 10, color: "#0E0E0E", lineHeight: 1.3 }}>{row.text}</p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Three Micro-Practices */}
+              <div style={{ padding: mobile ? "6px 12px" : "10px 16px" }}>
+                <p style={{ fontFamily: inter, fontSize: mobile ? 6 : 8, fontWeight: 500, letterSpacing: "0.10em", textTransform: "uppercase", color: "#5A5A57", marginBottom: mobile ? 4 : 6 }}>Three micro-practices</p>
+                {[
+                  "Open the next huddle with a check-in",
+                  "15-min supervision with each new starter",
+                  "Name workload pressure in next message",
+                ].map((text, i) => (
+                  <div key={i} className="flex items-start gap-1 mb-1">
+                    <span style={{ fontFamily: inter, fontSize: mobile ? 7.5 : 10, color: "#5A5A57", flexShrink: 0 }}>{i + 1}.</span>
+                    <p style={{ fontFamily: inter, fontSize: mobile ? 7.5 : 10, color: "#0E0E0E", lineHeight: 1.4 }}>{text}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </figure>
+  );
+}
+
 function Hero() {
   return (
     <section style={{ backgroundColor: C.paper }}>
@@ -383,17 +497,15 @@ function Hero() {
             </div>
           </div>
 
-          {/* Right: hero image */}
-          <div className="hidden lg:block lg:w-[480px] shrink-0 mt-4">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/hero-gibraltar.png" alt="Gibraltar Gardens aged care facility at sunset" className="w-full h-auto rounded-[5px]" style={{ border: `0.5px solid ${C.border}` }} />
+          {/* Right: iPhone mockup with Team Briefing */}
+          <div className="hidden lg:flex lg:w-[340px] shrink-0 items-center justify-center">
+            <HeroiPhone />
           </div>
         </div>
 
-        {/* Mobile image */}
-        <div className="lg:hidden mb-10">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/hero-gibraltar.png" alt="Gibraltar Gardens aged care facility at sunset" className="w-full h-auto rounded-[5px]" style={{ border: `0.5px solid ${C.border}` }} />
+        {/* Mobile phone mockup */}
+        <div className="lg:hidden flex justify-center mb-10">
+          <HeroiPhone mobile />
         </div>
 
         {/* Trust strip */}
