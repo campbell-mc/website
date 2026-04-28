@@ -32,6 +32,14 @@ const C = {
   // CTA
   ctaBg: "#0E0E0E",
   ctaText: "#FAFAF6",
+  // Section backgrounds (3-tone system)
+  canvasWarm: "#FAFAF6",  // A sections
+  canvasLight: "#FFFFFF", // B sections
+  canvasDark: "#0E0E0E",  // C section (one only, conversion)
+  textOnDark: "#FAFAF6",
+  textOnDarkMuted: "#B5B3AC",
+  cardOnLight: "#FAFAF6", // cards invert on white sections
+  borderOnDark: "rgba(255,255,255,0.10)",
   // Inside-product tokens (briefing artefact ONLY)
   forest: "#1B4332",
   gold: "#D4A853",
@@ -307,7 +315,7 @@ function SectionEyebrow({ children }: { children: React.ReactNode }) {
 
 function Nav() {
   return (
-    <nav className="sticky top-0 z-50" style={{ backgroundColor: C.canvas, borderBottom: `0.5px solid ${C.borderSubtle}` }}>
+    <nav className="sticky top-0 z-50 backdrop-blur-sm" style={{ backgroundColor: "rgba(250,250,246,0.92)", borderBottom: `0.5px solid ${C.borderSubtle}` }}>
       <div className="max-w-6xl mx-auto flex items-center justify-between px-6 lg:px-16 py-3">
         <Link href="/v2" className="text-[15px] font-medium tracking-tight" style={{ color: C.text }}>
           Chris<span style={{ color: C.teal }}>·</span>OS
@@ -445,7 +453,7 @@ function WhatChrisIsSection() {
   const red = "#A32D2D";
   const textPrimary = "#0E0E0E";
   const textSecondary = "#5A5A57";
-  const canvas = "#FAFAF6";
+  const canvas = C.canvasLight;
   const borderDefault = "rgba(15,23,42,0.08)";
 
   function Badge({ n }: { n: number }) {
@@ -589,7 +597,7 @@ function WhatChrisIsSection() {
 
 function ToolsStrip() {
   return (
-    <section id="tools" style={{ backgroundColor: C.canvas, borderTop: `0.5px solid ${C.border}` }}>
+    <section id="tools" style={{ backgroundColor: C.canvas }}>
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-14 lg:py-18">
         {/* Header */}
         <div className="max-w-[560px] mb-10">
@@ -1121,6 +1129,7 @@ function JobsSection() {
 }
 
 function ScenarioSection() {
+  const [activeScenario, setActiveScenario] = useState<number | null>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -1135,68 +1144,107 @@ function ScenarioSection() {
     return () => observer.disconnect();
   }, []);
 
+  const scenarios = [
+    {
+      id: 0,
+      clock: "23:04",
+      tag: "Incident detected",
+      tagColor: C.red,
+      borderColor: C.red,
+      title: "11:04pm Friday.",
+      subtitle: "A Priority 1 incident. 24 hours to notify ACQSC.",
+      lines: [
+        { text: "Chris classified it in 4 minutes.", weight: true },
+        { text: "The draft was waiting in the DON\u2019s inbox by 11:09.", italic: true },
+        { text: "She approved it before midnight.", italic: true },
+      ],
+      punchline: "That is the difference between a penalty and a clean record.",
+      footnote: "Documentation drafting, event-driven. Always watching. Zero missed deadlines at current pilots.",
+    },
+    {
+      id: 1,
+      clock: "09:14",
+      tag: "Opportunity surfaced",
+      tagColor: C.teal,
+      borderColor: C.teal,
+      title: "Tuesday morning, 9:14am.",
+      subtitle: "Three residents flagged for AN-ACC reclassification.",
+      lines: [
+        { text: "Chris surfaced the opportunity overnight.", weight: true },
+        { text: "Clinical evidence compiled. Classification uplift quantified.", italic: true },
+        { text: "The CFO reviewed the numbers before morning tea.", italic: true },
+      ],
+      punchline: "$11,400 per month in revenue the facility was already entitled to.",
+      footnote: "Revenue intelligence, running weekly. Every reclassification opportunity quantified before the quarter closes.",
+    },
+  ];
+
   return (
-    <section ref={sectionRef} style={{ backgroundColor: C.canvas, borderTop: `0.5px solid ${C.border}` }}>
+    <section ref={sectionRef} style={{ backgroundColor: C.canvasLight }}>
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-12 lg:py-16">
         <p className="text-[17px] mb-8" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>Every facility. Every week.</p>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-          {/* Scenario 1: SIRS Friday night */}
-          <div>
-            <div className="flex items-center gap-3 mb-5">
-              <span className="text-[12px] font-medium tracking-[0.12em] tabular-nums" style={{ fontFamily: "'Courier New', Consolas, monospace", color: C.red }}>23:04</span>
-              <span className="text-[9px] font-medium tracking-[0.15em] uppercase" style={{ color: C.textFaint }}>Incident detected</span>
-              <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: C.red }} />
-            </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          {scenarios.map((sc) => {
+            const isOpen = activeScenario === sc.id;
+            return (
+              <button key={sc.id}
+                onClick={() => setActiveScenario(isOpen ? null : sc.id)}
+                className="text-left rounded-[8px] overflow-hidden transition-all duration-300"
+                style={{
+                  backgroundColor: C.canvasWarm,
+                  border: `0.5px solid ${isOpen ? sc.borderColor : C.border}`,
+                  borderLeftWidth: isOpen ? 3 : 0.5,
+                  borderLeftColor: isOpen ? sc.borderColor : C.border,
+                  boxShadow: isOpen ? `0 4px 20px rgba(0,0,0,0.06)` : "none",
+                }}>
+                <div className="p-6 lg:p-7">
+                  {/* Header row: clock + tag + expand indicator */}
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-3">
+                      <span className="text-[12px] font-medium tracking-[0.12em] tabular-nums" style={{ fontFamily: "'Courier New', Consolas, monospace", color: sc.tagColor }}>{sc.clock}</span>
+                      <span className="text-[9px] font-medium tracking-[0.15em] uppercase" style={{ color: C.textFaint }}>{sc.tag}</span>
+                      <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: sc.tagColor }} />
+                    </div>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className={`transition-transform duration-300 ${isOpen ? "rotate-45" : ""}`}>
+                      <path d="M8 3v10M3 8h10" stroke={sc.tagColor} strokeWidth="1.5" strokeLinecap="round" />
+                    </svg>
+                  </div>
 
-            {[
-              { text: "11:04pm Friday.", style: { fontSize: "clamp(1.8rem, 4vw, 2.5rem)", fontFamily: fraunces, fontStyle: "italic" as const, color: C.text, letterSpacing: "-0.02em", marginBottom: "0.6em" }, delay: 0 },
-              { text: "A Priority 1 incident. 24 hours to notify ACQSC.", style: { fontSize: "14px", color: C.textFaint, marginBottom: "0.8em" }, delay: 200 },
-              { text: "Chris classified it in 4 minutes.", style: { fontSize: "clamp(1.1rem, 2vw, 1.4rem)", fontWeight: 500, color: C.text, marginBottom: "0.3em" }, delay: 600 },
-              { text: "The draft was waiting in the DON\u2019s inbox by 11:09.", style: { fontSize: "15px", fontFamily: fraunces, fontStyle: "italic" as const, color: C.textMuted, marginBottom: "0.2em" }, delay: 1000 },
-              { text: "She approved it before midnight.", style: { fontSize: "15px", fontFamily: fraunces, fontStyle: "italic" as const, color: C.textMuted, marginBottom: "0.8em" }, delay: 1200 },
-              { text: "That is the difference between a penalty and a clean record.", style: { fontSize: "clamp(1.1rem, 2vw, 1.4rem)", fontWeight: 500, color: C.teal, marginBottom: "0" }, delay: 1800 },
-            ].map((line, i) => (
-              <div key={i} className="transition-all duration-700 ease-out"
-                style={{ ...line.style, opacity: visible ? 1 : 0, transform: visible ? "translateY(0)" : "translateY(16px)", transitionDelay: `${line.delay}ms` }}>
-                {line.text}
-              </div>
-            ))}
+                  {/* Title (always visible) */}
+                  <h3 className="text-[clamp(1.5rem,3.5vw,2rem)] leading-[1.1] mb-2" style={{ fontFamily: fraunces, fontStyle: "italic", color: C.text, letterSpacing: "-0.02em" }}>{sc.title}</h3>
+                  <p className="text-[14px]" style={{ color: C.textFaint }}>{sc.subtitle}</p>
 
-            <div className="mt-6 pt-4" style={{ borderTop: `0.5px solid ${C.border}` }}>
-              <p className="text-[12px]" style={{ color: C.textFaint }}>Documentation drafting, event-driven. Always watching. Zero missed deadlines at current pilots.</p>
-            </div>
-          </div>
+                  {/* Expanded content */}
+                  <div className={`overflow-hidden transition-all duration-500 ${isOpen ? "max-h-[400px] opacity-100 mt-5" : "max-h-0 opacity-0"}`}>
+                    {sc.lines.map((line, i) => (
+                      <div key={i} className="transition-all duration-500 ease-out mb-1"
+                        style={{ opacity: isOpen && visible ? 1 : 0, transform: isOpen ? "translateY(0)" : "translateY(12px)", transitionDelay: `${i * 200}ms` }}>
+                        <p style={{
+                          fontSize: line.weight ? "clamp(1.1rem, 2vw, 1.3rem)" : "15px",
+                          fontWeight: line.weight ? 500 : 400,
+                          fontFamily: line.italic ? fraunces : inter,
+                          fontStyle: line.italic ? "italic" : "normal",
+                          color: line.weight ? C.text : C.textMuted,
+                        }}>{line.text}</p>
+                      </div>
+                    ))}
 
-          {/* Scenario 2: Tuesday morning revenue uplift */}
-          <div>
-            <div className="flex items-center gap-3 mb-5">
-              <span className="text-[12px] font-medium tracking-[0.12em] tabular-nums" style={{ fontFamily: "'Courier New', Consolas, monospace", color: C.teal }}>09:14</span>
-              <span className="text-[9px] font-medium tracking-[0.15em] uppercase" style={{ color: C.textFaint }}>Opportunity surfaced</span>
-              <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: C.teal }} />
-            </div>
+                    <p className="text-[clamp(1.1rem,2vw,1.3rem)] font-medium mt-4" style={{ color: C.teal }}>{sc.punchline}</p>
 
-            {[
-              { text: "Tuesday morning, 9:14am.", style: { fontSize: "clamp(1.8rem, 4vw, 2.5rem)", fontFamily: fraunces, fontStyle: "italic" as const, color: C.text, letterSpacing: "-0.02em", marginBottom: "0.6em" }, delay: 200 },
-              { text: "Three residents flagged for AN-ACC reclassification.", style: { fontSize: "14px", color: C.textFaint, marginBottom: "0.8em" }, delay: 400 },
-              { text: "Chris surfaced the opportunity overnight.", style: { fontSize: "clamp(1.1rem, 2vw, 1.4rem)", fontWeight: 500, color: C.text, marginBottom: "0.3em" }, delay: 800 },
-              { text: "Clinical evidence compiled. Classification uplift quantified.", style: { fontSize: "15px", fontFamily: fraunces, fontStyle: "italic" as const, color: C.textMuted, marginBottom: "0.2em" }, delay: 1200 },
-              { text: "The CFO reviewed the numbers before morning tea.", style: { fontSize: "15px", fontFamily: fraunces, fontStyle: "italic" as const, color: C.textMuted, marginBottom: "0.8em" }, delay: 1400 },
-              { text: "$11,400 per month in revenue the facility was already entitled to.", style: { fontSize: "clamp(1.1rem, 2vw, 1.4rem)", fontWeight: 500, color: C.teal, marginBottom: "0" }, delay: 2000 },
-            ].map((line, i) => (
-              <div key={i} className="transition-all duration-700 ease-out"
-                style={{ ...line.style, opacity: visible ? 1 : 0, transform: visible ? "translateY(0)" : "translateY(16px)", transitionDelay: `${line.delay}ms` }}>
-                {line.text}
-              </div>
-            ))}
+                    <div className="mt-5 pt-4" style={{ borderTop: `0.5px solid ${C.border}` }}>
+                      <p className="text-[12px]" style={{ color: C.textFaint }}>{sc.footnote}</p>
+                    </div>
+                  </div>
 
-            <div className="mt-6 pt-4" style={{ borderTop: `0.5px solid ${C.border}` }}>
-              <p className="text-[12px]" style={{ color: C.textFaint }}>Revenue intelligence, running weekly. Every reclassification opportunity quantified before the quarter closes.</p>
-            </div>
-          </div>
+                  {!isOpen && <p className="text-[12px] mt-3" style={{ color: C.textFaint }}>Click to read the full scenario</p>}
+                </div>
+              </button>
+            );
+          })}
         </div>
 
-        <p className="text-[13px] mt-10" style={{ color: C.textFaint }}>Nine workflows live today, from SIRS handling to board pack generation. <a href="/workflows" className="font-medium hover:underline" style={{ color: C.text }}>See the full list →</a></p>
+        <p className="text-[13px] mt-8" style={{ color: C.textFaint }}>Nine workflows live today, from SIRS handling to board pack generation. <a href="/workflows" className="font-medium hover:underline" style={{ color: C.text }}>See the full list →</a></p>
       </div>
     </section>
   );
@@ -1461,7 +1509,7 @@ const CLIENTS = [
 
 function LiveFacilityView() {
   return (
-    <section style={{ backgroundColor: C.canvas, borderTop: `0.5px solid ${C.border}` }}>
+    <section style={{ backgroundColor: C.canvasLight }}>
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-14 lg:py-18">
         <p className="text-[12px] mb-6" style={{ color: C.textFaint }}>Three live panels from a 60-bed NSW facility, captured Monday morning.</p>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
