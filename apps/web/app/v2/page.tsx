@@ -45,17 +45,32 @@ const C = {
 
 const TOOLS = [
   {
+    title: "EX workforce ROI",
+    blurb: "What is turnover, agency dependence, and burnout costing you? Modelled on your facility.",
+    cta: "Calculate ROI →",
+    href: "/tools/ex-roi",
+    stat: "28%",
+    statLabel: "average aged care turnover rate. What is yours costing?",
+    accent: C.teal,
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <path d="M4 22 L10 14 L16 17 L24 6" stroke="#1F6F66" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+        <circle cx="24" cy="6" r="3" fill="#1F6F66" fillOpacity="0.3"><animate attributeName="r" values="2.5;3.5;2.5" dur="2s" repeatCount="indefinite" /></circle>
+      </svg>
+    ),
+  },
+  {
     title: "Care minutes & supplement",
     blurb: "Are you meeting 215/44? See your compliance position and your financial exposure.",
     cta: "Run the check →",
     href: "/tools/care-minutes",
     stat: "45.9%",
     statLabel: "of services meeting both targets nationally",
-    accent: C.warm,
+    accent: C.red,
     icon: (
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <circle cx="14" cy="14" r="11" stroke="#b5572a" strokeWidth="2.5" strokeDasharray="56 14" strokeLinecap="round"><animateTransform attributeName="transform" type="rotate" from="0 14 14" to="360 14 14" dur="20s" repeatCount="indefinite" /></circle>
-        <text x="14" y="17" textAnchor="middle" fill="#b5572a" fontSize="8" fontWeight="700" fontFamily="system-ui">215</text>
+        <circle cx="14" cy="14" r="11" stroke="#A32D2D" strokeWidth="2.5" strokeDasharray="56 14" strokeLinecap="round"><animateTransform attributeName="transform" type="rotate" from="0 14 14" to="360 14 14" dur="20s" repeatCount="indefinite" /></circle>
+        <text x="14" y="17" textAnchor="middle" fill="#A32D2D" fontSize="8" fontWeight="700" fontFamily="system-ui">215</text>
       </svg>
     ),
   },
@@ -66,26 +81,11 @@ const TOOLS = [
     href: "/tools/psh-assessment",
     stat: "16",
     statLabel: "hazard domains. One conversation with Chris.",
-    accent: C.good,
+    accent: C.amber,
     icon: (
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        {[0, 1, 2, 3, 4, 5].map((i) => { const a = (i * 60 - 90) * Math.PI / 180; return <circle key={i} cx={14 + 9 * Math.cos(a)} cy={14 + 9 * Math.sin(a)} r="3" fill="#2d6a4f" fillOpacity={0.15 + i * 0.12}><animate attributeName="fillOpacity" values={`${0.15 + i * 0.12};${0.5 + i * 0.08};${0.15 + i * 0.12}`} dur={`${2 + i * 0.3}s`} repeatCount="indefinite" /></circle>; })}
-        <circle cx="14" cy="14" r="4" fill="#2d6a4f" fillOpacity="0.3" />
-      </svg>
-    ),
-  },
-  {
-    title: "EX workforce ROI",
-    blurb: "What's turnover, agency dependence, and burnout costing you? Modelled on your facility.",
-    cta: "Calculate ROI →",
-    href: "/tools/ex-roi",
-    stat: "28%",
-    statLabel: "average aged care turnover rate. What's yours costing?",
-    accent: C.copper,
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <path d="M4 22 L10 14 L16 17 L24 6" stroke="#c89a3c" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-        <circle cx="24" cy="6" r="3" fill="#c89a3c" fillOpacity="0.3"><animate attributeName="r" values="2.5;3.5;2.5" dur="2s" repeatCount="indefinite" /></circle>
+        {[0, 1, 2, 3, 4, 5].map((i) => { const a = (i * 60 - 90) * Math.PI / 180; return <circle key={i} cx={14 + 9 * Math.cos(a)} cy={14 + 9 * Math.sin(a)} r="3" fill="#BA7517" fillOpacity={0.15 + i * 0.12}><animate attributeName="fillOpacity" values={`${0.15 + i * 0.12};${0.5 + i * 0.08};${0.15 + i * 0.12}`} dur={`${2 + i * 0.3}s`} repeatCount="indefinite" /></circle>; })}
+        <circle cx="14" cy="14" r="4" fill="#BA7517" fillOpacity="0.3" />
       </svg>
     ),
   },
@@ -96,12 +96,12 @@ const TOOLS = [
     href: "/tools/team-briefing",
     stat: "14",
     statLabel: "day cycle. One briefing. One practice. Measured.",
-    accent: "#2D7D73",
+    accent: C.teal,
     icon: (
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <rect x="4" y="4" width="20" height="20" rx="4" stroke="#2D7D73" strokeWidth="2" />
-        <path d="M9 10h10M9 14h7M9 18h4" stroke="#2D7D73" strokeWidth="1.5" strokeLinecap="round" />
-        <circle cx="22" cy="8" r="3" fill="#2D7D73" fillOpacity="0.4"><animate attributeName="fillOpacity" values="0.3;0.6;0.3" dur="2s" repeatCount="indefinite" /></circle>
+        <rect x="4" y="4" width="20" height="20" rx="4" stroke="#1F6F66" strokeWidth="2" />
+        <path d="M9 10h10M9 14h7M9 18h4" stroke="#1F6F66" strokeWidth="1.5" strokeLinecap="round" />
+        <circle cx="22" cy="8" r="3" fill="#1F6F66" fillOpacity="0.4"><animate attributeName="fillOpacity" values="0.3;0.6;0.3" dur="2s" repeatCount="indefinite" /></circle>
       </svg>
     ),
   },
@@ -594,7 +594,7 @@ function ToolsStrip() {
             See your own numbers
           </p>
           <h2 className="text-[clamp(1.75rem,4vw,34px)] font-medium leading-[1.08] tracking-[-0.025em] mb-3" style={{ color: C.text }}>
-            Four tools. Run them on your facility before we ever talk.
+            Run these on your facility. No email required.
           </h2>
           <p className="text-[14px] leading-[1.6] mb-2" style={{ color: C.textMuted }}>
             Each one models a question on the agenda of every aged care board right now: supplement exposure, psychosocial obligations, the cost of workforce instability, and the state of your leadership pipeline.
