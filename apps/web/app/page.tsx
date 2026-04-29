@@ -499,25 +499,27 @@ function Hero() {
         <div className="flex flex-col lg:flex-row lg:items-start lg:gap-12 mb-10">
           {/* Left: headline + subhead + CTAs */}
           <div className="flex-1 min-w-0">
-            <h1 className="mb-8" style={{ fontFamily: serif, fontSize: "clamp(48px, 6.5vw, 80px)", lineHeight: 1.05, letterSpacing: "-0.025em", fontWeight: 400, color: C.text }}>
+            <h1 className="mb-6" style={{ fontFamily: serif, fontSize: "clamp(48px, 6.5vw, 80px)", lineHeight: 1.05, letterSpacing: "-0.025em", fontWeight: 400, color: C.text }}>
               <span className="block">Never miss a compliance deadline again.</span>
               <span className="block">Never run blind on care minutes.</span>
               <span className="block">Know what&apos;s coming before it hits.</span>
             </h1>
 
-            <p className="max-w-[560px] mb-4" style={{ fontFamily: sans, fontSize: "clamp(17px, 1.6vw, 20px)", lineHeight: 1.5, fontWeight: 400, color: C.textSoft }}>
-              Chris reads the systems your teams already run, detects risk and opportunity across your operation, and drafts the work leaders would otherwise stitch together by hand{" "}
-              <em style={{ fontFamily: serif, fontStyle: "italic", fontWeight: 400, fontSize: "1.05em", color: C.ironstone }}>before the day begins.</em>
+            <p className="max-w-[620px] mb-5" style={{ fontFamily: serif, fontStyle: "italic", fontSize: "clamp(20px, 2.1vw, 26px)", lineHeight: 1.25, letterSpacing: "-0.012em", fontWeight: 400, color: C.ironstone }}>
+              Chris does the work your team is currently stitching together manually.
             </p>
-            <p className="max-w-[560px] mb-10 text-[14px] leading-[1.5]" style={{ fontFamily: sans, color: C.textMuted }}>
-              Operational intelligence and execution for Australian aged care and NDIS. Live in NSW and VIC. Human approved where it matters.
+            <p className="max-w-[560px] mb-3" style={{ fontFamily: sans, fontSize: "clamp(16px, 1.5vw, 19px)", lineHeight: 1.5, fontWeight: 400, color: C.textSoft }}>
+              Reads the systems you already run. Drafts the priority work before the day begins, ready for your approval.
+            </p>
+            <p className="max-w-[560px] mb-10 text-[13.5px] leading-[1.55]" style={{ fontFamily: sans, color: C.textMuted }}>
+              A missed SIRS deadline or care minutes breach can trigger regulatory action. Most providers still track them on memory and spreadsheets.
             </p>
 
-            <div className="flex items-center gap-7 flex-wrap">
-              <a href="#tools" className="inline-block text-[15px] font-medium px-[30px] py-[17px] transition-colors duration-200 hover:bg-[#8b3a32]" style={{ fontFamily: sans, backgroundColor: C.ctaBg, color: C.ctaText, textDecoration: "none" }}>
+            <div className="flex items-center gap-6 flex-wrap">
+              <a href="#tools" className="inline-block text-[16px] font-medium px-[34px] py-[19px] transition-colors duration-200 hover:bg-[#8b3a32]" style={{ fontFamily: sans, backgroundColor: C.ctaBg, color: C.ctaText, textDecoration: "none", boxShadow: "0 1px 0 rgba(0,0,0,0.04)" }}>
                 Run your facility numbers →
               </a>
-              <a href="#how-it-works" className="text-[15px] font-medium pb-[3px] hover:border-[#1a1a1a]" style={{ fontFamily: sans, color: C.text, textDecoration: "none", borderBottom: "1px solid rgba(26,26,26,0.4)" }}>
+              <a href="#how-it-works" className="text-[14px] pb-[2px] hover:border-[#1a1a1a]" style={{ fontFamily: sans, color: C.textMuted, textDecoration: "none", borderBottom: "1px solid rgba(26,26,26,0.25)" }}>
                 See how Chris works
               </a>
             </div>
@@ -561,18 +563,16 @@ function Hero() {
 // ─── Pain section: name the operational reality ─────────────────────────────
 function PainSection() {
   const before = [
-    "Data scattered across systems",
     "Deadlines tracked by people",
+    "Data scattered across systems",
     "Risks found after the fact",
     "Reports assembled manually",
-    "Leaders overloaded with admin",
   ];
   const after = [
     "Signals connected overnight",
-    "Priority work drafted before morning",
-    "Leaders approve instead of chase",
-    "Evidence trails update as work happens",
-    "Risk and margin visible earlier",
+    "Work drafted before morning",
+    "Leaders approve, not chase",
+    "Evidence updates automatically",
   ];
   return (
     <section style={{ backgroundColor: C.canvasLight, borderTop: `0.5px solid ${C.border}` }}>
@@ -582,8 +582,8 @@ function PainSection() {
           Most providers are running on memory, spreadsheets and{" "}
           <span style={{ fontStyle: "italic" }}>heroic follow-up.</span>
         </h2>
-        <p className="text-[15px] leading-[1.65] max-w-[760px] mb-10" style={{ fontFamily: sans, color: C.textMuted }}>
-          Care minutes, SIRS, QI, psychosocial hazards, board packs, corrective actions, AN-ACC opportunities and workforce risk all live in different systems. The danger is not that leaders don&apos;t care. The danger is that no one can see the whole picture in time.
+        <p className="text-[15px] leading-[1.65] max-w-[700px] mb-10" style={{ fontFamily: sans, color: C.textMuted }}>
+          Care minutes, SIRS, QI, psychosocial hazards, board packs, AN-ACC and workforce risk live in different systems. The risk is not that leaders don&apos;t care. It is that no one can see the whole picture in time.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
@@ -640,8 +640,8 @@ function WhatChrisDoesStrip() {
           Chris does the work your team is currently stitching together{" "}
           <span style={{ fontStyle: "italic" }}>manually.</span>
         </h2>
-        <p className="text-[15px] leading-[1.65] max-w-[760px] mb-10" style={{ fontFamily: sans, color: C.textMuted }}>
-          It reads across care, workforce, finance, quality, compliance and leadership signals. Then it drafts the document, recommends the action, prepares the briefing or flags the decision before the day gets away.
+        <p className="text-[15px] leading-[1.65] max-w-[700px] mb-10" style={{ fontFamily: sans, color: C.textMuted }}>
+          Reads across care, workforce, finance, quality, compliance and leadership signals. Drafts the document, the action, the briefing or the decision before the day gets away.
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -852,7 +852,7 @@ function WhatChrisIsSection() {
         {/* Footer line */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mt-6 pt-4 gap-2" style={{ borderTop: `0.5px solid rgba(15,23,42,0.08)` }}>
           <p className="text-[11px]" style={{ color: textSecondary }}>
-            This is the team every facility gets before breakfast. The agents above are the cast for this scene.
+            This is the team working before your team wakes up. The agents above are the cast for this scene.
           </p>
           <div className="flex items-center gap-1.5">
             <span className="w-[7px] h-[7px] rounded-full animate-pulse" style={{ backgroundColor: teal }} />
@@ -2342,9 +2342,8 @@ function ChangeImplementationLayer() {
         <div className="max-w-[660px] mb-6" style={reveal(1200)}>
           <p className="text-[10px] font-medium uppercase tracking-[0.08em] mb-3" style={{ fontFamily: inter, color: C.sage }}>Why this matters now</p>
           <div className="space-y-4">
-            <p className="text-[15px] leading-[1.65]" style={{ fontFamily: inter, color: C.text }}>Emotional intelligence is one of the better-evidenced predictors of how leaders and teams handle change. AI in aged care is the test case for that, not an exception to it.</p>
-            <p className="text-[15px] leading-[1.65]" style={{ fontFamily: inter, color: C.text }}>The leaders who develop the EI capability to lead in the hybrid environment build the cultures that absorb AI adoption. The ones who do not burn out, attrition out, or hold the change back.</p>
-            <p className="text-[15px] leading-[1.65]" style={{ fontFamily: inter, color: C.text }}>Chris OS is the operating layer that does the work and develops the capability. Continuous. Tied to actual operations rather than a generic transformation playbook. Genos-grounded where the consulting alternative is a six-month engagement that ends.</p>
+            <p className="text-[15px] leading-[1.65]" style={{ fontFamily: inter, color: C.text }}>Emotional intelligence is one of the better-evidenced predictors of how leaders and teams handle change. The leaders who develop that capability for the hybrid environment build the cultures that absorb AI adoption. The ones who don&apos;t burn out, attrition out, or hold the change back.</p>
+            <p className="text-[15px] leading-[1.65]" style={{ fontFamily: inter, color: C.text }}>Chris OS is the operating layer that does the work and develops the capability. Continuous. Tied to actual operations, not a generic transformation playbook. Genos-grounded where the consulting alternative is a six-month engagement that ends.</p>
           </div>
           <p className="text-[14px] italic mt-4" style={{ fontFamily: inter, color: C.textMuted }}>Pilot pricing from $15,000.</p>
         </div>
@@ -2604,10 +2603,10 @@ function FinalCTASection() {
         <SectionEyebrow>Where to start</SectionEyebrow>
         <h2 className="mb-5 max-w-[820px] mx-auto" style={{ fontFamily: serif, fontSize: "clamp(32px, 4.5vw, 52px)", lineHeight: 1.08, letterSpacing: "-0.025em", fontWeight: 400, color: C.text }}>
           Start with the workflow{" "}
-          <span style={{ fontStyle: "italic", color: C.ironstone }}>costing you most.</span>
+          <span style={{ fontStyle: "italic", color: C.ironstone }}>costing you the most right now.</span>
         </h2>
         <p className="text-[15px] leading-[1.65] max-w-[620px] mx-auto mb-10" style={{ fontFamily: sans, color: C.textMuted }}>
-          Bring us one operational problem: care minutes, SIRS, QI, workforce risk, board packs, AN-ACC, psychosocial hazards or leader briefings. In 30 minutes, we will show you what Chris could take off your team.
+          Bring us one problem: care minutes, SIRS, QI, workforce risk, board packs, AN-ACC, psychosocial hazards or leader briefings. In 30 minutes we will show you what Chris takes off your team.
         </p>
         <div className="flex items-center gap-6 flex-wrap justify-center">
           <a href="#book" className="inline-block text-[15px] font-medium px-[30px] py-[17px] transition-colors duration-200 hover:bg-[#8b3a32]" style={{ fontFamily: sans, backgroundColor: C.ctaBg, color: C.ctaText, textDecoration: "none" }}>
