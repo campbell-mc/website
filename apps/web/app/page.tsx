@@ -64,8 +64,9 @@ const C = {
 
 const TOOLS = [
   {
-    title: "EX workforce ROI",
-    blurb: "What is turnover, agency dependence, and burnout costing you? Modelled on your facility.",
+    title: "What is your turnover actually costing?",
+    italicWord: "costing",
+    blurb: "Modelled on your facility data. Turnover, agency dependence, sick leave and burnout priced as a single number.",
     cta: "Calculate ROI →",
     href: "/tools/ex-roi",
     stat: "28%",
@@ -79,8 +80,9 @@ const TOOLS = [
     ),
   },
   {
-    title: "Care minutes & supplement",
-    blurb: "Are you meeting 215/44? See your compliance position and your financial exposure.",
+    title: "Where do you sit on the supplement gradient?",
+    italicWord: "gradient",
+    blurb: "See where you sit between 85 and 100 percent on both targets. Cheapest legal close priced. Supplement gap named.",
     cta: "Run the check →",
     href: "/tools/care-minutes",
     stat: "45.9%",
@@ -94,8 +96,9 @@ const TOOLS = [
     ),
   },
   {
-    title: "PSH self-assessment",
-    blurb: "Score your facility across all 16 ISO 45003 psychosocial hazards. Get your convergence risk.",
+    title: "How exposed is your facility on the 16 hazards?",
+    italicWord: "hazards",
+    blurb: "Score across 16 ISO 45003 hazards. Convergence patterns surfaced where your psychosocial exposure compounds.",
     cta: "Start the assessment →",
     href: "/tools/psh-assessment",
     stat: "16",
@@ -109,8 +112,9 @@ const TOOLS = [
     ),
   },
   {
-    title: "Team Briefing demo",
-    blurb: "See what your team leaders would receive. Operational data in, prioritised briefing out.",
+    title: "Actionable EX insights",
+    italicWord: undefined,
+    blurb: "Run your facility's operational and pulse data through Chris. A team briefing with insights and micro-practices, ready for your morning huddle.",
     cta: "Generate a briefing →",
     href: "/tools/team-briefing",
     stat: "14",
@@ -125,6 +129,22 @@ const TOOLS = [
     ),
   },
 ];
+
+function renderToolTitle(text: string, italicWord?: string) {
+  if (!italicWord) return text;
+  const idx = text.toLowerCase().indexOf(italicWord.toLowerCase());
+  if (idx === -1) return text;
+  const before = text.slice(0, idx);
+  const matched = text.slice(idx, idx + italicWord.length);
+  const after = text.slice(idx + italicWord.length);
+  return (
+    <>
+      {before}
+      <span style={{ fontFamily: fraunces, fontStyle: "italic", fontWeight: 400 }}>{matched}</span>
+      {after}
+    </>
+  );
+}
 
 const STATS = [
   { number: "$1.5M", label: "Maximum corporate penalty, serious failure, Aged Care Act 2024", color: C.warn },
@@ -903,7 +923,7 @@ function ToolsStrip() {
 
                 <p className="text-[10px] mb-3 leading-relaxed" style={{ color: C.textFaint }}>{tool.statLabel}</p>
 
-                <h3 className="text-[14px] font-medium mb-1 leading-snug" style={{ color: C.text }}>{tool.title}</h3>
+                <h3 className="mb-2" style={{ fontFamily: sans, fontSize: 18, fontWeight: 500, lineHeight: 1.2, letterSpacing: "-0.015em", color: C.text }}>{renderToolTitle(tool.title, tool.italicWord)}</h3>
                 <p className="text-[12px] leading-[1.55] mb-4" style={{ color: C.textMuted }}>{tool.blurb}</p>
 
                 <span className="text-[12px] font-medium group-hover:underline" style={{ color: tool.accent }}>{tool.cta}</span>
