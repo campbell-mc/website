@@ -1086,16 +1086,16 @@ function HowItWorksSection() {
   const [active, setActive] = useState(0);
   const outerRef = useRef<HTMLDivElement>(null);
 
-  // Scroll-driven stage progression on desktop
   useEffect(() => {
     const outer = outerRef.current;
     if (!outer) return;
+    if (typeof window === "undefined") return;
+    if (window.matchMedia("(max-width: 1023px)").matches) return;
     function onScroll() {
       if (!outer) return;
       const rect = outer.getBoundingClientRect();
       const sectionHeight = outer.offsetHeight;
       const viewportH = window.innerHeight;
-      // How far we've scrolled into the section (0 = top just hit viewport, sectionHeight - viewportH = bottom)
       const scrolled = -rect.top;
       const scrollableRange = sectionHeight - viewportH;
       if (scrollableRange <= 0) return;
@@ -1111,10 +1111,10 @@ function HowItWorksSection() {
   const Illus = HIW_ILLUSTRATIONS[active];
 
   return (
-    <section id="how-it-works" ref={outerRef} style={{ backgroundColor: C.canvas, height: "300vh" }}>
-      <div className="sticky top-0" style={{ height: "100vh", display: "flex", alignItems: "center" }}>
+    <section id="how-it-works" ref={outerRef} style={{ backgroundColor: C.canvas }} className="lg:h-[300vh]">
+      {/* Desktop: sticky scroll-driven progression */}
+      <div className="hidden lg:flex sticky top-0" style={{ height: "100vh", alignItems: "center" }}>
         <div className="max-w-6xl mx-auto px-6 lg:px-16 w-full">
-          {/* Header */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-16 mb-10">
             <div>
               <SectionEyebrow>How it works</SectionEyebrow>
@@ -1129,7 +1129,6 @@ function HowItWorksSection() {
             </div>
           </div>
 
-          {/* Progress bar */}
           <div className="flex gap-1 mb-8">
             {HIW_STAGES.map((s, i) => (
               <div key={s.num} className="flex-1">
@@ -1142,7 +1141,6 @@ function HowItWorksSection() {
             ))}
           </div>
 
-          {/* Content: illustration + copy */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-center">
             <div className="order-2 lg:order-1 rounded-[8px] overflow-hidden" style={{ border: `0.5px solid ${C.border}` }}>
               <div className="p-2 lg:p-3"><Illus /></div>
@@ -1160,6 +1158,38 @@ function HowItWorksSection() {
           </div>
         </div>
       </div>
+
+      {/* Mobile: stacked cards, simple scroll */}
+      <div className="lg:hidden max-w-6xl mx-auto px-6 py-14">
+        <SectionEyebrow>How it works</SectionEyebrow>
+        <h2 className="mb-4" style={{ fontSize: "clamp(30px, 7vw, 40px)", lineHeight: 1.1, letterSpacing: "-0.025em", fontWeight: 400, fontFamily: serif, color: C.text }}>
+          Aged care, with <span style={{ fontStyle: "italic" }}>intelligence</span> in every layer
+        </h2>
+        <p className="text-[15px] leading-[1.6] mb-10" style={{ color: C.textMuted }}>
+          Cross-domain intelligence working alongside your leaders. Reading every system you already run, catching what slips between domains, supporting the people running care, and handling the routine so they can lead.
+        </p>
+
+        <div className="space-y-5">
+          {HIW_STAGES.map((s, i) => {
+            const StageIllus = HIW_ILLUSTRATIONS[i];
+            return (
+              <div key={s.num} className="rounded-[8px] p-5" style={{ backgroundColor: C.canvasLight, border: `0.5px solid ${C.border}` }}>
+                <p className="text-[11px] font-medium tracking-[0.08em] uppercase mb-2" style={{ fontFamily: inter, color: C.ironstone }}>{s.num} {s.label}</p>
+                <h3 className="mb-3" style={{ fontSize: "22px", lineHeight: 1.18, letterSpacing: "-0.01em", fontWeight: 500, fontFamily: serif, color: C.text }}>{s.title}</h3>
+                <p className="text-[14px] leading-[1.6] mb-4" style={{ fontFamily: inter, color: C.textMuted }}>{s.body}</p>
+                <div className="rounded-[6px] overflow-hidden mb-4" style={{ border: `0.5px solid ${C.border}` }}>
+                  <div className="p-2"><StageIllus /></div>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {s.pills.map((pill) => (
+                    <span key={pill} className="px-2.5 py-1 rounded-full text-[11px] font-medium" style={{ backgroundColor: C.accentMuted, color: C.ironstone }}>{pill}</span>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
     </section>
   );
 }
@@ -1167,7 +1197,7 @@ function HowItWorksSection() {
 function StatRow() {
   return (
     <section style={{ backgroundColor: C.canvas, borderTop: `0.5px solid ${C.border}` }}>
-      <div className="max-w-6xl mx-auto px-6 lg:px-16 py-12 lg:py-14">
+      <div className="max-w-6xl mx-auto px-6 lg:px-16 py-14 lg:py-18">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 lg:gap-0">
           {STATS.map((stat, i) => (
             <div key={stat.label} className={`flex flex-col items-center text-center lg:py-0 ${i < STATS.length - 1 ? "sm:border-r" : ""}`} style={{ borderColor: C.border }}>
@@ -1347,7 +1377,7 @@ function ScenarioSection() {
 
   return (
     <section ref={sectionRef} style={{ backgroundColor: C.canvasLight }}>
-      <div className="max-w-6xl mx-auto px-6 lg:px-16 py-12 lg:py-16">
+      <div className="max-w-6xl mx-auto px-6 lg:px-16 py-14 lg:py-18">
         <p className="text-[17px] mb-8" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>Every facility. Every week.</p>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
@@ -1565,7 +1595,7 @@ const FOUNDERS = [
 function FoundersSection() {
   return (
     <section style={{ backgroundColor: C.canvas }}>
-      <div className="max-w-6xl mx-auto px-6 lg:px-16 py-12 lg:py-16">
+      <div className="max-w-6xl mx-auto px-6 lg:px-16 py-14 lg:py-18">
         <p className="text-[17px] mb-2" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: C.teal }}>Your team</p>
         <h2 className="mb-10" style={{ fontSize: "clamp(34px, 4vw, 48px)", lineHeight: 1.08, letterSpacing: "-0.025em", fontWeight: 500, color: C.text }}>
           The humans behind Chris{" "}
@@ -1625,7 +1655,7 @@ function HonestAnswersSection() {
 
   return (
     <section style={{ backgroundColor: C.canvasLight }}>
-      <div className="max-w-6xl mx-auto px-6 lg:px-16 py-12 lg:py-16">
+      <div className="max-w-6xl mx-auto px-6 lg:px-16 py-14 lg:py-18">
         <p className="text-[11px] font-medium uppercase tracking-[0.08em] mb-3" style={{ color: C.teal }}>Honest answers</p>
         <h2 className="mb-3" style={{ fontSize: "clamp(34px, 4vw, 48px)", lineHeight: 1.08, letterSpacing: "-0.025em", fontFamily: serif, fontWeight: 400, color: C.text }}>
           Yes, we know what you&apos;re{" "}
