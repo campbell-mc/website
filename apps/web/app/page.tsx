@@ -491,10 +491,10 @@ function Hero() {
         <div className="flex flex-col lg:flex-row lg:items-start lg:gap-12 mb-10">
           {/* Left: headline + subhead + CTAs */}
           <div className="flex-1 min-w-0">
-            <h1 className="mb-8" style={{ fontFamily: serif, fontSize: "clamp(56px, 7.5vw, 92px)", lineHeight: 1.0, letterSpacing: "-0.028em", fontWeight: 400, color: C.text }}>
-              <span className="block">Hold quality.</span>
-              <span className="block">Protect margin.</span>
-              <span className="block">Lead with confidence.</span>
+            <h1 className="mb-8" style={{ fontFamily: serif, fontSize: "clamp(48px, 6.5vw, 80px)", lineHeight: 1.05, letterSpacing: "-0.025em", fontWeight: 400, color: C.text }}>
+              <span className="block">Never miss a compliance deadline again.</span>
+              <span className="block">Never run blind on care minutes.</span>
+              <span className="block">Know what&apos;s coming before it hits.</span>
             </h1>
 
             <p className="max-w-[560px] mb-10" style={{ fontFamily: sans, fontSize: "clamp(17px, 1.6vw, 20px)", lineHeight: 1.5, fontWeight: 400, color: C.textSoft }}>
