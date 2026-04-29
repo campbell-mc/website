@@ -331,14 +331,13 @@ function Nav() {
   return (
     <nav className="sticky top-0 z-50 backdrop-blur-sm" style={{ backgroundColor: "rgba(243,239,230,0.94)", borderBottom: `1px solid ${C.ruleCharcoal}` }}>
       <div className="max-w-[1240px] mx-auto flex items-center justify-between px-6 lg:px-14 py-3">
-        <Link href="/v2" className="text-[15px] font-medium tracking-tight" style={{ fontFamily: sans, color: C.text }}>
+        <Link href="/" className="text-[15px] font-medium tracking-tight" style={{ fontFamily: sans, color: C.text }}>
           Chris<span style={{ color: C.ironstone }}>·</span>OS
         </Link>
         <div className="flex items-center gap-5">
-          <a href="#what-chris-is" className="text-[13px] hidden lg:block hover:opacity-70" style={{ fontFamily: sans, color: C.textMuted }}>What Chris is</a>
-          <a href="#tools" className="text-[13px] hidden lg:block hover:opacity-70" style={{ fontFamily: sans, color: C.textMuted }}>Your numbers</a>
+          <a href="#tools" className="text-[13px] hidden lg:block hover:opacity-70" style={{ fontFamily: sans, color: C.textMuted }}>Run your numbers</a>
           <a href="#how-it-works" className="text-[13px] hidden lg:block hover:opacity-70" style={{ fontFamily: sans, color: C.textMuted }}>How it works</a>
-          <a href="#lead-change" className="text-[13px] hidden lg:block hover:opacity-70" style={{ fontFamily: sans, color: C.textMuted }}>Lead change</a>
+          <a href="/trust" className="text-[13px] hidden lg:block hover:opacity-70" style={{ fontFamily: sans, color: C.textMuted }}>Trust</a>
           <a href="#book" className="text-[14px] font-medium px-[20px] py-[12px]" style={{ fontFamily: sans, backgroundColor: C.ctaBg, color: C.ctaText, transition: "background 200ms" }}>
             Book a conversation
           </a>
@@ -497,20 +496,25 @@ function Hero() {
               <span className="block">Know what&apos;s coming before it hits.</span>
             </h1>
 
-            <p className="max-w-[560px] mb-10" style={{ fontFamily: sans, fontSize: "clamp(17px, 1.6vw, 20px)", lineHeight: 1.5, fontWeight: 400, color: C.textSoft }}>
-              Operational intelligence for Australian aged care and NDIS.{" "}
-              <em style={{ fontFamily: serif, fontStyle: "italic", fontWeight: 400, fontSize: "1.05em", color: C.ironstone }}>Run the morning before the morning.</em>{" "}
-              Chris reads every system you already run, drafts the work your team would otherwise stitch together by hand, and keeps your leaders ahead of compliance and cost.
+            <p className="max-w-[560px] mb-4" style={{ fontFamily: sans, fontSize: "clamp(17px, 1.6vw, 20px)", lineHeight: 1.5, fontWeight: 400, color: C.textSoft }}>
+              Chris reads the systems your teams already run, detects risk and opportunity across your operation, and drafts the work leaders would otherwise stitch together by hand{" "}
+              <em style={{ fontFamily: serif, fontStyle: "italic", fontWeight: 400, fontSize: "1.05em", color: C.ironstone }}>before the day begins.</em>
+            </p>
+            <p className="max-w-[560px] mb-10 text-[14px] leading-[1.5]" style={{ fontFamily: sans, color: C.textMuted }}>
+              Operational intelligence and execution for Australian aged care and NDIS. Live in NSW and VIC. Human approved where it matters.
             </p>
 
             <div className="flex items-center gap-7 flex-wrap">
-              <a href="#book" className="inline-block text-[15px] font-medium px-[30px] py-[17px] transition-colors duration-200 hover:bg-[#8b3a32]" style={{ fontFamily: sans, backgroundColor: C.ctaBg, color: C.ctaText, textDecoration: "none" }}>
-                Book 30 minutes with Campbell →
+              <a href="#tools" className="inline-block text-[15px] font-medium px-[30px] py-[17px] transition-colors duration-200 hover:bg-[#8b3a32]" style={{ fontFamily: sans, backgroundColor: C.ctaBg, color: C.ctaText, textDecoration: "none" }}>
+                Run your facility numbers →
               </a>
               <a href="#how-it-works" className="text-[15px] font-medium pb-[3px] hover:border-[#1a1a1a]" style={{ fontFamily: sans, color: C.text, textDecoration: "none", borderBottom: "1px solid rgba(26,26,26,0.4)" }}>
-                How Chris works, layer by layer
+                See how Chris works
               </a>
             </div>
+            <p className="text-[12.5px] mt-3" style={{ fontFamily: sans, color: C.textFaint }}>
+              No email required. No demo. Just your numbers.
+            </p>
           </div>
 
           {/* Right: iPhone mockup with Team Briefing */}
@@ -539,6 +543,72 @@ function Hero() {
               </div>
             ))}
           </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── Pain section: name the operational reality ─────────────────────────────
+function PainSection() {
+  const before = [
+    "Data scattered across systems",
+    "Deadlines tracked by people",
+    "Risks found after the fact",
+    "Reports assembled manually",
+    "Leaders overloaded with admin",
+  ];
+  const after = [
+    "Signals connected overnight",
+    "Priority work drafted before morning",
+    "Leaders approve instead of chase",
+    "Evidence trails update as work happens",
+    "Risk and margin visible earlier",
+  ];
+  return (
+    <section style={{ backgroundColor: C.canvasLight, borderTop: `0.5px solid ${C.border}` }}>
+      <div className="max-w-6xl mx-auto px-6 lg:px-16 py-14 lg:py-18">
+        <SectionEyebrow>The operational reality</SectionEyebrow>
+        <h2 className="mb-5 max-w-[820px]" style={{ fontFamily: serif, fontSize: "clamp(30px, 4vw, 44px)", lineHeight: 1.1, letterSpacing: "-0.02em", fontWeight: 400, color: C.text }}>
+          Most providers are running on memory, spreadsheets and{" "}
+          <span style={{ fontStyle: "italic" }}>heroic follow-up.</span>
+        </h2>
+        <p className="text-[15px] leading-[1.65] max-w-[760px] mb-10" style={{ fontFamily: sans, color: C.textMuted }}>
+          Care minutes, SIRS, QI, psychosocial hazards, board packs, corrective actions, AN-ACC opportunities and workforce risk all live in different systems. The danger is not that leaders don&apos;t care. The danger is that no one can see the whole picture in time.
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
+          <div className="rounded-[8px] p-6" style={{ backgroundColor: C.canvas, border: `0.5px solid ${C.border}` }}>
+            <p className="text-[11px] font-semibold tracking-[0.16em] uppercase mb-4" style={{ fontFamily: sans, color: C.textFaint }}>Before Chris</p>
+            <ul className="space-y-2.5">
+              {before.map((line) => (
+                <li key={line} className="flex items-start gap-3 text-[14px] leading-[1.5]" style={{ fontFamily: sans, color: C.textMuted }}>
+                  <span className="mt-2 w-1 h-1 rounded-full shrink-0" style={{ backgroundColor: C.textFaint }} />
+                  <span>{line}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="rounded-[8px] p-6" style={{ backgroundColor: C.canvas, border: `0.5px solid ${C.ironstone}` }}>
+            <p className="text-[11px] font-semibold tracking-[0.16em] uppercase mb-4" style={{ fontFamily: sans, color: C.ironstone }}>After Chris</p>
+            <ul className="space-y-2.5">
+              {after.map((line) => (
+                <li key={line} className="flex items-start gap-3 text-[14px] leading-[1.5]" style={{ fontFamily: sans, color: C.text }}>
+                  <span className="mt-2 w-1 h-1 rounded-full shrink-0" style={{ backgroundColor: C.ironstone }} />
+                  <span>{line}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div className="mt-10 flex items-center gap-6 flex-wrap">
+          <a href="#tools" className="inline-block text-[14px] font-medium px-[26px] py-[14px] transition-colors duration-200 hover:bg-[#8b3a32]" style={{ fontFamily: sans, backgroundColor: C.ctaBg, color: C.ctaText, textDecoration: "none" }}>
+            Run your facility numbers →
+          </a>
+          <a href="#how-it-works" className="text-[14px] font-medium pb-[3px]" style={{ fontFamily: sans, color: C.text, textDecoration: "none", borderBottom: "1px solid rgba(26,26,26,0.4)" }}>
+            See how Chris works
+          </a>
         </div>
       </div>
     </section>
@@ -2446,6 +2516,35 @@ function VictorianHook() {
   );
 }
 
+// ─── Final CTA: workflow-first close ────────────────────────────────────────
+function FinalCTASection() {
+  return (
+    <section style={{ backgroundColor: C.canvasWarm }}>
+      <div className="max-w-6xl mx-auto px-6 lg:px-16 py-16 lg:py-22 text-center">
+        <SectionEyebrow>Where to start</SectionEyebrow>
+        <h2 className="mb-5 max-w-[820px] mx-auto" style={{ fontFamily: serif, fontSize: "clamp(32px, 4.5vw, 52px)", lineHeight: 1.08, letterSpacing: "-0.025em", fontWeight: 400, color: C.text }}>
+          Start with the workflow{" "}
+          <span style={{ fontStyle: "italic", color: C.ironstone }}>costing you most.</span>
+        </h2>
+        <p className="text-[15px] leading-[1.65] max-w-[620px] mx-auto mb-10" style={{ fontFamily: sans, color: C.textMuted }}>
+          Bring us one operational problem: care minutes, SIRS, QI, workforce risk, board packs, AN-ACC, psychosocial hazards or leader briefings. In 30 minutes, we will show you what Chris could take off your team.
+        </p>
+        <div className="flex items-center gap-6 flex-wrap justify-center">
+          <a href="#book" className="inline-block text-[15px] font-medium px-[30px] py-[17px] transition-colors duration-200 hover:bg-[#8b3a32]" style={{ fontFamily: sans, backgroundColor: C.ctaBg, color: C.ctaText, textDecoration: "none" }}>
+            Book a 30-minute conversation →
+          </a>
+          <a href="#tools" className="text-[15px] font-medium pb-[3px]" style={{ fontFamily: sans, color: C.text, textDecoration: "none", borderBottom: "1px solid rgba(26,26,26,0.4)" }}>
+            Run your facility numbers
+          </a>
+        </div>
+        <p className="text-[12.5px] mt-6" style={{ fontFamily: sans, color: C.textFaint }}>
+          Pilot pricing from $15,000. Founding partner cohort now open.
+        </p>
+      </div>
+    </section>
+  );
+}
+
 function Footer() {
   return (
     <footer style={{ backgroundColor: C.canvas, borderTop: `0.5px solid ${C.border}` }}>
@@ -2522,17 +2621,18 @@ export default function V2Page() {
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..500;1,9..144,300..500&family=Inter:wght@400;500;600&display=swap" />
       <Nav />
       <Hero />
-      {/* Section 2: Mt Gibraltar morning narrative */}
-      <WhatChrisIsSection />
-      {/* Section 3: Customer proof */}
-      <ClientProof />
-      {/* Section 4: Live facility view (cards moved from hero) */}
-      <LiveFacilityView />
-      {/* Section 5: Self-service tools */}
-      <StatRow />
+      {/* Sell the pain before the system */}
+      <PainSection />
+      {/* Lead-gen wedge: run your numbers */}
       <ToolsStrip />
       <VictorianHook />
-      {/* Section 6: Scenarios */}
+      {/* Customer proof */}
+      <ClientProof />
+      {/* Mt Gibraltar morning narrative */}
+      <WhatChrisIsSection />
+      {/* Live facility view */}
+      <LiveFacilityView />
+      <StatRow />
       <ScenarioSection />
       <HowItWorksSection />
       <JobsSection />
@@ -2540,6 +2640,7 @@ export default function V2Page() {
       <ChangeImplementationLayer />
       <HonestAnswersSection />
       <FoundersSection />
+      <FinalCTASection />
       <Footer />
       </div>{/* close relative z-[1] wrapper */}
 
