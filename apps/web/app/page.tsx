@@ -136,6 +136,7 @@ const JOBS = [
   {
     n: "01", role: "DON", title: "Handle SIRS without missing a deadline",
     hook: "A Priority 1 incident. 11pm. The 24-hour clock is running.", accent: C.warm,
+    consequence: "Civil penalties for late notifications.",
     chrisDoes: [
       "Classifies incident as Priority 1 or Priority 2 within minutes of ingestion",
       "Drafts the ACQSC notification with all mandatory fields populated",
@@ -148,6 +149,7 @@ const JOBS = [
   {
     n: "02", role: "DON", title: "Stay on the right side of care minutes every day",
     hook: "2pm. Your RN called in sick. Nobody's run the numbers.", accent: C.copper,
+    consequence: "AN-ACC funding and regulatory exposure.",
     chrisDoes: [
       "Pulls rostering data from Deputy / Humanforce every 2 hours",
       "Calculates total and RN minutes per resident against 215/44 thresholds",
@@ -160,6 +162,7 @@ const JOBS = [
   {
     n: "03", role: "Quality Lead", title: "Submit QI without the quarterly scramble",
     hook: "The GPMS window opens. Someone has to pull 14 indicator domains from three systems.", accent: C.good,
+    consequence: "Star rating and accreditation readiness.",
     chrisDoes: [
       "Aggregates all 14 QI domains from connected clinical systems",
       "Flags data quality anomalies before submission",
@@ -172,6 +175,7 @@ const JOBS = [
   {
     n: "04", role: "Quality Lead", title: "Track corrective actions so nothing falls through",
     hook: "A corrective action was opened six weeks ago. Nobody knows who owns it.", accent: C.dark,
+    consequence: "Audit readiness, regulatory standing.",
     chrisDoes: [
       "Creates corrective actions from incidents, audits, or ACQSC findings",
       "Assigns owner, sets deadline, tracks status continuously",
@@ -184,6 +188,7 @@ const JOBS = [
   {
     n: "05", role: "DON", title: "Give every leader their Monday briefing",
     hook: "Sunday night. Someone has to pull together what's happening across the facility.", accent: C.good,
+    consequence: "1,872 leader hours per year returned.",
     chrisDoes: [
       "Synthesises care minutes, SIRS status, workforce signals, and compliance data",
       "Generates a role-specific briefing for every leader (DON, CFO, WHS Lead, Team Leaders)",
@@ -196,6 +201,7 @@ const JOBS = [
   {
     n: "06", role: "CEO", title: "Produce board and committee packs from live data",
     hook: "Three days before the board meeting. Five systems. One Sunday lost.", accent: C.dark,
+    consequence: "Eight hours per pack returned, monthly.",
     chrisDoes: [
       "Assembles all 8 board pack sections from the canonical data layer",
       "Drafts the executive narrative, risk register, and decisions required",
@@ -208,6 +214,7 @@ const JOBS = [
   {
     n: "07", role: "WHS Lead", title: "Know which workforce risks are real before they become incidents",
     hook: "Three staff resigned in the same wing in four weeks. Nobody connected the signals.", accent: C.copper,
+    consequence: "Standard 2 plus $1M+ PSH penalty exposure.",
     chrisDoes: [
       "Runs fortnightly pulse survey across all teams, 16 PSH domains",
       "Correlates pulse signals with rostering, incident, and HR data",
@@ -220,6 +227,7 @@ const JOBS = [
   {
     n: "08", role: "CFO", title: "Optimise AN-ACC funding without a consultant",
     hook: "Your revenue per bed is 8% below sector average. Nobody knows why.", accent: C.warm,
+    consequence: "$14K+ annual revenue uplift per facility.",
     chrisDoes: [
       "Monitors resident classifications continuously against AN-ACC funding rules",
       "Identifies reclassification opportunities before the quarter closes",
@@ -232,6 +240,7 @@ const JOBS = [
   {
     n: "09", role: "CEO", title: "See what's coming before it hits",
     hook: "A complaint pattern built for six weeks. In hindsight, the signals were there.", accent: C.dark,
+    consequence: "Reputation, regulatory standing, board confidence.",
     chrisDoes: [
       "Monitors patterns across clinical, workforce, financial, and compliance data simultaneously",
       "Detects precursor signatures that match historical incident patterns",
@@ -609,6 +618,39 @@ function PainSection() {
           <a href="#how-it-works" className="text-[14px] font-medium pb-[3px]" style={{ fontFamily: sans, color: C.text, textDecoration: "none", borderBottom: "1px solid rgba(26,26,26,0.4)" }}>
             See how Chris works
           </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── What Chris does: 4-step outcome strip ──────────────────────────────────
+function WhatChrisDoesStrip() {
+  const steps = [
+    { num: "01", label: "Connect", body: "Chris reads the systems you already run. No rip-and-replace." },
+    { num: "02", label: "Watch", body: "It monitors for risk, drift, deadlines, gaps and opportunities across domains." },
+    { num: "03", label: "Draft", body: "It prepares the work: SIRS, QI, board pack sections, care minute checks, leader briefings, action queues." },
+    { num: "04", label: "Approve", body: "Your leaders review, edit and approve. Regulatory submissions remain human approved." },
+  ];
+  return (
+    <section style={{ backgroundColor: C.canvas, borderTop: `0.5px solid ${C.border}` }}>
+      <div className="max-w-6xl mx-auto px-6 lg:px-16 py-14 lg:py-18">
+        <SectionEyebrow>What Chris does</SectionEyebrow>
+        <h2 className="mb-4 max-w-[820px]" style={{ fontFamily: serif, fontSize: "clamp(30px, 4vw, 44px)", lineHeight: 1.1, letterSpacing: "-0.02em", fontWeight: 400, color: C.text }}>
+          Chris does the work your team is currently stitching together{" "}
+          <span style={{ fontStyle: "italic" }}>manually.</span>
+        </h2>
+        <p className="text-[15px] leading-[1.65] max-w-[760px] mb-10" style={{ fontFamily: sans, color: C.textMuted }}>
+          It reads across care, workforce, finance, quality, compliance and leadership signals. Then it drafts the document, recommends the action, prepares the briefing or flags the decision before the day gets away.
+        </p>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {steps.map((s) => (
+            <div key={s.num} className="rounded-[8px] p-5" style={{ backgroundColor: C.canvasLight, border: `0.5px solid ${C.border}` }}>
+              <p className="text-[10px] font-semibold tracking-[0.16em] uppercase mb-3" style={{ fontFamily: sans, color: C.ironstone }}>{s.num} · {s.label}</p>
+              <p className="text-[14px] leading-[1.55]" style={{ fontFamily: sans, color: C.text }}>{s.body}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -1312,6 +1354,7 @@ function JobsSection() {
                 </div>
                 <h3 className="text-[15px] font-medium mb-2" style={{ color: C.inkDark }}>{job.title}</h3>
                 <p className="text-[13px] italic mb-3" style={{ color: C.inkMutedLight }}>{job.hook}</p>
+                <p className="text-[11px] font-medium uppercase tracking-[0.08em] mb-3" style={{ color: C.textFaint }}>At stake: <span className="normal-case tracking-normal" style={{ color: C.text }}>{job.consequence}</span></p>
                 <p className="text-[12px] font-medium" style={{ color: job.accent }}>See example →</p>
               </div>
             </button>
@@ -2517,6 +2560,42 @@ function VictorianHook() {
   );
 }
 
+// ─── Proof block: 7 named proof points ──────────────────────────────────────
+function ProofBlock() {
+  const proof = [
+    { label: "Live cohort", value: "4 sites and services" },
+    { label: "Resident and client coverage", value: "650 residents and clients" },
+    { label: "Practice depth", value: "200 micro-practices implemented" },
+    { label: "Operating jurisdictions", value: "Live in NSW and VIC" },
+    { label: "Pilot pricing", value: "From $15,000" },
+    { label: "Regulatory submissions", value: "Human approved, every time" },
+    { label: "Data residency", value: "Australian-resident, Sydney region" },
+  ];
+  return (
+    <section style={{ backgroundColor: C.canvas, borderTop: `0.5px solid ${C.border}` }}>
+      <div className="max-w-6xl mx-auto px-6 lg:px-16 py-14 lg:py-18">
+        <SectionEyebrow>What is real today</SectionEyebrow>
+        <h2 className="mb-4 max-w-[760px]" style={{ fontFamily: serif, fontSize: "clamp(28px, 3.6vw, 40px)", lineHeight: 1.12, letterSpacing: "-0.02em", fontWeight: 400, color: C.text }}>
+          The cohort, the cost and the{" "}
+          <span style={{ fontStyle: "italic" }}>controls.</span>
+        </h2>
+        <p className="text-[15px] leading-[1.6] max-w-[640px] mb-10" style={{ fontFamily: sans, color: C.textMuted }}>
+          Pilot cohort, founding partners, and the operating posture every CFO and CIO will ask about on the first call.
+        </p>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {proof.map((p) => (
+            <div key={p.label} className="rounded-[8px] p-5" style={{ backgroundColor: C.canvasLight, border: `0.5px solid ${C.border}` }}>
+              <p className="text-[10px] font-semibold tracking-[0.16em] uppercase mb-2" style={{ fontFamily: sans, color: C.ironstone }}>{p.label}</p>
+              <p className="text-[15px] font-medium leading-[1.35]" style={{ fontFamily: sans, color: C.text }}>{p.value}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // ─── Final CTA: workflow-first close ────────────────────────────────────────
 function FinalCTASection() {
   return (
@@ -2624,6 +2703,8 @@ export default function V2Page() {
       <Hero />
       {/* Sell the pain before the system */}
       <PainSection />
+      {/* What Chris does in four steps */}
+      <WhatChrisDoesStrip />
       {/* Lead-gen wedge: run your numbers */}
       <ToolsStrip />
       <VictorianHook />
@@ -2633,6 +2714,8 @@ export default function V2Page() {
       <WhatChrisIsSection />
       {/* Live facility view */}
       <LiveFacilityView />
+      {/* Cohort/cost/controls proof */}
+      <ProofBlock />
       <StatRow />
       <ScenarioSection />
       <HowItWorksSection />
