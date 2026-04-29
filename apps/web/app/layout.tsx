@@ -3,9 +3,9 @@ import "./globals.css";
 import { instrumentSerif, dmSans } from "./fonts";
 
 export const metadata: Metadata = {
-  title: "CHRIS — Culture Habit Reinforcement Intelligence System",
+  title: "Chris OS — Operational intelligence for Australian aged care",
   description:
-    "Operational intelligence for Australian aged care providers. Connecting every source system into a single canonical data layer.",
+    "Seven AI agents monitor every domain of your aged care operation. When something needs action, Chris executes it.",
 };
 
 export default function RootLayout({
