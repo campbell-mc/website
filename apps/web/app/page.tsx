@@ -2462,7 +2462,7 @@ function Footer() {
           <div>
             <p className="text-[11px] font-medium uppercase tracking-wider mb-3" style={{ color: C.textFaint }}>Company</p>
             <div className="space-y-2">
-              <a href="mailto:hello@culturecrunch.io" className="block text-[13px] hover:opacity-70" style={{ color: C.textMuted }}>Contact</a>
+              <a href="mailto:hello@chris-os.io" className="block text-[13px] hover:opacity-70" style={{ color: C.textMuted }}>Contact</a>
             </div>
           </div>
           <div>
@@ -2482,9 +2482,9 @@ function Footer() {
         <div className="pt-6 flex items-center justify-between flex-wrap gap-3" style={{ borderTop: `0.5px solid ${C.border}` }}>
           <div>
             <span className="text-[14px] font-medium" style={{ color: C.text }}>Chris<span style={{ color: C.teal }}>·</span>OS</span>
-            <p className="text-[12px] mt-1" style={{ color: C.textFaint }}>Operational intelligence and execution for Australian aged care. Built by Culture Crunch.</p>
+            <p className="text-[12px] mt-1" style={{ color: C.textFaint }}>Operational intelligence and execution for Australian aged care.</p>
           </div>
-          <span className="text-[11px]" style={{ color: C.textFaint }}>© 2026 Culture Crunch Pty Ltd</span>
+          <span className="text-[11px]" style={{ color: C.textFaint }}>© 2026 Chris OS</span>
         </div>
       </div>
     </footer>
