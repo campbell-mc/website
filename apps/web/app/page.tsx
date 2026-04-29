@@ -692,12 +692,12 @@ function WhatChrisIsSection() {
       <div className="max-w-5xl mx-auto px-6 lg:px-12 py-14 lg:py-18">
         {/* Header */}
         <div className="mb-8 lg:mb-10">
-          <p className="text-[17px] mb-3" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: teal }}>What Chris is</p>
+          <p className="text-[17px] mb-3" style={{ fontFamily: fraunces, fontStyle: "italic", letterSpacing: "-0.01em", color: teal }}>A morning before the morning</p>
           <h2 className="mb-3 max-w-[700px]" style={{ fontSize: "clamp(34px, 4vw, 48px)", lineHeight: 1.08, letterSpacing: "-0.025em", fontWeight: 400, fontFamily: serif, color: textPrimary }}>
             A <span style={{ fontStyle: "italic" }}>morning</span> at Mt Gibraltar Gardens.
           </h2>
-          <p className="text-[12.5px] leading-[1.55] max-w-[520px]" style={{ color: textSecondary }}>
-            Monday morning. While Sarah&apos;s team finished the night shift, Chris built her team briefing. The agents that built it are on the left. The artefact she opened before the morning huddle is on the right.
+          <p className="text-[12.5px] leading-[1.55] max-w-[560px]" style={{ color: textSecondary }}>
+            While Sarah&apos;s team finished the night shift, Chris built her Monday briefing. It connected pulse results, roster signals, supervision gaps and trust scores, then prepared three practical actions for her morning huddle.
           </p>
         </div>
 
@@ -810,7 +810,7 @@ function WhatChrisIsSection() {
         {/* Footer line */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mt-6 pt-4 gap-2" style={{ borderTop: `0.5px solid rgba(15,23,42,0.08)` }}>
           <p className="text-[11px]" style={{ color: textSecondary }}>
-            This morning&apos;s briefing assembled itself overnight. The agents above are the cast for this scene.
+            This is the team every facility gets before breakfast. The agents above are the cast for this scene.
           </p>
           <div className="flex items-center gap-1.5">
             <span className="w-[7px] h-[7px] rounded-full animate-pulse" style={{ backgroundColor: teal }} />
@@ -1194,7 +1194,7 @@ function HowItWorksSection() {
             </div>
             <div className="lg:pt-8">
               <p className="text-[15px] leading-[1.6]" style={{ color: C.textMuted }}>
-                Cross-domain intelligence working alongside your leaders. Reading every system you already run, catching what slips between domains, supporting the people running care, and handling the routine so they can lead.
+                Chris works across the systems your teams already use. It does not replace your clinical, rostering, finance or quality platforms. It connects the signals between them.
               </p>
             </div>
           </div>
@@ -1294,10 +1294,10 @@ function JobsSection() {
           <em className="italic" style={{ color: C.copperDark }}>Then another. Then another.</em>
         </h2>
         <p className="text-[16px] leading-relaxed mb-3" style={{ color: C.inkMutedLight }}>
-          Pick the one workflow that&apos;s costing you the most right now. Chris handles it end-to-end. You approve the outcome.
+          Start with the workflow costing you the most time, margin or risk. Chris handles it end to end. Your team approves the outcome.
         </p>
         <p className="text-[15px] leading-relaxed mb-12" style={{ color: C.textMuted }}>
-          These are the problems we see most often. Yours might be something else entirely. Either way, we&apos;ll find it in a single conversation.
+          These are the problems we see most often. Yours might be something else entirely. Either way, we will find it in a single conversation.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -1311,7 +1311,8 @@ function JobsSection() {
                   <span className="text-[10px] font-medium uppercase tracking-wider px-2 py-0.5 rounded-full" style={{ backgroundColor: "rgba(26,18,24,0.06)", color: C.inkDark }}>{job.role}</span>
                 </div>
                 <h3 className="text-[15px] font-medium mb-2" style={{ color: C.inkDark }}>{job.title}</h3>
-                <p className="text-[13px] italic" style={{ color: C.inkMutedLight }}>{job.hook}</p>
+                <p className="text-[13px] italic mb-3" style={{ color: C.inkMutedLight }}>{job.hook}</p>
+                <p className="text-[12px] font-medium" style={{ color: job.accent }}>See example →</p>
               </div>
             </button>
           ))}
@@ -1638,25 +1639,25 @@ function AISupportSection() {
 const FOUNDERS = [
   {
     initials: "CM", name: "Campbell McGlynn", title: "Cofounder",
-    bio: "20+ years in HR leadership, including 6 years as Chief People Officer at IRT Group in aged care. The person who will be in your debrief and your fortnightly check-ins.",
+    bio: "20+ years in HR leadership, including 6 years as Chief People Officer at IRT Group in aged care. Leads customer debriefs, fortnightly check-ins and change implementation.",
     color: "#1B4332", linkedin: "https://www.linkedin.com/in/campbellmcglynn/",
     photo: "/founders/campbell.jpeg",
   },
   {
     initials: "IS", name: "Ivan Sanchez", title: "Cofounder",
-    bio: "Platform architecture and engineering. Makes sure the integrations, agents, and intelligence layer work reliably behind the scenes.",
+    bio: "Platform architecture and engineering. Keeps the integrations, agents and intelligence layer working reliably under load.",
     color: "#1F6F66", linkedin: "https://www.linkedin.com/in/ivsanchez/",
     photo: "/founders/ivan.jpg",
   },
   {
     initials: "AJ", name: "Abhinav Jain", title: "AI/ML Lead",
-    bio: "AI and agentic lead engineer behind Chris. Builds the agentic systems, integrations, and intelligence that make the platform learn, remember, and respond in context.",
+    bio: "AI/ML lead. Builds the agentic systems, integrations and intelligence layer behind Chris. The reason the platform learns, remembers and responds in context.",
     color: "#BA7517", linkedin: "https://www.linkedin.com/in/abhinav-jain-ml/",
     photo: "/founders/aj.webp",
   },
   {
     initials: "BP", name: "Dr Ben Palmer", title: "Coventure partner",
-    bio: "Internationally recognised CEO of Genos International. Developed Australia's first workplace model and measure of emotional intelligence through his PhD at Swinburne. 23+ years partnering with organisations from start-ups to Fortune 500.",
+    bio: "CEO of Genos International. Workplace EI measurement and leadership development expertise. 23+ years partnering with organisations from start-ups to Fortune 500.",
     color: "#5A5A57", linkedin: "https://www.linkedin.com/in/benjaminpalmer/",
     photo: "/founders/ben.jpeg",
   },
@@ -1728,11 +1729,11 @@ function HonestAnswersSection() {
       <div className="max-w-6xl mx-auto px-6 lg:px-16 py-14 lg:py-18">
         <p className="text-[11px] font-medium uppercase tracking-[0.08em] mb-3" style={{ color: C.teal }}>Honest answers</p>
         <h2 className="mb-3" style={{ fontSize: "clamp(34px, 4vw, 48px)", lineHeight: 1.08, letterSpacing: "-0.025em", fontFamily: serif, fontWeight: 400, color: C.text }}>
-          Yes, we know what you&apos;re{" "}
+          Yes, we know what your CFO and CIO are{" "}
           <span style={{ color: C.teal }}>thinking.</span>
         </h2>
         <p className="text-[15px] leading-[1.6] max-w-[560px] mb-10" style={{ color: C.textMuted }}>
-          Three questions every CFO and CIO asks before signing anything in aged care. We have already had this conversation with a Tier 1 Australian aged care provider. Here is the short version of how it went. The full review is at <a href="/trust" className="font-medium hover:underline" style={{ color: C.teal }}>chris-os.io/trust</a>.
+          Integration. Data privacy. Cyber security. We have already had this conversation with a Tier 1 Australian aged care provider. The full review is at <a href="/trust" className="font-medium hover:underline" style={{ color: C.teal }}>chris-os.io/trust</a>.
         </p>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-8">
@@ -2253,7 +2254,7 @@ function ChangeImplementationLayer() {
         {/* Positioning intro — first paragraph visible, rest collapsible */}
         <div className="max-w-[660px] mb-12">
           <p className="mb-4" style={{ fontFamily: inter, fontSize: 16, lineHeight: 1.65, color: C.text, ...reveal(200) }}>
-            Aged care is in the middle of the largest operational change since the Royal Commission. The change is not another technology rollout. It is a shift in what work is, who does it, and what leaders need to know how to do.
+            AI adoption in aged care is not just a technology rollout. It changes what work is, who does it, and what leaders must pay attention to. Chris OS includes the leadership rhythm so teams do not just adopt a tool. They build the capability to use it well.
           </p>
           <PositioningDetail visible={visible} reveal={reveal} />
         </div>
@@ -2298,9 +2299,9 @@ function ChangeImplementationLayer() {
         <div className="max-w-[660px] mb-6" style={reveal(1200)}>
           <p className="text-[10px] font-medium uppercase tracking-[0.08em] mb-3" style={{ fontFamily: inter, color: C.sage }}>Why this matters now</p>
           <div className="space-y-4">
-            <p className="text-[15px] leading-[1.65]" style={{ fontFamily: inter, color: C.text }}>Twenty years of EI research tells us emotional intelligence is the strongest predictor of how leaders and teams adapt to change. AI is not an exception to that. It is the test case.</p>
-            <p className="text-[15px] leading-[1.65]" style={{ fontFamily: inter, color: C.text }}>The leaders who develop the EI capability to lead in the hybrid environment build the cultures that absorb AI adoption successfully. The ones who do not burn out, attrition out, or hold the change back.</p>
-            <p className="text-[15px] leading-[1.65]" style={{ fontFamily: inter, color: C.text }}>Chris OS is the operating layer that does the work and develops the capability. Operationalised. Continuous. Tied to actual operations rather than to a generic transformation playbook. Genos-grounded and peer-reviewed where the consulting alternative is anecdote and PowerPoint.</p>
+            <p className="text-[15px] leading-[1.65]" style={{ fontFamily: inter, color: C.text }}>Emotional intelligence is one of the better-evidenced predictors of how leaders and teams handle change. AI in aged care is the test case for that, not an exception to it.</p>
+            <p className="text-[15px] leading-[1.65]" style={{ fontFamily: inter, color: C.text }}>The leaders who develop the EI capability to lead in the hybrid environment build the cultures that absorb AI adoption. The ones who do not burn out, attrition out, or hold the change back.</p>
+            <p className="text-[15px] leading-[1.65]" style={{ fontFamily: inter, color: C.text }}>Chris OS is the operating layer that does the work and develops the capability. Continuous. Tied to actual operations rather than a generic transformation playbook. Genos-grounded where the consulting alternative is a six-month engagement that ends.</p>
           </div>
           <p className="text-[14px] italic mt-4" style={{ fontFamily: inter, color: C.textMuted }}>Pilot pricing from $15,000.</p>
         </div>
