@@ -449,9 +449,9 @@ export default function TeamBriefingTool() {
                   {/* CTAs */}
                   <div className="space-y-3">
                     <button onClick={() => setShowEmail(true)} className="w-full py-3.5 rounded-[4px] text-[14px] font-medium" style={{ backgroundColor: C.ctaBg, color: C.ctaText }}>
-                      Get this as a board paper, signed by Campbell McGlynn and Ben Palmer →
+                      Download this as a board paper →
                     </button>
-                    <a href="/v2#book" className="block w-full text-center py-3 rounded-[4px] text-[13px] font-medium" style={{ border: `0.5px solid ${C.border}`, color: C.text }}>Book 30 minutes with Campbell</a>
+                    <a href="/#book" className="block w-full text-center py-3 rounded-[4px] text-[13px] font-medium" style={{ border: `0.5px solid ${C.border}`, color: C.text }}>Book 30 minutes with Campbell</a>
                   </div>
                 </div>
               )}
@@ -466,7 +466,7 @@ export default function TeamBriefingTool() {
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
           <form onSubmit={handleEmail} className="relative bg-white rounded-[8px] p-6 max-w-md w-full space-y-3" onClick={(e) => e.stopPropagation()}>
             <h3 className="text-[16px] font-medium" style={{ color: C.text }}>Download your Team Briefing</h3>
-            <p className="text-[13px]" style={{ color: C.textMuted }}>Full briefing PDF with signal prioritisation, narrative, micro-practices, and financial signals. Signed by Campbell McGlynn and Dr Ben Palmer.</p>
+            <p className="text-[13px]" style={{ color: C.textMuted }}>Full briefing PDF with signal prioritisation, narrative, micro-practices, and financial signals.</p>
             <input required type="text" value={emailName} onChange={(e) => setEmailName(e.target.value)} placeholder="Name" className="w-full px-4 py-2.5 rounded-[4px] text-[13px] focus:outline-none" style={{ border: `0.5px solid ${C.border}` }} />
             <select value={emailRole} onChange={(e) => setEmailRole(e.target.value)} className="w-full px-4 py-2.5 rounded-[4px] text-[13px] focus:outline-none" style={{ border: `0.5px solid ${C.border}` }}>
               <option value="">Select role</option>
