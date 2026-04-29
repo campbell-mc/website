@@ -490,28 +490,28 @@ function Hero() {
     <section style={{ backgroundColor: C.paper }}>
       <div className="max-w-[1240px] mx-auto px-6 lg:px-14">
         {/* Filed-at byline */}
-        <div className="flex items-center gap-[14px] pt-14 pb-8">
+        <div className="flex items-center gap-[14px] pt-9 lg:pt-10 pb-5">
           <span className="text-[10.5px] font-semibold tracking-[0.22em] uppercase" style={{ fontFamily: sans, color: C.ironstone }}>Filed Monday · NSW &amp; VIC · Cohort live</span>
           <div className="flex-1 h-px max-w-[280px]" style={{ backgroundColor: C.ruleIronstone }} />
         </div>
 
         {/* Two-column: headline left, image right */}
-        <div className="flex flex-col lg:flex-row lg:items-start lg:gap-12 mb-10">
+        <div className="flex flex-col lg:flex-row lg:items-start lg:gap-10 mb-8">
           {/* Left: headline + subhead + CTAs */}
           <div className="flex-1 min-w-0">
-            <h1 className="mb-6" style={{ fontFamily: serif, fontSize: "clamp(48px, 6.5vw, 80px)", lineHeight: 1.05, letterSpacing: "-0.025em", fontWeight: 400, color: C.text }}>
+            <h1 className="mb-3" style={{ fontFamily: serif, fontSize: "clamp(40px, 5.4vw, 66px)", lineHeight: 1.06, letterSpacing: "-0.022em", fontWeight: 400, color: C.text }}>
               <span className="block">Never miss a compliance deadline again.</span>
               <span className="block">Never run blind on care minutes.</span>
               <span className="block">Know what&apos;s coming before it hits.</span>
             </h1>
 
-            <p className="max-w-[620px] mb-5" style={{ fontFamily: serif, fontStyle: "italic", fontSize: "clamp(20px, 2.1vw, 26px)", lineHeight: 1.25, letterSpacing: "-0.012em", fontWeight: 400, color: C.ironstone }}>
+            <p className="max-w-[620px] mb-4" style={{ fontFamily: serif, fontStyle: "italic", fontSize: "clamp(21px, 2.2vw, 28px)", lineHeight: 1.2, letterSpacing: "-0.014em", fontWeight: 500, color: C.ironstone }}>
               Chris does the work your team is currently stitching together manually.
             </p>
-            <p className="max-w-[560px] mb-3" style={{ fontFamily: sans, fontSize: "clamp(16px, 1.5vw, 19px)", lineHeight: 1.5, fontWeight: 400, color: C.textSoft }}>
+            <p className="max-w-[560px] mb-2" style={{ fontFamily: sans, fontSize: "clamp(15px, 1.4vw, 18px)", lineHeight: 1.45, fontWeight: 400, color: C.textSoft }}>
               Reads the systems you already run. Drafts the priority work before the day begins, ready for your approval.
             </p>
-            <p className="max-w-[560px] mb-10 text-[13.5px] leading-[1.55]" style={{ fontFamily: sans, color: C.textMuted }}>
+            <p className="max-w-[560px] mb-7 text-[12.5px] leading-[1.5]" style={{ fontFamily: sans, color: C.textFaint }}>
               A missed SIRS deadline or care minutes breach can trigger regulatory action. Most providers still track them on memory and spreadsheets.
             </p>
 
@@ -529,13 +529,13 @@ function Hero() {
           </div>
 
           {/* Right: iPhone mockup with Team Briefing */}
-          <div className="hidden lg:flex lg:w-[340px] shrink-0 items-center justify-center">
+          <div className="hidden lg:flex lg:w-[320px] shrink-0 items-center justify-center">
             <HeroiPhone />
           </div>
         </div>
 
         {/* Mobile phone mockup */}
-        <div className="lg:hidden flex justify-center mb-10">
+        <div className="lg:hidden flex justify-center mb-8">
           <HeroiPhone mobile />
         </div>
 
